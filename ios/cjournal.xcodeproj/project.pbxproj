@@ -37,13 +37,6 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "cjournal-tvOS";
 		};
-		407A02E5239FD88500BE9E50 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 407A02E1239FD88500BE9E50 /* RNToastNative.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNToastNative;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +56,6 @@
 		2D02E4901E0B4A5D006451C7 /* cjournal-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cjournal-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D1FC692D29E1912FB761DD6 /* Pods-cjournal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cjournal.debug.xcconfig"; path = "Target Support Files/Pods-cjournal/Pods-cjournal.debug.xcconfig"; sourceTree = "<group>"; };
 		3FB3E78FE14072CA10690C98 /* libPods-cjournalTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cjournalTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		407A02E1239FD88500BE9E50 /* RNToastNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNToastNative.xcodeproj; path = "../../cjournal-old/node_modules/react-native-toast-native/ios/RNToastNative.xcodeproj"; sourceTree = "<group>"; };
 		53916D9B436B6C1CC6871909 /* libPods-cjournal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cjournal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		610207928FEC3281DC95FD61 /* Pods-cjournalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cjournalTests.debug.xcconfig"; path = "Target Support Files/Pods-cjournalTests/Pods-cjournalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		72FF5E18A754874EAC6C82FC /* Pods-cjournal-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cjournal-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-cjournal-tvOSTests/Pods-cjournal-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,18 +149,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		407A02E2239FD88500BE9E50 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				407A02E6239FD88500BE9E50 /* libRNToastNative.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				407A02E1239FD88500BE9E50 /* RNToastNative.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -182,6 +165,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A0E1B11B65E1675159B7FBD7 /* Pods */,
+				F26A7B294E454CA9A4C09E4D /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -212,6 +196,13 @@
 				FF17610037D35A31F7F00852 /* Pods-cjournalTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F26A7B294E454CA9A4C09E4D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,7 +293,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -332,12 +323,6 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 407A02E2239FD88500BE9E50 /* Products */;
-					ProjectRef = 407A02E1239FD88500BE9E50 /* RNToastNative.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* cjournal */,
@@ -347,16 +332,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		407A02E6239FD88500BE9E50 /* libRNToastNative.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNToastNative.a;
-			remoteRef = 407A02E5239FD88500BE9E50 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -711,13 +686,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = cjournal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjournal;
 				PRODUCT_NAME = cjournal;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -730,13 +706,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = cjournal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cjournal;
 				PRODUCT_NAME = cjournal;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
