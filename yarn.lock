@@ -5454,11 +5454,6 @@ react-native-sound@^0.11.0:
   resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.11.0.tgz#ad60b55ba8c6dc89917f381ad3713f2738de530f"
   integrity sha512-4bGAZfni6E2L695NQjOZwNLBQGXgBGYC4Sy+h99K5h0HqNZjCqR0+aLel+ezASxEJDpaH83gylNObXpiqJgdwg==
 
-react-native-toast-native@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-toast-native/-/react-native-toast-native-1.2.1.tgz#ced3bb7cf26e63e670c881edc51bfa1087423c67"
-  integrity sha512-HRu/k+MBSwWk6AFH2OAJwBQBCRWaHC3S52zkA1TcLrUwwTeBbHQfW0Yy9oZBVupMtjlaGeo9bJ143e53vyepeQ==
-
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"
