@@ -1,7 +1,7 @@
 import { APIBaseURL } from '../properties'
-import { updateUser } from '../actions/userActions'
+import { updateUser } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
-import { scheduleSync } from './connectivityWatcher'
+import { scheduleSync } from '../services/connectivityWatcher'
 import { strings } from '../localizations'
 
 export function loginFetchData(email, password) {
@@ -11,21 +11,21 @@ export function loginFetchData(email, password) {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 email: email,
-                password: password
-            })
+                password: password,
+            }),
         })
             .then(res => res.json())
             .catch(err => {
-                Alert.alert(strings.Oops, strings.NoConn)
                 console.log(err)
+                Alert.alert(strings.Error, strings.NoConn)
             })
             .then(res => {
                 if (!res.api_key) {
-                    Alert.alert(strings.Oops, strings.CantConnect)
+                    Alert.alert(strings.Error, strings.CantConnect)
                 } else {
                     dispatch(updateUser(res))
                 }
