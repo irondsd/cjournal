@@ -148,6 +148,7 @@ export const strings = new LocalizedStrings({
         YouWalked: 'You walked',
         DeviceInstalled: 'Device installed',
         NoPhoto: 'No Photo',
+        Register: 'Register',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -296,6 +297,7 @@ export const strings = new LocalizedStrings({
         YouWalked: 'Usted caminó',
         DeviceInstalled: 'Dispositivo instalado',
         NoPhoto: 'No hay foto',
+        Register: 'Registrarse',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -445,5 +447,6 @@ export const strings = new LocalizedStrings({
         YouWalked: 'Вы прошли',
         DeviceInstalled: 'Устройство установлено',
         NoPhoto: 'Нет фото',
+        Register: 'Зарегистрироваться',
     },
 })

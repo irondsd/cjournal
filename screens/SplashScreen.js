@@ -94,13 +94,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: appColor,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     logoContainer: {
         flexGrow: 1,
-        justifyContent: 'center',
         alignItems: 'center',
+        top: '22%',
     },
     logo: {
         width: logoSize,
