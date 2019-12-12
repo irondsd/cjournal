@@ -1,5 +1,5 @@
 import { APIBaseURL } from '../properties'
-import { updateActivities } from '../actions/activityActions'
+import { updateActivities } from '../redux/actions/activityActions'
 import { scheduleSync } from '../services/connectivityWatcher'
 
 export const activityFetchData = (id, api_key) => {

@@ -1,5 +1,5 @@
 import { APIBaseURL } from '../properties'
-import { updateUser } from '../actions/userActions'
+import { updateUser } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
 import { scheduleSync } from '../services/connectivityWatcher'
 

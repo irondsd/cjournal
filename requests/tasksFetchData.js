@@ -1,5 +1,5 @@
 import { APIBaseURL } from '../properties'
-import { replaceTasks } from '../actions/tasksActions'
+import { replaceTasks } from '../redux/actions/tasksActions'
 import { scheduleSync } from '../services/connectivityWatcher'
 
 export const tasksFetchData = (id, api_key) => {
