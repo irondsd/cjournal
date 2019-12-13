@@ -12,8 +12,7 @@ class QRScanButton extends Component {
                 onPress={() => {
                     this.props.callback()
                 }}>
-                {/* <Icon name="qr-code" color="#FFF" size={30} /> */}
-                <Text>QR</Text>
+                <Icon name="qrcode" color="#FFF" size={30} />
             </TouchableOpacity>
         )
     }
