@@ -309,7 +309,7 @@ export const paths = {
     Jounal: 'Journal',
     ActivityDetails: 'ActivityDetails',
     Tasks: 'Tasks',
-    Profile: 'Profile',
+    Settings: 'Settings',
     TimePick: 'TimePick',
     ActivityStats: 'ActivityStats',
     Activity: 'Activity',

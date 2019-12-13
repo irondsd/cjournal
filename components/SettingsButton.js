@@ -4,22 +4,21 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { withNavigation } from 'react-navigation'
 import { paths } from '../properties'
 
-class ProfileButton extends Component {
+class SettingsButton extends Component {
     render() {
         return (
             <TouchableOpacity
                 style={styles.menuIcon}
                 onPress={() => {
-                    this.props.navigation.navigate(paths.Profile)
-                }}
-            >
-                <Icon name='md-contact' color='#000' size={25} />
+                    this.props.navigation.navigate(paths.Settings)
+                }}>
+                <Icon name="md-settings" color="#000" size={25} />
             </TouchableOpacity>
         )
     }
 }
 
-export default withNavigation(ProfileButton)
+export default withNavigation(SettingsButton)
 
 const styles = StyleSheet.create({
     menuIcon: {
@@ -27,6 +26,6 @@ const styles = StyleSheet.create({
         height: 35,
         width: 35,
         padding: 5,
-        alignItems: 'flex-end'
-    }
+        alignItems: 'flex-end',
+    },
 })
