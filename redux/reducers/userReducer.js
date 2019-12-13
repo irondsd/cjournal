@@ -26,6 +26,11 @@ export default function userReducer(state = initialState, { type, payload }) {
                 isLoggedIn = true
             }
 
+            // TODO: remove this
+            if (payload.hide_elements === null) {
+                payload.hide_elements = []
+            }
+
             return {
                 ...state,
                 ...payload,
