@@ -10,16 +10,12 @@ import {
 } from 'react-native'
 import { secs2time } from '../../helpers/dateTime'
 import { connect } from 'react-redux'
-import { addActivity } from '../../actions/activityActions'
-import {
-    screenAsyncSave,
-    screenAsyncDelete,
-} from '../../services/screenAsyncSave'
+import { addActivity } from '../../redux/actions'
 import { strings } from '../../localizations'
 import { backgroundColor, paths, activity_types } from '../../properties'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
-
+// TODO: async safe fix
 class RestScreen extends Component {
     static navigationOptions = {
         header: null,

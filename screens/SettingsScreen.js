@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View, Button } from 'react-native'
+import {
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    StatusBar,
+} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
@@ -21,6 +28,11 @@ class SettingsScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar
+                    backgroundColor={'white'}
+                    barStyle="dark-content"
+                    // hidden={true}
+                />
                 <Text style={styles.name}>{this.props.user.name}</Text>
                 <Text style={styles.email}>{this.props.user.email}</Text>
                 <Text style={styles.information}>

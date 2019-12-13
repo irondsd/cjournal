@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Button, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, appColor, activity_types } from '../properties'
 import { strings } from '../localizations'
-import ProfileButton from '../components/ProfileButton'
+import SettingsButton from '../components/SettingsButton'
 import sync from '../services/sync'
 import ActivityTile from '../components/tiles/ActivityTile'
 import PhysicalActivityTile from '../components/tiles/PhysicalActivityTile'
@@ -23,7 +23,7 @@ import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
 class HomeScreen extends Component {
     static navigationOptions = {
         title: strings.Home,
-        // headerRight: <ProfileButton />,
+        headerRight: <SettingsButton />,
     }
 
     constructor(props) {
@@ -107,6 +107,11 @@ class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.activityBox}>
+                <StatusBar
+                    backgroundColor={'white'}
+                    barStyle="dark-content"
+                    // hidden={true}
+                />
                 <TroubleButton navigation={this.props.navigation} />
                 <ActivityTile
                     navigation={this.props.navigation}

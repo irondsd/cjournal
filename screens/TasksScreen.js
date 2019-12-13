@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    FlatList,
+    StatusBar,
+} from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor } from '../properties'
 import { strings } from '../localizations'
@@ -46,6 +53,11 @@ class TasksScreen extends Component<Props> {
         this.props.tasks ? (list = [...this.props.tasks]) : (list = [])
         return (
             <View style={styles.container}>
+                <StatusBar
+                    backgroundColor={'white'}
+                    barStyle="dark-content"
+                    // hidden={true}
+                />
                 <FlatList
                     style={styles.list}
                     data={list}
