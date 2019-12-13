@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import ActivityItem from '../../ActivityItem'
-import { strings } from '../../../localizations'
-import { activityInstantSave } from '../../../helpers/activityInstantSave'
-import { activity_types, paths } from '../../../properties'
+import ActivityItem from '../ActivityItem'
+import { strings } from '../../localizations'
+import { activityInstantSave } from '../../helpers/activityInstantSave'
+import { activity_types, paths } from '../../properties'
+import { iconPicker } from '../../helpers/iconPicker'
 
 const name = activity_types.Anxiety
 let clicked = false
@@ -12,16 +13,18 @@ export default class Tile extends Component {
         return (
             <ActivityItem
                 text={strings[name]}
-                img={require('../../../resources/icons/anxiety.png')}
+                img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color='#421000'
+                color="#421000"
                 imgScale={1}
                 onPress={() => {
                     activityInstantSave(name)
                     this.props.navigation.navigate(paths.Home)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.TimePick, { sender: name })
+                    this.props.navigation.navigate(paths.TimePick, {
+                        sender: name,
+                    })
                 }}
             />
         )

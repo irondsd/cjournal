@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ActivityItem from '../ActivityItem'
 import { strings } from '../../localizations'
+import { activityInstantSave } from '../../helpers/activityInstantSave'
 import { activity_types, paths } from '../../properties'
 import { iconPicker } from '../../helpers/iconPicker'
 
@@ -14,7 +15,7 @@ export default class Tile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color='#6d1393'
+                color="#6d1393"
                 disabled={this.props.disabled}
                 imgScale={0.8}
                 onPress={() => {
