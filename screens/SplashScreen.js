@@ -45,7 +45,7 @@ class SplashScreen extends Component {
                             res.screen.screen,
                             res.screen,
                         )
-                        AsyncStorage.removeItem('screen') // to prevent it to reopen next time
+                        removeScreen() // to prevent it to reopen next time
                     } else {
                         this.props.navigation.navigate('App')
                     }
