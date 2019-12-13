@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import ActivityItem from '../../ActivityItem'
-import { strings } from '../../../localizations'
-import { activity_types, paths } from '../../../properties'
-import { iconPicker } from '../../../helpers/iconPicker'
+import ActivityItem from '../ActivityItem'
+import { strings } from '../../localizations'
+import { activity_types, paths } from '../../properties'
+import { iconPicker } from '../../helpers/iconPicker'
 
 const name = activity_types.Workout
 
@@ -13,7 +13,7 @@ export default class Tile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color='#512DA8'
+                color="#512DA8"
                 imgScale={0.95}
                 onPress={() => {
                     this.props.navigation.navigate(paths.Workout)
