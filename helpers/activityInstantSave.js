@@ -1,6 +1,6 @@
-import store from '../store'
-import { addActivity } from '../actions'
-import { showToast, showError } from './toast'
+import store from '../redux/store'
+import { addActivity } from '../redux/actions'
+import { showToast, showError } from '../services/toast'
 import { strings } from '../localizations'
 import { overlappingGreying } from './activityOverlap'
 import Activity from '../classes/Activity'
@@ -14,7 +14,10 @@ export function activityInstantSave(activity_type) {
             clicked = false
         }, 500)
         let activity = Activity.instantInit(activity_type)
-        let overlaps = overlappingGreying(store.getState().activity, activity.activity_type)
+        let overlaps = overlappingGreying(
+            store.getState().activity,
+            activity.activity_type,
+        )
         if (overlaps) {
             showError(strings.OverlapMsg)
         } else {
