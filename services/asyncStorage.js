@@ -9,7 +9,7 @@ let entries = {
 }
 
 export function userAsyncSave(user) {
-    AsyncStorage.setItem(entries.user, JSON.stringify(user))
+    AsyncStorage.mergeItem(entries.user, JSON.stringify(user))
 }
 
 export function activityAsyncSave(activity) {
