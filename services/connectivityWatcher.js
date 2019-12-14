@@ -1,20 +1,24 @@
 import NetInfo from '@react-native-community/netinfo'
 import sync from './sync'
 
-let subscription
+let unsubscribe
 let scheduled = false
 
 export function scheduleSync() {
     if (scheduled === false) {
         scheduled = true
-        subscription = NetInfo.isConnected.addEventListener('connectionChange', listener)
+        unsubscribe = NetInfo.addEventListener(state => {
+            listener(state.isConnected)
+        })
     }
 }
 
+// TODO: device between error resync and no connection resync
+
 const listener = isConnected => {
-    if (isConnected) {
+    if (isConnected && scheduled) {
         scheduled = false
         sync()
-        subscription.remove()
+        if (unsubscribe) unsubscribe()
     }
 }

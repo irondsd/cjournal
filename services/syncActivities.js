@@ -1,8 +1,4 @@
-import store from '../store'
-import activityPostData from './activityPostData'
-import activityFileUpload from './activityFileUpload'
-import { activitySetId } from '../actions/activityActions'
-import { scheduleSync } from './connectivityWatcher'
+import store from '../redux/store'
 
 export default function syncActivities() {
     let id = store.getState().user.id
@@ -25,7 +21,6 @@ export default function syncActivities() {
                         })
                 })
             }
-        })
+        }),
     ])
-    // })
 }
