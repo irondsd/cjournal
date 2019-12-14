@@ -12,6 +12,7 @@ class PillPickerContainer extends Component {
             list: [],
             pill: null,
             text: '',
+            pills: [],
             input: true,
         }
 
@@ -26,7 +27,7 @@ class PillPickerContainer extends Component {
             pills = this.props.user.relief_of_attack
         if (this.props.activity_type == 'OneTimeTakingOfMedicine')
             pills = this.props.user.tests
-
+        console.log('gg')
         if (pills.length == 0) {
             this.setState({
                 input: true,
@@ -52,6 +53,7 @@ class PillPickerContainer extends Component {
     }
 
     render() {
+        console.log(this.state.pills)
         if (this.state.input)
             return (
                 <View>
