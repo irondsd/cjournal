@@ -9,7 +9,6 @@ import {
     BackHandler,
 } from 'react-native'
 import { secs2time } from '../../helpers/dateTime'
-import Pedometer from '@JWWon/react-native-universal-pedometer'
 import BackgroundTimer from 'react-native-background-timer'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
