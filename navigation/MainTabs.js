@@ -87,6 +87,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
     }
     let tabBarLabel = strings.Home
     let tabBarVisible = true
+    let swipeEnabled = true
     // preventing tabbar from appearing on certain screens
     let routeName = ''
     for (let i = 0; i < routes.length; i++) {
@@ -101,11 +102,13 @@ HomeStack.navigationOptions = ({ navigation }) => {
         routeName === paths.ExerciseFinish
     ) {
         tabBarVisible = false
+        swipeEnabled = false
     }
 
     return {
         tabBarVisible,
         tabBarLabel,
+        swipeEnabled,
     }
 }
 TasksStack.navigationOptions = { tabBarLabel: strings.Tasks }
