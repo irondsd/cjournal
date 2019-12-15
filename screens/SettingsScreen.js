@@ -7,20 +7,15 @@ import {
     Button,
     StatusBar,
 } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
 import { backgroundColor } from '../properties'
 import { strings } from '../localizations'
+import { removeAll } from '../services/asyncStorage'
 
 class SettingsScreen extends Component {
     logout() {
-        // TODO: change
-        AsyncStorage.removeItem('user')
-        AsyncStorage.removeItem('activity')
-        AsyncStorage.removeItem('tasks')
-        AsyncStorage.removeItem('notifications')
-        AsyncStorage.removeItem('screens')
+        removeAll()
         this.props.logout()
         this.props.navigation.navigate('Auth')
     }
