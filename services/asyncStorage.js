@@ -13,11 +13,11 @@ export function userAsyncSave(user) {
 }
 
 export function activityAsyncSave(activity) {
-    AsyncStorage.mergeItem(entries.activity, JSON.stringify(activity))
+    AsyncStorage.setItem(entries.activity, JSON.stringify(activity))
 }
 
 export function tasksAsyncSave(tasks) {
-    AsyncStorage.mergeItem(entries.tasks, JSON.stringify(tasks))
+    AsyncStorage.setItem(entries.tasks, JSON.stringify(tasks))
 }
 
 export function notificationsAsyncSave(notifications) {
