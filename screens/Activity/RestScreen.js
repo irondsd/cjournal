@@ -7,6 +7,8 @@ import {
     Button,
     TouchableOpacity,
     BackHandler,
+    StatusBar,
+    Alert,
 } from 'react-native'
 import { secs2time } from '../../helpers/dateTime'
 import { connect } from 'react-redux'
@@ -15,7 +17,8 @@ import { strings } from '../../localizations'
 import { backgroundColor, paths, activity_types } from '../../properties'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
-// TODO: async safe fix
+import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
+
 class RestScreen extends Component {
     static navigationOptions = {
         header: null,
@@ -45,7 +48,20 @@ class RestScreen extends Component {
     }
 
     handleBackButton() {
-        this.finish()
+        // this.finish()
+        Alert.alert(
+            'Terminate?',
+            'Do you really want to terminate rest?',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false },
+        )
         return true
     }
 
@@ -71,7 +87,7 @@ class RestScreen extends Component {
             ).toString()
             seconds = seconds.substring(0, seconds.length - 3)
             if (!seconds) seconds = 0
-            console.log(seconds)
+            // console.log(seconds)
             this.setState({
                 timer: secs2time(seconds),
             })
@@ -83,7 +99,7 @@ class RestScreen extends Component {
 
     finish() {
         clearInterval(this.state.intervalId)
-        screenAsyncDelete()
+        removeScreen()
         let activity = new Activity(
             null,
             activity_types.Rest,
@@ -101,6 +117,7 @@ class RestScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar backgroundColor={'black'} barStyle="light-content" />
                 <Text style={styles.text}>{this.state.message}</Text>
                 <Text style={styles.timer}>{this.state.timer}</Text>
                 <View style={styles.button}>
