@@ -12,6 +12,7 @@ import { APIBaseURL, appColor } from '../properties'
 import { strings } from '../localizations'
 import { loginFetchData } from '../requests/loginFetchData'
 import { connect } from 'react-redux'
+import TouchableIcon from './TouchableIcon'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -30,46 +31,66 @@ class LoginForm extends Component {
         return (
             <View style={styles.box}>
                 <StatusBar barStyle="light-content" />
-                <TextInput
-                    placeholder={strings.email}
-                    placeholderTextColor="rgba(255, 255, 255, 0.5)"
-                    style={styles.input}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    autoFocus={true}
-                    returnKeyType="next"
-                    onSubmitEditing={() => this.passwordInput.focus()}
-                    keyboardType={'email-address'}
-                    onChangeText={text => {
-                        this.setState({
-                            email: text,
-                        })
-                    }}
-                    value={this.state.email}
-                />
-                <TextInput
-                    placeholder={strings.password}
-                    placeholderTextColor="rgba(255, 255, 255, 0.5)"
-                    style={styles.input}
-                    secureTextEntry
-                    returnKeyType="go"
-                    ref={input => {
-                        this.passwordInput = input
-                    }}
-                    onChangeText={text => {
-                        this.setState({
-                            password: text,
-                        })
-                    }}
-                    value={this.state.password}
-                />
-                <TouchableOpacity
+                <View style={styles.inputBox}>
+                    <View style={styles.iconBox}>
+                        <TouchableIcon name="user" size={25} />
+                    </View>
+                    <TextInput
+                        placeholder={strings.email}
+                        placeholderTextColor="#dddddd"
+                        style={styles.input}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        autoFocus={true}
+                        returnKeyType="next"
+                        onSubmitEditing={() => this.passwordInput.focus()}
+                        keyboardType={'email-address'}
+                        onChangeText={text => {
+                            this.setState({
+                                email: text,
+                            })
+                        }}
+                        value={this.state.email}
+                    />
+                </View>
+                <View style={styles.inputBox}>
+                    <View style={styles.iconBox}>
+                        <TouchableIcon name="lock" size={25} />
+                    </View>
+                    <TextInput
+                        placeholder={strings.password}
+                        placeholderTextColor="#dddddd"
+                        style={styles.input}
+                        secureTextEntry
+                        returnKeyType="go"
+                        ref={input => {
+                            this.passwordInput = input
+                        }}
+                        onChangeText={text => {
+                            this.setState({
+                                password: text,
+                            })
+                        }}
+                        value={this.state.password}
+                    />
+                </View>
+                {/* <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
                         this.login()
                     }}>
                     <Text style={styles.buttonText}>{strings.Login}</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                <View style={[styles.inputBox, styles.buttonsBox]}>
+                    <View style={[styles.iconBox, styles.buttonQrBox]}></View>
+                    <TouchableOpacity
+                        style={[styles.inputBox, styles.buttonBox]}
+                        onPress={() => {
+                            this.login()
+                        }}>
+                        <Text style={styles.buttonText}>{strings.Login}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
@@ -89,9 +110,9 @@ const styles = StyleSheet.create({
     input: {
         margin: 5,
         padding: 5,
-        height: 40,
+        height: 50,
         width: width,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        paddingLeft: 50,
         color: 'white',
         fontSize: 20,
     },
@@ -102,11 +123,50 @@ const styles = StyleSheet.create({
     },
     button: {
         padding: 10,
-        width: 200,
+        width: '100%',
     },
     box: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: appColor,
+    },
+    inputBox: {
+        backgroundColor: '#00000015',
+        height: 45,
+        borderRadius: 10,
+        width: 300,
+        justifyContent: 'center',
+        margin: 5,
+    },
+    buttonBox: {
+        backgroundColor: '#ffffff00',
+        margin: 0,
+        marginLeft: 50,
+        width: '83%',
+        borderRadius: 10,
+        borderWidth: 0.5,
+        borderColor: '#ffffff99',
+    },
+    text: {
+        color: '#fff',
+        fontSize: 20,
+        paddingLeft: 60,
+    },
+    iconBox: {
+        backgroundColor: '#00000010',
+        borderRadius: 10,
+        width: 45,
+        height: 45,
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonQrBox: {
+        backgroundColor: '#ffffff00',
+        borderRadius: 10,
+        borderWidth: 0.5,
+        borderColor: '#ffffff99',
+    },
+    buttonsBox: {
+        backgroundColor: '#ffffff00',
     },
 })
