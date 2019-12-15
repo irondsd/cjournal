@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 import { appColor } from '../properties'
 import { strings } from '../localizations'
-import RegButton from '../components/RegButton'
 import RegisterOrLogin from '../components/RegisterOrLogin'
 
 export default class WelcomeScreen extends Component {
