@@ -34,11 +34,16 @@ const styles = StyleSheet.create({
     button: {
         marginTop: 10,
         padding: 10,
-        width: 250,
-        borderRadius: 20,
+        width: '100%',
+        borderRadius: 10,
         borderWidth: 0.5,
-        borderColor: '#fff',
+        borderColor: '#ffffff99',
         alignItems: 'center',
+        shadowOffset: { height: 5 },
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        backgroundColor: '#00000004',
     },
     buttonText: {
         color: 'white',
@@ -50,6 +55,7 @@ const styles = StyleSheet.create({
         bottom: '8%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: appColor,
+        width: '70%',
+        // backgroundColor: appColor,
     },
 })

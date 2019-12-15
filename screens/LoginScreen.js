@@ -18,13 +18,12 @@ import { appColor } from '../properties'
 import { strings } from '../localizations'
 import { connect } from 'react-redux'
 import store from '../redux/store'
-import QRScanButton from '../components/QRScanButton'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import { updateUser } from '../redux/actions'
 import SimpleCrypto from 'simple-crypto-js'
 import { secretKey } from '../properties'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
-import RegButton from '../components/RegButton'
+import TouchableIcon from '../components/TouchableIcon'
 
 const behavior = Platform.OS === 'ios' ? 'padding' : 'null'
 const simpleCrypto = new SimpleCrypto(secretKey)
@@ -137,7 +136,13 @@ class LoginScreen extends Component {
                 </View>
                 <View style={styles.login}>
                     <LoginForm navigation={this.props.navigation} />
-                    <QRScanButton callback={() => this.onOpneScanner()} />
+                    {/* <QRScanButton callback={() => this.onOpneScanner()} /> */}
+                    <TouchableIcon
+                        name="qrcode"
+                        onPress={() => this.onOpneScanner()}
+                        style={styles.qrButton}
+                        size={30}
+                    />
                 </View>
             </KeyboardAvoidingView>
         )
@@ -179,5 +184,12 @@ const styles = StyleSheet.create({
     },
     login: {
         margin: 20,
+        bottom: '5%',
+    },
+    qrButton: {
+        position: 'absolute',
+        bottom: '1%',
+        left: 5,
+        padding: 10,
     },
 })
