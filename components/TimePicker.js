@@ -8,19 +8,28 @@ export default class TimePicker extends Component {
     state = {
         dateTime: new Date(),
         isTimePickerVisible: false,
-        isDatePickerVisible: false
+        isDatePickerVisible: false,
     }
 
     componentDidMount() {
         this.setState({
-            dateTime: this.props.dateTime
+            dateTime: this.props.dateTime,
         })
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            dateTime: nextProps.dateTime
-        })
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         dateTime: nextProps.dateTime,
+    //     })
+    // }
+    // TODO: check this
+    static getDerivedStateFromProps(nextProps, prevState) {
+        // this.setState({
+        //     dateTime: nextProps.dateTime,
+        // })
+        return {
+            dateTime: nextProps.dateTime,
+        }
     }
 
     _showTimePicker = () => {
@@ -48,17 +57,21 @@ export default class TimePicker extends Component {
         this._hideDatePicker()
         this.props.handler(dateTime)
         this.setState({
-            dateTime: dateTime
+            dateTime: dateTime,
         })
     }
 
     _handleTimePicked = dateTime => {
         this._hideTimePicker()
         newDateTime = this.state.dateTime
-        newDateTime.setHours(dateTime.getHours(), dateTime.getMinutes(), dateTime.getSeconds())
+        newDateTime.setHours(
+            dateTime.getHours(),
+            dateTime.getMinutes(),
+            dateTime.getSeconds(),
+        )
         this.props.handler(newDateTime)
         this.setState({
-            dateTime: dateTime
+            dateTime: dateTime,
         })
     }
 
@@ -67,7 +80,9 @@ export default class TimePicker extends Component {
             <View>
                 <View style={styles.time}>
                     <TouchableOpacity onPress={this._showDatePicker}>
-                        <Text style={styles.timeText}>{displayDate(this.state.dateTime)}</Text>
+                        <Text style={styles.timeText}>
+                            {displayDate(this.state.dateTime)}
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this._showTimePicker}>
                         <Text style={styles.timeText}>
@@ -80,14 +95,14 @@ export default class TimePicker extends Component {
                     isVisible={this.state.isTimePickerVisible}
                     onConfirm={this._handleTimePicked}
                     onCancel={this._hideTimePicker}
-                    mode='time'
+                    mode="time"
                     date={this.state.dateTime}
                 />
                 <DateTimePicker
                     isVisible={this.state.isDatePickerVisible}
                     onConfirm={this._handleDatePicked}
                     onCancel={this._hideDatePicker}
-                    mode='date'
+                    mode="date"
                     date={this.state.dateTime}
                 />
             </View>
@@ -98,12 +113,12 @@ export default class TimePicker extends Component {
 const styles = StyleSheet.create({
     time: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     timeText: {
         fontSize: 20,
         color: 'black',
         textAlign: 'center',
-        marginTop: 40
-    }
+        marginTop: 40,
+    },
 })

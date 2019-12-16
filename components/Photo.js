@@ -37,7 +37,11 @@ export default class Photo extends Component {
         if (this.props.link) this.link(this.props.link)
     }
 
-    componentWillReceiveProps(nextProps) {
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.link) this.link(this.props.link)
+    // }
+    // TODO: check
+    componentDidUpdate() {
         if (this.props.link) this.link(this.props.link)
     }
 
