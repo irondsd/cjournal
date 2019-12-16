@@ -19,11 +19,11 @@ export default class TroubleButton extends Component {
     render() {
         let propsStyles = StyleSheet.create({
             button: {
-                borderTopColor: pSBC(0.2, '#dd0000'),
-                borderBottomColor: pSBC(-0.2, '#dd0000'),
                 backgroundColor: '#dd0000',
-                borderLeftColor: '#dd0000',
-                borderRightColor: '#dd0000',
+                borderTopColor: pSBC(-0.1, '#dd0000'),
+                borderBottomColor: pSBC(-0.1, '#dd0000'),
+                borderLeftColor: pSBC(-0.1, '#dd0000'),
+                borderRightColor: pSBC(-0.1, '#dd0000'),
             },
         })
 
@@ -51,7 +51,7 @@ export default class TroubleButton extends Component {
 }
 
 const tileSize = Dimensions.get('window').width / 3.75
-const borderRadius = tileSize / 8
+const borderRadius = 20
 const margin = Dimensions.get('window').width / 46.875
 
 const styles = StyleSheet.create({
