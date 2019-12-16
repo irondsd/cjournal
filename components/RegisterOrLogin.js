@@ -4,7 +4,6 @@ import { APIBaseURL, appColor } from '../properties'
 import { strings } from '../localizations'
 import { withNavigation } from 'react-navigation'
 
-// TODO: icons?
 class RegisterOrLogin extends Component {
     render() {
         return (

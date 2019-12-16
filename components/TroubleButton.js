@@ -13,15 +13,17 @@ import { strings } from '../localizations'
 import { iconPicker } from '../helpers/iconPicker'
 var { Dimensions } = require('react-native')
 
+// TODO: add gradient
+
 export default class TroubleButton extends Component {
     render() {
         let propsStyles = StyleSheet.create({
             button: {
-                borderTopColor: pSBC(0.2, '#f00'),
-                borderBottomColor: pSBC(-0.2, '#f00'),
-                backgroundColor: '#f00',
-                borderLeftColor: '#f00',
-                borderRightColor: '#f00',
+                borderTopColor: pSBC(0.2, '#dd0000'),
+                borderBottomColor: pSBC(-0.2, '#dd0000'),
+                backgroundColor: '#dd0000',
+                borderLeftColor: '#dd0000',
+                borderRightColor: '#dd0000',
             },
         })
 
@@ -66,11 +68,11 @@ const styles = StyleSheet.create({
         borderLeftWidth: 2,
         borderRightWidth: 2,
         borderTopWidth: 2,
-        borderTopColor: '#f00',
-        borderBottomColor: '#f00',
-        backgroundColor: '#f00',
-        borderLeftColor: '#f00',
-        borderRightColor: '#f00',
+        borderTopColor: '#dd0000',
+        borderBottomColor: '#dd0000',
+        backgroundColor: '#dd0000',
+        borderLeftColor: '#dd0000',
+        borderRightColor: '#dd0000',
         borderStyle: 'solid',
         paddingLeft: 7,
         paddingRight: 7,
