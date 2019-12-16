@@ -33,14 +33,29 @@ export default class ActivityItem extends Component {
         if (this.props.disabled) color = pSBC(0.7, color)
         let propsStyles = {
             text: {
-                height: tileSize / 5,
-                // fontSize: this.props.text.length > 14 ? 9 : 14,
+                height: tileSize / (numberOfLines === 1 ? 5 : 4),
+                fontSize:
+                    Platform.OS === 'android'
+                        ? this.props.text.length > 14
+                            ? 9
+                            : 14
+                        : null,
             },
             img: {
                 height: imgSize ? imgSize : 70,
                 width: imgSize ? imgSize : 70,
                 top: margin ? margin : 14,
                 left: margin ? margin : 14,
+            },
+            buttonActivity: {
+                borderColor:
+                    Platform.OS === 'android'
+                        ? 'white'
+                        : styles.buttonActivity.borderColor,
+                // borderRadius:
+                //     Platform.OS === 'android'
+                //         ? styles.buttonActivity.borderRadius - 5
+                //         : styles.buttonActivity.borderRadius,
             },
         }
 
@@ -60,8 +75,7 @@ export default class ActivityItem extends Component {
                         pSBC(-0.5, this.props.color, shadeColor),
                     ]}
                     start={{ x: 0.0, y: 0.0 }}
-                    end={{ x: 1.0, y: 1.0 }}
-                    style={styles.buttonActivity}>
+                    end={{ x: 1.0, y: 1.0 }}>
                     <Image
                         style={[styles.img, propsStyles.img]}
                         source={this.props.img}
@@ -87,9 +101,9 @@ const imgMargin = (tileSize - imgSize) / 2
 const styles = StyleSheet.create({
     buttonActivity: {
         width: tileSize,
+        margin: margin,
         height: tileSize,
         justifyContent: 'flex-end',
-        margin: margin,
         borderRadius: borderRadius,
         borderWidth: 2,
         backgroundColor: 'black',
