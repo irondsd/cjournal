@@ -87,6 +87,7 @@ class ActivityDetailsScreen extends Component<Props> {
             originalActivity: this.props.navigation.state.params,
             activity_type: this.props.navigation.state.params.activity_type,
             data: this.props.navigation.state.params.data,
+            comment: this.props.navigation.state.params.comment,
             duration: duration,
             addDuration: addDuration,
         })
@@ -201,9 +202,10 @@ class ActivityDetailsScreen extends Component<Props> {
         this.setState(
             {
                 activity: activity,
+                comment: text,
             },
             () => {
-                // this.update()
+                this.update()
             },
         )
     }
