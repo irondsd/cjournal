@@ -58,8 +58,8 @@ export default class ActivityItem extends Component {
         shadeColor = pSBC(-0.5, this.props.color, shadeColor)
 
         if (this.props.disabled) {
-            mainColor = pSBC(0.7, mainColor)
-            shadeColor = pSBC(0.7, shadeColor)
+            mainColor = '#aaa'
+            shadeColor = '#aaa'
         }
 
         return (
