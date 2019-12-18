@@ -32,14 +32,6 @@ export default class Task {
     isNewerThan(other) {
         return this.last_updated > other.last_updated
     }
-
-    createOnServer(id, api_key) {
-        // TODO: post
-    }
-
-    editOnServer() {
-        // TODO: put
-    }
 }
 
 export function taskExists(array, task) {
