@@ -52,11 +52,14 @@ export default class ActivityItem extends Component {
                     Platform.OS === 'android'
                         ? 'white'
                         : styles.buttonActivity.borderColor,
-                // borderRadius:
-                //     Platform.OS === 'android'
-                //         ? styles.buttonActivity.borderRadius - 5
-                //         : styles.buttonActivity.borderRadius,
             },
+        }
+        let mainColor = this.props.color
+        shadeColor = pSBC(-0.5, this.props.color, shadeColor)
+
+        if (this.props.disabled) {
+            mainColor = pSBC(0.7, mainColor)
+            shadeColor = pSBC(0.7, shadeColor)
         }
 
         return (
@@ -70,10 +73,7 @@ export default class ActivityItem extends Component {
                 }}>
                 <LinearGradient
                     style={[styles.buttonActivity, propsStyles.buttonActivity]}
-                    colors={[
-                        this.props.color,
-                        pSBC(-0.5, this.props.color, shadeColor),
-                    ]}
+                    colors={[mainColor, shadeColor]}
                     start={{ x: 0.0, y: 0.0 }}
                     end={{ x: 1.0, y: 1.0 }}>
                     <Image
