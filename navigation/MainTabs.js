@@ -99,7 +99,8 @@ HomeStack.navigationOptions = ({ navigation }) => {
         routeName === paths.Rest ||
         routeName === paths.Walking ||
         routeName === paths.Stairs ||
-        routeName === paths.ExerciseFinish
+        routeName === paths.ExerciseFinish ||
+        routeName === paths.Camera
     ) {
         tabBarVisible = false
         swipeEnabled = false

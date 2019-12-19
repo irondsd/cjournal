@@ -337,6 +337,8 @@ export const paths = {
     Workout: 'Workout',
     Trouble: 'Trouble',
     DeviceInstall: 'DeviceInstall',
+    Camera: 'Camera',
+    Welcome: 'Welcome',
 }
 
 export const monthNames = [

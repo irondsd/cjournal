@@ -11,7 +11,7 @@ class RegisterOrLogin extends Component {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        this.props.navigation.navigate('Registration')
+                        // open browser
                     }}>
                     <Text style={styles.buttonText}>{strings.Register}</Text>
                 </TouchableOpacity>
