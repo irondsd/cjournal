@@ -6,16 +6,16 @@ import { strings } from '../../localizations'
 import sync from '../../services/sync'
 import OrthostasisTile from '../../components/tiles/OrthostasisTile'
 import OneTimeTakingofMedicineTile from '../../components/tiles/OneTimeTakingOfMedicineTile'
+import TileWrapper from '../../components/TileWrapper'
 
-type Props = {}
-class TestsAcreen extends Component<Props> {
+class TestsScreen extends Component {
     static navigationOptions = {
         title: strings.Activity,
     }
 
     render() {
         return (
-            <View style={styles.activityBox}>
+            <TileWrapper>
                 {this.props.user.hide_elements.includes(
                     'Orthostasis',
                 ) ? null : (
@@ -24,7 +24,7 @@ class TestsAcreen extends Component<Props> {
                 <OneTimeTakingofMedicineTile
                     navigation={this.props.navigation}
                 />
-            </View>
+            </TileWrapper>
         )
     }
 }
@@ -32,24 +32,8 @@ class TestsAcreen extends Component<Props> {
 function mapStateToProps(state) {
     return {
         user: state.user,
+        activity: state.activity,
     }
 }
 
-export default connect(mapStateToProps, null)(TestsAcreen)
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-    },
-    activityBox: {
-        marginTop: 10,
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: backgroundColor,
-        justifyContent: 'center',
-    },
-})
+export default connect(mapStateToProps, null)(TestsScreen)

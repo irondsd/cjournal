@@ -19,7 +19,6 @@ export default class Tile extends Component {
                 disabled={this.props.disabled}
                 imgScale={1.07}
                 onPress={() => {
-                    console.log('gggfs')
                     this.props.navigation.navigate(paths.Activity)
                 }}
                 onLongPress={() => {

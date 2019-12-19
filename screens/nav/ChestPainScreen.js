@@ -7,44 +7,20 @@ import sync from '../../services/sync'
 import AnginalPainTile from '../../components/tiles/AnginousPainTile'
 import RetrosternalPainTile from '../../components/tiles/RetrosternalPainTile'
 import HeartAreaPainTile from '../../components/tiles/HeartAreaPainTile'
+import TileWrapper from '../../components/TileWrapper'
 
-class IntakeScreen extends Component {
+export default class IntakeScreen extends Component {
     static navigationOptions = {
         title: strings.ChestPain,
     }
 
     render() {
         return (
-            <View style={styles.activityBox}>
+            <TileWrapper>
                 <AnginalPainTile navigation={this.props.navigation} />
                 <RetrosternalPainTile navigation={this.props.navigation} />
                 <HeartAreaPainTile navigation={this.props.navigation} />
-            </View>
+            </TileWrapper>
         )
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        user: state.user,
-    }
-}
-
-export default connect(mapStateToProps, null)(IntakeScreen)
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-    },
-    activityBox: {
-        marginTop: 10,
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: backgroundColor,
-        justifyContent: 'center',
-    },
-})

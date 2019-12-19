@@ -8,10 +8,15 @@ import WalkingTile from '../../components/tiles/WalkingTile'
 import StairsTile from '../../components/tiles/StairsTile'
 import WorkoutTile from '../../components/tiles/WorkoutTile'
 import Barometer from '../../sensors/Barometer'
+import TileWrapper from '../../components/TileWrapper'
 
 class ActivityScreen extends Component<Props> {
     static navigationOptions = {
         title: strings.Activity,
+    }
+
+    constructor(props) {
+        super(props)
     }
 
     componentDidMount() {
@@ -24,7 +29,7 @@ class ActivityScreen extends Component<Props> {
 
     render() {
         return (
-            <View style={styles.activityBox}>
+            <TileWrapper>
                 <RestTile navigation={this.props.navigation} />
                 {this.props.user.hide_elements.includes(
                     activity_types.Walking,
@@ -37,7 +42,7 @@ class ActivityScreen extends Component<Props> {
                     <StairsTile navigation={this.props.navigation} />
                 )}
                 <WorkoutTile navigation={this.props.navigation} />
-            </View>
+            </TileWrapper>
         )
     }
 }
@@ -45,24 +50,8 @@ class ActivityScreen extends Component<Props> {
 function mapStateToProps(state) {
     return {
         user: state.user,
+        activity: state.activity,
     }
 }
 
 export default connect(mapStateToProps, null)(ActivityScreen)
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-    },
-    activityBox: {
-        marginTop: 10,
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: backgroundColor,
-        justifyContent: 'center',
-    },
-})

@@ -7,45 +7,20 @@ import sync from '../../services/sync'
 import AlcoholTile from '../../components/tiles/AlcoholTile'
 import MealTile from '../../components/tiles/MealTile'
 import SmokingTile from '../../components/tiles/SmokingTile'
+import TileWrapper from '../../components/TileWrapper'
 
-type Props = {}
-class IntakeScreen extends Component<Props> {
+export default class IntakeScreen extends Component {
     static navigationOptions = {
         title: strings.Intake,
     }
 
     render() {
         return (
-            <View style={styles.activityBox}>
+            <TileWrapper>
                 <MealTile navigation={this.props.navigation} />
                 <AlcoholTile navigation={this.props.navigation} />
                 <SmokingTile navigation={this.props.navigation} />
-            </View>
+            </TileWrapper>
         )
     }
 }
-
-function mapStateToProps(state) {
-    return {
-        user: state.user,
-    }
-}
-
-export default connect(mapStateToProps, null)(IntakeScreen)
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-    },
-    activityBox: {
-        marginTop: 10,
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: backgroundColor,
-        justifyContent: 'center',
-    },
-})

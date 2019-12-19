@@ -19,6 +19,7 @@ import TestsTile from '../components/tiles/TestsTile'
 import EmotionsTile from '../components/tiles/EmotionsTile'
 import TroubleButton from '../components/TroubleButton'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
+import TileWrapper from '../components/TileWrapper'
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -106,7 +107,7 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            <View style={styles.activityBox}>
+            <TileWrapper>
                 <StatusBar
                     backgroundColor={'white'}
                     barStyle="dark-content"
@@ -147,7 +148,7 @@ class HomeScreen extends Component {
                     navigation={this.props.navigation}
                     disabled={this.state.Tests}
                 />
-            </View>
+            </TileWrapper>
         )
     }
 }
@@ -160,20 +161,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(HomeScreen)
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-    },
-    activityBox: {
-        marginTop: 10,
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: backgroundColor,
-        justifyContent: 'center',
-    },
-})
