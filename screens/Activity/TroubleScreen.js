@@ -16,9 +16,9 @@ import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
+import GPS from '../../sensors/GPS'
 
-type Props = {}
-class TroubleScreen extends Component<Props> {
+class TroubleScreen extends Component {
     static navigationOptions = {
         title: strings.Trouble,
         headerLeft: null,
@@ -30,12 +30,14 @@ class TroubleScreen extends Component<Props> {
         this.state = {
             longPress: false,
             comment: '',
-            position: false,
+            position: {},
             audioFile: null,
+            locationPermission: false,
         }
 
         this.setAudio = this.setAudio.bind(this)
-        this.requestPosition = this.requestPosition.bind(this)
+        this.startUpdates = this.startUpdates.bind(this)
+        this.GPS = new GPS()
     }
 
     record() {
@@ -49,67 +51,37 @@ class TroubleScreen extends Component<Props> {
         if (this.state.audioFile) activity.data.audioFile = this.state.audioFile
 
         this.props.add(activity)
-
         this.props.navigation.navigate(paths.Home)
     }
 
-    requestPosition(enableHighAccuracy = false) {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                console.log('Got position', position.coords)
-                // record here
-                this.setState(
-                    {
-                        position: position.coords,
-                    },
-                    () => {
-                        if (!this.state.longPress) this.record()
-                    },
-                )
-            },
-            error => console.log(error.message),
-            {
-                enableHighAccuracy: enableHighAccuracy,
-                timeout: 30000,
-                maximumAge: 30000,
-            },
-        )
-    }
-
-    async requestLocationPermissions() {
-        try {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-                {
-                    title: 'Cardio Tracker',
-                    message:
-                        'We need your location to better calculate the distance.',
-                    buttonNeutral: 'Ask Me Later',
-                    buttonNegative: 'Cancel',
-                    buttonPositive: 'OK',
-                },
-            )
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log('You can use the location')
-                this.requestPosition(false)
-                this.requestPosition(true) // first requesting by wifi, then by GPS
-            } else {
-                console.log('Location permission denied')
-            }
-        } catch (err) {
-            console.warn(err)
-        }
-    }
-
     componentDidMount() {
-        this.requestLocationPermissions()
         this.setState({
             longPress: this.props.navigation.state.params.longPress,
         })
+
+        if (this.props.navigation.state.params.longPress) {
+            this.startUpdates()
+        } else {
+            this.GPS.getPosition().then(position => {
+                this.setState({ position: position }, () => {
+                    this.record()
+                })
+            })
+        }
     }
 
     componentWillUnmount() {
-        navigator.geolocation.stopObserving()
+        clearInterval(this.intervalId)
+    }
+
+    startUpdates() {
+        this.intervalId = setInterval(() => {
+            this.GPS.getPosition().then(position => {
+                this.setState({ position: position }, () => {
+                    this.record()
+                })
+            })
+        }, 3000)
     }
 
     setAudio(audioFile) {
