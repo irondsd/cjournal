@@ -14,8 +14,8 @@ class App extends Component {
                 startOnBoot: true, // <-- Android-only
             },
             () => {
-                if (true) {
-                    sync(this.props.user.id, this.props.user.api_key)
+                if (this.props.id && this.props.api_key) {
+                    sync(this.props.id, this.props.api_key)
                 } else {
                     console.log(`Can't sync, not logged in`)
                 }
