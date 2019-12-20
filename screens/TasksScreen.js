@@ -26,17 +26,32 @@ class TasksScreen extends Component<Props> {
         store.subscribe(() => {
             this.forceUpdate()
         })
+
+        this.active = false
     }
 
     componentDidMount() {
-        this.props.navigation.addListener('willFocus', this.fetch)
-        this.intervalId = setInterval(() => {
-            this.fetch()
-        }, 3000)
+        this.props.navigation.addListener('willFocus', () => {
+            this.runSync()
+            this.active = true
+        })
+        this.props.navigation.addListener('willBlur', () => {
+            this.active = false
+        })
+
+        this.updates()
     }
 
     componentWillUnmount() {
         clearInterval(this.intervalId)
+    }
+
+    updates() {
+        this.intervalId = setInterval(() => {
+            if (this.active) {
+                this.fetch()
+            }
+        }, 3000)
     }
 
     fetch() {
