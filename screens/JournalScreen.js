@@ -28,6 +28,8 @@ class JournalScreen extends Component<Props> {
         store.subscribe(() => {
             this.forceUpdate()
         })
+
+        this.active = false
     }
 
     componentDidUpdate() {
@@ -36,18 +38,27 @@ class JournalScreen extends Component<Props> {
     }
 
     componentDidMount() {
-        this.props.navigation.addListener('willFocus', this.runSync)
-        this.props.navigation.addListener('willBlur', () =>
-            clearInterval(this.intervalId),
-        )
-
-        this.intervalId = setInterval(() => {
+        this.props.navigation.addListener('willFocus', () => {
             this.runSync()
-        }, 3000)
+            this.active = true
+        })
+        this.props.navigation.addListener('willBlur', () => {
+            this.active = false
+        })
+
+        this.updates()
     }
 
     componentWillUnmount() {
         clearInterval(this.intervalId)
+    }
+
+    updates() {
+        this.intervalId = setInterval(() => {
+            if (this.active) {
+                this.runSync()
+            }
+        }, 3000)
     }
 
     runSync() {
