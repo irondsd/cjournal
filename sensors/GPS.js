@@ -1,18 +1,29 @@
-import {calculateDistance} from '../helpers/GPS'
+import { calculateDistance } from '../helpers/GPS'
+import requestLocationPermissions from '../permissions/requestLocationPermissions'
+import Geolocation from '@react-native-community/geolocation'
 
 export default class GPS {
     constructor(cb = null) {
         this.distance = 0
         this.speed = 0
         this.positions = []
+        this.allowed = false
 
         if (cb) this.callback = cb
+        this.confirmPermissions()
+    }
+
+    async confirmPermissions() {
+        this.allowed = await requestLocationPermissions()
+        return this.allowed
     }
 
     requestPosition() {
-        navigator.geolocation.getCurrentPosition(
+        if (!this.allowed) return console.log('Not allowed to use location')
+
+        Geolocation.getCurrentPosition(
             position => {
-                // console.log("Got position", position.coords);
+                // console.log('Got position', position.coords)
                 let distance = 0
                 if (this.positions[this.positions.length - 1]) {
                     distance =
@@ -23,13 +34,11 @@ export default class GPS {
                             position.coords.longitude,
                         ).toFixed(3) * 1000
                 }
-
                 this.positions.push([
                     position.coords.latitude,
                     position.coords.longitude,
                 ])
                 this.distance += distance
-
                 if (this.callback) this.callback(this.distance)
             },
             error => console.log(error.message),
@@ -41,14 +50,37 @@ export default class GPS {
         )
     }
 
-    watchStart(interval = 10000) {
-        this.intervalId = setInterval(() => {
+    async getPosition() {
+        let allowed = await this.confirmPermissions()
+
+        return new Promise((resolve, reject) => {
+            if (!allowed) reject('not allowed')
+
+            Geolocation.getCurrentPosition(
+                position => {
+                    resolve(position)
+                },
+                error => {
+                    reject(error)
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 20000,
+                    maximumAge: 1000,
+                },
+            )
+        })
+    }
+
+    async watchStart(interval = 10000) {
+        this.requestPosition()
+        this.watchId = setInterval(() => {
             this.requestPosition()
         }, interval)
     }
 
     watchStop() {
-        clearInterval(this.intervalId)
+        clearInterval(this.watchId)
     }
 
     getFirstAndLastPosition() {
