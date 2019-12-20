@@ -10,7 +10,7 @@ import Barometer from '../sensors/Barometer'
 
 export default async function sync(id, api_key) {
     if (!id) return
-    Barometer.calibrate(20)
+    // Barometer.calibrate(20)
 
     syncActivities()
         .then(() => {
