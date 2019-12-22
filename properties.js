@@ -1,4 +1,4 @@
-export const EndpointURL = 'http://217.197.236.243:3000/'
+export const EndpointURL = 'http://217.197.236.243:3333/'
 export const APIBaseURL = `${EndpointURL}api/`
 export const appColor = '#e84d2e'
 export const backgroundColor = '#fcfeff'
