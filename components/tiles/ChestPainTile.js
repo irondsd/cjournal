@@ -14,13 +14,18 @@ export default class Tile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color='#D82315'
+                color="#fc3f00"
+                shadeColor="#fca800"
                 imgScale={1}
                 onPress={() => {
-                    this.props.navigation.navigate(paths.CardiacRhythmDisturbance)
+                    this.props.navigation.navigate(
+                        paths.CardiacRhythmDisturbance,
+                    )
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.CardiacRhythmDisturbance)
+                    this.props.navigation.navigate(
+                        paths.CardiacRhythmDisturbance,
+                    )
                 }}
             />
         )
