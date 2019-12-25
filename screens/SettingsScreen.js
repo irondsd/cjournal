@@ -6,10 +6,11 @@ import {
     View,
     Button,
     StatusBar,
+    Linking,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
-import { backgroundColor } from '../properties'
+import { backgroundColor, profileEditUrl } from '../properties'
 import { strings } from '../localizations'
 import { removeAll } from '../services/asyncStorage'
 
@@ -29,17 +30,28 @@ class SettingsScreen extends Component {
                     // hidden={true}
                 />
                 <Text style={styles.name}>{this.props.user.name}</Text>
-                <Text style={styles.email}>{this.props.user.email}</Text>
-                <Text style={styles.information}>
-                    {this.props.user.gender}, {this.props.user.birthday}
-                </Text>
-                <Button
-                    title={strings.Logout}
-                    style={styles.button}
-                    onPress={() => {
-                        this.logout()
-                    }}
-                />
+                <Text
+                    style={
+                        styles.information
+                    }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
+                <View style={styles.buttonView}>
+                    <Button
+                        title={'Edit profile'}
+                        style={styles.button}
+                        onPress={() => {
+                            Linking.openURL(profileEditUrl).catch(err =>
+                                console.error('An error occurred', err),
+                            )
+                        }}
+                    />
+                    <Button
+                        title={strings.Logout}
+                        style={styles.button}
+                        onPress={() => {
+                            this.logout()
+                        }}
+                    />
+                </View>
             </View>
         )
     }
@@ -85,5 +97,10 @@ const styles = StyleSheet.create({
     button: {
         margin: 10,
         padding: 20,
+    },
+    buttonView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: '15%',
     },
 })

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import { APIBaseURL, appColor } from '../properties'
+import { Text, View, StyleSheet, TouchableOpacity, Linking } from 'react-native'
+import { apiBaseUrl, appColor, registrationUrl } from '../properties'
 import { strings } from '../localizations'
 import { withNavigation } from 'react-navigation'
 
@@ -11,7 +11,9 @@ class RegisterOrLogin extends Component {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        // open browser
+                        Linking.openURL(registrationUrl).catch(err =>
+                            console.error('An error occurred', err),
+                        )
                     }}>
                     <Text style={styles.buttonText}>{strings.Register}</Text>
                 </TouchableOpacity>
