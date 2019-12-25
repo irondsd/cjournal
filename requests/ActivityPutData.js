@@ -1,5 +1,4 @@
 import { apiBaseUrl, rec_version } from '../properties'
-import { scheduleSync } from '../services/connectivityWatcher'
 
 export default function activityPutData(id, api_key, activity) {
     const url =

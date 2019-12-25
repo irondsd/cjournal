@@ -1,7 +1,6 @@
 import { apiBaseUrl } from '../properties'
 import { updateUser } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
-import { scheduleSync } from '../services/connectivityWatcher'
 import { strings } from '../localizations'
 
 export function loginFetchData(email, password) {
@@ -31,7 +30,6 @@ export function loginFetchData(email, password) {
                 }
             })
             .catch(err => {
-                // scheduleSync()
                 console.log('error in reducer', err)
             })
     }
