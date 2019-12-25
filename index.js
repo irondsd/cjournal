@@ -15,4 +15,6 @@ export default class AppContainer extends Component {
     }
 }
 
+YellowBox.ignoreWarnings(['Require cycle:', 'ListView is deprecated'])
+
 AppRegistry.registerComponent(appName, () => AppContainer)

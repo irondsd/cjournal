@@ -13,7 +13,7 @@ export function scheduleSync() {
     }
 }
 
-// TODO: device between error resync and no connection resync
+// TODO: differenciate between error resync and no connection resync
 
 const listener = isConnected => {
     if (isConnected && scheduled) {
