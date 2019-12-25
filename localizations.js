@@ -149,6 +149,8 @@ export const strings = new LocalizedStrings({
         DeviceInstalled: 'Device installed',
         NoPhoto: 'No Photo',
         Register: 'Register',
+        idinv: 'Investigation ID',
+        EditProfile: 'Edit profile',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -298,6 +300,8 @@ export const strings = new LocalizedStrings({
         DeviceInstalled: 'Dispositivo instalado',
         NoPhoto: 'No hay foto',
         Register: 'Registrarse',
+        idinv: 'Identificación de investigación',
+        EditProfile: 'Editar perfil',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -448,5 +452,7 @@ export const strings = new LocalizedStrings({
         DeviceInstalled: 'Устройство установлено',
         NoPhoto: 'Нет фото',
         Register: 'Зарегистрироваться',
+        idinv: 'Номер обследования',
+        EditProfile: 'Редактировать профиль',
     },
 })
