@@ -1,6 +1,8 @@
 import { apiBaseUrl } from '../properties'
-import { updateActivities } from '../redux/actions/activityActions'
-import { scheduleSync } from '../services/connectivityWatcher'
+import {
+    updateActivities,
+    activityFetchFailed,
+} from '../redux/actions/activityActions'
 
 export const activityFetchData = (id, api_key) => {
     const url = apiBaseUrl + `users/${id}/activity?api_key=${api_key}`
@@ -11,7 +13,7 @@ export const activityFetchData = (id, api_key) => {
                 dispatch(updateActivities(res))
             })
             .catch(err => {
-                scheduleSync()
+                dispatch(activityFetchFailed())
             })
     }
 }

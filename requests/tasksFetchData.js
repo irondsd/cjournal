@@ -1,6 +1,5 @@
 import { apiBaseUrl } from '../properties'
-import { replaceTasks } from '../redux/actions/tasksActions'
-import { scheduleSync } from '../services/connectivityWatcher'
+import { replaceTasks, tasksFetchFailed } from '../redux/actions/tasksActions'
 
 export const tasksFetchData = (id, api_key) => {
     const url = apiBaseUrl + `users/${id}/tasks?api_key=${api_key}`
@@ -11,7 +10,7 @@ export const tasksFetchData = (id, api_key) => {
                 dispatch(replaceTasks(res))
             })
             .catch(err => {
-                scheduleSync()
+                dispatch(tasksFetchFailed())
             })
     }
 }

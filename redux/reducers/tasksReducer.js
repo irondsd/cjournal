@@ -1,6 +1,7 @@
 import { tasksAsyncSave } from '../../services/asyncStorage'
 import { sortTasks } from '../../helpers/sort'
 import Task, { addOrUpdate, exists, sort } from '../../classes/Task'
+import { scheduleSync } from '../../services/connectivityWatcher'
 
 export default function tasksReducer(state = [], { type, payload }) {
     switch (type) {
@@ -35,7 +36,9 @@ export default function tasksReducer(state = [], { type, payload }) {
             }
             save(state)
             return state
-
+        case 'TASKS_FETCH_FAILED':
+            scheduleSync()
+            return state
         case 'ADD_ACTIVITY':
             if (payload.tasks_id && !payload.data.failed) {
                 for (task in state) {

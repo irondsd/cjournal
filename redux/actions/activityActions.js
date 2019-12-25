@@ -64,6 +64,12 @@ export const activitySendFailed = activity => {
     }
 }
 
+export const activityFetchFailed = () => {
+    return {
+        type: 'ACTIVITY_FETCH_FAILED',
+    }
+}
+
 export const logoutUserActivity = () => {
     return {
         type: 'LOGOUT_USER',

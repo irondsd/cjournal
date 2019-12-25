@@ -97,6 +97,9 @@ export default function activityReducer(state = [], { type, payload }) {
             save(state)
             scheduleSync()
             return state
+        case 'ACTIVITY_FETCH_FAILED':
+            scheduleSync()
+            return state
         case 'ACTIVITY_SYNCED':
             payload.successfullySynced()
             save(state)

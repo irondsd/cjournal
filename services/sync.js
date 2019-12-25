@@ -5,7 +5,7 @@ import { tasksFetchData } from '../requests/tasksFetchData'
 import { dispatch } from 'redux'
 import store from '../redux/store'
 import syncActivities from './syncActivities'
-import { scheduleSync } from './connectivityWatcher'
+// import { scheduleSync } from './connectivityWatcher'
 import Barometer from '../sensors/Barometer'
 
 export default async function sync(id, api_key) {
@@ -22,6 +22,6 @@ export default async function sync(id, api_key) {
         })
         .catch(() => {
             console.log('sync ended with errors')
-            scheduleSync()
+            // scheduleSync()
         })
 }
