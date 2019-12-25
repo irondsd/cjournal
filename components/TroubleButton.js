@@ -11,6 +11,7 @@ import { pSBC } from '../helpers/colors'
 import { appColor, activity_types, paths } from '../properties'
 import { strings } from '../localizations'
 import { iconPicker } from '../helpers/iconPicker'
+import LinearGradient from 'react-native-linear-gradient'
 var { Dimensions } = require('react-native')
 
 // TODO: add gradient
@@ -19,17 +20,16 @@ export default class TroubleButton extends Component {
     render() {
         let propsStyles = StyleSheet.create({
             button: {
-                backgroundColor: '#dd0000',
-                borderTopColor: pSBC(-0.1, '#dd0000'),
-                borderBottomColor: pSBC(-0.1, '#dd0000'),
-                borderLeftColor: pSBC(-0.1, '#dd0000'),
-                borderRightColor: pSBC(-0.1, '#dd0000'),
+                backgroundColor: '#7C1710',
+                borderTopColor: pSBC(-0.1, '#7C1710'),
+                borderBottomColor: pSBC(-0.1, '#7C1710'),
+                borderLeftColor: pSBC(-0.1, '#7C1710'),
+                borderRightColor: pSBC(-0.1, '#7C1710'),
             },
         })
 
         return (
             <TouchableOpacity
-                style={[styles.button, propsStyles.button]}
                 onLongPress={() => {
                     this.props.navigation.navigate(paths.Trouble, {
                         longPress: true,
@@ -40,11 +40,17 @@ export default class TroubleButton extends Component {
                         longPress: false,
                     })
                 }}>
-                <Image
-                    style={styles.img}
-                    source={iconPicker(activity_types.Trouble)}
-                />
-                <Text style={styles.text}>{strings.Trouble}</Text>
+                <LinearGradient
+                    style={[styles.button, propsStyles.button]}
+                    colors={['#7C1710', '#3C1518', '#7C1710']}
+                    start={{ x: 0.0, y: 0.0 }}
+                    end={{ x: 1.0, y: 1.0 }}>
+                    <Image
+                        style={styles.img}
+                        source={iconPicker(activity_types.Trouble)}
+                    />
+                    <Text style={styles.text}>{strings.Trouble}</Text>
+                </LinearGradient>
             </TouchableOpacity>
         )
     }
