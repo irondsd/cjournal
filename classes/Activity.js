@@ -4,7 +4,7 @@ import activityPostData from '../requests/activityPostData'
 import activityFileUpload from '../requests/activityFileUpload'
 import {
     activitySetId,
-    activitySyncFailed,
+    activitySendFailed,
     activitySynced,
     activityDeleted,
 } from '../redux/actions/activityActions'
@@ -127,7 +127,7 @@ export default class Activity {
                     })
                     .catch(error => {
                         console.log('post activity fail', error)
-                        store.dispatch(activitySyncFailed(this))
+                        store.dispatch(activitySendFailed(this))
                         reject()
                     })
             }
@@ -138,7 +138,7 @@ export default class Activity {
                     })
                     .catch(error => {
                         console.log('put activity fail', error)
-                        store.dispatch(activitySyncFailed(this))
+                        store.dispatch(activitySendFailed(this))
                         reject()
                     })
             }
@@ -149,7 +149,7 @@ export default class Activity {
                     })
                     .catch(error => {
                         console.log('delete activity fail', error)
-                        store.dispatch(activitySyncFailed(this))
+                        store.dispatch(activitySendFailed(this))
                         reject()
                     })
             }

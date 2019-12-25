@@ -9,6 +9,7 @@ import Activity, {
     remove,
     update,
 } from '../../classes/Activity'
+import { scheduleSync } from '../../services/connectivityWatcher'
 
 export default function activityReducer(state = [], { type, payload }) {
     switch (type) {
@@ -91,9 +92,10 @@ export default function activityReducer(state = [], { type, payload }) {
             payload.activity.setId(payload.id)
             save(state)
             return state
-        case 'ACTIVITY_SYNC_FAILED':
+        case 'ACTIVITY_SEND_FAILED':
             payload.increaseFailedSyncCount()
             save(state)
+            scheduleSync()
             return state
         case 'ACTIVITY_SYNCED':
             payload.successfullySynced()
