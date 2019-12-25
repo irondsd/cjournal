@@ -20,7 +20,7 @@ export default class Photo extends Component {
 
     link(link) {
         // this.setState({
-        //     link: EndpointURL + this.props.link,
+        //     link: EndpointUrl + this.props.link,
         // })
 
         let filename = link.split('/')[1]

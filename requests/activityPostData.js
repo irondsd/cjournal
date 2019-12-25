@@ -1,8 +1,8 @@
-import { APIBaseURL, rec_version } from '../properties'
+import { apiBaseUrl, rec_version } from '../properties'
 import { scheduleSync } from '../services/connectivityWatcher'
 
 export default function activityPostData(id, api_key, activity) {
-    const url = APIBaseURL + `users/${id}/activity?api_key=${api_key}`
+    const url = apiBaseUrl + `users/${id}/activity?api_key=${api_key}`
     return fetch(url, {
         method: 'POST',
         headers: {

@@ -32,7 +32,7 @@ class TasksScreen extends Component<Props> {
 
     componentDidMount() {
         this.props.navigation.addListener('willFocus', () => {
-            this.runSync()
+            this.fetch()
             this.active = true
         })
         this.props.navigation.addListener('willBlur', () => {

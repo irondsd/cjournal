@@ -1,11 +1,11 @@
-import { APIBaseURL } from '../properties'
+import { apiBaseUrl } from '../properties'
 import { updateUser } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
 import { scheduleSync } from '../services/connectivityWatcher'
 
 export const userFetchData = (id, api_key) => {
     return dispatch => {
-        const url = APIBaseURL + `users/${id}?api_key=${api_key}`
+        const url = apiBaseUrl + `users/${id}?api_key=${api_key}`
         fetch(url)
             .then(res => res.json())
             .then(res => {

@@ -1,10 +1,10 @@
 var RNFS = require('react-native-fs')
-import { APIBaseURL, rec_version } from '../properties'
+import { apiBaseUrl, rec_version } from '../properties'
 import { scheduleSync } from '../services/connectivityWatcher'
 
 export default async function activityPostData(id, api_key, activity) {
     const uploadUrl =
-        APIBaseURL + `users/${id}/activity/${activity.id}?api_key=${api_key}`
+        apiBaseUrl + `users/${id}/activity/${activity.id}?api_key=${api_key}`
     var files = []
 
     if (activity.data.audioFile)
