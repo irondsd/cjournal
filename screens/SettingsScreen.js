@@ -36,7 +36,7 @@ class SettingsScreen extends Component {
                     }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
                 <View style={styles.buttonView}>
                     <Button
-                        title={'Edit profile'}
+                        title={strings.EditProfile}
                         style={styles.button}
                         onPress={() => {
                             Linking.openURL(profileEditUrl).catch(err =>
