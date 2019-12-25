@@ -1,7 +1,9 @@
-export const EndpointURL = 'http://217.197.236.243:3333/'
-export const APIBaseURL = `${EndpointURL}api/`
+export const EndpointUrl = 'http://217.197.236.243:3333/'
+export const apiBaseUrl = `${EndpointUrl}api/`
 export const appColor = '#e84d2e'
 export const backgroundColor = '#fcfeff'
+export const registrationUrl = `http://217.197.236.242:7050/Identity/Account/Register`
+export const profileEditUrl = `http://217.197.236.242:7050/Identity/Account/Manage`
 
 // list if editable activities
 export const editable = [
