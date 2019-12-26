@@ -1,6 +1,7 @@
 import { userAsyncSave } from '../../services/asyncStorage'
 import { clearFiles } from '../../services/fs'
 import { scheduleSync } from '../../services/connectivityWatcher'
+import { removeAll } from '../../services/asyncStorage'
 
 const initialState = {
     isLoggedIn: false,
@@ -41,6 +42,7 @@ export default function userReducer(state = initialState, { type, payload }) {
             scheduleSync()
             return state
         case 'LOGOUT_USER':
+            removeAll()
             clearFiles()
             return initialState
         default:

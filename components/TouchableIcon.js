@@ -12,7 +12,7 @@ export default class TouchableIcon extends Component {
                 onPress={this.props.onPress}>
                 <Icon
                     name={this.props.name}
-                    color="#FFF"
+                    color={this.props.color || '#FFF'}
                     size={this.props.size}
                 />
             </TouchableOpacity>
