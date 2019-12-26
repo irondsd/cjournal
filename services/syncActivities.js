@@ -1,10 +1,4 @@
-import store from '../redux/store'
-
-export default function syncActivities() {
-    let id = store.getState().user.id
-    let api_key = store.getState().user.api_key
-    let activities = store.getState().activity
-
+export default function syncActivities(activities, id, api_key) {
     return Promise.all([
         ...activities.map(activity => {
             if (!activity.synced()) {

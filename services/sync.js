@@ -1,18 +1,18 @@
 import { activityFetchData } from '../requests/activityFetchData'
 import { userFetchData } from '../requests/userFetchData'
 import { tasksFetchData } from '../requests/tasksFetchData'
-
-import { dispatch } from 'redux'
+// import { dispatch } from 'redux'
 import store from '../redux/store'
 import syncActivities from './syncActivities'
-// import { scheduleSync } from './connectivityWatcher'
 import Barometer from '../sensors/Barometer'
 
 export default async function sync(id, api_key) {
     if (!id) return
     // Barometer.calibrate(20)
 
-    syncActivities()
+    let activities = store.getState().activity
+
+    syncActivities(activities, id, api_key)
         .then(() => {
             console.log('sync done')
 
@@ -22,6 +22,5 @@ export default async function sync(id, api_key) {
         })
         .catch(() => {
             console.log('sync ended with errors')
-            // scheduleSync()
         })
 }
