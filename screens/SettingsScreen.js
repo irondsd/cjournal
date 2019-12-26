@@ -12,11 +12,22 @@ import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
 import { backgroundColor, profileEditUrl } from '../properties'
 import { strings } from '../localizations'
-import { removeAll } from '../services/asyncStorage'
+import TouchableIcon from '../components/TouchableIcon'
 
 class SettingsScreen extends Component {
+    static navigationOptions = {
+        title: strings.Settings,
+        headerRight: (
+            <TouchableIcon
+                name="qrcode"
+                color="#000"
+                size={25}
+                style={{ right: 15 }}
+            />
+        ),
+    }
+
     logout() {
-        removeAll()
         this.props.logout()
         this.props.navigation.navigate('Auth')
     }

@@ -151,6 +151,7 @@ export const strings = new LocalizedStrings({
         Register: 'Register',
         idinv: 'Investigation ID',
         EditProfile: 'Edit profile',
+        Settings: 'Settings',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -302,6 +303,7 @@ export const strings = new LocalizedStrings({
         Register: 'Registrarse',
         idinv: 'Identificación de investigación',
         EditProfile: 'Editar perfil',
+        Settings: 'Configuraciones',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -454,5 +456,6 @@ export const strings = new LocalizedStrings({
         Register: 'Зарегистрироваться',
         idinv: 'Номер обследования',
         EditProfile: 'Редактировать профиль',
+        Settings: 'Настройки',
     },
 })
