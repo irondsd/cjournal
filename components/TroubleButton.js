@@ -20,11 +20,11 @@ export default class TroubleButton extends Component {
     render() {
         let propsStyles = StyleSheet.create({
             button: {
-                backgroundColor: '#7C1710',
-                borderTopColor: pSBC(-0.1, '#7C1710'),
-                borderBottomColor: pSBC(-0.1, '#7C1710'),
-                borderLeftColor: pSBC(-0.1, '#7C1710'),
-                borderRightColor: pSBC(-0.1, '#7C1710'),
+                backgroundColor: '#800',
+                borderTopColor: pSBC(-0.1, '#800'),
+                borderBottomColor: pSBC(-0.1, '#800'),
+                borderLeftColor: pSBC(-0.1, '#800'),
+                borderRightColor: pSBC(-0.1, '#800'),
             },
         })
 
@@ -42,9 +42,12 @@ export default class TroubleButton extends Component {
                 }}>
                 <LinearGradient
                     style={[styles.button, propsStyles.button]}
-                    colors={['#7C1710', '#3C1518', '#7C1710']}
-                    start={{ x: 0.0, y: 0.0 }}
-                    end={{ x: 1.0, y: 1.0 }}>
+                    colors={['#800', '#3C1518', '#800']}
+                    useAngle={true}
+                    angle={40}
+                    // start={{ x: 0.0, y: 0.0 }}
+                    // end={{ x: 0.5, y: 1.0 }}
+                >
                     <Image
                         style={styles.img}
                         source={iconPicker(activity_types.Trouble)}
@@ -57,7 +60,7 @@ export default class TroubleButton extends Component {
 }
 
 const tileSize = Dimensions.get('window').width / 3.75
-const borderRadius = 20
+const borderRadius = 10
 const margin = Dimensions.get('window').width / 46.875
 
 const styles = StyleSheet.create({

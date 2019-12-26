@@ -48,10 +48,7 @@ export default class ActivityItem extends Component {
                 left: margin ? margin : 14,
             },
             buttonActivity: {
-                borderColor:
-                    Platform.OS === 'android'
-                        ? 'white'
-                        : styles.buttonActivity.borderColor,
+                backgroundColor: this.props.color,
             },
         }
         let mainColor = this.props.color
@@ -106,7 +103,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         borderRadius: borderRadius,
         borderWidth: 2,
-        backgroundColor: 'black',
         borderColor: '#00000015',
         borderStyle: 'solid',
         paddingLeft: 5,
