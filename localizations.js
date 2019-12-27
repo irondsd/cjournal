@@ -3,7 +3,7 @@ import LocalizedStrings from 'react-native-localization'
 export const strings = new LocalizedStrings({
     'en-US': {
         AppTitle: 'Cardio Journal',
-        email: 'email',
+        username: 'username',
         password: 'password',
         Login: 'Login',
         Journal: 'Journal',
@@ -155,7 +155,7 @@ export const strings = new LocalizedStrings({
     },
     es: {
         AppTitle: 'Diario de Cardio',
-        email: 'email',
+        username: 'nombre de usuario',
         password: 'contraseña',
         Login: 'Entrar',
         Journal: 'Diario',
@@ -307,7 +307,7 @@ export const strings = new LocalizedStrings({
     },
     ru: {
         AppTitle: 'Кардио журнал',
-        email: 'электронная почта',
+        username: 'имя пользователя',
         password: 'пароль',
         Login: 'Войти',
         Journal: 'Дневник',
