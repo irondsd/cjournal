@@ -1,11 +1,11 @@
-import { apiBaseUrl } from '../properties'
+import { apiUrl } from '../properties'
 import {
     updateActivities,
     activityFetchFailed,
 } from '../redux/actions/activityActions'
 
 export const activityFetchData = (id, api_key) => {
-    const url = apiBaseUrl + `users/${id}/activity?api_key=${api_key}`
+    const url = apiUrl + `users/${id}/activity?api_key=${api_key}`
     return dispatch => {
         fetch(url)
             .then(res => res.json())

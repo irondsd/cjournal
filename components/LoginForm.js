@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     StatusBar,
 } from 'react-native'
-import { apiBaseUrl, appColor } from '../properties'
+import { apiUrl, appColor } from '../properties'
 import { strings } from '../localizations'
 import { loginFetchData } from '../requests/loginFetchData'
 import { connect } from 'react-redux'

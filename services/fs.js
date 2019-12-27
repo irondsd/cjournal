@@ -1,5 +1,5 @@
 var RNFS = require('react-native-fs')
-import { EndpointURL } from '../properties'
+import { backendUrl } from '../properties'
 
 export async function moveToParentDir(filepath, filename) {
     // console.log(filepath, RNFS.DocumentDirectoryPath + '/' + filename)
@@ -14,7 +14,7 @@ export async function moveToParentDir(filepath, filename) {
 export async function downloadFile(url) {
     let filename = url.split('/')[1]
     let filepath = RNFS.DocumentDirectoryPath + '/' + filename
-    url = EndpointUrl + url
+    url = backendUrl + url
 
     // RNFS.readdir(RNFS.DocumentDirectoryPath).then(res => {
     //     console.log(res)

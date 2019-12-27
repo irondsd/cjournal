@@ -1,8 +1,8 @@
-import { apiBaseUrl, rec_version } from '../properties'
+import { apiUrl, rec_version } from '../properties'
 
 export default function activityPutData(id, api_key, activity) {
     const url =
-        apiBaseUrl + `users/${id}/activity/${activity.id}?api_key=${api_key}`
+        apiUrl + `users/${id}/activity/${activity.id}?api_key=${api_key}`
     return fetch(url, {
         method: 'PUT',
         headers: {

@@ -1,11 +1,11 @@
-import { apiBaseUrl } from '../properties'
+import { apiUrl } from '../properties'
 import { updateUser } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
 import { strings } from '../localizations'
 
 export function loginFetchData(email, password) {
     return dispatch => {
-        const url = apiBaseUrl + 'login'
+        const url = apiUrl + 'login'
         fetch(url, {
             method: 'POST',
             headers: {

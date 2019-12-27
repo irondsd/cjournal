@@ -1,7 +1,7 @@
-import { apiBaseUrl, rec_version } from '../properties'
+import { apiUrl, rec_version } from '../properties'
 
 export default function activityPostData(id, api_key, activity) {
-    const url = apiBaseUrl + `users/${id}/activity?api_key=${api_key}`
+    const url = apiUrl + `users/${id}/activity?api_key=${api_key}`
     return fetch(url, {
         method: 'POST',
         headers: {

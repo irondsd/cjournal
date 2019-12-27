@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Linking } from 'react-native'
-import { apiBaseUrl, appColor, registrationUrl } from '../properties'
+import { apiUrl, appColor, registrationUrl } from '../properties'
 import { strings } from '../localizations'
 import { withNavigation } from 'react-navigation'
 

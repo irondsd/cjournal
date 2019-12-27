@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
 import { strings } from '../localizations'
-import { backgroundColor, EndpointURL } from '../properties'
+import { backgroundColor, backendUrl } from '../properties'
 import Icon from 'react-native-vector-icons/FontAwesome'
 const RNFS = require('react-native-fs')
 
@@ -20,7 +20,7 @@ export default class Photo extends Component {
 
     link(link) {
         // this.setState({
-        //     link: EndpointUrl + this.props.link,
+        //     link: backendUrl + this.props.link,
         // })
 
         let filename = link.split('/')[1]

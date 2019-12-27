@@ -1,4 +1,4 @@
-import { apiBaseUrl } from '../properties'
+import { apiUrl } from '../properties'
 import {
     updateUser,
     userFetchFailed,
@@ -8,7 +8,7 @@ import { Alert } from 'react-native'
 
 export const userFetchData = (id, api_key) => {
     return dispatch => {
-        const url = apiBaseUrl + `users/${id}?api_key=${api_key}`
+        const url = apiUrl + `users/${id}?api_key=${api_key}`
         fetch(url)
             .then(res => res.json())
             .then(res => {
