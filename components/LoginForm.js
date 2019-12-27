@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { apiUrl, appColor } from '../properties'
 import { strings } from '../localizations'
-import { loginFetchData } from '../requests/loginFetchData'
+import { identityLogin } from '../requests/identityLogin'
 import { connect } from 'react-redux'
 import TouchableIcon from './TouchableIcon'
 
@@ -18,13 +18,13 @@ class LoginForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: '',
+            username: '',
             password: '',
         }
     }
 
     login() {
-        this.props.login(this.state.email, this.state.password)
+        this.props.login(this.state.username, this.state.password)
     }
 
     render() {
@@ -36,7 +36,7 @@ class LoginForm extends Component {
                         <TouchableIcon name="user" size={25} />
                     </View>
                     <TextInput
-                        placeholder={strings.email}
+                        placeholder={strings.username}
                         placeholderTextColor="#dddddd"
                         style={styles.input}
                         autoCapitalize="none"
@@ -44,13 +44,13 @@ class LoginForm extends Component {
                         autoFocus={true}
                         returnKeyType="next"
                         onSubmitEditing={() => this.passwordInput.focus()}
-                        keyboardType={'email-address'}
+                        keyboardType={'default'}
                         onChangeText={text => {
                             this.setState({
-                                email: text,
+                                username: text,
                             })
                         }}
-                        value={this.state.email}
+                        value={this.state.username}
                     />
                 </View>
                 <View style={styles.inputBox}>
@@ -74,13 +74,7 @@ class LoginForm extends Component {
                         value={this.state.password}
                     />
                 </View>
-                {/* <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => {
-                        this.login()
-                    }}>
-                    <Text style={styles.buttonText}>{strings.Login}</Text>
-                </TouchableOpacity> */}
+
                 <View style={[styles.inputBox, styles.buttonsBox]}>
                     <View style={[styles.iconBox, styles.buttonQrBox]}></View>
                     <TouchableOpacity
@@ -97,8 +91,8 @@ class LoginForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    login: (email, password) => {
-        dispatch(loginFetchData(email, password))
+    login: (username, password) => {
+        dispatch(identityLogin(username, password))
     },
 })
 
