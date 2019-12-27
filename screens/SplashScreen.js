@@ -14,6 +14,7 @@ import {
     replaceActivities,
     replaceTasks,
     loadNotifications,
+    tokensReceived,
 } from '../redux/actions'
 import { strings } from '../localizations'
 import { asyncGetAll, removeScreen, removeAll } from '../services/asyncStorage'
@@ -32,14 +33,15 @@ class SplashScreen extends Component {
         // Barometer.calibrate()
         asyncGetAll()
             .then(res => {
+                if (res.tokens) this.props.tokensReceived(res.tokens)
                 if (res.user) this.props.updateUser(res.user)
                 if (res.activity) this.props.replaceActivities(res.activity)
                 if (res.tasks) this.props.replaceTasks(res.tasks)
                 if (res.notifications)
                     this.props.loadNotifications(res.notifications)
 
-                if (res.user && res.user.api_key && res.user.id) {
-                    this.props.updateUser(res.user)
+                if (res.tokens) {
+                    // TODO:  update tokens
                     if (res.screen) {
                         this.props.navigation.navigate(
                             res.screen.screen,
@@ -84,6 +86,7 @@ const mapDispatchToProps = {
     replaceTasks,
     updateUser,
     loadNotifications,
+    tokensReceived,
 }
 
 export default connect(null, mapDispatchToProps)(SplashScreen)

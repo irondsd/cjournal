@@ -19,13 +19,12 @@ import { strings } from '../localizations'
 import { connect } from 'react-redux'
 import store from '../redux/store'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
-import { updateUser } from '../redux/actions'
 import SimpleCrypto from 'simple-crypto-js'
 import { secretKey } from '../properties'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import TouchableIcon from '../components/TouchableIcon'
 
-const behavior = Platform.OS === 'ios' ? 'padding' : 'null'
+const behavior = Platform.OS === 'ios' ? 'padding' : 'padding'
 const simpleCrypto = new SimpleCrypto(secretKey)
 
 class LoginScreen extends Component {
@@ -47,14 +46,17 @@ class LoginScreen extends Component {
     }
 
     handleBackButton() {
-        this.setState({ opneScanner: false })
-        return true
+        if (this.state.opneScanner) {
+            this.setState({ opneScanner: false })
+            return true
+        }
+        return false
     }
 
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
         store.subscribe(() => {
-            if (this.props.user.isLoggedIn) {
+            if (this.props.tokens.isLoggedIn) {
                 this.props.navigation.navigate('App')
             }
         })
@@ -74,7 +76,7 @@ class LoginScreen extends Component {
         }
         let results = JSON.parse(decipherText)
 
-        this.props.updateUser(results)
+        // this.props.updateUser(results)
 
         if (results.api_key) {
             this.props.navigation.navigate('App')
@@ -132,6 +134,7 @@ class LoginScreen extends Component {
                         style={styles.logo}
                         source={require('../resources/logo.png')}
                     />
+
                     <Text style={styles.title}>{strings.AppTitle}</Text>
                 </View>
                 <View style={styles.login}>
@@ -151,12 +154,12 @@ class LoginScreen extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user,
+        tokens: state.tokens,
     }
 }
 
 const mapDispatchToProps = {
-    updateUser,
+    // updateUser,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
@@ -173,6 +176,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         alignItems: 'center',
         top: '22%',
+        paddingBottom: '10%',
     },
     logo: {
         width: logoSize,
@@ -184,7 +188,7 @@ const styles = StyleSheet.create({
     },
     login: {
         margin: 20,
-        bottom: '5%',
+        bottom: '3%',
     },
     qrButton: {
         position: 'absolute',

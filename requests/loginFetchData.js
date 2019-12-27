@@ -3,7 +3,7 @@ import { updateUser } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
 import { strings } from '../localizations'
 
-export function loginFetchData(email, password) {
+export function loginFetchData(username, password) {
     return dispatch => {
         const url = apiUrl + 'login'
         fetch(url, {
@@ -13,7 +13,7 @@ export function loginFetchData(email, password) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                email: email,
+                username: username,
                 password: password,
             }),
         })
