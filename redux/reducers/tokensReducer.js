@@ -15,9 +15,12 @@ export default function userReducer(state = initialState, { type, payload }) {
             state = {
                 access_token: payload.access_token,
                 refresh_token: payload.refresh_token,
-                token_lifetime: timestamp() + payload.expires_in,
+                token_lifetime:
+                    payload.token_lifetime ||
+                    timestamp() + parseInt(payload.expires_in),
                 isLoggedIn: isLoggedIn,
             }
+            // console.log(state)
             tokensAsyncSave(state)
             return state
         case 'TOKENS_REFRESH_ERROR':

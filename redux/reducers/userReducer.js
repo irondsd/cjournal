@@ -10,17 +10,15 @@ const initialState = {
     course_therapy: [],
     relief_of_attack: [],
     tests: [],
+    sub: '',
+    email: '',
+    preferred_username: '',
 }
 
 export default function userReducer(state = initialState, { type, payload }) {
     switch (type) {
         case 'UPDATE_USER':
             userAsyncSave(payload)
-
-            // TODO: remove this later
-            if (payload.hide_elements === null) {
-                payload.hide_elements = []
-            }
 
             return {
                 ...state,
