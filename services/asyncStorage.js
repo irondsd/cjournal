@@ -6,10 +6,15 @@ let entries = {
     tasks: 'tasks',
     notifications: 'notifications',
     screen: 'screen',
+    tokens: 'tokens',
 }
 
 export function userAsyncSave(user) {
     AsyncStorage.mergeItem(entries.user, JSON.stringify(user))
+}
+
+export function tokensAsyncSave(tokens) {
+    AsyncStorage.setItem(entries.tokens, JSON.stringify(tokens))
 }
 
 export function activityAsyncSave(activity) {
