@@ -48,7 +48,7 @@ class HomeScreen extends Component {
     }
 
     runSync() {
-        sync(this.props.user.id, this.props.user.api_key)
+        sync(this.props.user.id, this.props.tokens.access_token)
     }
 
     refresh() {
@@ -156,6 +156,7 @@ class HomeScreen extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user,
+        tokens: state.tokens,
         activity: state.activity,
     }
 }
