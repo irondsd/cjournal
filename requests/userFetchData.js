@@ -6,10 +6,15 @@ import {
 } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
 
-export const userFetchData = (id, api_key) => {
+export const userFetchData = (id, access_token) => {
     return dispatch => {
-        const url = apiUrl + `users/${id}?api_key=${api_key}`
-        fetch(url)
+        const url = apiUrl + `users/${id}`
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + access_token,
+            },
+        })
             .then(res => res.json())
             .then(res => {
                 if (res.error) {
