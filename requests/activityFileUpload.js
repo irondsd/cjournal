@@ -1,8 +1,8 @@
 var RNFS = require('react-native-fs')
 import { apiUrl, rec_version } from '../properties'
 
-export default async function activityPostData(id, api_key, activity) {
-    const uploadUrl = apiUrl + `users/${id}/activity?api_key=${api_key}`
+export default async function activityPostData(id, access_token, activity) {
+    const uploadUrl = apiUrl + `users/${id}/activity`
     var files = []
 
     if (activity.data.audioFile)
@@ -48,6 +48,7 @@ export default async function activityPostData(id, api_key, activity) {
         method: 'POST',
         headers: {
             Accept: 'application/json',
+            Authorization: 'Bearer ' + access_token,
         },
         fields: {
             ...fields,

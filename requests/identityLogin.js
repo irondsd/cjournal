@@ -23,7 +23,6 @@ export function identityLogin(username, password) {
 
                 if (res.access_token) {
                     loginConfirm(res.access_token).then(res => {
-                        console.log(res)
                         dispatch(updateUser(res))
                     })
                     dispatch(tokensReceived(res))
