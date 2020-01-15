@@ -118,10 +118,10 @@ export default class Activity {
         return true
     }
 
-    sync(id, api_key) {
+    sync(id, access_token) {
         return new Promise((resolve, reject) => {
             if (!this.id) {
-                this.createOnServer(id, api_key)
+                this.createOnServer(id, access_token)
                     .then(() => {
                         resolve()
                     })
@@ -132,7 +132,7 @@ export default class Activity {
                     })
             }
             if (this.system.awaitsEdit) {
-                this.editOnServer(id, api_key)
+                this.editOnServer(id, access_token)
                     .then(() => {
                         resolve()
                     })
@@ -143,7 +143,7 @@ export default class Activity {
                     })
             }
             if (this.system.awaitsDelete) {
-                this.deleteOnServer(id, api_key)
+                this.deleteOnServer(id, access_token)
                     .then(() => {
                         resolve()
                     })
@@ -173,10 +173,10 @@ export default class Activity {
         delete this.system
     }
 
-    createOnServer(id, api_key) {
+    createOnServer(id, access_token) {
         return new Promise((resolve, reject) => {
             if (this.data.audioFile || this.data.photoFile) {
-                activityFileUpload(id, api_key, this)
+                activityFileUpload(id, access_token, this)
                     .then(res => {
                         if (res && res.id) {
                             // console.log('successfully uploaded', res.id)
@@ -192,7 +192,7 @@ export default class Activity {
                         reject(error)
                     })
             } else {
-                activityPostData(id, api_key, this)
+                activityPostData(id, access_token, this)
                     .then(res => {
                         // console.log(res)
                         store.dispatch(activitySetId(res.id, this))
@@ -205,10 +205,10 @@ export default class Activity {
         })
     }
 
-    editOnServer(id, api_key) {
+    editOnServer(id, access_token) {
         return new Promise((resolve, reject) => {
             if (this.data.audioFile || this.data.photoFile) {
-                activityPutFile(id, api_key, this)
+                activityPutFile(id, access_token, this)
                     .then(res => {
                         if (res && res.id) {
                             console.log('successfully uploaded', res)
@@ -224,7 +224,7 @@ export default class Activity {
                         reject(error)
                     })
             } else {
-                activityPutData(id, api_key, this)
+                activityPutData(id, access_token, this)
                     .then(res => {
                         // console.log('successfully updated', res)
                         store.dispatch(activitySynced(this))
@@ -237,9 +237,9 @@ export default class Activity {
         })
     }
 
-    deleteOnServer(id, api_key) {
+    deleteOnServer(id, access_token) {
         return new Promise((resolve, reject) => {
-            activityDeleteData(id, api_key, this.id)
+            activityDeleteData(id, access_token, this.id)
                 .then(res => {
                     // console.log('successfully deleted', res)
                     store.dispatch(activityDeleted(this))

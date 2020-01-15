@@ -1,10 +1,10 @@
-export default function syncActivities(activities, id, api_key) {
+export default function syncActivities(activities, id, access_token) {
     return Promise.all([
         ...activities.map(activity => {
             if (!activity.synced()) {
                 return new Promise((resolve, reject) => {
                     activity
-                        .sync(id, api_key)
+                        .sync(id, access_token)
                         .then(() => {
                             // sync activity success
                             resolve()
