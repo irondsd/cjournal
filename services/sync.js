@@ -1,26 +1,40 @@
 import { activityFetchData } from '../requests/activityFetchData'
 import { userFetchData } from '../requests/userFetchData'
 import { tasksFetchData } from '../requests/tasksFetchData'
-// import { dispatch } from 'redux'
+import { identityUserInfo } from '../requests/identityUserInfo'
+import { identityRefreshToken } from '../requests/identityRefreshToken'
 import store from '../redux/store'
 import syncActivities from './syncActivities'
 import Barometer from '../sensors/Barometer'
+import timestamp from '../helpers/timestamp'
 
-export default async function sync(id, api_key) {
-    if (!id) return
+export default async function sync(id, tokens) {
     // Barometer.calibrate(20)
 
     let activities = store.getState().activity
 
-    syncActivities(activities, id, api_key)
-        .then(() => {
-            console.log('sync done')
+    if (tokens.expiresSoon()) {
+        // update tokens first
+        console.log('token expires soon, updating')
+        tokens = await tokens.refresh()
+        console.log('received new tokens')
+    }
 
-            store.dispatch(userFetchData(id, api_key))
-            store.dispatch(activityFetchData(id, api_key))
-            store.dispatch(tasksFetchData(id, api_key))
+    if (!tokens || !tokens.access_token) {
+        // probably log out here in this case
+        return console.log('no tokens, sync aborted')
+    }
+
+    syncActivities(activities, id, tokens.access_token)
+        .then(() => {
+            store.dispatch(userFetchData(id, tokens.access_token))
+            store.dispatch(activityFetchData(id, tokens.access_token))
+            store.dispatch(tasksFetchData(id, tokens.access_token))
+            store.dispatch(identityUserInfo(tokens.access_token))
+
+            console.log('sync done')
         })
-        .catch(() => {
-            console.log('sync ended with errors')
+        .catch(err => {
+            console.log('sync ended with errors', err)
         })
 }
