@@ -15,9 +15,12 @@ export default class Tokens {
         return new Promise((resolve, reject) => {
             identityRefreshToken(this.refresh_token)
                 .then(res => {
-                    // console.log('tokens received')
-                    store.dispatch(tokensReceived(res))
-                    resolve(res)
+                    if (res.access_token && res.refresh_token) {
+                        store.dispatch(tokensReceived(res))
+                        resolve(res)
+                    } else {
+                        throw new Error('No tokens received')
+                    }
                 })
                 .catch(err => {
                     // console.log('error refreshing tokens')
@@ -31,10 +34,7 @@ export default class Tokens {
     }
 
     expiresSoon() {
-        return this.token_lifetime - 600 > timestamp()
+        // TODO: set to 600
+        return this.token_lifetime - timestamp() < 3500
     }
-}
-
-export async function example() {
-    //
 }
