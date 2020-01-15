@@ -77,8 +77,8 @@ class LoginScreen extends Component {
         let results = JSON.parse(decipherText)
 
         // this.props.updateUser(results)
-
-        if (results.api_key) {
+        // TODO: rework qr login
+        if (results.tokens) {
             this.props.navigation.navigate('App')
         }
     }

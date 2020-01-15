@@ -56,8 +56,8 @@ class TasksScreen extends Component<Props> {
 
     fetch() {
         id = this.props.user.id
-        api_key = this.props.user.api_key
-        this.props.fetchData(id, api_key)
+        tokens = this.props.tokens
+        this.props.fetchData(id, tokens.access_token)
     }
 
     _renderItem = ({ item, index }) => {
@@ -92,8 +92,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchData: (id, api_key) => {
-        dispatch(tasksFetchData(id, api_key))
+    fetchData: (id, access_token) => {
+        dispatch(tasksFetchData(id, access_token))
     },
 })
 

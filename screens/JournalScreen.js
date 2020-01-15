@@ -62,7 +62,7 @@ class JournalScreen extends Component<Props> {
     }
 
     runSync() {
-        sync(this.props.user.id, this.props.user.api_key)
+        sync(this.props.user.id, this.props.tokens)
     }
 
     _renderItem = ({ item, index }) => {
@@ -96,12 +96,13 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         activity: state.activity,
+        tokens: state.tokens,
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchData: (id, api_key) => {
-        dispatch(activityFetchData(id, api_key))
+    fetchData: (id, access_token) => {
+        dispatch(activityFetchData(id, access_token))
     },
     removeDeleted: activity => {
         dispatch(deleteActivity(activity))
