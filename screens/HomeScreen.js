@@ -48,7 +48,7 @@ class HomeScreen extends Component {
     }
 
     runSync() {
-        sync(this.props.user.id, this.props.tokens.access_token)
+        sync(this.props.user.id, this.props.tokens)
     }
 
     refresh() {
