@@ -14,8 +14,8 @@ class App extends Component {
                 startOnBoot: true, // <-- Android-only
             },
             () => {
-                if (this.props.id && this.props.access_token) {
-                    sync(this.props.id, this.props.access_token)
+                if (this.props.id && this.props.tokens) {
+                    sync(this.props.id, this.props.tokens)
                 } else {
                     console.log(`Can't sync, not logged in`)
                 }
@@ -57,8 +57,8 @@ class App extends Component {
 function mapStateToProps(state) {
     const isLoggedIn = state.user.isLoggedIn
     const id = state.user.id
-    const access_token = state.tokens.access_token
-    return { isLoggedIn, id, access_token }
+    const tokens = state.tokens
+    return { isLoggedIn, id, tokens }
 }
 
 export default connect(mapStateToProps)(App)
