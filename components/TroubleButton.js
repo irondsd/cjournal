@@ -14,8 +14,6 @@ import { iconPicker } from '../helpers/iconPicker'
 import LinearGradient from 'react-native-linear-gradient'
 var { Dimensions } = require('react-native')
 
-// TODO: add gradient
-
 export default class TroubleButton extends Component {
     render() {
         let propsStyles = StyleSheet.create({

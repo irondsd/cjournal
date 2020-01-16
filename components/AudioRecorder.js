@@ -46,10 +46,6 @@ export default class App extends Component {
         AudioRecord.init(options)
     }
 
-    //    componentWillReceiveProps(newProps) {
-    //        if (newProps.link) this.linkLoad(newProps.link)
-    //    }
-    // TODO: check
     componentDidUpdate() {
         // if (newProps.link) this.linkLoad(newProps.link)
         if (this.props.link) this.linkLoad(this.props.link)

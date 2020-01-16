@@ -32,11 +32,6 @@ class JournalScreen extends Component<Props> {
         this.active = false
     }
 
-    componentDidUpdate() {
-        // this.forceUpdate()
-        // TODO: check here
-    }
-
     componentDidMount() {
         this.props.navigation.addListener('willFocus', () => {
             this.runSync()

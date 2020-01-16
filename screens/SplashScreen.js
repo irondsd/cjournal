@@ -41,7 +41,6 @@ class SplashScreen extends Component {
                     this.props.loadNotifications(res.notifications)
 
                 if (res.tokens) {
-                    // TODO:  update tokens
                     if (res.screen) {
                         this.props.navigation.navigate(
                             res.screen.screen,

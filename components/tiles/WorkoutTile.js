@@ -25,5 +25,3 @@ export default class Tile extends Component {
         )
     }
 }
-
-// TODO: WORKOUTS!

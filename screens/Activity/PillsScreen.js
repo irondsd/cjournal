@@ -107,17 +107,6 @@ class PillPickScreen extends Component {
         this.props.navigation.navigate(paths.Home)
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.navigation.state.params) {
-    //         if (nextProps.navigation.state.params.image) {
-    //             this.setState({
-    //                 photoFile: nextProps.navigation.state.params.image.uri,
-    //             })
-    //         }
-    //     }
-    // TODO: check
-    // }
-
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.navigation.state.params) {
             if (nextProps.navigation.state.params.image) {
