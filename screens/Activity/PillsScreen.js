@@ -114,6 +114,8 @@ class PillPickScreen extends Component {
                     photoFile: nextProps.navigation.state.params.image.uri,
                 }
             }
+        } else {
+            return { photoFile: '' }
         }
     }
 
@@ -130,6 +132,8 @@ class PillPickScreen extends Component {
     }
 
     render() {
+        if (!this.state.activity_type) return null
+
         return (
             <View style={styles.container}>
                 <TimePicker
