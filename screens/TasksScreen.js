@@ -88,6 +88,7 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         tasks: state.tasks,
+        tokens: state.tokens,
     }
 }
 
