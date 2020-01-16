@@ -76,11 +76,13 @@ class TroubleScreen extends Component {
 
     startUpdates() {
         this.intervalId = setInterval(() => {
-            this.GPS.getPosition().then(position => {
-                this.setState({ position: position }, () => {
-                    this.record()
+            this.GPS.getPosition()
+                .then(position => {
+                    this.setState({ position: position }, () => {
+                        this.record()
+                    })
                 })
-            })
+                .catch(() => this.startUpdates())
         }, 3000)
     }
 
@@ -94,9 +96,10 @@ class TroubleScreen extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>
-                    {this.state.position != false
-                        ? strings.FoundLocation
-                        : strings.Locating}
+                    {Object.entries(this.state.position).length === 0 &&
+                    this.state.position.constructor === Object
+                        ? strings.Locating
+                        : strings.FoundLocation}
                 </Text>
                 {this.state.longPress ? (
                     <TextInput
