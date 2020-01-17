@@ -313,6 +313,7 @@ export const activity_types = {
 
 // navigation paths
 export const paths = {
+    Login: 'Login',
     Home: 'Home',
     Jounal: 'Journal',
     ActivityDetails: 'ActivityDetails',
