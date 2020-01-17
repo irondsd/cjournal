@@ -8,7 +8,6 @@ export default async function requestLocationPermissions() {
         const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.CAMERA,
             {
-                // TODO: translate
                 title: strings.CameraPermissions,
                 message: strings.CameraPermissionsMessage,
                 buttonNeutral: strings.AskMeLater,

@@ -8,7 +8,6 @@ export default async function requestLocationPermissions() {
         const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
             {
-                // TODO: translate
                 title: strings.MicrophonePermissions,
                 message: strings.MicrophonePermissionsMessage,
                 buttonNeutral: strings.AskMeLater,
