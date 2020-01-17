@@ -152,6 +152,19 @@ export const strings = new LocalizedStrings({
         idinv: 'Investigation ID',
         EditProfile: 'Edit profile',
         Settings: 'Settings',
+        CameraPermissions: 'Camera Permissions',
+        MicrophonePermissions: 'Microphone Permissions',
+        StoragePermissions: 'Storage Permissions',
+        LocationPermissions: 'Location Permissions',
+        Ok: 'Ok',
+        AskMeLater: 'Ask me later',
+        CameraPermissionsMessage: 'Cardio Journal needs access to your camera',
+        LocationPermissionsMessage:
+            'Cardio Journal needs access to your location',
+        MicrophonePermissionsMessage:
+            'Cardio Journal needs access to your microphone',
+        StoragePermissionsMessage:
+            'Cardio Journal needs access to your internal storage',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -304,6 +317,19 @@ export const strings = new LocalizedStrings({
         idinv: 'Identificación de investigación',
         EditProfile: 'Editar perfil',
         Settings: 'Configuraciones',
+        CameraPermissions: 'Permisos de сámera',
+        MicrophonePermissions: 'Permisos de micrófono',
+        StoragePermissions: 'Permisos de almacenamiento',
+        LocationPermissions: 'Permisos de ubicación',
+        Ok: 'Ok',
+        AskMeLater: 'Pregúntame luego',
+        CameraPermissionsMessage: 'Cardio Journal necesita acceso a tu cámara',
+        LocationPermissionsMessage:
+            'Cardio Journal necesita acceso a tu ubicación',
+        MicrophonePermissionsMessage:
+            'Cardio Journal necesita acceso a tu micrófono',
+        StoragePermissionsMessage:
+            'Cardio Journal necesita acceso a tu almacenamiento',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -457,5 +483,16 @@ export const strings = new LocalizedStrings({
         idinv: 'Номер обследования',
         EditProfile: 'Редактировать профиль',
         Settings: 'Настройки',
+        CameraPermissions: 'Разрешение на использование камеры',
+        MicrophonePermissions: 'Разрешение на использование микрофона',
+        StoragePermissions: 'Разрешение на хранение данных',
+        LocationPermissions: 'Разрешение на использование геолокации',
+        Ok: 'Ok',
+        AskMeLater: 'Спросить позже',
+        CameraPermissionsMessage: 'Cardio Journal нужен доступ к камере',
+        LocationPermissionsMessage: 'Cardio Journal нужен доступ к геолокации',
+        MicrophonePermissionsMessage: 'Cardio Journal нужен доступ к микрофону',
+        StoragePermissionsMessage:
+            'Cardio Journal нужен доступ к внутреннему хранилищу',
     },
 })
