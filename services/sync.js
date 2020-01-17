@@ -13,14 +13,20 @@ export default async function sync(id, tokens) {
 
     let activities = store.getState().activity
 
+    if (!tokens) return console.log('sync aborted')
+
     if (tokens.expiresSoon()) {
         // update tokens first
         console.log('token expires soon, updating')
-        tokens = await tokens.refresh()
+        try {
+            tokens = await tokens.refresh()
+        } catch (error) {
+            console.log(error)
+        }
         console.log('received new tokens')
     }
 
-    if (!tokens || !tokens.access_token) {
+    if (!tokens.access_token) {
         // probably log out here in this case
         return console.log('no tokens, sync aborted')
     }
