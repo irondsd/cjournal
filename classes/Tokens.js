@@ -23,7 +23,6 @@ export default class Tokens {
                     }
                 })
                 .catch(err => {
-                    // console.log('error refreshing tokens')
                     reject(err)
                 })
         })
@@ -34,7 +33,7 @@ export default class Tokens {
     }
 
     expiresSoon() {
-        // TODO: set to 600
-        return this.token_lifetime - timestamp() < 3500
+        // 10 minutes before it expires
+        return this.token_lifetime - timestamp() < 600
     }
 }
