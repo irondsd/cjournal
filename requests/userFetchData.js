@@ -1,10 +1,11 @@
-import { apiUrl } from '../properties'
+import { apiUrl, paths } from '../properties'
 import {
     updateUser,
     userFetchFailed,
     logoutUser,
 } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
+import NavigationService from '../navigation/NavigationService'
 
 export const userFetchData = (id, access_token) => {
     return dispatch => {
@@ -18,9 +19,9 @@ export const userFetchData = (id, access_token) => {
             .then(res => res.json())
             .then(res => {
                 if (res.error) {
-                    // console.log(res.error)
-                    // TODO: if error 404, logout
-                    // dispatch(logoutUser())
+                    console.log(res.error)
+                    dispatch(logoutUser())
+                    NavigationService.navigate(paths.Welcome)
                 } else {
                     dispatch(updateUser(res))
                 }

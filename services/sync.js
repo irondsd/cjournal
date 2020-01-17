@@ -7,6 +7,8 @@ import store from '../redux/store'
 import syncActivities from './syncActivities'
 import Barometer from '../sensors/Barometer'
 import timestamp from '../helpers/timestamp'
+import NavigationService from '../navigation/NavigationService'
+import { logoutUser } from '../redux/actions'
 
 export default async function sync(id, tokens) {
     // Barometer.calibrate(20)
@@ -22,6 +24,9 @@ export default async function sync(id, tokens) {
             tokens = await tokens.refresh()
         } catch (error) {
             console.log(error)
+            console.log(tokens)
+            store.dispatch(logoutUser())
+            NavigationService.navigate(paths.Welcome)
         }
         console.log('received new tokens')
     }
