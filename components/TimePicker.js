@@ -17,16 +17,7 @@ export default class TimePicker extends Component {
         })
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({
-    //         dateTime: nextProps.dateTime,
-    //     })
-    // }
-    // TODO: check this
     static getDerivedStateFromProps(nextProps, prevState) {
-        // this.setState({
-        //     dateTime: nextProps.dateTime,
-        // })
         return {
             dateTime: nextProps.dateTime,
         }

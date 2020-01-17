@@ -52,7 +52,6 @@ class PillPickerContainer extends Component {
     }
 
     render() {
-        console.log(this.state.pills)
         if (this.state.input)
             return (
                 <View>
