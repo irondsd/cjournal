@@ -1,4 +1,5 @@
 import { PermissionsAndroid, Platform } from 'react-native'
+import { strings } from '../localizations'
 
 export default async function requestExternalWritePermission() {
     if (Platform.OS === 'ios') return true
@@ -7,21 +8,23 @@ export default async function requestExternalWritePermission() {
         const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
             {
-                title: 'Cardio Jounal External Storage Write Permission',
-                message:
-                    'Cardio Jounal needs access to Storage data in your SD Card ',
+                title: strings.StoragePermissions,
+                message: strings.StoragePermissionsMessage,
+                buttonNeutral: strings.AskMeLater,
+                buttonNegative: strings.Cancel,
+                buttonPositive: string.Ok,
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            //If WRITE_EXTERNAL_STORAGE Permission is granted
-            //Calling the READ_EXTERNAL_STORAGE permission function
+            console.log('Write storage granted')
             return await requestExternalReadPermission()
         } else {
-            alert('WRITE_EXTERNAL_STORAGE permission denied')
+            console.log('Write permission denied')
+            return false
         }
     } catch (err) {
-        alert('Write permission err', err)
         console.warn(err)
+        return false
     }
 }
 async function requestExternalReadPermission() {
@@ -29,18 +32,21 @@ async function requestExternalReadPermission() {
         const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
             {
-                title: 'Cardio Jounal needs Storage Read Permission',
-                message: 'Cardio Jounal App needs access to your SD Card',
+                title: strings.StoragePermissions,
+                message: strings.StoragePermissionsMessage,
+                buttonNeutral: strings.AskMeLater,
+                buttonNegative: strings.Cancel,
+                buttonPositive: string.Ok,
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log('Read storage granted')
             return true
         } else {
-            alert('READ_EXTERNAL_STORAGE permission denied')
+            console.log('Read permission denied')
             return false
         }
     } catch (err) {
-        alert('Read permission err', err)
         console.warn(err)
         return false
     }

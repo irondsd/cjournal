@@ -1,4 +1,5 @@
 import { PermissionsAndroid, Platform } from 'react-native'
+import { strings } from '../localizations'
 
 export default async function requestLocationPermissions() {
     if (Platform.OS === 'ios') return true
@@ -8,16 +9,15 @@ export default async function requestLocationPermissions() {
             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
             {
                 // TODO: translate
-                title: 'Cardio Tracker',
-                message:
-                    'We need your location to better calculate the distance.',
-                buttonNeutral: 'Ask Me Later',
-                buttonNegative: 'Cancel',
-                buttonPositive: 'OK',
+                title: strings.LocationPermissions,
+                message: strings.LocationPermissionsMessage,
+                buttonNeutral: strings.AskMeLater,
+                buttonNegative: strings.Cancel,
+                buttonPositive: string.Ok,
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('You can use the location')
+            console.log('Location permissions granted')
             return true
         } else {
             console.log('Location permission denied')

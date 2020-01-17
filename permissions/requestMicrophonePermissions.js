@@ -1,4 +1,5 @@
 import { PermissionsAndroid, Platform } from 'react-native'
+import { strings } from '../localizations'
 
 export default async function requestLocationPermissions() {
     if (Platform.OS === 'ios') return true
@@ -8,15 +9,15 @@ export default async function requestLocationPermissions() {
             PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
             {
                 // TODO: translate
-                title: 'Microphone permissions',
-                message: 'We need microphone access to record audio',
-                buttonNeutral: 'Ask Me Later',
-                buttonNegative: 'Cancel',
-                buttonPositive: 'OK',
+                title: strings.MicrophonePermissions,
+                message: strings.MicrophonePermissionsMessage,
+                buttonNeutral: strings.AskMeLater,
+                buttonNegative: strings.Cancel,
+                buttonPositive: string.Ok,
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('You can use the microphone')
+            console.log('Microphone permissions granted')
             return true
         } else {
             console.log('Microphone permission denied')
