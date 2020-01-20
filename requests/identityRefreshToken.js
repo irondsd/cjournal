@@ -14,9 +14,11 @@ export default function identityRefreshToken(refresh_token) {
         },
         body: formData,
     }).then(res => {
-        if (res.status === 200) {
-            return res.json()
+        if (res.ok) {
+            res = res.json()
+            return res
         } else {
+            console.log('error updating token', res)
             throw new Error('invalid grant')
         }
     })
