@@ -11,6 +11,8 @@ import NavigationService from '../navigation/NavigationService'
 import { logoutUser } from '../redux/actions'
 import { paths } from '../properties'
 
+let errors = 0
+
 export default async function sync(id, tokens) {
     // Barometer.calibrate(20)
 
@@ -24,12 +26,16 @@ export default async function sync(id, tokens) {
         try {
             tokens = await tokens.refresh()
         } catch (error) {
-            console.log(error)
-            console.log(tokens)
-            store.dispatch(logoutUser())
-            NavigationService.navigate(paths.Welcome)
+            errors += 1
+
+            if (errors >= 5) {
+                store.dispatch(logoutUser())
+                NavigationService.navigate(paths.Welcome)
+            }
+            return
         }
         console.log('received new tokens', tokens.refresh_token)
+        errors = 0
     }
 
     if (!tokens.access_token) {
