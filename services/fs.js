@@ -14,7 +14,7 @@ export async function moveToParentDir(filepath, filename) {
 export async function downloadFile(url) {
     let filename = url.split('/')[1]
     let filepath = RNFS.DocumentDirectoryPath + '/' + filename
-    url = backendUrl + url
+    url = backendUrl + '/' + url
 
     // RNFS.readdir(RNFS.DocumentDirectoryPath).then(res => {
     //     console.log(res)
