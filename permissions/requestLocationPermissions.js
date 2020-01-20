@@ -12,7 +12,7 @@ export default async function requestLocationPermissions() {
                 message: strings.LocationPermissionsMessage,
                 buttonNeutral: strings.AskMeLater,
                 buttonNegative: strings.Cancel,
-                buttonPositive: string.Ok,
+                buttonPositive: strings.Ok,
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {

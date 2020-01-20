@@ -12,7 +12,7 @@ export default async function requestExternalWritePermission() {
                 message: strings.StoragePermissionsMessage,
                 buttonNeutral: strings.AskMeLater,
                 buttonNegative: strings.Cancel,
-                buttonPositive: string.Ok,
+                buttonPositive: strings.Ok,
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -36,7 +36,7 @@ async function requestExternalReadPermission() {
                 message: strings.StoragePermissionsMessage,
                 buttonNeutral: strings.AskMeLater,
                 buttonNegative: strings.Cancel,
-                buttonPositive: string.Ok,
+                buttonPositive: strings.Ok,
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
