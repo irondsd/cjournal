@@ -1,6 +1,8 @@
 import { identityTokenUrl } from '../properties'
 import { tokensReceived, updateUser } from '../redux/actions/'
 import { loginConfirm } from './loginConfirm'
+import { Alert } from 'react-native'
+import { strings } from '../localizations'
 
 export function identityLogin(username, password) {
     let formData = new FormData()
@@ -29,8 +31,7 @@ export function identityLogin(username, password) {
                 }
             })
             .catch(err => {
-                console.log(err)
-                // TODO: errors here
+                Alert.alert(strings.Error, strings.WrongPassword)
             })
     }
 }

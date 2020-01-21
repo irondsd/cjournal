@@ -165,6 +165,7 @@ export const strings = new LocalizedStrings({
             'Cardio Journal needs access to your microphone',
         StoragePermissionsMessage:
             'Cardio Journal needs access to your internal storage',
+        WrongPassword: 'Wrong username or password',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -330,6 +331,7 @@ export const strings = new LocalizedStrings({
             'Cardio Journal necesita acceso a tu micrófono',
         StoragePermissionsMessage:
             'Cardio Journal necesita acceso a tu almacenamiento',
+        WrongPassword: 'Nombre de usuario o contraseña incorrectos',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -494,5 +496,6 @@ export const strings = new LocalizedStrings({
         MicrophonePermissionsMessage: 'Cardio Journal нужен доступ к микрофону',
         StoragePermissionsMessage:
             'Cardio Journal нужен доступ к внутреннему хранилищу',
+        WrongPassword: 'Неправильный логин или пароль',
     },
 })
