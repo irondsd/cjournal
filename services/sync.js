@@ -18,7 +18,7 @@ export default async function sync(id, tokens) {
 
     let activities = store.getState().activity
 
-    if (!tokens && !id) return console.log('sync aborted')
+    if (!tokens || !id) return console.log('sync aborted')
 
     if (tokens.expiresSoon()) {
         // update tokens first
@@ -42,7 +42,6 @@ export default async function sync(id, tokens) {
         // probably log out here in this case
         return console.log('no tokens, sync aborted')
     }
-
     syncActivities(activities, id, tokens.access_token)
         .then(() => {
             store.dispatch(userFetchData(id, tokens.access_token))
