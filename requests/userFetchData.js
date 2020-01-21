@@ -10,6 +10,7 @@ import NavigationService from '../navigation/NavigationService'
 export const userFetchData = (id, access_token) => {
     return dispatch => {
         const url = apiUrl + `users/${id}`
+
         fetch(url, {
             method: 'GET',
             headers: {
@@ -19,7 +20,8 @@ export const userFetchData = (id, access_token) => {
             .then(res => res.json())
             .then(res => {
                 if (res.error) {
-                    console.log(res.error)
+                    console.log(res)
+                    // TODO:  here
                     dispatch(logoutUser())
                     NavigationService.navigate(paths.Welcome)
                 } else {

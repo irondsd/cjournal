@@ -11,6 +11,8 @@ import {
 import { pSBC } from '../helpers/colors'
 import LinearGradient from 'react-native-linear-gradient'
 
+// TODO: understand height change
+
 export default class ActivityItem extends Component {
     render() {
         let shadeColor = '#000000dd'
