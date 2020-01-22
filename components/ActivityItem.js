@@ -15,6 +15,12 @@ import LinearGradient from 'react-native-linear-gradient'
 
 export default class ActivityItem extends Component {
     render() {
+        let marginTop = Dimensions.get('window').width / 46.875
+        if (
+            Dimensions.get('window').width / Dimensions.get('window').height >
+            0.56
+        )
+            marginTop = -2
         let shadeColor = '#000000dd'
         if (this.props.shadeColor) shadeColor = this.props.shadeColor
         let numberOfLines = 1
@@ -51,6 +57,7 @@ export default class ActivityItem extends Component {
             },
             buttonActivity: {
                 backgroundColor: this.props.color,
+                marginTop: marginTop,
             },
         }
         let mainColor = this.props.color
