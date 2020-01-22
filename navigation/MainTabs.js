@@ -140,14 +140,14 @@ export const MainTabs = createMaterialTopTabNavigator(
                         name={iconName}
                         size={25}
                         color={tintColor}
-                        style={{ top: 5 }}
+                        style={{ top: -2 }}
                     />
                 )
             },
         }),
         tabBarOptions: {
             style: {
-                height: 70,
+                height: 60,
                 backgroundColor: backgroundColor,
             },
             upperCaseLabel: false,
@@ -155,7 +155,7 @@ export const MainTabs = createMaterialTopTabNavigator(
             inactiveTintColor: 'gray',
             showIcon: true,
             labelStyle: {
-                top: 4,
+                top: -5,
                 fontSize: 13,
             },
             tabStyle: {
