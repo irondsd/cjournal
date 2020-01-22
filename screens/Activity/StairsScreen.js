@@ -14,7 +14,7 @@ import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
-import { barometer } from 'react-native-sensors'
+// import { barometer } from 'react-native-sensors'
 import { average, altMeter } from '../../helpers/math'
 // import KeepAwake from 'react-native-keep-awake'
 import { cancelNotification } from '../../redux/actions'
@@ -22,10 +22,7 @@ import { backgroundColor, paths, activity_types } from '../../properties'
 import BackButton from '../../components/BackButton'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
-
-pressuresArr = []
-initialPressure = 0
-let timerOn = false
+import Barometer from '../../sensors/Barometer'
 
 class StairsScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -57,9 +54,11 @@ class StairsScreen extends Component {
             prevMeters: 0,
             tasks_id: 0,
             hPa: 0,
+            mmHg: 0,
         }
 
         this.handleBackButton = this.handleBackButton.bind(this)
+        this.update = this.update.bind(this)
     }
 
     componentWillUnmount() {
@@ -76,7 +75,6 @@ class StairsScreen extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.navigation.state.params)
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
         // zero it out
@@ -91,69 +89,76 @@ class StairsScreen extends Component {
             hPa: 0,
         })
 
-        const bar = barometer.subscribe(
-            ({ pressure }) => {
-                if (initialPressure === 0 && pressuresArr.length > 30) {
-                    initialPressure = average(pressuresArr)
-                }
-                pressuresArr.push(pressure)
-                if (pressuresArr.length > 300) {
-                    pressuresArr.splice(0, 1)
-                }
-
-                if (!this.state.started) {
-                    return
-                }
-
-                meters = altMeter(
-                    initialPressure,
-                    average(pressuresArr),
-                ).toFixed(1)
-                if (meters == -Infinity || meters == -0.0) meters = '0.0'
-                let metersAccended
-                let metersDescended
-                if (meters > -0.1) {
-                    metersAccended =
-                        this.state.prevMeters < meters
-                            ? this.state.metersAcc + 0.05
-                            : this.state.metersAcc
-                    metersDescended =
-                        this.state.prevMeters > meters
-                            ? this.state.metersAcc - 0.05
-                            : this.state.metersDes
-                } else {
-                    metersAccended =
-                        this.state.prevMeters > meters
-                            ? this.state.metersAcc + 0.05
-                            : this.state.metersAcc
-                    metersDescended =
-                        this.state.prevMeters < meters
-                            ? this.state.metersAcc - 0.05
-                            : this.state.metersDes
-                }
-                this.setState(prevState => ({
-                    tasks_id: this.props.navigation.state.params
-                        ? this.props.navigation.state.params.tasks_id
-                        : null,
-                    metersAcc: metersAccended,
-                    metersDes: metersDescended,
-                    prevMeters: prevState.meters,
-                    meters: meters,
-                    hPa: average(pressuresArr),
-                    mmHg: (
-                        average(pressuresArr).toFixed(1) / 1.3332236
-                    ).toFixed(0),
-                }))
-            },
-            error => {
-                alert('Barometer is not available on this device')
-                this.props.navigation.navigate(paths.Home)
-            },
-        )
-
-        this.setState({
-            barometer: bar,
+        this.barometer = new Barometer()
+        this.barometer.initialize(() => {
+            this.setState({
+                mmHg: this.barometer.mmHg,
+            })
         })
+
+        // const bar = barometer.subscribe(
+        //     ({ pressure }) => {
+        //         if (initialPressure === 0 && pressuresArr.length > 30) {
+        //             initialPressure = average(pressuresArr)
+        //         }
+        //         pressuresArr.push(pressure)
+        //         if (pressuresArr.length > 300) {
+        //             pressuresArr.splice(0, 1)
+        //         }
+
+        //         if (!this.state.started) {
+        //             return
+        //         }
+
+        //         meters = altMeter(
+        //             initialPressure,
+        //             average(pressuresArr),
+        //         ).toFixed(1)
+        //         if (meters == -Infinity || meters == -0.0) meters = '0.0'
+        //         let metersAccended
+        //         let metersDescended
+        //         if (meters > -0.1) {
+        //             metersAccended =
+        //                 this.state.prevMeters < meters
+        //                     ? this.state.metersAcc + 0.05
+        //                     : this.state.metersAcc
+        //             metersDescended =
+        //                 this.state.prevMeters > meters
+        //                     ? this.state.metersAcc - 0.05
+        //                     : this.state.metersDes
+        //         } else {
+        //             metersAccended =
+        //                 this.state.prevMeters > meters
+        //                     ? this.state.metersAcc + 0.05
+        //                     : this.state.metersAcc
+        //             metersDescended =
+        //                 this.state.prevMeters < meters
+        //                     ? this.state.metersAcc - 0.05
+        //                     : this.state.metersDes
+        //         }
+        //         this.setState(prevState => ({
+        //             tasks_id: this.props.navigation.state.params
+        //                 ? this.props.navigation.state.params.tasks_id
+        //                 : null,
+        //             metersAcc: metersAccended,
+        //             metersDes: metersDescended,
+        //             prevMeters: prevState.meters,
+        //             meters: meters,
+        //             hPa: average(pressuresArr),
+        //             mmHg: (
+        //                 average(pressuresArr).toFixed(1) / 1.3332236
+        //             ).toFixed(0),
+        //         }))
+        //     },
+        //     error => {
+        //         alert('Barometer is not available on this device')
+        //         // this.props.navigation.navigate(paths.Home)
+        //     },
+        // )
+
+        // this.setState({
+        //     barometer: bar,
+        // })
     }
 
     record() {
@@ -182,16 +187,76 @@ class StairsScreen extends Component {
         this.props.navigation.navigate('ExerciseFinish', { activity: activity })
     }
 
+    update() {
+        if (!this.state.started) return
+
+        let meters = altMeter(
+            this.barometer.initialPressure,
+            average(this.barometer.pressures),
+        ).toFixed(1)
+        if (meters == -Infinity || meters == -0.0) meters = '0.0'
+        let metersAccended
+        let metersDescended
+        if (meters > -0.1) {
+            metersAccended =
+                this.state.prevMeters < meters
+                    ? this.state.metersAcc + 0.05
+                    : this.state.metersAcc
+            metersDescended =
+                this.state.prevMeters > meters
+                    ? this.state.metersAcc - 0.05
+                    : this.state.metersDes
+        } else {
+            metersAccended =
+                this.state.prevMeters > meters
+                    ? this.state.metersAcc + 0.05
+                    : this.state.metersAcc
+            metersDescended =
+                this.state.prevMeters < meters
+                    ? this.state.metersAcc - 0.05
+                    : this.state.metersDes
+        }
+        this.setState(prevState => ({
+            metersAcc: metersAccended,
+            metersDes: metersDescended,
+            prevMeters: prevState.meters,
+            meters: meters,
+            hPa: average(this.barometer.pressures),
+            mmHg: (
+                average(this.barometer.pressures).toFixed(1) / 1.3332236
+            ).toFixed(0),
+        }))
+        console.log(metersAccended, metersDescended)
+    }
+
+    updatesStop() {
+        clearInterval(this.intervalId)
+        this.barometer.stopUpdates()
+        this.record()
+    }
+
     startPressed() {
-        timerOn = true
-        if (!this.state.started) {
+        // timerOn = true
+        // if (!this.state.started) {
+        //     this.setState({
+        //         started: true,
+        //         button_text: strings.Finish,
+        //     })
+        // } else {
+        //     this.state.barometer.unsubscribe()
+        //     this.record()
+        // }
+        if (!this.intervalId) {
             this.setState({
                 started: true,
                 button_text: strings.Finish,
             })
+            this.barometer.startUpdates()
+            this.intervalId = setInterval(() => {
+                this.update()
+            }, 1000)
         } else {
-            this.state.barometer.unsubscribe()
-            this.record()
+            this.updatesStop()
         }
     }
 
