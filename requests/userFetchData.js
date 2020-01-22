@@ -21,7 +21,6 @@ export const userFetchData = (id, access_token) => {
             .then(res => {
                 if (res.error) {
                     console.log(res)
-                    // TODO:  here
                     dispatch(logoutUser())
                     NavigationService.navigate(paths.Welcome)
                 } else {
