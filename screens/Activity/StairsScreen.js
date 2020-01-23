@@ -24,13 +24,15 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import Barometer from '../../sensors/Barometer'
 
+let started = false
+
 class StairsScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: strings.Stairs,
         headerLeft: (
             <BackButton
                 goBack={() => {
-                    if (timerOn) {
+                    if (started) {
                         Alert.alert(strings.Alert, strings.CantGoBack)
                     } else {
                         navigation.goBack()
@@ -45,15 +47,10 @@ class StairsScreen extends Component {
 
         this.state = {
             startDate: new Date(),
-            barometer: null,
-            meters: 0,
-            metersAcc: 0,
+            meters: '0.0',
+            metersMax: 0,
             button_text: strings.Start,
             started: false,
-            metersDes: 0,
-            prevMeters: 0,
-            tasks_id: 0,
-            hPa: 0,
             mmHg: 0,
         }
 
@@ -78,15 +75,10 @@ class StairsScreen extends Component {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
         // zero it out
-        pressuresArr = []
         this.setState({
             startDate: new Date(),
-            meters: 0,
-            metersAcc: 0,
-            metersDes: 0,
-            prevMeters: 0,
+            meters: '0.0',
             tasks_id: 0,
-            hPa: 0,
         })
 
         this.barometer = new Barometer()
@@ -95,82 +87,18 @@ class StairsScreen extends Component {
                 mmHg: this.barometer.mmHg,
             })
         })
-
-        // const bar = barometer.subscribe(
-        //     ({ pressure }) => {
-        //         if (initialPressure === 0 && pressuresArr.length > 30) {
-        //             initialPressure = average(pressuresArr)
-        //         }
-        //         pressuresArr.push(pressure)
-        //         if (pressuresArr.length > 300) {
-        //             pressuresArr.splice(0, 1)
-        //         }
-
-        //         if (!this.state.started) {
-        //             return
-        //         }
-
-        //         meters = altMeter(
-        //             initialPressure,
-        //             average(pressuresArr),
-        //         ).toFixed(1)
-        //         if (meters == -Infinity || meters == -0.0) meters = '0.0'
-        //         let metersAccended
-        //         let metersDescended
-        //         if (meters > -0.1) {
-        //             metersAccended =
-        //                 this.state.prevMeters < meters
-        //                     ? this.state.metersAcc + 0.05
-        //                     : this.state.metersAcc
-        //             metersDescended =
-        //                 this.state.prevMeters > meters
-        //                     ? this.state.metersAcc - 0.05
-        //                     : this.state.metersDes
-        //         } else {
-        //             metersAccended =
-        //                 this.state.prevMeters > meters
-        //                     ? this.state.metersAcc + 0.05
-        //                     : this.state.metersAcc
-        //             metersDescended =
-        //                 this.state.prevMeters < meters
-        //                     ? this.state.metersAcc - 0.05
-        //                     : this.state.metersDes
-        //         }
-        //         this.setState(prevState => ({
-        //             tasks_id: this.props.navigation.state.params
-        //                 ? this.props.navigation.state.params.tasks_id
-        //                 : null,
-        //             metersAcc: metersAccended,
-        //             metersDes: metersDescended,
-        //             prevMeters: prevState.meters,
-        //             meters: meters,
-        //             hPa: average(pressuresArr),
-        //             mmHg: (
-        //                 average(pressuresArr).toFixed(1) / 1.3332236
-        //             ).toFixed(0),
-        //         }))
-        //     },
-        //     error => {
-        //         alert('Barometer is not available on this device')
-        //         // this.props.navigation.navigate(paths.Home)
-        //     },
-        // )
-
-        // this.setState({
-        //     barometer: bar,
-        // })
     }
 
     record() {
-        tasks_id = this.state.tasks_id ? parseInt(this.state.tasks_id) : null
+        let tasks_id = this.state.tasks_id
+            ? parseInt(this.state.tasks_id)
+            : null
         if (tasks_id) cancelNotification(tasks_id)
 
         endDate = new Date()
         data = {
-            meters: this.state.metersAcc ? this.state.metersAcc.toFixed(1) : 0,
-            metersDes: this.state.metersDes
-                ? this.state.metersDes.toFixed(1)
-                : 0,
+            meters: this.state.meters,
+            metersMax: this.state.metersMax,
         }
         if (this.state.metersAcc === 0) data.failed = true
         let activity = new Activity(
@@ -190,43 +118,18 @@ class StairsScreen extends Component {
     update() {
         if (!this.state.started) return
 
-        let meters = altMeter(
-            this.barometer.initialPressure,
-            average(this.barometer.pressures),
-        ).toFixed(1)
+        let initialPressure = this.barometer.initialPressure
+        let pressures = this.barometer.pressures
+
+        let rmeters = altMeter(initialPressure, average(pressures)).toFixed(1)
         if (meters == -Infinity || meters == -0.0) meters = '0.0'
-        let metersAccended
-        let metersDescended
-        if (meters > -0.1) {
-            metersAccended =
-                this.state.prevMeters < meters
-                    ? this.state.metersAcc + 0.05
-                    : this.state.metersAcc
-            metersDescended =
-                this.state.prevMeters > meters
-                    ? this.state.metersAcc - 0.05
-                    : this.state.metersDes
-        } else {
-            metersAccended =
-                this.state.prevMeters > meters
-                    ? this.state.metersAcc + 0.05
-                    : this.state.metersAcc
-            metersDescended =
-                this.state.prevMeters < meters
-                    ? this.state.metersAcc - 0.05
-                    : this.state.metersDes
-        }
+
         this.setState(prevState => ({
-            metersAcc: metersAccended,
-            metersDes: metersDescended,
-            prevMeters: prevState.meters,
             meters: meters,
-            hPa: average(this.barometer.pressures),
-            mmHg: (
-                average(this.barometer.pressures).toFixed(1) / 1.3332236
-            ).toFixed(0),
+            metersMax:
+                prevState.metersMax < meters ? meters : prevState.metersMax,
+            mmHg: (average(pressures).toFixed(1) / 1.3332236).toFixed(0),
         }))
-        console.log(metersAccended, metersDescended)
     }
 
     updatesStop() {
@@ -236,16 +139,7 @@ class StairsScreen extends Component {
     }
 
     startPressed() {
-        // timerOn = true
-        // if (!this.state.started) {
-        //     this.setState({
-        //         started: true,
-        //         button_text: strings.Finish,
-        //     })
-        // } else {
-        //     this.state.barometer.unsubscribe()
-        //     this.record()
-        // }
+        started = true
         if (!this.intervalId) {
             this.setState({
                 started: true,
@@ -266,11 +160,7 @@ class StairsScreen extends Component {
                 <Text style={styles.text}>
                     {strings.Pressure}: {this.state.mmHg} {strings.mmHg}
                 </Text>
-                <Text style={styles.timer}>
-                    {this.state.metersAcc.toFixed(1)}
-                </Text>
-                {/* <Text style={styles.timer}>{this.state.meters}</Text>
-                <Text style={styles.timer}>{this.state.hPa.toFixed(3)}</Text> */}
+                <Text style={styles.timer}>{this.state.meters}</Text>
                 <View style={styles.button}>
                     <Button
                         title={this.state.button_text}
