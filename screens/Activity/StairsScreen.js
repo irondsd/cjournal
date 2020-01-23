@@ -23,7 +23,8 @@ import BackButton from '../../components/BackButton'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import Barometer from '../../sensors/Barometer'
-
+import Pedometer from '../../sensors/Pedometer'
+import GPS from '../../sensors/GPS'
 let started = false
 
 class StairsScreen extends Component {
@@ -52,10 +53,14 @@ class StairsScreen extends Component {
             button_text: strings.Start,
             started: false,
             mmHg: 0,
+            steps: 0,
+            distance: 0,
         }
 
         this.handleBackButton = this.handleBackButton.bind(this)
         this.update = this.update.bind(this)
+        this.Pedometer = new Pedometer(this.setSteps)
+        this.GPS = new GPS(this.setDistance)
     }
 
     componentWillUnmount() {
@@ -71,6 +76,18 @@ class StairsScreen extends Component {
         }
     }
 
+    setDistance = distance => {
+        this.setState({
+            distance: distance,
+        })
+    }
+
+    setSteps = pedometerData => {
+        this.setState({
+            steps: pedometerData.numberOfSteps,
+        })
+    }
+
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
@@ -79,6 +96,8 @@ class StairsScreen extends Component {
             startDate: new Date(),
             meters: '0.0',
             tasks_id: 0,
+            steps: 0,
+            distance: 0,
         })
 
         this.barometer = new Barometer()
@@ -94,13 +113,18 @@ class StairsScreen extends Component {
             ? parseInt(this.state.tasks_id)
             : null
         if (tasks_id) cancelNotification(tasks_id)
-
         endDate = new Date()
         data = {
             meters: this.state.meters,
             metersMax: this.state.metersMax,
+            steps: this.state.steps,
+            distance: this.state.distance,
         }
-        if (this.state.metersAcc === 0) data.failed = true
+        let positions = this.GPS.getFirstAndLastPosition()
+        data = {
+            ...data,
+            ...positions,
+        }
         let activity = new Activity(
             null,
             activity_types.Stairs,
@@ -121,7 +145,7 @@ class StairsScreen extends Component {
         let initialPressure = this.barometer.initialPressure
         let pressures = this.barometer.pressures
 
-        let rmeters = altMeter(initialPressure, average(pressures)).toFixed(1)
+        let meters = altMeter(initialPressure, average(pressures)).toFixed(1)
         if (meters == -Infinity || meters == -0.0) meters = '0.0'
 
         this.setState(prevState => ({
@@ -135,6 +159,8 @@ class StairsScreen extends Component {
     updatesStop() {
         clearInterval(this.intervalId)
         this.barometer.stopUpdates()
+        this.GPS.watchStop()
+        this.Pedometer.stopUpdates()
         this.record()
     }
 
@@ -145,6 +171,11 @@ class StairsScreen extends Component {
                 started: true,
                 button_text: strings.Finish,
             })
+            this.GPS.watchStart(10000)
+
+            let dateTime = new Date()
+            this.setState({ startDate: dateTime })
+            this.Pedometer.startUpdates(dateTime)
             this.barometer.startUpdates()
             this.intervalId = setInterval(() => {
                 this.update()
