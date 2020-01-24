@@ -18,15 +18,12 @@ import {
 } from '../redux/actions'
 import { strings } from '../localizations'
 import { asyncGetAll, removeScreen, removeAll } from '../services/asyncStorage'
-import { setupNotifications } from '../notifications/notifications'
-// import sync from '../services/sync'
 import Barometer from '../sensors/Barometer'
-// import { readStateFile } from '../services/idinv'
+import { idinvWatcher } from '../services/idinvWatcher'
 
 class SplashScreen extends Component {
     constructor(props) {
         super(props)
-        // setupNotifications()
     }
 
     componentDidMount() {
@@ -34,7 +31,16 @@ class SplashScreen extends Component {
         asyncGetAll()
             .then(res => {
                 if (res.tokens) this.props.tokensReceived(res.tokens)
-                if (res.user) this.props.updateUser(res.user)
+                if (res.user) {
+                    this.props.updateUser(res.user)
+                    if (res.user.id && res.tokens.access_token) {
+                        idinvWatcher(
+                            res.user.id,
+                            res.tokens.access_token,
+                            res.user.idinv,
+                        )
+                    }
+                }
                 if (res.activity) this.props.replaceActivities(res.activity)
                 if (res.tasks) this.props.replaceTasks(res.tasks)
                 if (res.notifications)
