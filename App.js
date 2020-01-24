@@ -4,6 +4,7 @@ import NavContainer from './navigation/NavContainer'
 import BackgroundFetch from 'react-native-background-fetch'
 import sync from './services/sync'
 import NavigationService from './navigation/NavigationService'
+import { idinvWatcher } from './services/idinvWatcher'
 
 class App extends Component {
     componentDidMount() {
@@ -16,6 +17,16 @@ class App extends Component {
             () => {
                 if (this.props.id && this.props.tokens) {
                     sync(this.props.id, this.props.tokens)
+                    if (
+                        this.props.id &&
+                        this.props.tokens.access_token &&
+                        this.props.idinv
+                    )
+                        idinvWatcher(
+                            this.props.id,
+                            this.props.tokens.access_token,
+                            this.props.idinv,
+                        )
                 } else {
                     console.log(`Can't sync, not logged in`)
                 }
@@ -58,7 +69,8 @@ function mapStateToProps(state) {
     const isLoggedIn = state.user.isLoggedIn
     const id = state.user.id
     const tokens = state.tokens
-    return { isLoggedIn, id, tokens }
+    const idinv = state.user.idinv
+    return { isLoggedIn, id, tokens, idinv }
 }
 
 export default connect(mapStateToProps)(App)
