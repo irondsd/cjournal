@@ -25,7 +25,7 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 
 let clicked = false
-
+// TODO: SegmentedControls redo
 class TimePickScreen extends Component {
     constructor(props) {
         super(props)
