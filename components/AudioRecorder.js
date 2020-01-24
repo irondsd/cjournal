@@ -47,8 +47,9 @@ export default class App extends Component {
     }
 
     componentDidUpdate() {
-        // if (newProps.link) this.linkLoad(newProps.link)
-        if (this.props.link) this.linkLoad(this.props.link)
+        if (this.props.link && !this.state.loaded) {
+            this.linkLoad(this.props.link)
+        }
     }
 
     record = async () => {
@@ -92,13 +93,14 @@ export default class App extends Component {
         if (!this.state.loaded) {
             let audioFile =
                 RNFS.DocumentDirectoryPath + '/' + link.split('/')[1]
-
-            this.setState(
-                {
-                    audioFile: audioFile,
-                },
-                () => this.load(),
-            )
+            if (!this.state.audioFile) {
+                this.setState(
+                    {
+                        audioFile: audioFile,
+                    },
+                    async () => await this.load(),
+                )
+            }
         }
     }
 
@@ -107,7 +109,6 @@ export default class App extends Component {
             if (!this.state.audioFile) {
                 return reject('file path is empty')
             }
-
             this.sound = new Sound(this.state.audioFile, '', error => {
                 if (error) {
                     console.log('failed to load the file', error)
