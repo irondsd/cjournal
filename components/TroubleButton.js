@@ -59,11 +59,11 @@ export default class TroubleButton extends Component {
 
 const tileSize = Dimensions.get('window').width / 3.75
 const borderRadius = 10
-const margin = Dimensions.get('window').width / 46.875
+const margin = Dimensions.get('window').width / 100
 
 const styles = StyleSheet.create({
     button: {
-        width: tileSize * 3 + margin * 2 + 16,
+        width: tileSize * 3 + margin * 4 + 16,
         height: tileSize / 2,
         justifyContent: 'center',
         // margin: margin,
@@ -81,11 +81,9 @@ const styles = StyleSheet.create({
         borderLeftColor: '#dd0000',
         borderRightColor: '#dd0000',
         borderStyle: 'solid',
-        paddingLeft: 7,
-        paddingRight: 7,
-        paddingBottom: 2,
-        marginBottom: 8,
-        marginTop: 8,
+        paddingLeft: 5,
+        paddingRight: 5,
+        marginTop: 20,
         alignItems: 'center',
         flexDirection: 'row',
     },
