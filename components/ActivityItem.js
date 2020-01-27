@@ -19,6 +19,16 @@ export default class ActivityItem extends Component {
             0.56
         )
             marginTop = -2
+
+        marginTop =
+            (Dimensions.get('window').height -
+                70 -
+                64 -
+                10 -
+                20 -
+                tileSize / 2 -
+                tileSize * 4) /
+            5
         let shadeColor = '#000000dd'
         if (this.props.shadeColor) shadeColor = this.props.shadeColor
         let numberOfLines = 1
@@ -26,7 +36,7 @@ export default class ActivityItem extends Component {
             numberOfLines = 2
         }
         let color = this.props.color
-        imgSize = tileSize * 0.7 * this.props.imgScale
+        let imgSize = tileSize * 0.7 * this.props.imgScale
 
         if (numberOfLines > 1) {
             imgSize = imgSize * 0.8
@@ -56,6 +66,7 @@ export default class ActivityItem extends Component {
             buttonActivity: {
                 backgroundColor: this.props.color,
                 marginTop: marginTop,
+                marginBottom: 0,
             },
         }
         let mainColor = this.props.color
