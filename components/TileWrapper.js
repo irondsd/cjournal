@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, SafeAreaView, Button } from 'react-native'
 import { backgroundColor } from '../properties'
 
 export default class TileWrapper extends Component {
+    measureView = event => {
+        console.log(event.nativeEvent.layout.height)
+    }
     render() {
-        return <View style={styles.activityBox}>{this.props.children}</View>
+        return (
+            <SafeAreaView
+                onLayout={this.measureView}
+                style={styles.activityBox}>
+                {this.props.children}
+            </SafeAreaView>
+        )
     }
 }
 
 const styles = StyleSheet.create({
     activityBox: {
-        marginTop: 10,
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
