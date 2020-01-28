@@ -9,7 +9,8 @@
         "test": "jest",
         "build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
         "apk": "cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && ..",
-        "pods": "cd ios && pod install && .."
+        "pods": "cd ios && pod install && ..",
+        "release": "react-native run-android --variant=release"
     },
     "dependencies": {
         "@JWWon/react-native-universal-pedometer": "git+https://github.com/stephenheron/react-native-universal-pedometer.git",
