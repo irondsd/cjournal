@@ -2,11 +2,11 @@ import Toast from 'react-native-root-toast'
 import { Platform } from 'react-native'
 
 export function showToast(message) {
-    toast(message, '#005500')
+    // toast(message, '#005500')
 }
 
 export function showError(message) {
-    toast(message, '#550000')
+    // toast(message, '#550000')
 }
 
 function toast(message, color) {
