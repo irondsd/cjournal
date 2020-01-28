@@ -1,15 +1,6 @@
 import Toast from 'react-native-root-toast'
-import { Platform } from 'react-native'
 
-export function showToast(message) {
-    // toast(message, '#005500')
-}
-
-export function showError(message) {
-    // toast(message, '#550000')
-}
-
-function toast(message, color) {
+const toast = (message, color) => {
     let toast = Toast.show(message, {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
@@ -31,4 +22,12 @@ function toast(message, color) {
             // calls on toast\`s hide animation end.
         },
     })
+}
+
+export function showToast(message) {
+    toast(message, '#005500')
+}
+
+export function showError(message) {
+    toast(message, '#550000')
 }
