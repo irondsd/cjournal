@@ -3,13 +3,13 @@ import { StyleSheet, Text, SafeAreaView, Button } from 'react-native'
 import { backgroundColor } from '../properties'
 
 export default class TileWrapper extends Component {
-    measureView = event => {
-        console.log(event.nativeEvent.layout.height)
-    }
+    // measureView = event => {
+    //     console.log(event.nativeEvent.layout.height)
+    // }
     render() {
         return (
             <SafeAreaView
-                onLayout={this.measureView}
+                // onLayout={this.measureView}
                 style={styles.activityBox}>
                 {this.props.children}
             </SafeAreaView>
