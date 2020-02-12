@@ -5,25 +5,31 @@ import { removeAll } from '../../services/asyncStorage'
 
 const initialState = {
     username: '',
-    name: '',
     hide_elements: [],
     course_therapy: [],
     relief_of_attack: [],
     tests: [],
-    sub: '',
-    email: '',
-    preferred_username: '',
+    role: [],
+    department: '',
 }
 
 export default function userReducer(state = initialState, { type, payload }) {
     switch (type) {
         case 'UPDATE_USER':
-            userAsyncSave(payload)
-
-            return {
+            state = {
                 ...state,
                 ...payload,
             }
+            userAsyncSave(state)
+            return state
+        case 'IDENTITY_USER':
+            state = {
+                ...state,
+                username: payload.name,
+                role: payload.role,
+                department: payload.department,
+            }
+            return state
         case 'USER_FETCH_FAILED':
             scheduleSync()
             return state

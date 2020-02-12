@@ -5,6 +5,13 @@ export const updateUser = user => {
     }
 }
 
+export const identityUser = user => {
+    return {
+        type: 'IDENTITY_USER',
+        payload: user,
+    }
+}
+
 export const userFetchFailed = () => {
     return {
         type: 'USER_FETCH_FAILED',

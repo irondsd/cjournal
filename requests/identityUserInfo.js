@@ -1,5 +1,5 @@
 import { identityUserInfoUrl } from '../properties'
-import { updateUser, logoutUser } from '../redux/actions'
+import { identityUser, logoutUser } from '../redux/actions'
 import NavigationService from '../navigation/NavigationService'
 export function identityUserInfo(access_token) {
     return dispatch => {
@@ -17,7 +17,7 @@ export function identityUserInfo(access_token) {
                 return res.json()
             })
             .then(res => {
-                dispatch(updateUser(res))
+                dispatch(identityUser(res))
             })
             .catch(err => {
                 console.log(err)
