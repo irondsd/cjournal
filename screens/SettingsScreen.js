@@ -40,7 +40,7 @@ class SettingsScreen extends Component {
                     barStyle="dark-content"
                     // hidden={true}
                 />
-                <Text style={styles.name}>{this.props.user.name}</Text>
+                <Text style={styles.name}>{this.props.user.username}</Text>
                 <Text
                     style={
                         styles.information
