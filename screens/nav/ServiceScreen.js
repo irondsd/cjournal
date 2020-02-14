@@ -12,7 +12,7 @@ import ViewingTile from '../../components/tiles/ViewingTile'
 import RelaxationTile from '../../components/tiles/RelaxationTile'
 import TileWrapper from '../../components/TileWrapper'
 
-export default class PsychilogicalActivityScreen extends Component {
+export default class ServiceScreen extends Component {
     static navigationOptions = {
         title: strings.Activity,
     }
@@ -20,12 +20,12 @@ export default class PsychilogicalActivityScreen extends Component {
     render() {
         return (
             <TileWrapper>
-                <IntelectualWorkTile navigation={this.props.navigation} />
+                {/* <IntelectualWorkTile navigation={this.props.navigation} />
                 <GamblingTile navigation={this.props.navigation} />
                 <ReadingTile navigation={this.props.navigation} />
                 <ViewingTile navigation={this.props.navigation} />
                 <PsychotherapyTile navigation={this.props.navigation} />
-                <RelaxationTile navigation={this.props.navigation} />
+                <RelaxationTile navigation={this.props.navigation} /> */}
             </TileWrapper>
         )
     }

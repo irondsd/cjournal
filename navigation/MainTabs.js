@@ -13,7 +13,7 @@ import SettingsScreen from '../screens/SettingsScreen'
 import TimePickScreen from '../screens/Activity/TimePickScreen'
 import ActivityScreen from '../screens/nav/ActivityScreen'
 import PhysicalActivityScreen from '../screens/nav/PhysicalActivityScreen'
-import PsychologicalActivityScreen from '../screens/nav/PsychologicalActivityScreen'
+import ServiceScreen from '../screens/nav/ServiceScreen'
 import IntakeScreen from '../screens/nav/IntakeScreen'
 import InfluenceScreen from '../screens/nav/InfluenceScreen'
 import WalkingScreen from '../screens/Activity/WalkingScreen'
@@ -50,7 +50,7 @@ const HomeStack = createStackNavigator({
     TimePick: TimePickScreen,
     Activity: ActivityScreen,
     PhysicalActivity: PhysicalActivityScreen,
-    PsychologicalActivity: PsychologicalActivityScreen,
+    Service: ServiceScreen,
     Intake: IntakeScreen,
     Influence: InfluenceScreen,
     Walking: WalkingScreen,

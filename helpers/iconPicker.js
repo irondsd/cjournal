@@ -34,8 +34,8 @@ export function iconPicker(activity_type) {
         case activity_types.IntellectualWork:
             img = require('../resources/icons/brain.png')
             break
-        case activity_types.PsychologicalActivity:
-            img = require('../resources/icons/psychological.png')
+        case activity_types.Service:
+            img = require('../resources/icons/service.png')
             break
         case activity_types.Reading:
             img = require('../resources/icons/reading.png')
