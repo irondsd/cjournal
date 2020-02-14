@@ -27,17 +27,17 @@ export default class TasksListItem extends Component {
         if (this.props.item.completed) return
 
         if (
-            this.props.item.activity_type === activity_types.OneTimeTakingOfMedicine ||
+            this.props.item.activity_type === activity_types.MedicineTest ||
             this.props.item.activity_type === activity_types.CourseTherapy ||
             this.props.item.activity_type === activity_types.ReliefOfAttack
         ) {
             this.props.navigation.navigate(paths.Pills, {
                 tasks_id: this.props.item.id,
-                sender: this.props.item.activity_type
+                sender: this.props.item.activity_type,
             })
         } else {
             this.props.navigation.navigate(this.props.item.activity_type, {
-                tasks_id: this.props.item.id
+                tasks_id: this.props.item.id,
             })
         }
     }

@@ -175,7 +175,7 @@ export function iconPicker(activity_type) {
         case activity_types.Tests:
             img = require('../resources/icons/tests.png')
             break
-        case activity_types.OneTimeTakingOfMedicine:
+        case activity_types.MedicineTest:
             img = require('../resources/icons/pill.png')
             break
         case activity_types.Psychotherapy:

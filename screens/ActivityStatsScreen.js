@@ -114,7 +114,7 @@ class ActivityStatsScreen extends Component<Props> {
                     ': ' +
                     this.props.navigation.state.params.data.distance
                 break
-            case activity_types.OneTimeTakingOfMedicine:
+            case activity_types.MedicineTest:
                 stats =
                     strings.TakingMedicine +
                     ': ' +

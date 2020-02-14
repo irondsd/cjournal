@@ -109,7 +109,7 @@ export const overlaps = {
         'Smoking',
         'Tests',
         'Orthostasis',
-        'OneTimeTakingOfMedicine',
+        'MedicineTest',
     ],
     PhysicalActivity: [
         'Activity',
@@ -137,7 +137,7 @@ export const overlaps = {
         'Smoking',
         'Tests',
         'Orthostasis',
-        'OneTimeTakingOfMedicine',
+        'MedicineTest',
     ],
     PsychologicalActivity: [
         'Activity',
@@ -168,7 +168,7 @@ export const overlaps = {
         'Smoking',
         'Tests',
         'Orthostasis',
-        'OneTimeTakingOfMedicine',
+        'MedicineTest',
     ],
     Influence: [
         'Activity',
@@ -199,7 +199,7 @@ export const overlaps = {
         'Smoking',
         'Tests',
         'Orthostasis',
-        'OneTimeTakingOfMedicine',
+        'MedicineTest',
     ],
     Intake: [
         'Activity',
@@ -209,7 +209,7 @@ export const overlaps = {
         'Workout',
         'Tests',
         'Orthostasis',
-        'OneTimeTakingOfMedicine',
+        'MedicineTest',
     ],
     Tests: [
         'Activity',
@@ -240,7 +240,7 @@ export const overlaps = {
         'Smoking',
         'Tests',
         'Orthostasis',
-        'OneTimeTakingOfMedicine',
+        'MedicineTest',
     ],
 }
 
@@ -307,7 +307,7 @@ export const activity_types = {
     PositionalChanges: 'PositionalChanges',
     Press: 'Press',
     Straining: 'Straining',
-    OneTimeTakingOfMedicine: 'OneTimeTakingOfMedicine',
+    MedicineTest: 'MedicineTest',
     DeviceInstall: 'DeviceInstall',
 }
 
@@ -337,7 +337,7 @@ export const paths = {
     Emotions: 'Emotions',
     Weakness: 'Weakness',
     Pills: 'Pills',
-    OneTimeTakingOfMedicine: 'OneTimeTakingOfMedicine',
+    MedicineTest: 'MedicineTest',
     Tests: 'Tests',
     Orthostasis: 'Orthostasis',
     Running: 'Running',

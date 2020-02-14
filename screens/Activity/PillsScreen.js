@@ -45,7 +45,7 @@ class PillPickScreen extends Component {
         title: `${
             navigation.state.params.sender
                 ? strings[navigation.state.params.sender]
-                : strings['OneTimeTakingOfMedicine']
+                : strings['MedicineTest']
         }`,
     })
 

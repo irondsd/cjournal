@@ -222,7 +222,7 @@ class ActivityDetailsScreen extends Component<Props> {
             pills = this.props.user.course_therapy
         if (activity.activity_type === activity_types.ReliefOfAttack)
             pills = this.props.user.relief_of_attack
-        if (activity.activity_type === activity_types.OneTimeTakingOfMedicine)
+        if (activity.activity_type === activity_types.MedicineTest)
             pills = this.props.user.tests
         if (pills.length == 0) {
             pills = [strings.NotFilled]
@@ -307,7 +307,7 @@ class ActivityDetailsScreen extends Component<Props> {
                 {this.state.activity.activity_type ==
                     activity_types.CourseTherapy ||
                 this.state.activity.activity_type ==
-                    activity_types.OneTimeTakingOfMedicine ||
+                    activity_types.MedicineTest ||
                 this.state.activity.activity_type ==
                     activity_types.ReliefOfAttack ? (
                     <PillPickerContainer

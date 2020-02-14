@@ -5,7 +5,7 @@ import { backgroundColor, appColor } from '../../properties'
 import { strings } from '../../localizations'
 import sync from '../../services/sync'
 import OrthostasisTile from '../../components/tiles/OrthostasisTile'
-import OneTimeTakingofMedicineTile from '../../components/tiles/OneTimeTakingOfMedicineTile'
+import MedicineTestTile from '../../components/tiles/MedicineTestTile'
 import TileWrapper from '../../components/TileWrapper'
 
 class TestsScreen extends Component {
@@ -21,9 +21,7 @@ class TestsScreen extends Component {
                 ) ? null : (
                     <OrthostasisTile navigation={this.props.navigation} />
                 )}
-                <OneTimeTakingofMedicineTile
-                    navigation={this.props.navigation}
-                />
+                <MedicineTestTile navigation={this.props.navigation} />
             </TileWrapper>
         )
     }

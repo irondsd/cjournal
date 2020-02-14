@@ -25,7 +25,7 @@ class PillPickerContainer extends Component {
             pills = this.props.user.course_therapy
         if (this.props.activity_type == 'ReliefOfAttack')
             pills = this.props.user.relief_of_attack
-        if (this.props.activity_type == 'OneTimeTakingOfMedicine')
+        if (this.props.activity_type == 'MedicineTest')
             pills = this.props.user.tests
         if (pills.length == 0) {
             this.setState({
