@@ -18,9 +18,9 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import GPS from '../../sensors/GPS'
 
-class TroubleScreen extends Component {
+class AlarmScreen extends Component {
     static navigationOptions = {
-        title: strings.Trouble,
+        title: strings.Alarm,
         headerLeft: null,
     }
 
@@ -42,7 +42,7 @@ class TroubleScreen extends Component {
 
     record() {
         let activity = Activity.instantInit(
-            activity_types.Trouble,
+            activity_types.Alarm,
             this.state.comment,
             {
                 position: this.state.position,
@@ -152,7 +152,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TroubleScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(AlarmScreen)
 
 const styles = StyleSheet.create({
     container: {

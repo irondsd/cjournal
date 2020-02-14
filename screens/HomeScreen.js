@@ -17,9 +17,11 @@ import DisturbanceOfRaspirationTile from '../components/tiles/DisturbanceOfRaspi
 import WeaknessTile from '../components/tiles/WeaknessTile'
 import TestsTile from '../components/tiles/TestsTile'
 import EmotionsTile from '../components/tiles/EmotionsTile'
-import TroubleButton from '../components/TroubleButton'
+import AlarmButton from '../components/TroubleButton'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
 import TileWrapper from '../components/TileWrapper'
+import RestTile from '../components/tiles/RestTile'
+import AlarmTile from '../components/tiles/AlarmTile'
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -53,58 +55,103 @@ class HomeScreen extends Component {
     }
 
     refresh() {
-        let Activity = overlappingGreying(
-            this.props.activity,
-            activity_types.Activity,
-        )
-        let PhysicalActivity = overlappingGreying(
-            this.props.activity,
-            activity_types.PhysicalActivity,
-        )
-        let PsychologicalActivity = overlappingGreying(
-            this.props.activity,
-            activity_types.PsychologicalActivity,
-        )
-        let Influence = overlappingGreying(
-            this.props.activity,
-            activity_types.Influence,
-        )
-        let Intake = overlappingGreying(
-            this.props.activity,
-            activity_types.Intake,
-        )
-        let Tests = overlappingGreying(
-            this.props.activity,
-            activity_types.Tests,
-        )
-
-        this.setState({
-            Activity: Activity,
-            PhysicalActivity: PhysicalActivity,
-            PsychologicalActivity: PsychologicalActivity,
-            Influence: Influence,
-            Intake: Intake,
-            Tests: Tests,
-        })
-
-        if (
-            Activity ||
-            PhysicalActivity ||
-            PsychologicalActivity ||
-            Influence ||
-            Intake ||
-            Tests
-        ) {
-            // disabled, let's update every 10 seconds
-            setTimeout(() => {
-                this.refresh()
-            }, 10000)
-        } else {
-            clearTimeout()
-        }
-
-        this.runSync()
+        // let Activity = overlappingGreying(
+        //     this.props.activity,
+        //     activity_types.Activity,
+        // )
+        // let PhysicalActivity = overlappingGreying(
+        //     this.props.activity,
+        //     activity_types.PhysicalActivity,
+        // )
+        // let PsychologicalActivity = overlappingGreying(
+        //     this.props.activity,
+        //     activity_types.PsychologicalActivity,
+        // )
+        // let Influence = overlappingGreying(
+        //     this.props.activity,
+        //     activity_types.Influence,
+        // )
+        // let Intake = overlappingGreying(
+        //     this.props.activity,
+        //     activity_types.Intake,
+        // )
+        // let Tests = overlappingGreying(
+        //     this.props.activity,
+        //     activity_types.Tests,
+        // )
+        // this.setState({
+        //     Activity: Activity,
+        //     PhysicalActivity: PhysicalActivity,
+        //     PsychologicalActivity: PsychologicalActivity,
+        //     Influence: Influence,
+        //     Intake: Intake,
+        //     Tests: Tests,
+        // })
+        // if (
+        //     Activity ||
+        //     PhysicalActivity ||
+        //     PsychologicalActivity ||
+        //     Influence ||
+        //     Intake ||
+        //     Tests
+        // ) {
+        //     // disabled, let's update every 10 seconds
+        //     setTimeout(() => {
+        //         this.refresh()
+        //     }, 10000)
+        // } else {
+        //     clearTimeout()
+        // }
+        // this.runSync()
     }
+
+    //     render() {
+    //         return (
+    //             <TileWrapper>
+    //                 <StatusBar
+    //                     backgroundColor={'white'}
+    //                     barStyle="dark-content"
+    //                     // hidden={true}
+    //                 />
+    //                 <AlarmButton navigation={this.props.navigation} />
+    //                 <ActivityTile
+    //                     navigation={this.props.navigation}
+    //                     disabled={this.state.Activity}
+    //                 />
+    //                 <PhysicalActivityTile
+    //                     navigation={this.props.navigation}
+    //                     disabled={this.state.PhysicalActivity}
+    //                 />
+    //                 <PsychologicalActivityTile
+    //                     navigation={this.props.navigation}
+    //                     disabled={this.state.PsychologicalActivity}
+    //                 />
+    //                 <InfluenceTile
+    //                     navigation={this.props.navigation}
+    //                     disabled={this.state.Influence}
+    //                 />
+    //                 <IntakeTile
+    //                     navigation={this.props.navigation}
+    //                     disabled={this.state.Intake}
+    //                 />
+    //                 <PillsTile navigation={this.props.navigation} />
+    //                 <ChestPainTile navigation={this.props.navigation} />
+    //                 <CardiacRhythmDisturbanceTile
+    //                     navigation={this.props.navigation}
+    //                 />
+    //                 <DisturbanceOfRaspirationTile
+    //                     navigation={this.props.navigation}
+    //                 />
+    //                 <WeaknessTile navigation={this.props.navigation} />
+    //                 <EmotionsTile navigation={this.props.navigation} />
+    //                 <TestsTile
+    //                     navigation={this.props.navigation}
+    //                     disabled={this.state.Tests}
+    //                 />
+    //             </TileWrapper>
+    //         )
+    //     }
+    // }
 
     render() {
         return (
@@ -114,41 +161,8 @@ class HomeScreen extends Component {
                     barStyle="dark-content"
                     // hidden={true}
                 />
-                <TroubleButton navigation={this.props.navigation} />
-                <ActivityTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Activity}
-                />
-                <PhysicalActivityTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.PhysicalActivity}
-                />
-                <PsychologicalActivityTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.PsychologicalActivity}
-                />
-                <InfluenceTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Influence}
-                />
-                <IntakeTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Intake}
-                />
-                <PillsTile navigation={this.props.navigation} />
-                <ChestPainTile navigation={this.props.navigation} />
-                <CardiacRhythmDisturbanceTile
-                    navigation={this.props.navigation}
-                />
-                <DisturbanceOfRaspirationTile
-                    navigation={this.props.navigation}
-                />
-                <WeaknessTile navigation={this.props.navigation} />
-                <EmotionsTile navigation={this.props.navigation} />
-                <TestsTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Tests}
-                />
+                <RestTile navigation={this.props.navigation} />
+                <AlarmTile navigation={this.props.navigation} />
             </TileWrapper>
         )
     }

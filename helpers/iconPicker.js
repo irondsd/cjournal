@@ -139,7 +139,7 @@ export function iconPicker(activity_type) {
         case activity_types.Sex:
             img = require('../resources/icons/sex.png')
             break
-        case activity_types.Trouble:
+        case activity_types.Alarm:
             img = require('../resources/icons/trouble.png')
             break
         case activity_types.Toilet:

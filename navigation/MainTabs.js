@@ -30,7 +30,7 @@ import WeaknessScreen from '../screens/nav/WeaknessScreen'
 import PillsScreen from '../screens/Activity/PillsScreen'
 import TestsScreen from '../screens/nav/TestsScreen'
 import OrthostasisScreen from '../screens/Activity/OrthostasisScreen'
-import TroubleScreen from '../screens/Activity/TroubleScreen'
+import AlarmScreen from '../screens/Activity/AlarmScreen'
 import RunningScreen from '../screens/Activity/RunningScreen'
 import WorkoutWalkingScreen from '../screens/Activity/WorkoutWalkingScreen'
 import BicyclingScreen from '../screens/Activity/BicyclingScreen'
@@ -70,7 +70,7 @@ const HomeStack = createStackNavigator({
     Bicycling: BicyclingScreen,
     Workout: WorkoutScreen,
     WorkoutWalking: WorkoutWalkingScreen,
-    Trouble: TroubleScreen,
+    Alarm: AlarmScreen,
     DeviceInstall: DeviceInstallScreen,
     Camera: CameraScreen,
 })

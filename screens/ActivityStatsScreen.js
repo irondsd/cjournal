@@ -129,9 +129,9 @@ class ActivityStatsScreen extends Component<Props> {
                     ': ' +
                     this.props.navigation.state.params.data.device_id
                 break
-            case activity_types.Trouble:
+            case activity_types.Alarm:
                 stats =
-                    strings.Trouble +
+                    strings.Alarm +
                     ' ' +
                     displayDateTime(
                         new Date(
