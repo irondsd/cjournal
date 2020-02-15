@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ActivityItem from '../ActivityItem'
+import ActivityLargeItem from '../ActivityLargeItem'
 import { strings } from '../../localizations'
 import { activityInstantSave } from '../../helpers/activityInstantSave'
 import { activity_types, paths } from '../../properties'
@@ -11,7 +11,7 @@ let clicked = false
 export default class Tile extends Component {
     render() {
         return (
-            <ActivityItem
+            <ActivityLargeItem
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
