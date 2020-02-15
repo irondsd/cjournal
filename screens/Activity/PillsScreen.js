@@ -12,13 +12,18 @@ import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import TimePicker from '../../components/TimePicker'
-import { backgroundColor, durations, paths } from '../../properties'
+import {
+    backgroundColor,
+    durations,
+    paths,
+    activity_types,
+} from '../../properties'
 import DurationPicker from '../../components/DurationPicker'
-import PillPickerContainer from '../../components/PillPickerContainer'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import PhotoButton from '../../components/PhotoButton'
 import Photo from '../../components/Photo'
+import DropDownInput from '../../components/DropDownInput'
 
 submitted = false
 
@@ -30,7 +35,7 @@ class PillPickScreen extends Component {
             photoFile: '',
             dateTime: new Date(),
             pill: '',
-            pills: ['Not filled'],
+            pills: [],
             input: false,
             activity_type: null,
             tasks_id: null,
@@ -50,15 +55,31 @@ class PillPickScreen extends Component {
     })
 
     componentDidMount() {
-        dateTime = new Date()
+        let dateTime = new Date()
         dateTime.setSeconds(0)
         dateTime.setMilliseconds(0)
-
+        let activity_type = this.props.navigation.state.params.sender
         this.setState({
             dateTime: dateTime,
-            activity_type: this.props.navigation.state.params.sender,
+            activity_type: activity_type,
         })
 
+        let pills
+        switch (activity_type) {
+            case activity_types.CourseTherapy:
+                pills = this.props.user.course_therapy
+                break
+            case activity_types.ReliefOfAttack:
+                pills = this.props.user.relief_of_attack
+                break
+            case activity_types.MedicineTest:
+                pills = this.props.user.tests
+                break
+            default:
+                pills = ['Error']
+                break
+        }
+        this.setState({ pills: pills })
         if (this.props.navigation.state.params) {
             if (this.props.navigation.state.params.tasks_id) {
                 for (let i = 0; i < this.props.tasks.length; i++) {
@@ -82,6 +103,7 @@ class PillPickScreen extends Component {
     changeDateTime(dateTime) {
         this.setState({
             dateTime: dateTime,
+            pills: pills,
         })
     }
 
@@ -141,11 +163,16 @@ class PillPickScreen extends Component {
                     handler={this.changeDateTime}
                 />
 
-                <PillPickerContainer
+                {/* <PillPickerContainer
                     id={this.props.user.id}
                     pill={this.state.pill}
                     activity_type={this.state.activity_type}
                     handler={this.onPillChange}
+                /> */}
+                <DropDownInput
+                    list={this.state.pills}
+                    onChangeText={this.onPillChange}
+                    open={true}
                 />
                 <View style={styles.center}>
                     <PhotoButton
@@ -207,6 +234,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
+        zIndex: 1,
         flex: 2,
         margin: 20,
         justifyContent: 'flex-end',
