@@ -17,7 +17,7 @@ import ServiceScreen from '../screens/nav/ServiceScreen'
 import IntakeScreen from '../screens/nav/IntakeScreen'
 import InfluenceScreen from '../screens/nav/InfluenceScreen'
 import WalkingScreen from '../screens/Activity/WalkingScreen'
-import RestScreen from '../screens/Activity/RestScreen'
+import SleepScreen from '../screens/Activity/SleepScreen'
 import ExerciseFinishScreen from '../screens/Activity/ExerciseFinishScreen'
 import TakingMedicineScreen from '../screens/nav/TakingMedicineScreen'
 import ChestPainScreen from '../screens/nav/ChestPainScreen'
@@ -54,7 +54,7 @@ const HomeStack = createStackNavigator({
     Intake: IntakeScreen,
     Influence: InfluenceScreen,
     Walking: WalkingScreen,
-    Rest: RestScreen,
+    Sleep: SleepScreen,
     ExerciseFinish: ExerciseFinishScreen,
     TakingMedicine: TakingMedicineScreen,
     ChestPain: ChestPainScreen,
@@ -96,7 +96,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
     }
 
     if (
-        routeName === paths.Rest ||
+        routeName === paths.Sleep ||
         routeName === paths.Walking ||
         routeName === paths.Stairs ||
         routeName === paths.ExerciseFinish ||

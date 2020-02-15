@@ -4,7 +4,7 @@ export function iconPicker(activity_type) {
     let img
 
     switch (activity_type) {
-        case activity_types.Rest:
+        case activity_types.Sleep:
             img = require('../resources/icons/sleep.png')
             break
         case activity_types.Stairs:

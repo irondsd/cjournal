@@ -4,7 +4,7 @@ import { strings } from '../../localizations'
 import { activity_types, paths } from '../../properties'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.Rest
+const name = activity_types.Sleep
 
 export default class Tile extends Component {
     render() {
@@ -17,7 +17,7 @@ export default class Tile extends Component {
                 shadeColor="#000"
                 imgScale={0.8}
                 onPress={() => {
-                    this.props.navigation.navigate(paths.Rest)
+                    this.props.navigation.navigate(paths.Sleep)
                 }}
                 onLongPress={() => {
                     this.props.navigation.navigate(paths.TimePick, {

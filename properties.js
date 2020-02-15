@@ -13,7 +13,7 @@ export const backgroundColor = '#fcfeff'
 
 // list if editable activities
 export const editable = [
-    'Rest',
+    'Sleep',
     'PhysicalWork',
     'Sex',
     'Toilet',
@@ -82,7 +82,7 @@ export const secretKey = 'baba_yaga'
 export const overlaps = {
     Activity: [
         'Activity',
-        'Rest',
+        'Sleep',
         'Stairs',
         'Walking',
         'Workout',
@@ -113,7 +113,7 @@ export const overlaps = {
     ],
     PhysicalActivity: [
         'Activity',
-        'Rest',
+        'Sleep',
         'Stairs',
         'Walking',
         'Workout',
@@ -141,7 +141,7 @@ export const overlaps = {
     ],
     Service: [
         'Activity',
-        'Rest',
+        'Sleep',
         'Stairs',
         'Walking',
         'Workout',
@@ -172,7 +172,7 @@ export const overlaps = {
     ],
     Influence: [
         'Activity',
-        'Rest',
+        'Sleep',
         'Stairs',
         'Walking',
         'Workout',
@@ -203,7 +203,7 @@ export const overlaps = {
     ],
     Intake: [
         'Activity',
-        'Rest',
+        'Sleep',
         'Stairs',
         'Walking',
         'Workout',
@@ -213,7 +213,7 @@ export const overlaps = {
     ],
     Tests: [
         'Activity',
-        'Rest',
+        'Sleep',
         'Stairs',
         'Walking',
         'Workout',
@@ -247,7 +247,7 @@ export const overlaps = {
 // complete list of possible activities
 export const activity_types = {
     Activity: 'Activity',
-    Rest: 'Rest',
+    Sleep: 'Sleep',
     Stairs: 'Stairs',
     Walking: 'Walking',
     Running: 'Running',
@@ -327,7 +327,7 @@ export const paths = {
     Intake: 'Intake',
     Influence: 'Influence',
     Walking: 'Walking',
-    Rest: 'Rest',
+    Sleep: 'Sleep',
     ExerciseFinish: 'ExerciseFinish',
     TakingMedicine: 'TakingMedicine',
     ChestPain: 'ChestPain',

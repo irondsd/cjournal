@@ -19,7 +19,7 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
 
-class RestScreen extends Component {
+class SleepScreen extends Component {
     static navigationOptions = {
         header: null,
         headerLeft: null,
@@ -29,7 +29,7 @@ class RestScreen extends Component {
         super(props)
 
         this.state = {
-            message: strings.HaveAGoodRest,
+            message: strings.HaveAGoodSleep,
             timer: '0:00',
             button_text: strings.Terminate,
             startDate: null,
@@ -51,7 +51,7 @@ class RestScreen extends Component {
         // this.finish()
         Alert.alert(
             'Terminate?',
-            'Do you really want to terminate rest?',
+            'Do you really want to terminate Sleep?',
             [
                 {
                     text: 'Cancel',
@@ -76,7 +76,7 @@ class RestScreen extends Component {
                 : currentTime,
         })
         screenAsyncSave({
-            screen: 'Rest',
+            screen: 'Sleep',
             startDate: currentTime.getTime(),
         })
 
@@ -102,7 +102,7 @@ class RestScreen extends Component {
         removeScreen()
         let activity = new Activity(
             null,
-            activity_types.Rest,
+            activity_types.Sleep,
             timestamp(this.state.startDate),
             timestamp(),
             null,
@@ -142,7 +142,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(null, mapDispatchToProps)(RestScreen)
+export default connect(null, mapDispatchToProps)(SleepScreen)
 
 const styles = StyleSheet.create({
     container: {

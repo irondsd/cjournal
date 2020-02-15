@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, appColor, activity_types } from '../../properties'
 import { strings } from '../../localizations'
-import RestTile from '../../components/tiles/RestTile'
+import SleepTile from '../../components/tiles/SleepTile'
 import WalkingTile from '../../components/tiles/WalkingTile'
 import StairsTile from '../../components/tiles/StairsTile'
 import WorkoutTile from '../../components/tiles/WorkoutTile'
@@ -30,7 +30,7 @@ class ActivityScreen extends Component<Props> {
     render() {
         return (
             <TileWrapper>
-                <RestTile navigation={this.props.navigation} />
+                <SleepTile navigation={this.props.navigation} />
                 {this.props.user.hide_elements.includes(
                     activity_types.Walking,
                 ) ? null : (
