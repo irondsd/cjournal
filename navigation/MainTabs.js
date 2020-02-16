@@ -20,7 +20,7 @@ import WalkingScreen from '../screens/Activity/WalkingScreen'
 import SleepScreen from '../screens/Activity/SleepScreen'
 import ExerciseFinishScreen from '../screens/Activity/ExerciseFinishScreen'
 import TakingMedicineScreen from '../screens/nav/TakingMedicineScreen'
-import ChestPainScreen from '../screens/nav/ChestPainScreen'
+import PainScreen from '../screens/nav/PainScreen'
 import CardiacRhythmDisturbanceScreen from '../screens/nav/CardiacRhythmDisturbanceScreen'
 import DisturbanceOfRespirationScreen from '../screens/nav/DisturbanceOfRespirationScreen'
 import StairsScreen from '../screens/Activity/StairsScreen'
@@ -57,7 +57,7 @@ const HomeStack = createStackNavigator({
     Sleep: SleepScreen,
     ExerciseFinish: ExerciseFinishScreen,
     TakingMedicine: TakingMedicineScreen,
-    ChestPain: ChestPainScreen,
+    Pain: PainScreen,
     CardiacRhythmDisturbance: CardiacRhythmDisturbanceScreen,
     DisturbanceOfRespiration: DisturbanceOfRespirationScreen,
     Stairs: StairsScreen,

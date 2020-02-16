@@ -11,7 +11,7 @@ import TileWrapper from '../../components/TileWrapper'
 
 export default class IntakeScreen extends Component {
     static navigationOptions = {
-        title: strings.ChestPain,
+        title: strings.Pain,
     }
 
     render() {

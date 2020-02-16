@@ -4,7 +4,7 @@ import { strings } from '../../localizations'
 import { activity_types, paths } from '../../properties'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.ChestPain
+const name = activity_types.Pain
 let clicked = false
 
 export default class Tile extends Component {

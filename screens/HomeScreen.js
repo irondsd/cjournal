@@ -6,12 +6,12 @@ import { strings } from '../localizations'
 import SettingsButton from '../components/SettingsButton'
 import sync from '../services/sync'
 import ActivityTile from '../components/tiles/ActivityTile'
-import PhysicalActivityTile from '../components/tiles/PhysicalActivityTile'
-import PsychologicalActivityTile from '../components/tiles/PsychologicalActivityTile'
+import PhysicalLoadTile from '../components/tiles/PhysicalLoadTile'
+import ServiceTile from '../components/tiles/ServiceTile'
 import InfluenceTile from '../components/tiles/InfluenceTile'
 import IntakeTile from '../components/tiles/IntakeTile'
 import PillsTile from '../components/tiles/PillsTile'
-import ChestPainTile from '../components/tiles/ChestPainTile'
+import PainTile from '../components/tiles/PainTile'
 import CardiacRhythmDisturbanceTile from '../components/tiles/CardiacRhythmDisturbanceTile'
 import DisturbanceOfRaspirationTile from '../components/tiles/DisturbanceOfRaspirationTile'
 import WeaknessTile from '../components/tiles/WeaknessTile'
@@ -20,7 +20,7 @@ import EmotionsTile from '../components/tiles/EmotionsTile'
 import AlarmButton from '../components/TroubleButton'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
 import TileWrapper from '../components/TileWrapper'
-import RestTile from '../components/tiles/RestTile'
+import SleepTile from '../components/tiles/SleepTile'
 import AlarmTile from '../components/tiles/AlarmTile'
 
 class HomeScreen extends Component {
@@ -34,8 +34,8 @@ class HomeScreen extends Component {
 
         this.state = {
             Activity: false,
-            PhysicalActivity: false,
-            PsychologicalActivity: false,
+            PhysicalLoad: false,
+            Service: false,
             Influence: false,
             Intake: false,
             Tests: false,
@@ -59,13 +59,13 @@ class HomeScreen extends Component {
         //     this.props.activity,
         //     activity_types.Activity,
         // )
-        // let PhysicalActivity = overlappingGreying(
+        // let PhysicalLoad = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.PhysicalActivity,
+        //     activity_types.PhysicalLoad,
         // )
-        // let PsychologicalActivity = overlappingGreying(
+        // let Service = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.PsychologicalActivity,
+        //     activity_types.Service,
         // )
         // let Influence = overlappingGreying(
         //     this.props.activity,
@@ -81,16 +81,16 @@ class HomeScreen extends Component {
         // )
         // this.setState({
         //     Activity: Activity,
-        //     PhysicalActivity: PhysicalActivity,
-        //     PsychologicalActivity: PsychologicalActivity,
+        //     PhysicalLoad: PhysicalLoad,
+        //     Service: Service,
         //     Influence: Influence,
         //     Intake: Intake,
         //     Tests: Tests,
         // })
         // if (
         //     Activity ||
-        //     PhysicalActivity ||
-        //     PsychologicalActivity ||
+        //     PhysicalLoad ||
+        //     Service ||
         //     Influence ||
         //     Intake ||
         //     Tests
@@ -118,13 +118,13 @@ class HomeScreen extends Component {
     //                     navigation={this.props.navigation}
     //                     disabled={this.state.Activity}
     //                 />
-    //                 <PhysicalActivityTile
+    //                 <PhysicalLoadTile
     //                     navigation={this.props.navigation}
-    //                     disabled={this.state.PhysicalActivity}
+    //                     disabled={this.state.PhysicalLoad}
     //                 />
-    //                 <PsychologicalActivityTile
+    //                 <ServiceTile
     //                     navigation={this.props.navigation}
-    //                     disabled={this.state.PsychologicalActivity}
+    //                     disabled={this.state.Service}
     //                 />
     //                 <InfluenceTile
     //                     navigation={this.props.navigation}
@@ -135,7 +135,7 @@ class HomeScreen extends Component {
     //                     disabled={this.state.Intake}
     //                 />
     //                 <PillsTile navigation={this.props.navigation} />
-    //                 <ChestPainTile navigation={this.props.navigation} />
+    //                 <PainTile navigation={this.props.navigation} />
     //                 <CardiacRhythmDisturbanceTile
     //                     navigation={this.props.navigation}
     //                 />
@@ -161,8 +161,31 @@ class HomeScreen extends Component {
                     barStyle="dark-content"
                     // hidden={true}
                 />
-                <RestTile navigation={this.props.navigation} />
+                <SleepTile navigation={this.props.navigation} />
                 <AlarmTile navigation={this.props.navigation} />
+                <PhysicalLoadTile
+                    navigation={this.props.navigation}
+                    // disabled={this.state.PhysicalLoad}
+                />
+                <ActivityTile
+                    navigation={this.props.navigation}
+                    // disabled={this.state.Activity}
+                />
+                <PillsTile navigation={this.props.navigation} />
+                <EmotionsTile navigation={this.props.navigation} />
+                <PainTile navigation={this.props.navigation} />
+                <DisturbanceOfRaspirationTile
+                    navigation={this.props.navigation}
+                />
+                <WeaknessTile navigation={this.props.navigation} />
+                <TestsTile
+                    navigation={this.props.navigation}
+                    // disabled={this.state.Tests}
+                />
+                <ServiceTile
+                    navigation={this.props.navigation}
+                    // disabled={this.state.Service}
+                />
             </TileWrapper>
         )
     }
