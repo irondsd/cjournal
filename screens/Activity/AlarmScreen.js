@@ -18,6 +18,8 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import GPS from '../../sensors/GPS'
 
+// TODO: Fix location not found exeption
+
 class AlarmScreen extends Component {
     static navigationOptions = {
         title: strings.Alarm,
