@@ -11,7 +11,7 @@ import SaunaTile from '../../components/tiles/SaunaTile'
 import ShowerTile from '../../components/tiles/ShowerTile'
 import TileWrapper from '../../components/TileWrapper'
 
-export default class PhysicalActivityScreen extends Component {
+export default class PhysicalLoadScreen extends Component {
     static navigationOptions = {
         title: strings.Activity,
     }

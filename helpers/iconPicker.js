@@ -154,7 +154,7 @@ export function iconPicker(activity_type) {
         case activity_types.Influence:
             img = require('../resources/icons/influence.png')
             break
-        case activity_types.PhysicalActivity:
+        case activity_types.PhysicalLoad:
             img = require('../resources/icons/physical.png')
             break
         case activity_types.ChestPain:

@@ -4,7 +4,7 @@ import { strings } from '../../localizations'
 import { activity_types, paths } from '../../properties'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.PhysicalActivity
+const name = activity_types.PhysicalLoad
 let clicked = false
 
 export default class Tile extends Component {
@@ -19,10 +19,10 @@ export default class Tile extends Component {
                 imgScale={0.95}
                 disabled={this.props.disabled}
                 onPress={() => {
-                    this.props.navigation.navigate(paths.PhysicalActivity)
+                    this.props.navigation.navigate(paths.PhysicalLoad)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.PhysicalActivity)
+                    this.props.navigation.navigate(paths.PhysicalLoad)
                 }}
             />
         )
