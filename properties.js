@@ -351,7 +351,6 @@ export const paths = {
     Running: 'Running',
     GymWalking: 'GymWalking',
     Bicycling: 'Bicycling',
-    Gym: 'Gym',
     Alarm: 'Alarm',
     DeviceInstall: 'DeviceInstall',
     Camera: 'Camera',

@@ -23,7 +23,6 @@ import TakingMedicineScreen from '../screens/nav/TakingMedicineScreen'
 import PainScreen from '../screens/nav/PainScreen'
 import ComplaintsScreen from '../screens/nav/ComplaintsScreen'
 import StairsScreen from '../screens/Activity/StairsScreen'
-import GymScreen from '../screens/Activity/GymScreen'
 import EmotionsScreen from '../screens/nav/EmotionsScreen'
 import WeaknessScreen from '../screens/nav/WeaknessScreen'
 import PillsScreen from '../screens/Activity/PillsScreen'
@@ -67,7 +66,6 @@ const HomeStack = createStackNavigator({
     Orthostasis: OrthostasisScreen,
     Running: RunningScreen,
     Bicycling: BicyclingScreen,
-    Gym: GymScreen,
     GymWalking: GymWalkingScreen,
     Alarm: AlarmScreen,
     DeviceInstall: DeviceInstallScreen,

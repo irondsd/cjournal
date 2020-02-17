@@ -494,7 +494,7 @@ export const strings = new LocalizedStrings({
         CantConnect: 'Невозможно соединиться с сервером',
         Postponed: 'Отложено',
         Running: 'Бег',
-        Bicycling: 'Езда на велосипеде',
+        Bicycling: 'Велосипед',
         GymWalking: 'Ходьба',
         ErrQR: 'Не удаётся прочесть QR код',
         CamPermDenied: 'Отказано в использовании камеры',
