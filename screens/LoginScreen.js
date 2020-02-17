@@ -20,12 +20,10 @@ import { connect } from 'react-redux'
 import store from '../redux/store'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import SimpleCrypto from 'simple-crypto-js'
-import { secretKey } from '../properties'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import TouchableIcon from '../components/TouchableIcon'
 
 const behavior = Platform.OS === 'ios' ? 'padding' : 'padding'
-const simpleCrypto = new SimpleCrypto(secretKey)
 
 class LoginScreen extends Component {
     constructor(props) {

@@ -6,11 +6,13 @@ import { strings } from '../../localizations'
 import sync from '../../services/sync'
 import DyspneaTile from '../../components/tiles/DyspneaTile'
 import TachypneaTile from '../../components/tiles/TachypneaTile'
+import ArrhythmiaTile from '../../components/tiles/ArrhythmiaTile'
+import PalpitationTile from '../../components/tiles/PalpitationTile'
 import TileWrapper from '../../components/TileWrapper'
 
-export default class IntakeScreen extends Component<Props> {
+export default class ComplaintsScreen extends Component<Props> {
     static navigationOptions = {
-        title: strings.DisturbanceOfRespiration,
+        title: strings.Complaints,
     }
 
     render() {
@@ -18,6 +20,8 @@ export default class IntakeScreen extends Component<Props> {
             <TileWrapper>
                 <DyspneaTile navigation={this.props.navigation} />
                 <TachypneaTile navigation={this.props.navigation} />
+                <ArrhythmiaTile navigation={this.props.navigation} />
+                <PalpitationTile navigation={this.props.navigation} />
             </TileWrapper>
         )
     }

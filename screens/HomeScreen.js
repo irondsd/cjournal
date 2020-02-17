@@ -12,8 +12,7 @@ import InfluenceTile from '../components/tiles/InfluenceTile'
 import IntakeTile from '../components/tiles/IntakeTile'
 import PillsTile from '../components/tiles/PillsTile'
 import PainTile from '../components/tiles/PainTile'
-import CardiacRhythmDisturbanceTile from '../components/tiles/CardiacRhythmDisturbanceTile'
-import DisturbanceOfRaspirationTile from '../components/tiles/DisturbanceOfRaspirationTile'
+import DisturbanceOfRaspirationTile from '../components/tiles/ComplaintsTile'
 import WeaknessTile from '../components/tiles/WeaknessTile'
 import TestsTile from '../components/tiles/TestsTile'
 import EmotionsTile from '../components/tiles/EmotionsTile'
@@ -104,54 +103,6 @@ class HomeScreen extends Component {
         // }
         // this.runSync()
     }
-
-    //     render() {
-    //         return (
-    //             <TileWrapper>
-    //                 <StatusBar
-    //                     backgroundColor={'white'}
-    //                     barStyle="dark-content"
-    //                     // hidden={true}
-    //                 />
-    //                 <AlarmButton navigation={this.props.navigation} />
-    //                 <ActivityTile
-    //                     navigation={this.props.navigation}
-    //                     disabled={this.state.Activity}
-    //                 />
-    //                 <PhysicalLoadTile
-    //                     navigation={this.props.navigation}
-    //                     disabled={this.state.PhysicalLoad}
-    //                 />
-    //                 <ServiceTile
-    //                     navigation={this.props.navigation}
-    //                     disabled={this.state.Service}
-    //                 />
-    //                 <InfluenceTile
-    //                     navigation={this.props.navigation}
-    //                     disabled={this.state.Influence}
-    //                 />
-    //                 <IntakeTile
-    //                     navigation={this.props.navigation}
-    //                     disabled={this.state.Intake}
-    //                 />
-    //                 <PillsTile navigation={this.props.navigation} />
-    //                 <PainTile navigation={this.props.navigation} />
-    //                 <CardiacRhythmDisturbanceTile
-    //                     navigation={this.props.navigation}
-    //                 />
-    //                 <DisturbanceOfRaspirationTile
-    //                     navigation={this.props.navigation}
-    //                 />
-    //                 <WeaknessTile navigation={this.props.navigation} />
-    //                 <EmotionsTile navigation={this.props.navigation} />
-    //                 <TestsTile
-    //                     navigation={this.props.navigation}
-    //                     disabled={this.state.Tests}
-    //                 />
-    //             </TileWrapper>
-    //         )
-    //     }
-    // }
 
     render() {
         return (

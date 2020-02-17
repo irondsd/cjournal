@@ -18,14 +18,10 @@ export default class Tile extends Component {
                 shadeColor="#fca800"
                 imgScale={1}
                 onPress={() => {
-                    this.props.navigation.navigate(
-                        paths.CardiacRhythmDisturbance,
-                    )
+                    this.props.navigation.navigate(paths.Pain)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(
-                        paths.CardiacRhythmDisturbance,
-                    )
+                    this.props.navigation.navigate(paths.Pain)
                 }}
             />
         )

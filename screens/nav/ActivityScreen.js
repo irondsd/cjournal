@@ -5,6 +5,7 @@ import { backgroundColor, appColor, activity_types } from '../../properties'
 import { strings } from '../../localizations'
 import SleepTile from '../../components/tiles/SleepTile'
 import WalkingTile from '../../components/tiles/WalkingTile'
+import OtherActivity from '../../components/tiles/OtherActivity'
 import StairsTile from '../../components/tiles/StairsTile'
 import WorkoutTile from '../../components/tiles/WorkoutTile'
 import Barometer from '../../sensors/Barometer'
@@ -42,6 +43,7 @@ class ActivityScreen extends Component<Props> {
                     <StairsTile navigation={this.props.navigation} />
                 )}
                 <WorkoutTile navigation={this.props.navigation} />
+                <OtherActivity navigation={this.props.navigation} />
             </TileWrapper>
         )
     }
