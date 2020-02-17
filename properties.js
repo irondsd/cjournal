@@ -51,6 +51,12 @@ export const editable = [
     'Fear',
     'Excitement',
     'Anxiety',
+    'Other Load',
+    'Other Activity',
+    'Other Emotions',
+    'Other Pain',
+    'Other Complaints',
+    'Other Weakness',
 ]
 
 // duration in minutes
@@ -74,9 +80,6 @@ export const durations = [
     600,
     720,
 ]
-
-// for derypting QR
-export const secretKey = 'baba_yaga'
 
 // overlapping matrix
 export const overlaps = {
@@ -309,6 +312,12 @@ export const activity_types = {
     Straining: 'Straining',
     MedicineTest: 'MedicineTest',
     DeviceInstall: 'DeviceInstall',
+    OtherLoad: 'OtherLoad',
+    OtherActivity: 'OtherActivity',
+    OtherEmotions: 'OtherEmotions',
+    OtherPain: 'OtherPain',
+    OtherComplaints: 'OtherComplaints',
+    OtherWeakness: 'OtherWeakness',
 }
 
 // navigation paths
@@ -327,6 +336,7 @@ export const paths = {
     Intake: 'Intake',
     Influence: 'Influence',
     Walking: 'Walking',
+    Other: 'Other',
     Sleep: 'Sleep',
     ExerciseFinish: 'ExerciseFinish',
     TakingMedicine: 'TakingMedicine',

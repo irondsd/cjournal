@@ -34,6 +34,24 @@ export function iconPicker(activity_type) {
         case activity_types.IntellectualWork:
             img = require('../resources/icons/brain.png')
             break
+        case activity_types.OtherLoad:
+            img = require('../resources/icons/person.png')
+            break
+        case activity_types.OtherActivity:
+            img = require('../resources/icons/person.png')
+            break
+        case activity_types.OtherEmotions:
+            img = require('../resources/icons/person.png')
+            break
+        case activity_types.OtherPain:
+            img = require('../resources/icons/person.png')
+            break
+        case activity_types.OtherComplaints:
+            img = require('../resources/icons/person.png')
+            break
+        case activity_types.OtherWeakness:
+            img = require('../resources/icons/person.png')
+            break
         case activity_types.Service:
             img = require('../resources/icons/service.png')
             break
