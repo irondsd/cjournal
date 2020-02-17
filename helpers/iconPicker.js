@@ -13,7 +13,7 @@ export function iconPicker(activity_type) {
         case activity_types.Walking:
             img = require('../resources/icons/walking.png')
             break
-        case activity_types.Workout:
+        case activity_types.Gym:
             img = require('../resources/icons/workout.png')
             break
         case activity_types.PhysicalWork:
@@ -145,7 +145,7 @@ export function iconPicker(activity_type) {
         case activity_types.Running:
             img = require('../resources/icons/running.png')
             break
-        case activity_types.WorkoutWalking:
+        case activity_types.GymWalking:
             img = require('../resources/icons/walking.png')
             break
         case activity_types.Bicycling:

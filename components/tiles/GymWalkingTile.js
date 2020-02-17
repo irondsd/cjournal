@@ -4,7 +4,7 @@ import { strings } from '../../localizations'
 import { activity_types, paths } from '../../properties'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.Workout
+const name = activity_types.GymWalking
 
 export default class Tile extends Component {
     render() {
@@ -13,13 +13,13 @@ export default class Tile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color="#512DA8"
-                imgScale={0.95}
+                color="#37474F"
+                imgScale={0.9}
                 onPress={() => {
-                    this.props.navigation.navigate(paths.Workout)
+                    this.props.navigation.navigate(paths.GymWalking)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.Workout)
+                    this.props.navigation.navigate(paths.GymWalking)
                 }}
             />
         )

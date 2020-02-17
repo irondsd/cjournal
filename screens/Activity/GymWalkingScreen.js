@@ -115,7 +115,7 @@ class RunningScreen extends Component {
 
         let activity = new Activity(
             null,
-            activity_types.WorkoutWalking,
+            activity_types.GymWalking,
             timestamp(this.state.startDate),
             timestamp(),
             tasks_id,

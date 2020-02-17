@@ -23,7 +23,7 @@ import TakingMedicineScreen from '../screens/nav/TakingMedicineScreen'
 import PainScreen from '../screens/nav/PainScreen'
 import ComplaintsScreen from '../screens/nav/ComplaintsScreen'
 import StairsScreen from '../screens/Activity/StairsScreen'
-import WorkoutScreen from '../screens/Activity/WorkoutScreen'
+import GymScreen from '../screens/Activity/GymScreen'
 import EmotionsScreen from '../screens/nav/EmotionsScreen'
 import WeaknessScreen from '../screens/nav/WeaknessScreen'
 import PillsScreen from '../screens/Activity/PillsScreen'
@@ -31,7 +31,7 @@ import TestsScreen from '../screens/nav/TestsScreen'
 import OrthostasisScreen from '../screens/Activity/OrthostasisScreen'
 import AlarmScreen from '../screens/Activity/AlarmScreen'
 import RunningScreen from '../screens/Activity/RunningScreen'
-import WorkoutWalkingScreen from '../screens/Activity/WorkoutWalkingScreen'
+import GymWalkingScreen from '../screens/Activity/GymWalkingScreen'
 import BicyclingScreen from '../screens/Activity/BicyclingScreen'
 import ActivityStatsScreen from '../screens/ActivityStatsScreen'
 import DeviceInstallScreen from '../screens/Activity/DeviceInstallScreen'
@@ -67,8 +67,8 @@ const HomeStack = createStackNavigator({
     Orthostasis: OrthostasisScreen,
     Running: RunningScreen,
     Bicycling: BicyclingScreen,
-    Workout: WorkoutScreen,
-    WorkoutWalking: WorkoutWalkingScreen,
+    Gym: GymScreen,
+    GymWalking: GymWalkingScreen,
     Alarm: AlarmScreen,
     DeviceInstall: DeviceInstallScreen,
     Camera: CameraScreen,

@@ -4,18 +4,18 @@ import { connect } from 'react-redux'
 import { backgroundColor, appColor } from '../../properties'
 import { strings } from '../../localizations'
 import RunningTile from '../../components/tiles/RunningTile'
-import WorkoutWalkingTile from '../../components/tiles/WorkoutWalkingTile'
+import GymWalkingTile from '../../components/tiles/GymWalkingTile'
 import BicyclingTile from '../../components/tiles/BicyclingTile'
 
-class WorkoutScreen extends Component {
+class GymScreen extends Component {
     static navigationOptions = {
-        title: strings.Workout,
+        title: strings.Gym,
     }
 
     render() {
         return (
             <View style={styles.activityBox}>
-                <WorkoutWalkingTile navigation={this.props.navigation} />
+                <GymWalkingTile navigation={this.props.navigation} />
                 <RunningTile navigation={this.props.navigation} />
                 <BicyclingTile navigation={this.props.navigation} />
             </View>
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(WorkoutScreen)
+export default connect(mapStateToProps, null)(GymScreen)
 
 const styles = StyleSheet.create({
     container: {

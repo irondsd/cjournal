@@ -88,7 +88,7 @@ class ActivityStatsScreen extends Component<Props> {
                     ' ' +
                     strings.Meters
                 break
-            case activity_types.WorkoutWalking:
+            case activity_types.GymWalking:
                 stats =
                     strings.Steps +
                     ': ' +
