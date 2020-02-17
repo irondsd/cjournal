@@ -16,7 +16,7 @@ export default class Tile extends Component {
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
                 color="#ada"
-                imgScale={0.8}
+                imgScale={1}
                 onPress={() => {
                     this.props.navigation.navigate(paths.Other, {
                         sender: name,

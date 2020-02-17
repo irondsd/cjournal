@@ -10,6 +10,7 @@ import ToiletTile from '../../components/tiles/ToiletTile'
 import SaunaTile from '../../components/tiles/SaunaTile'
 import ShowerTile from '../../components/tiles/ShowerTile'
 import TileWrapper from '../../components/TileWrapper'
+import OtherLoad from '../../components/tiles/OtherLoad'
 
 export default class PhysicalLoadScreen extends Component {
     static navigationOptions = {
@@ -22,8 +23,8 @@ export default class PhysicalLoadScreen extends Component {
                 <PhysicalWorkTile navigation={this.props.navigation} />
                 <SexTile navigation={this.props.navigation} />
                 <ToiletTile navigation={this.props.navigation} />
-                <SaunaTile navigation={this.props.navigation} />
                 <ShowerTile navigation={this.props.navigation} />
+                <OtherLoad navigation={this.props.navigation} />
             </TileWrapper>
         )
     }
