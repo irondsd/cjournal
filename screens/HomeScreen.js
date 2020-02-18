@@ -54,6 +54,7 @@ class HomeScreen extends Component {
     }
 
     refresh() {
+        // TODO: rework
         // let Activity = overlappingGreying(
         //     this.props.activity,
         //     activity_types.Activity,

@@ -5,7 +5,7 @@ import { activityInstantSave } from '../../helpers/activityInstantSave'
 import { activity_types, paths } from '../../properties'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.AnginousPain
+const name = activity_types.Headache
 let clicked = false
 
 export default class Tile extends Component {

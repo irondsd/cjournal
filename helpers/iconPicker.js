@@ -88,8 +88,8 @@ export function iconPicker(activity_type) {
         case activity_types.ReliefOfAttack:
             img = require('../resources/icons/pill.png')
             break
-        case activity_types.AnginousPain:
-            img = require('../resources/icons/pain.png')
+        case activity_types.Headache:
+            img = require('../resources/icons/sad.png')
             break
         case activity_types.HeartAreaPain:
             img = require('../resources/icons/pain.png')

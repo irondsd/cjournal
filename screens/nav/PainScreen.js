@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import { backgroundColor, appColor } from '../../properties'
 import { strings } from '../../localizations'
 import sync from '../../services/sync'
-import AnginalPainTile from '../../components/tiles/AnginousPainTile'
+import HeadacheTile from '../../components/tiles/HeadacheTile'
 import RetrosternalPainTile from '../../components/tiles/RetrosternalPainTile'
 import HeartAreaPainTile from '../../components/tiles/HeartAreaPainTile'
+import OtherPain from '../../components/tiles/OtherPain'
 import TileWrapper from '../../components/TileWrapper'
 
 export default class IntakeScreen extends Component {
@@ -17,9 +18,10 @@ export default class IntakeScreen extends Component {
     render() {
         return (
             <TileWrapper>
-                <AnginalPainTile navigation={this.props.navigation} />
                 <RetrosternalPainTile navigation={this.props.navigation} />
                 <HeartAreaPainTile navigation={this.props.navigation} />
+                <HeadacheTile navigation={this.props.navigation} />
+                <OtherPain navigation={this.props.navigation} />
             </TileWrapper>
         )
     }
