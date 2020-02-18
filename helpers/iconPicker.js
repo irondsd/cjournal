@@ -41,7 +41,7 @@ export function iconPicker(activity_type) {
             img = require('../resources/icons/person.png')
             break
         case activity_types.OtherEmotions:
-            img = require('../resources/icons/person.png')
+            img = require('../resources/icons/mood.png')
             break
         case activity_types.OtherPain:
             img = require('../resources/icons/person.png')
@@ -139,7 +139,7 @@ export function iconPicker(activity_type) {
         case activity_types.Fear:
             img = require('../resources/icons/fear.png')
             break
-        case activity_types.Happy:
+        case activity_types.Positive:
             img = require('../resources/icons/happy.png')
             break
         case activity_types.Running:
@@ -151,8 +151,8 @@ export function iconPicker(activity_type) {
         case activity_types.Bicycling:
             img = require('../resources/icons/bicycle.png')
             break
-        case activity_types.Sadness:
-            img = require('../resources/icons/sad.png')
+        case activity_types.Negative:
+            img = require('../resources/icons/bad.png')
             break
         case activity_types.Sex:
             img = require('../resources/icons/sex.png')

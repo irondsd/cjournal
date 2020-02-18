@@ -5,7 +5,7 @@ import { activityInstantSave } from '../../helpers/activityInstantSave'
 import { activity_types, paths } from '../../properties'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.Sadness
+const name = activity_types.Negative
 let clicked = false
 
 export default class Tile extends Component {
