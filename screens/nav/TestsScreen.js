@@ -4,24 +4,20 @@ import { connect } from 'react-redux'
 import { backgroundColor, appColor } from '../../properties'
 import { strings } from '../../localizations'
 import sync from '../../services/sync'
-import OrthostasisTile from '../../components/tiles/OrthostasisTile'
-import MedicineTestTile from '../../components/tiles/MedicineTestTile'
+import WalkingTile from '../../components/tiles/WalkingTile'
+import StairsTile from '../../components/tiles/StairsTile'
 import TileWrapper from '../../components/TileWrapper'
 
 class TestsScreen extends Component {
     static navigationOptions = {
-        title: strings.Activity,
+        title: strings.Tests,
     }
 
     render() {
         return (
             <TileWrapper>
-                {this.props.user.hide_elements.includes(
-                    'Orthostasis',
-                ) ? null : (
-                    <OrthostasisTile navigation={this.props.navigation} />
-                )}
-                <MedicineTestTile navigation={this.props.navigation} />
+                <WalkingTile navigation={this.props.navigation} />
+                <StairsTile navigation={this.props.navigation} />
             </TileWrapper>
         )
     }

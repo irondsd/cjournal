@@ -112,6 +112,9 @@ export function iconPicker(activity_type) {
         case activity_types.Faint:
             img = require('../resources/icons/dizzy.png')
             break
+        case activity_types.Syncope:
+            img = require('../resources/icons/dizzy.png')
+            break
         case activity_types.Fatigue:
             img = require('../resources/icons/fatigue.png')
             break

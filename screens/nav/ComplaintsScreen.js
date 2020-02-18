@@ -8,6 +8,7 @@ import DyspneaTile from '../../components/tiles/DyspneaTile'
 import TachypneaTile from '../../components/tiles/TachypneaTile'
 import ArrhythmiaTile from '../../components/tiles/ArrhythmiaTile'
 import PalpitationTile from '../../components/tiles/PalpitationTile'
+import OtherComplaints from '../../components/tiles/OtherComplaints'
 import TileWrapper from '../../components/TileWrapper'
 
 export default class ComplaintsScreen extends Component<Props> {
@@ -22,6 +23,7 @@ export default class ComplaintsScreen extends Component<Props> {
                 <TachypneaTile navigation={this.props.navigation} />
                 <ArrhythmiaTile navigation={this.props.navigation} />
                 <PalpitationTile navigation={this.props.navigation} />
+                <OtherComplaints navigation={this.props.navigation} />
             </TileWrapper>
         )
     }
