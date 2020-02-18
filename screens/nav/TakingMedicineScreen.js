@@ -7,6 +7,7 @@ import sync from '../../services/sync'
 import CourseTherapyTile from '../../components/tiles/CourseTherapyTile'
 import ReliefOfAttackTile from '../../components/tiles/ReliefOfAttackTile'
 import TileWrapper from '../../components/TileWrapper'
+import MedicineTestTile from '../../components/tiles/MedicineTestTile'
 
 export default class IntakeScreen extends Component {
     static navigationOptions = {
@@ -18,6 +19,7 @@ export default class IntakeScreen extends Component {
             <TileWrapper>
                 <CourseTherapyTile navigation={this.props.navigation} />
                 <ReliefOfAttackTile navigation={this.props.navigation} />
+                <MedicineTestTile navigation={this.props.navigation} />
             </TileWrapper>
         )
     }
