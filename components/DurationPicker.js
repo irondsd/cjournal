@@ -4,6 +4,7 @@ import { durations } from '../properties'
 import { strings } from '../localizations'
 import { localTime } from '../helpers/dateTime'
 import { sortNumbers } from '../helpers/sort'
+import DropDownSelect from './DropDownSelect'
 
 export default class componentName extends Component {
     durationItems() {
@@ -14,39 +15,64 @@ export default class componentName extends Component {
             durs = sortNumbers(durs)
         }
 
-        for (var i in durs) {
-            items.push(<Picker.Item label={localTime(durs[i])} value={durs[i]} key={i} />)
-        }
+        // for (var i in durs) {
+        //     items.push(
+        //         <Picker.Item
+        //             label={localTime(durs[i])}
+        //             value={durs[i]}
+        //             key={i}
+        //         />,
+        //     )
+        // }
 
-        return items
+        return durs
     }
 
-    onChange(itemValue) {
+    onChange = itemValue => {
         this.setState({
-            duration: itemValue
+            duration: itemValue,
         })
         this.props.handler(itemValue)
     }
 
     render() {
         return (
-            <View>
-                <Picker
+            <View style={styles.container}>
+                {/* <Picker
                     selectedValue={this.props.duration}
                     style={styles.picker}
                     onValueChange={itemValue => this.onChange(itemValue)}
                     enabled={!this.props.disabled}
                 >
                     {this.durationItems()}
-                </Picker>
+                </Picker> */}
+                <View style={styles.duration}>
+                    <Text style={styles.text}>{'Duration: '}</Text>
+                </View>
+                <View style={styles.select}>
+                    <DropDownSelect
+                        list={this.durationItems()}
+                        // open={true}
+                        onSelect={this.onChange}
+                    />
+                </View>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    picker: {
-        height: 50,
-        width: '100%'
-    }
+    container: {
+        flexDirection: 'row',
+    },
+    duration: {
+        width: '25%',
+    },
+    text: {
+        fontSize: 17,
+        top: 13,
+    },
+    select: {
+        width: '75%',
+    },
 })
