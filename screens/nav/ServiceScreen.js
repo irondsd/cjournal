@@ -18,12 +18,6 @@ export default class ServiceScreen extends Component {
             <TileWrapper>
                 <CuffFixTile navigation={this.props.navigation} />
                 <ElectrodeReplacementTile navigation={this.props.navigation} />
-                {/* <IntelectualWorkTile navigation={this.props.navigation} />
-                <GamblingTile navigation={this.props.navigation} />
-                <ReadingTile navigation={this.props.navigation} />
-                <ViewingTile navigation={this.props.navigation} />
-                <PsychotherapyTile navigation={this.props.navigation} />
-                <RelaxationTile navigation={this.props.navigation} /> */}
             </TileWrapper>
         )
     }
