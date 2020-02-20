@@ -23,6 +23,7 @@ import { SegmentedControls } from 'react-native-radio-buttons'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
+import Comment from '../../components/Comment'
 
 let clicked = false
 // TODO: SegmentedControls redo
@@ -106,6 +107,12 @@ class TimePickScreen extends Component {
         }
     }
 
+    onCommentChange = value => {
+        this.setState({
+            comment: value,
+        })
+    }
+
     onPickerChange(itemValue) {
         let dateTime = this.state.dateTime
         if (this.state.fromStart == strings.FromEnd) {
@@ -159,21 +166,9 @@ class TimePickScreen extends Component {
                     duration={this.state.duration}
                     handler={this.onPickerChange}
                 />
-                <TextInput
-                    placeholder={strings.Comment}
-                    multiline={true}
-                    maxLength={80}
-                    placeholderTextColor="rgba(0, 0, 0, 0.5)"
-                    style={styles.input}
-                    autoCapitalize="none"
-                    autoCorrect={true}
-                    returnKeyType="next"
-                    onChangeText={text => {
-                        this.setState({
-                            comment: text,
-                        })
-                    }}
-                    value={this.state.comment}
+                <Comment
+                    comment={this.state.comment}
+                    onChangeText={this.onCommentChange}
                 />
                 <AudioRecorder
                     audioFile={this.state.audioFile}
@@ -214,13 +209,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 20,
-    },
-    input: {
-        fontSize: 20,
-        backgroundColor: 'whitesmoke',
-        color: 'black',
-        margin: 20,
-        padding: 10,
     },
     time: {
         flexDirection: 'row',
