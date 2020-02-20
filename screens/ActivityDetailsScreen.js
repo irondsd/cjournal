@@ -4,7 +4,6 @@ import {
     Text,
     View,
     Button,
-    TextInput,
     TouchableOpacity,
     Picker,
     Platform,
@@ -26,6 +25,7 @@ import TimePicker from '../components/TimePicker'
 import DurationPicker from '../components/DurationPicker'
 import DeleteButton from '../components/DeleteButton'
 import AudioRecorder from '../components/AudioRecorder'
+import ActivitySelect from '../components/ActivitySelect'
 import { overlappingGreying } from '../helpers/activityOverlap'
 import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
@@ -164,12 +164,12 @@ class ActivityDetailsScreen extends Component<Props> {
         this.props.navigation.goBack()
     }
 
-    onPickerChange(itemValue, itemIndex) {
-        activity = { ...this.state.activity }
-        activity.activity_type = itemValue
+    onPickerChange = value => {
+        let activity = { ...this.state.activity }
+        activity.activity_type = value
         this.setState(
             {
-                activity_type: itemValue,
+                activity_type: value,
                 activity: activity,
             },
             () => {
@@ -285,7 +285,7 @@ class ActivityDetailsScreen extends Component<Props> {
         })
         return (
             <View style={styles.container}>
-                <Picker
+                {/* <Picker
                     selectedValue={this.state.activity_type}
                     style={styles.picker}
                     onValueChange={(itemValue, itemIndex) =>
@@ -293,7 +293,11 @@ class ActivityDetailsScreen extends Component<Props> {
                     }
                     enabled={!this.state.disabled}>
                     {items}
-                </Picker>
+                </Picker> */}
+                <ActivitySelect
+                    onSelect={this.onPickerChange}
+                    value={this.state.activity_type}
+                />
                 <TimePicker
                     dateTime={
                         new Date(
