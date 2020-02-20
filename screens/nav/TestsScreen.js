@@ -6,6 +6,9 @@ import { strings } from '../../localizations'
 import sync from '../../services/sync'
 import WalkingTile from '../../components/tiles/WalkingTile'
 import StairsTile from '../../components/tiles/StairsTile'
+import PsychoemotionalTestTile from '../../components/tiles/PsychoemotionalTestTile'
+import PressTile from '../../components/tiles/PressTile'
+import StrainingTile from '../../components/tiles/StrainingTile'
 import TileWrapper from '../../components/TileWrapper'
 
 class TestsScreen extends Component {
@@ -18,6 +21,9 @@ class TestsScreen extends Component {
             <TileWrapper>
                 <WalkingTile navigation={this.props.navigation} />
                 <StairsTile navigation={this.props.navigation} />
+                <PsychoemotionalTestTile navigation={this.props.navigation} />
+                <PressTile navigation={this.props.navigation} />
+                <StrainingTile navigation={this.props.navigation} />
             </TileWrapper>
         )
     }
