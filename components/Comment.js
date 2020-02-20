@@ -4,6 +4,7 @@ import { strings } from '../localizations'
 
 export default class Comment extends Component {
     render() {
+        console.log(this.props.comment)
         return (
             <TextInput
                 placeholder={strings.Comment}
@@ -17,6 +18,13 @@ export default class Comment extends Component {
                 onChangeText={text => {
                     this.props.onChangeText(text)
                 }}
+                onEndEditing={
+                    this.props.onEndEditing
+                        ? text => {
+                              this.props.onEndEditing(text)
+                          }
+                        : null
+                }
                 value={this.props.comment}
             />
         )

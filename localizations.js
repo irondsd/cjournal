@@ -176,7 +176,7 @@ export const strings = new LocalizedStrings({
         OtherComplaints: 'Other complaints',
         OtherWeakness: 'Other weakness',
         ElectrodeReplacement: 'Electrode replacement',
-        VerticalPosCalibration: 'Vertical Position Calibration',
+        VerticalPositionCalibration: 'Vertical Position Calibration',
         PsychoemptionalTest: 'Psychoemotional test',
     },
     es: {
@@ -354,7 +354,7 @@ export const strings = new LocalizedStrings({
         OtherComplaints: 'Otras quejas',
         OtherWeakness: 'Otra debilidad',
         ElectrodeReplacement: 'Reemplazo de electrodos',
-        VerticalPosCalibration: 'Calibración de posición vertical',
+        VerticalPositionCalibration: 'Calibración de posición vertical',
         PsychoemptionalTest: 'Prueba psicoemocional',
     },
     ru: {
@@ -531,7 +531,7 @@ export const strings = new LocalizedStrings({
         OtherComplaints: 'Другие жалобы',
         OtherWeakness: 'Другая слабость',
         ElectrodeReplacement: 'Замена электрода',
-        VerticalPosCalibration: 'Калибровка вертикальной позиции',
+        VerticalPositionCalibration: 'Калибровка вертикальной позиции',
         Press: 'Жим',
         Straining: 'Натуживание',
         PsychoemotionalTest: 'Психоэмоциональные пробы',

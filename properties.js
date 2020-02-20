@@ -47,12 +47,12 @@ export const editable = [
     'VisionDisturbances',
     'Fatigue',
     'Negative',
-    'Other Load',
-    'Other Activity',
-    'Other Emotions',
-    'Other Pain',
-    'Other Complaints',
-    'Other Weakness',
+    'OtherLoad',
+    'OtherActivity',
+    'OtherEmotions',
+    'OtherPain',
+    'OtherComplaints',
+    'OtherWeakness',
 ]
 
 // duration in minutes
@@ -312,6 +312,10 @@ export const activity_types = {
     OtherPain: 'OtherPain',
     OtherComplaints: 'OtherComplaints',
     OtherWeakness: 'OtherWeakness',
+    Press: 'Press',
+    Straining: 'Straining',
+    VerticalPositionCalibration: 'VerticalPositionCalibration',
+    PsychoemotionalTest: 'PsychoemotionalTest',
 }
 
 // navigation paths
@@ -341,10 +345,6 @@ export const paths = {
     Pills: 'Pills',
     MedicineTest: 'MedicineTest',
     Tests: 'Tests',
-    Press: 'Press',
-    Straining: 'Straining',
-    VerticalPositionCalibration: 'VerticalPositionCalibration',
-    PsychoemotionalTest: 'PsychoemotionalTest',
     Orthostasis: 'Orthostasis',
     Running: 'Running',
     GymWalking: 'GymWalking',

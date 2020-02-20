@@ -31,6 +31,7 @@ import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
 import PillPickerContainer from '../components/PillPickerContainer'
 import Photo from '../components/Photo'
+import Comment from '../components/Comment'
 
 type Props = {}
 class ActivityDetailsScreen extends Component<Props> {
@@ -179,10 +180,10 @@ class ActivityDetailsScreen extends Component<Props> {
     }
 
     onDurationChange(itemValue) {
-        time_started = parseInt(this.state.activity.time_started)
-        time_ended = time_started + itemValue * 60
+        let time_started = parseInt(this.state.activity.time_started)
+        let time_ended = time_started + itemValue * 60
 
-        activity = { ...this.state.activity }
+        let activity = { ...this.state.activity }
         activity.time_ended = time_ended
 
         this.setState(
@@ -282,7 +283,6 @@ class ActivityDetailsScreen extends Component<Props> {
                 <Picker.Item label={strings[item]} value={item} key={index} />
             )
         })
-
         return (
             <View style={styles.container}>
                 <Picker
@@ -324,24 +324,15 @@ class ActivityDetailsScreen extends Component<Props> {
                         addDuration={this.state.addDuration}
                     />
                 )}
-                <TextInput
-                    placeholder={strings.Comment}
-                    multiline={true}
-                    maxLength={80}
-                    placeholderTextColor="rgba(0, 0, 0, 0.5)"
-                    style={styles.input}
-                    autoCapitalize="none"
-                    autoCorrect={true}
-                    returnKeyType="next"
+                <Comment
+                    comment={this.state.comment}
                     onChangeText={text => {
                         this.onInputChange(text)
                     }}
                     onEndEditing={text => {
                         this.onEndEditing(text)
                     }}
-                    value={this.state.comment}
                 />
-                <Text style={styles.stats}>{this.state.stats}</Text>
                 <Photo link={this.state.data.image} remove={this.removePhoto} />
                 <AudioRecorder
                     link={this.state.data.audio}
