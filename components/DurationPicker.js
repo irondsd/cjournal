@@ -4,7 +4,7 @@ import { durations } from '../properties'
 import { strings } from '../localizations'
 import { localTime } from '../helpers/dateTime'
 import { sortNumbers } from '../helpers/sort'
-import DropDownSelect from './DropDownSelect'
+import DurationSelect from './DurationSelect'
 
 export default class componentName extends Component {
     durationItems() {
@@ -50,7 +50,7 @@ export default class componentName extends Component {
                     <Text style={styles.text}>{'Duration: '}</Text>
                 </View>
                 <View style={styles.select}>
-                    <DropDownSelect
+                    <DurationSelect
                         list={this.durationItems()}
                         // open={true}
                         onSelect={this.onChange}

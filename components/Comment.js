@@ -4,7 +4,6 @@ import { strings } from '../localizations'
 
 export default class Comment extends Component {
     render() {
-        console.log(this.props.comment)
         return (
             <TextInput
                 placeholder={strings.Comment}
