@@ -176,6 +176,8 @@ export const strings = new LocalizedStrings({
         OtherComplaints: 'Other complaints',
         OtherWeakness: 'Other weakness',
         ElectrodeReplacement: 'Electrode replacement',
+        VerticalPosCalibration: 'Vertical Position Calibration',
+        PsychoemptionalTest: 'Psychoemotional test',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -352,6 +354,8 @@ export const strings = new LocalizedStrings({
         OtherComplaints: 'Otras quejas',
         OtherWeakness: 'Otra debilidad',
         ElectrodeReplacement: 'Reemplazo de electrodos',
+        VerticalPosCalibration: 'Calibración de posición vertical',
+        PsychoemptionalTest: 'Prueba psicoemocional',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -527,5 +531,9 @@ export const strings = new LocalizedStrings({
         OtherComplaints: 'Другие жалобы',
         OtherWeakness: 'Другая слабость',
         ElectrodeReplacement: 'Замена электрода',
+        VerticalPosCalibration: 'Калибровка вертикальной позиции',
+        Press: 'Жим',
+        Straining: 'Натуживание',
+        PsychoemotionalTest: 'Психоэмоциональные пробы',
     },
 })
