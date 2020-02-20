@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    TextInput,
     TouchableOpacity,
     Button,
     Picker,

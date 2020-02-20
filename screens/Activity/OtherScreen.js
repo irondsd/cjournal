@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    TextInput,
     TouchableOpacity,
     Button,
     Picker,
@@ -151,22 +150,6 @@ class OtherScreen extends Component {
                     duration={this.state.duration}
                     handler={this.onPickerChange}
                 />
-                {/* <TextInput
-                    placeholder={strings.Comment}
-                    multiline={true}
-                    maxLength={80}
-                    placeholderTextColor="rgba(0, 0, 0, 0.5)"
-                    style={styles.input}
-                    autoCapitalize="none"
-                    autoCorrect={true}
-                    returnKeyType="next"
-                    onChangeText={text => {
-                        this.setState({
-                            comment: text,
-                        })
-                    }}
-                    value={this.state.comment}
-                /> */}
                 <DropDownInput
                     list={['fsfsddd', 'asdsfsddd', 'bbddd', '44fd', 'gggggggg']}
                     open={true}

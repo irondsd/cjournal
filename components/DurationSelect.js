@@ -131,6 +131,7 @@ var styles = StyleSheet.create({
     },
     popUp: {
         position: 'absolute',
+        zIndex: 10000,
         top: 49,
         bottom: 0,
         width: '100%',

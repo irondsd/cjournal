@@ -17,6 +17,7 @@ import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import GPS from '../../sensors/GPS'
+import Comment from '../../components/Comment'
 
 // TODO: Fix location not found exeption
 
@@ -104,21 +105,13 @@ class AlarmScreen extends Component {
                         : strings.FoundLocation}
                 </Text>
                 {this.state.longPress ? (
-                    <TextInput
-                        placeholder={strings.Comment}
-                        multiline={true}
-                        maxLength={80}
-                        placeholderTextColor="rgba(0, 0, 0, 0.5)"
-                        style={styles.input}
-                        autoCapitalize="none"
-                        autoCorrect={true}
-                        returnKeyType="next"
+                    <Comment
                         onChangeText={text => {
                             this.setState({
                                 comment: text,
                             })
                         }}
-                        value={this.state.comment}
+                        comment={this.state.comment}
                     />
                 ) : null}
                 {this.state.longPress ? (
