@@ -178,6 +178,8 @@ export const strings = new LocalizedStrings({
         ElectrodeReplacement: 'Electrode replacement',
         VerticalPositionCalibration: 'Vertical Position Calibration',
         PsychoemptionalTest: 'Psychoemotional test',
+        Time: 'Time',
+        Duration: 'Duration',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -356,6 +358,8 @@ export const strings = new LocalizedStrings({
         ElectrodeReplacement: 'Reemplazo de electrodos',
         VerticalPositionCalibration: 'Calibración de posición vertical',
         PsychoemptionalTest: 'Prueba psicoemocional',
+        Time: 'Tiempo',
+        Duration: 'Duración',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -535,5 +539,7 @@ export const strings = new LocalizedStrings({
         Press: 'Жим',
         Straining: 'Натуживание',
         PsychoemotionalTest: 'Психоэмоциональные пробы',
+        Time: 'Время',
+        Duration: 'Длительность',
     },
 })

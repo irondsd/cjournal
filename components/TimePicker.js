@@ -70,15 +70,16 @@ export default class TimePicker extends Component {
         return (
             <View>
                 <View style={styles.time}>
+                    <Text style={styles.timeText}>{strings.Time + ':'}</Text>
                     <TouchableOpacity onPress={this._showDatePicker}>
-                        <Text style={styles.timeText}>
+                        <Text style={styles.selectText}>
                             {displayDate(this.state.dateTime)}
                         </Text>
                     </TouchableOpacity>
+                    <Text style={styles.timeText}> {strings.at}</Text>
                     <TouchableOpacity onPress={this._showTimePicker}>
-                        <Text style={styles.timeText}>
-                            {' '}
-                            {strings.at} {displayTime(this.state.dateTime)}
+                        <Text style={styles.selectText}>
+                            {displayTime(this.state.dateTime)}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -104,12 +105,25 @@ export default class TimePicker extends Component {
 const styles = StyleSheet.create({
     time: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
     },
     timeText: {
-        fontSize: 20,
+        lineHeight: 50,
+        fontSize: 17,
         color: 'black',
-        textAlign: 'center',
-        marginTop: 40,
+        color: '#888',
+        // textAlign: 'center',
+    },
+    selectText: {
+        borderRadius: 5,
+        lineHeight: 50,
+        borderWidth: 0.5,
+        borderColor: '#d6d7da',
+        fontSize: 17,
+        paddingLeft: 15,
+        paddingRight: 15,
+        height: 50,
+        backgroundColor: 'white',
+        color: 'black',
     },
 })

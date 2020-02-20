@@ -24,6 +24,7 @@ export default class DropDownInput extends Component {
         this.setState({
             droppedDown: this.props.open,
             refinedList: this.props.list,
+            text: this.props.value ? this.props.value : '',
         })
     }
 

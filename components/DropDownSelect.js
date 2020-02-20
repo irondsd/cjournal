@@ -8,13 +8,12 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
-import { localTime } from '../helpers/dateTime'
 
 let maxLines = 5
 
 export default class DropDownSelect extends Component {
     state = {
-        value: 0,
+        value: '',
         droppedDown: false,
         list: [],
     }
@@ -23,8 +22,8 @@ export default class DropDownSelect extends Component {
         this.setState({
             droppedDown: this.props.open,
             list: this.props.list,
+            value: this.props.value ? this.props.value : '',
         })
-
         if (this.props.maxLines) maxLines = this.props.maxLines
     }
 
@@ -54,7 +53,7 @@ export default class DropDownSelect extends Component {
                             this.setState({ droppedDown: false })
                         }}
                         key={index}>
-                        <Text style={styles.popUpText}>{localTime(el)}</Text>
+                        <Text style={styles.popUpText}>{el}</Text>
                     </TouchableOpacity>
                 )
             }),
@@ -76,9 +75,7 @@ export default class DropDownSelect extends Component {
                     {this.state.value === '' && (
                         <Text style={styles.placeholder}></Text>
                     )}
-                    <Text style={styles.Text}>
-                        {localTime(this.state.value)}
-                    </Text>
+                    <Text style={styles.Text}>{this.state.value}</Text>
                 </TouchableOpacity>
                 <Icon
                     style={styles.iconDown}

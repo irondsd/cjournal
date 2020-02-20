@@ -116,6 +116,7 @@ var styles = StyleSheet.create({
         flex: 1,
         top: 13,
         fontSize: 17,
+        color: '#000',
     },
     placeholder: {
         flex: 1,
