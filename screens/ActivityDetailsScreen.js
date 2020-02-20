@@ -285,15 +285,6 @@ class ActivityDetailsScreen extends Component<Props> {
         })
         return (
             <View style={styles.container}>
-                {/* <Picker
-                    selectedValue={this.state.activity_type}
-                    style={styles.picker}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.onPickerChange(itemValue, itemIndex)
-                    }
-                    enabled={!this.state.disabled}>
-                    {items}
-                </Picker> */}
                 <ActivitySelect
                     onSelect={this.onPickerChange}
                     value={this.state.activity_type}
@@ -322,9 +313,8 @@ class ActivityDetailsScreen extends Component<Props> {
                     />
                 ) : (
                     <DurationPicker
-                        duration={this.state.duration}
+                        value={this.state.duration}
                         handler={this.onDurationChange}
-                        disabled={this.state.disabled}
                         addDuration={this.state.addDuration}
                     />
                 )}
@@ -375,28 +365,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 20,
-    },
-    input: {
-        fontSize: 20,
-        backgroundColor: backgroundColor,
-        color: 'black',
-        margin: 20,
-        padding: 10,
-        marginTop: Platform.OS === 'ios' ? 200 : 10,
-    },
-    picker: {
-        height: Platform.OS === 'ios' ? 170 : 60,
-        width: '100%',
-    },
-    time: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    timeText: {
-        fontSize: 20,
-        color: 'black',
-        textAlign: 'center',
-        marginTop: 40,
     },
     stats: {
         color: 'grey',
