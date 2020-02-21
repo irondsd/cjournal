@@ -88,7 +88,7 @@ export default class DropDownInput extends Component {
 
         if (this.state.refinedList.length < 5)
             popUpHeight = this.state.refinedList.length * 40
-
+        console.log(this.props)
         return (
             <View style={styles.View}>
                 <TextInput

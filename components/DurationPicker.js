@@ -91,7 +91,7 @@ export default class DurationPicker extends Component {
         if (this.state.list.length < maxLines)
             popUpHeight = this.state.list.length * 40
 
-        if (!this.props.value) return null
+        if (this.props.value === undefined) return null
 
         return (
             <View style={styles.container}>

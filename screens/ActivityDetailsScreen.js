@@ -26,10 +26,10 @@ import DurationPicker from '../components/DurationPicker'
 import DeleteButton from '../components/DeleteButton'
 import AudioRecorder from '../components/AudioRecorder'
 import ActivitySelect from '../components/ActivitySelect'
+import DropDownInput from '../components/DropDownInput'
 import { overlappingGreying } from '../helpers/activityOverlap'
 import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
-import PillPickerContainer from '../components/PillPickerContainer'
 import Photo from '../components/Photo'
 import Comment from '../components/Comment'
 
@@ -229,6 +229,10 @@ class ActivityDetailsScreen extends Component<Props> {
             pills = [strings.NotFilled]
         }
 
+        if (!pills.includes(activity.data.pill)) {
+            pills = [activity.data.pill, ...pills]
+        }
+
         this.setState({
             pills: pills,
         })
@@ -305,11 +309,11 @@ class ActivityDetailsScreen extends Component<Props> {
                     activity_types.MedicineTest ||
                 this.state.activity.activity_type ==
                     activity_types.ReliefOfAttack ? (
-                    <PillPickerContainer
-                        id={this.props.user.id}
-                        activity_type={this.state.activity.activity_type}
-                        pill={this.state.activity.data.pill}
-                        handler={this.onPillChange}
+                    <DropDownInput
+                        list={this.state.pills}
+                        onChangeText={this.onPillChange}
+                        value={this.state.activity.data.pill}
+                        placeholder={strings.Drug}
                     />
                 ) : (
                     <DurationPicker

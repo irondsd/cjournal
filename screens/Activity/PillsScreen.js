@@ -162,14 +162,8 @@ class PillPickScreen extends Component {
                     dateTime={new Date()}
                     handler={this.changeDateTime}
                 />
-
-                {/* <PillPickerContainer
-                    id={this.props.user.id}
-                    pill={this.state.pill}
-                    activity_type={this.state.activity_type}
-                    handler={this.onPillChange}
-                /> */}
                 <DropDownInput
+                    placeholder={strings.Drug}
                     list={this.state.pills}
                     onChangeText={this.onPillChange}
                     open={true}
