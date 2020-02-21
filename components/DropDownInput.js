@@ -30,7 +30,6 @@ export default class DropDownInput extends Component {
 
     onSubmitEditing = () => {
         let value = this.state.refinedList[0]
-        console.log(value)
         this.setState({ text: value, droppedDown: false })
     }
 
@@ -71,7 +70,6 @@ export default class DropDownInput extends Component {
                 return (
                     <TouchableOpacity
                         onPress={() => {
-                            console.log(el)
                             this.onChangeText(el)
                             this.setState({ droppedDown: false })
                         }}
@@ -88,7 +86,6 @@ export default class DropDownInput extends Component {
 
         if (this.state.refinedList.length < 5)
             popUpHeight = this.state.refinedList.length * 40
-        console.log(this.props)
         return (
             <View style={styles.View}>
                 <TextInput

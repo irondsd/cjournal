@@ -23,6 +23,7 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import PhotoButton from '../../components/PhotoButton'
 import Photo from '../../components/Photo'
+import TakePhoto from '../../components/TakePhoto'
 import DropDownInput from '../../components/DropDownInput'
 
 submitted = false
@@ -151,11 +152,11 @@ class PillPickScreen extends Component {
         this.setState({
             photoFile: null,
         })
+        this.props.navigation.setParams({ image: null })
     }
 
     render() {
         if (!this.state.activity_type) return null
-
         return (
             <View style={styles.container}>
                 <TimePicker
@@ -168,22 +169,15 @@ class PillPickScreen extends Component {
                     onChangeText={this.onPillChange}
                     open={true}
                 />
-                <View style={styles.center}>
-                    <PhotoButton
-                        callback={() =>
-                            this.props.navigation.navigate('Camera', {
-                                returnTo: paths.Pills,
-                            })
-                        }
-                    />
-                </View>
-
-                <Photo
-                    style={styles.photo}
+                <TakePhoto
                     photo={this.state.photoFile}
-                    remove={this.clearPhoto}
+                    openCamera={() =>
+                        this.props.navigation.navigate('Camera', {
+                            returnTo: paths.Pills,
+                        })
+                    }
+                    removePhoto={this.clearPhoto}
                 />
-
                 <Button
                     style={styles.button}
                     title={strings.Save}
