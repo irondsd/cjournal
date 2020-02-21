@@ -11,7 +11,7 @@ import MedicineTestTile from '../../components/tiles/MedicineTestTile'
 
 export default class IntakeScreen extends Component {
     static navigationOptions = {
-        title: strings.Pills,
+        title: strings.TakingMedicine,
     }
 
     render() {

@@ -23,6 +23,7 @@ import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import Comment from '../../components/Comment'
+import TimeSwitch from '../../components/TimeSwitch'
 
 let clicked = false
 // TODO: SegmentedControls redo
@@ -42,6 +43,7 @@ class TimePickScreen extends Component {
         this.changeDateTime = this.changeDateTime.bind(this)
         this.onPickerChange = this.onPickerChange.bind(this)
         this.setAudio = this.setAudio.bind(this)
+        this.setSelectedOption = this.setSelectedOption.bind(this)
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -114,7 +116,7 @@ class TimePickScreen extends Component {
 
     onPickerChange(itemValue) {
         let dateTime = this.state.dateTime
-        if (this.state.fromStart == strings.FromEnd) {
+        if (this.state.fromStart === strings.FromEnd) {
             dateTime.setMinutes(dateTime.getMinutes() - itemValue)
         }
 
@@ -125,7 +127,7 @@ class TimePickScreen extends Component {
     }
 
     setSelectedOption(selectedOption) {
-        if (this.state.fromStart == selectedOption) {
+        if (this.state.fromStart === selectedOption) {
             return
         }
 
@@ -152,10 +154,9 @@ class TimePickScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <SegmentedControls
-                    options={this.state.options}
+                <TimeSwitch
                     onSelection={this.setSelectedOption.bind(this)}
-                    selectedOption={this.state.fromStart}
+                    value={this.state.fromStart}
                 />
                 <TimePicker
                     dateTime={this.state.dateTime}
@@ -164,15 +165,16 @@ class TimePickScreen extends Component {
                 <DurationPicker
                     duration={this.state.duration}
                     handler={this.onPickerChange}
+                    value={this.state.duration}
                 />
                 <Comment
                     comment={this.state.comment}
                     onChangeText={this.onCommentChange}
                 />
-                <AudioRecorder
+                {/* <AudioRecorder
                     audioFile={this.state.audioFile}
                     setAudio={this.setAudio}
-                />
+                /> */}
                 <Button
                     style={styles.button}
                     title={strings.Save}
