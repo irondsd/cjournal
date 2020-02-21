@@ -69,9 +69,8 @@ export default class TakePhoto extends Component {
 
     async load(path) {
         if (path === undefined) return
-        let base64image = await RNFS.xwreadFile(path, 'base64')
+        let base64image = await RNFS.readFile(path, 'base64')
         let link = `data:image/jpeg;base64,${base64image}`
-
         this.setState({ link: link }, () => {
             this.forceUpdate()
         })

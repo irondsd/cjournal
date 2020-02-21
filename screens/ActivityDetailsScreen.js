@@ -334,13 +334,15 @@ class ActivityDetailsScreen extends Component {
                     />
                 )}
                 {this.state.switches.pills && (
-                    <DropDownInput
-                        style={{ zIndex: 10 }}
-                        list={this.state.pills}
-                        onChangeText={this.onPillChange}
-                        value={this.state.activity.data.pill}
-                        placeholder={strings.Drug}
-                    />
+                    <View style={{ zIndex: 10 }}>
+                        <DropDownInput
+                            style={{ zIndex: 10 }}
+                            list={this.state.pills}
+                            onChangeText={this.onPillChange}
+                            value={this.state.activity.data.pill}
+                            placeholder={strings.Drug}
+                        />
+                    </View>
                 )}
                 {this.state.switches.duration && (
                     <View style={{ zIndex: 10 }}>
