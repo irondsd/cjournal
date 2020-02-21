@@ -1,14 +1,5 @@
 import React, { Component } from 'react'
-import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    TouchableOpacity,
-    Picker,
-    Platform,
-    Alert,
-} from 'react-native'
+import { StyleSheet, View, Button, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import {
     backgroundColor,
@@ -33,8 +24,7 @@ import timestamp from '../helpers/timestamp'
 import Photo from '../components/Photo'
 import Comment from '../components/Comment'
 
-type Props = {}
-class ActivityDetailsScreen extends Component<Props> {
+class ActivityDetailsScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -48,6 +38,15 @@ class ActivityDetailsScreen extends Component<Props> {
             duration: 0,
             disabled: false,
             pills: [],
+            switches: {
+                activity: true,
+                time: true,
+                duration: true,
+                pills: false,
+                comment: true,
+                audio: true,
+                photo: false,
+            },
         }
         this.onDurationChange = this.onDurationChange.bind(this)
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -82,15 +81,44 @@ class ActivityDetailsScreen extends Component<Props> {
         }
 
         this.fillPillsList(this.props.navigation.state.params)
+        this.setSwitches(this.props.navigation.state.params)
 
         this.setState({
             activity: this.props.navigation.state.params,
             originalActivity: this.props.navigation.state.params,
             activity_type: this.props.navigation.state.params.activity_type,
-            data: this.props.navigation.state.params.data,
+            data: data,
             comment: this.props.navigation.state.params.comment,
             duration: duration,
             addDuration: addDuration,
+        })
+    }
+
+    setSwitches = activity => {
+        let pills = false
+        let photo = false
+        let duration = true
+
+        if (
+            activity.activity_type === activity_types.CourseTherapy ||
+            activity.activity_type === activity_types.MedicineTest ||
+            activity.activity_type === activity_types.ReliefOfAttack
+        ) {
+            pills = true
+            duration = false
+            photo = true
+        }
+
+        this.setState({
+            switches: {
+                activity: true,
+                time: true,
+                duration: duration,
+                pills: pills,
+                comment: true,
+                audio: true,
+                photo: photo,
+            },
         })
     }
 
@@ -282,60 +310,64 @@ class ActivityDetailsScreen extends Component<Props> {
     }
 
     render() {
-        let items = editable.map((item, index) => {
-            return (
-                <Picker.Item label={strings[item]} value={item} key={index} />
-            )
-        })
         return (
             <View style={styles.container}>
-                <ActivitySelect
-                    onSelect={this.onPickerChange}
-                    value={this.state.activity_type}
-                />
-                <TimePicker
-                    dateTime={
-                        new Date(
-                            this.props.navigation.state.params.time_started *
-                                1000,
-                        )
-                    }
-                    handler={this.changeDateTime}
-                    disabled={this.state.disabled}
-                />
-                {this.state.activity.activity_type ==
-                    activity_types.CourseTherapy ||
-                this.state.activity.activity_type ==
-                    activity_types.MedicineTest ||
-                this.state.activity.activity_type ==
-                    activity_types.ReliefOfAttack ? (
+                {this.state.switches.activity && (
+                    <ActivitySelect
+                        onSelect={this.onPickerChange}
+                        value={this.state.activity_type}
+                    />
+                )}
+                {this.state.switches.time && (
+                    <TimePicker
+                        dateTime={
+                            new Date(
+                                this.props.navigation.state.params
+                                    .time_started * 1000,
+                            )
+                        }
+                        handler={this.changeDateTime}
+                        disabled={this.state.disabled}
+                    />
+                )}
+                {this.state.switches.pills && (
                     <DropDownInput
                         list={this.state.pills}
                         onChangeText={this.onPillChange}
                         value={this.state.activity.data.pill}
                         placeholder={strings.Drug}
                     />
-                ) : (
+                )}
+                {this.state.switches.duration && (
                     <DurationPicker
                         value={this.state.duration}
                         handler={this.onDurationChange}
                         addDuration={this.state.addDuration}
                     />
                 )}
-                <Comment
-                    comment={this.state.comment}
-                    onChangeText={text => {
-                        this.onInputChange(text)
-                    }}
-                    onEndEditing={text => {
-                        this.onEndEditing(text)
-                    }}
-                />
-                <Photo link={this.state.data.image} remove={this.removePhoto} />
-                <AudioRecorder
-                    link={this.state.data.audio}
-                    setAudio={this.setAudio}
-                />
+                {this.state.switches.comment && (
+                    <Comment
+                        comment={this.state.comment}
+                        onChangeText={text => {
+                            this.onInputChange(text)
+                        }}
+                        onEndEditing={text => {
+                            this.onEndEditing(text)
+                        }}
+                    />
+                )}
+                {this.state.switches.photo && (
+                    <Photo
+                        link={this.state.data.image}
+                        remove={this.removePhoto}
+                    />
+                )}
+                {this.state.switches.audio && (
+                    <AudioRecorder
+                        link={this.state.data.audio}
+                        setAudio={this.setAudio}
+                    />
+                )}
             </View>
         )
     }
