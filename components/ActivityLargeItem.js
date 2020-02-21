@@ -13,14 +13,7 @@ import LinearGradient from 'react-native-linear-gradient'
 
 export default class ActivityItem extends Component {
     render() {
-        let marginTop = Dimensions.get('window').width / 46.875
-        if (
-            Dimensions.get('window').width / Dimensions.get('window').height >
-            0.56
-        )
-            marginTop = -2
-
-        marginTop =
+        let marginTop =
             (Dimensions.get('window').height -
                 70 -
                 64 -
@@ -29,6 +22,10 @@ export default class ActivityItem extends Component {
                 tileSize / 2 -
                 tileSize * 4) /
             5
+
+        if (Dimensions.get('window').width / 20 < marginTop)
+            marginTop = Dimensions.get('window').width / 20
+
         let shadeColor = '#000000dd'
         if (this.props.shadeColor) shadeColor = this.props.shadeColor
         let numberOfLines = 1
