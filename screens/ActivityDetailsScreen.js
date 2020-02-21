@@ -23,6 +23,7 @@ import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
 import Photo from '../components/Photo'
 import Comment from '../components/Comment'
+import TakePhoto from '../components/TakePhoto'
 
 class ActivityDetailsScreen extends Component {
     constructor(props) {
@@ -234,7 +235,7 @@ class ActivityDetailsScreen extends Component {
                 comment: text,
             },
             () => {
-                this.update()
+                // this.update()
             },
         )
     }
@@ -313,10 +314,12 @@ class ActivityDetailsScreen extends Component {
         return (
             <View style={styles.container}>
                 {this.state.switches.activity && (
-                    <ActivitySelect
-                        onSelect={this.onPickerChange}
-                        value={this.state.activity_type}
-                    />
+                    <View style={{ zIndex: 10 }}>
+                        <ActivitySelect
+                            onSelect={this.onPickerChange}
+                            value={this.state.activity_type}
+                        />
+                    </View>
                 )}
                 {this.state.switches.time && (
                     <TimePicker
@@ -332,6 +335,7 @@ class ActivityDetailsScreen extends Component {
                 )}
                 {this.state.switches.pills && (
                     <DropDownInput
+                        style={{ zIndex: 10 }}
                         list={this.state.pills}
                         onChangeText={this.onPillChange}
                         value={this.state.activity.data.pill}
@@ -339,11 +343,13 @@ class ActivityDetailsScreen extends Component {
                     />
                 )}
                 {this.state.switches.duration && (
-                    <DurationPicker
-                        value={this.state.duration}
-                        handler={this.onDurationChange}
-                        addDuration={this.state.addDuration}
-                    />
+                    <View style={{ zIndex: 10 }}>
+                        <DurationPicker
+                            value={this.state.duration}
+                            handler={this.onDurationChange}
+                            addDuration={this.state.addDuration}
+                        />
+                    </View>
                 )}
                 {this.state.switches.comment && (
                     <Comment
@@ -357,9 +363,18 @@ class ActivityDetailsScreen extends Component {
                     />
                 )}
                 {this.state.switches.photo && (
-                    <Photo
+                    // <Photo
+                    //     link={this.state.data.image}
+                    //     remove={this.removePhoto}
+                    // />
+                    <TakePhoto
                         link={this.state.data.image}
-                        remove={this.removePhoto}
+                        openCamera={() =>
+                            this.props.navigation.navigate('Camera', {
+                                returnTo: paths.Pills,
+                            })
+                        }
+                        removePhoto={this.removePhoto}
                     />
                 )}
                 {this.state.switches.audio && (
@@ -401,6 +416,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 20,
+        zIndex: 1,
     },
     stats: {
         color: 'grey',

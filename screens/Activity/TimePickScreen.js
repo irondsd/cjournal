@@ -162,19 +162,21 @@ class TimePickScreen extends Component {
                     dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
                 />
-                <DurationPicker
-                    duration={this.state.duration}
-                    handler={this.onPickerChange}
-                    value={this.state.duration}
-                />
+                <View style={{ zIndex: 10 }}>
+                    <DurationPicker
+                        duration={this.state.duration}
+                        handler={this.onPickerChange}
+                        value={this.state.duration}
+                    />
+                </View>
                 <Comment
                     comment={this.state.comment}
                     onChangeText={this.onCommentChange}
                 />
-                {/* <AudioRecorder
+                <AudioRecorder
                     audioFile={this.state.audioFile}
                     setAudio={this.setAudio}
-                /> */}
+                />
                 <Button
                     style={styles.button}
                     title={strings.Save}
@@ -210,6 +212,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 20,
+        zIndex: 20,
     },
     time: {
         flexDirection: 'row',
