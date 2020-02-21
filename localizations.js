@@ -180,6 +180,7 @@ export const strings = new LocalizedStrings({
         PsychoemptionalTest: 'Psychoemotional test',
         Time: 'Time',
         Duration: 'Duration',
+        TakePhoto: 'Take a photo',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -360,6 +361,7 @@ export const strings = new LocalizedStrings({
         PsychoemptionalTest: 'Prueba psicoemocional',
         Time: 'Tiempo',
         Duration: 'Duración',
+        TakePhoto: 'Tomar un foto',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -541,5 +543,6 @@ export const strings = new LocalizedStrings({
         PsychoemotionalTest: 'Психоэмоциональные пробы',
         Time: 'Время',
         Duration: 'Длительность',
+        TakePhoto: 'Сделать фото',
     },
 })
