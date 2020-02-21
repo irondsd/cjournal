@@ -118,7 +118,7 @@ class PillPickScreen extends Component {
             null,
             this.state.tasks_id ? this.state.tasks_id : null,
             timestamp(),
-            this.state.input,
+            '',
             { pill: this.state.pill },
         )
 
