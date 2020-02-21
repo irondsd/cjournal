@@ -38,6 +38,7 @@ export default class TakePhoto extends Component {
     link(link) {
         let filename = link.split('/')[1]
         let filepath = RNFS.DocumentDirectoryPath + '/' + filename
+
         RNFS.exists(filepath).then(exists => {
             if (exists) this.load(filepath)
             else console.log("doesn't exist")
@@ -67,7 +68,8 @@ export default class TakePhoto extends Component {
     }
 
     async load(path) {
-        let base64image = await RNFS.readFile(path, 'base64')
+        if (path === undefined) return
+        let base64image = await RNFS.xwreadFile(path, 'base64')
         let link = `data:image/jpeg;base64,${base64image}`
 
         this.setState({ link: link }, () => {
@@ -85,7 +87,6 @@ export default class TakePhoto extends Component {
     }
 
     render() {
-        console.log(this.state.name)
         return (
             <View style={styles.container}>
                 {this.props.photo || this.props.link ? (
