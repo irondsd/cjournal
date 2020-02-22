@@ -314,7 +314,7 @@ class ActivityDetailsScreen extends Component {
         return (
             <View style={styles.container}>
                 {this.state.switches.activity && (
-                    <View style={{ zIndex: 10 }}>
+                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
                         <ActivitySelect
                             onSelect={this.onPickerChange}
                             value={this.state.activity_type}
@@ -334,9 +334,11 @@ class ActivityDetailsScreen extends Component {
                     />
                 )}
                 {this.state.switches.pills && (
-                    <View style={{ zIndex: 10 }}>
+                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
                         <DropDownInput
-                            style={{ zIndex: 10 }}
+                            style={
+                                Platform.OS === 'ios' ? { zIndex: 10 } : null
+                            }
                             list={this.state.pills}
                             onChangeText={this.onPillChange}
                             value={this.state.activity.data.pill}
@@ -345,7 +347,7 @@ class ActivityDetailsScreen extends Component {
                     </View>
                 )}
                 {this.state.switches.duration && (
-                    <View style={{ zIndex: 10 }}>
+                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
                         <DurationPicker
                             value={this.state.duration}
                             handler={this.onDurationChange}

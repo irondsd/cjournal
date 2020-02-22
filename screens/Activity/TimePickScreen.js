@@ -162,7 +162,7 @@ class TimePickScreen extends Component {
                     dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
                 />
-                <View style={{ zIndex: 10 }}>
+                <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
                     <DurationPicker
                         duration={this.state.duration}
                         handler={this.onPickerChange}
@@ -177,14 +177,16 @@ class TimePickScreen extends Component {
                     audioFile={this.state.audioFile}
                     setAudio={this.setAudio}
                 />
-                <Button
-                    style={styles.button}
-                    title={strings.Save}
-                    onPress={() => {
-                        this.handleSubmit.bind(this)
-                        this.handleSubmit()
-                    }}
-                />
+                <View style={{ zIndex: 5 }}>
+                    <Button
+                        style={styles.button}
+                        title={strings.Save}
+                        onPress={() => {
+                            this.handleSubmit.bind(this)
+                            this.handleSubmit()
+                        }}
+                    />
+                </View>
             </View>
         )
     }
