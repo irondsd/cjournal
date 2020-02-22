@@ -148,15 +148,14 @@ export default class App extends Component {
 
     bars = () => {
         return this.state.bars.map((bar, index) => {
-            const barW = (width - 100) / 88
             return (
                 <View
                     key={index}
                     style={{
                         height: bar,
-                        width: barW,
-                        margin: 1,
-                        backgroundColor: 'white',
+                        width: '1%',
+                        margin: 0.5,
+                        backgroundColor: '#888',
                     }}
                 />
             )
@@ -206,24 +205,28 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
     recorder: {
-        flexDirection: 'row',
-        backgroundColor: '#ddd',
-        width: '100%',
-        height: 50,
-        marginBottom: 10,
-        marginTop: 10,
-        padding: 5,
-        borderRadius: 40,
-        alignItems: 'center',
-    },
-    buttonPlay: {
-        height: 40,
-        width: 40,
-        backgroundColor: '#e84d2e',
+        borderRadius: 5,
+        borderWidth: 0.5,
+        borderColor: '#d6d7da',
+        paddingLeft: 55,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 25,
-        marginRight: 5,
+        paddingRight: 55,
+        height: 50,
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+    },
+    buttonPlay: {
+        backgroundColor: '#e84d2e',
+        height: 40,
+        width: 40,
+        justifyContent: 'center',
+        position: 'absolute',
+        alignItems: 'center',
+        borderRadius: 5,
+        // marginRight: 5,
+        left: 5,
+        top: 5,
     },
     buttonRec: {
         height: 40,
@@ -231,7 +234,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e84d2e',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 25,
+        borderRadius: 5,
         position: 'absolute',
         right: 5,
         top: 5,
@@ -239,21 +242,25 @@ const styles = StyleSheet.create({
     buttonRecDisabled: {
         height: 40,
         width: 40,
-        backgroundColor: '#cfcfcf',
+        backgroundColor: '#d6d7da',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 25,
         position: 'absolute',
+        alignItems: 'center',
+        borderRadius: 5,
+        // marginRight: 5,
         right: 5,
         top: 5,
     },
     buttonPlayDisabled: {
+        backgroundColor: '#d6d7da',
         height: 40,
         width: 40,
-        backgroundColor: '#cfcfcf',
         justifyContent: 'center',
+        position: 'absolute',
         alignItems: 'center',
-        borderRadius: 25,
-        marginRight: 5,
+        borderRadius: 5,
+        // marginRight: 5,
+        left: 5,
+        top: 5,
     },
 })
