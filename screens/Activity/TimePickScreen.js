@@ -18,7 +18,6 @@ import TimePicker from '../../components/TimePicker'
 import { backgroundColor, durations, paths } from '../../properties'
 import DurationPicker from '../../components/DurationPicker'
 import { overlappingGreying } from '../../helpers/activityOverlap'
-import { SegmentedControls } from 'react-native-radio-buttons'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -26,7 +25,6 @@ import Comment from '../../components/Comment'
 import TimeSwitch from '../../components/TimeSwitch'
 
 let clicked = false
-// TODO: SegmentedControls redo
 class TimePickScreen extends Component {
     constructor(props) {
         super(props)

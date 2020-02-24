@@ -18,14 +18,13 @@ import TimePicker from '../../components/TimePicker'
 import { backgroundColor, durations, paths } from '../../properties'
 import DurationPicker from '../../components/DurationPicker'
 import { overlappingGreying } from '../../helpers/activityOverlap'
-import { SegmentedControls } from 'react-native-radio-buttons'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import DropDownInput from '../../components/DropDownInput'
+import TimeSwitch from '../../components/TimeSwitch'
 
 let clicked = false
-// TODO: SegmentedControls redo
 class OtherScreen extends Component {
     constructor(props) {
         super(props)
@@ -137,10 +136,9 @@ class OtherScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <SegmentedControls
-                    options={this.state.options}
+                <TimeSwitch
                     onSelection={this.setSelectedOption.bind(this)}
-                    selectedOption={this.state.fromStart}
+                    value={this.state.fromStart}
                 />
                 <TimePicker
                     dateTime={this.state.dateTime}
