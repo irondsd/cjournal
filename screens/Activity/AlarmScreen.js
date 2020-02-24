@@ -19,8 +19,6 @@ import timestamp from '../../helpers/timestamp'
 import GPS from '../../sensors/GPS'
 import Comment from '../../components/Comment'
 
-// TODO: Fix location not found exeption
-
 class AlarmScreen extends Component {
     static navigationOptions = {
         title: strings.Alarm,
@@ -43,12 +41,13 @@ class AlarmScreen extends Component {
         this.GPS = new GPS()
     }
 
-    record() {
+    record(err = null) {
         let activity = Activity.instantInit(
             activity_types.Alarm,
             this.state.comment,
             {
                 position: this.state.position,
+                error: err.message,
             },
         )
         if (this.state.audioFile) activity.data.audioFile = this.state.audioFile
@@ -65,11 +64,16 @@ class AlarmScreen extends Component {
         if (this.props.navigation.state.params.longPress) {
             this.startUpdates()
         } else {
-            this.GPS.getPosition().then(position => {
-                this.setState({ position: position }, () => {
-                    this.record()
+            this.GPS.getPosition()
+                .then(position => {
+                    this.setState({ position: position }, () => {
+                        this.record()
+                    })
                 })
-            })
+                .catch(err => {
+                    this.record(err)
+                    // TODO: try to get position later
+                })
         }
     }
 
