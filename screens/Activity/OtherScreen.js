@@ -23,6 +23,7 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import DropDownInput from '../../components/DropDownInput'
 import TimeSwitch from '../../components/TimeSwitch'
+import { addHint, loadHints } from '../../services/otherHints'
 
 let clicked = false
 class OtherScreen extends Component {
@@ -30,12 +31,14 @@ class OtherScreen extends Component {
         super(props)
 
         this.state = {
-            comment: '',
+            other: 'what',
             dateTime: new Date(),
             duration: 0,
             fromStart: strings.FromStart,
             options: [strings.FromStart, strings.FromEnd],
             audioFile: null,
+            activity_type: null,
+            list: [],
         }
 
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -50,8 +53,19 @@ class OtherScreen extends Component {
     componentDidMount() {
         dateTime = new Date()
         dateTime.setMilliseconds(0)
-        this.setState({
-            dateTime: dateTime,
+        this.setState(
+            {
+                dateTime: dateTime,
+                activity_type: this.props.navigation.state.params.sender,
+            },
+            () => this.loadList(),
+        )
+    }
+
+    loadList = () => {
+        loadHints(this.state.activity_type).then(res => {
+            console.log(res)
+            this.setState({ list: res })
         })
     }
 
@@ -72,16 +86,19 @@ class OtherScreen extends Component {
             timeEnded.setMinutes(
                 timeEnded.getMinutes() + parseInt(this.state.duration),
             )
+
+            addHint(this.state.activity_type, this.state.other)
+
             if (this.state.duration == 0) timeEnded = null
             let activity = new Activity(
                 null,
-                this.props.navigation.state.params.sender,
+                this.state.activity_type,
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
                 null,
                 timestamp(),
-                this.state.comment,
-                {},
+                '',
+                { other: this.state.other },
             )
             if (this.state.audioFile)
                 activity.data.audioFile = this.state.audioFile
@@ -149,11 +166,11 @@ class OtherScreen extends Component {
                     handler={this.onPickerChange}
                 />
                 <DropDownInput
-                    list={['fsfsddd', 'asdsfsddd', 'bbddd', '44fd', 'gggggggg']}
+                    list={this.state.list}
                     open={true}
                     onChangeText={text => {
                         this.setState({
-                            comment: text,
+                            other: text,
                         })
                     }}
                 />
@@ -161,14 +178,16 @@ class OtherScreen extends Component {
                     audioFile={this.state.audioFile}
                     setAudio={this.setAudio}
                 />
-                <Button
-                    style={styles.button}
-                    title={strings.Save}
-                    onPress={() => {
-                        this.handleSubmit.bind(this)
-                        this.handleSubmit()
-                    }}
-                />
+                <View style={{ zIndex: 1 }}>
+                    <Button
+                        style={styles.button}
+                        title={strings.Save}
+                        onPress={() => {
+                            this.handleSubmit.bind(this)
+                            this.handleSubmit()
+                        }}
+                    />
+                </View>
             </View>
         )
     }
