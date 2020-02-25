@@ -5,6 +5,7 @@ export async function addHint(name, item) {
 
     let list = await AsyncStorage.getItem(name)
     list = JSON.parse(list)
+    if (!list) list = []
 
     if (!list.includes(item)) {
         list = [item, ...list]
