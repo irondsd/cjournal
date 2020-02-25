@@ -11,13 +11,13 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
 
 const ref_input = React.createRef()
-const max_lines = 5
 
 export default class DropDownInput extends Component {
     state = {
         text: '',
         droppedDown: false,
         refinedList: [],
+        maxLines: 5,
     }
 
     componentDidMount() {
@@ -25,6 +25,7 @@ export default class DropDownInput extends Component {
             droppedDown: this.props.open,
             refinedList: this.props.list,
             text: this.props.value ? this.props.value : '',
+            maxLines: this.props.maxLines || 5,
         })
     }
 
@@ -84,8 +85,9 @@ export default class DropDownInput extends Component {
     render() {
         let popUpHeight = 200
 
-        if (this.state.refinedList.length < 5)
+        if (this.state.refinedList.length < this.state.maxLines)
             popUpHeight = this.state.refinedList.length * 40
+        else popUpHeight = this.state.maxLines * 40
         return (
             <View style={styles.View}>
                 <TextInput
