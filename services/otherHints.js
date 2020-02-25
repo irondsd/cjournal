@@ -18,6 +18,7 @@ export async function addHint(name, item) {
 export async function loadHints(name) {
     return new Promise((resolve, reject) => {
         AsyncStorage.getItem(name).then(res => {
+            if (!res) resolve([])
             resolve(JSON.parse(res))
         })
     })
