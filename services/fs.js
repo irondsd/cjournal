@@ -19,7 +19,7 @@ export async function downloadFile(url) {
     // RNFS.readdir(RNFS.DocumentDirectoryPath).then(res => {
     //     console.log(res)
     // })
-
+    // TODO: check it works
     if (await RNFS.exists(filepath)) {
         // console.log('EXISTS')
     } else {
