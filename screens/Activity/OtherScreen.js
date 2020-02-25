@@ -64,7 +64,6 @@ class OtherScreen extends Component {
 
     loadList = () => {
         loadHints(this.state.activity_type).then(res => {
-            console.log(res)
             this.setState({ list: res })
         })
     }

@@ -12,7 +12,6 @@ export async function addHint(name, item) {
 
     if (list.length > 10) list.pop()
 
-    console.log(list)
     AsyncStorage.setItem(name, JSON.stringify(list))
 }
 
