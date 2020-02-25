@@ -18,7 +18,10 @@ export default class DropDownInput extends Component {
         droppedDown: false,
         refinedList: [],
         maxLines: 5,
+        list: [],
     }
+
+    // TODO: fix button placements
 
     componentDidMount() {
         this.setState({
@@ -26,7 +29,20 @@ export default class DropDownInput extends Component {
             refinedList: this.props.list,
             text: this.props.value ? this.props.value : '',
             maxLines: this.props.maxLines || 5,
+            list: this.props.list,
         })
+
+        if (this.props.list.length < 1) this.setState({ droppedDown: false })
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.list !== prevState.list) {
+            return {
+                refinedList: nextProps.list,
+                droppedDown: nextProps.open,
+                list: nextProps.list,
+            }
+        } else return null
     }
 
     onSubmitEditing = () => {
@@ -42,9 +58,12 @@ export default class DropDownInput extends Component {
     refineList = value => {
         let list = this.props.list
         list = list.filter(e => {
-            return e.includes(value)
+            return e.toLowerCase().includes(value.toLowerCase())
         })
-        this.setState({ refinedList: list })
+
+        this.setState({
+            refinedList: list,
+        })
     }
 
     onChangeText = value => {
@@ -61,7 +80,7 @@ export default class DropDownInput extends Component {
         this.setState({
             droppedDown: !this.state.droppedDown,
         })
-        ref_input.current.focus()
+        // ref_input.current.focus()
     }
 
     popUpRender = () => {
@@ -88,6 +107,7 @@ export default class DropDownInput extends Component {
         if (this.state.refinedList.length < this.state.maxLines)
             popUpHeight = this.state.refinedList.length * 40
         else popUpHeight = this.state.maxLines * 40
+
         return (
             <View style={styles.View}>
                 <TextInput
@@ -141,16 +161,16 @@ var styles = StyleSheet.create({
     },
     iconDown: {
         position: 'absolute',
-        right: 0,
+        right: 1,
         top: 10,
-        height: 50,
+        height: 45,
         width: 30,
     },
     iconClear: {
         position: 'absolute',
         right: 35,
         top: 15,
-        height: 50,
+        height: 45,
         width: 30,
     },
     popUp: {
