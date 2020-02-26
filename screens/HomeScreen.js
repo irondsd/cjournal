@@ -8,15 +8,12 @@ import sync from '../services/sync'
 import ActivityTile from '../components/tiles/ActivityTile'
 import PhysicalLoadTile from '../components/tiles/PhysicalLoadTile'
 import ServiceTile from '../components/tiles/ServiceTile'
-import InfluenceTile from '../components/tiles/InfluenceTile'
-import IntakeTile from '../components/tiles/IntakeTile'
 import PillsTile from '../components/tiles/PillsTile'
 import PainTile from '../components/tiles/PainTile'
-import DisturbanceOfRaspirationTile from '../components/tiles/ComplaintsTile'
+import ComplaintsTile from '../components/tiles/ComplaintsTile'
 import WeaknessTile from '../components/tiles/WeaknessTile'
 import TestsTile from '../components/tiles/TestsTile'
 import EmotionsTile from '../components/tiles/EmotionsTile'
-import AlarmButton from '../components/TroubleButton'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
 import TileWrapper from '../components/TileWrapper'
 import SleepTile from '../components/tiles/SleepTile'
@@ -126,9 +123,7 @@ class HomeScreen extends Component {
                 <PillsTile navigation={this.props.navigation} />
                 <EmotionsTile navigation={this.props.navigation} />
                 <PainTile navigation={this.props.navigation} />
-                <DisturbanceOfRaspirationTile
-                    navigation={this.props.navigation}
-                />
+                <ComplaintsTile navigation={this.props.navigation} />
                 <WeaknessTile navigation={this.props.navigation} />
                 <TestsTile
                     navigation={this.props.navigation}
