@@ -9,9 +9,16 @@ export async function addHint(name, item) {
 
     if (!list.includes(item)) {
         list = [item, ...list]
+    } else {
+        list = [
+            item,
+            ...list.filter(function(value, index, arr) {
+                return value !== item
+            }),
+        ]
     }
-
     if (list.length > 10) list.pop()
+    console.log(list)
 
     AsyncStorage.setItem(name, JSON.stringify(list))
 }
