@@ -22,14 +22,14 @@ export default class ActivityItem extends Component {
                 tileSize / 2 -
                 tileSize * 4) /
             5
-
+        let text = this.props.text || 'Undefined'
         if (Dimensions.get('window').width / 20 < marginTop)
             marginTop = Dimensions.get('window').width / 20
 
         let shadeColor = '#000000dd'
         if (this.props.shadeColor) shadeColor = this.props.shadeColor
         let numberOfLines = 1
-        if (this.props.text.length > 14) {
+        if (text.length > 14) {
             numberOfLines = 2
         }
         let color = this.props.color
@@ -53,7 +53,7 @@ export default class ActivityItem extends Component {
                 height: tileSize / (numberOfLines === 1 ? 5 : 4),
                 fontSize:
                     Platform.OS === 'android'
-                        ? this.props.text.length > 14
+                        ? text.length > 14
                             ? 9
                             : 14
                         : null,
