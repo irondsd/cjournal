@@ -1,4 +1,4 @@
-import { apiUrl } from '../properties'
+import { apiUrl } from '../constants'
 
 export default function userUpdateIdinv(id, access_token, idinv) {
     const url = apiUrl + `users/${id}/`

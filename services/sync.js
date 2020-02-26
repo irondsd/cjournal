@@ -9,7 +9,7 @@ import Barometer from '../sensors/Barometer'
 import timestamp from '../helpers/timestamp'
 import NavigationService from '../navigation/NavigationService'
 import { logoutUser } from '../redux/actions'
-import { paths } from '../properties'
+import { paths } from '../constants'
 
 let errors = 0
 

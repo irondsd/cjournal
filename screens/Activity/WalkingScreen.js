@@ -16,7 +16,7 @@ import { addActivity, cancelNotification } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 import { calculateDistance } from '../../helpers/GPS'
-import { backgroundColor, activity_types, paths } from '../../properties'
+import { backgroundColor, activityTypes, paths } from '../../constants'
 import BackButton from '../../components/BackButton'
 import { showError } from '../../services/toast'
 import Activity from '../../classes/Activity'
@@ -176,7 +176,7 @@ class WalkingScreen extends Component {
 
         let activity = new Activity(
             null,
-            activity_types.Walking,
+            activityTypes.Walking,
             timestamp(this.state.startDate),
             timestamp(),
             tasks_id,

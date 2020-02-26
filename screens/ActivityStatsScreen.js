@@ -15,10 +15,10 @@ import {
     backgroundColor,
     durations,
     appColor,
-    activity_types,
+    activityTypes,
     editable,
     paths,
-} from '../properties'
+} from '../constants'
 import { displayDate, displayTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
 import { updateActivity, deleteActivity } from '../redux/actions/'
@@ -74,12 +74,12 @@ class ActivityStatsScreen extends Component<Props> {
         this.props.navigation.setParams({ goBack: this.goBack })
 
         switch (this.props.navigation.state.params.activity_type) {
-            case activity_types.Walking:
+            case activityTypes.Walking:
                 if (this.props.navigation.state.params.data) {
                     stats = `${strings.YouWalked} ${this.props.navigation.state.params.data.distance} ${strings.Meters} ${strings.and} ${this.props.navigation.state.params.data.steps} ${strings.Steps}`
                 }
                 break
-            case activity_types.Stairs:
+            case activityTypes.Stairs:
                 stats =
                     strings.YouClimbed +
                     ' ' +
@@ -87,7 +87,7 @@ class ActivityStatsScreen extends Component<Props> {
                     ' ' +
                     strings.Meters
                 break
-            case activity_types.GymWalking:
+            case activityTypes.GymWalking:
                 stats =
                     strings.Steps +
                     ': ' +
@@ -97,7 +97,7 @@ class ActivityStatsScreen extends Component<Props> {
                     ': ' +
                     this.props.navigation.state.params.data.distance
                 break
-            case activity_types.Running:
+            case activityTypes.Running:
                 stats =
                     strings.Steps +
                     ': ' +
@@ -107,28 +107,28 @@ class ActivityStatsScreen extends Component<Props> {
                     ': ' +
                     this.props.navigation.state.params.data.distance
                 break
-            case activity_types.Bicycling:
+            case activityTypes.Bicycling:
                 stats =
                     strings.Meters +
                     ': ' +
                     this.props.navigation.state.params.data.distance
                 break
-            case activity_types.MedicineTest:
+            case activityTypes.MedicineTest:
                 stats =
                     strings.TakingMedicine +
                     ': ' +
                     this.props.navigation.state.params.data.pill
                 break
-            case activity_types.Orthostasis:
+            case activityTypes.Orthostasis:
                 stats = 'Orthostasis'
                 break
-            case activity_types.DeviceInstall:
+            case activityTypes.DeviceInstall:
                 stats =
                     strings.DeviceId +
                     ': ' +
                     this.props.navigation.state.params.data.device_id
                 break
-            case activity_types.Alarm:
+            case activityTypes.Alarm:
                 stats =
                     strings.Alarm +
                     ' ' +

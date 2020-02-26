@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
-import { backgroundColor, paths, activity_types } from '../../properties'
+import { backgroundColor, paths, activityTypes } from '../../constants'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -43,7 +43,7 @@ class AlarmScreen extends Component {
 
     record(err = null) {
         let activity = Activity.instantInit(
-            activity_types.Alarm,
+            activityTypes.Alarm,
             this.state.comment,
             {
                 position: this.state.position,

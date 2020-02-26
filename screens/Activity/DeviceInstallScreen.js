@@ -11,7 +11,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
 import { logoutUser, addActivity } from '../../redux/actions'
-import { backgroundColor, paths, activity_types } from '../../properties'
+import { backgroundColor, paths, activityTypes } from '../../constants'
 import { strings } from '../../localizations'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -46,7 +46,7 @@ class DeviceInstallScreen extends Component {
         if (tasks_id) cancelNotification(tasks_id)
         let activity = new Activity(
             null,
-            activity_types.DeviceInstall,
+            activityTypes.DeviceInstall,
             timestamp(),
             null,
             tasks_id,

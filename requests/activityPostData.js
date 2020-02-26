@@ -1,4 +1,4 @@
-import { apiUrl, rec_version } from '../properties'
+import { apiUrl } from '../constants'
 
 export default function activityPostData(id, access_token, activity) {
     const url = apiUrl + `users/${id}/activity`

@@ -14,7 +14,7 @@ import { secs2time } from '../../helpers/dateTime'
 import { connect } from 'react-redux'
 import { addActivity } from '../../redux/actions'
 import { strings } from '../../localizations'
-import { backgroundColor, paths, activity_types } from '../../properties'
+import { backgroundColor, paths, activityTypes } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
@@ -102,7 +102,7 @@ class SleepScreen extends Component {
         removeScreen()
         let activity = new Activity(
             null,
-            activity_types.Sleep,
+            activityTypes.Sleep,
             timestamp(this.state.startDate),
             timestamp(),
             null,

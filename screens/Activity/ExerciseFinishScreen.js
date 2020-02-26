@@ -11,10 +11,10 @@ import {
     Dimensions,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor } from '../../properties'
+import { backgroundColor } from '../../constants'
 import { strings } from '../../localizations'
 import { updateActivity } from '../../redux/actions'
-import { paths } from '../../properties'
+import { paths } from '../../constants'
 
 class FinishScreen extends Component {
     static navigationOptions = {

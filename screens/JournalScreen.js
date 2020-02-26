@@ -8,7 +8,7 @@ import {
     StatusBar,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor } from '../properties'
+import { backgroundColor } from '../constants'
 import { strings } from '../localizations'
 import { activityFetchData } from '../requests/activityFetchData'
 import ActivityListItem from '../components/ActivityListItem'

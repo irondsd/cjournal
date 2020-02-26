@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
-import { backgroundColor, profileEditUrl } from '../properties'
+import { backgroundColor, profileEditUrl } from '../constants'
 import { strings } from '../localizations'
 import TouchableIcon from '../components/TouchableIcon'
 

@@ -1,4 +1,4 @@
-import { identityTokenUrl } from '../properties'
+import { identityTokenUrl } from '../constants'
 import { tokensReceived } from '../redux/actions'
 
 export default function identityRefreshToken(refresh_token) {

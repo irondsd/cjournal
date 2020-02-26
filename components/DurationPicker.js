@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     ScrollView,
 } from 'react-native'
-import { durations } from '../properties'
+import { durations } from '../constants/'
 import { strings } from '../localizations'
 import { localTime } from '../helpers/dateTime'
 import { sortNumbers } from '../helpers/sort'

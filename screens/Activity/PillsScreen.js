@@ -16,8 +16,8 @@ import {
     backgroundColor,
     durations,
     paths,
-    activity_types,
-} from '../../properties'
+    activityTypes,
+} from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -67,13 +67,13 @@ class PillPickScreen extends Component {
 
         let pills
         switch (activity_type) {
-            case activity_types.CourseTherapy:
+            case activityTypes.CourseTherapy:
                 pills = this.props.user.course_therapy
                 break
-            case activity_types.ReliefOfAttack:
+            case activityTypes.ReliefOfAttack:
                 pills = this.props.user.relief_of_attack
                 break
-            case activity_types.MedicineTest:
+            case activityTypes.MedicineTest:
                 pills = this.props.user.tests
                 break
             default:

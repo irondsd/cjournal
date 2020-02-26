@@ -1,5 +1,5 @@
 var RNFS = require('react-native-fs')
-import { apiUrl, rec_version } from '../properties'
+import { apiUrl } from '../constants'
 
 export default async function activityPostData(id, access_token, activity) {
     const uploadUrl = apiUrl + `users/${id}/activity/${activity.id}`

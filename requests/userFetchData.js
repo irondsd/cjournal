@@ -1,4 +1,4 @@
-import { apiUrl, paths } from '../properties'
+import { apiUrl, paths } from '../constants'
 import {
     updateUser,
     userFetchFailed,

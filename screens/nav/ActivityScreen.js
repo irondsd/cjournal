@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor, appColor, activity_types } from '../../properties'
+import { backgroundColor, appColor, activityTypes } from '../../constants'
 import { strings } from '../../localizations'
 import TileWrapper from '../../components/TileWrapper'
 import SexTile from '../../components/tiles/SexTile'

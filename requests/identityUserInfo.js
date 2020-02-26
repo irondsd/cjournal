@@ -1,4 +1,4 @@
-import { identityUserInfoUrl } from '../properties'
+import { identityUserInfoUrl } from '../constants'
 import { identityUser, logoutUser } from '../redux/actions'
 import NavigationService from '../navigation/NavigationService'
 export function identityUserInfo(access_token) {

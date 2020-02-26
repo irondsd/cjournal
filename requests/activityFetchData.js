@@ -1,4 +1,4 @@
-import { apiUrl } from '../properties'
+import { apiUrl } from '../constants'
 import {
     updateActivities,
     activityFetchFailed,

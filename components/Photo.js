@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Dimensions, Image } from 'react-native'
 import { strings } from '../localizations'
-import { backgroundColor, backendUrl } from '../properties'
+import { backgroundColor, backendUrl } from '../constants'
 import Icon from 'react-native-vector-icons/FontAwesome'
 const RNFS = require('react-native-fs')
 

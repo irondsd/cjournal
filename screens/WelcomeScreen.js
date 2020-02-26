@@ -8,7 +8,7 @@ import {
     Dimensions,
     StatusBar,
 } from 'react-native'
-import { appColor } from '../properties'
+import { appColor } from '../constants'
 import { strings } from '../localizations'
 import RegisterOrLogin from '../components/RegisterOrLogin'
 

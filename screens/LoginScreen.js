@@ -14,7 +14,7 @@ import {
     StatusBar,
 } from 'react-native'
 import LoginForm from '../components/LoginForm'
-import { appColor } from '../properties'
+import { appColor } from '../constants'
 import { strings } from '../localizations'
 import { connect } from 'react-redux'
 import store from '../redux/store'

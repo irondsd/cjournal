@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, StyleSheet, View, Image } from 'react-native'
 import { displayDateTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
 import { iconPicker } from '../helpers/iconPicker'
-import { paths, editable } from '../properties'
+import { paths, editable } from '../constants'
 import ListItem from './ListItem'
 
 export default class ActivityListItem extends Component {
@@ -15,7 +15,9 @@ export default class ActivityListItem extends Component {
             this.props.item.time_ended != 'null' &&
             this.props.item.time_ended != this.props.item.time_started
         ) {
-            time += ' — ' + displayDateTime(new Date(this.props.item.time_ended * 1000))
+            time +=
+                ' — ' +
+                displayDateTime(new Date(this.props.item.time_ended * 1000))
         }
 
         return time
@@ -35,7 +37,10 @@ export default class ActivityListItem extends Component {
 
     onPress() {
         if (editable.includes(this.props.item.activity_type)) {
-            this.props.navigation.navigate(paths.ActivityDetails, this.props.item)
+            this.props.navigation.navigate(
+                paths.ActivityDetails,
+                this.props.item,
+            )
         } else {
             this.props.navigation.navigate(paths.ActivityStats, this.props.item)
         }

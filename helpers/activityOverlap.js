@@ -1,4 +1,4 @@
-import { overlaps } from '../properties'
+import { overlaps } from '../constants'
 
 export function overlappingGreying(state, activityName) {
     let dateTime = (new Date().getTime() + '').substring(0, 10)

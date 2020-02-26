@@ -1,4 +1,4 @@
-import { apiUrl } from '../properties'
+import { apiUrl } from '../constants'
 import { updateUser } from '../redux/actions/userActions'
 import { Alert } from 'react-native'
 import { strings } from '../localizations'

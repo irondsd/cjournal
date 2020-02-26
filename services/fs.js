@@ -1,5 +1,5 @@
 var RNFS = require('react-native-fs')
-import { backendUrl } from '../properties'
+import { backendUrl } from '../constants'
 
 export async function moveToParentDir(filepath, filename) {
     // console.log(filepath, RNFS.DocumentDirectoryPath + '/' + filename)

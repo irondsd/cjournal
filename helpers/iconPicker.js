@@ -1,205 +1,205 @@
-import { activity_types } from '../properties'
+import { activityTypes } from '../constants'
 
 export function iconPicker(activity_type) {
     let img
 
     switch (activity_type) {
-        case activity_types.Sleep:
+        case activityTypes.Sleep:
             img = require('../resources/icons/sleep.png')
             break
-        case activity_types.Stairs:
+        case activityTypes.Stairs:
             img = require('../resources/icons/stairs.png')
             break
-        case activity_types.Walking:
+        case activityTypes.Walking:
             img = require('../resources/icons/walking.png')
             break
-        case activity_types.Gym:
+        case activityTypes.Gym:
             img = require('../resources/icons/workout.png')
             break
-        case activity_types.PhysicalWork:
+        case activityTypes.PhysicalWork:
             img = require('../resources/icons/exercise.png')
             break
-        case activity_types.Sauna:
+        case activityTypes.Sauna:
             img = require('../resources/icons/sauna.png')
             break
-        case activity_types.Sauna:
+        case activityTypes.Sauna:
             img = require('../resources/icons/sex.png')
             break
-        case activity_types.Shower:
+        case activityTypes.Shower:
             img = require('../resources/icons/shower.png')
             break
-        case activity_types.Gambling:
+        case activityTypes.Gambling:
             img = require('../resources/icons/gambling.png')
             break
-        case activity_types.IntellectualWork:
+        case activityTypes.IntellectualWork:
             img = require('../resources/icons/brain.png')
             break
-        case activity_types.OtherLoad:
+        case activityTypes.OtherLoad:
             img = require('../resources/icons/person.png')
             break
-        case activity_types.OtherActivity:
+        case activityTypes.OtherActivity:
             img = require('../resources/icons/person.png')
             break
-        case activity_types.OtherEmotions:
+        case activityTypes.OtherEmotions:
             img = require('../resources/icons/mood.png')
             break
-        case activity_types.OtherPain:
+        case activityTypes.OtherPain:
             img = require('../resources/icons/person.png')
             break
-        case activity_types.OtherComplaints:
+        case activityTypes.OtherComplaints:
             img = require('../resources/icons/person.png')
             break
-        case activity_types.OtherWeakness:
+        case activityTypes.OtherWeakness:
             img = require('../resources/icons/person.png')
             break
-        case activity_types.Service:
+        case activityTypes.Service:
             img = require('../resources/icons/service.png')
             break
-        case activity_types.Reading:
+        case activityTypes.Reading:
             img = require('../resources/icons/reading.png')
             break
-        case activity_types.Relaxation:
+        case activityTypes.Relaxation:
             img = require('../resources/icons/tv.png')
             break
-        case activity_types.Viewing:
+        case activityTypes.Viewing:
             img = require('../resources/icons/viewing.png')
             break
-        case activity_types.Massage:
+        case activityTypes.Massage:
             img = require('../resources/icons/massage.png')
             break
-        case activity_types.Physiotherapy:
+        case activityTypes.Physiotherapy:
             img = require('../resources/icons/physiotherapy.png')
             break
-        case activity_types.Sunbathe:
+        case activityTypes.Sunbathe:
             img = require('../resources/icons/sunbathe.png')
             break
-        case activity_types.Meal:
+        case activityTypes.Meal:
             img = require('../resources/icons/meal.png')
             break
-        case activity_types.Alcohol:
+        case activityTypes.Alcohol:
             img = require('../resources/icons/alcohol.png')
             break
-        case activity_types.Smoking:
+        case activityTypes.Smoking:
             img = require('../resources/icons/smoking.png')
             break
-        case activity_types.CourseTherapy:
+        case activityTypes.CourseTherapy:
             img = require('../resources/icons/pill.png')
             break
-        case activity_types.ReliefOfAttack:
+        case activityTypes.ReliefOfAttack:
             img = require('../resources/icons/pill.png')
             break
-        case activity_types.Headache:
+        case activityTypes.Headache:
             img = require('../resources/icons/sad.png')
             break
-        case activity_types.HeartAreaPain:
+        case activityTypes.HeartAreaPain:
             img = require('../resources/icons/pain.png')
             break
-        case activity_types.RetrosternalPain:
+        case activityTypes.RetrosternalPain:
             img = require('../resources/icons/pain.png')
             break
-        case activity_types.Arrhythmia:
+        case activityTypes.Arrhythmia:
             img = require('../resources/icons/arrhythmia.png')
             break
-        case activity_types.Palpitation:
+        case activityTypes.Palpitation:
             img = require('../resources/icons/heartpain.png')
             break
-        case activity_types.Dyspnea:
+        case activityTypes.Dyspnea:
             img = require('../resources/icons/lungs.png')
             break
-        case activity_types.Tachypnea:
+        case activityTypes.Tachypnea:
             img = require('../resources/icons/lungs.png')
             break
-        case activity_types.Faint:
+        case activityTypes.Faint:
             img = require('../resources/icons/dizzy.png')
             break
-        case activity_types.Syncope:
+        case activityTypes.Syncope:
             img = require('../resources/icons/dizzy.png')
             break
-        case activity_types.Fatigue:
+        case activityTypes.Fatigue:
             img = require('../resources/icons/fatigue.png')
             break
-        case activity_types.Nausea:
+        case activityTypes.Nausea:
             img = require('../resources/icons/dizzy.png')
             break
-        case activity_types.Stupefaction:
+        case activityTypes.Stupefaction:
             img = require('../resources/icons/dizzy.png')
             break
-        case activity_types.VisionDisturbances:
+        case activityTypes.VisionDisturbances:
             img = require('../resources/icons/vision.png')
             break
-        case activity_types.Anger:
+        case activityTypes.Anger:
             img = require('../resources/icons/quarrel.png')
             break
-        case activity_types.Anxiety:
+        case activityTypes.Anxiety:
             img = require('../resources/icons/anxiety.png')
             break
-        case activity_types.Excitement:
+        case activityTypes.Excitement:
             img = require('../resources/icons/excitement.png')
             break
-        case activity_types.Intake:
+        case activityTypes.Intake:
             img = require('../resources/icons/meal.png')
             break
-        case activity_types.Fear:
+        case activityTypes.Fear:
             img = require('../resources/icons/fear.png')
             break
-        case activity_types.Positive:
+        case activityTypes.Positive:
             img = require('../resources/icons/happy.png')
             break
-        case activity_types.Running:
+        case activityTypes.Running:
             img = require('../resources/icons/running.png')
             break
-        case activity_types.GymWalking:
+        case activityTypes.GymWalking:
             img = require('../resources/icons/walking.png')
             break
-        case activity_types.Bicycling:
+        case activityTypes.Bicycling:
             img = require('../resources/icons/bicycle.png')
             break
-        case activity_types.Negative:
+        case activityTypes.Negative:
             img = require('../resources/icons/bad.png')
             break
-        case activity_types.Sex:
+        case activityTypes.Sex:
             img = require('../resources/icons/sex.png')
             break
-        case activity_types.Alarm:
+        case activityTypes.Alarm:
             img = require('../resources/icons/trouble.png')
             break
-        case activity_types.Toilet:
+        case activityTypes.Toilet:
             img = require('../resources/icons/toilet.png')
             break
-        case activity_types.Orthostasis:
+        case activityTypes.Orthostasis:
             img = require('../resources/icons/laying.png')
             break
-        case activity_types.TakingMedicine:
+        case activityTypes.TakingMedicine:
             img = require('../resources/icons/pill.png')
             break
-        case activity_types.Influence:
+        case activityTypes.Influence:
             img = require('../resources/icons/influence.png')
             break
-        case activity_types.PhysicalLoad:
+        case activityTypes.PhysicalLoad:
             img = require('../resources/icons/physical.png')
             break
-        case activity_types.Pain:
+        case activityTypes.Pain:
             img = require('../resources/icons/pain.png')
             break
-        case activity_types.Complaints:
+        case activityTypes.Complaints:
             img = require('../resources/icons/heartpain.png')
             break
-        case activity_types.Weakness:
+        case activityTypes.Weakness:
             img = require('../resources/icons/dizzy.png')
             break
-        case activity_types.Emotions:
+        case activityTypes.Emotions:
             img = require('../resources/icons/mood.png')
             break
-        case activity_types.Tests:
+        case activityTypes.Tests:
             img = require('../resources/icons/tests.png')
             break
-        case activity_types.MedicineTest:
+        case activityTypes.MedicineTest:
             img = require('../resources/icons/pill.png')
             break
-        case activity_types.Psychotherapy:
+        case activityTypes.Psychotherapy:
             img = require('../resources/icons/psychological.png')
             break
-        case activity_types.DeviceInstall:
+        case activityTypes.DeviceInstall:
             img = require('../resources/icons/device.png')
             break
         default:

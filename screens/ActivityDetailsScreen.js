@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Button, Platform } from 'react-native'
 import { connect } from 'react-redux'
-import {
-    backgroundColor,
-    appColor,
-    activity_types,
-    editable,
-    paths,
-    durations,
-} from '../properties'
+import { backgroundColor, appColor } from '../constants'
+import { activityTypes, editable, paths, durations } from '../constants/'
 import { displayDate, displayTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
 import { updateActivity, deleteActivity } from '../redux/actions'
@@ -101,9 +95,9 @@ class ActivityDetailsScreen extends Component {
         let duration = true
 
         if (
-            activity.activity_type === activity_types.CourseTherapy ||
-            activity.activity_type === activity_types.MedicineTest ||
-            activity.activity_type === activity_types.ReliefOfAttack
+            activity.activity_type === activityTypes.CourseTherapy ||
+            activity.activity_type === activityTypes.MedicineTest ||
+            activity.activity_type === activityTypes.ReliefOfAttack
         ) {
             pills = true
             duration = false
@@ -248,11 +242,11 @@ class ActivityDetailsScreen extends Component {
         let pills = []
 
         if (!activity) activity = this.state.activity
-        if (activity.activity_type === activity_types.CourseTherapy)
+        if (activity.activity_type === activityTypes.CourseTherapy)
             pills = this.props.user.course_therapy
-        if (activity.activity_type === activity_types.ReliefOfAttack)
+        if (activity.activity_type === activityTypes.ReliefOfAttack)
             pills = this.props.user.relief_of_attack
-        if (activity.activity_type === activity_types.MedicineTest)
+        if (activity.activity_type === activityTypes.MedicineTest)
             pills = this.props.user.tests
         if (pills.length == 0) {
             pills = [strings.NotFilled]

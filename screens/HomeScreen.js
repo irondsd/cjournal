@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor, appColor, activity_types } from '../properties'
+import { backgroundColor, appColor, activityTypes } from '../constants'
 import { strings } from '../localizations'
 import SettingsButton from '../components/SettingsButton'
 import sync from '../services/sync'
@@ -54,27 +54,27 @@ class HomeScreen extends Component {
         // TODO: rework
         // let Activity = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.Activity,
+        //     activityTypes.Activity,
         // )
         // let PhysicalLoad = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.PhysicalLoad,
+        //     activityTypes.PhysicalLoad,
         // )
         // let Service = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.Service,
+        //     activityTypes.Service,
         // )
         // let Influence = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.Influence,
+        //     activityTypes.Influence,
         // )
         // let Intake = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.Intake,
+        //     activityTypes.Intake,
         // )
         // let Tests = overlappingGreying(
         //     this.props.activity,
-        //     activity_types.Tests,
+        //     activityTypes.Tests,
         // )
         // this.setState({
         //     Activity: Activity,

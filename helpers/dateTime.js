@@ -1,30 +1,41 @@
 import { strings } from '../localizations'
-import { monthNames } from '../properties'
+import { months } from '../constants'
 export function displayDate(dateTime) {
     if (dateTime.getDate() === new Date(Date.now()).getDate()) {
-        if (dateTime.getYear() === new Date().getYear() && dateTime.getMonth() === new Date().getMonth()) {
+        if (
+            dateTime.getYear() === new Date().getYear() &&
+            dateTime.getMonth() === new Date().getMonth()
+        ) {
             return strings.Today
         }
     }
 
     if (dateTime.getDate() === new Date(Date.now()).getDate() - 1) {
-        if (dateTime.getYear() === new Date().getYear() && dateTime.getMonth() === new Date().getMonth()) {
+        if (
+            dateTime.getYear() === new Date().getYear() &&
+            dateTime.getMonth() === new Date().getMonth()
+        ) {
             return strings.Yesterday
         }
     }
 
     if (dateTime.getDate() === new Date(Date.now()).getDate() + 1) {
-        if (dateTime.getYear() === new Date().getYear() && dateTime.getMonth() === new Date().getMonth()) {
+        if (
+            dateTime.getYear() === new Date().getYear() &&
+            dateTime.getMonth() === new Date().getMonth()
+        ) {
             return strings.Tomorrow
         }
     }
 
-    date = `${dateTime.getDate()} ${strings[monthNames[dateTime.getMonth()]]}`
+    date = `${dateTime.getDate()} ${strings[months[dateTime.getMonth()]]}`
     return date
 }
 
 export function displayDateTime(dateTime) {
-    return displayDate(dateTime) + ' ' + strings.at + ' ' + displayTime(dateTime)
+    return (
+        displayDate(dateTime) + ' ' + strings.at + ' ' + displayTime(dateTime)
+    )
 }
 
 export function displayTime(dateTime) {
@@ -96,13 +107,13 @@ function minutesRU(minutes) {
             minutes
                 .toString()
                 .split('')
-                .pop()
+                .pop(),
         ) >= 2 &&
         parseInt(
             minutes
                 .toString()
                 .split('')
-                .pop()
+                .pop(),
         ) <= 4
     ) {
         if (minutes > 20 || minutes < 10) {
@@ -117,10 +128,15 @@ function hoursRU(minutes) {
     if (minutes === 60) return minutes / 60 + ' ' + strings.hour
 
     if (minutes % 60 != 0) {
-        return hoursRU(parseInt(minutes / 60) * 60) + ` ${strings.and} ` + minutesRU(minutes % 60)
+        return (
+            hoursRU(parseInt(minutes / 60) * 60) +
+            ` ${strings.and} ` +
+            minutesRU(minutes % 60)
+        )
     }
 
-    if (minutes > 60 && minutes < 300) return minutes / 60 + ' ' + strings.hour + 'а'
+    if (minutes > 60 && minutes < 300)
+        return minutes / 60 + ' ' + strings.hour + 'а'
 
     return minutes / 60 + ' ' + strings.hours
 }
@@ -129,7 +145,11 @@ function hoursINT(minutes) {
     if (minutes == 60) return minutes / 60 + ' ' + strings.hour
 
     if (minutes % 60 != 0) {
-        return hoursINT(parseInt(minutes / 60) * 60) + ` ${strings.and} ` + minutesINT(minutes % 60)
+        return (
+            hoursINT(parseInt(minutes / 60) * 60) +
+            ` ${strings.and} ` +
+            minutesINT(minutes % 60)
+        )
     }
 
     return minutes / 60 + ' ' + strings.hours

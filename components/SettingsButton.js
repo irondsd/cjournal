@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { withNavigation } from 'react-navigation'
-import { paths } from '../properties'
+import { paths } from '../constants'
 
 class SettingsButton extends Component {
     render() {

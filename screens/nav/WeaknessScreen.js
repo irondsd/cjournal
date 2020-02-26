@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor, appColor } from '../../properties'
+import { backgroundColor, appColor } from '../../constants'
 import { strings } from '../../localizations'
 import sync from '../../services/sync'
 import FaintTile from '../../components/tiles/FaintTile'

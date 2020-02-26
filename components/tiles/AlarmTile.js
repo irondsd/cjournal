@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import ActivityLargeItem from '../ActivityLargeItem'
 import { strings } from '../../localizations'
 import { activityInstantSave } from '../../helpers/activityInstantSave'
-import { activity_types, paths } from '../../properties'
+import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.Alarm
+const name = activityTypes.Alarm
 let clicked = false
 
 export default class Tile extends Component {

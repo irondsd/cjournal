@@ -8,7 +8,7 @@ import {
     StatusBar,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { appColor } from '../properties'
+import { appColor } from '../constants'
 import {
     updateUser,
     replaceActivities,

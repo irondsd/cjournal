@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import ActivityItem from '../ActivityItem'
 import { strings } from '../../localizations'
-import { activity_types, paths } from '../../properties'
+import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activity_types.Walking
+const name = activityTypes.Walking
 
 export default class Tile extends Component {
     render() {

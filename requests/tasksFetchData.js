@@ -1,4 +1,4 @@
-import { apiUrl } from '../properties'
+import { apiUrl } from '../constants'
 import { replaceTasks, tasksFetchFailed } from '../redux/actions/tasksActions'
 
 export const tasksFetchData = (id, access_token) => {

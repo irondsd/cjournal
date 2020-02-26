@@ -1,4 +1,4 @@
-import { apiUrl } from '../properties'
+import { apiUrl } from '../constants'
 
 export default function activityDeleteData(id, access_token, activityId) {
     const url = apiUrl + `users/${id}/activity/${activityId}`

@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { strings } from '../localizations'
 import DropDownSelect from './DropDownSelect'
-import { editable } from '../properties'
+import { editable } from '../constants'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
 let maxLines = 5

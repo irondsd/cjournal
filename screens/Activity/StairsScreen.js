@@ -18,7 +18,7 @@ import { HeaderBackButton } from 'react-navigation'
 import { average, altMeter } from '../../helpers/math'
 // import KeepAwake from 'react-native-keep-awake'
 import { cancelNotification } from '../../redux/actions'
-import { backgroundColor, paths, activity_types } from '../../properties'
+import { backgroundColor, paths, activityTypes } from '../../constants'
 import BackButton from '../../components/BackButton'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -127,7 +127,7 @@ class StairsScreen extends Component {
         }
         let activity = new Activity(
             null,
-            activity_types.Stairs,
+            activityTypes.Stairs,
             timestamp(this.state.startDate),
             timestamp(),
             tasks_id,

@@ -1,4 +1,4 @@
-import { identityTokenUrl } from '../properties'
+import { identityTokenUrl } from '../constants'
 import { tokensReceived, updateUser } from '../redux/actions/'
 import { loginConfirm } from './loginConfirm'
 import { Alert } from 'react-native'

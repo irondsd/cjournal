@@ -16,7 +16,7 @@ import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 // import KeepAwake from 'react-native-keep-awake'
-import { backgroundColor, paths } from '../../properties'
+import { backgroundColor, paths } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 
@@ -64,7 +64,7 @@ class WalkingScreen extends Component {
         }
         let activity = new Activity(
             null,
-            activity_types.Orthostasis,
+            activityTypes.Orthostasis,
             timestamp(this.state.startDate),
             timestamp(),
             tasks_id,
