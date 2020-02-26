@@ -177,10 +177,11 @@ export const strings = new LocalizedStrings({
         OtherWeakness: 'Other weakness',
         ElectrodeReplacement: 'Electrode replacement',
         VerticalPositionCalibration: 'Vertical Position Calibration',
-        PsychoemptionalTest: 'Psychoemotional test',
+        PsychoemotionalTest: 'Psychoemotional test',
         Time: 'Time',
         Duration: 'Duration',
         TakePhoto: 'Take a photo',
+        Undefined: 'Undefined',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -358,10 +359,11 @@ export const strings = new LocalizedStrings({
         OtherWeakness: 'Otra debilidad',
         ElectrodeReplacement: 'Reemplazo de electrodos',
         VerticalPositionCalibration: 'Calibración de posición vertical',
-        PsychoemptionalTest: 'Prueba psicoemocional',
+        PsychoemotionalTest: 'Prueba psicoemocional',
         Time: 'Tiempo',
         Duration: 'Duración',
         TakePhoto: 'Tomar un foto',
+        Undefined: 'Indefinida',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -544,5 +546,6 @@ export const strings = new LocalizedStrings({
         Time: 'Время',
         Duration: 'Длительность',
         TakePhoto: 'Сделать фото',
+        Undefined: 'Без названия',
     },
 })
