@@ -30,6 +30,10 @@ export default class ActivityListItem extends Component {
             if (this.props.item.data.pill) {
                 data = this.props.item.data.pill
             }
+
+            if (this.props.item.data.other) {
+                data = this.props.item.data.other
+            }
         }
 
         return data
