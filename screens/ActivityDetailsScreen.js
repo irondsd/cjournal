@@ -2,7 +2,14 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Button, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, appColor } from '../constants'
-import { activityTypes, editable, paths, durations } from '../constants/'
+import {
+    activityTypes,
+    editable,
+    paths,
+    durations,
+    pillsList,
+    othersList,
+} from '../constants/'
 import { displayDate, displayTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
 import { updateActivity, deleteActivity } from '../redux/actions'
@@ -94,14 +101,14 @@ class ActivityDetailsScreen extends Component {
         let photo = false
         let duration = true
 
-        if (
-            activity.activity_type === activityTypes.CourseTherapy ||
-            activity.activity_type === activityTypes.MedicineTest ||
-            activity.activity_type === activityTypes.ReliefOfAttack
-        ) {
+        if (pillsList.includes(activity.activity_type)) {
             pills = true
             duration = false
             photo = true
+        }
+
+        if (othersList.includes(activity.activity_type)) {
+            console.log('other')
         }
 
         this.setState({

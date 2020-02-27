@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, StyleSheet, View, Image } from 'react-native'
 import { displayDateTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
 import { iconPicker } from '../helpers/iconPicker'
-import { paths, activityTypes } from '../constants'
+import { paths, activityTypes, pillsList, othersList } from '../constants'
 import ListItem from './ListItem'
 
 export default class TasksListItem extends Component {
@@ -26,11 +26,7 @@ export default class TasksListItem extends Component {
     onPress() {
         if (this.props.item.completed) return
 
-        if (
-            this.props.item.activity_type === activityTypes.MedicineTest ||
-            this.props.item.activity_type === activityTypes.CourseTherapy ||
-            this.props.item.activity_type === activityTypes.ReliefOfAttack
-        ) {
+        if (pillsList.includes(this.props.item.activity_type)) {
             this.props.navigation.navigate(paths.Pills, {
                 tasks_id: this.props.item.id,
                 sender: this.props.item.activity_type,
