@@ -10,8 +10,6 @@ export const editable = [
     'GymWalking',
     'Bicycling',
     'Running',
-    'Psychotherapy',
-    'Relaxation',
     'Meal',
     'CuffFix',
     'ElectrodeReplacement',
