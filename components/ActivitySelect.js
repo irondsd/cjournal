@@ -9,7 +9,12 @@ import {
 } from 'react-native'
 import { strings } from '../localizations'
 import DropDownSelect from './DropDownSelect'
-import { editable, borderGrey, secondaryGrey } from '../constants'
+import {
+    editable,
+    borderGrey,
+    secondaryGrey,
+    placeholderGrey,
+} from '../constants'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
 let maxLines = 5
@@ -86,7 +91,7 @@ export default class ActivitySelect extends Component {
                     name={this.state.droppedDown ? 'angle-up' : 'angle-down'}
                     size={30}
                     onPress={this.dropDown}
-                    color={this.state.droppedDown ? '#aaa' : '#ddd'}
+                    color={this.state.droppedDown ? '#aaa' : placeholderGrey}
                 />
                 {this.state.droppedDown && (
                     <ScrollView style={[styles.popUp, { height: popUpHeight }]}>
@@ -122,7 +127,7 @@ var styles = StyleSheet.create({
         flex: 1,
         top: 13,
         fontSize: 17,
-        color: '#ddd',
+        color: placeholderGrey,
     },
     iconDown: {
         position: 'absolute',

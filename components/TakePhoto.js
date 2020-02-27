@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { strings } from '../localizations'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
 const RNFS = require('react-native-fs')
-import { borderGrey, secondaryGrey } from '../constants'
+import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 
 export default class TakePhoto extends Component {
     state = {
@@ -115,7 +115,7 @@ export default class TakePhoto extends Component {
                     name="close"
                     size={22.5}
                     onPress={this.removePhoto}
-                    color={'#ddd'}
+                    color={placeholderGrey}
                 />
                 {this.state.popUp && (
                     <View style={styles.popUp}>
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 13,
         fontSize: 17,
-        color: '#ddd',
+        color: placeholderGrey,
     },
     iconPhoto: {
         position: 'absolute',

@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
-import { borderGrey, secondaryGrey } from '../constants'
+import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 
 const ref_input = React.createRef()
 
@@ -124,7 +124,7 @@ export default class DropDownInput extends Component {
                     name={this.state.droppedDown ? 'angle-up' : 'angle-down'}
                     size={30}
                     onPress={this.dropDown}
-                    color={this.state.droppedDown ? '#aaa' : '#ddd'}
+                    color={this.state.droppedDown ? '#aaa' : placeholderGrey}
                 />
                 {this.state.text !== '' && (
                     <IconAnt
@@ -132,7 +132,7 @@ export default class DropDownInput extends Component {
                         name="close"
                         size={22.5}
                         onPress={this.clear}
-                        color={'#ddd'}
+                        color={placeholderGrey}
                     />
                 )}
                 {this.state.droppedDown && (

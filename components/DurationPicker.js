@@ -12,7 +12,7 @@ import { strings } from '../localizations'
 import { localTime } from '../helpers/dateTime'
 import { sortNumbers } from '../helpers/sort'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
-import { borderGrey, secondaryGrey } from '../constants'
+import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 
 let maxLines = 5
 
@@ -118,7 +118,9 @@ export default class DurationPicker extends Component {
                         }
                         size={30}
                         onPress={this.dropDown}
-                        color={this.state.droppedDown ? '#aaa' : '#ddd'}
+                        color={
+                            this.state.droppedDown ? '#aaa' : placeholderGrey
+                        }
                     />
                     {this.state.droppedDown && (
                         <ScrollView
@@ -169,7 +171,7 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 13,
         fontSize: 17,
-        color: '#ddd',
+        color: placeholderGrey,
     },
     iconDown: {
         position: 'absolute',

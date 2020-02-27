@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
-import { borderGrey, secondaryGrey } from '../constants'
+import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 
 let maxLines = 5
 
@@ -83,7 +83,7 @@ export default class DropDownSelect extends Component {
                     name={this.state.droppedDown ? 'angle-up' : 'angle-down'}
                     size={30}
                     onPress={this.dropDown}
-                    color={this.state.droppedDown ? '#aaa' : '#ddd'}
+                    color={this.state.droppedDown ? '#aaa' : placeholderGrey}
                 />
                 {this.state.droppedDown && (
                     <ScrollView style={[styles.popUp, { height: popUpHeight }]}>
@@ -118,7 +118,7 @@ var styles = StyleSheet.create({
         flex: 1,
         top: 13,
         fontSize: 17,
-        color: '#ddd',
+        color: placeholderGrey,
     },
     iconDown: {
         position: 'absolute',
