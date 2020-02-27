@@ -32,4 +32,5 @@ export const paths = {
     DeviceInstall: 'DeviceInstall',
     Camera: 'Camera',
     Welcome: 'Welcome',
+    Gym: 'Gym',
 }
