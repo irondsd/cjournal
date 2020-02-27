@@ -25,6 +25,7 @@ import timestamp from '../helpers/timestamp'
 import Photo from '../components/Photo'
 import Comment from '../components/Comment'
 import TakePhoto from '../components/TakePhoto'
+import { loadHints } from '../services/otherHints'
 
 class ActivityDetailsScreen extends Component {
     constructor(props) {
@@ -48,7 +49,9 @@ class ActivityDetailsScreen extends Component {
                 comment: true,
                 audio: true,
                 photo: false,
+                others: false,
             },
+            loadedOthers: [],
         }
         this.onDurationChange = this.onDurationChange.bind(this)
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -83,6 +86,7 @@ class ActivityDetailsScreen extends Component {
         }
 
         this.fillPillsList(this.props.navigation.state.params)
+        this.fillOthersList(this.props.navigation.state.params)
         this.setSwitches(this.props.navigation.state.params)
 
         this.setState({
@@ -100,15 +104,23 @@ class ActivityDetailsScreen extends Component {
         let pills = false
         let photo = false
         let duration = true
+        let others = false
+        let comment = true
 
         if (pillsList.includes(activity.activity_type)) {
             pills = true
             duration = false
             photo = true
+            others = false
+            comment = true
         }
 
         if (othersList.includes(activity.activity_type)) {
-            console.log('other')
+            pills = false
+            duration = false
+            photo = false
+            others = true
+            comment = false
         }
 
         this.setState({
@@ -117,9 +129,10 @@ class ActivityDetailsScreen extends Component {
                 time: true,
                 duration: duration,
                 pills: pills,
-                comment: true,
+                comment: comment,
                 audio: true,
                 photo: photo,
+                others: others,
             },
         })
     }
@@ -204,6 +217,7 @@ class ActivityDetailsScreen extends Component {
             },
             () => {
                 this.fillPillsList(this.state.activity)
+                this.fillOthersList(this.state.activity)
                 this.update()
             },
         )
@@ -268,10 +282,35 @@ class ActivityDetailsScreen extends Component {
         })
     }
 
+    fillOthersList(activity) {
+        let list = []
+
+        if (!activity) activity = this.state.activity
+        if (!othersList.includes(activity.activity_type)) return
+
+        loadHints(activity.activity_type).then(res => {
+            this.setState({ loadedOthers: res })
+        })
+    }
+
     onPillChange(itemValue) {
         let activity = { ...this.state.activity }
         let data = { ...this.state.data }
         data.pill = itemValue
+        activity.data = data
+        this.setState(
+            {
+                activity: activity,
+                data: data,
+            },
+            () => this.update(),
+        )
+    }
+
+    onOthersChange = value => {
+        let activity = { ...this.state.activity }
+        let data = { ...this.state.data }
+        data.other = value
         activity.data = data
         this.setState(
             {
@@ -353,6 +392,17 @@ class ActivityDetailsScreen extends Component {
                             value={this.state.duration}
                             handler={this.onDurationChange}
                             addDuration={this.state.addDuration}
+                        />
+                    </View>
+                )}
+                {this.state.switches.others && (
+                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
+                        <DropDownInput
+                            list={this.state.loadedOthers}
+                            open={true}
+                            maxLines={4}
+                            value={this.state.activity.data.other}
+                            onChangeText={this.onOthersChange}
                         />
                     </View>
                 )}
