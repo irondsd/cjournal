@@ -10,7 +10,7 @@ import HeartAreaPainTile from '../../components/tiles/HeartAreaPainTile'
 import OtherPain from '../../components/tiles/OtherPain'
 import TileWrapper from '../../components/TileWrapper'
 
-export default class IntakeScreen extends Component {
+export default class PainScreen extends Component {
     static navigationOptions = {
         title: strings.Pain,
     }

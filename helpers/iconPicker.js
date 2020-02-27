@@ -16,9 +16,6 @@ export function iconPicker(activity_type) {
         case activityTypes.Gym:
             img = require('../resources/icons/workout.png')
             break
-        case activityTypes.PhysicalWork:
-            img = require('../resources/icons/exercise.png')
-            break
         case activityTypes.Sauna:
             img = require('../resources/icons/sauna.png')
             break
@@ -135,9 +132,6 @@ export function iconPicker(activity_type) {
             break
         case activityTypes.Excitement:
             img = require('../resources/icons/excitement.png')
-            break
-        case activityTypes.Intake:
-            img = require('../resources/icons/meal.png')
             break
         case activityTypes.Fear:
             img = require('../resources/icons/fear.png')

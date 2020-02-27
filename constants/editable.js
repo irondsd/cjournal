@@ -1,6 +1,7 @@
+import { activityTypes } from './activityTypes'
+
 export const editable = [
     'Sleep',
-    'PhysicalWork',
     'Sex',
     'Toilet',
     'Sauna',

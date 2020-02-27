@@ -9,7 +9,7 @@ import ReliefOfAttackTile from '../../components/tiles/ReliefOfAttackTile'
 import TileWrapper from '../../components/TileWrapper'
 import MedicineTestTile from '../../components/tiles/MedicineTestTile'
 
-export default class IntakeScreen extends Component {
+export default class MedicineScreen extends Component {
     static navigationOptions = {
         title: strings.TakingMedicine,
     }
