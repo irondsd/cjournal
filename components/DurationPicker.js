@@ -11,8 +11,8 @@ import { durations } from '../constants/'
 import { strings } from '../localizations'
 import { localTime } from '../helpers/dateTime'
 import { sortNumbers } from '../helpers/sort'
-// import DurationSelect from './DurationSelect'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
+import { borderGrey, secondaryGrey } from '../constants'
 
 let maxLines = 5
 
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     input: {
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         paddingLeft: 15,
         paddingRight: 15,
         height: 50,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         height: 200,
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         paddingLeft: 15,
         paddingRight: 15,
         backgroundColor: 'white',
@@ -195,6 +195,6 @@ const styles = StyleSheet.create({
     popUpText: {
         fontSize: 17,
         lineHeight: 40,
-        color: '#888',
+        color: secondaryGrey,
     },
 })

@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { strings } from '../localizations'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
 const RNFS = require('react-native-fs')
+import { borderGrey, secondaryGrey } from '../constants'
 
 export default class TakePhoto extends Component {
     state = {
@@ -107,7 +108,7 @@ export default class TakePhoto extends Component {
                     name={'camera'}
                     size={25}
                     onPress={this.openCamera}
-                    color={'#888'}
+                    color={secondaryGrey}
                 />
                 <IconAnt
                     style={styles.iconRemove}
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         paddingLeft: 45,
         paddingRight: 45,
         height: 50,

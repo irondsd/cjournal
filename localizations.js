@@ -370,7 +370,6 @@ export const strings = new LocalizedStrings({
         Home: 'Дом',
         Tasks: 'Задания',
         Tests: 'Тесты',
-        : 'Приём',
         Emotions: 'Эмоции',
         Problems: 'Проблемы',
         Pain: 'Боль',

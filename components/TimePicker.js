@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { displayDate, displayTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
+import { borderGrey, secondaryGrey } from '../constants'
 
 export default class TimePicker extends Component {
     state = {
@@ -111,14 +112,14 @@ const styles = StyleSheet.create({
         lineHeight: 50,
         fontSize: 17,
         color: 'black',
-        color: '#888',
+        color: secondaryGrey,
         // textAlign: 'center',
     },
     selectText: {
         borderRadius: 5,
         lineHeight: 50,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         fontSize: 17,
         paddingLeft: 15,
         paddingRight: 15,

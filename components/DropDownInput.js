@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
+import { borderGrey, secondaryGrey } from '../constants'
 
 const ref_input = React.createRef()
 
@@ -152,7 +153,7 @@ var styles = StyleSheet.create({
     input: {
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         fontSize: 17,
         paddingLeft: 15,
         paddingRight: 15,
@@ -182,7 +183,7 @@ var styles = StyleSheet.create({
         height: 200,
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         paddingLeft: 15,
         paddingRight: 15,
         backgroundColor: 'white',
@@ -190,6 +191,6 @@ var styles = StyleSheet.create({
     popUpText: {
         fontSize: 17,
         lineHeight: 40,
-        color: '#888',
+        color: secondaryGrey,
     },
 })

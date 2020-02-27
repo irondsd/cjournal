@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput } from 'react-native'
 import { strings } from '../localizations'
+import { borderGrey, secondaryGrey } from '../constants'
 
 export default class Comment extends Component {
     render() {
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     input: {
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         fontSize: 17,
         paddingLeft: 15,
         lineHeight: 30,

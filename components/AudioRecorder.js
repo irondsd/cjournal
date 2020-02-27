@@ -13,6 +13,7 @@ import AudioRecord from 'react-native-audio-record'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import requestMicrophonePermissions from '../permissions/requestMicrophonePermissions'
 var RNFS = require('react-native-fs')
+import { borderGrey, secondaryGrey, appColor } from '../constants'
 
 const { width } = Dimensions.get('window')
 
@@ -155,7 +156,7 @@ export default class App extends Component {
                         height: bar,
                         width: '1%',
                         margin: 0.5,
-                        backgroundColor: '#888',
+                        backgroundColor: secondaryGrey,
                     }}
                 />
             )
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     recorder: {
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         paddingLeft: 55,
         justifyContent: 'center',
         alignItems: 'center',
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     buttonPlay: {
-        backgroundColor: '#e84d2e',
+        backgroundColor: appColor,
         height: 40,
         width: 40,
         justifyContent: 'center',
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
     buttonRec: {
         height: 40,
         width: 40,
-        backgroundColor: '#e84d2e',
+        backgroundColor: appColor,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
@@ -242,7 +243,7 @@ const styles = StyleSheet.create({
     buttonRecDisabled: {
         height: 40,
         width: 40,
-        backgroundColor: '#d6d7da',
+        backgroundColor: borderGrey,
         justifyContent: 'center',
         position: 'absolute',
         alignItems: 'center',
@@ -252,7 +253,7 @@ const styles = StyleSheet.create({
         top: 5,
     },
     buttonPlayDisabled: {
-        backgroundColor: '#d6d7da',
+        backgroundColor: borderGrey,
         height: 40,
         width: 40,
         justifyContent: 'center',

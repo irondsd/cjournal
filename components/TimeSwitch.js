@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { strings } from '../localizations'
+import { borderGrey, secondaryGrey } from '../constants'
 
 export default class TimeSwitch extends Component {
     state = {
@@ -72,12 +73,12 @@ const styles = StyleSheet.create({
     selected: {
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         backgroundColor: 'white',
     },
     buttonRight: {},
     text: {
         fontSize: 17,
-        color: '#888',
+        color: secondaryGrey,
     },
 })

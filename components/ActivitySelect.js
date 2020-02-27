@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { strings } from '../localizations'
 import DropDownSelect from './DropDownSelect'
-import { editable } from '../constants'
+import { editable, borderGrey, secondaryGrey } from '../constants'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
 let maxLines = 5
@@ -106,7 +106,7 @@ var styles = StyleSheet.create({
     input: {
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         paddingLeft: 15,
         paddingRight: 15,
         height: 50,
@@ -132,7 +132,7 @@ var styles = StyleSheet.create({
         width: 30,
     },
     popUp: {
-        zIndex: 10000,
+        zIndex: 10,
         position: 'absolute',
         top: 49,
         bottom: 0,
@@ -140,7 +140,7 @@ var styles = StyleSheet.create({
         height: 200,
         borderRadius: 5,
         borderWidth: 0.5,
-        borderColor: '#d6d7da',
+        borderColor: borderGrey,
         paddingLeft: 15,
         paddingRight: 15,
         backgroundColor: 'white',
@@ -148,6 +148,6 @@ var styles = StyleSheet.create({
     popUpText: {
         fontSize: 17,
         lineHeight: 40,
-        color: '#888',
+        color: secondaryGrey,
     },
 })
