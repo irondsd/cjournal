@@ -169,6 +169,8 @@ export const strings = new LocalizedStrings({
         Duration: 'Duration',
         TakePhoto: 'Take a photo',
         Undefined: 'Undefined',
+        GymType: 'Exercise machine type',
+        Calories: 'Calories',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -338,6 +340,8 @@ export const strings = new LocalizedStrings({
         Duration: 'Duración',
         TakePhoto: 'Tomar un foto',
         Undefined: 'Indefinida',
+        GymType: 'Tipo de máquina de ejercicio',
+        Calories: 'Calorías',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -508,5 +512,7 @@ export const strings = new LocalizedStrings({
         Duration: 'Длительность',
         TakePhoto: 'Сделать фото',
         Undefined: 'Без названия',
+        GymType: 'Тип тренажёра',
+        Calories: 'Калории',
     },
 })

@@ -17,13 +17,10 @@ export default class Tile extends Component {
                 color="#512DA8"
                 imgScale={0.95}
                 onPress={() => {
-                    activityInstantSave(name)
-                    this.props.navigation.navigate(paths.Home)
+                    this.props.navigation.navigate(paths.Gym)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.TimePick, {
-                        sender: name,
-                    })
+                    this.props.navigation.navigate(paths.Gym)
                 }}
             />
         )

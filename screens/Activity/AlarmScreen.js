@@ -47,7 +47,7 @@ class AlarmScreen extends Component {
             this.state.comment,
             {
                 position: this.state.position,
-                error: err.message,
+                error: err,
             },
         )
         if (this.state.audioFile) activity.data.audioFile = this.state.audioFile

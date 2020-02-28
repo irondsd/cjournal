@@ -31,7 +31,7 @@ class OtherScreen extends Component {
         super(props)
 
         this.state = {
-            other: 'what',
+            other: '',
             dateTime: new Date(),
             duration: 0,
             fromStart: strings.FromStart,
