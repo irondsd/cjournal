@@ -13,7 +13,7 @@ import PainTile from '../components/tiles/PainTile'
 import ComplaintsTile from '../components/tiles/ComplaintsTile'
 import WeaknessTile from '../components/tiles/WeaknessTile'
 import TestsTile from '../components/tiles/TestsTile'
-import EmotionsTile from '../components/tiles/EmotionsTile'
+import EmotionalStressTile from '../components/tiles/EmotionalStressTile'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
 import TileWrapper from '../components/TileWrapper'
 import SleepTile from '../components/tiles/SleepTile'
@@ -120,11 +120,11 @@ class HomeScreen extends Component {
                     navigation={this.props.navigation}
                     // disabled={this.state.Activity}
                 />
-                <PillsTile navigation={this.props.navigation} />
-                <EmotionsTile navigation={this.props.navigation} />
+                <EmotionalStressTile navigation={this.props.navigation} />
                 <PainTile navigation={this.props.navigation} />
                 <ComplaintsTile navigation={this.props.navigation} />
                 <WeaknessTile navigation={this.props.navigation} />
+                <PillsTile navigation={this.props.navigation} />
                 <TestsTile
                     navigation={this.props.navigation}
                     // disabled={this.state.Tests}
