@@ -10,22 +10,21 @@ import {
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 
-let maxLines = 5
-
 export default class DropDownSelect extends Component {
     state = {
         value: '',
         droppedDown: false,
         list: [],
+        maxLines: 5,
     }
 
     componentDidMount() {
         this.setState({
             droppedDown: this.props.open,
             list: this.props.list,
+            maxLines: this.props.maxLines || 5,
             value: this.props.value ? this.props.value : '',
         })
-        if (this.props.maxLines) maxLines = this.props.maxLines
     }
 
     onSelect = value => {
@@ -64,8 +63,9 @@ export default class DropDownSelect extends Component {
     render() {
         let popUpHeight = 200
 
-        if (this.state.list.length < maxLines)
+        if (this.state.list.length < this.state.maxLines)
             popUpHeight = this.state.list.length * 40
+        else popUpHeight = this.state.maxLines * 40
 
         return (
             <View style={styles.View}>
@@ -74,7 +74,9 @@ export default class DropDownSelect extends Component {
                     style={styles.input}
                     onPress={this.dropDown}>
                     {this.state.value === '' && (
-                        <Text style={styles.placeholder}></Text>
+                        <Text style={styles.placeholder}>
+                            {this.props.placeholder}
+                        </Text>
                     )}
                     <Text style={styles.Text}>{this.state.value}</Text>
                 </TouchableOpacity>
@@ -130,6 +132,7 @@ var styles = StyleSheet.create({
     popUp: {
         position: 'absolute',
         top: 49,
+        zIndex: 10,
         bottom: 0,
         width: '100%',
         height: 200,
