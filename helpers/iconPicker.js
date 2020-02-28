@@ -181,7 +181,7 @@ export function iconPicker(activity_type) {
         case activityTypes.Weakness:
             img = require('../resources/icons/dizzy.png')
             break
-        case activityTypes.Emotions:
+        case activityTypes.EmotionalStress:
             img = require('../resources/icons/mood.png')
             break
         case activityTypes.Tests:

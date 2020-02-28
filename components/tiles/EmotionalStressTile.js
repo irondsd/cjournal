@@ -4,7 +4,7 @@ import { strings } from '../../localizations'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activityTypes.Emotions
+const name = activityTypes.EmotionalStress
 let clicked = false
 
 export default class Tile extends Component {
@@ -18,10 +18,10 @@ export default class Tile extends Component {
                 shadeColor="#32a4a8"
                 imgScale={0.9}
                 onPress={() => {
-                    this.props.navigation.navigate(paths.Emotions)
+                    this.props.navigation.navigate(paths.EmotionalStress)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.Emotions)
+                    this.props.navigation.navigate(paths.EmotionalStress)
                 }}
             />
         )

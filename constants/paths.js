@@ -19,7 +19,7 @@ export const paths = {
     Pain: 'Pain',
     Complaints: 'Complaints',
     Stairs: 'Stairs',
-    Emotions: 'Emotions',
+    EmotionalStress: 'EmotionalStress',
     Weakness: 'Weakness',
     Pills: 'Pills',
     MedicineTest: 'MedicineTest',

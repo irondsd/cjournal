@@ -37,7 +37,7 @@ export const activityTypes = {
     Nausea: 'Nausea',
     VisionDisturbances: 'VisionDisturbances',
     Fatigue: 'Fatigue',
-    Emotions: 'Emotions',
+    EmotionalStress: 'EmotionalStress',
     Positive: 'Positive',
     Negative: 'Negative',
     Tests: 'Tests',

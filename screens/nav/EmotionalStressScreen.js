@@ -6,7 +6,7 @@ import NegativeTile from '../../components/tiles/NegativeTile'
 import OtherEmotions from '../../components/tiles/OtherEmotions'
 import TileWrapper from '../../components/TileWrapper'
 
-export default class EmotionsScreen extends Component {
+export default class EmotionalStressScreen extends Component {
     static navigationOptions = {
         title: strings.EmotionalStress,
     }

@@ -13,7 +13,7 @@ import GymTile from '../../components/tiles/GymTile'
 
 export default class PhysicalLoadScreen extends Component {
     static navigationOptions = {
-        title: strings.Activity,
+        title: strings.PhysicalLoad,
     }
 
     render() {
