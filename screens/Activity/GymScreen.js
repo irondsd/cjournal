@@ -29,6 +29,7 @@ import timestamp from '../../helpers/timestamp'
 import DropDownSelect from '../../components/DropDownSelect'
 import TimeSwitch from '../../components/TimeSwitch'
 import { addHint, loadHints } from '../../services/otherHints'
+import CaloriesInput from '../../components/CaloriesInput'
 
 let clicked = false
 class GymScreen extends Component {
@@ -38,7 +39,7 @@ class GymScreen extends Component {
         this.state = {
             dateTime: new Date(),
             duration: 0,
-            fromStart: strings.FromStart,
+            fromStart: strings.FromEnd,
             options: [strings.FromStart, strings.FromEnd],
             audioFile: null,
             activity_type: null,
@@ -50,6 +51,7 @@ class GymScreen extends Component {
                 'Elliptical',
                 'Stair-stepper',
             ],
+            calories: '',
         }
 
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -87,8 +89,6 @@ class GymScreen extends Component {
                 timeEnded.getMinutes() + parseInt(this.state.duration),
             )
 
-            addHint(this.state.activity_type, this.state.other)
-
             if (this.state.duration == 0) timeEnded = null
             let activity = new Activity(
                 null,
@@ -98,7 +98,7 @@ class GymScreen extends Component {
                 null,
                 timestamp(),
                 '',
-                { other: this.state.other },
+                { calories: this.state.calories, type: this.state.type },
             )
             if (this.state.audioFile)
                 activity.data.audioFile = this.state.audioFile
@@ -168,7 +168,7 @@ class GymScreen extends Component {
                 <DropDownSelect
                     list={this.state.list}
                     open={true}
-                    maxLines={4}
+                    // maxLines={5}
                     value={this.state.type}
                     placeholder={strings.GymType}
                     onSelect={value => {
@@ -176,6 +176,10 @@ class GymScreen extends Component {
                             type: value,
                         })
                     }}
+                />
+                <CaloriesInput
+                    value={this.state.calories}
+                    onChangeText={value => this.setState({ calories: value })}
                 />
                 <View style={{ zIndex: 1 }}>
                     <Button
