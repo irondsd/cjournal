@@ -15,7 +15,8 @@ export default class Tile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color="#555500"
+                color="#dd0"
+                shadeColor="#000"
                 imgScale={0.9}
                 onPress={() => {
                     activityInstantSave(name)
