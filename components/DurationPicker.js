@@ -61,7 +61,6 @@ export default class DurationPicker extends Component {
 
     popUpRender = () => {
         let array = this.state.list
-        console.log(this.state)
         return [
             array.map((el, index) => {
                 return (

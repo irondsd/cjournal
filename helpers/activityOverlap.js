@@ -1,24 +1,43 @@
 import { overlaps } from '../constants'
+import timestamp from './timestamp'
 
-export function overlappingGreying(state, activityName) {
-    let dateTime = (new Date().getTime() + '').substring(0, 10)
+export function overlappingGreying(state) {
+    let dateTime = timestamp()
+    let Sleep = false
+    let PhysicalLoad = false
+    let Activity = false
+    let Pills = false
+    let Tests = false
+    let Service = false
 
     for (let i = 0; i < state.length; i++) {
         if (state[i].time_ended == null || state[i].time_ended == 'null')
             continue
-        if (!Object.keys(overlaps).includes(activityName)) continue
 
         if (
             state[i].time_started < dateTime &&
             state[i].time_ended > dateTime
         ) {
-            // console.log(overlaps[activityName].includes(state[i].activity_type))
-            // console.log(state[i].activity_type)
-            if (overlaps[activityName].includes(state[i].activity_type)) {
-                return true
+            if (overlaps.Sleep.includes(state[i].activity_type)) {
+                Sleep = true
+            }
+            if (overlaps.PhysicalLoad.includes(state[i].activity_type)) {
+                PhysicalLoad = true
+            }
+            if (overlaps.Activity.includes(state[i].activity_type)) {
+                Activity = true
+            }
+            if (overlaps.Pills.includes(state[i].activity_type)) {
+                Pills = true
+            }
+            if (overlaps.Tests.includes(state[i].activity_type)) {
+                Tests = true
+            }
+            if (overlaps.Service.includes(state[i].activity_type)) {
+                Service = true
             }
         }
     }
-    // console.log('no conflict')
-    return false
+
+    return [Sleep, PhysicalLoad, Activity, Pills, Tests, Service]
 }
