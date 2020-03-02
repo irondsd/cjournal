@@ -6,6 +6,7 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
+    Keyboard,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
@@ -50,6 +51,8 @@ export default class DropDownInput extends Component {
         if (this.state.refinedList[0]) {
             let value = this.state.refinedList[0]
             this.setState({ text: value, droppedDown: false })
+        } else {
+            this.setState({ droppedDown: false })
         }
     }
 
@@ -63,9 +66,9 @@ export default class DropDownInput extends Component {
         list = list.filter(e => {
             return e.toLowerCase().includes(value.toLowerCase())
         })
-
         this.setState({
             refinedList: list,
+            droppedDown: list.length > 0 ? true : false,
         })
     }
 
@@ -73,16 +76,17 @@ export default class DropDownInput extends Component {
         this.refineList(value)
         this.setState({
             text: value,
-            droppedDown: true,
         })
 
         this.props.onChangeText(value)
     }
 
     dropDown = () => {
-        this.setState({
-            droppedDown: !this.state.droppedDown,
-        })
+        if (this.state.refinedList.length > 0) {
+            this.setState({
+                droppedDown: !this.state.droppedDown,
+            })
+        }
         // ref_input.current.focus()
     }
 
@@ -95,6 +99,7 @@ export default class DropDownInput extends Component {
                         onPress={() => {
                             this.onChangeText(el)
                             this.setState({ droppedDown: false })
+                            Keyboard.dismiss()
                         }}
                         key={index}>
                         <Text style={styles.popUpText}>{el}</Text>
@@ -113,32 +118,47 @@ export default class DropDownInput extends Component {
 
         return (
             <View style={styles.View}>
-                <TextInput
-                    onSubmitEditing={this.onSubmitEditing}
-                    style={styles.input}
-                    placeholder={this.props.placeholder}
-                    value={this.state.text}
-                    onChangeText={this.onChangeText}
-                    ref={ref_input}
-                />
-                <Icon
-                    style={styles.iconDown}
-                    name={this.state.droppedDown ? 'angle-up' : 'angle-down'}
-                    size={30}
-                    onPress={this.dropDown}
-                    color={this.state.droppedDown ? '#aaa' : placeholderGrey}
-                />
-                {this.state.text !== '' && (
-                    <IconAnt
-                        style={styles.iconClear}
-                        name="close"
-                        size={22.5}
-                        onPress={this.clear}
-                        color={placeholderGrey}
+                <View style={styles.border}>
+                    <TextInput
+                        onSubmitEditing={this.onSubmitEditing}
+                        style={styles.inputText}
+                        placeholderTextColor={placeholderGrey}
+                        placeholder={this.props.placeholder}
+                        value={this.state.text}
+                        onChangeText={this.onChangeText}
+                        ref={ref_input}
                     />
-                )}
+                    {this.state.text !== '' && (
+                        <IconAnt
+                            style={styles.iconClear}
+                            name="close"
+                            size={22.5}
+                            onPress={this.clear}
+                            color={placeholderGrey}
+                        />
+                    )}
+                    {this.state.refinedList.length > 0 && (
+                        <Icon
+                            style={styles.iconDown}
+                            name={
+                                this.state.droppedDown
+                                    ? 'angle-up'
+                                    : 'angle-down'
+                            }
+                            size={30}
+                            onPress={this.dropDown}
+                            color={
+                                this.state.droppedDown
+                                    ? '#aaa'
+                                    : placeholderGrey
+                            }
+                        />
+                    )}
+                </View>
                 {this.state.droppedDown && (
-                    <ScrollView style={[styles.popUp, { height: popUpHeight }]}>
+                    <ScrollView
+                        keyboardShouldPersistTaps="always"
+                        style={[styles.popUp, { height: popUpHeight }]}>
                         {this.popUpRender()}
                     </ScrollView>
                 )}
@@ -152,28 +172,30 @@ var styles = StyleSheet.create({
         // backgroundColor: 'white',
         width: '100%',
     },
-    input: {
+    border: {
+        flexDirection: 'row',
         borderRadius: 5,
         borderWidth: 0.5,
         borderColor: borderGrey,
-        fontSize: 17,
-        paddingLeft: 15,
-        paddingRight: 15,
+        paddingLeft: 10,
         height: 50,
         backgroundColor: 'white',
     },
+    inputText: {
+        fontSize: 17,
+        width: '100%',
+        flex: 1,
+        // backgroundColor: 'black',
+        flexShrink: 0,
+    },
     iconDown: {
-        position: 'absolute',
-        right: 1,
-        top: 10,
-        height: 45,
+        paddingTop: 10,
+        height: 50,
         width: 30,
     },
     iconClear: {
-        position: 'absolute',
-        right: 35,
-        top: 15,
-        height: 45,
+        paddingTop: 14,
+        height: 50,
         width: 30,
     },
     popUp: {
@@ -187,7 +209,7 @@ var styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: borderGrey,
         paddingLeft: 15,
-        paddingRight: 15,
+        paddingRight: 30,
         backgroundColor: 'white',
     },
     popUpText: {
