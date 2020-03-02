@@ -47,8 +47,10 @@ export default class DropDownInput extends Component {
     }
 
     onSubmitEditing = () => {
-        let value = this.state.refinedList[0]
-        this.setState({ text: value, droppedDown: false })
+        if (this.state.refinedList[0]) {
+            let value = this.state.refinedList[0]
+            this.setState({ text: value, droppedDown: false })
+        }
     }
 
     clear = () => {
