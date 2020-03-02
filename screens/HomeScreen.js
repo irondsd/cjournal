@@ -29,11 +29,11 @@ class HomeScreen extends Component {
         super(props)
 
         this.state = {
+            Sleep: false,
             Activity: false,
             PhysicalLoad: false,
             Service: false,
-            Influence: false,
-            Intake: false,
+            Pills: false,
             Tests: false,
         }
 
@@ -46,92 +46,71 @@ class HomeScreen extends Component {
     }
 
     runSync() {
-        if (this.props.user.id && this.props.tokens)
+        if (this.props.user.id && this.props.tokens) {
             sync(this.props.user.id, this.props.tokens)
+        }
     }
 
     refresh() {
-        // TODO: rework
-        // let Activity = overlappingGreying(
-        //     this.props.activity,
-        //     activityTypes.Activity,
-        // )
-        // let PhysicalLoad = overlappingGreying(
-        //     this.props.activity,
-        //     activityTypes.PhysicalLoad,
-        // )
-        // let Service = overlappingGreying(
-        //     this.props.activity,
-        //     activityTypes.Service,
-        // )
-        // let Influence = overlappingGreying(
-        //     this.props.activity,
-        //     activityTypes.Influence,
-        // )
-        // let Intake = overlappingGreying(
-        //     this.props.activity,
-        //     activityTypes.Intake,
-        // )
-        // let Tests = overlappingGreying(
-        //     this.props.activity,
-        //     activityTypes.Tests,
-        // )
-        // this.setState({
-        //     Activity: Activity,
-        //     PhysicalLoad: PhysicalLoad,
-        //     Service: Service,
-        //     Influence: Influence,
-        //     Intake: Intake,
-        //     Tests: Tests,
-        // })
-        // if (
-        //     Activity ||
-        //     PhysicalLoad ||
-        //     Service ||
-        //     Influence ||
-        //     Intake ||
-        //     Tests
-        // ) {
-        //     // disabled, let's update every 10 seconds
-        //     setTimeout(() => {
-        //         this.refresh()
-        //     }, 10000)
-        // } else {
-        //     clearTimeout()
-        // }
-        // this.runSync()
+        let overlaps = overlappingGreying(this.props.activity)
+        this.setState({
+            Sleep: overlaps[0],
+            Activity: overlaps[1],
+            PhysicalLoad: overlaps[2],
+            Pills: overlaps[3],
+            Tests: overlaps[4],
+            Service: overlaps[5],
+        })
+
+        if (
+            overlaps[0] ||
+            overlaps[1] ||
+            overlaps[2] ||
+            overlaps[3] ||
+            overlaps[4] ||
+            overlaps[5]
+        ) {
+            setTimeout(() => {
+                this.refresh()
+            }, 10000)
+        } else {
+            clearTimeout()
+        }
+        this.runSync()
     }
 
     render() {
         return (
             <TileWrapper>
-                <StatusBar
-                    backgroundColor={'white'}
-                    barStyle="dark-content"
-                    // hidden={true}
+                <StatusBar backgroundColor={'white'} barStyle="dark-content" />
+                <SleepTile
+                    navigation={this.props.navigation}
+                    disabled={this.state.Sleep}
                 />
-                <SleepTile navigation={this.props.navigation} />
                 <AlarmTile navigation={this.props.navigation} />
                 <PhysicalLoadTile
                     navigation={this.props.navigation}
-                    // disabled={this.state.PhysicalLoad}
+                    disabled={this.state.PhysicalLoad}
                 />
                 <ActivityTile
                     navigation={this.props.navigation}
-                    // disabled={this.state.Activity}
+                    disabled={this.state.Activity}
                 />
                 <EmotionalStressTile navigation={this.props.navigation} />
                 <PainTile navigation={this.props.navigation} />
                 <ComplaintsTile navigation={this.props.navigation} />
                 <WeaknessTile navigation={this.props.navigation} />
-                <PillsTile navigation={this.props.navigation} />
+                <PillsTile
+                    navigation={this.props.navigation}
+                    disabled={this.state.Pills}
+                />
                 <TestsTile
                     navigation={this.props.navigation}
-                    // disabled={this.state.Tests}
+                    disabled={this.state.Tests}
                 />
                 <ServiceTile
                     navigation={this.props.navigation}
-                    // disabled={this.state.Service}
+                    disabled={this.state.Service}
                 />
             </TileWrapper>
         )
