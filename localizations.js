@@ -96,8 +96,7 @@ export const strings = new LocalizedStrings({
         HaveAGoodSleep: 'Have a good Sleep',
         ActivityEdit: 'Activity Edit',
         OverlapTitle: 'Overlap',
-        OverlapMsg:
-            "Can't add the activity, it's overlapping with exercises or Sleep",
+        OverlapMsg: "Can't add the activity, it's overlapping with others",
         Saved: 'Saved',
         Alarm: 'Alarm',
         Locating: 'Looking for location!',
@@ -268,7 +267,7 @@ export const strings = new LocalizedStrings({
         ActivityEdit: 'edición de la actividad',
         OverlapTitle: 'Superposición',
         OverlapMsg:
-            'No es possible agregar la actividad, se superpone con ejercicios o descanso.',
+            'No es possible agregar la actividad, se superpone con otras',
         Saved: 'Salvado',
         Alarm: 'Problema',
         Locating: '¡Buscando ubicación!',
@@ -439,8 +438,7 @@ export const strings = new LocalizedStrings({
         HaveAGoodSleep: 'Приятного отдыха',
         ActivityEdit: 'Редактирование активности',
         OverlapTitle: 'Наложение',
-        OverlapMsg:
-            'Невозможно добавить актиность, она пересекается с другими.',
+        OverlapMsg: 'Невозможно добавить актиность, она пересекается с другими',
         Saved: 'Сохранено',
         Alarm: 'Тревога',
         Locating: 'Поиск местоположения!',

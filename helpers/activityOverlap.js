@@ -41,3 +41,26 @@ export function overlappingGreying(state) {
 
     return [Sleep, PhysicalLoad, Activity, Pills, Tests, Service]
 }
+
+export function activitySingleOverlap(state, activity) {
+    let time_started = activity.time_started
+    let time_ended = activity.time_ended
+
+    for (let i = 0; i < state.length; i++) {
+        if (state[i].time_ended == null || state[i].time_ended == 'null')
+            continue
+
+        if (
+            (state[i].time_started <= time_started &&
+                state[i].time_ended >= time_started) ||
+            (state[i].time_started <= time_ended &&
+                state[i].time_ended >= time_ended)
+        ) {
+            if (overlaps.Sleep.includes(activity.activity_type)) {
+                return true
+            }
+
+            return false
+        }
+    }
+}

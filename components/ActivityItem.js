@@ -10,6 +10,8 @@ import {
 } from 'react-native'
 import { pSBC } from '../helpers/colors'
 import LinearGradient from 'react-native-linear-gradient'
+import { showToast, showError } from '../services/toast'
+import { strings } from '../localizations'
 
 export default class ActivityItem extends Component {
     render() {
@@ -77,11 +79,18 @@ export default class ActivityItem extends Component {
         return (
             <TouchableOpacity
                 onLongPress={() => {
-                    this.props.onLongPress()
+                    if (!this.props.disabled) {
+                        this.props.onLongPress()
+                    } else {
+                        showError(strings.OverlapMsg)
+                    }
                 }}
-                disabled={this.props.disabled}
                 onPress={() => {
-                    this.props.onPress()
+                    if (!this.props.disabled) {
+                        this.props.onPress()
+                    } else {
+                        showError(strings.OverlapMsg)
+                    }
                 }}>
                 <LinearGradient
                     style={[styles.buttonActivity, propsStyles.buttonActivity]}

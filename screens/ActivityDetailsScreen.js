@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Button, Platform } from 'react-native'
+import { StyleSheet, View, Button, Platform, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, appColor } from '../constants'
 import {
@@ -19,7 +19,7 @@ import DeleteButton from '../components/DeleteButton'
 import AudioRecorder from '../components/AudioRecorder'
 import ActivitySelect from '../components/ActivitySelect'
 import DropDownInput from '../components/DropDownInput'
-import { overlappingGreying } from '../helpers/activityOverlap'
+import { activitySingleOverlap } from '../helpers/activityOverlap'
 import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
 import Photo from '../components/Photo'
@@ -148,10 +148,11 @@ class ActivityDetailsScreen extends Component {
                 activity: activity,
             },
             () => {
-                let overlaps = overlappingGreying(
+                let overlaps = activitySingleOverlap(
                     this.props.activity,
                     this.state.activity,
                 )
+
                 if (!overlaps) {
                     this.update()
                 } else {
