@@ -39,6 +39,7 @@ class ActivityDetailsScreen extends Component {
             data: { audioFile: '', photoFile: null },
             stats: '',
             duration: 0,
+            dateTime: null,
             disabled: false,
             pills: [],
             switches: {
@@ -91,6 +92,7 @@ class ActivityDetailsScreen extends Component {
 
         this.setState({
             activity: this.props.navigation.state.params,
+            dateTime: this.props.navigation.state.params.time_started,
             originalActivity: this.props.navigation.state.params,
             activity_type: this.props.navigation.state.params.activity_type,
             data: data,
@@ -365,10 +367,7 @@ class ActivityDetailsScreen extends Component {
                 {this.state.switches.time && (
                     <TimePicker
                         dateTime={
-                            new Date(
-                                this.props.navigation.state.params
-                                    .time_started * 1000,
-                            )
+                            new Date(this.state.activity.time_started * 1000)
                         }
                         handler={this.changeDateTime}
                         disabled={this.state.disabled}
