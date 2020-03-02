@@ -22,7 +22,6 @@ import {
     activityTypes,
 } from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
-import { overlappingGreying } from '../../helpers/activityOverlap'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -30,6 +29,7 @@ import DropDownSelect from '../../components/DropDownSelect'
 import TimeSwitch from '../../components/TimeSwitch'
 import { addHint, loadHints } from '../../services/otherHints'
 import CaloriesInput from '../../components/CaloriesInput'
+import { activitySingleOverlap } from '../../helpers/activityOverlap'
 
 let clicked = false
 class GymScreen extends Component {
@@ -103,12 +103,12 @@ class GymScreen extends Component {
             if (this.state.audioFile)
                 activity.data.audioFile = this.state.audioFile
 
-            let overlaps = overlappingGreying(this.props.activity, activity)
-            if (!overlaps) {
+            let overlaps = activitySingleOverlap(this.props.activity, activity)
+            if (overlaps) {
+                Alert.alert(strings.OverlapTitle, strings.OverlapMsg)
+            } else {
                 this.props.add(activity)
                 this.props.navigation.navigate(paths.Home)
-            } else {
-                Alert.alert(strings.OverlapTitle, strings.OverlapMsg)
             }
         }
     }

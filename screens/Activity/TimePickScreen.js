@@ -16,8 +16,8 @@ import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import TimePicker from '../../components/TimePicker'
 import { backgroundColor, durations, paths } from '../../constants'
+import { activitySingleOverlap } from '../../helpers/activityOverlap'
 import DurationPicker from '../../components/DurationPicker'
-import { overlappingGreying } from '../../helpers/activityOverlap'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -74,15 +74,6 @@ class TimePickScreen extends Component {
                 timeEnded.getMinutes() + parseInt(this.state.duration),
             )
             if (this.state.duration == 0) timeEnded = null
-            // let activity = constructActivity(
-            //     null,
-            //     this.props.user.id,
-            //     this.props.navigation.state.params.sender,
-            //     this.state.dateTime,
-            //     timeEnded,
-            //     this.state.comment,
-            //     {}
-            // )
             let activity = new Activity(
                 null,
                 this.props.navigation.state.params.sender,
@@ -96,12 +87,12 @@ class TimePickScreen extends Component {
             if (this.state.audioFile)
                 activity.data.audioFile = this.state.audioFile
 
-            let overlaps = overlappingGreying(this.props.activity, activity)
-            if (!overlaps) {
+            let overlaps = activitySingleOverlap(this.props.activity, activity)
+            if (overlaps) {
+                Alert.alert(strings.OverlapTitle, strings.OverlapMsg)
+            } else {
                 this.props.add(activity)
                 this.props.navigation.navigate(paths.Home)
-            } else {
-                Alert.alert(strings.OverlapTitle, strings.OverlapMsg)
             }
         }
     }
