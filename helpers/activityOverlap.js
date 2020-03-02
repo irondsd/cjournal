@@ -51,10 +51,10 @@ export function activitySingleOverlap(state, activity) {
             continue
 
         if (
-            (state[i].time_started <= time_started &&
-                state[i].time_ended >= time_started) ||
-            (state[i].time_started <= time_ended &&
-                state[i].time_ended >= time_ended)
+            (state[i].time_started < time_started &&
+                state[i].time_ended > time_started) ||
+            (state[i].time_started < time_ended &&
+                state[i].time_ended > time_ended)
         ) {
             if (overlaps.Sleep.includes(activity.activity_type)) {
                 return true
