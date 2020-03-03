@@ -8,7 +8,12 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
-import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
+import {
+    borderGrey,
+    secondaryGrey,
+    placeholderGrey,
+    defaultStyles,
+} from '../constants'
 
 export default class DropDownSelect extends Component {
     state = {
@@ -71,7 +76,7 @@ export default class DropDownSelect extends Component {
             <View style={styles.View}>
                 <TouchableOpacity
                     activeOpacity={100}
-                    style={styles.input}
+                    style={defaultStyles.border}
                     onPress={this.dropDown}>
                     {this.state.value === '' && (
                         <Text style={styles.placeholder}>
@@ -101,15 +106,6 @@ var styles = StyleSheet.create({
     View: {
         // backgroundColor: 'white',
         width: '100%',
-    },
-    input: {
-        borderRadius: 5,
-        borderWidth: 0.5,
-        borderColor: borderGrey,
-        paddingLeft: 15,
-        paddingRight: 15,
-        height: 50,
-        backgroundColor: 'white',
     },
     Text: {
         flex: 1,

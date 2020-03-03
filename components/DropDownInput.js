@@ -10,7 +10,12 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
-import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
+import {
+    borderGrey,
+    secondaryGrey,
+    placeholderGrey,
+    defaultStyles,
+} from '../constants'
 
 const ref_input = React.createRef()
 
@@ -119,7 +124,7 @@ export default class DropDownInput extends Component {
 
         return (
             <View style={styles.View}>
-                <View style={styles.border}>
+                <View style={defaultStyles.border}>
                     <TextInput
                         onSubmitEditing={this.onSubmitEditing}
                         style={styles.inputText}
@@ -173,20 +178,10 @@ var styles = StyleSheet.create({
         // backgroundColor: 'white',
         width: '100%',
     },
-    border: {
-        flexDirection: 'row',
-        borderRadius: 5,
-        borderWidth: 0.5,
-        borderColor: borderGrey,
-        paddingLeft: 10,
-        height: 50,
-        backgroundColor: 'white',
-    },
     inputText: {
         fontSize: 17,
         width: '100%',
         flex: 1,
-        // backgroundColor: 'black',
         flexShrink: 0,
     },
     iconDown: {
