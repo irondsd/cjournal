@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
     StyleSheet,
     View,
-    Button,
     Text,
     TouchableOpacity,
     Dimensions,
@@ -13,7 +12,7 @@ import AudioRecord from 'react-native-audio-record'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import requestMicrophonePermissions from '../permissions/requestMicrophonePermissions'
 var RNFS = require('react-native-fs')
-import { borderGrey, secondaryGrey, appColor } from '../constants'
+import { borderGrey, secondaryGrey, secondaryColor } from '../constants'
 
 const { width } = Dimensions.get('window')
 
@@ -218,7 +217,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     buttonPlay: {
-        backgroundColor: appColor,
+        backgroundColor: secondaryColor,
         height: 40,
         width: 40,
         justifyContent: 'center',
@@ -232,7 +231,7 @@ const styles = StyleSheet.create({
     buttonRec: {
         height: 40,
         width: 40,
-        backgroundColor: appColor,
+        backgroundColor: secondaryColor,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
