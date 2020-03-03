@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     Alert,
     BackHandler,
     Vibration,
@@ -24,6 +23,7 @@ import timestamp from '../../helpers/timestamp'
 import requestLocationPermissions from '../../permissions/requestLocationPermissions'
 import GPS from '../../sensors/GPS'
 import Pedometer from '../../sensors/Pedometer'
+import SaveButton from '../../components/SaveButton'
 
 const duration = 360 // 6 minutes
 let timerOn = false
@@ -277,7 +277,7 @@ class WalkingScreen extends Component {
                 </Text>
                 <Text style={styles.timer}>{this.state.timer}</Text>
                 <View style={styles.button}>
-                    <Button
+                    <SaveButton
                         title={this.state.button_text}
                         style={styles.button}
                         onPress={() => {

@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     Alert,
     BackHandler,
     Vibration,
@@ -19,6 +18,7 @@ import { HeaderBackButton } from 'react-navigation'
 import { backgroundColor, paths } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
+import SaveButton from '../../components/SaveButton'
 
 class WalkingScreen extends Component {
     static navigationOptions = {
@@ -170,9 +170,8 @@ class WalkingScreen extends Component {
                 <Text style={styles.text}>{'Stage: ' + this.state.stage}</Text>
                 <Text style={styles.timer}>{this.state.timer}</Text>
                 <View style={styles.button}>
-                    <Button
+                    <SaveButton
                         title={this.state.button_text}
-                        style={styles.button}
                         onPress={() => {
                             this.startPressed()
                         }}

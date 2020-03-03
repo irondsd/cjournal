@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import {
-    StyleSheet,
-    View,
-    TouchableOpacity,
-    Button,
-    Picker,
-} from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Picker } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { displayDate, displayTime } from '../../helpers/dateTime'
 import { strings } from '../../localizations'
@@ -25,6 +19,7 @@ import PhotoButton from '../../components/PhotoButton'
 import Photo from '../../components/Photo'
 import TakePhoto from '../../components/TakePhoto'
 import DropDownInput from '../../components/DropDownInput'
+import SaveButton from '../../components/SaveButton'
 
 submitted = false
 
@@ -178,7 +173,7 @@ class PillPickScreen extends Component {
                     }
                     removePhoto={this.clearPhoto}
                 />
-                <Button
+                <SaveButton
                     style={styles.button}
                     title={strings.Save}
                     onPress={() => {

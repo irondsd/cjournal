@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     Alert,
     BackHandler,
 } from 'react-native'
@@ -25,6 +24,7 @@ import timestamp from '../../helpers/timestamp'
 import Barometer from '../../sensors/Barometer'
 import Pedometer from '../../sensors/Pedometer'
 import GPS from '../../sensors/GPS'
+import SaveButton from '../../components/SaveButton'
 let started = false
 
 class StairsScreen extends Component {
@@ -193,8 +193,7 @@ class StairsScreen extends Component {
                 </Text>
                 <Text style={styles.timer}>{this.state.meters}</Text>
                 <View style={styles.button}>
-                    <Button
-                        title={this.state.button_text}
+                    <SaveButton
                         style={styles.button}
                         onPress={() => {
                             this.startPressed()

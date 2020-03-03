@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     PermissionsAndroid,
     TextInput,
 } from 'react-native'
@@ -18,6 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import requestCameraPermission from '../../permissions/requestCameraPermissions'
+import SaveButton from '../../components/SaveButton'
 
 class DeviceInstallScreen extends Component {
     static navigationOptions = {
@@ -134,8 +134,7 @@ class DeviceInstallScreen extends Component {
                         }}
                     />
                 </View>
-                <Button
-                    style={styles.button}
+                <SaveButton
                     title={strings.Save}
                     onPress={() => {
                         this.record.bind(this)
@@ -177,11 +176,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
         margin: 10,
-    },
-    button: {
-        flex: 2,
-        margin: 20,
-        justifyContent: 'flex-end',
     },
     input: {
         fontSize: 20,

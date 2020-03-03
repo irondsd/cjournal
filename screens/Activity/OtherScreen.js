@@ -5,7 +5,6 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Button,
     Picker,
     Alert,
 } from 'react-native'
@@ -24,6 +23,7 @@ import DropDownInput from '../../components/DropDownInput'
 import TimeSwitch from '../../components/TimeSwitch'
 import { addHint, loadHints } from '../../services/otherHints'
 import { activitySingleOverlap } from '../../helpers/activityOverlap'
+import SaveButton from '../../components/SaveButton'
 
 let clicked = false
 class OtherScreen extends Component {
@@ -178,7 +178,7 @@ class OtherScreen extends Component {
                     setAudio={this.setAudio}
                 />
                 <View style={{ zIndex: 1 }}>
-                    <Button
+                    <SaveButton
                         style={styles.button}
                         title={strings.Save}
                         onPress={() => {

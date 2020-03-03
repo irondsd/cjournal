@@ -5,7 +5,6 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Button,
     Picker,
     Alert,
 } from 'react-native'
@@ -23,6 +22,7 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import Comment from '../../components/Comment'
 import TimeSwitch from '../../components/TimeSwitch'
+import SaveButton from '../../components/SaveButton'
 
 let clicked = false
 class TimePickScreen extends Component {
@@ -167,8 +167,7 @@ class TimePickScreen extends Component {
                     setAudio={this.setAudio}
                 />
                 <View style={{ zIndex: 5 }}>
-                    <Button
-                        style={styles.button}
+                    <SaveButton
                         title={strings.Save}
                         onPress={() => {
                             this.handleSubmit.bind(this)

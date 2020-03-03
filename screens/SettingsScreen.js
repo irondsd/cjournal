@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     StatusBar,
     Linking,
 } from 'react-native'
@@ -13,6 +12,7 @@ import { logoutUser } from '../redux/actions/userActions'
 import { backgroundColor, profileEditUrl } from '../constants'
 import { strings } from '../localizations'
 import TouchableIcon from '../components/TouchableIcon'
+import SaveButton from '../components/SaveButton'
 
 class SettingsScreen extends Component {
     static navigationOptions = {
@@ -46,7 +46,7 @@ class SettingsScreen extends Component {
                         styles.information
                     }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
                 <View style={styles.buttonView}>
-                    <Button
+                    <SaveButton
                         title={strings.EditProfile}
                         style={styles.button}
                         onPress={() => {
@@ -55,7 +55,7 @@ class SettingsScreen extends Component {
                             )
                         }}
                     />
-                    <Button
+                    <SaveButton
                         title={strings.Logout}
                         style={styles.button}
                         onPress={() => {
@@ -112,6 +112,5 @@ const styles = StyleSheet.create({
     buttonView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: '5%',
     },
 })

@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     PermissionsAndroid,
     TextInput,
 } from 'react-native'
@@ -18,6 +17,7 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import GPS from '../../sensors/GPS'
 import Comment from '../../components/Comment'
+import SaveButton from '../../components/SaveButton'
 
 class AlarmScreen extends Component {
     static navigationOptions = {
@@ -109,22 +109,20 @@ class AlarmScreen extends Component {
                         : strings.FoundLocation}
                 </Text>
                 {this.state.longPress ? (
-                    <Comment
-                        onChangeText={text => {
-                            this.setState({
-                                comment: text,
-                            })
-                        }}
-                        comment={this.state.comment}
-                    />
-                ) : null}
-                {this.state.longPress ? (
-                    <View>
+                    <View style={styles.long}>
+                        <Comment
+                            onChangeText={text => {
+                                this.setState({
+                                    comment: text,
+                                })
+                            }}
+                            comment={this.state.comment}
+                        />
                         <AudioRecorder
                             audioFile={this.state.audioFile}
                             setAudio={this.setAudio}
                         />
-                        <Button
+                        <SaveButton
                             style={styles.button}
                             title={strings.Save}
                             onPress={() => {
@@ -169,12 +167,17 @@ const styles = StyleSheet.create({
     button: {
         flex: 2,
         margin: 20,
-        justifyContent: 'flex-end',
+        // justifyContent: 'flex-end',
     },
     input: {
         fontSize: 20,
         backgroundColor: 'whitesmoke',
         color: 'black',
         padding: 10,
+    },
+    long: {
+        height: '50%',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
     },
 })

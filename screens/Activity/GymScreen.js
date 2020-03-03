@@ -5,7 +5,6 @@ import {
     Text,
     View,
     TouchableOpacity,
-    Button,
     Picker,
     Alert,
 } from 'react-native'
@@ -30,6 +29,7 @@ import TimeSwitch from '../../components/TimeSwitch'
 import { addHint, loadHints } from '../../services/otherHints'
 import CaloriesInput from '../../components/CaloriesInput'
 import { activitySingleOverlap } from '../../helpers/activityOverlap'
+import SaveButton from '../../components/SaveButton'
 
 let clicked = false
 class GymScreen extends Component {
@@ -63,7 +63,7 @@ class GymScreen extends Component {
     })
 
     componentDidMount() {
-        dateTime = new Date()
+        let dateTime = new Date()
         dateTime.setMilliseconds(0)
         this.setState({
             dateTime: dateTime,
@@ -182,8 +182,7 @@ class GymScreen extends Component {
                     onChangeText={value => this.setState({ calories: value })}
                 />
                 <View style={{ zIndex: 1 }}>
-                    <Button
-                        style={styles.button}
+                    <SaveButton
                         title={strings.Save}
                         onPress={() => {
                             this.handleSubmit.bind(this)
