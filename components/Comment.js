@@ -33,6 +33,7 @@ export default class Comment extends Component {
 
 const styles = StyleSheet.create({
     input: {
+        width: '100%',
         borderRadius: 5,
         borderWidth: 0.5,
         borderColor: borderGrey,

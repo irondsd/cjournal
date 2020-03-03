@@ -164,7 +164,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.recorder}>
                     <TouchableOpacity
                         disabled={!this.state.audioFile}
@@ -204,6 +204,7 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: { width: '100%' },
     recorder: {
         borderRadius: 5,
         borderWidth: 0.5,

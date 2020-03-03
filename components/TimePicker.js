@@ -69,7 +69,7 @@ export default class TimePicker extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.time}>
                     <Text style={styles.timeText}>{strings.Time + ':'}</Text>
                     <TouchableOpacity onPress={this._showDatePicker}>
@@ -104,6 +104,7 @@ export default class TimePicker extends Component {
 }
 
 const styles = StyleSheet.create({
+    container: { width: '100%' },
     time: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',

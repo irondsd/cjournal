@@ -9,15 +9,13 @@ export default class SaveButton extends Component {
             ? (bColor = secondaryColor)
             : (bColor = secondaryGrey)
         return (
-            <View>
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={[styles.container, { backgroundColor: bColor }]}
-                    disabled={this.props.disabled}
-                    onPress={this.props.onPress}>
-                    <Text style={styles.text}>{this.props.title} </Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+                activeOpacity={0.7}
+                style={[styles.container, { backgroundColor: bColor }]}
+                disabled={this.props.disabled}
+                onPress={this.props.onPress}>
+                <Text style={styles.text}>{this.props.title} </Text>
+            </TouchableOpacity>
         )
     }
 }
