@@ -7,6 +7,7 @@ export const defaultStyles = StyleSheet.create({
         backgroundColor: backgroundColor,
         flexDirection: 'column',
         justifyContent: 'space-between',
+        alignItems: 'center',
         padding: 20,
     },
 })

@@ -284,7 +284,6 @@ class WalkingScreen extends Component {
                 <View style={styles.button}>
                     <SaveButton
                         title={this.state.button_text}
-                        style={styles.button}
                         onPress={() => {
                             this.startPressed()
                         }}
@@ -315,8 +314,8 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
     button: {
-        width: '90%',
         justifyContent: 'flex-end',
         paddingBottom: 20,
+        width: '100%',
     },
 })

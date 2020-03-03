@@ -17,7 +17,12 @@ import { HeaderBackButton } from 'react-navigation'
 import { average, altMeter } from '../../helpers/math'
 // import KeepAwake from 'react-native-keep-awake'
 import { cancelNotification } from '../../redux/actions'
-import { backgroundColor, paths, activityTypes } from '../../constants'
+import {
+    backgroundColor,
+    paths,
+    activityTypes,
+    defaultStyles,
+} from '../../constants'
 import BackButton from '../../components/BackButton'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -25,9 +30,8 @@ import Barometer from '../../sensors/Barometer'
 import Pedometer from '../../sensors/Pedometer'
 import GPS from '../../sensors/GPS'
 import SaveButton from '../../components/SaveButton'
-let started = false
 
-// TODO: polish
+let started = false
 
 class StairsScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -189,14 +193,13 @@ class StairsScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <Text style={styles.text}>
                     {strings.Pressure}: {this.state.mmHg} {strings.mmHg}
                 </Text>
                 <Text style={styles.timer}>{this.state.meters}</Text>
                 <View style={styles.button}>
                     <SaveButton
-                        style={styles.button}
                         title={this.state.button_text}
                         onPress={() => {
                             this.startPressed()
@@ -217,12 +220,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(null, mapDispatchToProps)(StairsScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-        height: '100%',
-        justifyContent: 'space-between',
-    },
     mainContent: {
         backgroundColor: 'green',
     },
@@ -237,8 +234,7 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
     button: {
-        width: '90%',
+        width: '100%',
         justifyContent: 'flex-end',
-        paddingBottom: 20,
     },
 })

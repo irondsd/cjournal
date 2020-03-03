@@ -65,7 +65,7 @@ class FinishScreen extends Component {
                 <View style={styles.feelingsBox}>
                     <TouchableOpacity
                         onPress={() => {
-                            activity = this.state.activity
+                            let activity = this.state.activity
                             activity.data.state = 'Bad'
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
@@ -78,7 +78,7 @@ class FinishScreen extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
-                            activity = this.state.activity
+                            let activity = this.state.activity
                             activity.data.state = 'Normal'
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
@@ -91,7 +91,7 @@ class FinishScreen extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
-                            activity = this.state.activity
+                            let activity = this.state.activity
                             activity.data.state = 'Good'
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
@@ -133,16 +133,17 @@ const styles = StyleSheet.create({
     },
     feelingsBox: {
         top: 100,
+        height: '50%',
         flex: 1,
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
     },
     img: {
         width: imgSize,
         height: imgSize,
-        margin: 10,
         tintColor: 'grey',
+        marginLeft: 10,
+        marginRight: 10,
     },
 })
