@@ -171,7 +171,7 @@ class TimePickScreen extends Component {
                     audioFile={this.state.audioFile}
                     setAudio={this.setAudio}
                 />
-                <View style={{ zIndex: 5 }}>
+                <View style={{ zIndex: 5, width: '100%' }}>
                     <SaveButton
                         title={strings.Save}
                         onPress={() => {

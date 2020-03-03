@@ -182,7 +182,7 @@ class OtherScreen extends Component {
                     audioFile={this.state.audioFile}
                     setAudio={this.setAudio}
                 />
-                <View style={{ zIndex: 1 }}>
+                <View style={{ zIndex: 1, width: '100%' }}>
                     <SaveButton
                         style={styles.button}
                         title={strings.Save}
