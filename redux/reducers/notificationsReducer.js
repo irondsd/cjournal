@@ -41,7 +41,6 @@ export default function notificationsReducer(state = [], { type, payload }) {
                         time: (dateTime.getTime() + '').substring(0, 10),
                     }
 
-                    // TODO: check datetime here
                     let found = false
                     for (let i = 0; i < state.length; i++) {
                         if (areEqual(state[i], notification)) {

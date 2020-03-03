@@ -28,8 +28,6 @@ export default class DropDownInput extends Component {
         list: [],
     }
 
-    // TODO: fix button placements
-
     componentDidMount() {
         this.setState({
             droppedDown: this.props.open,

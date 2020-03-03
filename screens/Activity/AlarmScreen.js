@@ -46,7 +46,7 @@ class AlarmScreen extends Component {
         this.GPS = new GPS()
     }
 
-    record(err = null) {
+    record(err = undefined) {
         let activity = Activity.instantInit(
             activityTypes.Alarm,
             this.state.comment,
@@ -91,7 +91,7 @@ class AlarmScreen extends Component {
             this.GPS.getPosition()
                 .then(position => {
                     this.setState({ position: position }, () => {
-                        this.record()
+                        // this.record()
                     })
                 })
                 .catch(() => this.startUpdates())
@@ -106,7 +106,7 @@ class AlarmScreen extends Component {
 
     render() {
         return (
-            <View style={defaultStyles.container.container}>
+            <View style={defaultStyles.container}>
                 <Text style={styles.text}>
                     {Object.entries(this.state.position).length === 0 &&
                     this.state.position.constructor === Object
@@ -161,11 +161,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
         margin: 10,
-    },
-    button: {
-        flex: 2,
-        margin: 20,
-        // justifyContent: 'flex-end',
+        top: 50,
     },
     input: {
         fontSize: 20,
@@ -175,6 +171,7 @@ const styles = StyleSheet.create({
     },
     long: {
         height: '50%',
+        width: '100%',
         flexDirection: 'column',
         justifyContent: 'space-between',
     },
