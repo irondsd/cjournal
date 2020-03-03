@@ -34,14 +34,15 @@ export default class DropDownInput extends Component {
             list: this.props.list,
         })
 
-        if (this.props.list.length < 1) this.setState({ droppedDown: false })
+        if (this.props.list.length === 0) this.setState({ droppedDown: false })
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.list !== prevState.list) {
             return {
                 refinedList: nextProps.list,
-                droppedDown: nextProps.open,
+                droppedDown:
+                    nextProps.list.length === 0 ? false : nextProps.open,
                 list: nextProps.list,
             }
         } else return null
