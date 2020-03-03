@@ -1,12 +1,5 @@
 import React, { Component } from 'react'
-import {
-    Platform,
-    StyleSheet,
-    View,
-    Button,
-    TextInput,
-    Text,
-} from 'react-native'
+import { StyleSheet, View, TextInput, Text } from 'react-native'
 import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 import { strings } from '../localizations'
 

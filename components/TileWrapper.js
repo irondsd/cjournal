@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, SafeAreaView, Button } from 'react-native'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import { backgroundColor } from '../constants'
 
 export default class TileWrapper extends Component {

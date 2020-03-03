@@ -1,15 +1,5 @@
 import React, { Component } from 'react'
-import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    TextInput,
-    TouchableOpacity,
-    Picker,
-    Platform,
-    Alert,
-} from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import {
     backgroundColor,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Button, Platform, Alert } from 'react-native'
+import { StyleSheet, View, Platform, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, appColor } from '../constants'
 import {

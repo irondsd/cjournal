@@ -1,12 +1,5 @@
 import React, { Component } from 'react'
-import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    FlatList,
-    StatusBar,
-} from 'react-native'
+import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor } from '../constants'
 import { strings } from '../localizations'
