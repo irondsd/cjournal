@@ -14,7 +14,12 @@ import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import TimePicker from '../../components/TimePicker'
-import { backgroundColor, durations, paths } from '../../constants'
+import {
+    backgroundColor,
+    durations,
+    paths,
+    defaultStyles,
+} from '../../constants'
 import { activitySingleOverlap } from '../../helpers/activityOverlap'
 import DurationPicker from '../../components/DurationPicker'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -49,7 +54,7 @@ class TimePickScreen extends Component {
     })
 
     componentDidMount() {
-        dateTime = new Date()
+        let dateTime = new Date()
         dateTime.setMilliseconds(0)
         this.setState({
             dateTime: dateTime,
@@ -142,7 +147,7 @@ class TimePickScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <TimeSwitch
                     onSelection={this.setSelectedOption.bind(this)}
                     value={this.state.fromStart}
@@ -196,14 +201,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(TimePickScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
-        zIndex: 20,
-    },
     time: {
         flexDirection: 'row',
         justifyContent: 'center',

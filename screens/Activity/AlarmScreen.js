@@ -9,7 +9,12 @@ import {
 } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
-import { backgroundColor, paths, activityTypes } from '../../constants'
+import {
+    backgroundColor,
+    paths,
+    activityTypes,
+    defaultStyles,
+} from '../../constants'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -101,7 +106,7 @@ class AlarmScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container.container}>
                 <Text style={styles.text}>
                     {Object.entries(this.state.position).length === 0 &&
                     this.state.position.constructor === Object
@@ -152,13 +157,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(AlarmScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
-    },
     text: {
         fontSize: 30,
         textAlign: 'center',

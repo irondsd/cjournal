@@ -27,6 +27,8 @@ import GPS from '../../sensors/GPS'
 import SaveButton from '../../components/SaveButton'
 let started = false
 
+// TODO: polish
+
 class StairsScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: strings.Stairs,
@@ -195,6 +197,7 @@ class StairsScreen extends Component {
                 <View style={styles.button}>
                     <SaveButton
                         style={styles.button}
+                        title={this.state.button_text}
                         onPress={() => {
                             this.startPressed()
                         }}

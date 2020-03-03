@@ -10,7 +10,12 @@ import {
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
 import { logoutUser, addActivity } from '../../redux/actions'
-import { backgroundColor, paths, activityTypes } from '../../constants'
+import {
+    backgroundColor,
+    paths,
+    activityTypes,
+    defaultStyles,
+} from '../../constants'
 import { strings } from '../../localizations'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -106,7 +111,7 @@ class DeviceInstallScreen extends Component {
         }
 
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <View style={styles.inputBlock}>
                     <TextInput
                         placeholder={strings.DeviceId}
@@ -161,13 +166,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(DeviceInstallScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
-    },
     inputBlock: {
         flexDirection: 'row',
         flexWrap: 'wrap',

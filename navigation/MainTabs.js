@@ -2,7 +2,13 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
-import { backgroundColor, paths } from '../constants'
+import {
+    backgroundColor,
+    paths,
+    appColor,
+    secondaryColor,
+    secondaryGrey,
+} from '../constants'
 import { strings } from '../localizations'
 import JournalScreen from '../screens/JournalScreen'
 import TasksScreen from '../screens/TasksScreen'
@@ -141,8 +147,8 @@ export const MainTabs = createMaterialTopTabNavigator(
                 backgroundColor: backgroundColor,
             },
             upperCaseLabel: false,
-            activeTintColor: 'tomato',
-            inactiveTintColor: 'gray',
+            activeTintColor: appColor,
+            inactiveTintColor: secondaryGrey,
             showIcon: true,
             labelStyle: {
                 top: -5,

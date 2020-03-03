@@ -218,32 +218,4 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 20,
     },
-    input: {
-        fontSize: 20,
-        backgroundColor: 'whitesmoke',
-        color: 'black',
-        margin: 20,
-        padding: 10,
-    },
-    time: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    timeText: {
-        fontSize: 20,
-        color: 'black',
-        textAlign: 'center',
-        marginTop: 40,
-    },
-    button: {
-        flex: 2,
-        margin: 20,
-        justifyContent: 'flex-end',
-    },
-    picker: {
-        left: 80,
-        height: 50,
-        alignItems: 'center',
-        width: '60%',
-    },
 })

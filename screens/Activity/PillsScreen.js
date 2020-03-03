@@ -11,6 +11,7 @@ import {
     durations,
     paths,
     activityTypes,
+    defaultStyles,
 } from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import Activity from '../../classes/Activity'
@@ -153,7 +154,7 @@ class PillPickScreen extends Component {
     render() {
         if (!this.state.activity_type) return null
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <TimePicker
                     dateTime={new Date()}
                     handler={this.changeDateTime}
@@ -202,13 +203,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(PillPickScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
-    },
     center: {
         alignItems: 'center',
     },

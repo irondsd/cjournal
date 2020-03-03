@@ -10,7 +10,7 @@ import {
     Dimensions,
 } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor } from '../../constants'
+import { backgroundColor, defaultStyles } from '../../constants'
 import { strings } from '../../localizations'
 import { updateActivity } from '../../redux/actions'
 import { paths } from '../../constants'
@@ -58,7 +58,7 @@ class FinishScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <Text style={styles.text}>{this.state.message}</Text>
                 <Text style={styles.text}>{this.state.stats}</Text>
                 <Text style={styles.text}>{strings.HowDoYouFeelAfterThis}</Text>
@@ -126,10 +126,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(FinishScreen)
 const imgSize = Dimensions.get('window').width / 3.75
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-    },
     text: {
         fontSize: 20,
         textAlign: 'center',

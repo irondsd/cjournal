@@ -15,7 +15,12 @@ import { addActivity, cancelNotification } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 import { calculateDistance } from '../../helpers/GPS'
-import { backgroundColor, activityTypes, paths } from '../../constants'
+import {
+    backgroundColor,
+    activityTypes,
+    paths,
+    defaultStyles,
+} from '../../constants'
 import BackButton from '../../components/BackButton'
 import { showError } from '../../services/toast'
 import Activity from '../../classes/Activity'
@@ -270,7 +275,7 @@ class WalkingScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <Text style={styles.text}>
                     {strings.Steps}: {this.state.numberOfSteps},{' '}
                     {strings.Distance}: {this.state.distance}
@@ -299,15 +304,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(null, mapDispatchToProps)(WalkingScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-        height: '100%',
-        justifyContent: 'space-between',
-    },
-    mainContent: {
-        backgroundColor: 'green',
-    },
     text: {
         padding: 10,
         flex: 3,

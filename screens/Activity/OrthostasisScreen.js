@@ -15,7 +15,7 @@ import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 // import KeepAwake from 'react-native-keep-awake'
-import { backgroundColor, paths } from '../../constants'
+import { backgroundColor, paths, defaultStyles } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import SaveButton from '../../components/SaveButton'
@@ -165,7 +165,7 @@ class WalkingScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <Text style={styles.text}>Info</Text>
                 <Text style={styles.text}>{'Stage: ' + this.state.stage}</Text>
                 <Text style={styles.timer}>{this.state.timer}</Text>
@@ -191,12 +191,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(null, mapDispatchToProps)(WalkingScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        backgroundColor: backgroundColor,
-        height: '100%',
-        justifyContent: 'space-between',
-    },
     mainContent: {
         backgroundColor: 'green',
     },

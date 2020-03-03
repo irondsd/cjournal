@@ -14,7 +14,12 @@ import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import TimePicker from '../../components/TimePicker'
-import { backgroundColor, durations, paths } from '../../constants'
+import {
+    backgroundColor,
+    durations,
+    paths,
+    defaultStyles,
+} from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'
@@ -51,7 +56,7 @@ class OtherScreen extends Component {
     })
 
     componentDidMount() {
-        dateTime = new Date()
+        let dateTime = new Date()
         dateTime.setMilliseconds(0)
         this.setState(
             {
@@ -151,7 +156,7 @@ class OtherScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <TimeSwitch
                     onSelection={this.setSelectedOption.bind(this)}
                     value={this.state.fromStart}
@@ -208,13 +213,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(OtherScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
-    },
     input: {
         fontSize: 20,
         backgroundColor: 'whitesmoke',
