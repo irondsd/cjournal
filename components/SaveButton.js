@@ -2,7 +2,20 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { secondaryColor, secondaryGrey } from '../constants'
 
+let disabled = false
+
 export default class SaveButton extends Component {
+    onPress = () => {
+        if (!disabled) {
+            disabled = true
+            this.props.onPress()
+        }
+
+        setInterval(() => {
+            disabled = false
+        }, 500)
+    }
+
     render() {
         let bColor
         !this.props.disabled
@@ -13,7 +26,7 @@ export default class SaveButton extends Component {
                 activeOpacity={0.7}
                 style={[styles.container, { backgroundColor: bColor }]}
                 disabled={this.props.disabled}
-                onPress={this.props.onPress}>
+                onPress={this.onPress}>
                 <Text style={styles.text}>{this.props.title} </Text>
             </TouchableOpacity>
         )
