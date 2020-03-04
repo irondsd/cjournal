@@ -6,7 +6,7 @@ export default class IdinvFilter extends Component {
     render() {
         return (
             <View style={styles.View}>
-                <Text style={styles.Text}> Idinv filter </Text>
+                <Text style={styles.Text}>{this.props.text}</Text>
                 <Switch
                     onChange={this.props.onChange}
                     value={this.props.value}
