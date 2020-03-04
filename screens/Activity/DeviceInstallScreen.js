@@ -15,6 +15,7 @@ import {
     paths,
     activityTypes,
     defaultStyles,
+    borderGrey,
 } from '../../constants'
 import { strings } from '../../localizations'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
@@ -23,6 +24,8 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import requestCameraPermission from '../../permissions/requestCameraPermissions'
 import SaveButton from '../../components/SaveButton'
+import DeviceIdInput from '../../components/DeviceIdInput'
+import { cancelLocalNotification } from '../../notifications/notifications'
 
 class DeviceInstallScreen extends Component {
     static navigationOptions = {
@@ -48,7 +51,7 @@ class DeviceInstallScreen extends Component {
         let tasks_id = this.state.tasks_id
             ? parseInt(this.state.tasks_id)
             : null
-        if (tasks_id) cancelNotification(tasks_id)
+        if (tasks_id) cancelLocalNotification(tasks_id)
         let activity = new Activity(
             null,
             activityTypes.DeviceInstall,
@@ -112,33 +115,12 @@ class DeviceInstallScreen extends Component {
 
         return (
             <View style={defaultStyles.container}>
-                <View style={styles.inputBlock}>
-                    <TextInput
-                        placeholder={strings.DeviceId}
-                        multiline={true}
-                        maxLength={80}
-                        placeholderTextColor="rgba(0, 0, 0, 0.5)"
-                        style={styles.input}
-                        autoCapitalize="none"
-                        autoCorrect={true}
-                        returnKeyType="next"
-                        onChangeText={text => {
-                            this.setState({
-                                device_id: text,
-                            })
-                        }}
-                        value={this.state.device_id}
-                    />
-                    <Icon
-                        name={'qrcode'}
-                        size={40}
-                        color={'black'}
-                        style={styles.icon}
-                        onPress={() => {
-                            this.onOpneScanner()
-                        }}
-                    />
-                </View>
+                <DeviceIdInput
+                    value={this.state.device_id}
+                    setText={text => {
+                        this.setState({ device_id: text })
+                    }}
+                />
                 <SaveButton
                     title={strings.Save}
                     onPress={() => {
@@ -164,25 +146,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeviceInstallScreen)
-
-const styles = StyleSheet.create({
-    inputBlock: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-    },
-    text: {
-        fontSize: 30,
-        textAlign: 'center',
-        margin: 10,
-    },
-    input: {
-        fontSize: 20,
-        backgroundColor: 'whitesmoke',
-        color: 'black',
-        padding: 10,
-        width: '87%',
-    },
-    icon: {
-        margin: 7,
-    },
-})
