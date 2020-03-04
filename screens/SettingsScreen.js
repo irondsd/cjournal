@@ -46,22 +46,26 @@ class SettingsScreen extends Component {
                         styles.information
                     }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
                 <View style={styles.buttonView}>
-                    <SaveButton
-                        title={strings.EditProfile}
-                        style={styles.button}
-                        onPress={() => {
-                            Linking.openURL(profileEditUrl).catch(err =>
-                                console.error('An error occurred', err),
-                            )
-                        }}
-                    />
-                    <SaveButton
-                        title={strings.Logout}
-                        style={styles.button}
-                        onPress={() => {
-                            this.logout()
-                        }}
-                    />
+                    <View>
+                        <SaveButton
+                            title={strings.EditProfile}
+                            style={styles.button}
+                            onPress={() => {
+                                Linking.openURL(profileEditUrl).catch(err =>
+                                    console.error('An error occurred', err),
+                                )
+                            }}
+                        />
+                    </View>
+                    <View>
+                        <SaveButton
+                            title={strings.Logout}
+                            style={styles.button}
+                            onPress={() => {
+                                this.logout()
+                            }}
+                        />
+                    </View>
                 </View>
             </View>
         )
