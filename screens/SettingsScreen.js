@@ -13,6 +13,8 @@ import { backgroundColor, profileEditUrl } from '../constants'
 import { strings } from '../localizations'
 import TouchableIcon from '../components/TouchableIcon'
 import SaveButton from '../components/SaveButton'
+import IdinvFilter from '../components/settings/IdinvFilterSwitch'
+import Notifications from '../components/settings/NotificationsSwitch'
 
 class SettingsScreen extends Component {
     static navigationOptions = {
@@ -25,6 +27,11 @@ class SettingsScreen extends Component {
                 style={{ right: 15 }}
             />
         ),
+    }
+
+    state = {
+        idinvFilter: false,
+        notifications: false,
     }
 
     logout() {
@@ -45,6 +52,24 @@ class SettingsScreen extends Component {
                     style={
                         styles.information
                     }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
+                <View>
+                    <IdinvFilter
+                        value={this.state.idinvFilter}
+                        onChange={value =>
+                            this.setState({
+                                idinvFilter: !this.state.idinvFilter,
+                            })
+                        }
+                    />
+                    <Notifications
+                        value={this.state.notifications}
+                        onChange={value =>
+                            this.setState({
+                                notifications: !this.state.notifications,
+                            })
+                        }
+                    />
+                </View>
                 <View style={styles.buttonView}>
                     <View>
                         <SaveButton
