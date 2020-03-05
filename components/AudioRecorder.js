@@ -54,7 +54,7 @@ export default class App extends Component {
 
     componentWillUnmount() {
         this.stop()
-        this.pause()
+        if (!this.state.paused) this.pause()
     }
 
     record = async () => {
