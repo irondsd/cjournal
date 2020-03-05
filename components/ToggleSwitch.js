@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, Switch, StyleSheet, Platform } from 'react-native'
-import { secondaryColor, placeholderGrey, secondaryGrey } from '../../constants'
+import { secondaryColor, placeholderGrey, secondaryGrey } from '../constants'
 
-export default class IdinvFilter extends Component {
+export default class ToggleSwitch extends Component {
     render() {
         return (
             <View style={styles.View}>

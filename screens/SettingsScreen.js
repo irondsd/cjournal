@@ -13,7 +13,7 @@ import { backgroundColor, profileEditUrl } from '../constants'
 import { strings } from '../localizations'
 import TouchableIcon from '../components/TouchableIcon'
 import SaveButton from '../components/SaveButton'
-import ToggleSwitch from '../components/settings/ToggleSwitch'
+import ToggleSwitch from '../components/ToggleSwitch'
 
 class SettingsScreen extends Component {
     static navigationOptions = {
@@ -53,7 +53,7 @@ class SettingsScreen extends Component {
                     }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
                 <View>
                     <ToggleSwitch
-                        text={'idinv filter'}
+                        text={'Idinv filter'}
                         value={this.state.idinvFilter}
                         onChange={value =>
                             this.setState({
