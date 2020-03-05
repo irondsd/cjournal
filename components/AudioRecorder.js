@@ -52,6 +52,11 @@ export default class App extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.stop()
+        this.pause()
+    }
+
     record = async () => {
         let permissions = await requestMicrophonePermissions()
         if (!permissions) return
@@ -144,6 +149,11 @@ export default class App extends Component {
             this.sound.pause()
             this.setState({ paused: true })
         }
+    }
+
+    pause = () => {
+        this.sound.pause()
+        this.setState({ paused: true })
     }
 
     bars = () => {
