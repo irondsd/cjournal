@@ -19,7 +19,7 @@ export async function downloadFile(url) {
     // RNFS.readdir(RNFS.DocumentDirectoryPath).then(res => {
     //     console.log(res)
     // })
-    // TODO: check it works
+
     if (await RNFS.exists(filepath)) {
         // console.log('EXISTS')
     } else {
@@ -30,8 +30,8 @@ export async function downloadFile(url) {
             toFile: filepath,
         }
         RNFS.downloadFile(DownloadFileOptions)
-            .then(res => {
-                console.log('download', res, url)
+            .promise.then(res => {
+                // console.log('download', res, url)
             })
             .catch(err => {
                 console.log('download failed', err)
