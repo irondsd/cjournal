@@ -31,7 +31,9 @@ export function identityLogin(username, password) {
                 }
             })
             .catch(err => {
-                Alert.alert(strings.Error, strings.WrongPassword)
+                if (err.message.includes('Network request failed'))
+                    Alert.alert(strings.NoConn, strings.CantConnect)
+                else Alert.alert(strings.Error, strings.WrongPassword)
             })
     }
 }
