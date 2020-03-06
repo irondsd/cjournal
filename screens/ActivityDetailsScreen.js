@@ -102,6 +102,22 @@ class ActivityDetailsScreen extends Component {
         })
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.navigation.state.params) {
+            if (nextProps.navigation.state.params.image) {
+                return {
+                    // photoFile: nextProps.navigation.state.params.image.uri,
+                    data: {
+                        ...prevState.data,
+                        photoFile: nextProps.navigation.state.params.image.uri,
+                    },
+                }
+            } else return null
+        } else {
+            return { photoFile: '' }
+        }
+    }
+
     setSwitches = activity => {
         let pills = false
         let photo = false
@@ -272,9 +288,6 @@ class ActivityDetailsScreen extends Component {
             pills = this.props.user.relief_of_attack
         if (activity.activity_type === activityTypes.MedicineTest)
             pills = this.props.user.tests
-        if (pills.length == 0) {
-            pills = [strings.NotFilled]
-        }
 
         if (!pills.includes(activity.data.pill)) {
             pills = [activity.data.pill, ...pills]
@@ -417,21 +430,28 @@ class ActivityDetailsScreen extends Component {
                         }}
                     />
                 )}
-                {this.state.switches.photo && (
-                    // <Photo
-                    //     link={this.state.data.image}
-                    //     remove={this.removePhoto}
-                    // />
-                    <TakePhoto
-                        link={this.state.data.image}
-                        openCamera={() =>
-                            this.props.navigation.navigate('Camera', {
-                                returnTo: paths.Pills,
-                            })
-                        }
-                        removePhoto={this.removePhoto}
-                    />
-                )}
+                {this.state.switches.photo &&
+                    (this.state.activity.data.photoFile ? (
+                        <TakePhoto
+                            photo={this.state.data.photoFile}
+                            openCamera={() =>
+                                this.props.navigation.navigate('Camera', {
+                                    returnTo: paths.ActivityDetails,
+                                })
+                            }
+                            removePhoto={this.removePhoto}
+                        />
+                    ) : (
+                        <TakePhoto
+                            link={this.state.data.image}
+                            openCamera={() =>
+                                this.props.navigation.navigate('Camera', {
+                                    returnTo: paths.ActivityDetails,
+                                })
+                            }
+                            removePhoto={this.removePhoto}
+                        />
+                    ))}
                 {this.state.switches.audio && (
                     <AudioRecorder
                         link={this.state.data.audio}
