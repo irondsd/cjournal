@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput } from 'react-native'
 import { strings } from '../localizations'
-import { borderGrey, secondaryGrey } from '../constants'
+import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 
 export default class Comment extends Component {
     render() {
         return (
             <TextInput
                 placeholder={strings.Comment}
-                multiline={true}
+                multiline={false}
                 maxLength={80}
-                placeholderTextColor="rgba(0, 0, 0, 0.5)"
+                placeholderTextColor={placeholderGrey}
                 style={styles.input}
                 autoCapitalize="none"
                 autoCorrect={true}

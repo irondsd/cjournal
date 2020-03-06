@@ -99,8 +99,7 @@ export default class TakePhoto extends Component {
                     </TouchableOpacity>
                 ) : (
                     <Text style={styles.placeholder} onPress={this.openCamera}>
-                        {' '}
-                        {strings.TakePhoto}{' '}
+                        {strings.TakePhoto}
                     </Text>
                 )}
                 <Icon
