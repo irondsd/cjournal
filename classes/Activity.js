@@ -12,6 +12,7 @@ import activityPutData from '../requests/ActivityPutData'
 import activityPutFile from '../requests/activityPutFile'
 import activityDeleteData from '../requests/ActivityDeleteData'
 import { moveToParentDir, downloadFile } from '../services/fs'
+import GPS from '../sensors/GPS'
 
 export default class Activity {
     constructor(
@@ -40,11 +41,9 @@ export default class Activity {
         this.id = id
     }
 
-    addToData(values) {
-        this.data = {
-            ...this.data,
-            ...values,
-        }
+    attachToData(data) {
+        this.data = { ...this.data, ...data }
+        this.setToUpdate()
     }
 
     setToDelete() {
@@ -248,6 +247,18 @@ export default class Activity {
                 .catch(error => {
                     reject(error)
                 })
+        })
+    }
+
+    attachLocation() {
+        return new Promise((resolve, reject) => {
+            let GPSClass = new GPS()
+            GPSClass.getPosition()
+                .then(position => {
+                    this.attachToData({ position: position })
+                    resolve()
+                })
+                .catch(err => reject(err))
         })
     }
 }
