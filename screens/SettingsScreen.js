@@ -14,6 +14,8 @@ import { strings } from '../localizations'
 import TouchableIcon from '../components/TouchableIcon'
 import SaveButton from '../components/SaveButton'
 import ToggleSwitch from '../components/ToggleSwitch'
+import { version } from '../package.json'
+import { displayName } from '../app.json'
 
 class SettingsScreen extends Component {
     static navigationOptions = {
@@ -46,6 +48,11 @@ class SettingsScreen extends Component {
                     barStyle="dark-content"
                     // hidden={true}
                 />
+                <Text
+                    style={
+                        styles.information
+                    }>{`${displayName} - ${strings.Version}: ${version}`}</Text>
+                <View></View>
                 <Text style={styles.name}>{this.props.user.username}</Text>
                 <Text
                     style={

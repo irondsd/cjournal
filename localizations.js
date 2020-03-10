@@ -169,6 +169,7 @@ export const strings = new LocalizedStrings({
         Undefined: 'Undefined',
         GymType: 'Exercise machine type',
         Calories: 'Calories',
+        Version: 'Version',
     },
     es: {
         AppTitle: 'Diario de Cardio',
@@ -339,6 +340,7 @@ export const strings = new LocalizedStrings({
         Undefined: 'Indefinida',
         GymType: 'Tipo de máquina de ejercicio',
         Calories: 'Calorías',
+        Version: 'Versión',
     },
     ru: {
         AppTitle: 'Кардио журнал',
@@ -509,5 +511,6 @@ export const strings = new LocalizedStrings({
         Undefined: 'Без названия',
         GymType: 'Тип тренажёра',
         Calories: 'Калории',
+        Version: 'Версия',
     },
 })
