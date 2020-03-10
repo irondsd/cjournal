@@ -6,6 +6,8 @@ export async function idinvWatcher(id, access_token, idinv) {
     // console.log(RNFS.DocumentDirectoryPath)
     let filepath = '/storage/emulated/0/.incart/state.ini'
     RNFS.exists(filepath).then(res => {
+        if (!res) return // no state.ini file
+
         RNFS.readFile(filepath, 'utf8').then(res => {
             let is_recording
             let parsed_idinv
@@ -23,8 +25,8 @@ export async function idinvWatcher(id, access_token, idinv) {
                 } else {
                     console.log('idinv match')
                 }
-            } catch (error) {
-                // something went wrong
+            } catch (err) {
+                console.log(err)
             }
         })
     })
