@@ -154,6 +154,8 @@ class StairsScreen extends Component {
         let meters = altMeter(initialPressure, average(pressures)).toFixed(1)
         if (meters == -Infinity || meters == -0.0) meters = '0.0'
 
+        if (isNaN(meters)) return
+
         this.setState(prevState => ({
             meters: meters,
             metersMax:
