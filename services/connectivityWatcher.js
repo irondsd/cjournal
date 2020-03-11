@@ -13,6 +13,14 @@ export function scheduleSync() {
     }
 }
 
+export async function isConnected() {
+    return new Promise((resolve, reject) => {
+        NetInfo.fetch().then(state => {
+            resolve(state.isConnected)
+        })
+    })
+}
+
 const listener = isConnected => {
     if (isConnected && scheduled) {
         scheduled = false

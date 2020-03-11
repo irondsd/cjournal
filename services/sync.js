@@ -10,6 +10,7 @@ import timestamp from '../helpers/timestamp'
 import NavigationService from '../navigation/NavigationService'
 import { logoutUser } from '../redux/actions'
 import { paths } from '../constants'
+import { isConnected } from './connectivityWatcher'
 
 let errors = 0
 
@@ -22,13 +23,17 @@ export default async function sync(id, tokens) {
 
     if (tokens.expiresSoon()) {
         // update tokens first
-        console.log('token', tokens.refresh_token)
+
         try {
             tokens = await tokens.refresh()
         } catch (error) {
-            errors += 1
+            isConnected().then(connected => {
+                console.log('is connected', connected)
+                if (!connected) errors += 1
+            })
 
-            if (errors >= 5) {
+            if (errors >= 5 && tokens.isExpired()) {
+                console.log(`Tokens expored, errors: ${errors}, logging out`)
                 store.dispatch(logoutUser())
                 NavigationService.navigate(paths.Welcome)
             }
