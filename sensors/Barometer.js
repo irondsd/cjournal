@@ -59,6 +59,7 @@ export default class Barometer {
             },
         )
     }
+
     stopUpdates() {
         this.bar.unsubscribe()
     }

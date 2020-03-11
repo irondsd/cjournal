@@ -103,50 +103,7 @@ class WalkingScreen extends Component {
 
         if (this.props.navigation.state.params)
             cancelNotification(this.props.navigation.state.params.tasks_id)
-
-        // Pedometer.isStepCountingAvailable((error, isAvailable) => {
-        //   if (isAvailable) {
-        //     Pedometer.startPedometerUpdatesFromDate(
-        //       this.state.startDate.getTime(),
-        //       pedometerData => {
-        //         if (this.state.timer_set) {
-        //           this.setState({
-        //             numberOfSteps: pedometerData.numberOfSteps
-        //             // distance: Math.round(pedometerData.distance * 10) / 10
-        //           });
-        //         }
-        //       }
-        //     );
-        //   }
-        // });
     }
-
-    //   requestPosition() {
-    //     navigator.geolocation.getCurrentPosition(
-    //       position => {
-    //         console.log("Got position", position.coords);
-    //         let distance = 0;
-    //         if (this.state.positions[this.state.positions.length - 1]) {
-    //           distance =
-    //             calculateDistance(
-    //               this.state.positions[this.state.positions.length - 1][0],
-    //               this.state.positions[this.state.positions.length - 1][1],
-    //               position.coords.latitude,
-    //               position.coords.longitude
-    //             ).toFixed(3) * 1000;
-    //         }
-    //         this.setState(prevState => ({
-    //           positions: [
-    //             ...prevState.positions,
-    //             [position.coords.latitude, position.coords.longitude]
-    //           ],
-    //           distance: prevState.distance + distance
-    //         }));
-    //       },
-    //       error => console.log(error.message),
-    //       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    //     );
-    //   }
 
     setDistance(distance) {
         this.setState({
@@ -169,10 +126,7 @@ class WalkingScreen extends Component {
             distance: this.state.distance ? this.state.distance : 0,
         }
         if (this.state.time_seconds >= 300) data.failed = true
-        // if (this.state.positions.length > 0) {
-        //   data.positionStart = this.state.positions[0];
-        //   data.positionEnd = this.state.positions[this.state.positions.length - 1];
-        // }
+
         let positions = this.GPS.getFirstAndLastPosition()
         data = {
             ...data,
