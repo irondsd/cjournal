@@ -258,7 +258,9 @@ export default class Activity {
                     this.attachToData({ position: position })
                     resolve()
                 })
-                .catch(err => reject(err))
+                .catch(err => {
+                    reject(err)
+                })
         })
     }
 }

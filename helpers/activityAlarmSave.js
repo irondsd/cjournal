@@ -13,9 +13,14 @@ export function activityAlarmSave(activity_type) {
             clicked = false
         }, 500)
         let activity = Activity.instantInit(activity_type)
-        activity.attachLocation().then(() => {
-            store.dispatch(updateActivity(activity, activity))
-        })
+        activity
+            .attachLocation()
+            .then(() => {
+                store.dispatch(updateActivity(activity, activity))
+            })
+            .catch(() => {
+                console.log('location error')
+            })
         store.dispatch(addActivity(activity))
     }
 }
