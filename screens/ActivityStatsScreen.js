@@ -18,6 +18,7 @@ import DeleteButton from '../components/DeleteButton'
 import BackButton from '../components/BackButton'
 import Activity from '../classes/Activity'
 import { displayDateTime } from '../helpers/dateTime'
+import Map from '../components/Map'
 
 type Props = {}
 class ActivityStatsScreen extends Component<Props> {
@@ -25,6 +26,7 @@ class ActivityStatsScreen extends Component<Props> {
         super(props)
         this.state = {
             stats: '',
+            coords: null,
         }
 
         this.goBack = this.goBack.bind(this)
@@ -61,6 +63,25 @@ class ActivityStatsScreen extends Component<Props> {
         let data = this.props.navigation.state.params.data
         this.props.navigation.setParams({ deleteActivity: this.deleteActivity })
         this.props.navigation.setParams({ goBack: this.goBack })
+
+        if (this.props.navigation.state.params) {
+            if (this.props.navigation.state.params.data) {
+                let coords = null
+                let data = this.props.navigation.state.params.data
+
+                if (data.position && data.position.coords) {
+                    coords = data.position.coords
+                }
+                if (data.positionStart) {
+                    coords = {
+                        latitude: data.positionStart[0],
+                        longitude: data.positionStart[1],
+                    }
+                }
+
+                // this.setState({ coords: coords })
+            }
+        }
 
         switch (this.props.navigation.state.params.activity_type) {
             case activityTypes.Walking:
@@ -139,6 +160,7 @@ class ActivityStatsScreen extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
+                {this.state.coords && <Map coords={this.state.coords} />}
                 <Text style={styles.stats}>{this.state.stats}</Text>
             </View>
         )
