@@ -168,6 +168,7 @@ class OtherScreen extends Component {
                 <DurationPicker
                     duration={this.state.duration}
                     handler={this.onPickerChange}
+                    value={this.state.duration}
                 />
                 <DropDownInput
                     list={this.state.list}
