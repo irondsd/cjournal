@@ -37,7 +37,7 @@ export default class DeviceIdInput extends Component {
                             size={30}
                             color={secondaryGrey}
                             onPress={() => {
-                                this.onOpneScanner()
+                                this.props.onOpenScanner()
                             }}
                         />
                     </View>

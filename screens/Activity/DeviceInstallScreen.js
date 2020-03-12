@@ -74,7 +74,7 @@ class DeviceInstallScreen extends Component {
         this.setState({ opneScanner: false })
     }
 
-    onOpneScanner() {
+    onOpenScanner = () => {
         //To Start Scanning
         if (Platform.OS === 'android') {
             //Calling the camera permission function
@@ -117,6 +117,7 @@ class DeviceInstallScreen extends Component {
             <View style={defaultStyles.container}>
                 <DeviceIdInput
                     value={this.state.device_id}
+                    onOpenScanner={this.onOpenScanner}
                     setText={text => {
                         this.setState({ device_id: text })
                     }}
