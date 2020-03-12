@@ -22,8 +22,6 @@ import TakePhoto from '../../components/TakePhoto'
 import DropDownInput from '../../components/DropDownInput'
 import SaveButton from '../../components/SaveButton'
 
-submitted = false
-
 class PillPickScreen extends Component {
     constructor(props) {
         super(props)
@@ -105,9 +103,6 @@ class PillPickScreen extends Component {
     }
 
     handleSubmit() {
-        if (submitted) return
-        submitted = true
-
         let activity = new Activity(
             null,
             this.state.activity_type,

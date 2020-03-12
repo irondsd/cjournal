@@ -77,7 +77,6 @@ class AlarmScreen extends Component {
                 })
                 .catch(err => {
                     this.record(err)
-                    // TODO: try to get position later
                 })
         }
     }
