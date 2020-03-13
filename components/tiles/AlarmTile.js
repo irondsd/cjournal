@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ActivityLargeItem from '../ActivityLargeItem'
 import { strings } from '../../localizations'
-import { activityAlarmSave } from '../../helpers/activityAlarmSave'
+import { activitySaveWithLocation } from '../../helpers/activitySaveWithLocation'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
@@ -19,7 +19,7 @@ export default class Tile extends Component {
                 shadeColor="#000"
                 imgScale={0.85}
                 onPress={() => {
-                    activityAlarmSave(name)
+                    activitySaveWithLocation(name)
                     this.props.navigation.navigate(paths.Home)
                 }}
                 onLongPress={() => {
