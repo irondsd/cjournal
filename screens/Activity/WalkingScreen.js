@@ -161,6 +161,13 @@ class WalkingScreen extends Component {
             this.timerTick()
         }, 1000)
 
+        BackgroundTimer.setTimeout(() => {
+            console.log('finished 6 mins')
+
+            this.timerStop()
+            this.record()
+        }, 360000)
+
         this.setState(prevstate => ({
             intervalId: intervalId,
         }))
@@ -208,21 +215,13 @@ class WalkingScreen extends Component {
         if (this.state.time_seconds === 0) {
             // time ran out
             Vibration.vibrate(600)
-            // Pedometer.stopPedometerUpdates();
-            //   navigator.geolocation.clearWatch(this.state.watchID);
             this.timerStop()
             this.record()
         }
-
-        // if (this.state.time_seconds % 10 === 0) {
-        //   this.requestPosition();
-        // }
     }
 
     timerStop() {
-        // navigator.geolocation.clearWatch(this.state.watchID);
         BackgroundTimer.clearInterval(this.state.intervalId)
-        // Pedometer.stopPedometerUpdates();
         this.GPS.watchStop()
         this.Pedometer.stopUpdates()
     }
