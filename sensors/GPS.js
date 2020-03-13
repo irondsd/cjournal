@@ -23,7 +23,6 @@ export default class GPS {
 
         Geolocation.getCurrentPosition(
             position => {
-                // console.log('Got position', position.coords)
                 let distance = 0
                 if (this.positions[this.positions.length - 1]) {
                     distance =
@@ -44,8 +43,8 @@ export default class GPS {
             error => console.log(error.message),
             {
                 enableHighAccuracy: true,
-                timeout: 20000,
-                maximumAge: 1000,
+                timeout: 30000,
+                maximumAge: 0,
             },
         )
     }
@@ -61,7 +60,18 @@ export default class GPS {
                     resolve(position)
                 },
                 error => {
-                    reject(error)
+                    // retry with low accuracy
+                    Geolocation.getCurrentPosition(position => {
+                        resolve(position)
+                    }),
+                        error => {
+                            reject(error)
+                        },
+                        {
+                            enableHighAccuracy: false,
+                            timeout: 20000,
+                            maximumAge: 1000,
+                        }
                 },
                 {
                     enableHighAccuracy: true,
