@@ -1,6 +1,6 @@
 {
     "name": "cjournal",
-    "version": "3.2.8",
+    "version": "3.2.10",
     "private": true,
     "scripts": {
         "android": "react-native run-android",
