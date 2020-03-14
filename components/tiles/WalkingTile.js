@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import ActivityItem from '../ActivityItem'
+import Tile from '../Tile'
 import { strings } from '../../localizations'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
 const name = activityTypes.Walking
 
-export default class Tile extends Component {
+export default class ScreenTile extends Component {
     render() {
         return (
-            <ActivityItem
+            <Tile
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
