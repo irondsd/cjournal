@@ -81,38 +81,27 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            <TileWrapper>
-                <StatusBar backgroundColor={'white'} barStyle="dark-content" />
-                <SleepTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Sleep}
-                />
-                <AlarmTile navigation={this.props.navigation} />
-                <PhysicalLoadTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.PhysicalLoad}
-                />
-                <ActivityTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Activity}
-                />
-                <EmotionalStressTile navigation={this.props.navigation} />
-                <PainTile navigation={this.props.navigation} />
-                <ComplaintsTile navigation={this.props.navigation} />
-                <WeaknessTile navigation={this.props.navigation} />
-                <PillsTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Pills}
-                />
-                <TestsTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Tests}
-                />
-                <ServiceTile
-                    navigation={this.props.navigation}
-                    disabled={this.state.Service}
-                />
-            </TileWrapper>
+            <View>
+                <TileWrapper>
+                    <SleepTile navigation={this.props.navigation} />
+                    <AlarmTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <PhysicalLoadTile navigation={this.props.navigation} />
+                    <ActivityTile navigation={this.props.navigation} />
+                    <EmotionalStressTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <PainTile navigation={this.props.navigation} />
+                    <ComplaintsTile navigation={this.props.navigation} />
+                    <WeaknessTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <PillsTile navigation={this.props.navigation} />
+                    <TestsTile navigation={this.props.navigation} />
+                    <ServiceTile navigation={this.props.navigation} />
+                </TileWrapper>
+            </View>
         )
     }
 }

@@ -18,13 +18,19 @@ class TestsScreen extends Component {
 
     render() {
         return (
-            <TileWrapper>
-                <WalkingTile navigation={this.props.navigation} />
-                <StairsTile navigation={this.props.navigation} />
-                <PsychoemotionalTestTile navigation={this.props.navigation} />
-                <PressTile navigation={this.props.navigation} />
-                <StrainingTile navigation={this.props.navigation} />
-            </TileWrapper>
+            <View>
+                <TileWrapper>
+                    <WalkingTile navigation={this.props.navigation} />
+                    <StairsTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <PsychoemotionalTestTile
+                        navigation={this.props.navigation}
+                    />
+                    <PressTile navigation={this.props.navigation} />
+                    <StrainingTile navigation={this.props.navigation} />
+                </TileWrapper>
+            </View>
         )
     }
 }

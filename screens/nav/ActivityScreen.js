@@ -19,15 +19,19 @@ class ActivityScreen extends Component<Props> {
 
     render() {
         return (
-            <TileWrapper>
-                <MealTile navigation={this.props.navigation} />
-                <AlcoholTile navigation={this.props.navigation} />
-                <SmokingTile navigation={this.props.navigation} />
-                <SexTile navigation={this.props.navigation} />
-                <ToiletTile navigation={this.props.navigation} />
-                <ShowerTile navigation={this.props.navigation} />
-                <OtherActivity navigation={this.props.navigation} />
-            </TileWrapper>
+            <View>
+                <TileWrapper>
+                    <MealTile navigation={this.props.navigation} />
+                    <AlcoholTile navigation={this.props.navigation} />
+                    <SmokingTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <SexTile navigation={this.props.navigation} />
+                    <ToiletTile navigation={this.props.navigation} />
+                    <ShowerTile navigation={this.props.navigation} />
+                    <OtherActivity navigation={this.props.navigation} />
+                </TileWrapper>
+            </View>
         )
     }
 }

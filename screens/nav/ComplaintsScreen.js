@@ -18,13 +18,17 @@ export default class ComplaintsScreen extends Component<Props> {
 
     render() {
         return (
-            <TileWrapper>
-                <DyspneaTile navigation={this.props.navigation} />
-                <TachypneaTile navigation={this.props.navigation} />
-                <ArrhythmiaTile navigation={this.props.navigation} />
-                <PalpitationTile navigation={this.props.navigation} />
-                <OtherComplaints navigation={this.props.navigation} />
-            </TileWrapper>
+            <View>
+                <TileWrapper>
+                    <DyspneaTile navigation={this.props.navigation} />
+                    <TachypneaTile navigation={this.props.navigation} />
+                    <ArrhythmiaTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <PalpitationTile navigation={this.props.navigation} />
+                    <OtherComplaints navigation={this.props.navigation} />
+                </TileWrapper>
+            </View>
         )
     }
 }

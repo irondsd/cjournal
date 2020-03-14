@@ -18,13 +18,19 @@ export default class WeaknessScreen extends Component {
 
     render() {
         return (
-            <TileWrapper>
-                <SyncopeTile navigation={this.props.navigation} />
-                <FaintTile navigation={this.props.navigation} />
-                <StupefactionTile navigation={this.props.navigation} />
-                <VisionDisturbancesTile navigation={this.props.navigation} />
-                <OtherWeakness navigation={this.props.navigation} />
-            </TileWrapper>
+            <View>
+                <TileWrapper>
+                    <SyncopeTile navigation={this.props.navigation} />
+                    <FaintTile navigation={this.props.navigation} />
+                    <StupefactionTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <VisionDisturbancesTile
+                        navigation={this.props.navigation}
+                    />
+                    <OtherWeakness navigation={this.props.navigation} />
+                </TileWrapper>
+            </View>
         )
     }
 }

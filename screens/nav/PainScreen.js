@@ -17,12 +17,16 @@ export default class PainScreen extends Component {
 
     render() {
         return (
-            <TileWrapper>
-                <RetrosternalPainTile navigation={this.props.navigation} />
-                <HeartAreaPainTile navigation={this.props.navigation} />
-                <HeadacheTile navigation={this.props.navigation} />
-                <OtherPain navigation={this.props.navigation} />
-            </TileWrapper>
+            <View>
+                <TileWrapper>
+                    <RetrosternalPainTile navigation={this.props.navigation} />
+                    <HeartAreaPainTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <HeadacheTile navigation={this.props.navigation} />
+                    <OtherPain navigation={this.props.navigation} />
+                </TileWrapper>
+            </View>
         )
     }
 }

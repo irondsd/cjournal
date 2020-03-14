@@ -18,13 +18,17 @@ export default class PhysicalLoadScreen extends Component {
 
     render() {
         return (
-            <TileWrapper>
-                <GymWalkingTile navigation={this.props.navigation} />
-                <RunningTile navigation={this.props.navigation} />
-                <BicyclingTile navigation={this.props.navigation} />
-                <GymTile navigation={this.props.navigation} />
-                <OtherLoad navigation={this.props.navigation} />
-            </TileWrapper>
+            <View>
+                <TileWrapper>
+                    <GymWalkingTile navigation={this.props.navigation} />
+                    <RunningTile navigation={this.props.navigation} />
+                    <BicyclingTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <GymTile navigation={this.props.navigation} />
+                    <OtherLoad navigation={this.props.navigation} />
+                </TileWrapper>
+            </View>
         )
     }
 }
