@@ -16,7 +16,6 @@ export default class ScreenTile extends Component {
                 navigation={this.props.navigation}
                 color="#C62828"
                 shadeColor="#384E77"
-                imgScale={1}
                 onPress={() => {
                     this.props.navigation.navigate(paths.Complaints)
                 }}

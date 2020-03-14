@@ -17,7 +17,6 @@ export default class ScreenTile extends Component {
                 navigation={this.props.navigation}
                 color="#dd0"
                 shadeColor="#000"
-                imgScale={0.9}
                 onPress={() => {
                     activityInstantSave(name)
                     this.props.navigation.navigate(paths.Home)
