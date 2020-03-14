@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 import { backgroundColor, borderGrey } from './colors'
 
 export const tileMargin = Dimensions.get('window').width / 50
-export const tileSize = Dimensions.get('window').width / 3.75
+export const tileSize = Dimensions.get('window').width / 4.15
 export const borderRadius = tileSize / 8
 export const imgSize = tileSize * 0.7
 

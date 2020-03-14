@@ -12,7 +12,9 @@ import { showToast, showError } from '../services/toast'
 import { strings } from '../localizations'
 
 export default class aTile extends Component {
-    static defaultProps = { shadeColor: '#000' }
+    static defaultProps = {
+        shadeColor: '#000',
+    }
 
     render() {
         return (
@@ -33,7 +35,7 @@ export default class aTile extends Component {
                     }
                 }}>
                 <LinearGradient
-                    style={[styles.box]}
+                    style={styles.box}
                     colors={[this.props.color, this.props.shadeColor]}
                     start={{ x: 0.0, y: 0.0 }}
                     end={{ x: 1.0, y: 1.0 }}>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
         marginRight: tileMargin,
     },
     box: {
-        height: tileSize * 0.9,
+        height: tileSize,
         backgroundColor: '#666',
         borderRadius: borderRadius,
         alignItems: 'center',
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
         height: imgSize,
     },
     titleBox: {
+        top: -3,
         height: tileMargin * 4.5,
     },
     text: {

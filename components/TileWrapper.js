@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
         backgroundColor: backgroundColor,
         justifyContent: 'space-evenly',
         margin: tileMargin,
-        marginBottom: tileMargin * 2,
+        marginBottom: tileMargin * 3,
     },
 })
