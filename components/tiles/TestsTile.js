@@ -15,8 +15,8 @@ export default class ScreenTile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color="#8B55B2"
-                shadeColor="#000"
+                color="#57687a"
+                shadeColor="#5d577a"
                 disabled={this.props.disabled}
                 onPress={() => {
                     this.props.navigation.navigate(paths.Tests)
