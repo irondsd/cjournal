@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import {
+    Text,
+    View,
+    StyleSheet,
+    Image,
+    TouchableOpacity,
+    Platform,
+} from 'react-native'
 import {
     tileMargin,
     imgSize,
@@ -68,12 +75,13 @@ const styles = StyleSheet.create({
         height: imgSize,
     },
     titleBox: {
-        top: -3,
+        top: Platform.OS === 'ios' ? 0 : -3,
         height: tileMargin * 4.5,
     },
     text: {
         color: 'black',
         fontSize: 14,
+        fontWeight: '400',
         textAlign: 'center',
     },
 })
