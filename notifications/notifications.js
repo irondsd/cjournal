@@ -37,7 +37,7 @@ export function scheduleNotification(id, title, message, dateTime) {
         ongoing: false, // (optional) set whether this is an "ongoing" notification
         soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
     })
-    // console.log(`notification ${id} set on`, dateTime)
+    console.log(`notification ${id} set on`, dateTime)
 }
 
 export function cancelLocalNotification(id) {
@@ -46,29 +46,30 @@ export function cancelLocalNotification(id) {
 }
 
 function onNotificationOpened(notification) {
+    // TODO: check if opens correctly
     console.log('Opened notification:', notification)
-    if (notification.action === strings.Postponed) {
-        cancelNotification(notification.id)
-        // reschedule
-        let dateTime = new Date()
-        dateTime.setMinutes(dateTime.getMinutes() + 30)
-        scheduleNotification(
-            notification.id,
-            notification.title,
-            notification.message,
-            dateTime,
-        )
-        showToast(strings.Postponed)
-    } else {
-        let task = store.getState().tasks.find(task => {
-            return task.id == notification.id
-        })
-        if (!task.isCompleted()) {
-            NavigationService.navigate(task.activity_type, {
-                tasks_id: notification.id,
-            })
-        } else {
-            console.log('already completed task notification')
-        }
-    }
+    // if (notification.action === strings.Postponed) {
+    //     cancelNotification(notification.id)
+    //     // reschedule
+    //     let dateTime = new Date()
+    //     dateTime.setMinutes(dateTime.getMinutes() + 30)
+    //     scheduleNotification(
+    //         notification.id,
+    //         notification.title,
+    //         notification.message,
+    //         dateTime,
+    //     )
+    //     showToast(strings.Postponed)
+    // } else {
+    //     let task = store.getState().tasks.find(task => {
+    //         return task.id == notification.id
+    //     })
+    //     if (!task.isCompleted()) {
+    //         NavigationService.navigate(task.activity_type, {
+    //             tasks_id: notification.id,
+    //         })
+    //     } else {
+    //         console.log('already completed task notification')
+    //     }
+    // }
 }
