@@ -12,6 +12,7 @@ import {
     imgSize,
     borderRadius,
     tileSize,
+    tileFontSize,
 } from '../constants/styles'
 import { pSBC } from '../helpers/colors'
 import LinearGradient from 'react-native-linear-gradient'
@@ -49,7 +50,9 @@ export default class aTile extends Component {
                     <Image style={styles.img} source={this.props.img} />
                 </LinearGradient>
                 <View style={styles.titleBox}>
-                    <Text style={styles.text}>{this.props.text}</Text>
+                    <Text adjustsFontSizeToFit style={styles.text}>
+                        {this.props.text}
+                    </Text>
                 </View>
             </TouchableOpacity>
         )
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'black',
-        fontSize: 14,
+        fontSize: tileFontSize,
         fontWeight: '400',
         textAlign: 'center',
     },
