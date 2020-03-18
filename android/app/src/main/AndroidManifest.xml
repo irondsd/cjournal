@@ -68,7 +68,7 @@
         <!-- </ Only if you're using GCM or localNotificationSchedule() > -->
       <activity
         android:name=".MainActivity"
-        android:launchMode="singleTask"
+        android:launchMode="singleInstance"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
