@@ -46,30 +46,28 @@ export function cancelLocalNotification(id) {
 }
 
 function onNotificationOpened(notification) {
-    // TODO: check if opens correctly
-    console.log('Opened notification:', notification)
-    // if (notification.action === strings.Postponed) {
-    //     cancelNotification(notification.id)
-    //     // reschedule
-    //     let dateTime = new Date()
-    //     dateTime.setMinutes(dateTime.getMinutes() + 30)
-    //     scheduleNotification(
-    //         notification.id,
-    //         notification.title,
-    //         notification.message,
-    //         dateTime,
-    //     )
-    //     showToast(strings.Postponed)
-    // } else {
-    //     let task = store.getState().tasks.find(task => {
-    //         return task.id == notification.id
-    //     })
-    //     if (!task.isCompleted()) {
-    //         NavigationService.navigate(task.activity_type, {
-    //             tasks_id: notification.id,
-    //         })
-    //     } else {
-    //         console.log('already completed task notification')
-    //     }
-    // }
+    if (notification.action === strings.RemindLater) {
+        cancelNotification(notification.id)
+        // reschedule
+        let dateTime = new Date()
+        dateTime.setMinutes(dateTime.getMinutes() + 30)
+        scheduleNotification(
+            notification.id,
+            notification.title,
+            notification.message,
+            dateTime,
+        )
+        showToast(strings.Postponed)
+    } else {
+        let task = store.getState().tasks.find(task => {
+            return task.id == notification.id
+        })
+        if (!task.isCompleted()) {
+            NavigationService.navigate(task.activity_type, {
+                tasks_id: notification.id,
+            })
+        } else {
+            console.log('already completed task notification')
+        }
+    }
 }

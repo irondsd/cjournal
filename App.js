@@ -5,9 +5,11 @@ import BackgroundFetch from 'react-native-background-fetch'
 import sync from './services/sync'
 import NavigationService from './navigation/NavigationService'
 import { idinvWatcher } from './services/idinvWatcher'
+import { setupNotifications } from './notifications/notifications'
 
 class App extends Component {
     componentDidMount() {
+        setupNotifications()
         BackgroundFetch.configure(
             {
                 minimumFetchInterval: 15, // <-- minutes (15 is minimum allowed)
