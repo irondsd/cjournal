@@ -4,6 +4,7 @@ import tasksReducer from './tasksReducer'
 import userReducer from './userReducer'
 import notificationsReducer from './notificationsReducer'
 import tokensReducer from './tokensReducer'
+import settingsReducer from './settingsReducer'
 
 export const allReducers = combineReducers({
     user: userReducer,
@@ -11,4 +12,5 @@ export const allReducers = combineReducers({
     tasks: tasksReducer,
     notifications: notificationsReducer,
     tokens: tokensReducer,
+    settings: settingsReducer,
 })
