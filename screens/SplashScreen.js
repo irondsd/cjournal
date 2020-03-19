@@ -15,6 +15,7 @@ import {
     replaceTasks,
     loadNotifications,
     tokensReceived,
+    loadSettings,
 } from '../redux/actions'
 import { strings } from '../localizations'
 import { asyncGetAll, removeScreen, removeAll } from '../services/asyncStorage'
@@ -45,7 +46,7 @@ class SplashScreen extends Component {
                 if (res.tasks) this.props.replaceTasks(res.tasks)
                 if (res.notifications)
                     this.props.loadNotifications(res.notifications)
-
+                if (res.settings) this.props.loadSettings(res.settings)
                 if (res.tokens) {
                     if (res.screen) {
                         this.props.navigation.navigate(
@@ -92,6 +93,7 @@ const mapDispatchToProps = {
     updateUser,
     loadNotifications,
     tokensReceived,
+    loadSettings,
 }
 
 export default connect(null, mapDispatchToProps)(SplashScreen)

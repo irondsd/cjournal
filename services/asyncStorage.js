@@ -7,10 +7,15 @@ let entries = {
     notifications: 'notifications',
     screen: 'screen',
     tokens: 'tokens',
+    settings: 'settings',
 }
 
 export function userAsyncSave(user) {
     AsyncStorage.mergeItem(entries.user, JSON.stringify(user))
+}
+
+export function settingsAsyncSave(settings) {
+    AsyncStorage.setItem(entries.settings, JSON.stringify(settings))
 }
 
 export function tokensAsyncSave(tokens) {
