@@ -31,7 +31,7 @@ import EmotionalStressScreen from '../screens/nav/EmotionalStressScreen'
 import WeaknessScreen from '../screens/nav/WeaknessScreen'
 import PillsScreen from '../screens/Activity/PillsScreen'
 import TestsScreen from '../screens/nav/TestsScreen'
-import OrthostasisScreen from '../screens/Activity/OrthostasisScreen'
+import DebugScreen from '../screens/DebugScreen'
 import AlarmScreen from '../screens/Activity/AlarmScreen'
 import ActivityStatsScreen from '../screens/ActivityStatsScreen'
 import DeviceInstallScreen from '../screens/Activity/DeviceInstallScreen'
@@ -63,7 +63,6 @@ const HomeStack = createStackNavigator({
     Weakness: WeaknessScreen,
     Pills: PillsScreen,
     Tests: TestsScreen,
-    Orthostasis: OrthostasisScreen,
     Alarm: AlarmScreen,
     DeviceInstall: DeviceInstallScreen,
     Camera: CameraScreen,
