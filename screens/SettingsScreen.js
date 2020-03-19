@@ -16,6 +16,7 @@ import SaveButton from '../components/SaveButton'
 import ToggleSwitch from '../components/ToggleSwitch'
 import { version } from '../package.json'
 import { displayName } from '../app.json'
+import { setNotifications, setIdinvFilter } from '../redux/actions'
 
 class SettingsScreen extends Component {
     static navigationOptions = {
@@ -28,11 +29,6 @@ class SettingsScreen extends Component {
                 style={{ right: 15 }}
             />
         ),
-    }
-
-    state = {
-        idinvFilter: false,
-        notifications: false,
     }
 
     logout() {
@@ -61,20 +57,16 @@ class SettingsScreen extends Component {
                 <View>
                     <ToggleSwitch
                         text={'Idinv filter'}
-                        value={this.state.idinvFilter}
-                        onChange={value =>
-                            this.setState({
-                                idinvFilter: !this.state.idinvFilter,
-                            })
+                        value={this.props.idinvFilter}
+                        onValueChange={value =>
+                            this.props.setIdinvFilter(value)
                         }
                     />
                     <ToggleSwitch
                         text={'Notifications'}
-                        value={this.state.notifications}
-                        onChange={value =>
-                            this.setState({
-                                notifications: !this.state.notifications,
-                            })
+                        value={this.props.notifications}
+                        onValueChange={value =>
+                            this.props.setNotifications(value)
                         }
                     />
                 </View>
@@ -108,12 +100,20 @@ class SettingsScreen extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user,
+        notifications: state.settings.notifications,
+        idinvFilter: state.settings.idinvFilter,
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     logout: () => {
         dispatch(logoutUser())
+    },
+    setNotifications: value => {
+        dispatch(setNotifications(value))
+    },
+    setIdinvFilter: value => {
+        dispatch(setIdinvFilter(value))
     },
 })
 
