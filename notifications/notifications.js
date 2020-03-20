@@ -26,18 +26,15 @@ export function scheduleNotification(id, title, message, dateTime) {
         id: id.toString(),
         title: strings[title],
         message: message,
-        // bigText: "My big text that will be shown when notification is expanded",
         vibrate: true,
         date: dateTime,
-        // color: 'blue',
         largeIcon: 'app_icon', // (optional) default: "ic_launcher"
         smallIcon: 'app_icon', // (optional) default: "ic_notification" with fallback for "ic_launcher"
         actions: `["${strings.Start}", "${strings.RemindLater}"]`,
         playSound: true, // (optional) default: true
         ongoing: false, // (optional) set whether this is an "ongoing" notification
-        soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
+        soundName: 'default',
     })
-    // console.log(`notification ${id} set on`, dateTime)
 }
 
 export function cancelLocalNotification(id) {
@@ -62,7 +59,7 @@ function onNotificationOpened(notification) {
         let task = store.getState().tasks.find(task => {
             return task.id == notification.id
         })
-        if (!task.isCompleted()) {
+        if (task && !task.isCompleted()) {
             NavigationService.navigate(task.activity_type, {
                 tasks_id: notification.id,
             })
