@@ -43,6 +43,8 @@ export function cancelLocalNotification(id) {
 }
 
 function onNotificationOpened(notification) {
+    // TODO: dismiss notification with android Native Modules
+
     if (notification.action === strings.RemindLater) {
         cancelNotification(notification.id)
         // reschedule
