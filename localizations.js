@@ -164,6 +164,7 @@ export const strings = new LocalizedStrings({
         Yesterday: 'Yesterday',
         YouClimbed: 'You climbed',
         YouWalked: 'You walked',
+        by: 'by',
     },
     es: {
         Activity: 'Actividad',
@@ -330,6 +331,7 @@ export const strings = new LocalizedStrings({
         Yesterday: 'Ayer',
         YouClimbed: 'Usted subió',
         YouWalked: 'Usted caminó',
+        by: 'por',
     },
     ru: {
         Activity: 'Активность',
@@ -492,5 +494,6 @@ export const strings = new LocalizedStrings({
         Yesterday: 'Вчера',
         YouClimbed: 'Вы поднялись на',
         YouWalked: 'Вы прошли',
+        by: 'на',
     },
 })
