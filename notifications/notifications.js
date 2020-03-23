@@ -6,7 +6,7 @@ import { strings } from '../localizations'
 import { showToast } from '../services/toast'
 import { localTime } from '../helpers/dateTime'
 
-const PostponeBy = 5 // minutes
+const PostponeBy = 30 // minutes
 
 export function setupNotifications() {
     console.log('notifications service initiated')
@@ -38,6 +38,7 @@ export function scheduleNotification(id, title, message, dateTime) {
         ongoing: false, // (optional) set whether this is an "ongoing" notification
         soundName: 'default',
     })
+    // console.log(`not ${id} scheduled for ${dateTime.toLocaleTimeString()}`)
 }
 
 export function cancelLocalNotification(id) {
