@@ -15,23 +15,26 @@ export default function notificationsReducer(state = [], { type, payload }) {
                     let dateTime = new Date(payload[i].time * 1000)
                     dateTime.setSeconds(0)
                     dateTime.setMilliseconds(0)
-                    // if (new Date() > dateTime) {
-                    //     // it's in the past
-                    //     // let's notify in the next half an hour
-                    //     dateTime = new Date()
-                    //     dateTime.setSeconds(0)
-                    //     dateTime.setMilliseconds(0)
-                    //     if (dateTime.getHours() > 21 || dateTime.getHours() < 9) {
-                    //         // if it's late, let's schedule for the next morning
-                    //         dateTime.setHours(10)
-                    //     }
-                    //     if (dateTime.getMinutes() > 30) {
-                    //         dateTime.setHours(dateTime.getHours() + 1)
-                    //         dateTime.setMinutes(0)
-                    //     } else {
-                    //         dateTime.setMinutes(30)
-                    //     }
-                    // }
+                    if (new Date() > dateTime) {
+                        // it's in the past
+                        // let's notify in the next half an hour
+                        dateTime = new Date()
+                        dateTime.setSeconds(0)
+                        dateTime.setMilliseconds(0)
+                        if (
+                            dateTime.getHours() > 21 ||
+                            dateTime.getHours() < 9
+                        ) {
+                            // if it's late, let's schedule for the next morning
+                            dateTime.setHours(10)
+                        }
+                        if (dateTime.getMinutes() > 30) {
+                            dateTime.setHours(dateTime.getHours() + 1)
+                            dateTime.setMinutes(0)
+                        } else {
+                            dateTime.setMinutes(30)
+                        }
+                    }
                     // cheching if we have a notification at this time already
                     let vacant = isVacant(state, dateTime, payload[i].id)
                     if (!vacant) dateTime.setHours(dateTime.getHours() + 1) // if so, adding 1 hour
@@ -51,7 +54,7 @@ export default function notificationsReducer(state = [], { type, payload }) {
                                 state.push(notification)
                                 scheduleNotification(
                                     payload[i].id,
-                                    payload[i].activity_type,
+                                    strings[payload[i].activity_type],
                                     strings.notifText,
                                     dateTime,
                                 )
@@ -142,8 +145,9 @@ function findExists(state, notification) {
 
 function isVacant(state, dateTime, id) {
     let vacant = true
+
     for (let i = 0; i < state.length; i++) {
-        if (state[i].time == dateTime.getTime()) {
+        if (state[i].time == (dateTime.getTime() + '').substring(0, 10)) {
             if (state[i].id != id) {
                 vacant = false
             }
