@@ -4,6 +4,9 @@ import { cancelNotification } from '../redux/actions/notificationsActions'
 import NavigationService from '../navigation/NavigationService'
 import { strings } from '../localizations'
 import { showToast } from '../services/toast'
+import { localTime } from '../helpers/dateTime'
+
+const PostponeBy = 5 // minutes
 
 export function setupNotifications() {
     console.log('notifications service initiated')
@@ -40,23 +43,30 @@ export function scheduleNotification(id, title, message, dateTime) {
 export function cancelLocalNotification(id) {
     console.log('cancelled notification', id)
     PushNotification.cancelLocalNotifications({ id: id.toString() })
+    PushNotification.clearLocalNotification(id)
+}
+
+export function dismissLocalNotification(id) {
+    id = parseInt(id)
+    PushNotification.clearLocalNotification(id)
 }
 
 function onNotificationOpened(notification) {
-    // TODO: dismiss notification with android Native Modules
+    dismissLocalNotification(notification.id)
 
     if (notification.action === strings.RemindLater) {
         cancelNotification(notification.id)
+
         // reschedule
         let dateTime = new Date()
-        dateTime.setMinutes(dateTime.getMinutes() + 30)
+        dateTime.setMinutes(dateTime.getMinutes() + PostponeBy)
         scheduleNotification(
             notification.id,
             notification.title,
             notification.message,
             dateTime,
         )
-        showToast(strings.Postponed)
+        showToast(`${strings.Postponed} ${strings.by} ${localTime(PostponeBy)}`)
     } else {
         let task = store.getState().tasks.find(task => {
             return task.id == notification.id
