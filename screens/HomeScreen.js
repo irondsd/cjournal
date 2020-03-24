@@ -83,12 +83,21 @@ class HomeScreen extends Component {
         return (
             <View>
                 <TileWrapper>
-                    <SleepTile navigation={this.props.navigation} />
+                    <SleepTile
+                        navigation={this.props.navigation}
+                        disabled={this.state.Sleep}
+                    />
                     <AlarmTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
-                    <PhysicalLoadTile navigation={this.props.navigation} />
-                    <ActivityTile navigation={this.props.navigation} />
+                    <PhysicalLoadTile
+                        navigation={this.props.navigation}
+                        disabled={this.state.PhysicalLoad}
+                    />
+                    <ActivityTile
+                        navigation={this.props.navigation}
+                        disabled={this.state.Activity}
+                    />
                     <EmotionalStressTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
@@ -97,9 +106,18 @@ class HomeScreen extends Component {
                     <WeaknessTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
-                    <PillsTile navigation={this.props.navigation} />
-                    <TestsTile navigation={this.props.navigation} />
-                    <ServiceTile navigation={this.props.navigation} />
+                    <PillsTile
+                        navigation={this.props.navigation}
+                        disabled={this.state.Pills}
+                    />
+                    <TestsTile
+                        navigation={this.props.navigation}
+                        disabled={this.state.Tests}
+                    />
+                    <ServiceTile
+                        navigation={this.props.navigation}
+                        disabled={this.state.Service}
+                    />
                 </TileWrapper>
             </View>
         )
