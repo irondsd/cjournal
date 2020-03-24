@@ -48,8 +48,8 @@ class TasksScreen extends Component<Props> {
     }
 
     fetch() {
-        id = this.props.user.id
-        tokens = this.props.tokens
+        let id = this.props.user.id
+        let tokens = this.props.tokens
         this.props.fetchData(id, tokens.access_token)
     }
 
