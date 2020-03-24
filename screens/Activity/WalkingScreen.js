@@ -20,6 +20,7 @@ import {
     activityTypes,
     paths,
     defaultStyles,
+    walkingDuration,
 } from '../../constants'
 import BackButton from '../../components/BackButton'
 import { showError } from '../../services/toast'
@@ -30,7 +31,6 @@ import GPS from '../../sensors/GPS'
 import Pedometer from '../../sensors/Pedometer'
 import SaveButton from '../../components/SaveButton'
 
-const duration = 360 // 6 minutes
 let timerOn = false
 
 class WalkingScreen extends Component {
@@ -58,7 +58,7 @@ class WalkingScreen extends Component {
 
         this.state = {
             timer: '0:00',
-            time_seconds: duration,
+            time_seconds: walkingDuration,
             timer_set: false,
             button_text: strings.Start,
             intervalId: 0,
@@ -95,7 +95,7 @@ class WalkingScreen extends Component {
         requestLocationPermissions()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
         this.setState({
-            timer: secs2time(duration),
+            timer: secs2time(walkingDuration),
             tasks_id: this.props.navigation.state.params
                 ? this.props.navigation.state.params.tasks_id
                 : null,

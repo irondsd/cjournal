@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor } from '../constants'
+import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localizations'
 import { tasksFetchData } from '../requests/tasksFetchData'
 import TasksListItem from '../components/TasksListItem'
@@ -44,7 +44,7 @@ class TasksScreen extends Component<Props> {
             if (this.active) {
                 this.fetch()
             }
-        }, 3000)
+        }, listUpdateInterval)
     }
 
     fetch() {

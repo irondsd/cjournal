@@ -2,6 +2,7 @@ import timestamp from '../helpers/timestamp'
 import store from '../redux/store'
 import identityRefreshToken from '../requests/identityRefreshToken'
 import { tokensReceived } from '../redux/actions'
+import { updateTokenBeforeExpiration } from '../constants'
 
 export default class Tokens {
     constructor(access_token, refresh_token, token_lifetime, isLoggedIn) {
@@ -34,6 +35,6 @@ export default class Tokens {
 
     expiresSoon() {
         // 10 minutes before it expires
-        return this.token_lifetime - timestamp() < 600
+        return this.token_lifetime - timestamp() < updateTokenBeforeExpiration
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor } from '../constants'
+import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localizations'
 import { activityFetchData } from '../requests/activityFetchData'
 import ActivityListItem from '../components/ActivityListItem'
@@ -46,7 +46,7 @@ class JournalScreen extends Component<Props> {
             if (this.active) {
                 this.runSync()
             }
-        }, 3000)
+        }, listUpdateInterval)
     }
 
     runSync() {
