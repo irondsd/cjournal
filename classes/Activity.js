@@ -21,6 +21,7 @@ export default class Activity {
         time_started,
         time_ended,
         tasks_id,
+        idinv,
         last_updated,
         comment,
         data,
@@ -33,6 +34,7 @@ export default class Activity {
         this.tasks_id = tasks_id
         this.last_updated = last_updated
         this.comment = comment
+        this.idinv = idinv
         this.data = data
         this.system = system
     }
@@ -62,13 +64,14 @@ export default class Activity {
         }
     }
 
-    static instantInit(activity_type, comment = '', data = {}) {
+    static instantInit(activity_type, idinv = null, comment = '', data = {}) {
         return new Activity(
             null,
             activity_type,
             timestamp(),
             null,
             null,
+            idinv,
             timestamp(),
             comment,
             data,
@@ -80,6 +83,7 @@ export default class Activity {
         time_started,
         time_ended,
         tasks_id,
+        idinv,
         comment,
         data,
     ) {
@@ -89,6 +93,7 @@ export default class Activity {
             time_started,
             time_ended,
             tasks_id,
+            idinv,
             timestamp(),
             comment,
             data,
