@@ -55,6 +55,14 @@ class JournalScreen extends Component<Props> {
 
     _renderItem = ({ item, index }) => {
         if (item.system) if (item.system.awaitsDelete) return null
+
+        // idinv filter implemented
+        if (this.props.idinvFilter) {
+            if (item.idinv !== this.props.user.idinv) {
+                return null
+            }
+        }
+
         return (
             <ActivityListItem item={item} navigation={this.props.navigation} />
         )
@@ -85,6 +93,7 @@ function mapStateToProps(state) {
         user: state.user,
         activity: state.activity,
         tokens: state.tokens,
+        idinvFilter: state.settings.idinvFilter,
     }
 }
 
