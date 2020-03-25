@@ -21,6 +21,7 @@ export default function activityReducer(state = [], { type, payload }) {
                     activity.time_started,
                     activity.time_ended,
                     activity.tasks_id,
+                    activity.idinv,
                     activity.last_updated,
                     activity.comment,
                     activity.data,
@@ -37,9 +38,12 @@ export default function activityReducer(state = [], { type, payload }) {
                 payload.time_started,
                 payload.time_ended,
                 payload.tasks_id,
+                payload.idinv,
                 payload.last_updated,
                 payload.comment,
                 payload.data,
+                {},
+                payload.idinv,
             )
             addOrUpdate(state, activity)
             showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
@@ -48,7 +52,6 @@ export default function activityReducer(state = [], { type, payload }) {
             return state
         case 'UPDATE_ACTIVITIES':
             if (!state) state = []
-
             state = [
                 ...state.filter(activity => {
                     return !activity.synced()
@@ -60,9 +63,12 @@ export default function activityReducer(state = [], { type, payload }) {
                         activity.time_started,
                         activity.time_ended,
                         activity.tasks_id,
+                        activity.idinv,
                         activity.last_updated,
                         activity.comment,
                         activity.data,
+                        {},
+                        activity.idinv,
                     )
                     addOrUpdate(state, activity)
                     return activity

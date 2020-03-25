@@ -197,6 +197,7 @@ class ActivityDetailsScreen extends Component {
             this.state.originalActivity.time_started,
             this.state.originalActivity.time_ended,
             this.state.originalActivity.tasks_id,
+            this.state.originalActivity.idinv,
             this.state.originalActivity.last_updated,
             this.state.originalActivity.comment,
             this.state.originalActivity.data,
@@ -207,6 +208,7 @@ class ActivityDetailsScreen extends Component {
             this.state.activity.time_started,
             this.state.activity.time_ended,
             this.state.activity.tasks_id,
+            this.props.user.idinv, // TODO: check
             timestamp(),
             this.state.activity.comment,
             this.state.activity.data,
