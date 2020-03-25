@@ -12,7 +12,8 @@ export function activityInstantSave(activity_type) {
         setTimeout(() => {
             clicked = false
         }, 500)
-        let activity = Activity.instantInit(activity_type)
+        let idinv = store.getState().user.idinv
+        let activity = Activity.instantInit(activity_type, idinv)
         store.dispatch(addActivity(activity))
     }
 }
