@@ -49,6 +49,7 @@ class AlarmScreen extends Component {
     record(err = undefined) {
         let activity = Activity.instantInit(
             activityTypes.Alarm,
+            this.props.user.idinv,
             this.state.comment,
             {
                 position: this.state.position,

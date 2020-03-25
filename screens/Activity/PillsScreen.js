@@ -109,6 +109,7 @@ class PillPickScreen extends Component {
             timestamp(this.state.dateTime),
             null,
             this.state.tasks_id ? this.state.tasks_id : null,
+            this.props.user.idinv, // TODO: check
             timestamp(),
             '',
             { pill: this.state.pill },

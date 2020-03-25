@@ -100,6 +100,7 @@ class OtherScreen extends Component {
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
                 null,
+                this.props.user.idinv, // TODO: check
                 timestamp(),
                 '',
                 { other: this.state.other },

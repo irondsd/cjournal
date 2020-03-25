@@ -85,6 +85,7 @@ class TimePickScreen extends Component {
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
                 null,
+                this.props.user.idinv, // TODO: check
                 timestamp(),
                 this.state.comment,
                 {},
