@@ -139,6 +139,7 @@ class WalkingScreen extends Component {
             timestamp(this.state.startDate),
             timestamp(),
             tasks_id,
+            this.props.idinv, // TODO: check
             timestamp(),
             '',
             data,
@@ -247,13 +248,19 @@ class WalkingScreen extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        idinv: state.user.idinv,
+    }
+}
+
 const mapDispatchToProps = dispatch => ({
     add: activity => {
         dispatch(addActivity(activity))
     },
 })
 
-export default connect(null, mapDispatchToProps)(WalkingScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(WalkingScreen)
 
 const styles = StyleSheet.create({
     text: {

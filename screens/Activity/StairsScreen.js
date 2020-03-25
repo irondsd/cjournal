@@ -137,6 +137,7 @@ class StairsScreen extends Component {
             timestamp(this.state.startDate),
             timestamp(),
             tasks_id,
+            this.props.idinv, // TODO: check
             timestamp(),
             '',
             data,
@@ -214,13 +215,19 @@ class StairsScreen extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        idinv: state.user.idinv,
+    }
+}
+
 const mapDispatchToProps = dispatch => ({
     add: activity => {
         dispatch(addActivity(activity))
     },
 })
 
-export default connect(null, mapDispatchToProps)(StairsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(StairsScreen)
 
 const styles = StyleSheet.create({
     mainContent: {
