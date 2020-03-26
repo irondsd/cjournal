@@ -139,7 +139,7 @@ class WalkingScreen extends Component {
             timestamp(this.state.startDate),
             timestamp(),
             tasks_id,
-            this.props.idinv, // TODO: check
+            this.props.idinv,
             timestamp(),
             '',
             data,

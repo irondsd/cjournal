@@ -207,7 +207,7 @@ class ActivityDetailsScreen extends Component {
             this.state.activity.time_started,
             this.state.activity.time_ended,
             this.state.activity.tasks_id,
-            this.props.user.idinv, // TODO: check
+            this.props.user.idinv,
             timestamp(),
             this.state.activity.comment,
             this.state.activity.data,

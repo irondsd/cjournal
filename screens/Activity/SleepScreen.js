@@ -105,7 +105,7 @@ class SleepScreen extends Component {
             timestamp(this.state.startDate),
             timestamp(),
             null,
-            this.props.user.idinv, // TODO: check
+            this.props.user.idinv,
             timestamp(),
             '',
             {},

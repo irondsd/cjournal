@@ -60,22 +60,7 @@ class LoginScreen extends Component {
     }
 
     onBarcodeScan(qrvalue) {
-        //called after te successful scanning of QRCode/Barcode
-        // this.setState({ qrvalue: qrvalue })
-        // this.setState({ opneScanner: false })
-        // let decipherText
-        // try {
-        //     decipherText = simpleCrypto.decrypt(qrvalue)
-        // } catch (error) {
-        //     Alert.alert(strings.Error, strings.ErrQR)
-        //     return
-        // }
-        // let results = JSON.parse(decipherText)
-        // // this.props.updateUser(results)
-        // // TODO: rework qr login
-        // if (results.tokens) {
-        //     this.props.navigation.navigate('App')
-        // }
+        // scan qr here
     }
 
     onOpneScanner() {

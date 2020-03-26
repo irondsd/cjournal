@@ -96,7 +96,7 @@ class GymScreen extends Component {
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
                 null,
-                this.props.user.idinv, // TODO: check
+                this.props.user.idinv,
                 timestamp(),
                 '',
                 { calories: this.state.calories, type: this.state.type },
