@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import { activityAsyncSave } from '../../services/asyncStorage'
 import { sortActivities } from '../../helpers/sort'
 import { showError, showToast } from '../../services/toast'
@@ -91,7 +92,15 @@ export default function activityReducer(state = [], { type, payload }) {
             save(state)
             return state
         case 'DELETE_ACTIVITY':
-            payload.setToDelete()
+            if (Platform.OS === 'ios') {
+                if (payload.system) {
+                    payload.system.awaitsDelete = true
+                } else {
+                    payload.system = { awaitsDelete: true }
+                }
+            } else {
+                payload.setToDelete()
+            }
             save(state)
             return state
         case 'ACTIVITY_SET_ID':

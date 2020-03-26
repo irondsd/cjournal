@@ -106,7 +106,6 @@ class ActivityDetailsScreen extends Component {
         if (nextProps.navigation.state.params) {
             if (nextProps.navigation.state.params.image) {
                 return {
-                    // photoFile: nextProps.navigation.state.params.image.uri,
                     data: {
                         ...prevState.data,
                         photoFile: nextProps.navigation.state.params.image.uri,
@@ -220,7 +219,7 @@ class ActivityDetailsScreen extends Component {
     }
 
     deleteActivity = () => {
-        this.props.remove(this.state.originalActivity)
+        this.props.remove(this.props.navigation.state.params)
         this.props.navigation.navigate(paths.Jounal)
     }
 
