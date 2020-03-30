@@ -5,7 +5,7 @@ import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 import { activityInstantSave } from '../../helpers/activityInstantSave'
 
-const name = activityTypes.GymWalking
+const name = activityTypes.Trainer
 
 export default class ScreenTile extends Component {
     render() {
@@ -14,15 +14,12 @@ export default class ScreenTile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color="#37474F"
+                color="#512DA8"
                 onPress={() => {
-                    activityInstantSave(name)
-                    this.props.navigation.navigate(paths.Home)
+                    this.props.navigation.navigate(paths.Trainer)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.TimePick, {
-                        sender: name,
-                    })
+                    this.props.navigation.navigate(paths.Trainer)
                 }}
             />
         )

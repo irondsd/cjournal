@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import Tile from '../Tile'
 import { strings } from '../../localizations'
+import { activityInstantSave } from '../../helpers/activityInstantSave'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
-import { activityInstantSave } from '../../helpers/activityInstantSave'
 
-const name = activityTypes.Gym
+const name = activityTypes.Nausea
+let clicked = false
 
 export default class ScreenTile extends Component {
     render() {
@@ -14,12 +15,15 @@ export default class ScreenTile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color="#512DA8"
+                color="#002b22"
                 onPress={() => {
-                    this.props.navigation.navigate(paths.Gym)
+                    activityInstantSave(name)
+                    this.props.navigation.navigate(paths.Home)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.Gym)
+                    this.props.navigation.navigate(paths.TimePick, {
+                        sender: name,
+                    })
                 }}
             />
         )

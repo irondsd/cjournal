@@ -13,7 +13,7 @@ export function iconPicker(activity_type) {
         case activityTypes.Walking:
             img = require('../resources/icons/walking.png')
             break
-        case activityTypes.Gym:
+        case activityTypes.Trainer:
             img = require('../resources/icons/workout.png')
             break
         case activityTypes.Sauna:
@@ -106,7 +106,7 @@ export function iconPicker(activity_type) {
         case activityTypes.Tachypnea:
             img = require('../resources/icons/lungs.png')
             break
-        case activityTypes.Faint:
+        case activityTypes.Nausea:
             img = require('../resources/icons/dizzy.png')
             break
         case activityTypes.Syncope:
@@ -142,7 +142,7 @@ export function iconPicker(activity_type) {
         case activityTypes.Running:
             img = require('../resources/icons/running.png')
             break
-        case activityTypes.GymWalking:
+        case activityTypes.NormalWalking:
             img = require('../resources/icons/walking.png')
             break
         case activityTypes.Bicycling:

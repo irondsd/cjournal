@@ -32,7 +32,7 @@ import { activitySingleOverlap } from '../../helpers/activityOverlap'
 import SaveButton from '../../components/SaveButton'
 
 let clicked = false
-class GymScreen extends Component {
+class TrainerScreen extends Component {
     constructor(props) {
         super(props)
 
@@ -59,7 +59,7 @@ class GymScreen extends Component {
     }
 
     static navigationOptions = ({ navigation }) => ({
-        title: `${strings[activityTypes.Gym]}`,
+        title: `${strings[activityTypes.Trainer]}`,
     })
 
     componentDidMount() {
@@ -67,7 +67,7 @@ class GymScreen extends Component {
         dateTime.setMilliseconds(0)
         this.setState({
             dateTime: dateTime,
-            activity_type: activityTypes.Gym,
+            activity_type: activityTypes.Trainer,
         })
     }
 
@@ -172,7 +172,7 @@ class GymScreen extends Component {
                     open={true}
                     // maxLines={5}
                     value={this.state.type}
-                    placeholder={strings.GymType}
+                    placeholder={strings.TrainerType}
                     onSelect={value => {
                         this.setState({
                             type: value,
@@ -210,7 +210,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(GymScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(TrainerScreen)
 
 const styles = StyleSheet.create({
     container: {

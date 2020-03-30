@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { backgroundColor, appColor } from '../../constants'
 import { strings } from '../../localizations'
 import sync from '../../services/sync'
-import FaintTile from '../../components/tiles/FaintTile'
+import NauseaTile from '../../components/tiles/NauseaTile'
 import StupefactionTile from '../../components/tiles/StupefactionTile'
 import VisionDisturbancesTile from '../../components/tiles/VisionDisturbancesTile'
 import OtherWeakness from '../../components/tiles/OtherWeakness'
@@ -22,7 +22,7 @@ export default class WeaknessScreen extends Component {
             <View>
                 <TileWrapper>
                     <SyncopeTile navigation={this.props.navigation} />
-                    <FaintTile navigation={this.props.navigation} />
+                    <NauseaTile navigation={this.props.navigation} />
                     <StupefactionTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>

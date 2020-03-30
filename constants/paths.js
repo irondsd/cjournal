@@ -26,11 +26,11 @@ export const paths = {
     Tests: 'Tests',
     Orthostasis: 'Orthostasis',
     Running: 'Running',
-    GymWalking: 'GymWalking',
+    NormalWalking: 'NormalWalking',
     Bicycling: 'Bicycling',
     Alarm: 'Alarm',
     DeviceInstall: 'DeviceInstall',
     Camera: 'Camera',
     Welcome: 'Welcome',
-    Gym: 'Gym',
+    Trainer: 'Trainer',
 }

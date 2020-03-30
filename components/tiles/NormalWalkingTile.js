@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import Tile from '../Tile'
 import { strings } from '../../localizations'
-import { activityInstantSave } from '../../helpers/activityInstantSave'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
+import { activityInstantSave } from '../../helpers/activityInstantSave'
 
-const name = activityTypes.Faint
-let clicked = false
+const name = activityTypes.NormalWalking
 
 export default class ScreenTile extends Component {
     render() {
@@ -15,7 +14,7 @@ export default class ScreenTile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color="#002b22"
+                color="#37474F"
                 onPress={() => {
                     activityInstantSave(name)
                     this.props.navigation.navigate(paths.Home)

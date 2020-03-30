@@ -1,10 +1,10 @@
 export const overlaps = {
     Sleep: [
         'Walking',
-        'GymWalking',
+        'NormalWalking',
         'Running',
         'Bicycle',
-        'Gym',
+        'Trainer',
         'Sleep',
         'OtherLoad',
         'Meal',
@@ -28,10 +28,10 @@ export const overlaps = {
     Activity: [
         'Sleep',
         'Walking',
-        'GymWalking',
+        'NormalWalking',
         'Running',
         'Bicycle',
-        'Gym',
+        'Trainer',
         'OtherLoad',
     ],
     Pills: ['Sleep'],
