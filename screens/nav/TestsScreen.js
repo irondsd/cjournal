@@ -20,15 +20,15 @@ class TestsScreen extends Component {
         return (
             <View>
                 <TileWrapper>
-                    <WalkingTile navigation={this.props.navigation} />
                     <StairsTile navigation={this.props.navigation} />
+                    <WalkingTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
+                    <PressTile navigation={this.props.navigation} />
+                    <StrainingTile navigation={this.props.navigation} />
                     <PsychoemotionalTestTile
                         navigation={this.props.navigation}
                     />
-                    <PressTile navigation={this.props.navigation} />
-                    <StrainingTile navigation={this.props.navigation} />
                 </TileWrapper>
             </View>
         )
