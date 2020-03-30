@@ -372,7 +372,7 @@ class ActivityDetailsScreen extends Component {
         return (
             <View style={defaultStyles.container}>
                 {this.state.switches.activity && (
-                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
+                    <View style={{ zIndex: 10, width: '100%' }}>
                         <ActivitySelect
                             onSelect={this.onPickerChange}
                             value={this.state.activity_type}
@@ -411,7 +411,7 @@ class ActivityDetailsScreen extends Component {
                     </View>
                 )}
                 {this.state.switches.others && (
-                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
+                    <View style={{ zIndex: 10, width: '100%' }}>
                         <DropDownInput
                             list={this.state.loadedOthers}
                             open={true}

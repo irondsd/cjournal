@@ -105,7 +105,6 @@ export default class ActivitySelect extends Component {
 
 var styles = StyleSheet.create({
     View: {
-        // backgroundColor: 'white',
         width: '100%',
     },
     input: {
