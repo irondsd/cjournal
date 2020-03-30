@@ -92,15 +92,12 @@ export default function activityReducer(state = [], { type, payload }) {
             save(state)
             return state
         case 'DELETE_ACTIVITY':
-            if (Platform.OS === 'ios') {
-                if (payload.system) {
-                    payload.system.awaitsDelete = true
-                } else {
-                    payload.system = { awaitsDelete: true }
-                }
+            if (payload.system) {
+                payload.system.awaitsDelete = true
             } else {
-                payload.setToDelete()
+                payload.system = { awaitsDelete: true }
             }
+
             save(state)
             return state
         case 'ACTIVITY_SET_ID':
