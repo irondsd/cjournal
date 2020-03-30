@@ -105,7 +105,7 @@ class SleepScreen extends Component {
             timestamp(this.state.startDate),
             timestamp(),
             null,
-            this.props.user.idinv,
+            this.props.idinv,
             timestamp(),
             '',
             {},
@@ -136,13 +136,19 @@ class SleepScreen extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        idinv: state.user.idinv,
+    }
+}
+
 const mapDispatchToProps = dispatch => ({
     add: activity => {
         dispatch(addActivity(activity))
     },
 })
 
-export default connect(null, mapDispatchToProps)(SleepScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SleepScreen)
 
 const styles = StyleSheet.create({
     container: {

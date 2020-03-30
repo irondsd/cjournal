@@ -58,12 +58,14 @@ class DeviceInstallScreen extends Component {
             timestamp(),
             null,
             tasks_id,
+            this.props.user.idinv,
             timestamp(),
             '',
             {
                 device_id: this.state.device_id,
             },
         )
+        console.log(activity)
         this.props.add(activity)
         this.props.navigation.navigate(paths.Home)
     }
