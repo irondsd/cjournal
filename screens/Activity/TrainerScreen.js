@@ -19,6 +19,7 @@ import {
     durations,
     paths,
     activityTypes,
+    defaultStyles,
 } from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -153,7 +154,7 @@ class TrainerScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <TimeSwitch
                     onSelection={this.setSelectedOption.bind(this)}
                     value={this.state.fromStart}
@@ -213,15 +214,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(TrainerScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
-    },
     saveButton: {
-        // flex: 2,
         zIndex: 1,
         justifyContent: 'flex-end',
     },

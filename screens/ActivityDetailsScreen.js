@@ -9,6 +9,7 @@ import {
     durations,
     pillsList,
     othersList,
+    defaultStyles,
 } from '../constants/'
 import { displayDate, displayTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
@@ -369,7 +370,7 @@ class ActivityDetailsScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 {this.state.switches.activity && (
                     <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
                         <ActivitySelect
@@ -486,18 +487,6 @@ export default connect(
 )(ActivityDetailsScreen)
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: backgroundColor,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
-        zIndex: 1,
-    },
-    stats: {
-        color: 'grey',
-        textAlign: 'center',
-    },
     buttonRemove: {
         margin: 20,
     },
