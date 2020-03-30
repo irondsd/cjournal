@@ -1,12 +1,17 @@
 import { strings } from '../localizations'
 
-export const defaultOtherEmotions = [
-    strings.Joy,
-    strings.Sadness,
-    strings.Anger,
-    strings.Fear,
-    strings.Excitement,
-    strings.Anxiety,
-]
-
-export const defaultOtherLoad = [strings.WeightLifting, strings.PhysicalLabor]
+export const defaultHints = {
+    OtherActivity: [],
+    OtherComplaints: [],
+    OtherLoad: [strings.WeightLifting, strings.PhysicalLabor],
+    OtherPain: [],
+    OtherWeakness: [],
+    OtherEmotions: [
+        strings.Joy,
+        strings.Sadness,
+        strings.Anger,
+        strings.Fear,
+        strings.Excitement,
+        strings.Anxiety,
+    ],
+}

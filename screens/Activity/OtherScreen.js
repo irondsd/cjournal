@@ -30,10 +30,7 @@ import TimeSwitch from '../../components/TimeSwitch'
 import { addHint, loadHints, saveDefaultHints } from '../../services/otherHints'
 import { activitySingleOverlap } from '../../helpers/activityOverlap'
 import SaveButton from '../../components/SaveButton'
-import {
-    defaultOtherEmotions,
-    defaultOtherLoad,
-} from '../../constants/defaultHints'
+import { defaultHints } from '../../constants/defaultHints'
 
 let clicked = false
 class OtherScreen extends Component {
@@ -76,17 +73,20 @@ class OtherScreen extends Component {
         loadHints(this.state.activity_type).then(res => {
             // load defaults
             if (res.length === 0) {
-                if (this.state.activity_type === activityTypes.OtherEmotions) {
-                    res = defaultOtherEmotions
+                // if (this.state.activity_type === activityTypes.OtherEmotions) {
+                //     res = defaultOtherEmotions
 
-                    saveDefaultHints(this.state.activity_type, res)
-                }
+                //     saveDefaultHints(this.state.activity_type, res)
+                // }
 
-                if (this.state.activity_type === activityTypes.OtherLoad) {
-                    res = defaultOtherLoad
+                // if (this.state.activity_type === activityTypes.OtherLoad) {
+                //     res = defaultOtherLoad
 
-                    saveDefaultHints(this.state.activity_type, res)
-                }
+                //     saveDefaultHints(this.state.activity_type, res)
+                // }
+
+                res = defaultHints[this.state.activity_type]
+                saveDefaultHints(this.state.activity_type, res)
             }
 
             this.setState({ list: res })
