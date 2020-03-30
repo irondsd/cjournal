@@ -106,6 +106,8 @@ export default class ActivitySelect extends Component {
 var styles = StyleSheet.create({
     View: {
         width: '100%',
+        marginTop: 5,
+        marginBottom: 5,
     },
     input: {
         borderRadius: 5,

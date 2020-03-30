@@ -136,6 +136,8 @@ export default class DurationPicker extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        marginTop: 5,
+        marginBottom: 5,
     },
     duration: {
         width: '40%',

@@ -63,6 +63,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         height: 50,
+        marginTop: 5,
+        marginBottom: 5,
     },
     button: {
         width: '50%',

@@ -214,7 +214,11 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: { width: '100%' },
+    container: {
+        width: '100%',
+        marginTop: 5,
+        marginBottom: 5,
+    },
     recorder: {
         borderRadius: 5,
         borderWidth: 0.5,
