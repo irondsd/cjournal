@@ -16,8 +16,6 @@ import {
 import DurationPicker from '../../components/DurationPicker'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
-import PhotoButton from '../../components/PhotoButton'
-import Photo from '../../components/Photo'
 import TakePhoto from '../../components/TakePhoto'
 import DropDownInput from '../../components/DropDownInput'
 import SaveButton from '../../components/SaveButton'
