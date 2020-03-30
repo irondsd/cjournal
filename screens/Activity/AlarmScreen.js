@@ -27,7 +27,6 @@ import SaveButton from '../../components/SaveButton'
 class AlarmScreen extends Component {
     static navigationOptions = {
         title: strings.Alarm,
-        headerLeft: null,
     }
 
     constructor(props) {
