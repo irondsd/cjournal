@@ -45,11 +45,11 @@ class GymScreen extends Component {
             activity_type: null,
             type: '',
             list: [
-                'Walking',
-                'Running',
-                'Cycling',
-                'Elliptical',
-                'Stair-stepper',
+                strings.Walking,
+                strings.Running,
+                strings.Cycling,
+                strings.Elliptical,
+                strings.StairStepper,
             ],
             calories: '',
         }
@@ -165,6 +165,7 @@ class GymScreen extends Component {
                 <DurationPicker
                     duration={this.state.duration}
                     handler={this.onPickerChange}
+                    value={this.state.duration}
                 />
                 <DropDownSelect
                     list={this.state.list}
@@ -182,7 +183,7 @@ class GymScreen extends Component {
                     value={this.state.calories}
                     onChangeText={value => this.setState({ calories: value })}
                 />
-                <View style={{ zIndex: 1 }}>
+                <View style={styles.saveButton}>
                     <SaveButton
                         title={strings.Save}
                         onPress={() => {
@@ -218,5 +219,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 20,
+    },
+    saveButton: {
+        // flex: 2,
+        zIndex: 1,
+        justifyContent: 'flex-end',
     },
 })

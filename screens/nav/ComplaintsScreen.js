@@ -10,6 +10,7 @@ import ArrhythmiaTile from '../../components/tiles/ArrhythmiaTile'
 import PalpitationTile from '../../components/tiles/PalpitationTile'
 import OtherComplaints from '../../components/tiles/OtherComplaints'
 import TileWrapper from '../../components/TileWrapper'
+import TileSpacer from '../../components/TileSpacer'
 
 export default class ComplaintsScreen extends Component<Props> {
     static navigationOptions = {
@@ -26,6 +27,7 @@ export default class ComplaintsScreen extends Component<Props> {
                 </TileWrapper>
                 <TileWrapper>
                     <PalpitationTile navigation={this.props.navigation} />
+                    <TileSpacer />
                     <OtherComplaints navigation={this.props.navigation} />
                 </TileWrapper>
             </View>

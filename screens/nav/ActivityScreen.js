@@ -5,6 +5,7 @@ import { backgroundColor, appColor, activityTypes } from '../../constants'
 import { strings } from '../../localizations'
 import TileWrapper from '../../components/TileWrapper'
 import SexTile from '../../components/tiles/SexTile'
+import TileSpacer from '../../components/TileSpacer'
 import ToiletTile from '../../components/tiles/ToiletTile'
 import ShowerTile from '../../components/tiles/ShowerTile'
 import OtherActivity from '../../components/tiles/OtherActivity'
@@ -29,7 +30,11 @@ class ActivityScreen extends Component<Props> {
                     <SexTile navigation={this.props.navigation} />
                     <ToiletTile navigation={this.props.navigation} />
                     <ShowerTile navigation={this.props.navigation} />
+                </TileWrapper>
+                <TileWrapper>
+                    <TileSpacer />
                     <OtherActivity navigation={this.props.navigation} />
+                    <TileSpacer />
                 </TileWrapper>
             </View>
         )

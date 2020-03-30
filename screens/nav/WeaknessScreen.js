@@ -10,6 +10,7 @@ import VisionDisturbancesTile from '../../components/tiles/VisionDisturbancesTil
 import OtherWeakness from '../../components/tiles/OtherWeakness'
 import SyncopeTile from '../../components/tiles/SyncopeTile'
 import TileWrapper from '../../components/TileWrapper'
+import TileSpacer from '../../components/TileSpacer'
 
 export default class WeaknessScreen extends Component {
     static navigationOptions = {
@@ -28,6 +29,7 @@ export default class WeaknessScreen extends Component {
                     <VisionDisturbancesTile
                         navigation={this.props.navigation}
                     />
+                    <TileSpacer />
                     <OtherWeakness navigation={this.props.navigation} />
                 </TileWrapper>
             </View>
