@@ -19,6 +19,7 @@ import {
     durations,
     paths,
     defaultStyles,
+    activityTypes,
 } from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -26,9 +27,13 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import DropDownInput from '../../components/DropDownInput'
 import TimeSwitch from '../../components/TimeSwitch'
-import { addHint, loadHints } from '../../services/otherHints'
+import { addHint, loadHints, saveDefaultHints } from '../../services/otherHints'
 import { activitySingleOverlap } from '../../helpers/activityOverlap'
 import SaveButton from '../../components/SaveButton'
+import {
+    defaultOtherEmotions,
+    defaultOtherLoad,
+} from '../../constants/defaultHints'
 
 let clicked = false
 class OtherScreen extends Component {
@@ -69,6 +74,21 @@ class OtherScreen extends Component {
 
     loadList = () => {
         loadHints(this.state.activity_type).then(res => {
+            // load defaults
+            if (res.length === 0) {
+                if (this.state.activity_type === activityTypes.OtherEmotions) {
+                    res = defaultOtherEmotions
+
+                    saveDefaultHints(this.state.activity_type, res)
+                }
+
+                if (this.state.activity_type === activityTypes.OtherLoad) {
+                    res = defaultOtherLoad
+
+                    saveDefaultHints(this.state.activity_type, res)
+                }
+            }
+
             this.setState({ list: res })
         })
     }
