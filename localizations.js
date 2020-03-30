@@ -165,6 +165,9 @@ export const strings = new LocalizedStrings({
         YouClimbed: 'You climbed',
         YouWalked: 'You walked',
         by: 'by',
+        Cycling: 'Cycling',
+        Elliptical: 'Elliptical',
+        StairStepper: 'Stair-stepper',
     },
     es: {
         Activity: 'Actividad',
@@ -332,6 +335,9 @@ export const strings = new LocalizedStrings({
         YouClimbed: 'Usted subió',
         YouWalked: 'Usted caminó',
         by: 'por',
+        Cycling: 'Cycling',
+        Elliptical: 'Elliptical',
+        StairStepper: 'StairStepper',
     },
     ru: {
         Activity: 'Активность',
@@ -495,5 +501,8 @@ export const strings = new LocalizedStrings({
         YouClimbed: 'Вы поднялись на',
         YouWalked: 'Вы прошли',
         by: 'на',
+        Cycling: 'Велотренажёр',
+        Elliptical: 'Эллиптический',
+        StairStepper: 'Лестничный',
     },
 })

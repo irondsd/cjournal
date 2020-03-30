@@ -5,7 +5,7 @@ import { strings } from '../localizations'
 import Activity from '../classes/Activity'
 
 let clicked = false
-
+// TODO: fix double
 export function activitySaveWithLocation(activity_type) {
     if (!clicked) {
         clicked = true
