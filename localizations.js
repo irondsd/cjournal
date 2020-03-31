@@ -365,7 +365,7 @@ export const strings = new LocalizedStrings({
         NotFilledUp: 'Not filled up',
     },
     ru: {
-        Activity: 'Акти pность',
+        Activity: 'Активность',
         ActivityEdit: 'Редактирование активности',
         Alarm: 'Тревога',
         Alcohol: 'Алкоголь',
