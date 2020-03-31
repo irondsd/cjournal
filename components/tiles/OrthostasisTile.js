@@ -16,10 +16,14 @@ export default class ScreenTile extends Component {
                 navigation={this.props.navigation}
                 color="#040"
                 onPress={() => {
-                    this.props.navigation.navigate(paths.Orthostasis)
+                    this.props.navigation.navigate(paths.BloodPressure, {
+                        sender: name,
+                    })
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.Orthostasis)
+                    this.props.navigation.navigate(paths.BloodPressure, {
+                        sender: name,
+                    })
                 }}
             />
         )

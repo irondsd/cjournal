@@ -17,11 +17,12 @@ export default class ScreenTile extends Component {
                 navigation={this.props.navigation}
                 color="#002b22"
                 onPress={() => {
-                    activityInstantSave(name)
-                    this.props.navigation.navigate(paths.Home)
+                    this.props.navigation.navigate(paths.BloodPressure, {
+                        sender: name,
+                    })
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.TimePick, {
+                    this.props.navigation.navigate(paths.BloodPressure, {
                         sender: name,
                     })
                 }}
