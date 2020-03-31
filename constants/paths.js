@@ -33,4 +33,5 @@ export const paths = {
     Camera: 'Camera',
     Welcome: 'Welcome',
     Trainer: 'Trainer',
+    BloodPressure: 'BloodPressure',
 }

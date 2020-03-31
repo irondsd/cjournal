@@ -1,4 +1,5 @@
 import LocalizedStrings from 'react-native-localization'
+import BloodPressure from './components/BloodPressure'
 
 export const strings = new LocalizedStrings({
     'en-US': {
@@ -176,9 +177,13 @@ export const strings = new LocalizedStrings({
         Anxiety: 'Anxiety',
         WeightLifting: 'Weight lifting',
         PhysicalLabor: 'Physical labor',
+        Before: 'Before',
+        After: 'After',
+        BloodPressure: 'Blood pressure',
+        NotFilledUp: 'Not filled up',
     },
     es: {
-        Activity: 'Actividad',
+        Activity: 'Act pvidad',
         ActivityEdit: 'edición de la actividad',
         Alarm: 'Problema',
         Alcohol: 'Alcohol',
@@ -354,9 +359,13 @@ export const strings = new LocalizedStrings({
         Anxiety: 'Anxiety',
         WeightLifting: 'Weight lifting',
         PhysicalLabor: 'Physical labor',
+        Before: 'Before',
+        After: 'After',
+        BloodPressure: 'Blood pressure',
+        NotFilledUp: 'Not filled up',
     },
     ru: {
-        Activity: 'Активность',
+        Activity: 'Акти pность',
         ActivityEdit: 'Редактирование активности',
         Alarm: 'Тревога',
         Alcohol: 'Алкоголь',
@@ -510,7 +519,7 @@ export const strings = new LocalizedStrings({
         Version: 'Версия',
         VerticalPositionCalibration: 'Калибровка вертикальной позиции',
         VisionDisturbances: 'Нарушения зрения',
-        Walking: 'Тест с 6-минутной ходьбой',
+        Walking: 'Тест с 6-мин. ходьбой',
         Weakness: 'Слабость',
         WrongPassword: 'Неправильный логин или пароль',
         Yesterday: 'Вчера',
@@ -528,5 +537,9 @@ export const strings = new LocalizedStrings({
         Anxiety: 'Тревога',
         WeightLifting: 'Подъём тяжестей',
         PhysicalLabor: 'Физическая работа',
+        Before: 'До',
+        After: 'После',
+        BloodPressure: 'Давление',
+        NotFilledUp: 'Не заполнено',
     },
 })

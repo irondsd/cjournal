@@ -9,6 +9,7 @@ import StairsTile from '../../components/tiles/StairsTile'
 import PsychoemotionalTestTile from '../../components/tiles/PsychoemotionalTestTile'
 import PressTile from '../../components/tiles/PressTile'
 import StrainingTile from '../../components/tiles/StrainingTile'
+import OrthostasisTile from '../../components/tiles/OrthostasisTile'
 import TileWrapper from '../../components/TileWrapper'
 
 class TestsScreen extends Component {
@@ -22,10 +23,11 @@ class TestsScreen extends Component {
                 <TileWrapper>
                     <StairsTile navigation={this.props.navigation} />
                     <WalkingTile navigation={this.props.navigation} />
+                    <PressTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
-                    <PressTile navigation={this.props.navigation} />
                     <StrainingTile navigation={this.props.navigation} />
+                    <OrthostasisTile navigation={this.props.navigation} />
                     <PsychoemotionalTestTile
                         navigation={this.props.navigation}
                     />
