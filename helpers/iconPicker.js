@@ -164,7 +164,7 @@ export function iconPicker(activity_type) {
             img = require('../resources/icons/laying.png')
             break
         case activityTypes.TakingMedicine:
-            img = require('../resources/icons/pill.png')
+            img = require('../resources/icons/drug.png')
             break
         case activityTypes.Influence:
             img = require('../resources/icons/influence.png')
@@ -176,10 +176,10 @@ export function iconPicker(activity_type) {
             img = require('../resources/icons/pain.png')
             break
         case activityTypes.Complaints:
-            img = require('../resources/icons/heartpain.png')
+            img = require('../resources/icons/complaint.png')
             break
         case activityTypes.Weakness:
-            img = require('../resources/icons/dizzy.png')
+            img = require('../resources/icons/nausea.png')
             break
         case activityTypes.EmotionalStress:
             img = require('../resources/icons/mood.png')
@@ -190,11 +190,23 @@ export function iconPicker(activity_type) {
         case activityTypes.MedicineTest:
             img = require('../resources/icons/pill.png')
             break
-        case activityTypes.Psychotherapy:
+        case activityTypes.PsychoemotionalTest:
             img = require('../resources/icons/psychological.png')
+            break
+        case activityTypes.Press:
+            img = require('../resources/icons/pressure.png')
+            break
+        case activityTypes.CuffFix:
+            img = require('../resources/icons/cuff.png')
+            break
+        case activityTypes.ElectrodeReplacement:
+            img = require('../resources/icons/electrode.png')
             break
         case activityTypes.DeviceInstall:
             img = require('../resources/icons/device.png')
+            break
+        case activityTypes.VerticalPositionCalibration:
+            img = require('../resources/icons/vertical.png')
             break
         default:
             img = require('../resources/icons/activity.png')
