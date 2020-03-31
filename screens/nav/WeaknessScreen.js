@@ -29,8 +29,8 @@ export default class WeaknessScreen extends Component {
                     <VisionDisturbancesTile
                         navigation={this.props.navigation}
                     />
-                    <TileSpacer />
                     <OtherWeakness navigation={this.props.navigation} />
+                    <TileSpacer />
                 </TileWrapper>
             </View>
         )

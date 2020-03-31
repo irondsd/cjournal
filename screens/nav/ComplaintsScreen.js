@@ -27,8 +27,8 @@ export default class ComplaintsScreen extends Component<Props> {
                 </TileWrapper>
                 <TileWrapper>
                     <TachypneaTile navigation={this.props.navigation} />
-                    <TileSpacer />
                     <OtherComplaints navigation={this.props.navigation} />
+                    <TileSpacer />
                 </TileWrapper>
             </View>
         )
