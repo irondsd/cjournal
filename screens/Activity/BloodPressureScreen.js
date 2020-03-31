@@ -28,6 +28,8 @@ import SaveButton from '../../components/SaveButton'
 import { defaultHints } from '../../constants/defaultHints'
 import BloodPressure from '../../components/BloodPressure'
 import { showError } from '../../services/toast'
+import TimeSwitch from '../../components/TimeSwitch'
+import DurationPicker from '../../components/DurationPicker'
 
 class BloodPressureScreen extends Component {
     constructor(props) {
@@ -35,6 +37,9 @@ class BloodPressureScreen extends Component {
 
         this.state = {
             dateTime: new Date(),
+            duration: 0,
+            fromStart: strings.FromStart,
+            options: [strings.FromStart, strings.FromEnd],
             activity_type: null,
             bloodPressure: {
                 before: ['', ''],
@@ -44,6 +49,7 @@ class BloodPressureScreen extends Component {
         }
 
         this.changeDateTime = this.changeDateTime.bind(this)
+        this.onPickerChange = this.onPickerChange.bind(this)
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -111,12 +117,52 @@ class BloodPressureScreen extends Component {
         this.props.navigation.navigate(paths.Home)
     }
 
+    onPickerChange = itemValue => {
+        let dateTime = this.state.dateTime
+        if (this.state.fromStart == strings.FromEnd) {
+            dateTime.setMinutes(dateTime.getMinutes() - itemValue)
+        }
+
+        this.setState({
+            duration: itemValue,
+            dateTime: dateTime,
+        })
+    }
+
+    setSelectedOption = selectedOption => {
+        if (this.state.fromStart == selectedOption) {
+            return
+        }
+
+        let newDate = this.state.dateTime
+        if (selectedOption == strings.FromStart) {
+            newDate.setMinutes(newDate.getMinutes() + this.state.duration)
+        } else {
+            newDate.setMinutes(newDate.getMinutes() - this.state.duration)
+        }
+        this.setState({
+            fromStart: selectedOption,
+            dateTime: newDate,
+        })
+        this.changeDateTime(newDate)
+        this.forceUpdate()
+    }
+
     render() {
         return (
             <View style={defaultStyles.container}>
+                <TimeSwitch
+                    onSelection={this.setSelectedOption.bind(this)}
+                    value={this.state.fromStart}
+                />
                 <TimePicker
                     dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
+                />
+                <DurationPicker
+                    duration={this.state.duration}
+                    handler={this.onPickerChange}
+                    value={this.state.duration}
                 />
                 <BloodPressure
                     callback={this.changeBloodPressure}

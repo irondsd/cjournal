@@ -23,6 +23,10 @@ export default class BloodPressure extends Component {
                         keyboardType={'numeric'}
                         value={this.state.before[0]}
                         maxLength={3}
+                        onSubmitEditing={() => this.input2.focus()}
+                        ref={input => {
+                            this.input1 = input
+                        }}
                         onChangeText={value => {
                             this.setState(
                                 {
@@ -41,6 +45,10 @@ export default class BloodPressure extends Component {
                         keyboardType={'numeric'}
                         value={this.state.before[1]}
                         maxLength={3}
+                        onSubmitEditing={() => this.input3.focus()}
+                        ref={input => {
+                            this.input2 = input
+                        }}
                         onChangeText={value => {
                             this.setState(
                                 {
@@ -61,6 +69,10 @@ export default class BloodPressure extends Component {
                         keyboardType={'numeric'}
                         value={this.state.after[0]}
                         maxLength={3}
+                        onSubmitEditing={() => this.input4.focus()}
+                        ref={input => {
+                            this.input3 = input
+                        }}
                         onChangeText={value => {
                             this.setState(
                                 {
@@ -79,6 +91,9 @@ export default class BloodPressure extends Component {
                         keyboardType={'numeric'}
                         value={this.state.after[1]}
                         maxLength={3}
+                        ref={input => {
+                            this.input4 = input
+                        }}
                         onChangeText={value => {
                             this.setState(
                                 {
