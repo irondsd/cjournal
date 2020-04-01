@@ -64,7 +64,7 @@ export default class Barometer {
         this.bar.unsubscribe()
     }
 
-    static calibrate(seconds = 60) {
+    static calibrate(seconds = 10) {
         // console.log('Calibrating barometer...')
         bar = barometer.subscribe(
             ({ pressure }) => {},

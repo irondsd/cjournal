@@ -13,10 +13,15 @@ import OrthostasisTile from '../../components/tiles/OrthostasisTile'
 import DeepBreathingTile from '../../components/tiles/DeepBreathingTile'
 import TileWrapper from '../../components/TileWrapper'
 import TileSpacer from '../../components/TileSpacer'
+import Barometer from '../../sensors/Barometer'
 
 class TestsScreen extends Component {
     static navigationOptions = {
         title: strings.Tests,
+    }
+
+    componentDidMount() {
+        Barometer.calibrate()
     }
 
     render() {

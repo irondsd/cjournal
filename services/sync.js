@@ -15,7 +15,7 @@ import { isConnected } from './connectivityWatcher'
 let errors = 0
 
 export default async function sync(id, tokens) {
-    // Barometer.calibrate(20)
+    Barometer.calibrate(10)
 
     let activities = store.getState().activity
 

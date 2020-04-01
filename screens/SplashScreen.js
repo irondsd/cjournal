@@ -28,7 +28,7 @@ class SplashScreen extends Component {
     }
 
     componentDidMount() {
-        // Barometer.calibrate()
+        Barometer.calibrate(30)
         asyncGetAll()
             .then(res => {
                 if (res.tokens) this.props.tokensReceived(res.tokens)
