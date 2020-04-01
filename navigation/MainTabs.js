@@ -39,6 +39,7 @@ import CameraScreen from '../screens/CameraScreen'
 import OtherScreen from '../screens/Activity/OtherScreen'
 import TrainerScreen from '../screens/Activity/TrainerScreen'
 import BloodPressureScreen from '../screens/Activity/BloodPressureScreen'
+import VerticalPositionCalibrationScreen from '../screens/Activity/VerticalPositionCalibrationScreen'
 
 const JournalStack = createStackNavigator({
     Journal: JournalScreen,
@@ -70,6 +71,7 @@ const HomeStack = createStackNavigator({
     Other: OtherScreen,
     Trainer: TrainerScreen,
     BloodPressure: BloodPressureScreen,
+    VerticalPositionCalibration: VerticalPositionCalibrationScreen,
 })
 
 const TasksStack = createStackNavigator({

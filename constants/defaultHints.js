@@ -14,4 +14,9 @@ export const defaultHints = {
         strings.Excitement,
         strings.Anxiety,
     ],
+    VerticalPositionCalibration: [
+        strings.Straight,
+        strings.LeaningForward,
+        strings.LeaningToTheLeft,
+    ],
 }

@@ -34,4 +34,5 @@ export const paths = {
     Welcome: 'Welcome',
     Trainer: 'Trainer',
     BloodPressure: 'BloodPressure',
+    VerticalPositionCalibration: 'VerticalPositionCalibration',
 }
