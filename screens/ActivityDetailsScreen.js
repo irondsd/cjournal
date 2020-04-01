@@ -25,7 +25,7 @@ import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
 import Comment from '../components/Comment'
 import TakePhoto from '../components/TakePhoto'
-import { loadHints } from '../services/otherHints'
+import { loadHints } from '../services/hints'
 
 class ActivityDetailsScreen extends Component {
     constructor(props) {

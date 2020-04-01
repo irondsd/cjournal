@@ -23,7 +23,7 @@ import {
 } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
-import { addHint, loadHints, saveDefaultHints } from '../../services/otherHints'
+import { addHint, loadHints, saveDefaultHints } from '../../services/hints'
 import SaveButton from '../../components/SaveButton'
 import { defaultHints } from '../../constants/defaultHints'
 import BloodPressure from '../../components/BloodPressure'
