@@ -10,7 +10,9 @@ import PsychoemotionalTestTile from '../../components/tiles/PsychoemotionalTestT
 import PressTile from '../../components/tiles/PressTile'
 import StrainingTile from '../../components/tiles/StrainingTile'
 import OrthostasisTile from '../../components/tiles/OrthostasisTile'
+import DeepBreathingTile from '../../components/tiles/DeepBreathingTile'
 import TileWrapper from '../../components/TileWrapper'
+import TileSpacer from '../../components/TileSpacer'
 
 class TestsScreen extends Component {
     static navigationOptions = {
@@ -31,6 +33,11 @@ class TestsScreen extends Component {
                     <PsychoemotionalTestTile
                         navigation={this.props.navigation}
                     />
+                </TileWrapper>
+                <TileWrapper>
+                    <TileSpacer />
+                    <DeepBreathingTile navigation={this.props.navigation} />
+                    <TileSpacer />
                 </TileWrapper>
             </View>
         )

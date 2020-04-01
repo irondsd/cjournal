@@ -208,6 +208,9 @@ export function iconPicker(activity_type) {
         case activityTypes.VerticalPositionCalibration:
             img = require('../resources/icons/vertical.png')
             break
+        case activityTypes.DeepBreathing:
+            img = require('../resources/icons/lungs.png')
+            break
         default:
             img = require('../resources/icons/activity.png')
             break
