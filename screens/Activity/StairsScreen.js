@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 // import { barometer } from 'react-native-sensors'
 import { average, altMeter } from '../../helpers/math'
+import findLasestTask from '../../helpers/findLatestTask'
 // import KeepAwake from 'react-native-keep-awake'
 import { cancelNotification } from '../../redux/actions'
 import {
@@ -58,6 +59,7 @@ class StairsScreen extends Component {
             metersMax: 0,
             button_text: strings.Start,
             started: false,
+            tasks_id: null,
             mmHg: 0,
             steps: 0,
             distance: 0,
@@ -82,13 +84,13 @@ class StairsScreen extends Component {
         }
     }
 
-    setDistance = distance => {
+    setDistance = (distance) => {
         this.setState({
             distance: distance,
         })
     }
 
-    setSteps = pedometerData => {
+    setSteps = (pedometerData) => {
         this.setState({
             steps: pedometerData.numberOfSteps,
         })
@@ -97,11 +99,21 @@ class StairsScreen extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
+        let tasks_id = findLasestTask(activityTypes.Stairs)
+        if (
+            this.props.navigation.state.params &&
+            this.props.navigation.state.params.tasks_id
+        )
+            tasks_id = this.props.navigation.state.params.tasks_id
+        this.setState({
+            tasks_id: tasks_id,
+        })
+
         // zero it out
         this.setState({
             startDate: new Date(),
             meters: '0.0',
-            tasks_id: 0,
+            tasks_id: tasks_id,
             steps: 0,
             distance: 0,
         })
@@ -157,7 +169,7 @@ class StairsScreen extends Component {
 
         if (isNaN(meters)) return
 
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
             meters: meters,
             metersMax:
                 prevState.metersMax < meters ? meters : prevState.metersMax,
@@ -221,8 +233,8 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    add: activity => {
+const mapDispatchToProps = (dispatch) => ({
+    add: (activity) => {
         dispatch(addActivity(activity))
     },
 })

@@ -30,6 +30,7 @@ import requestLocationPermissions from '../../permissions/requestLocationPermiss
 import GPS from '../../sensors/GPS'
 import Pedometer from '../../sensors/Pedometer'
 import SaveButton from '../../components/SaveButton'
+import findLasestTask from '../../helpers/findLatestTask'
 
 let timerOn = false
 
@@ -94,11 +95,15 @@ class WalkingScreen extends Component {
     componentDidMount() {
         requestLocationPermissions()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
+        let tasks_id = findLasestTask(activityTypes.Walking)
+        if (
+            this.props.navigation.state.params &&
+            this.props.navigation.state.params.tasks_id
+        )
+            tasks_id = this.props.navigation.state.params.tasks_id
         this.setState({
             timer: secs2time(walkingDuration),
-            tasks_id: this.props.navigation.state.params
-                ? this.props.navigation.state.params.tasks_id
-                : null,
+            tasks_id: tasks_id,
         })
 
         if (this.props.navigation.state.params)
@@ -118,10 +123,12 @@ class WalkingScreen extends Component {
     }
 
     record() {
-        tasks_id = this.state.tasks_id ? parseInt(this.state.tasks_id) : null
+        let tasks_id = this.state.tasks_id
+            ? parseInt(this.state.tasks_id)
+            : null
         if (tasks_id) cancelNotification(tasks_id)
-        endDate = new Date()
-        data = {
+        let endDate = new Date()
+        let data = {
             steps: this.state.numberOfSteps ? this.state.numberOfSteps : 0,
             distance: this.state.distance ? this.state.distance : 0,
         }
@@ -169,7 +176,7 @@ class WalkingScreen extends Component {
             this.record()
         }, 360000)
 
-        this.setState(prevstate => ({
+        this.setState((prevstate) => ({
             intervalId: intervalId,
         }))
 
@@ -207,7 +214,7 @@ class WalkingScreen extends Component {
     timerTick() {
         console.log('tick')
 
-        this.setState(prevState => ({
+        this.setState((prevState) => ({
             timer_set: true,
             time_seconds: prevState.time_seconds - 1,
             timer: secs2time(prevState.time_seconds - 1),
@@ -254,8 +261,8 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    add: activity => {
+const mapDispatchToProps = (dispatch) => ({
+    add: (activity) => {
         dispatch(addActivity(activity))
     },
 })

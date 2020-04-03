@@ -19,6 +19,7 @@ import timestamp from '../../helpers/timestamp'
 import TakePhoto from '../../components/TakePhoto'
 import DropDownInput from '../../components/DropDownInput'
 import SaveButton from '../../components/SaveButton'
+import findLasestTask from '../../helpers/findLatestTask'
 
 class PillPickScreen extends Component {
     constructor(props) {
@@ -73,19 +74,20 @@ class PillPickScreen extends Component {
                 break
         }
         this.setState({ pills: pills })
+
+        let tasks_id = null
+        tasks_id = findLasestTask(activityTypes.Stairs)
+
         if (this.props.navigation.state.params) {
             if (this.props.navigation.state.params.tasks_id) {
+                tasks_id = this.props.navigation.state.params.tasks_id
                 for (let i = 0; i < this.props.tasks.length; i++) {
-                    if (
-                        this.props.tasks[i].id ==
-                        this.props.navigation.state.params.tasks_id
-                    ) {
+                    if (this.props.tasks[i].id == tasks_id) {
                         let pill = this.props.tasks[i].data.pill
                         this.setState({
                             pill: pill,
                             activity_type: this.props.tasks[i].activity_type,
-                            tasks_id: this.props.navigation.state.params
-                                .tasks_id,
+                            tasks_id: tasks_id,
                         })
                     }
                 }
@@ -188,8 +190,8 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    add: activity => {
+const mapDispatchToProps = (dispatch) => ({
+    add: (activity) => {
         dispatch(addActivity(activity))
     },
 })

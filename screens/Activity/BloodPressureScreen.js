@@ -30,6 +30,7 @@ import BloodPressure from '../../components/BloodPressure'
 import { showError } from '../../services/toast'
 import TimeSwitch from '../../components/TimeSwitch'
 import DurationPicker from '../../components/DurationPicker'
+import findLasestTask from '../../helpers/findLatestTask'
 
 class BloodPressureScreen extends Component {
     constructor(props) {
@@ -59,17 +60,25 @@ class BloodPressureScreen extends Component {
     componentDidMount() {
         let dateTime = new Date()
         dateTime.setMilliseconds(0)
+        let tasks_id = findLasestTask(this.props.navigation.state.params.sender)
+        if (
+            this.props.navigation.state.params &&
+            this.props.navigation.state.params.tasks_id
+        )
+            tasks_id = this.props.navigation.state.params.tasks_id
+
         this.setState(
             {
                 dateTime: dateTime,
                 activity_type: this.props.navigation.state.params.sender,
+                tasks_id: tasks_id,
             },
             () => this.loadList(),
         )
     }
 
     loadList = () => {
-        loadHints(this.state.activity_type).then(res => {
+        loadHints(this.state.activity_type).then((res) => {
             // load defaults
             if (res.length === 0) {
                 res = defaultHints[this.state.activity_type]
@@ -86,7 +95,7 @@ class BloodPressureScreen extends Component {
         })
     }
 
-    changeBloodPressure = values => {
+    changeBloodPressure = (values) => {
         this.setState({
             bloodPressure: values,
         })
@@ -117,7 +126,7 @@ class BloodPressureScreen extends Component {
         this.props.navigation.navigate(paths.Home)
     }
 
-    onPickerChange = itemValue => {
+    onPickerChange = (itemValue) => {
         let dateTime = this.state.dateTime
         if (this.state.fromStart == strings.FromEnd) {
             dateTime.setMinutes(dateTime.getMinutes() - itemValue)
@@ -129,7 +138,7 @@ class BloodPressureScreen extends Component {
         })
     }
 
-    setSelectedOption = selectedOption => {
+    setSelectedOption = (selectedOption) => {
         if (this.state.fromStart == selectedOption) {
             return
         }
@@ -190,8 +199,8 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    add: activity => {
+const mapDispatchToProps = (dispatch) => ({
+    add: (activity) => {
         dispatch(addActivity(activity))
     },
 })
