@@ -159,6 +159,7 @@ class WalkingScreen extends Component {
 
     componentWillUnmount() {
         this.timerStop()
+        timerOn = false
     }
 
     timerStart() {
