@@ -76,6 +76,7 @@ class StairsScreen extends Component {
             'hardwareBackPress',
             this.handleBackButton,
         )
+        started = false
     }
 
     handleBackButton() {
