@@ -30,7 +30,7 @@ import requestLocationPermissions from '../../permissions/requestLocationPermiss
 import GPS from '../../sensors/GPS'
 import Pedometer from '../../sensors/Pedometer'
 import SaveButton from '../../components/SaveButton'
-import findLasestTask from '../../helpers/findLatestTask'
+import { findLasestTask } from '../../classes/Task'
 
 let timerOn = false
 
@@ -95,12 +95,13 @@ class WalkingScreen extends Component {
     componentDidMount() {
         requestLocationPermissions()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
-        let tasks_id = findLasestTask(activityTypes.Walking)
+        let tasks_id = findLasestTask(this.props.tasks, activityTypes.Walking)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.tasks_id
-        )
+        ) {
             tasks_id = this.props.navigation.state.params.tasks_id
+        }
         this.setState({
             timer: secs2time(walkingDuration),
             tasks_id: tasks_id,
@@ -259,6 +260,7 @@ class WalkingScreen extends Component {
 function mapStateToProps(state) {
     return {
         idinv: state.user.idinv,
+        tasks: state.tasks,
     }
 }
 

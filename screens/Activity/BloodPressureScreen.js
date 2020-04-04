@@ -30,7 +30,7 @@ import BloodPressure from '../../components/BloodPressure'
 import { showError } from '../../services/toast'
 import TimeSwitch from '../../components/TimeSwitch'
 import DurationPicker from '../../components/DurationPicker'
-import findLasestTask from '../../helpers/findLatestTask'
+import { findLasestTask } from '../../classes/Task'
 
 class BloodPressureScreen extends Component {
     constructor(props) {
@@ -58,19 +58,21 @@ class BloodPressureScreen extends Component {
     })
 
     componentDidMount() {
+        let activity_type = this.props.navigation.state.params.sender
         let dateTime = new Date()
         dateTime.setMilliseconds(0)
-        let tasks_id = findLasestTask(this.props.navigation.state.params.sender)
+        let tasks_id = findLasestTask(this.props.tasks, activity_type)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.tasks_id
-        )
+        ) {
             tasks_id = this.props.navigation.state.params.tasks_id
+        }
 
         this.setState(
             {
                 dateTime: dateTime,
-                activity_type: this.props.navigation.state.params.sender,
+                activity_type: activity_type,
                 tasks_id: tasks_id,
             },
             () => this.loadList(),

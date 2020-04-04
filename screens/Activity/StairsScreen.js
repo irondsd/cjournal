@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 // import { barometer } from 'react-native-sensors'
 import { average, altMeter } from '../../helpers/math'
-import findLasestTask from '../../helpers/findLatestTask'
+import { findLasestTask } from '../../classes/Task'
 // import KeepAwake from 'react-native-keep-awake'
 import { cancelNotification } from '../../redux/actions'
 import {
@@ -100,15 +100,13 @@ class StairsScreen extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
-        let tasks_id = findLasestTask(activityTypes.Stairs)
+        let tasks_id = findLasestTask(this.props.tasks, activityTypes.Stairs)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.tasks_id
-        )
+        ) {
             tasks_id = this.props.navigation.state.params.tasks_id
-        this.setState({
-            tasks_id: tasks_id,
-        })
+        }
 
         // zero it out
         this.setState({
@@ -231,6 +229,7 @@ class StairsScreen extends Component {
 function mapStateToProps(state) {
     return {
         idinv: state.user.idinv,
+        tasks: state.tasks,
     }
 }
 

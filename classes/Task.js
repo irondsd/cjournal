@@ -1,3 +1,5 @@
+import timestamp from '../helpers/timestamp'
+
 export default class Task {
     constructor(id, activity_type, time, completed, last_updated, data) {
         this.id = id
@@ -79,4 +81,29 @@ export function sort(array) {
     }
 
     return array.sort(compare)
+}
+
+export function findLasestTask(array, activity_type) {
+    let id = null
+
+    for (task of array) {
+        if (task.activity_type === activity_type) {
+            if (timestamp() + 3600 > task.time) {
+                id = task.id
+                break
+            }
+        }
+    }
+
+    return id
+}
+
+export function findTaskById(array, id) {
+    for (task of array) {
+        if (task.id === id) {
+            return task
+        }
+    }
+
+    return null
 }
