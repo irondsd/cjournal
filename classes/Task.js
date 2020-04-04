@@ -9,7 +9,7 @@ export default class Task {
         this.last_updated = last_updated
         this.data = data
     }
-    // TODO: fintion find task
+
     isEqual(other) {
         if (this.id === other.id && this.id !== null) return true
         if (this.activity_type !== other.activity_type) return false
