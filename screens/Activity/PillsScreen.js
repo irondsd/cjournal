@@ -15,13 +15,13 @@ import {
 } from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import Activity from '../../classes/Activity'
-import timestamp from '../../helpers/timestamp'
+import { findTaskById, findLasestTask } from '../../classes/Task'
 import TakePhoto from '../../components/TakePhoto'
 import DropDownInput from '../../components/DropDownInput'
 import SaveButton from '../../components/SaveButton'
-import findLasestTask from '../../helpers/findLatestTask'
+import timestamp from '../../helpers/timestamp'
 
-class PillPickScreen extends Component {
+class PillsScreen extends Component {
     constructor(props) {
         super(props)
 
@@ -75,24 +75,24 @@ class PillPickScreen extends Component {
         }
         this.setState({ pills: pills })
 
-        let tasks_id = null
-        tasks_id = findLasestTask(activityTypes.Stairs)
+        let tasks_id = findLasestTask(this.props.tasks, activity_type)
+        let pill = null
+        let task = null
 
-        if (this.props.navigation.state.params) {
-            if (this.props.navigation.state.params.tasks_id) {
-                tasks_id = this.props.navigation.state.params.tasks_id
-                for (let i = 0; i < this.props.tasks.length; i++) {
-                    if (this.props.tasks[i].id == tasks_id) {
-                        let pill = this.props.tasks[i].data.pill
-                        this.setState({
-                            pill: pill,
-                            activity_type: this.props.tasks[i].activity_type,
-                            tasks_id: tasks_id,
-                        })
-                    }
-                }
-            }
+        if (
+            this.props.navigation.state.params &&
+            this.props.navigation.state.params.tasks_id
+        ) {
+            tasks_id = this.props.navigation.state.params.tasks_id
         }
+
+        task = findTaskById(this.props.tasks, tasks_id)
+        pill = task.data.pill
+
+        this.setState({
+            pill: pill,
+            tasks_id: tasks_id,
+        })
     }
 
     changeDateTime(dateTime) {
@@ -114,11 +114,8 @@ class PillPickScreen extends Component {
             '',
             { pill: this.state.pill },
         )
-
         if (this.state.photoFile) activity.data.photoFile = this.state.photoFile
-
         this.props.add(activity)
-
         this.props.navigation.navigate(paths.Home)
     }
 
@@ -160,6 +157,7 @@ class PillPickScreen extends Component {
                     list={this.state.pills}
                     onChangeText={this.onPillChange}
                     open={true}
+                    value={this.state.pill}
                 />
                 <TakePhoto
                     photo={this.state.photoFile}
@@ -196,7 +194,7 @@ const mapDispatchToProps = (dispatch) => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PillPickScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PillsScreen)
 
 const styles = StyleSheet.create({
     center: {
