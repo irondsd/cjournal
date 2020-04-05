@@ -14,61 +14,31 @@ export function iconPicker(activity_type) {
             img = require('../resources/icons/walking.png')
             break
         case activityTypes.Trainer:
-            img = require('../resources/icons/workout.png')
-            break
-        case activityTypes.Sauna:
-            img = require('../resources/icons/sauna.png')
-            break
-        case activityTypes.Sauna:
-            img = require('../resources/icons/sex.png')
+            img = require('../resources/icons/trainer.png')
             break
         case activityTypes.Shower:
             img = require('../resources/icons/shower.png')
             break
-        case activityTypes.Gambling:
-            img = require('../resources/icons/gambling.png')
-            break
-        case activityTypes.IntellectualWork:
-            img = require('../resources/icons/brain.png')
-            break
         case activityTypes.OtherLoad:
-            img = require('../resources/icons/person.png')
+            img = require('../resources/icons/exercise.png')
             break
         case activityTypes.OtherActivity:
-            img = require('../resources/icons/person.png')
+            img = require('../resources/icons/activity.png')
             break
         case activityTypes.OtherEmotions:
             img = require('../resources/icons/mood.png')
             break
         case activityTypes.OtherPain:
-            img = require('../resources/icons/person.png')
+            img = require('../resources/icons/otherpain.png')
             break
         case activityTypes.OtherComplaints:
-            img = require('../resources/icons/person.png')
+            img = require('../resources/icons/complaint.png')
             break
         case activityTypes.OtherWeakness:
-            img = require('../resources/icons/person.png')
+            img = require('../resources/icons/fatigue.png')
             break
         case activityTypes.Service:
             img = require('../resources/icons/service.png')
-            break
-        case activityTypes.Reading:
-            img = require('../resources/icons/reading.png')
-            break
-        case activityTypes.Relaxation:
-            img = require('../resources/icons/tv.png')
-            break
-        case activityTypes.Viewing:
-            img = require('../resources/icons/viewing.png')
-            break
-        case activityTypes.Massage:
-            img = require('../resources/icons/massage.png')
-            break
-        case activityTypes.Physiotherapy:
-            img = require('../resources/icons/physiotherapy.png')
-            break
-        case activityTypes.Sunbathe:
-            img = require('../resources/icons/sunbathe.png')
             break
         case activityTypes.Meal:
             img = require('../resources/icons/meal.png')
@@ -89,10 +59,10 @@ export function iconPicker(activity_type) {
             img = require('../resources/icons/sad.png')
             break
         case activityTypes.HeartAreaPain:
-            img = require('../resources/icons/pain.png')
+            img = require('../resources/icons/chestpain.png')
             break
         case activityTypes.RetrosternalPain:
-            img = require('../resources/icons/pain.png')
+            img = require('../resources/icons/chestpain.png')
             break
         case activityTypes.Arrhythmia:
             img = require('../resources/icons/arrhythmia.png')
@@ -123,18 +93,6 @@ export function iconPicker(activity_type) {
             break
         case activityTypes.VisionDisturbances:
             img = require('../resources/icons/vision.png')
-            break
-        case activityTypes.Anger:
-            img = require('../resources/icons/quarrel.png')
-            break
-        case activityTypes.Anxiety:
-            img = require('../resources/icons/anxiety.png')
-            break
-        case activityTypes.Excitement:
-            img = require('../resources/icons/excitement.png')
-            break
-        case activityTypes.Fear:
-            img = require('../resources/icons/fear.png')
             break
         case activityTypes.Positive:
             img = require('../resources/icons/happy.png')
@@ -210,6 +168,9 @@ export function iconPicker(activity_type) {
             break
         case activityTypes.DeepBreathing:
             img = require('../resources/icons/lungs.png')
+            break
+        case activityTypes.Workout:
+            img = require('../resources/icons/workout.png')
             break
         default:
             img = require('../resources/icons/activity.png')
