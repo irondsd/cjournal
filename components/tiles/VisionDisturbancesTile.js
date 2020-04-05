@@ -16,6 +16,7 @@ export default class ScreenTile extends Component {
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
                 color="#3a2747"
+                shadeColor="#993"
                 onPress={() => {
                     activityInstantSave(name)
                     this.props.navigation.navigate(paths.Home)
