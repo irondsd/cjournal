@@ -46,8 +46,8 @@ class TrainerScreen extends Component {
             activity_type: null,
             type: '',
             list: [
-                strings.Walking,
-                strings.Running,
+                strings.TrainerWalk,
+                strings.TrainerRun,
                 strings.Cycling,
                 strings.Elliptical,
                 strings.StairStepper,
@@ -174,7 +174,7 @@ class TrainerScreen extends Component {
                     // maxLines={5}
                     value={this.state.type}
                     placeholder={strings.TrainerType}
-                    onSelect={value => {
+                    onSelect={(value) => {
                         this.setState({
                             type: value,
                         })
@@ -182,7 +182,7 @@ class TrainerScreen extends Component {
                 />
                 <CaloriesInput
                     value={this.state.calories}
-                    onChangeText={value => this.setState({ calories: value })}
+                    onChangeText={(value) => this.setState({ calories: value })}
                 />
                 <View style={styles.saveButton}>
                     <SaveButton
@@ -205,8 +205,8 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    add: activity => {
+const mapDispatchToProps = (dispatch) => ({
+    add: (activity) => {
         dispatch(addActivity(activity))
     },
 })
