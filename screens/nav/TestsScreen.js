@@ -30,18 +30,18 @@ class TestsScreen extends Component {
                 <TileWrapper>
                     <StairsTile navigation={this.props.navigation} />
                     <WalkingTile navigation={this.props.navigation} />
-                    <PressTile navigation={this.props.navigation} />
+                    <DeepBreathingTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
+                    <PressTile navigation={this.props.navigation} />
                     <StrainingTile navigation={this.props.navigation} />
                     <OrthostasisTile navigation={this.props.navigation} />
-                    <PsychoemotionalTestTile
-                        navigation={this.props.navigation}
-                    />
                 </TileWrapper>
                 <TileWrapper>
                     <TileSpacer />
-                    <DeepBreathingTile navigation={this.props.navigation} />
+                    <PsychoemotionalTestTile
+                        navigation={this.props.navigation}
+                    />
                     <TileSpacer />
                 </TileWrapper>
             </View>
