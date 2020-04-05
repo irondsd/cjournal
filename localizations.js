@@ -185,6 +185,7 @@ export const strings = new LocalizedStrings({
         LeaningForward: 'Leaning forward',
         LeaningToTheLeft: 'Leaning to the left',
         DeepBreathing: 'Deep breathing',
+        Workout: 'Workout',
     },
     es: {
         Activity: 'Actividad',
@@ -371,6 +372,7 @@ export const strings = new LocalizedStrings({
         LeaningForward: 'Leaning forward',
         LeaningToTheLeft: 'Leaning to the left',
         DeepBreathing: 'Deep breathing',
+        Workout: 'Workout',
     },
     ru: {
         Activity: 'Активность',
@@ -553,5 +555,6 @@ export const strings = new LocalizedStrings({
         LeaningForward: 'Нагнувшись вперёд',
         LeaningToTheLeft: 'Нагнувшись влево',
         DeepBreathing: 'Глубокое дыхание',
+        Workout: 'Тренировка',
     },
 })

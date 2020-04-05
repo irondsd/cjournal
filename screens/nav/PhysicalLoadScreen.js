@@ -10,6 +10,7 @@ import RunningTile from '../../components/tiles/RunningTile'
 import NormalWalkingTile from '../../components/tiles/NormalWalkingTile'
 import BicyclingTile from '../../components/tiles/BicyclingTile'
 import TrainerTile from '../../components/tiles/TrainerTile'
+import WorkoutTile from '../../components/tiles/WorkoutTile'
 import TileSpacer from '../../components/TileSpacer'
 
 export default class PhysicalLoadScreen extends Component {
@@ -26,9 +27,9 @@ export default class PhysicalLoadScreen extends Component {
                     <BicyclingTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
+                    <WorkoutTile />
                     <TrainerTile navigation={this.props.navigation} />
                     <OtherLoad navigation={this.props.navigation} />
-                    <TileSpacer />
                 </TileWrapper>
             </View>
         )

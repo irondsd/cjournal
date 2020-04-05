@@ -58,4 +58,5 @@ export const activityTypes = {
     VerticalPositionCalibration: 'VerticalPositionCalibration',
     PsychoemotionalTest: 'PsychoemotionalTest',
     DeepBreathing: 'DeepBreathing',
+    Workout: 'Workout',
 }

@@ -34,4 +34,5 @@ export const editable = [
     'OtherPain',
     'OtherComplaints',
     'OtherWeakness',
+    'Workout',
 ]
