@@ -239,11 +239,21 @@ class WalkingScreen extends Component {
     render() {
         return (
             <View style={defaultStyles.container}>
-                <Text style={styles.text}>
-                    {strings.Steps}: {this.state.numberOfSteps},{' '}
-                    {strings.Distance}: {this.state.distance}
-                </Text>
-                <Text style={styles.timer}>{this.state.timer}</Text>
+                <View style={styles.stats}>
+                    <View style={styles.textSteps}>
+                        <Text style={styles.text}>{strings.Steps}</Text>
+                        <Text style={styles.number}>
+                            {this.state.numberOfSteps}
+                        </Text>
+                    </View>
+                    <View style={styles.textDistance}>
+                        <Text style={styles.text}>{strings.Distance}</Text>
+                        <Text style={styles.number}>{this.state.distance}</Text>
+                    </View>
+                </View>
+                <View style={styles.timerView}>
+                    <Text style={styles.timer}>{this.state.timer}</Text>
+                </View>
                 <View style={styles.button}>
                     <SaveButton
                         title={this.state.button_text}
@@ -273,19 +283,44 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(WalkingScreen)
 
 const styles = StyleSheet.create({
+    stats: {
+        // height: 50,
+        width: '100%',
+        flexDirection: 'row',
+        height: 50,
+    },
+    textSteps: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRightWidth: 1,
+        borderColor: '#dddddd',
+    },
+    textDistance: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderLeftWidth: 1,
+        borderColor: '#dddddd',
+    },
     text: {
-        padding: 10,
-        flex: 3,
+        fontSize: 15,
+    },
+    number: {
+        fontSize: 25,
+    },
+    timerView: {
+        top: '35%',
+        height: 100,
+        position: 'absolute',
     },
     timer: {
         fontSize: 80,
         fontWeight: '200',
-        flex: 5,
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
     button: {
         justifyContent: 'flex-end',
-        paddingBottom: 20,
         width: '100%',
     },
 })
