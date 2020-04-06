@@ -185,7 +185,6 @@ class StairsScreen extends Component {
     }
 
     startPressed() {
-        // TODO: check start values
         started = true
         if (!this.intervalId) {
             this.setState({
