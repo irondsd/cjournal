@@ -208,10 +208,21 @@ class StairsScreen extends Component {
     render() {
         return (
             <View style={defaultStyles.container}>
-                <Text style={styles.text}>
-                    {strings.Pressure}: {this.state.mmHg} {strings.mmHg}
-                </Text>
-                <Text style={styles.timer}>{this.state.meters}</Text>
+                <View style={styles.stats}>
+                    <View style={styles.textSteps}>
+                        <Text style={strings.Pressure}>
+                            {strings.Pressure} ({strings.mmHg})
+                        </Text>
+                        <Text style={styles.number}>{this.state.mmHg}</Text>
+                    </View>
+                    <View style={styles.textDistance}>
+                        <Text style={strings.Pressure}>{strings.Steps}</Text>
+                        <Text style={styles.number}>{this.state.steps}</Text>
+                    </View>
+                </View>
+                <View style={styles.timerView}>
+                    <Text style={styles.timer}>{this.state.meters}</Text>
+                </View>
                 <View style={styles.button}>
                     <SaveButton
                         title={this.state.button_text}
@@ -244,14 +255,45 @@ const styles = StyleSheet.create({
     mainContent: {
         backgroundColor: 'green',
     },
+    stats: {
+        // height: 50,
+        width: '100%',
+        flexDirection: 'row',
+        height: 50,
+    },
+    textSteps: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRightWidth: 1,
+        borderColor: '#dddddd',
+    },
+    textDistance: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderLeftWidth: 1,
+        borderColor: '#dddddd',
+    },
+    text: {
+        fontSize: 15,
+        backgroundColor: 'black',
+    },
+    number: {
+        fontSize: 25,
+    },
     text: {
         padding: 10,
         flex: 3,
     },
+    timerView: {
+        top: '35%',
+        height: 100,
+        position: 'absolute',
+    },
     timer: {
         fontSize: 80,
         fontWeight: '200',
-        flex: 5,
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
     button: {
