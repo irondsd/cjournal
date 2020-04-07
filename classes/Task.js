@@ -83,8 +83,10 @@ export function sort(array) {
     return array.sort(compare)
 }
 
-export function findLasestTask(array, activity_type) {
+export function findLatestTask(array, activity_type) {
     let id = null
+
+    if (!Array.isArray(array)) return null
 
     for (task of array) {
         if (task.activity_type === activity_type) {
