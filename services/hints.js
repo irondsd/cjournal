@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage'
+import { defaultHints } from '../constants/defaultHints'
 
 export async function addHint(name, item) {
     if (!item) return
@@ -33,4 +34,10 @@ export async function loadHints(name) {
             resolve(JSON.parse(res))
         })
     })
+}
+
+export function resetHits() {
+    for (const property in defaultHints) {
+        AsyncStorage.removeItem(property)
+    }
 }
