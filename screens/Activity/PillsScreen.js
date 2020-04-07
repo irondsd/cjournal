@@ -15,7 +15,7 @@ import {
 } from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import Activity from '../../classes/Activity'
-import { findTaskById, findLasestTask } from '../../classes/Task'
+import { findTaskById, findLatestTask } from '../../classes/Task'
 import TakePhoto from '../../components/TakePhoto'
 import DropDownInput from '../../components/DropDownInput'
 import SaveButton from '../../components/SaveButton'
@@ -75,7 +75,7 @@ class PillsScreen extends Component {
         }
         this.setState({ pills: pills })
 
-        let tasks_id = findLasestTask(this.props.tasks, activity_type)
+        let tasks_id = findLatestTask(this.props.tasks, activity_type)
         let pill = null
         let task = null
 
@@ -87,7 +87,9 @@ class PillsScreen extends Component {
         }
 
         task = findTaskById(this.props.tasks, tasks_id)
-        pill = task.data.pill
+        if (task) {
+            pill = task.data.pill
+        }
 
         this.setState({
             pill: pill,
@@ -188,13 +190,16 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    add: (activity) => {
+const mapDispatchToProps = dispatch => ({
+    add: activity => {
         dispatch(addActivity(activity))
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(PillsScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(PillsScreen)
 
 const styles = StyleSheet.create({
     center: {

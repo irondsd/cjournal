@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 // import { barometer } from 'react-native-sensors'
 import { average, altMeter } from '../../helpers/math'
-import { findLasestTask } from '../../classes/Task'
+import { findLatestTask } from '../../classes/Task'
 // import KeepAwake from 'react-native-keep-awake'
 import { cancelNotification } from '../../redux/actions'
 import {
@@ -85,13 +85,13 @@ class StairsScreen extends Component {
         }
     }
 
-    setDistance = (distance) => {
+    setDistance = distance => {
         this.setState({
             distance: distance,
         })
     }
 
-    setSteps = (pedometerData) => {
+    setSteps = pedometerData => {
         this.setState({
             steps: pedometerData.numberOfSteps,
         })
@@ -100,7 +100,7 @@ class StairsScreen extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
-        let tasks_id = findLasestTask(this.props.tasks, activityTypes.Stairs)
+        let tasks_id = findLatestTask(this.props.tasks, activityTypes.Stairs)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.tasks_id
@@ -168,7 +168,7 @@ class StairsScreen extends Component {
 
         if (isNaN(meters)) return
 
-        this.setState((prevState) => ({
+        this.setState(prevState => ({
             meters: meters,
             metersMax:
                 prevState.metersMax < meters ? meters : prevState.metersMax,
@@ -243,13 +243,16 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    add: (activity) => {
+const mapDispatchToProps = dispatch => ({
+    add: activity => {
         dispatch(addActivity(activity))
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(StairsScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(StairsScreen)
 
 const styles = StyleSheet.create({
     mainContent: {

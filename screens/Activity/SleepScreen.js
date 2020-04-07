@@ -49,15 +49,18 @@ class SleepScreen extends Component {
     handleBackButton() {
         // this.finish()
         Alert.alert(
-            'Terminate?',
-            'Do you really want to terminate Sleep?',
+            `${strings.Terminate}?`,
+            strings.TerminateSleep,
             [
                 {
-                    text: 'Cancel',
+                    text: strings.Cancel,
                     onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                 },
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
+                {
+                    text: strings.Terminate,
+                    onPress: () => this.finish(),
+                },
             ],
             { cancelable: false },
         )
@@ -148,7 +151,10 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SleepScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(SleepScreen)
 
 const styles = StyleSheet.create({
     container: {
