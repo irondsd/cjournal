@@ -9,6 +9,7 @@ import TachypneaTile from '../../components/tiles/TachypneaTile'
 import ArrhythmiaTile from '../../components/tiles/ArrhythmiaTile'
 import PalpitationTile from '../../components/tiles/PalpitationTile'
 import OtherComplaints from '../../components/tiles/OtherComplaints'
+import VisionDisturbancesTile from '../../components/tiles/VisionDisturbancesTile'
 import TileWrapper from '../../components/TileWrapper'
 import TileSpacer from '../../components/TileSpacer'
 

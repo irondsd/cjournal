@@ -6,7 +6,6 @@ import { strings } from '../../localizations'
 import sync from '../../services/sync'
 import NauseaTile from '../../components/tiles/NauseaTile'
 import StupefactionTile from '../../components/tiles/StupefactionTile'
-import VisionDisturbancesTile from '../../components/tiles/VisionDisturbancesTile'
 import OtherWeakness from '../../components/tiles/OtherWeakness'
 import SyncopeTile from '../../components/tiles/SyncopeTile'
 import FatigueTile from '../../components/tiles/FatigueTile'
@@ -27,11 +26,9 @@ export default class WeaknessScreen extends Component {
                     <StupefactionTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
-                    <VisionDisturbancesTile
-                        navigation={this.props.navigation}
-                    />
                     <FatigueTile navigation={this.props.navigation} />
                     <OtherWeakness navigation={this.props.navigation} />
+                    <TileSpacer />
                 </TileWrapper>
             </View>
         )

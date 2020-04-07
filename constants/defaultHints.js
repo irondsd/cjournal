@@ -18,5 +18,6 @@ export const defaultHints = {
         strings.Straight,
         strings.LeaningForward,
         strings.LeaningToTheLeft,
+        strings.LeaningToTheRight,
     ],
 }
