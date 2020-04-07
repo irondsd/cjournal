@@ -189,6 +189,7 @@ export const strings = new LocalizedStrings({
         Workout: 'Workout',
         TrainerWalk: 'Threadmill (walk)',
         TrainerRun: 'Threadmill (run)',
+        TerminateSleep: 'Do you really want to terminate sleep?',
     },
     es: {
         Activity: 'Actividad',
@@ -379,6 +380,7 @@ export const strings = new LocalizedStrings({
         Workout: 'Workout',
         TrainerWalk: 'Trainer walk',
         TrainerRun: 'Trainer run',
+        TerminateSleep: 'Do you really want to terminate sleep?',
     },
     ru: {
         Activity: 'Активность',
@@ -403,7 +405,7 @@ export const strings = new LocalizedStrings({
         CamPermDenied: 'Отказано в использовании камеры',
         Cancel: 'Отменить',
         CantConnect: 'Невозможно соединиться с сервером',
-        CantGoBack: 'Нельзя вернуться, сначала закончите занятие',
+        CantGoBack: 'Нельзя вернуться, сначала закончите задание',
         Comment: 'Комментарий',
         Complaints: 'Нарушения дыхания',
         Complaints: 'Жалобы',
@@ -422,8 +424,8 @@ export const strings = new LocalizedStrings({
         EmotionalStress: 'Эмоциональная нагрузка',
         Error: 'Ошибка',
         ErrQR: 'Не удаётся прочесть QR код',
-        ExerciseFinish: 'Завершение затяния',
-        ExerciseFinishText: 'Поздравляем, вы справились с занятием!',
+        ExerciseFinish: 'Завершение задания',
+        ExerciseFinishText: 'Поздравляем, вы справились с заданием!',
         Nausea: 'Дурнота (Тошнота)',
         Fatigue: 'Усталость',
         February: 'Февраля',
@@ -524,7 +526,7 @@ export const strings = new LocalizedStrings({
         Tasks: 'Задания',
         Terminate: 'Прервать',
         TerminationExerciseQuestion:
-            'Вы действительно хотите прервать занятие? Это необратимое действие',
+            'Вы действительно хотите прервать задание? Это необратимое действие',
         Tests: 'Пробы',
         Time: 'Время',
         Today: 'Сегодня',
@@ -565,5 +567,6 @@ export const strings = new LocalizedStrings({
         Workout: 'Тренировка',
         TrainerWalk: 'Бегущая дорожка (ходьба)',
         TrainerRun: 'Бегущая дорожка (бег)',
+        TerminateSleep: 'Вы действительно хотите завершить сон?',
     },
 })
