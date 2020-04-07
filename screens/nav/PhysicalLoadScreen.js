@@ -27,7 +27,7 @@ export default class PhysicalLoadScreen extends Component {
                     <BicyclingTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
-                    <WorkoutTile />
+                    <WorkoutTile navigation={this.props.navigation} />
                     <TrainerTile navigation={this.props.navigation} />
                     <OtherLoad navigation={this.props.navigation} />
                 </TileWrapper>
