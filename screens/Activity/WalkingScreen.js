@@ -21,6 +21,9 @@ import {
     paths,
     defaultStyles,
     walkingDuration,
+    appColor,
+    secondaryColor,
+    secondaryGrey,
 } from '../../constants'
 import BackButton from '../../components/BackButton'
 import { showError } from '../../services/toast'
@@ -30,7 +33,9 @@ import requestLocationPermissions from '../../permissions/requestLocationPermiss
 import GPS from '../../sensors/GPS'
 import Pedometer from '../../sensors/Pedometer'
 import SaveButton from '../../components/SaveButton'
-import { findLasestTask } from '../../classes/Task'
+import { findLatestTask } from '../../classes/Task'
+import { AnimatedCircularProgress } from 'react-native-circular-progress'
+import { createIconSetFromFontello } from 'react-native-vector-icons'
 
 let timerOn = false
 
@@ -54,36 +59,20 @@ class WalkingScreen extends Component {
         super(props)
 
         this.handleBackButton = this.handleBackButton.bind(this)
-        this.setDistance = this.setDistance.bind(this)
-        this.setSteps = this.setSteps.bind(this)
 
         this.state = {
             timer: '0:00',
-            time_seconds: walkingDuration,
-            timer_set: false,
-            button_text: strings.Start,
-            intervalId: 0,
-            timeoutId: 0,
-            startDate: null,
-            numberOfSteps: 0,
             tasks_id: null,
+            progress: 100,
             distance: 0,
-            speed: 0,
-            positions: [],
+            steps: 0,
+            started: false,
+            timestampStart: 0,
+            timestampEnd: 0,
         }
 
-        this.GPS = new GPS(this.setDistance)
-        this.Pedometer = new Pedometer(this.setSteps)
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener(
-            'hardwareBackPress',
-            this.handleBackButton,
-        )
-        // Pedometer.stopPedometerUpdates();
-        this.Pedometer.stopUpdates()
-        this.GPS.watchStop()
+        this.GPS = new GPS()
+        this.Pedometer = new Pedometer()
     }
 
     handleBackButton() {
@@ -95,58 +84,48 @@ class WalkingScreen extends Component {
     componentDidMount() {
         requestLocationPermissions()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
-        let tasks_id = findLasestTask(this.props.tasks, activityTypes.Walking)
+        let tasks_id = findLatestTask(this.props.tasks, activityTypes.Walking)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.tasks_id
         ) {
             tasks_id = this.props.navigation.state.params.tasks_id
+            cancelNotification(this.props.navigation.state.params.tasks_id)
         }
         this.setState({
             timer: secs2time(walkingDuration),
             tasks_id: tasks_id,
         })
-
-        if (this.props.navigation.state.params)
-            cancelNotification(this.props.navigation.state.params.tasks_id)
     }
 
-    setDistance(distance) {
-        this.setState({
-            distance: distance,
-        })
-    }
+    componentWillUnmount() {
+        BackHandler.removeEventListener(
+            'hardwareBackPress',
+            this.handleBackButton,
+        )
 
-    setSteps(pedometerData) {
-        this.setState({
-            numberOfSteps: pedometerData.numberOfSteps,
-        })
+        this.Pedometer.stopUpdates()
+        this.GPS.watchStop()
+        this.timerStop()
+        timerOn = false
     }
 
     record() {
-        let tasks_id = this.state.tasks_id
-            ? parseInt(this.state.tasks_id)
-            : null
-        if (tasks_id) cancelNotification(tasks_id)
-        let endDate = new Date()
-        let data = {
-            steps: this.state.numberOfSteps ? this.state.numberOfSteps : 0,
-            distance: this.state.distance ? this.state.distance : 0,
-        }
-        if (this.state.time_seconds >= 300) data.failed = true
+        console.log('record', timestamp(), this.state)
+        if (this.state.tasks_id) cancelNotification(tasks_id)
 
-        let positions = this.GPS.getFirstAndLastPosition()
-        data = {
-            ...data,
-            ...positions,
+        let data = {
+            steps: this.state.steps,
+            distance: this.state.distance,
+            positions: this.GPS.getFirstAndLastPosition(),
         }
 
         let activity = new Activity(
             null,
             activityTypes.Walking,
-            timestamp(this.state.startDate),
+            this.state.timestampStart,
             timestamp(),
-            tasks_id,
+            this.state.tasks_id,
             this.props.idinv,
             timestamp(),
             '',
@@ -158,43 +137,32 @@ class WalkingScreen extends Component {
         })
     }
 
-    componentWillUnmount() {
-        this.timerStop()
-        timerOn = false
-    }
-
     timerStart() {
         timerOn = true
-        console.log('timer started')
         // this timer is to update the screen
-        const intervalId = BackgroundTimer.setInterval(() => {
+        this.intervalId = BackgroundTimer.setInterval(() => {
             this.timerTick()
         }, 1000)
 
-        BackgroundTimer.setTimeout(() => {
-            console.log('finished 6 mins')
-
+        // timeout for 6 minutes
+        this.timeoutId = BackgroundTimer.setTimeout(() => {
+            console.log('gg4')
             this.timerStop()
             this.record()
-        }, 360000)
+        }, walkingDuration * 1000)
 
-        this.setState((prevstate) => ({
-            intervalId: intervalId,
+        this.setState(prevstate => ({
+            started: true,
+            timestampStart: timestamp(),
+            timestampEnd: timestamp() + walkingDuration,
         }))
 
-        this.GPS.watchStart(10000)
-
-        let dateTime = new Date()
-        this.setState({ startDate: dateTime })
-        this.Pedometer.startUpdates(dateTime)
+        this.GPS.watchStart()
+        this.Pedometer.startUpdates(new Date())
     }
 
     startPressed() {
-        if (!this.state.timer_set) {
-            this.setState({
-                timer_set: true,
-                button_text: strings.Terminate,
-            })
+        if (!this.state.started) {
             this.timerStart()
         } else {
             Alert.alert(strings.Cancel, strings.TerminationExerciseQuestion, [
@@ -205,6 +173,7 @@ class WalkingScreen extends Component {
                 {
                     text: strings.Terminate,
                     onPress: () => {
+                        console.log('gg3')
                         this.timerStop()
                         this.record()
                     },
@@ -214,26 +183,53 @@ class WalkingScreen extends Component {
     }
 
     timerTick() {
-        console.log('tick')
+        let time = this.state.timestampEnd - timestamp()
 
-        this.setState((prevState) => ({
-            timer_set: true,
-            time_seconds: prevState.time_seconds - 1,
-            timer: secs2time(prevState.time_seconds - 1),
-        }))
+        console.log(time)
 
-        if (this.state.time_seconds === 0) {
+        this.setState({
+            timer: secs2time(time),
+            distance: this.GPS.distance,
+            steps: this.Pedometer.steps,
+            progress: time / 3.6,
+        })
+
+        if (time === 0) {
             // time ran out
+            console.log('gg1')
             Vibration.vibrate(600)
+            this.timerStop()
+            this.record()
+        }
+        if (time < 0) {
+            console.log('gg2')
+            // time ran out before
+            this.setState({
+                timer: '00:00',
+            })
             this.timerStop()
             this.record()
         }
     }
 
     timerStop() {
-        BackgroundTimer.clearInterval(this.state.intervalId)
+        BackgroundTimer.clearInterval(this.intervalId)
+        BackgroundTimer.clearTimeout(this.timeoutId)
         this.GPS.watchStop()
         this.Pedometer.stopUpdates()
+
+        // this.setState({
+        //     timer: '0:00',
+        //     tasks_id: null,
+        //     progress: 100,
+        //     distance: 0,
+        //     steps: 0,
+        //     started: false,
+        //     timestampStart: 0,
+        //     timestampEnd: 0,
+        // })
+
+        timerOn = false
     }
 
     render() {
@@ -242,9 +238,7 @@ class WalkingScreen extends Component {
                 <View style={styles.stats}>
                     <View style={styles.textSteps}>
                         <Text style={styles.text}>{strings.Steps}</Text>
-                        <Text style={styles.number}>
-                            {this.state.numberOfSteps}
-                        </Text>
+                        <Text style={styles.number}>{this.state.steps}</Text>
                     </View>
                     <View style={styles.textDistance}>
                         <Text style={styles.text}>{strings.Distance}</Text>
@@ -252,11 +246,25 @@ class WalkingScreen extends Component {
                     </View>
                 </View>
                 <View style={styles.timerView}>
-                    <Text style={styles.timer}>{this.state.timer}</Text>
+                    <AnimatedCircularProgress
+                        size={300}
+                        width={2}
+                        fill={this.state.progress}
+                        rotation={180}
+                        tintColor={'#00000055'}
+                        backgroundColor="#00000000">
+                        {() => (
+                            <Text style={styles.timer}>{this.state.timer}</Text>
+                        )}
+                    </AnimatedCircularProgress>
                 </View>
                 <View style={styles.button}>
                     <SaveButton
-                        title={this.state.button_text}
+                        title={
+                            this.state.started
+                                ? strings.Terminate
+                                : strings.Start
+                        }
                         onPress={() => {
                             this.startPressed()
                         }}
@@ -274,13 +282,16 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    add: (activity) => {
+const mapDispatchToProps = dispatch => ({
+    add: activity => {
         dispatch(addActivity(activity))
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalkingScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(WalkingScreen)
 
 const styles = StyleSheet.create({
     stats: {
@@ -310,13 +321,14 @@ const styles = StyleSheet.create({
         fontSize: 25,
     },
     timerView: {
-        top: '35%',
+        top: '27.5%',
         height: 100,
         position: 'absolute',
     },
     timer: {
         fontSize: 80,
         fontWeight: '200',
+        color: '#00000055',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
     button: {
