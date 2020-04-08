@@ -17,7 +17,6 @@ export const defaultHints = {
     VerticalPositionCalibration: [
         strings.Straight,
         strings.LeaningForward,
-        strings.LeaningToTheLeft,
         strings.LeaningToTheRight,
     ],
 }
