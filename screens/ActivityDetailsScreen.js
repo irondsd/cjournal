@@ -388,11 +388,9 @@ class ActivityDetailsScreen extends Component {
                     />
                 )}
                 {this.state.switches.pills && (
-                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
+                    <View style={{ zIndex: 10, width: '100%' }}>
                         <DropDownInput
-                            style={
-                                Platform.OS === 'ios' ? { zIndex: 10 } : null
-                            }
+                            style={{ zIndex: 10, width: '100%' }}
                             list={this.state.pills}
                             onChangeText={this.onPillChange}
                             value={this.state.activity.data.pill}
@@ -401,7 +399,7 @@ class ActivityDetailsScreen extends Component {
                     </View>
                 )}
                 {this.state.switches.duration && (
-                    <View style={Platform.OS === 'ios' ? { zIndex: 10 } : null}>
+                    <View style={{ zIndex: 10 }}>
                         <DurationPicker
                             value={this.state.duration}
                             handler={this.onDurationChange}
