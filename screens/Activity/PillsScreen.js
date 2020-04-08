@@ -100,7 +100,6 @@ class PillsScreen extends Component {
     changeDateTime(dateTime) {
         this.setState({
             dateTime: dateTime,
-            pills: pills,
         })
     }
 
@@ -151,7 +150,7 @@ class PillsScreen extends Component {
         return (
             <View style={defaultStyles.container}>
                 <TimePicker
-                    dateTime={new Date()}
+                    dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
                 />
                 <DropDownInput

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tile from '../Tile'
 import { strings } from '../../localizations'
+import { activityInstantSave } from '../../helpers/activityInstantSave'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
