@@ -14,6 +14,8 @@ import { isConnected } from './connectivityWatcher'
 
 let errors = 0
 
+// TODO: fix doubling opon sync
+
 export default async function sync(id, tokens) {
     let activities = store.getState().activity
 
