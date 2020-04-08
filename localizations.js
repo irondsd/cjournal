@@ -536,7 +536,7 @@ export const strings = new LocalizedStrings({
         Undefined: 'Без названия',
         username: 'имя пользователя',
         Version: 'Версия',
-        VerticalPositionCalibration: 'Калибровка вертикальной позиции',
+        VerticalPositionCalibration: 'Калибровка вертикального положения',
         VisionDisturbances: 'Нарушения зрения',
         Walking: 'Тест с 6-мин. ходьбой',
         Weakness: 'Слабость',
