@@ -24,6 +24,8 @@ import TouchableIcon from '../components/TouchableIcon'
 
 const behavior = Platform.OS === 'ios' ? 'padding' : 'padding'
 
+// TODO: browser login
+
 class LoginScreen extends Component {
     constructor(props) {
         super(props)
@@ -142,7 +144,10 @@ const mapDispatchToProps = {
     // updateUser,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(LoginScreen)
 
 const logoSize = Dimensions.get('window').width / 2
 

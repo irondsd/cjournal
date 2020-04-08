@@ -9,10 +9,8 @@ export default class PedometerSensor {
     }
 
     startUpdates(dateTime) {
-        console.log('called')
         Pedometer.isStepCountingAvailable((error, isAvailable) => {
             if (isAvailable) {
-                console.log('available')
                 Pedometer.startPedometerUpdatesFromDate(
                     dateTime.getTime(),
                     pedometerData => {
