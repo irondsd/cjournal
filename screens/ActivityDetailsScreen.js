@@ -134,7 +134,7 @@ class ActivityDetailsScreen extends Component {
 
         if (othersList.includes(activity.activity_type)) {
             pills = false
-            duration = false
+            duration = true
             photo = false
             others = true
             comment = false
@@ -388,9 +388,14 @@ class ActivityDetailsScreen extends Component {
                     />
                 )}
                 {this.state.switches.pills && (
-                    <View style={{ zIndex: 10, width: '100%' }}>
+                    <View
+                        style={
+                            Platform.OS === 'ios'
+                                ? { zIndex: 10, width: '100%' }
+                                : { width: '100%' }
+                        }>
                         <DropDownInput
-                            style={{ zIndex: 10, width: '100%' }}
+                            // style={{ zIndex: 10, width: '100%' }}
                             list={this.state.pills}
                             onChangeText={this.onPillChange}
                             value={this.state.activity.data.pill}
@@ -399,7 +404,12 @@ class ActivityDetailsScreen extends Component {
                     </View>
                 )}
                 {this.state.switches.duration && (
-                    <View style={{ zIndex: 10 }}>
+                    <View
+                        style={
+                            Platform.OS === 'ios'
+                                ? { zIndex: 10, width: '100%' }
+                                : { width: '100%' }
+                        }>
                         <DurationPicker
                             value={this.state.duration}
                             handler={this.onDurationChange}
@@ -408,7 +418,12 @@ class ActivityDetailsScreen extends Component {
                     </View>
                 )}
                 {this.state.switches.others && (
-                    <View style={{ zIndex: 10, width: '100%' }}>
+                    <View
+                        style={
+                            Platform.OS === 'ios'
+                                ? { zIndex: 10, width: '100%' }
+                                : { width: '100%' }
+                        }>
                         <DropDownInput
                             list={this.state.loadedOthers}
                             open={true}
