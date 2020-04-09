@@ -16,6 +16,7 @@ export default class Tokens {
         return new Promise((resolve, reject) => {
             identityRefreshToken(this.refresh_token)
                 .then(res => {
+                    if (!res.ok) throw new Error(res.status)
                     if (res.access_token && res.refresh_token) {
                         store.dispatch(tokensReceived(res))
                         resolve(res)
@@ -30,7 +31,7 @@ export default class Tokens {
     }
 
     isExpired() {
-        return this.token_lifetime > timestamp()
+        return this.token_lifetime < timestamp()
     }
 
     expiresSoon() {

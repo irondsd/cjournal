@@ -18,8 +18,8 @@ export default function identityRefreshToken(refresh_token) {
             res = res.json()
             return res
         } else {
-            console.log('error updating token', res)
-            throw new Error('invalid grant')
+            // console.log('error updating token', res)
+            return res
         }
     })
 }

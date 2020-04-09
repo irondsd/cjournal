@@ -2,7 +2,6 @@ import { activityFetchData } from '../requests/activityFetchData'
 import { userFetchData } from '../requests/userFetchData'
 import { tasksFetchData } from '../requests/tasksFetchData'
 import { identityUserInfo } from '../requests/identityUserInfo'
-import { identityRefreshToken } from '../requests/identityRefreshToken'
 import store from '../redux/store'
 import syncActivities from './syncActivities'
 import Barometer from '../sensors/Barometer'
@@ -28,8 +27,9 @@ export default async function sync(id, tokens) {
             tokens = await tokens.refresh()
         } catch (error) {
             isConnected().then(connected => {
-                console.log('is connected', connected)
-                if (!connected) errors += 1
+                // console.log('is connected', connected)
+                if (error.message == '400') errors += 1
+                console.log(`Error updating token ${errors} out of 5`)
             })
 
             if (errors >= 5 && tokens.isExpired()) {
