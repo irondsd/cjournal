@@ -12,6 +12,7 @@ import {
     BackHandler,
     Alert,
     StatusBar,
+    Keyboard,
 } from 'react-native'
 import LoginForm from '../components/LoginForm'
 import { appColor } from '../constants'
@@ -22,8 +23,6 @@ import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import TouchableIcon from '../components/TouchableIcon'
 
-const behavior = Platform.OS === 'ios' ? 'padding' : 'padding'
-
 // TODO: browser login
 
 class LoginScreen extends Component {
@@ -32,6 +31,7 @@ class LoginScreen extends Component {
         this.state = {
             qrvalue: '',
             opneScanner: false,
+            keyboardHidden: true,
         }
 
         this.handleBackButton = this.handleBackButton.bind(this)
@@ -59,6 +59,19 @@ class LoginScreen extends Component {
                 this.props.navigation.navigate('App')
             }
         })
+        this.keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            this.keyboardDidShow,
+        )
+        this.keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            this.keyboardDidHide,
+        )
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove()
+        this.keyboardDidHideListener.remove()
     }
 
     onBarcodeScan(qrvalue) {
@@ -77,6 +90,14 @@ class LoginScreen extends Component {
             this.setState({ qrvalue: '' })
             this.setState({ opneScanner: true })
         }
+    }
+
+    keyboardDidShow = () => {
+        this.setState({ keyboardHidden: false })
+    }
+
+    keyboardDidHide = () => {
+        this.setState({ keyboardHidden: true })
     }
 
     render() {
@@ -105,13 +126,16 @@ class LoginScreen extends Component {
         }
 
         return (
-            <KeyboardAvoidingView behavior={behavior} style={styles.container}>
+            <KeyboardAvoidingView behavior={null} style={styles.container}>
                 <StatusBar
                     backgroundColor={appColor}
                     barStyle="light-content"
-                    // hidden={true}
                 />
-                <View style={styles.logoContainer}>
+                <View
+                    style={[
+                        styles.logoContainer,
+                        this.state.keyboardHidden ? null : { top: -10 },
+                    ]}>
                     <Image
                         style={styles.logo}
                         source={require('../resources/logo.png')}
@@ -121,7 +145,6 @@ class LoginScreen extends Component {
                 </View>
                 <View style={styles.login}>
                     <LoginForm navigation={this.props.navigation} />
-                    {/* <QRScanButton callback={() => this.onOpneScanner()} /> */}
                     <TouchableIcon
                         name="qrcode"
                         onPress={() => this.onOpneScanner()}
@@ -156,16 +179,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: appColor,
         alignItems: 'center',
+        justifyContent: 'flex-end',
     },
     logoContainer: {
-        flexGrow: 1,
         alignItems: 'center',
+        position: 'absolute',
         top: '22%',
-        paddingBottom: '10%',
     },
     logo: {
         width: logoSize,
-        height: logoSize,
+        height: logoSize - 10,
     },
     title: {
         color: 'white',
@@ -173,12 +196,11 @@ const styles = StyleSheet.create({
     },
     login: {
         margin: 20,
-        bottom: '3%',
     },
     qrButton: {
         position: 'absolute',
         bottom: '1%',
-        left: 5,
+        left: 6,
         padding: 10,
     },
 })
