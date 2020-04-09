@@ -78,7 +78,37 @@ const TasksStack = createStackNavigator({
     Tasks: TasksScreen,
 })
 
-JournalStack.navigationOptions = { tabBarLabel: strings.Journal }
+JournalStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true
+    let swipeEnabled = true
+    let tabBarLabel = strings.Journal
+
+    let routes
+    if (navigation.state.routes) {
+        routes = navigation.state.routes
+    }
+
+    let routeName = ''
+    for (let i = 0; i < routes.length; i++) {
+        routeName = routes[i].routeName
+        // getting the last route name
+    }
+
+    if (
+        routeName === paths.ActivityDetails ||
+        routeName === paths.ActivityStats
+    ) {
+        tabBarVisible = false
+        swipeEnabled = false
+    }
+
+    return {
+        tabBarVisible,
+        tabBarLabel,
+        swipeEnabled,
+    }
+}
+
 HomeStack.navigationOptions = ({ navigation }) => {
     let routes
     if (navigation.state.routes) {
@@ -95,11 +125,18 @@ HomeStack.navigationOptions = ({ navigation }) => {
     }
 
     if (
-        routeName === paths.Sleep ||
         routeName === paths.Walking ||
         routeName === paths.Stairs ||
         routeName === paths.ExerciseFinish ||
-        routeName === paths.Camera
+        routeName === paths.Pills ||
+        routeName === paths.BloodPressure ||
+        routeName === paths.TimePick ||
+        routeName === paths.Other ||
+        routeName === paths.VerticalPositionCalibration ||
+        routeName === paths.ExerciseFinish ||
+        routeName === paths.Trainer ||
+        routeName === paths.Alarm ||
+        routeName === paths.Sleep
     ) {
         tabBarVisible = false
         swipeEnabled = false
