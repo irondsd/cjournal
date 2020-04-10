@@ -1,8 +1,9 @@
 import { apiUrl } from '../constants'
+import timeoutFetch from '../helpers/timeoutFetch'
 
 export default function userUpdateIdinv(id, access_token, idinv) {
     const url = apiUrl + `users/${id}/`
-    return fetch(url, {
+    return timeoutFetch(url, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',

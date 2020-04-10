@@ -1,8 +1,9 @@
 import { apiUrl } from '../constants'
+import timeoutFetch from '../helpers/timeoutFetch'
 
 export default function activityPutData(id, access_token, activity) {
     const url = apiUrl + `users/${id}/activity/${activity.id}`
-    return fetch(url, {
+    return timeoutFetch(url, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
