@@ -18,8 +18,6 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
 
-// TODO: fix keyboard avoiding
-
 class SleepScreen extends Component {
     static navigationOptions = {
         header: null,
