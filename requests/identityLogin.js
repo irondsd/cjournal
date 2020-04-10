@@ -3,6 +3,7 @@ import { tokensReceived, updateUser } from '../redux/actions/'
 import { loginConfirm } from './loginConfirm'
 import { Alert } from 'react-native'
 import { strings } from '../localizations'
+import timeoutFetch from '../helpers/timeoutFetch'
 
 export function identityLogin(username, password) {
     let formData = new FormData()
@@ -12,7 +13,7 @@ export function identityLogin(username, password) {
     formData.append('password', password)
 
     return dispatch => {
-        fetch(identityTokenUrl, {
+        timeoutFetch(identityTokenUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -31,9 +32,15 @@ export function identityLogin(username, password) {
                 }
             })
             .catch(err => {
-                if (err.message.includes('Network request failed'))
+                console.log(err)
+                if (err.status === 408) {
+                    // timeout
                     Alert.alert(strings.NoConn, strings.CantConnect)
-                else Alert.alert(strings.Error, strings.WrongPassword)
+                }
+                if (err.message.includes('Network request failed')) {
+                    // server down
+                    Alert.alert(strings.Error, strings.ServerDown)
+                } else Alert.alert(strings.Error, strings.WrongPassword)
             })
     }
 }

@@ -189,6 +189,7 @@ export const strings = new LocalizedStrings({
         TrainerWalk: 'Threadmill (walk)',
         TrainerRun: 'Threadmill (run)',
         TerminateSleep: 'Do you really want to terminate sleep?',
+        ServerDown: 'Identity server down',
     },
     es: {
         Activity: 'Actividad',
@@ -379,6 +380,7 @@ export const strings = new LocalizedStrings({
         TrainerWalk: 'Trainer walk',
         TrainerRun: 'Trainer run',
         TerminateSleep: 'Do you really want to terminate sleep?',
+        ServerDown: 'Identity server down',
     },
     ru: {
         Activity: 'Активность',
@@ -389,7 +391,7 @@ export const strings = new LocalizedStrings({
         and: 'и',
         AppTitle: 'Кардио журнал',
         April: 'Апреля',
-        Arrhythmia: 'Перебои (аритмия)',
+        Arrhythmia: 'Перебои (Аритмия)',
         AskMeLater: 'Спросить позже',
         at: 'в',
         AtivityStats: 'Статистика активности',
@@ -478,7 +480,7 @@ export const strings = new LocalizedStrings({
         OtherActivity: 'Другая активность',
         OtherComplaints: 'Другие жалобы',
         OtherEmotions: 'Другие эмоции',
-        OtherLoad: 'Другая нагрузка (работа)',
+        OtherLoad: 'Другая нагрузка (Работа)',
         OtherPain: 'Другая боль',
         OtherWeakness: 'Другое',
         OverlapMsg:
@@ -566,5 +568,6 @@ export const strings = new LocalizedStrings({
         TrainerWalk: 'Бегущая дорожка (ходьба)',
         TrainerRun: 'Бегущая дорожка (бег)',
         TerminateSleep: 'Вы действительно хотите завершить сон?',
+        ServerDown: 'Сервер индетификации недоступен',
     },
 })
