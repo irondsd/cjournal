@@ -112,6 +112,8 @@ export default class Activity {
     }
 
     synced() {
+        if (this.system && this.system.syncing) return true
+
         if (!this.id) return false
 
         if (this.system) {
@@ -173,6 +175,15 @@ export default class Activity {
         }
     }
 
+    currentlySyncingMark() {
+        if (!this.system) this.system = {}
+        this.system.syncing = true
+
+        setTimeout(() => {
+            if (this.system) delete this.system.syncing
+        }, 5100)
+    }
+
     successfullySynced() {
         delete this.system
     }
@@ -180,6 +191,7 @@ export default class Activity {
     createOnServer(id, access_token) {
         return new Promise((resolve, reject) => {
             if (this.data.audioFile || this.data.photoFile) {
+                this.currentlySyncingMark()
                 activityFileUpload(id, access_token, this)
                     .then(res => {
                         if (res && res.id) {
@@ -196,6 +208,7 @@ export default class Activity {
                         reject(error)
                     })
             } else {
+                this.currentlySyncingMark()
                 activityPostData(id, access_token, this)
                     .then(res => {
                         // console.log(res)
@@ -212,6 +225,7 @@ export default class Activity {
     editOnServer(id, access_token) {
         return new Promise((resolve, reject) => {
             if (this.data.audioFile || this.data.photoFile) {
+                this.currentlySyncingMark()
                 activityPutFile(id, access_token, this)
                     .then(res => {
                         if (res && res.id) {
@@ -228,6 +242,7 @@ export default class Activity {
                         reject(error)
                     })
             } else {
+                this.currentlySyncingMark()
                 activityPutData(id, access_token, this)
                     .then(res => {
                         // console.log('successfully updated', res)
@@ -260,7 +275,9 @@ export default class Activity {
             let GPSClass = new GPS()
             GPSClass.getPosition()
                 .then(position => {
-                    this.attachToData({ position: position })
+                    this.attachToData({
+                        position: position,
+                    })
                     resolve()
                 })
                 .catch(err => {
