@@ -8,7 +8,7 @@ import { localTime } from '../helpers/dateTime'
 import { postponeNotificationBy } from '../constants/'
 
 export function setupNotifications() {
-    console.log('notifications service initiated')
+    // console.log('notifications service initiated')
     PushNotification.configure({
         onNotification: function(notification) {
             onNotificationOpened(notification)

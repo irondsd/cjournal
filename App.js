@@ -50,7 +50,7 @@ class App extends Component {
                     console.log('BackgroundFetch denied')
                     break
                 case BackgroundFetch.STATUS_AVAILABLE:
-                    console.log('BackgroundFetch is enabled')
+                    // console.log('BackgroundFetch is enabled')
                     break
             }
         })

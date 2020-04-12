@@ -146,7 +146,6 @@ class WalkingScreen extends Component {
 
         // timeout for 6 minutes
         this.timeoutId = BackgroundTimer.setTimeout(() => {
-            console.log('gg4')
             this.timerStop()
             this.record()
         }, walkingDuration * 1000)
@@ -173,7 +172,6 @@ class WalkingScreen extends Component {
                 {
                     text: strings.Terminate,
                     onPress: () => {
-                        console.log('gg3')
                         this.timerStop()
                         this.record()
                     },
@@ -196,13 +194,11 @@ class WalkingScreen extends Component {
 
         if (time === 0) {
             // time ran out
-            console.log('gg1')
             Vibration.vibrate(600)
             this.timerStop()
             this.record()
         }
         if (time < 0) {
-            console.log('gg2')
             // time ran out before
             this.setState({
                 timer: '00:00',
