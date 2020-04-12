@@ -89,6 +89,6 @@ const styles = StyleSheet.create({
         height: 23,
         position: 'absolute',
         left: 10,
-        top: 11,
+        top: 10,
     },
 })
