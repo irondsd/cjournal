@@ -19,6 +19,7 @@
         "@react-native-community/netinfo": "^5.0.0",
         "react": "16.9.0",
         "react-native": "0.61.5",
+        "react-native-app-auth": "^5.1.1",
         "react-native-audio-record": "^0.2.2",
         "react-native-background-fetch": "^2.7.1",
         "react-native-background-timer": "^2.1.1",
