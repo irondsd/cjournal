@@ -1,12 +1,10 @@
 import { apiUrl } from '../constants'
-import { updateUser } from '../redux/actions/userActions'
-import { Alert } from 'react-native'
-import { strings } from '../localizations'
+import timeoutFetch from '../helpers/timeoutFetch'
 
 export function loginConfirm(access_token) {
     return new Promise((resolve, reject) => {
         const url = apiUrl + 'login'
-        fetch(url, {
+        timeoutFetch(url, {
             method: 'POST',
             headers: {
                 Authorization: 'Bearer ' + access_token,
