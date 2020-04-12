@@ -44,16 +44,16 @@ class SettingsScreen extends Component {
                     barStyle="dark-content"
                     // hidden={true}
                 />
-                <Text
-                    style={
-                        styles.information
-                    }>{`${displayName} - ${strings.Version}: ${version}`}</Text>
-                <View></View>
+                <Text style={styles.information}>{`${displayName} - ${
+                    strings.Version
+                }: ${version}`}</Text>
+                <View />
                 <Text style={styles.name}>{this.props.user.username}</Text>
-                <Text
-                    style={
-                        styles.information
-                    }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
+                {this.props.user.idinv && (
+                    <Text style={styles.information}>{`${strings.idinv}: ${
+                        this.props.user.idinv
+                    }`}</Text>
+                )}
                 <View>
                     <ToggleSwitch
                         text={'Idinv filter'}
@@ -117,7 +117,10 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(SettingsScreen)
 
 const styles = StyleSheet.create({
     container: {
