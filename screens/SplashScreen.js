@@ -64,6 +64,7 @@ class SplashScreen extends Component {
             .catch(err => {
                 // error
                 console.log('error reading storage', err)
+                this.props.navigation.navigate('Welcome')
             })
     }
 
@@ -96,7 +97,10 @@ const mapDispatchToProps = {
     loadSettings,
 }
 
-export default connect(null, mapDispatchToProps)(SplashScreen)
+export default connect(
+    null,
+    mapDispatchToProps,
+)(SplashScreen)
 
 const logoSize = Dimensions.get('window').width / 2
 

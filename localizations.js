@@ -72,7 +72,7 @@ export const strings = new LocalizedStrings({
         LocationPermissions: 'Location Permissions',
         LocationPermissionsMessage:
             'Cardio Journal needs access to your location',
-        Login: 'Login',
+        Login: 'Login with Incart',
         Logout: 'Logout',
         March: 'March',
         May: 'May',
@@ -261,7 +261,7 @@ export const strings = new LocalizedStrings({
         LocationPermissions: 'Permisos de ubicación',
         LocationPermissionsMessage:
             'Cardio Journal necesita acceso a tu ubicación',
-        Login: 'Entrar',
+        Login: 'Entrar con Incart',
         Logout: 'Cerrar',
         March: 'Marso',
         May: 'Mayo',
@@ -452,7 +452,7 @@ export const strings = new LocalizedStrings({
         Locating: 'Поиск местоположения!',
         LocationPermissions: 'Разрешение на использование геолокации',
         LocationPermissionsMessage: 'Cardio Journal нужен доступ к геолокации',
-        Login: 'Войти',
+        Login: 'Войти с Инкарт',
         Logout: 'Выйти',
         March: 'Марта',
         May: 'Мая',
