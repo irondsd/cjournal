@@ -10,40 +10,39 @@ import NavigationService from '../navigation/NavigationService'
 import { logoutUser } from '../redux/actions'
 import { paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
+import { refreshTokens } from './identity'
 
 let errors = 0
 
 export default async function sync(id, tokens) {
     let activities = store.getState().activity
+    tokens = store.getState().tokens
 
-    if (!tokens || !id) return console.log('sync aborted')
+    if (!tokens || !id) return console.log('no tokens, sync aborted')
 
     if (tokens.expiresSoon()) {
-        // update tokens first
-
-        try {
-            tokens = await tokens.refresh()
-        } catch (error) {
-            isConnected().then(connected => {
-                // console.log('is connected', connected)
-                if (error.message == '400') errors += 1
-                console.log(`Error updating token ${errors} out of 5`)
+        // console.log('going to update tokens', tokens.refresh_token)
+        refreshTokens(tokens.refresh_token)
+            .then(tokens => {
+                console.log('received new tokens', tokens.refresh_token)
+                errors = 0
             })
-
-            if (errors >= 5 && tokens.isExpired()) {
-                console.log(`Tokens expored, errors: ${errors}, logging out`)
-                store.dispatch(logoutUser())
-                NavigationService.navigate(paths.Welcome)
-            }
-        }
-        console.log('received new tokens', tokens.refresh_token)
-        errors = 0
+            .catch(error => {
+                isConnected().then(connected => {
+                    if (error.message == 'invalid_grant') errors += 1
+                    console.log(`Error updating token ${errors} out of 5`)
+                })
+                if (errors >= 5 && tokens.isExpired()) {
+                    console.log(
+                        `Tokens expored, errors: ${errors}, logging out`,
+                    )
+                    // store.dispatch(logoutUser())
+                    NavigationService.navigate(paths.Welcome)
+                }
+            })
     }
 
-    if (!tokens.access_token) {
-        // probably log out here in this case
-        return console.log('no tokens, sync aborted')
-    }
+    if (!tokens.access_token) return console.log('no tokens, sync aborted')
     syncActivities(activities, id, tokens.access_token)
         .then(() => {
             store.dispatch(userFetchData(id, tokens.access_token))
