@@ -13,11 +13,10 @@ export default function userReducer(state = initialState, { type, payload }) {
     switch (type) {
         case 'TOKENS_RECEIVED':
             let isLoggedIn = true
-            let token_lifetime =
-                payload.token_lifetime ||
-                timestamp(new Date(payload.accessTokenExpirationDate))
-            let token = payload.accessToken || payload.access_token
-            let refresh = payload.refreshToken || payload.refresh_token
+            let token_lifetime = payload.token_lifetime
+            let token = payload.access_token
+            let refresh = payload.refresh_token
+
             state = new Tokens(token, refresh, token_lifetime, isLoggedIn)
 
             tokensAsyncSave(state)
