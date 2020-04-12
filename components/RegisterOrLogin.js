@@ -1,10 +1,28 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Linking } from 'react-native'
+import {
+    Text,
+    View,
+    StyleSheet,
+    TouchableOpacity,
+    Linking,
+    Image,
+} from 'react-native'
 import { apiUrl, appColor, registrationUrl } from '../constants'
 import { strings } from '../localizations'
 import { withNavigation } from 'react-navigation'
+import { authorization } from '../services/identity'
 
 class RegisterOrLogin extends Component {
+    Login = async () => {
+        authorization()
+            .then(res => {
+                this.props.navigation.navigate('Home')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     render() {
         return (
             <View style={styles.box}>
@@ -20,8 +38,13 @@ class RegisterOrLogin extends Component {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        this.props.navigation.navigate('Login')
+                        this.Login()
+                        // this.props.navigation.navigate('Login')
                     }}>
+                    {/* <Image
+                        style={styles.img}
+                        source={require('../resources/incart.png')}
+                    /> */}
                     <Text style={styles.buttonText}>{strings.Login}</Text>
                 </TouchableOpacity>
             </View>
@@ -45,6 +68,8 @@ const styles = StyleSheet.create({
         // shadowOpacity: 0.2,
         // shadowRadius: 10,
         backgroundColor: '#00000004',
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     buttonText: {
         color: 'white',
@@ -57,6 +82,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '70%',
-        // backgroundColor: appColor,
+        flexDirection: 'column',
+    },
+    img: {
+        width: 25,
+        height: 23,
+        position: 'absolute',
+        left: 10,
+        top: 11,
     },
 })
