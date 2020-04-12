@@ -3,7 +3,7 @@ import { identityServerConfig } from '../constants/identityServerConfig'
 import { loginConfirm } from '../requests/loginConfirm'
 import store from '../redux/store'
 import { tokensReceived, updateUser } from '../redux/actions/'
-import timestamp from './timestamp'
+import timestamp from '../helpers/timestamp'
 
 export async function authorization() {
     return new Promise((resolve, reject) => {
