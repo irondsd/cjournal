@@ -35,7 +35,6 @@ export default async function sync(id, tokens) {
                 store.dispatch(logoutUser())
                 NavigationService.navigate(paths.Welcome)
             }
-            return
         }
         console.log('received new tokens', tokens.refresh_token)
         errors = 0

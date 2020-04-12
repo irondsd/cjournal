@@ -41,10 +41,10 @@ class RegisterOrLogin extends Component {
                         this.Login()
                         // this.props.navigation.navigate('Login')
                     }}>
-                    {/* <Image
+                    <Image
                         style={styles.img}
                         source={require('../resources/incart.png')}
-                    /> */}
+                    />
                     <Text style={styles.buttonText}>{strings.Login}</Text>
                 </TouchableOpacity>
             </View>
