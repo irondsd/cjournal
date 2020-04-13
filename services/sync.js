@@ -36,7 +36,7 @@ export default async function sync(id, tokens) {
                     console.log(
                         `Tokens expored, errors: ${errors}, logging out`,
                     )
-                    // store.dispatch(logoutUser())
+                    store.dispatch(logoutUser())
                     NavigationService.navigate(paths.Welcome)
                 }
             })

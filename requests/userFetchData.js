@@ -21,8 +21,7 @@ export const userFetchData = (id, access_token) => {
             .then(res => {
                 if (res.error) {
                     console.log(res)
-                    dispatch(logoutUser())
-                    NavigationService.navigate(paths.Welcome)
+                    throw new Error(res)
                 } else {
                     dispatch(updateUser(res))
                 }
