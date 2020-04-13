@@ -159,3 +159,7 @@ function minutesINT(minutes) {
     if (minutes == 1) return minutes + ' ' + strings.minute
     return minutes + ' ' + strings.minutes
 }
+
+export function getUtcOffset() {
+    return new Date().getTimezoneOffset() * -1
+}

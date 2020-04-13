@@ -20,6 +20,7 @@ export default class Activity {
         activity_type,
         time_started,
         time_ended,
+        utc_offset,
         tasks_id,
         idinv,
         last_updated,
@@ -31,6 +32,7 @@ export default class Activity {
         this.activity_type = activity_type
         this.time_started = time_started
         this.time_ended = time_ended
+        this.utc_offset = utc_offset
         this.tasks_id = tasks_id
         this.last_updated = last_updated
         this.comment = comment
@@ -70,6 +72,7 @@ export default class Activity {
             activity_type,
             timestamp(),
             null,
+            new Date().getTimezoneOffset() * -1,
             null,
             idinv,
             timestamp(),
@@ -92,6 +95,7 @@ export default class Activity {
             activity_type,
             time_started,
             time_ended,
+            new Date().getTimezoneOffset() * -1,
             tasks_id,
             idinv,
             timestamp(),
