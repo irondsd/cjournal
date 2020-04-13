@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, TouchableOpacity, Picker } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import { displayDate, displayTime } from '../../helpers/dateTime'
+import { displayDate, displayTime, getUtcOffset } from '../../helpers/dateTime'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
@@ -109,6 +109,7 @@ class PillsScreen extends Component {
             this.state.activity_type,
             timestamp(this.state.dateTime),
             null,
+            getUtcOffset(),
             this.state.tasks_id ? this.state.tasks_id : null,
             this.props.user.idinv,
             timestamp(),

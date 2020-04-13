@@ -7,7 +7,7 @@ import {
     Alert,
     BackHandler,
 } from 'react-native'
-import { secs2time } from '../../helpers/dateTime'
+import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import BackgroundTimer from 'react-native-background-timer'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
@@ -147,6 +147,7 @@ class StairsScreen extends Component {
             activityTypes.Stairs,
             timestamp(this.state.startDate),
             timestamp(),
+            getUtcOffset(),
             tasks_id,
             this.props.idinv,
             timestamp(),

@@ -8,7 +8,7 @@ import {
     BackHandler,
     Vibration,
 } from 'react-native'
-import { secs2time } from '../../helpers/dateTime'
+import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import BackgroundTimer from 'react-native-background-timer'
 import { strings } from '../../localizations'
 import { addActivity, cancelNotification } from '../../redux/actions'
@@ -125,6 +125,7 @@ class WalkingScreen extends Component {
             activityTypes.Walking,
             this.state.timestampStart,
             timestamp(),
+            getUtcOffset(),
             this.state.tasks_id,
             this.props.idinv,
             timestamp(),

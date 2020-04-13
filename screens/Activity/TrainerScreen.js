@@ -9,7 +9,7 @@ import {
     Alert,
 } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import { displayDate, displayTime } from '../../helpers/dateTime'
+import { displayDate, displayTime, getUtcOffset } from '../../helpers/dateTime'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
@@ -96,6 +96,7 @@ class TrainerScreen extends Component {
                 this.state.activity_type,
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
+                getUtcOffset(),
                 null,
                 this.props.user.idinv,
                 timestamp(),
@@ -174,7 +175,7 @@ class TrainerScreen extends Component {
                     // maxLines={5}
                     value={this.state.type}
                     placeholder={strings.TrainerType}
-                    onSelect={(value) => {
+                    onSelect={value => {
                         this.setState({
                             type: value,
                         })
@@ -182,7 +183,7 @@ class TrainerScreen extends Component {
                 />
                 <CaloriesInput
                     value={this.state.calories}
-                    onChangeText={(value) => this.setState({ calories: value })}
+                    onChangeText={value => this.setState({ calories: value })}
                 />
                 <View style={styles.saveButton}>
                     <SaveButton
@@ -205,13 +206,16 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    add: (activity) => {
+const mapDispatchToProps = dispatch => ({
+    add: activity => {
         dispatch(addActivity(activity))
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrainerScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(TrainerScreen)
 
 const styles = StyleSheet.create({
     saveButton: {

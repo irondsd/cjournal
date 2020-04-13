@@ -9,7 +9,7 @@ import {
     Alert,
 } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import { displayDate, displayTime } from '../../helpers/dateTime'
+import { displayDate, displayTime, getUtcOffset } from '../../helpers/dateTime'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
@@ -101,6 +101,7 @@ class VerticalPositionCalibrationScreen extends Component {
                 this.state.activity_type,
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
+                getUtcOffset(),
                 null,
                 this.props.user.idinv,
                 timestamp(),

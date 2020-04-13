@@ -9,7 +9,7 @@ import {
     Alert,
 } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import { displayDate, displayTime } from '../../helpers/dateTime'
+import { displayDate, displayTime, getUtcOffset } from '../../helpers/dateTime'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
@@ -29,7 +29,8 @@ import Comment from '../../components/Comment'
 import TimeSwitch from '../../components/TimeSwitch'
 import SaveButton from '../../components/SaveButton'
 
-let clicked = false
+// TODO: default durations
+
 class TimePickScreen extends Component {
     constructor(props) {
         super(props)
@@ -68,38 +69,33 @@ class TimePickScreen extends Component {
     }
 
     handleSubmit() {
-        if (!clicked) {
-            setTimeout(() => {
-                clicked = false
-            }, 1000)
-            let timeEnded = new Date(this.state.dateTime)
-            timeEnded.setSeconds(this.state.dateTime.getSeconds())
-            timeEnded.setMilliseconds(0)
-            timeEnded.setMinutes(
-                timeEnded.getMinutes() + parseInt(this.state.duration),
-            )
-            if (this.state.duration == 0) timeEnded = null
-            let activity = new Activity(
-                null,
-                this.props.navigation.state.params.sender,
-                timestamp(this.state.dateTime),
-                timeEnded ? timestamp(timeEnded) : null,
-                null,
-                this.props.user.idinv,
-                timestamp(),
-                this.state.comment,
-                {},
-            )
-            if (this.state.audioFile)
-                activity.data.audioFile = this.state.audioFile
+        let timeEnded = new Date(this.state.dateTime)
+        timeEnded.setSeconds(this.state.dateTime.getSeconds())
+        timeEnded.setMilliseconds(0)
+        timeEnded.setMinutes(
+            timeEnded.getMinutes() + parseInt(this.state.duration),
+        )
+        if (this.state.duration == 0) timeEnded = null
+        let activity = new Activity(
+            null,
+            this.props.navigation.state.params.sender,
+            timestamp(this.state.dateTime),
+            timeEnded ? timestamp(timeEnded) : null,
+            getUtcOffset(),
+            null,
+            this.props.user.idinv,
+            timestamp(),
+            this.state.comment,
+            {},
+        )
+        if (this.state.audioFile) activity.data.audioFile = this.state.audioFile
 
-            let overlaps = activitySingleOverlap(this.props.activity, activity)
-            if (overlaps) {
-                Alert.alert(strings.OverlapTitle, strings.OverlapMsg)
-            } else {
-                this.props.add(activity)
-                this.props.navigation.navigate(paths.Home)
-            }
+        let overlaps = activitySingleOverlap(this.props.activity, activity)
+        if (overlaps) {
+            Alert.alert(strings.OverlapTitle, strings.OverlapMsg)
+        } else {
+            this.props.add(activity)
+            this.props.navigation.navigate(paths.Home)
         }
     }
 
@@ -199,7 +195,10 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimePickScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(TimePickScreen)
 
 const styles = StyleSheet.create({
     time: {

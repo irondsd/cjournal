@@ -26,6 +26,7 @@ import requestCameraPermission from '../../permissions/requestCameraPermissions'
 import SaveButton from '../../components/SaveButton'
 import DeviceIdInput from '../../components/DeviceIdInput'
 import { cancelLocalNotification } from '../../notifications/notifications'
+import { getUtcOffset } from '../../helpers/dateTime'
 
 class DeviceInstallScreen extends Component {
     static navigationOptions = {
@@ -57,6 +58,7 @@ class DeviceInstallScreen extends Component {
             activityTypes.DeviceInstall,
             timestamp(),
             null,
+            getUtcOffset(),
             tasks_id,
             this.props.user.idinv,
             timestamp(),
@@ -148,4 +150,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeviceInstallScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(DeviceInstallScreen)

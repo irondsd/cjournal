@@ -9,7 +9,7 @@ import {
     StatusBar,
     Alert,
 } from 'react-native'
-import { secs2time } from '../../helpers/dateTime'
+import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import { connect } from 'react-redux'
 import { addActivity } from '../../redux/actions'
 import { strings } from '../../localizations'
@@ -107,6 +107,7 @@ class SleepScreen extends Component {
             activityTypes.Sleep,
             timestamp(this.state.startDate),
             timestamp(),
+            getUtcOffset(),
             null,
             this.props.idinv,
             timestamp(),

@@ -195,6 +195,7 @@ class ActivityDetailsScreen extends Component {
             this.state.originalActivity.activity_type,
             this.state.originalActivity.time_started,
             this.state.originalActivity.time_ended,
+            this.state.originalActivity.utc_offset,
             this.state.originalActivity.tasks_id,
             this.state.originalActivity.idinv,
             this.state.originalActivity.last_updated,
@@ -206,6 +207,7 @@ class ActivityDetailsScreen extends Component {
             this.state.activity.activity_type,
             this.state.activity.time_started,
             this.state.activity.time_ended,
+            this.state.activity.utc_offset,
             this.state.activity.tasks_id,
             this.props.user.idinv,
             timestamp(),
@@ -371,7 +373,12 @@ class ActivityDetailsScreen extends Component {
         return (
             <View style={defaultStyles.container}>
                 {this.state.switches.activity && (
-                    <View style={{ zIndex: 10, width: '100%' }}>
+                    <View
+                        style={
+                            Platform.OS === 'ios'
+                                ? { zIndex: 10, width: '100%' }
+                                : { width: '100%' }
+                        }>
                         <ActivitySelect
                             onSelect={this.onPickerChange}
                             value={this.state.activity_type}
