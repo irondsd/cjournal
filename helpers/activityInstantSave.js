@@ -6,6 +6,8 @@ import Activity from '../classes/Activity'
 
 let clicked = false
 
+// TODO: merge with activity class
+
 export function activityInstantSave(activity_type) {
     if (!clicked) {
         clicked = true
