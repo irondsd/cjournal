@@ -35,7 +35,7 @@ export function identityLogin(username, password) {
                 console.log(err)
                 if (err.status === 408) {
                     // timeout
-                    Alert.alert(strings.NoConn, strings.CantConnect)
+                    Alert.alert(strings.NoConn, strings.CantConnectIdentity)
                 }
                 if (err.message.includes('Network request failed')) {
                     // server down

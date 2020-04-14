@@ -7,7 +7,7 @@ import {
     Linking,
     Image,
 } from 'react-native'
-import { apiUrl, appColor, registrationUrl } from '../constants'
+import { apiUrl, appColor, registrationUrl, paths } from '../constants'
 import { strings } from '../localizations'
 import { withNavigation } from 'react-navigation'
 import { authorization } from '../services/identity'
@@ -16,7 +16,7 @@ class RegisterOrLogin extends Component {
     Login = async () => {
         authorization()
             .then(res => {
-                this.props.navigation.navigate('Home')
+                this.props.navigation.navigate(paths.Home)
             })
             .catch(err => {
                 console.log(err)

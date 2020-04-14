@@ -4,6 +4,8 @@ import { loginConfirm } from '../requests/loginConfirm'
 import store from '../redux/store'
 import { tokensReceived, updateUser } from '../redux/actions/'
 import timestamp from '../helpers/timestamp'
+import { Alert } from 'react-native'
+import { strings } from '../localizations'
 
 export async function authorization() {
     return new Promise((resolve, reject) => {
@@ -11,11 +13,13 @@ export async function authorization() {
             .then(result => {
                 if (result.accessToken) {
                     result = tokensConverter(result)
-
                     loginConfirm(result.access_token)
                         .then(res => {
                             if (res.error) throw new Error(res)
-
+                            Alert.alert(
+                                strings.Error,
+                                strings.CantConnectBackend,
+                            )
                             store.dispatch(updateUser(res))
                             store.dispatch(tokensReceived(result))
 
