@@ -221,5 +221,6 @@ const styles = StyleSheet.create({
     saveButton: {
         zIndex: 1,
         justifyContent: 'flex-end',
+        width: '100%',
     },
 })
