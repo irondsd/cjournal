@@ -7,6 +7,8 @@ import timestamp from '../helpers/timestamp'
 import { Alert } from 'react-native'
 import { strings } from '../localizations'
 
+// TODO: merge with tokens class
+
 export async function authorization() {
     return new Promise((resolve, reject) => {
         authorize(identityServerConfig)
@@ -15,11 +17,13 @@ export async function authorization() {
                     result = tokensConverter(result)
                     loginConfirm(result.access_token)
                         .then(res => {
-                            if (res.error) throw new Error(res)
-                            Alert.alert(
-                                strings.Error,
-                                strings.CantConnectBackend,
-                            )
+                            if (res.error) {
+                                Alert.alert(
+                                    strings.Error,
+                                    strings.CantConnectBackend,
+                                )
+                                throw new Error(res)
+                            }
                             store.dispatch(updateUser(res))
                             store.dispatch(tokensReceived(result))
 
