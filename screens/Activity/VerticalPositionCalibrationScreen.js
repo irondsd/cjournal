@@ -38,7 +38,7 @@ class VerticalPositionCalibrationScreen extends Component {
         super(props)
 
         this.state = {
-            other: '',
+            type: '',
             dateTime: new Date(),
             activity_type: null,
             list: [],
@@ -93,7 +93,7 @@ class VerticalPositionCalibrationScreen extends Component {
                 timeEnded.getMinutes() + parseInt(this.state.duration),
             )
 
-            addHint(this.state.activity_type, this.state.other)
+            addHint(this.state.activity_type, this.state.type)
 
             if (this.state.duration == 0) timeEnded = null
             let activity = new Activity(
@@ -106,7 +106,7 @@ class VerticalPositionCalibrationScreen extends Component {
                 this.props.user.idinv,
                 timestamp(),
                 '',
-                { position: this.state.other },
+                { type: this.state.type },
             )
             if (this.state.audioFile)
                 activity.data.audioFile = this.state.audioFile
@@ -133,7 +133,7 @@ class VerticalPositionCalibrationScreen extends Component {
                     open={true}
                     onChangeText={text => {
                         this.setState({
-                            other: text,
+                            type: text,
                         })
                     }}
                 />

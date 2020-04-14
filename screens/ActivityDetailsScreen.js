@@ -140,6 +140,16 @@ class ActivityDetailsScreen extends Component {
             comment = false
         }
 
+        if (
+            activity.activity_type === activityTypes.VerticalPositionCalibration
+        ) {
+            pills = false
+            duration = false
+            photo = false
+            others = true
+            comment = false
+        }
+
         this.setState({
             switches: {
                 activity: true,
@@ -305,7 +315,11 @@ class ActivityDetailsScreen extends Component {
         let list = []
 
         if (!activity) activity = this.state.activity
-        if (!othersList.includes(activity.activity_type)) return
+        if (
+            !othersList.includes(activity.activity_type) &&
+            activity.activity_type !== activityTypes.VerticalPositionCalibration
+        )
+            return
 
         loadHints(activity.activity_type).then(res => {
             this.setState({ loadedOthers: res })
@@ -370,6 +384,7 @@ class ActivityDetailsScreen extends Component {
     }
 
     render() {
+        console.log(this.state.activity.data)
         return (
             <View style={defaultStyles.container}>
                 {this.state.switches.activity && (
@@ -433,9 +448,13 @@ class ActivityDetailsScreen extends Component {
                         }>
                         <DropDownInput
                             list={this.state.loadedOthers}
-                            open={true}
+                            open={
+                                this.state.activity.data.type === ''
+                                    ? true
+                                    : false
+                            }
                             maxLines={4}
-                            value={this.state.activity.data.other}
+                            value={this.state.activity.data.type}
                             onChangeText={this.onOthersChange}
                         />
                     </View>

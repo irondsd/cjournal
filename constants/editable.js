@@ -12,7 +12,7 @@ export const editable = [
     'Meal',
     'Meal',
     'Alcohol',
-    // 'Trainer', // add edit functionality to the screen
+    'VerticalPositionCalibration',
     'Smoking',
     'ReliefOfAttack',
     'CourseTherapy',

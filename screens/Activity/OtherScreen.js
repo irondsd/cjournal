@@ -38,7 +38,7 @@ class OtherScreen extends Component {
         super(props)
 
         this.state = {
-            other: '',
+            type: '',
             dateTime: new Date(),
             duration: 0,
             fromStart: strings.FromStart,
@@ -73,18 +73,6 @@ class OtherScreen extends Component {
         loadHints(this.state.activity_type).then(res => {
             // load defaults
             if (res.length === 0) {
-                // if (this.state.activity_type === activityTypes.OtherEmotions) {
-                //     res = defaultOtherEmotions
-
-                //     saveDefaultHints(this.state.activity_type, res)
-                // }
-
-                // if (this.state.activity_type === activityTypes.OtherLoad) {
-                //     res = defaultOtherLoad
-
-                //     saveDefaultHints(this.state.activity_type, res)
-                // }
-
                 res = defaultHints[this.state.activity_type]
                 saveDefaultHints(this.state.activity_type, res)
             }
@@ -111,7 +99,7 @@ class OtherScreen extends Component {
                 timeEnded.getMinutes() + parseInt(this.state.duration),
             )
 
-            addHint(this.state.activity_type, this.state.other)
+            addHint(this.state.activity_type, this.state.type)
 
             if (this.state.duration == 0) timeEnded = null
             let activity = new Activity(
@@ -124,7 +112,7 @@ class OtherScreen extends Component {
                 this.props.user.idinv,
                 timestamp(),
                 '',
-                { other: this.state.other },
+                { type: this.state.type },
             )
             if (this.state.audioFile)
                 activity.data.audioFile = this.state.audioFile
@@ -197,7 +185,7 @@ class OtherScreen extends Component {
                     open={true}
                     onChangeText={text => {
                         this.setState({
-                            other: text,
+                            type: text,
                         })
                     }}
                 />

@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, StyleSheet, View, Image } from 'react-native'
 import { displayDateTime } from '../helpers/dateTime'
 import { strings } from '../localizations'
 import { iconPicker } from '../helpers/iconPicker'
-import { paths, editable } from '../constants'
+import { paths, editable, activityTypes } from '../constants'
 import ListItem from './ListItem'
 
 export default class ActivityListItem extends Component {
@@ -31,8 +31,8 @@ export default class ActivityListItem extends Component {
                 data = this.props.item.data.pill
             }
 
-            if (this.props.item.data.other) {
-                data = this.props.item.data.other
+            if (this.props.item.data.type) {
+                data = this.props.item.data.type
             }
         }
 
