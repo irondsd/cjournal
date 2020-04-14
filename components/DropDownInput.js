@@ -35,6 +35,7 @@ export default class DropDownInput extends Component {
             text: this.props.value ? this.props.value : '',
             maxLines: this.props.maxLines || 5,
             list: this.props.list,
+            value: this.props.value,
         })
 
         if (this.props.list.length === 0) this.setState({ droppedDown: false })

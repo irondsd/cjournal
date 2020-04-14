@@ -32,6 +32,15 @@ export default class DropDownSelect extends Component {
         })
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.value !== prevState.value) {
+            return {
+                value: nextProps.value,
+                droppedDown: false,
+            }
+        } else return null
+    }
+
     onSelect = value => {
         this.setState({
             value: value,
@@ -55,7 +64,9 @@ export default class DropDownSelect extends Component {
                     <TouchableOpacity
                         onPress={() => {
                             this.onSelect(el)
-                            this.setState({ droppedDown: false })
+                            this.setState({
+                                droppedDown: false,
+                            })
                         }}
                         key={index}>
                         <Text style={styles.popUpText}>{el}</Text>
@@ -93,7 +104,13 @@ export default class DropDownSelect extends Component {
                     color={this.state.droppedDown ? '#aaa' : placeholderGrey}
                 />
                 {this.state.droppedDown && (
-                    <ScrollView style={[styles.popUp, { height: popUpHeight }]}>
+                    <ScrollView
+                        style={[
+                            styles.popUp,
+                            {
+                                height: popUpHeight,
+                            },
+                        ]}>
                         {this.popUpRender()}
                     </ScrollView>
                 )}
