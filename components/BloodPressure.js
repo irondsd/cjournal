@@ -9,14 +9,20 @@ export default class BloodPressure extends Component {
         after: ['', ''],
     }
 
+    componentDidMount() {
+        this.setState({
+            before: this.props.values.before || '',
+            after: this.props.values.after || '',
+        })
+    }
+
     render() {
         return (
             <View>
-                <View>
-                    <Text style={styles.Title}>{strings.Pressure}</Text>
-                </View>
                 <View style={styles.container}>
-                    <Text style={styles.Text}>{strings.Before}:</Text>
+                    <Text style={styles.Text}>
+                        {strings.BloodPressure} {strings.before}:
+                    </Text>
                     <TextInput
                         underlineColorAndroid="transparent"
                         style={styles.TextInputStyle}
@@ -62,7 +68,9 @@ export default class BloodPressure extends Component {
                     />
                 </View>
                 <View style={styles.container}>
-                    <Text style={styles.Text}>{strings.After}:</Text>
+                    <Text style={styles.Text}>
+                        {strings.BloodPressure} {strings.after}:
+                    </Text>
                     <TextInput
                         underlineColorAndroid="transparent"
                         style={styles.TextInputStyle}
