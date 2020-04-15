@@ -35,7 +35,10 @@ export function iconPicker(activity_type) {
             img = require('../resources/icons/complaint.png')
             break
         case activityTypes.OtherWeakness:
-            img = require('../resources/icons/fatigue.png')
+            img = require('../resources/icons/confusion.png')
+            break
+        case activityTypes.Activity:
+            img = require('../resources/icons/activity.png')
             break
         case activityTypes.Service:
             img = require('../resources/icons/service.png')
@@ -118,7 +121,7 @@ export function iconPicker(activity_type) {
         case activityTypes.Toilet:
             img = require('../resources/icons/toilet.png')
             break
-        case activityTypes.Orthostasis:
+        case activityTypes.ActiveOrthostasis:
             img = require('../resources/icons/laying.png')
             break
         case activityTypes.TakingMedicine:
@@ -144,6 +147,9 @@ export function iconPicker(activity_type) {
             break
         case activityTypes.Tests:
             img = require('../resources/icons/tests.png')
+            break
+        case activityTypes.Straining:
+            img = require('../resources/icons/straining.png')
             break
         case activityTypes.MedicineTest:
             img = require('../resources/icons/pill.png')
@@ -173,7 +179,7 @@ export function iconPicker(activity_type) {
             img = require('../resources/icons/workout.png')
             break
         default:
-            img = require('../resources/icons/activity.png')
+            img = require('../resources/icons/unknown.png')
             break
     }
 
