@@ -24,7 +24,7 @@ export const paths = {
     Pills: 'Pills',
     MedicineTest: 'MedicineTest',
     Tests: 'Tests',
-    Orthostasis: 'Orthostasis',
+    ActiveOrthostasis: 'ActiveOrthostasis',
     Running: 'Running',
     NormalWalking: 'NormalWalking',
     Bicycling: 'Bicycling',

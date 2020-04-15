@@ -20,6 +20,8 @@ import Activity from '../classes/Activity'
 import { displayDateTime } from '../helpers/dateTime'
 import Map from '../components/Map'
 
+// TODO: redo all
+
 type Props = {}
 class ActivityStatsScreen extends Component<Props> {
     constructor(props) {
@@ -86,7 +88,11 @@ class ActivityStatsScreen extends Component<Props> {
         switch (this.props.navigation.state.params.activity_type) {
             case activityTypes.Walking:
                 if (this.props.navigation.state.params.data) {
-                    stats = `${strings.YouWalked} ${this.props.navigation.state.params.data.distance} ${strings.Meters} ${strings.and} ${this.props.navigation.state.params.data.steps} ${strings.Steps}`
+                    stats = `${strings.YouWalked} ${
+                        this.props.navigation.state.params.data.distance
+                    } ${strings.Meters} ${strings.and} ${
+                        this.props.navigation.state.params.data.steps
+                    } ${strings.Steps}`
                 }
                 break
             case activityTypes.Stairs:
@@ -129,8 +135,8 @@ class ActivityStatsScreen extends Component<Props> {
                     ': ' +
                     this.props.navigation.state.params.data.pill
                 break
-            case activityTypes.Orthostasis:
-                stats = 'Orthostasis'
+            case activityTypes.ActiveOrthostasis:
+                stats = 'Active orthostasis'
                 break
             case activityTypes.DeviceInstall:
                 stats =
@@ -180,7 +186,10 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivityStatsScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(ActivityStatsScreen)
 
 const styles = StyleSheet.create({
     container: {

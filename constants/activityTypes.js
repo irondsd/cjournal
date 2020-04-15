@@ -41,7 +41,7 @@ export const activityTypes = {
     Positive: 'Positive',
     Negative: 'Negative',
     Tests: 'Tests',
-    Orthostasis: 'Orthostasis',
+    ActiveOrthostasis: 'ActiveOrthostasis',
     PositionalChanges: 'PositionalChanges',
     Press: 'Press',
     Straining: 'Straining',

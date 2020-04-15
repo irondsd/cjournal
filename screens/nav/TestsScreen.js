@@ -9,7 +9,7 @@ import StairsTile from '../../components/tiles/StairsTile'
 import PsychoemotionalTestTile from '../../components/tiles/PsychoemotionalTestTile'
 import PressTile from '../../components/tiles/PressTile'
 import StrainingTile from '../../components/tiles/StrainingTile'
-import OrthostasisTile from '../../components/tiles/OrthostasisTile'
+import ActiveOrthostasisTile from '../../components/tiles/ActiveOrthostasisTile'
 import DeepBreathingTile from '../../components/tiles/DeepBreathingTile'
 import TileWrapper from '../../components/TileWrapper'
 import TileSpacer from '../../components/TileSpacer'
@@ -35,7 +35,7 @@ class TestsScreen extends Component {
                 <TileWrapper>
                     <PressTile navigation={this.props.navigation} />
                     <StrainingTile navigation={this.props.navigation} />
-                    <OrthostasisTile navigation={this.props.navigation} />
+                    <ActiveOrthostasisTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
                     <TileSpacer />
@@ -56,4 +56,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(TestsScreen)
+export default connect(
+    mapStateToProps,
+    null,
+)(TestsScreen)

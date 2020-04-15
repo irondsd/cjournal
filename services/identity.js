@@ -1,5 +1,5 @@
 import { authorize, refresh } from 'react-native-app-auth'
-import { identityServerConfig } from '../constants/identityServerConfig'
+import { identityServerConfig } from '../constants/config'
 import { loginConfirm } from '../requests/loginConfirm'
 import store from '../redux/store'
 import { tokensReceived, updateUser } from '../redux/actions/'

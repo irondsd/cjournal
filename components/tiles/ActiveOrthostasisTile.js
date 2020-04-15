@@ -4,7 +4,7 @@ import { strings } from '../../localizations'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activityTypes.Orthostasis
+const name = activityTypes.ActiveOrthostasis
 let clicked = false
 
 export default class ScreenTile extends Component {
