@@ -26,6 +26,7 @@ import timestamp from '../helpers/timestamp'
 import Comment from '../components/Comment'
 import TakePhoto from '../components/TakePhoto'
 import { loadHints } from '../services/hints'
+import BloodPressure from '../components/BloodPressure'
 
 class ActivityDetailsScreen extends Component {
     constructor(props) {
@@ -51,6 +52,7 @@ class ActivityDetailsScreen extends Component {
                 audio: true,
                 photo: false,
                 others: false,
+                bloodPressure: false,
             },
             loadedOthers: [],
         }
@@ -123,19 +125,18 @@ class ActivityDetailsScreen extends Component {
         let duration = true
         let others = false
         let comment = true
+        let bloodPressure = false
+        let audio = true
 
         if (pillsList.includes(activity.activity_type)) {
             pills = true
             duration = false
             photo = true
-            others = false
-            comment = true
+            audio = false
         }
 
         if (othersList.includes(activity.activity_type)) {
-            pills = false
             duration = true
-            photo = false
             others = true
             comment = false
         }
@@ -148,6 +149,16 @@ class ActivityDetailsScreen extends Component {
             photo = false
             others = true
             comment = false
+            audio = false
+        }
+
+        if (
+            activity.activity_type === activityTypes.ActiveOrthostasis ||
+            activity.activity_type === activityTypes.Press
+        ) {
+            bloodPressure = true
+            comment = false
+            audio = false
         }
 
         this.setState({
@@ -157,9 +168,10 @@ class ActivityDetailsScreen extends Component {
                 duration: duration,
                 pills: pills,
                 comment: comment,
-                audio: true,
+                audio: audio,
                 photo: photo,
                 others: others,
+                bloodPressure: bloodPressure,
             },
         })
     }
@@ -368,6 +380,20 @@ class ActivityDetailsScreen extends Component {
         )
     }
 
+    changeBloodPressure = values => {
+        let activity = { ...this.state.activity }
+        let data = { ...this.state.data }
+        data.bloodPressure = values
+        activity.data = data
+        this.setState(
+            {
+                activity: activity,
+                data: data,
+            },
+            () => this.update(),
+        )
+    }
+
     removePhoto = () => {
         let activity = { ...this.state.activity }
         let data = { ...this.state.data }
@@ -496,6 +522,12 @@ class ActivityDetailsScreen extends Component {
                     <AudioRecorder
                         link={this.state.data.audio}
                         setAudio={this.setAudio}
+                    />
+                )}
+                {this.state.switches.bloodPressure && (
+                    <BloodPressure
+                        callback={this.changeBloodPressure}
+                        values={this.state.data.bloodPressure}
                     />
                 )}
             </View>
