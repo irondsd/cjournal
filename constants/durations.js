@@ -17,5 +17,6 @@ export const durations = [
     480,
     540,
     600,
+    660,
     720,
 ]
