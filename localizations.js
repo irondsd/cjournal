@@ -192,6 +192,8 @@ export const strings = new LocalizedStrings({
         TerminateSleep: 'Do you really want to terminate sleep?',
         ServerDown: 'Identity server down',
         UnknownActivity: 'Unknown activity',
+        IdinvFilter: 'IdInv filter',
+        Notifications: 'Notifications',
     },
     es: {
         Activity: 'Actividad',
@@ -385,6 +387,8 @@ export const strings = new LocalizedStrings({
         TerminateSleep: 'Do you really want to terminate sleep?',
         ServerDown: 'Identity server down',
         UnknownActivity: 'Actividad desconocida',
+        IdinvFilter: 'IdInv filter',
+        Notifications: 'Notifications',
     },
     ru: {
         Activity: 'Активность',
@@ -575,5 +579,7 @@ export const strings = new LocalizedStrings({
         TerminateSleep: 'Вы действительно хотите завершить сон?',
         ServerDown: 'Сервер индетификации недоступен',
         UnknownActivity: 'Неизвестная активность',
+        IdinvFilter: 'Фильтр по № обследования',
+        Notifications: 'Уведомления',
     },
 })
