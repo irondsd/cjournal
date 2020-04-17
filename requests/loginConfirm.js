@@ -15,7 +15,8 @@ export function loginConfirm(access_token) {
                 resolve(res)
             })
             .catch(err => {
-                reject(res)
+                err.error = err.message
+                resolve(err)
             })
     })
 }

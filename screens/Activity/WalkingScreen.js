@@ -112,7 +112,7 @@ class WalkingScreen extends Component {
 
     record() {
         console.log('record', timestamp(), this.state)
-        if (this.state.tasks_id) cancelNotification(tasks_id)
+        if (this.state.tasks_id) cancelNotification(this.state.tasks_id)
 
         let data = {
             steps: this.state.steps,
