@@ -6,6 +6,7 @@ import {
     View,
     StatusBar,
     Linking,
+    TouchableWithoutFeedback,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
@@ -19,6 +20,10 @@ import { displayName } from '../app.json'
 import { setNotifications, setIdinvFilter } from '../redux/actions'
 
 class SettingsScreen extends Component {
+    state = {
+        devSettingsHidden: true,
+    }
+
     static navigationOptions = {
         title: strings.Settings,
         headerRight: (
@@ -39,14 +44,18 @@ class SettingsScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar
-                    backgroundColor={'white'}
-                    barStyle="dark-content"
-                    // hidden={true}
-                />
-                <Text style={styles.information}>{`${displayName} - ${
-                    strings.Version
-                }: ${version}`}</Text>
+                <StatusBar backgroundColor={'white'} barStyle="dark-content" />
+                <TouchableWithoutFeedback
+                    delayLongPress={3000}
+                    onLongPress={() => {
+                        this.setState({
+                            devSettingsHidden: !this.state.devSettingsHidden,
+                        })
+                    }}>
+                    <Text style={styles.information}>{`${displayName} - ${
+                        strings.Version
+                    }: ${version}`}</Text>
+                </TouchableWithoutFeedback>
                 <View />
                 <Text style={styles.name}>{this.props.user.username}</Text>
                 {this.props.user.idinv && (
@@ -54,16 +63,21 @@ class SettingsScreen extends Component {
                         this.props.user.idinv
                     }`}</Text>
                 )}
-                <View>
+                <View
+                    style={
+                        this.state.devSettingsHidden
+                            ? { display: 'none' }
+                            : null
+                    }>
                     <ToggleSwitch
-                        text={'Idinv filter'}
+                        text={strings.IdinvFilter}
                         value={this.props.idinvFilter}
                         onValueChange={value =>
                             this.props.setIdinvFilter(value)
                         }
                     />
                     <ToggleSwitch
-                        text={'Notifications'}
+                        text={strings.Notifications}
                         value={this.props.notifications}
                         onValueChange={value =>
                             this.props.setNotifications(value)
@@ -74,7 +88,6 @@ class SettingsScreen extends Component {
                     <View>
                         <SaveButton
                             title={strings.EditProfile}
-                            style={styles.button}
                             onPress={() => {
                                 Linking.openURL(profileEditUrl).catch(err =>
                                     console.error('An error occurred', err),
@@ -85,7 +98,6 @@ class SettingsScreen extends Component {
                     <View>
                         <SaveButton
                             title={strings.Logout}
-                            style={styles.button}
                             onPress={() => {
                                 this.logout()
                             }}
@@ -127,13 +139,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: backgroundColor,
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: 20,
+        justifyContent: 'flex-start',
+        padding: 10,
     },
     name: {
         fontSize: 30,
         textAlign: 'center',
-        margin: 10,
+        margin: 20,
     },
     email: {
         fontSize: 15,
@@ -145,12 +157,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
     },
-    button: {
-        margin: 10,
-        padding: 20,
-    },
     buttonView: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'flex-end',
     },
 })
