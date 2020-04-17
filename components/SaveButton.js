@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import { secondaryColor, secondaryGrey } from '../constants'
+import { secondaryColor, secondaryGrey, width } from '../constants'
 
 let disabled = false
 
@@ -33,6 +33,8 @@ export default class SaveButton extends Component {
     }
 }
 
+console.log(width)
+
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -46,7 +48,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     text: {
-        fontSize: 17,
+        fontSize: width / 23,
         color: 'white',
+        textAlign: 'center',
     },
 })
