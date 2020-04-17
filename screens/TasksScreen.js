@@ -69,6 +69,8 @@ class TasksScreen extends Component<Props> {
                 <FlatList
                     style={styles.list}
                     data={list}
+                    contentContainerStyle={{ paddingBottom: 30 }}
+                    overScrollMode={'always'}
                     renderItem={this._renderItem}
                     keyExtractor={(item, index) => index.toString()}
                 />
@@ -91,16 +93,20 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(TasksScreen)
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: backgroundColor,
-        paddingBottom: 25,
     },
     list: {
         flex: 1,
-        top: 20,
+        paddingTop: 10,
+        flexGrow: 1,
+        paddingBottom: 20,
     },
 })

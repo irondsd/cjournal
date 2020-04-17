@@ -81,6 +81,8 @@ class JournalScreen extends Component<Props> {
                     style={styles.list}
                     data={list}
                     renderItem={this._renderItem}
+                    contentContainerStyle={{ paddingBottom: 30 }}
+                    overScrollMode={'always'}
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>
@@ -106,16 +108,20 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(JournalScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(JournalScreen)
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: backgroundColor,
-        paddingBottom: 25,
     },
     list: {
         flex: 1,
-        top: 20,
+        paddingTop: 10,
+        flexGrow: 1,
+        paddingBottom: 20,
     },
 })
