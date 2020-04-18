@@ -108,6 +108,8 @@ const styles = StyleSheet.create({
     time: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
+        marginTop: 10,
+        marginBottom: 10,
     },
     timeText: {
         lineHeight: 50,

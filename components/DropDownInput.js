@@ -176,6 +176,8 @@ var styles = StyleSheet.create({
     View: {
         // backgroundColor: 'white',
         width: '100%',
+        marginTop: 10,
+        marginBottom: 10,
     },
     inputText: {
         fontSize: 17,

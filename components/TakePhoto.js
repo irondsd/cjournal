@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
         paddingRight: 45,
         height: 50,
         backgroundColor: 'white',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
     },
     text: {
         fontSize: 17,

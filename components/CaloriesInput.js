@@ -24,8 +24,8 @@ export default class CaloriesInput extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
     },
     TextInputStyle: {
         borderRadius: 5,

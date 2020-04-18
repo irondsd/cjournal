@@ -95,8 +95,9 @@ export default class DurationPicker extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.duration}>
-                    <Text
-                        style={styles.text}>{`${strings['Duration']}: `}</Text>
+                    <Text style={styles.text}>{`${
+                        strings['Duration']
+                    }: `}</Text>
                 </View>
                 <View style={styles.select}>
                     <TouchableOpacity
@@ -104,7 +105,7 @@ export default class DurationPicker extends Component {
                         style={styles.input}
                         onPress={this.dropDown}>
                         {this.props.value === '' && (
-                            <Text style={styles.placeholder}></Text>
+                            <Text style={styles.placeholder} />
                         )}
                         <Text style={styles.Text}>
                             {localTime(this.props.value)}
@@ -136,8 +137,8 @@ export default class DurationPicker extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
     },
     duration: {
         width: '40%',

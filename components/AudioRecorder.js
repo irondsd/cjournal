@@ -216,8 +216,8 @@ export default class App extends Component {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
     },
     recorder: {
         borderRadius: 5,

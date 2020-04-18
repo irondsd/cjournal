@@ -17,7 +17,7 @@ import {
 } from '../constants'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 
-let maxLines = 5
+let maxLines = 10
 
 export default class ActivitySelect extends Component {
     state = {
@@ -82,7 +82,7 @@ export default class ActivitySelect extends Component {
                     style={styles.input}
                     onPress={this.dropDown}>
                     {this.props.value === '' && (
-                        <Text style={styles.placeholder}></Text>
+                        <Text style={styles.placeholder} />
                     )}
                     <Text style={styles.Text}>{strings[this.props.value]}</Text>
                 </TouchableOpacity>
@@ -106,16 +106,16 @@ export default class ActivitySelect extends Component {
 var styles = StyleSheet.create({
     View: {
         width: '100%',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
     },
     input: {
         borderRadius: 5,
         borderWidth: 0.5,
         borderColor: borderGrey,
         paddingLeft: 15,
-        paddingRight: 15,
         height: 50,
+        paddingRight: 15,
         backgroundColor: 'white',
     },
     Text: {
@@ -134,7 +134,8 @@ var styles = StyleSheet.create({
         position: 'absolute',
         right: 0,
         top: 10,
-        height: 50,
+        minHeight: 50,
+        maxHeight: 70,
         width: 30,
     },
     popUp: {

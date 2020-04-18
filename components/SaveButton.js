@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
         padding: 15,
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
     },
     text: {
         fontSize: width / 23,

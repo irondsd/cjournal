@@ -122,8 +122,8 @@ export default class BloodPressure extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginTop: 5,
-        marginBottom: 5,
+        marginTop: 10,
+        marginBottom: 10,
         width: '100%',
     },
     Title: {
