@@ -24,6 +24,7 @@ import {
     appColor,
     secondaryColor,
     secondaryGrey,
+    width,
 } from '../../constants'
 import BackButton from '../../components/BackButton'
 import { showError } from '../../services/toast'
@@ -244,7 +245,7 @@ class WalkingScreen extends Component {
                 </View>
                 <View style={styles.timerView}>
                     <AnimatedCircularProgress
-                        size={300}
+                        size={width / 1.3}
                         width={2}
                         fill={this.state.progress}
                         rotation={180}
@@ -292,7 +293,6 @@ export default connect(
 
 const styles = StyleSheet.create({
     stats: {
-        // height: 50,
         width: '100%',
         flexDirection: 'row',
         height: 50,
@@ -318,17 +318,17 @@ const styles = StyleSheet.create({
         fontSize: 25,
     },
     timerView: {
-        top: '27.5%',
-        height: 100,
-        position: 'absolute',
+        flex: 3,
+        justifyContent: 'center',
     },
     timer: {
-        fontSize: 80,
+        fontSize: width / 5,
         fontWeight: '200',
         color: '#00000055',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
     button: {
+        flex: 1,
         justifyContent: 'flex-end',
         width: '100%',
     },

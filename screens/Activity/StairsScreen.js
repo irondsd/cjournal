@@ -23,6 +23,7 @@ import {
     paths,
     activityTypes,
     defaultStyles,
+    width,
 } from '../../constants'
 import BackButton from '../../components/BackButton'
 import Activity from '../../classes/Activity'
@@ -211,13 +212,13 @@ class StairsScreen extends Component {
             <View style={defaultStyles.container}>
                 <View style={styles.stats}>
                     <View style={styles.textSteps}>
-                        <Text style={strings.Pressure}>
+                        <Text style={styles.text}>
                             {strings.Pressure} ({strings.mmHg})
                         </Text>
                         <Text style={styles.number}>{this.state.mmHg}</Text>
                     </View>
                     <View style={styles.textDistance}>
-                        <Text style={strings.Pressure}>{strings.Steps}</Text>
+                        <Text style={styles.text}>{strings.Steps}</Text>
                         <Text style={styles.number}>{this.state.steps}</Text>
                     </View>
                 </View>
@@ -280,27 +281,22 @@ const styles = StyleSheet.create({
         borderColor: '#dddddd',
     },
     text: {
-        fontSize: 15,
-        backgroundColor: 'black',
+        fontSize: width / 25,
     },
     number: {
         fontSize: 25,
     },
-    text: {
-        padding: 10,
-        flex: 3,
-    },
     timerView: {
-        top: '35%',
-        height: 100,
-        position: 'absolute',
+        flex: 3,
+        justifyContent: 'center',
     },
     timer: {
-        fontSize: 80,
+        fontSize: width / 5,
         fontWeight: '200',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
     button: {
+        flex: 1,
         width: '100%',
         justifyContent: 'flex-end',
     },
