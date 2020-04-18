@@ -14,7 +14,7 @@ export const defaultStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: backgroundColor,
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         alignItems: 'center',
         padding: 20,
         width: '100%',
