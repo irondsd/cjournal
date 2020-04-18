@@ -355,7 +355,7 @@ class ActivityDetailsScreen extends Component {
     onOthersChange = value => {
         let activity = { ...this.state.activity }
         let data = { ...this.state.data }
-        data.other = value
+        data.type = value
         activity.data = data
         this.setState(
             {
