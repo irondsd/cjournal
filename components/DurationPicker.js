@@ -141,14 +141,16 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     duration: {
-        width: '40%',
+        width: '45%',
     },
     text: {
         fontSize: 17,
-        top: 13,
+        height: 50,
+        lineHeight: 50,
+        textAlignVertical: 'center',
     },
     select: {
-        width: '60%',
+        width: '55%',
     },
     View: {
         // backgroundColor: 'white',
