@@ -14,6 +14,7 @@ import {
     paths,
     activityTypes,
     defaultStyles,
+    width,
 } from '../../constants'
 import { strings } from '../../localizations'
 import { addActivity } from '../../redux/actions'
@@ -23,6 +24,7 @@ import timestamp from '../../helpers/timestamp'
 import GPS from '../../sensors/GPS'
 import Comment from '../../components/Comment'
 import SaveButton from '../../components/SaveButton'
+import Icon from 'react-native-vector-icons/dist/MaterialIcons'
 
 class AlarmScreen extends Component {
     static navigationOptions = {
@@ -106,6 +108,16 @@ class AlarmScreen extends Component {
     render() {
         return (
             <View style={defaultStyles.container}>
+                <Icon
+                    style={styles.icon}
+                    name={
+                        this.state.position.coords
+                            ? 'location-on'
+                            : 'location-off'
+                    }
+                    size={50}
+                    color="#555"
+                />
                 <Text style={styles.text}>
                     {Object.entries(this.state.position).length === 0 &&
                     this.state.position.constructor === Object
@@ -153,14 +165,18 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AlarmScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(AlarmScreen)
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: 30,
+        fontSize: width / 15,
         textAlign: 'center',
-        margin: 10,
-        top: 50,
+        textAlignVertical: 'center',
+        flex: 1,
+        width: '100%',
     },
     input: {
         fontSize: 20,
@@ -172,6 +188,9 @@ const styles = StyleSheet.create({
         height: '50%',
         width: '100%',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+    },
+    icon: {
+        position: 'absolute',
+        top: '10%',
     },
 })
