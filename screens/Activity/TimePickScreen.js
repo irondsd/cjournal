@@ -19,6 +19,7 @@ import {
     durations,
     paths,
     defaultStyles,
+    defaultDurations,
 } from '../../constants'
 import { activitySingleOverlap } from '../../helpers/activityOverlap'
 import DurationPicker from '../../components/DurationPicker'
@@ -42,6 +43,7 @@ class TimePickScreen extends Component {
             fromStart: strings.FromStart,
             options: [strings.FromStart, strings.FromEnd],
             audioFile: null,
+            defaultTime: true,
         }
 
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -57,14 +59,24 @@ class TimePickScreen extends Component {
     componentDidMount() {
         let dateTime = new Date()
         dateTime.setMilliseconds(0)
+        let activity_type = this.props.navigation.state.params.sender
+
+        // default durations
+        dateTime.setSeconds(
+            dateTime.getSeconds() - defaultDurations[activity_type].offset,
+        )
+        let duration = defaultDurations[activity_type].duration
+
         this.setState({
             dateTime: dateTime,
+            duration: duration / 60,
         })
     }
 
     changeDateTime(dateTime) {
         this.setState({
             dateTime: dateTime,
+            defaultTime: false,
         })
     }
 
@@ -89,6 +101,7 @@ class TimePickScreen extends Component {
             {},
         )
         if (this.state.audioFile) activity.data.audioFile = this.state.audioFile
+        if (this.state.defaultTime) activity.data.default_time = true
 
         let overlaps = activitySingleOverlap(this.props.activity, activity)
         if (overlaps) {
@@ -114,6 +127,7 @@ class TimePickScreen extends Component {
         this.setState({
             duration: itemValue,
             dateTime: dateTime,
+            defaultTime: false,
         })
     }
 

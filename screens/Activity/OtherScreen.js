@@ -20,6 +20,7 @@ import {
     paths,
     defaultStyles,
     activityTypes,
+    defaultDurations,
 } from '../../constants'
 import DurationPicker from '../../components/DurationPicker'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -46,6 +47,7 @@ class OtherScreen extends Component {
             audioFile: null,
             activity_type: null,
             list: [],
+            defaultTime: true,
         }
 
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -60,10 +62,17 @@ class OtherScreen extends Component {
     componentDidMount() {
         let dateTime = new Date()
         dateTime.setMilliseconds(0)
+        let activity_type = this.props.navigation.state.params.sender
+        dateTime.setSeconds(
+            dateTime.getSeconds() - defaultDurations[activity_type].offset,
+        )
+        let duration = defaultDurations[activity_type].duration
+
         this.setState(
             {
                 dateTime: dateTime,
-                activity_type: this.props.navigation.state.params.sender,
+                activity_type: activity_type,
+                duration: duration / 60,
             },
             () => this.loadList(),
         )
@@ -84,6 +93,7 @@ class OtherScreen extends Component {
     changeDateTime(dateTime) {
         this.setState({
             dateTime: dateTime,
+            defaultTime: false,
         })
     }
 
@@ -116,6 +126,7 @@ class OtherScreen extends Component {
             )
             if (this.state.audioFile)
                 activity.data.audioFile = this.state.audioFile
+            if (this.state.defaultTime) activity.data.default_time = true
 
             let overlaps = activitySingleOverlap(this.props.activity, activity)
             if (overlaps) {
@@ -136,6 +147,7 @@ class OtherScreen extends Component {
         this.setState({
             duration: itemValue,
             dateTime: dateTime,
+            defaultTime: false,
         })
     }
 

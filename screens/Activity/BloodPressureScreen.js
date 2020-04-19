@@ -20,6 +20,7 @@ import {
     paths,
     defaultStyles,
     activityTypes,
+    defaultDurations,
 } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -47,6 +48,7 @@ class BloodPressureScreen extends Component {
                 after: ['', ''],
             },
             list: [],
+            defaultTime: true,
         }
 
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -69,11 +71,16 @@ class BloodPressureScreen extends Component {
         ) {
             tasks_id = this.props.navigation.state.params.tasks_id
         }
+        dateTime.setSeconds(
+            dateTime.getSeconds() - defaultDurations[activity_type].offset,
+        )
+        let duration = defaultDurations[activity_type].duration
         this.setState(
             {
                 dateTime: dateTime,
                 activity_type: activity_type,
                 tasks_id: tasks_id,
+                duration: duration / 60,
             },
             () => this.loadList(),
         )
@@ -124,6 +131,8 @@ class BloodPressureScreen extends Component {
             '',
             { bloodPressure: this.state.bloodPressure },
         )
+
+        if (this.state.defaultTime) activity.data.default_time = true
 
         this.props.add(activity)
         this.props.navigation.navigate(paths.Home)
