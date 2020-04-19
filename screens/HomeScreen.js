@@ -30,8 +30,8 @@ class HomeScreen extends Component {
 
         this.state = {
             Sleep: false,
-            Activity: false,
             PhysicalLoad: false,
+            Activity: false,
             Service: false,
             Pills: false,
             Tests: false,
@@ -53,10 +53,11 @@ class HomeScreen extends Component {
 
     refresh() {
         let overlaps = overlappingGreying(this.props.activity)
+        console.log(overlaps)
         this.setState({
             Sleep: overlaps[0],
-            Activity: overlaps[1],
-            PhysicalLoad: overlaps[2],
+            PhysicalLoad: overlaps[1],
+            Activity: overlaps[2],
             Pills: overlaps[3],
             Tests: overlaps[4],
             Service: overlaps[5],
@@ -132,4 +133,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(HomeScreen)
+export default connect(
+    mapStateToProps,
+    null,
+)(HomeScreen)
