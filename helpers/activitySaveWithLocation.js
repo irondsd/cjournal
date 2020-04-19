@@ -16,7 +16,7 @@ export function activitySaveWithLocation(activity_type) {
             clicked = false
         }, 5000)
         let idinv = store.getState().user.idinv
-        let activity = Activity.instantInit(activity_type, idinv)
+        let activity = Activity.instantInitWithDefaultTime(activity_type, idinv)
 
         activity
             .attachLocation()

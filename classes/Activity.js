@@ -13,6 +13,7 @@ import activityPutFile from '../requests/activityPutFile'
 import activityDeleteData from '../requests/ActivityDeleteData'
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
+import { defaultDurations } from '../constants'
 
 export default class Activity {
     constructor(
@@ -72,6 +73,33 @@ export default class Activity {
             activity_type,
             timestamp(),
             null,
+            new Date().getTimezoneOffset() * -1,
+            null,
+            idinv,
+            timestamp(),
+            comment,
+            data,
+        )
+    }
+
+    static instantInitWithDefaultTime(
+        activity_type,
+        idinv = null,
+        comment = '',
+        data = {},
+    ) {
+        let time_started = timestamp() - defaultDurations[activity_type].offset
+        let time_ended = time_started + defaultDurations[activity_type].duration
+        data = {
+            ...data,
+            default_time: true,
+        }
+
+        return new Activity(
+            null,
+            activity_type,
+            time_started,
+            time_ended,
             new Date().getTimezoneOffset() * -1,
             null,
             idinv,

@@ -3,6 +3,7 @@ import { addActivity } from '../redux/actions'
 import { showToast, showError } from '../services/toast'
 import { strings } from '../localizations'
 import Activity from '../classes/Activity'
+import { defaultDurations } from '../constants'
 
 let clicked = false
 
@@ -13,9 +14,9 @@ export function activityInstantSave(activity_type) {
         clicked = true
         setTimeout(() => {
             clicked = false
-        }, 500)
+        }, 1000)
         let idinv = store.getState().user.idinv
-        let activity = Activity.instantInit(activity_type, idinv)
+        let activity = Activity.instantInitWithDefaultTime(activity_type, idinv)
         store.dispatch(addActivity(activity))
     }
 }
