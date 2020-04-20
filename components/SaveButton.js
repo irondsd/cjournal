@@ -33,8 +33,6 @@ export default class SaveButton extends Component {
     }
 }
 
-console.log(width)
-
 const styles = StyleSheet.create({
     container: {
         width: '100%',

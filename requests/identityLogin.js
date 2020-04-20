@@ -32,7 +32,7 @@ export function identityLogin(username, password) {
                 }
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
                 if (err.status === 408) {
                     // timeout
                     Alert.alert(strings.NoConn, strings.CantConnectIdentity)

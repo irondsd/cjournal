@@ -41,7 +41,7 @@ export function scheduleNotification(id, title, message, dateTime) {
 }
 
 export function cancelLocalNotification(id) {
-    console.log('cancelled notification', id)
+    // console.log('cancelled notification', id)
     PushNotification.cancelLocalNotifications({ id: id.toString() })
     PushNotification.clearLocalNotification(id)
 }
@@ -80,7 +80,7 @@ function onNotificationOpened(notification) {
                 tasks_id: notification.id,
             })
         } else {
-            console.log('already completed task notification')
+            // console.log('already completed task notification')
         }
     }
 }

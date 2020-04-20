@@ -19,14 +19,14 @@ export async function idinvWatcher(id, access_token, idinv) {
                     // post request to update
                     userUpdateIdinv(id, access_token, parsed_idinv).then(
                         res => {
-                            if (res.ok) console.log('idinv updated')
+                            // if (res.ok) console.log('idinv updated')
                         },
                     )
                 } else {
-                    console.log('idinv match')
+                    // console.log('idinv match')
                 }
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         })
     })

@@ -55,7 +55,7 @@ export default class Barometer {
                 ).toFixed(0)
             },
             error => {
-                console.log('Barometer is not available on this device')
+                // console.log('Barometer is not available on this device')
             },
         )
     }
@@ -75,7 +75,7 @@ export default class Barometer {
 
         setTimeout(() => {
             if (bar) {
-                console.log('Calibrating done!')
+                // console.log('Calibrating done!')
                 bar.unsubscribe()
             }
         }, seconds * 1000)

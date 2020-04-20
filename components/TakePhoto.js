@@ -42,7 +42,7 @@ export default class TakePhoto extends Component {
 
         RNFS.exists(filepath).then(exists => {
             if (exists) this.load(filepath)
-            else console.log("doesn't exist")
+            // else console.log("doesn't exist")
         })
     }
 

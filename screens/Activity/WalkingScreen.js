@@ -112,7 +112,7 @@ class WalkingScreen extends Component {
     }
 
     record() {
-        console.log('record', timestamp(), this.state)
+        // console.log('record', timestamp(), this.state)
         if (this.state.tasks_id) cancelNotification(this.state.tasks_id)
 
         let data = {
@@ -185,7 +185,7 @@ class WalkingScreen extends Component {
     timerTick() {
         let time = this.state.timestampEnd - timestamp()
 
-        console.log(time)
+        // console.log(time)
 
         this.setState({
             timer: secs2time(time),

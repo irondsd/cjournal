@@ -164,7 +164,7 @@ export default class Activity {
                         resolve()
                     })
                     .catch(error => {
-                        console.log('post activity fail', error)
+                        // console.log('post activity fail', error)
                         store.dispatch(activitySendFailed(this))
                         reject()
                     })
@@ -175,7 +175,7 @@ export default class Activity {
                         resolve()
                     })
                     .catch(error => {
-                        console.log('put activity fail', error)
+                        // console.log('put activity fail', error)
                         store.dispatch(activitySendFailed(this))
                         reject()
                     })
@@ -186,7 +186,7 @@ export default class Activity {
                         resolve()
                     })
                     .catch(error => {
-                        console.log('delete activity fail', error)
+                        // console.log('delete activity fail', error)
                         store.dispatch(activitySendFailed(this))
                         reject()
                     })
@@ -231,12 +231,12 @@ export default class Activity {
                             store.dispatch(activitySetId(res.id, this))
                             resolve()
                         } else {
-                            console.log('upload error no id returned')
+                            // console.log('upload error no id returned')
                             reject()
                         }
                     })
                     .catch(error => {
-                        console.log('upload error', error)
+                        // console.log('upload error', error)
                         reject(error)
                     })
             } else {
@@ -261,16 +261,16 @@ export default class Activity {
                 activityPutFile(id, access_token, this)
                     .then(res => {
                         if (res && res.id) {
-                            console.log('successfully uploaded', res)
+                            // console.log('successfully uploaded', res)
                             store.dispatch(activitySynced(this))
                             resolve()
                         } else {
-                            console.log('upload error no id returned')
+                            // console.log('upload error no id returned')
                             reject('no id returned')
                         }
                     })
                     .catch(error => {
-                        console.log('upload error', error)
+                        // console.log('upload error', error)
                         reject(error)
                     })
             } else {

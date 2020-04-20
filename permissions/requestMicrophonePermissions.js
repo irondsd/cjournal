@@ -16,10 +16,10 @@ export default async function requestLocationPermissions() {
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('Microphone permissions granted')
+            // console.log('Microphone permissions granted')
             return true
         } else {
-            console.log('Microphone permission denied')
+            // console.log('Microphone permission denied')
             return false
         }
     } catch (err) {

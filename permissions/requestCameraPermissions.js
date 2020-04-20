@@ -16,10 +16,10 @@ export default async function requestLocationPermissions() {
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('Camera permissions granted')
+            // console.log('Camera permissions granted')
             return true
         } else {
-            console.log('Camera permission denied')
+            // console.log('Camera permission denied')
             return false
         }
     } catch (err) {

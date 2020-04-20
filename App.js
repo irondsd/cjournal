@@ -30,7 +30,7 @@ class App extends Component {
                             this.props.idinv,
                         )
                 } else {
-                    console.log(`Can't sync, not logged in`)
+                    console.log(`Sync aborted, not logged in`)
                 }
 
                 BackgroundFetch.finish(BackgroundFetch.FETCH_RESULT_NEW_DATA)

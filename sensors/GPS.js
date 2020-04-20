@@ -19,7 +19,7 @@ export default class GPS {
     }
 
     requestPosition() {
-        if (!this.allowed) return console.log('Not allowed to use location')
+        if (!this.allowed) return // console.log('Not allowed to use location')
 
         Geolocation.getCurrentPosition(
             position => {

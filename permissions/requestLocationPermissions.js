@@ -16,10 +16,10 @@ export default async function requestLocationPermissions() {
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('Location permissions granted')
+            // console.log('Location permissions granted')
             return true
         } else {
-            console.log('Location permission denied')
+            // console.log('Location permission denied')
             return false
         }
     } catch (err) {

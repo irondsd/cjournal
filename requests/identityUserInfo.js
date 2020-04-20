@@ -20,7 +20,7 @@ export function identityUserInfo(access_token) {
                 dispatch(identityUser(res))
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
                 // dispatch(logoutUser())
                 // NavigationService.navigate('Login')
             })

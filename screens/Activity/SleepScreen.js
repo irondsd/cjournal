@@ -54,7 +54,7 @@ class SleepScreen extends Component {
             [
                 {
                     text: strings.Cancel,
-                    onPress: () => console.log('Cancel Pressed'),
+                    // onPress: () => console.log('Cancel Pressed'),
                     style: 'cancel',
                 },
                 {

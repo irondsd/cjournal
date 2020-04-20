@@ -16,10 +16,10 @@ export default async function requestExternalWritePermission() {
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('Write storage granted')
+            // console.log('Write storage granted')
             return await requestExternalReadPermission()
         } else {
-            console.log('Write permission denied')
+            // console.log('Write permission denied')
             return false
         }
     } catch (err) {
@@ -40,10 +40,10 @@ async function requestExternalReadPermission() {
             },
         )
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('Read storage granted')
+            // console.log('Read storage granted')
             return true
         } else {
-            console.log('Read permission denied')
+            // console.log('Read permission denied')
             return false
         }
     } catch (err) {

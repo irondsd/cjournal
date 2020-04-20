@@ -53,7 +53,6 @@ class HomeScreen extends Component {
 
     refresh() {
         let overlaps = overlappingGreying(this.props.activity)
-        console.log(overlaps)
         this.setState({
             Sleep: overlaps[0],
             PhysicalLoad: overlaps[1],

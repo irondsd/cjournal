@@ -25,7 +25,7 @@ export function activitySaveWithLocation(activity_type) {
             })
             .catch(err => {
                 // error, retrying
-                console.log('error')
+                console.log('alarm location error')
 
                 setTimeout(() => {
                     // retry 1

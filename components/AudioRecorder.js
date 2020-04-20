@@ -130,7 +130,7 @@ export default class App extends Component {
             try {
                 await this.load()
             } catch (error) {
-                console.log(error)
+                // console.log(error)
             }
         }
         if (this.state.paused) {
@@ -138,9 +138,9 @@ export default class App extends Component {
             Sound.setCategory('Playback')
             this.sound.play(success => {
                 if (success) {
-                    console.log('successfully finished playing')
+                    // console.log('successfully finished playing')
                 } else {
-                    console.log('playback failed due to audio decoding errors')
+                    // console.log('playback failed due to audio decoding errors')
                 }
                 this.setState({ paused: true })
                 // this.sound.release();

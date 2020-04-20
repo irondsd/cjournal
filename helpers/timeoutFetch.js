@@ -8,7 +8,7 @@ export default function timeoutFetch(url, options, timeout = 5000) {
         fetch(url, options)
             .then(resolve, reject)
             .catch(() => {
-                console.log('Timeout!')
+                // console.log('Fetch timeout')
             })
         setTimeout(reject.bind(null, timeout_err), timeout)
     })

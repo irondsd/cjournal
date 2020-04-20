@@ -24,13 +24,13 @@ export default async function sync(id, tokens) {
         // console.log('going to update tokens', tokens.refresh_token)
         refreshTokens(tokens.refresh_token)
             .then(tokens => {
-                console.log('received new tokens', tokens.refresh_token)
+                // console.log('received new tokens', tokens.refresh_token)
                 errors = 0
             })
             .catch(error => {
                 isConnected().then(connected => {
                     if (error.message == 'invalid_grant') errors += 1
-                    console.log(`Error updating token ${errors} out of 5`)
+                    // console.log(`Error updating token ${errors} out of 5`)
                 })
                 if (errors >= 5 && tokens.isExpired()) {
                     console.log(
@@ -42,7 +42,7 @@ export default async function sync(id, tokens) {
             })
     }
 
-    if (!tokens.access_token) return console.log('no tokens, sync aborted')
+    if (!tokens.access_token) return // console.log('no tokens, sync aborted')
     syncActivities(activities, id, tokens.access_token)
         .then(() => {
             store.dispatch(userFetchData(id, tokens.access_token))
@@ -50,9 +50,9 @@ export default async function sync(id, tokens) {
             store.dispatch(tasksFetchData(id, tokens.access_token))
             store.dispatch(identityUserInfo(tokens.access_token))
 
-            console.log('sync done')
+            // console.log('sync done')
         })
         .catch(err => {
-            console.log('sync ended with errors', err)
+            // console.log('sync ended with errors', err)
         })
 }
