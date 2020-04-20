@@ -30,7 +30,7 @@ export default async function sync(id, tokens) {
             .catch(error => {
                 isConnected().then(connected => {
                     if (error.message == 'invalid_grant') errors += 1
-                    // console.log(`Error updating token ${errors} out of 5`)
+                    console.log(`Error updating token ${errors} out of 5`)
                 })
                 if (errors >= 5 && tokens.isExpired()) {
                     console.log(
@@ -50,9 +50,9 @@ export default async function sync(id, tokens) {
             store.dispatch(tasksFetchData(id, tokens.access_token))
             store.dispatch(identityUserInfo(tokens.access_token))
 
-            // console.log('sync done')
+            console.log('sync done')
         })
         .catch(err => {
-            // console.log('sync ended with errors', err)
+            console.log('sync ended with errors', err)
         })
 }

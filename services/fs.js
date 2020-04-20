@@ -34,7 +34,7 @@ export async function downloadFile(url) {
                 // console.log('download', res, url)
             })
             .catch(err => {
-                // console.log('download failed', err)
+                console.log('download failed', err)
             })
     }
 }
