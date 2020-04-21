@@ -10,7 +10,6 @@ import NavigationService from '../navigation/NavigationService'
 import { logoutUser } from '../redux/actions'
 import { paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
-import { refreshTokens } from './identity'
 
 let errors = 0
 
@@ -22,15 +21,21 @@ export default async function sync(id, tokens) {
 
     if (tokens.expiresSoon()) {
         // console.log('going to update tokens', tokens.refresh_token)
-        refreshTokens(tokens.refresh_token)
+        tokens
+            .update()
             .then(tokens => {
-                // console.log('received new tokens', tokens.refresh_token)
+                console.log('received new tokens', tokens.refresh_token)
                 errors = 0
             })
             .catch(error => {
+                if (error != 'already updating') {
+                    console.log(error)
+                }
                 isConnected().then(connected => {
-                    if (error.message == 'invalid_grant') errors += 1
-                    console.log(`Error updating token ${errors} out of 5`)
+                    if (error.message == 'invalid_grant') {
+                        errors += 1
+                        console.log(`Error updating token ${errors} out of 5`)
+                    }
                 })
                 if (errors >= 5 && tokens.isExpired()) {
                     console.log(

@@ -10,11 +10,13 @@ import {
 import { apiUrl, appColor, registrationUrl, paths } from '../constants'
 import { strings } from '../localizations'
 import { withNavigation } from 'react-navigation'
-import { authorization } from '../services/identity'
+// import { authorization } from '../services/identity'
+import Tokens from '../classes/Tokens'
 
 class RegisterOrLogin extends Component {
     Login = async () => {
-        authorization()
+        Tokens.receive()
+            // authorization()
             .then(res => {
                 this.props.navigation.navigate(paths.Home)
             })
