@@ -12,12 +12,17 @@ import { paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
 
 let errors = 0
+let executing = false
 
 export default async function sync(id, tokens) {
+    if (!tokens || !id) return console.log('no tokens, sync aborted')
+
+    if (executing) return console.log('sync already running')
+
     let activities = store.getState().activity
     tokens = store.getState().tokens
 
-    if (!tokens || !id) return console.log('no tokens, sync aborted')
+    executing = true
 
     if (tokens.expiresSoon()) {
         // console.log('going to update tokens', tokens.refresh_token)
@@ -47,7 +52,7 @@ export default async function sync(id, tokens) {
             })
     }
 
-    if (!tokens.access_token) return // console.log('no tokens, sync aborted')
+    if (!tokens.access_token) return (executing = false)
     syncActivities(activities, id, tokens.access_token)
         .then(() => {
             store.dispatch(userFetchData(id, tokens.access_token))
@@ -55,9 +60,11 @@ export default async function sync(id, tokens) {
             store.dispatch(tasksFetchData(id, tokens.access_token))
             store.dispatch(identityUserInfo(tokens.access_token))
 
+            executing = false
             console.log('sync done')
         })
         .catch(err => {
+            executing = false
             console.log('sync ended with errors', err)
         })
 }
