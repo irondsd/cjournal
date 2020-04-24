@@ -155,7 +155,6 @@ export default class Activity {
     }
 
     sync(id, access_token) {
-        console.log('launching sync', this.activity_type)
         return new Promise((resolve, reject) => {
             if (!this.id) {
                 this.createOnServer(id, access_token)
