@@ -9,9 +9,9 @@ export default function syncActivities(activities, id, access_token) {
                             // sync activity success
                             resolve()
                         })
-                        .catch(() => {
+                        .catch(err => {
                             // sync activity fail
-                            reject()
+                            reject(err)
                         })
                 })
             }
