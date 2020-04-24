@@ -144,8 +144,6 @@ export default class Activity {
     }
 
     synced() {
-        if (this.system && this.system.syncing) return true
-
         if (!this.id) return false
 
         if (this.system) {
@@ -157,6 +155,7 @@ export default class Activity {
     }
 
     sync(id, access_token) {
+        console.log('launching sync', this.activity_type)
         return new Promise((resolve, reject) => {
             if (!this.id) {
                 this.createOnServer(id, access_token)
@@ -166,7 +165,7 @@ export default class Activity {
                     .catch(error => {
                         // console.log('post activity fail', error)
                         store.dispatch(activitySendFailed(this))
-                        reject()
+                        reject(error)
                     })
             }
             if (this.system.awaitsEdit) {
@@ -177,7 +176,7 @@ export default class Activity {
                     .catch(error => {
                         // console.log('put activity fail', error)
                         store.dispatch(activitySendFailed(this))
-                        reject()
+                        reject(error)
                     })
             }
             if (this.system.awaitsDelete) {
@@ -188,7 +187,7 @@ export default class Activity {
                     .catch(error => {
                         // console.log('delete activity fail', error)
                         store.dispatch(activitySendFailed(this))
-                        reject()
+                        reject(error)
                     })
             }
         })
@@ -232,7 +231,7 @@ export default class Activity {
                             resolve()
                         } else {
                             // console.log('upload error no id returned')
-                            reject()
+                            reject('no id returned')
                         }
                     })
                     .catch(error => {
