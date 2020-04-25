@@ -4,7 +4,7 @@ import activityPostData from '../requests/activityPostData'
 import activityFileUpload from '../requests/activityFileUpload'
 import {
     activitySetId,
-    activitySendFailed,
+    activitySyncFailed,
     activitySynced,
     activityDeleted,
 } from '../redux/actions/activityActions'
@@ -13,7 +13,10 @@ import activityPutFile from '../requests/activityPutFile'
 import activityDeleteData from '../requests/ActivityDeleteData'
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
-import { defaultDurations } from '../constants'
+import { defaultDurations, paths } from '../constants'
+import idGenerator from '../helpers/idGenerator'
+import { getUtcOffset } from '../helpers/dateTime'
+import { addActivity } from '../redux/actions'
 
 export default class Activity {
     constructor(
@@ -69,7 +72,7 @@ export default class Activity {
 
     static instantInit(activity_type, idinv = null, comment = '', data = {}) {
         return new Activity(
-            null,
+            idGenerator(store.getState().user.id),
             activity_type,
             timestamp(),
             null,
@@ -79,6 +82,7 @@ export default class Activity {
             timestamp(),
             comment,
             data,
+            { awaitsSync: true },
         )
     }
 
@@ -96,7 +100,7 @@ export default class Activity {
         }
 
         return new Activity(
-            null,
+            idGenerator(store.getState().user.id),
             activity_type,
             time_started,
             time_ended,
@@ -106,6 +110,7 @@ export default class Activity {
             timestamp(),
             comment,
             data,
+            { awaitsSync: true },
         )
     }
 
@@ -119,17 +124,25 @@ export default class Activity {
         data,
     ) {
         return new Activity(
-            null,
+            idGenerator(store.getState().user.id),
             activity_type,
             time_started,
             time_ended,
-            new Date().getTimezoneOffset() * -1,
+            getUtcOffset(),
             tasks_id,
             idinv,
             timestamp(),
             comment,
             data,
+            { awaitsSync: true },
         )
+    }
+
+    static instantInitSave(activity_type, navigate) {
+        let idinv = store.getState().user.idinv
+        let activity = Activity.instantInit(activity_type, idinv)
+        store.dispatch(addActivity(activity))
+        navigate(paths.Home)
     }
 
     isEqual(other) {
@@ -147,6 +160,7 @@ export default class Activity {
         if (!this.id) return false
 
         if (this.system) {
+            if (this.system.awaitsSync) return false
             if (this.system.awaitsEdit) return false
             if (this.system.awaitsDelete) return false
         }
@@ -154,16 +168,21 @@ export default class Activity {
         return true
     }
 
+    hasFiles() {
+        if (this.data.audioFile || this.data.photoFile) return true
+        return false
+    }
+
     sync(id, access_token) {
         return new Promise((resolve, reject) => {
-            if (!this.id) {
+            if (this.system.awaitsSync) {
                 this.createOnServer(id, access_token)
                     .then(() => {
                         resolve()
                     })
                     .catch(error => {
                         // console.log('post activity fail', error)
-                        store.dispatch(activitySendFailed(this))
+                        store.dispatch(activitySyncFailed(this))
                         reject(error)
                     })
             }
@@ -174,7 +193,7 @@ export default class Activity {
                     })
                     .catch(error => {
                         // console.log('put activity fail', error)
-                        store.dispatch(activitySendFailed(this))
+                        store.dispatch(activitySyncFailed(this))
                         reject(error)
                     })
             }
@@ -185,7 +204,7 @@ export default class Activity {
                     })
                     .catch(error => {
                         // console.log('delete activity fail', error)
-                        store.dispatch(activitySendFailed(this))
+                        store.dispatch(activitySyncFailed(this))
                         reject(error)
                     })
             }
@@ -205,13 +224,9 @@ export default class Activity {
         }
     }
 
-    currentlySyncingMark() {
+    addLastSyncAttempt() {
         if (!this.system) this.system = {}
-        this.system.syncing = true
-
-        setTimeout(() => {
-            if (this.system) delete this.system.syncing
-        }, 5100)
+        this.system.lastSyncAttempt = timestamp()
     }
 
     successfullySynced() {
@@ -219,18 +234,16 @@ export default class Activity {
     }
 
     createOnServer(id, access_token) {
+        this.addLastSyncAttempt()
         return new Promise((resolve, reject) => {
-            if (this.data.audioFile || this.data.photoFile) {
-                this.currentlySyncingMark()
+            if (this.hasFiles()) {
                 activityFileUpload(id, access_token, this)
                     .then(res => {
-                        if (res && res.id) {
-                            // console.log('successfully uploaded', res.id)
-                            store.dispatch(activitySetId(res.id, this))
+                        if (res.ok) {
+                            store.dispatch(activitySynced(this))
                             resolve()
                         } else {
-                            // console.log('upload error no id returned')
-                            reject('no id returned')
+                            reject('post file activity fail')
                         }
                     })
                     .catch(error => {
@@ -238,12 +251,14 @@ export default class Activity {
                         reject(error)
                     })
             } else {
-                this.currentlySyncingMark()
                 activityPostData(id, access_token, this)
                     .then(res => {
-                        // console.log(res)
-                        store.dispatch(activitySetId(res.id, this))
-                        resolve()
+                        if (res.ok) {
+                            store.dispatch(activitySynced(this))
+                            resolve()
+                        } else {
+                            reject('post activity fail')
+                        }
                     })
                     .catch(error => {
                         reject(error)
@@ -253,18 +268,17 @@ export default class Activity {
     }
 
     editOnServer(id, access_token) {
+        this.addLastSyncAttempt()
         return new Promise((resolve, reject) => {
             if (this.data.audioFile || this.data.photoFile) {
-                this.currentlySyncingMark()
                 activityPutFile(id, access_token, this)
                     .then(res => {
-                        if (res && res.id) {
-                            // console.log('successfully uploaded', res)
+                        if (res.ok) {
                             store.dispatch(activitySynced(this))
                             resolve()
                         } else {
                             // console.log('upload error no id returned')
-                            reject('no id returned')
+                            reject('upload file fail')
                         }
                     })
                     .catch(error => {
@@ -272,7 +286,6 @@ export default class Activity {
                         reject(error)
                     })
             } else {
-                this.currentlySyncingMark()
                 activityPutData(id, access_token, this)
                     .then(res => {
                         // console.log('successfully updated', res)
