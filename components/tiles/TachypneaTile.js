@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Tile from '../Tile'
 import { strings } from '../../localizations'
-import { activityInstantSave } from '../../helpers/activityInstantSave'
+import Activity from '../../classes/Activity'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
@@ -17,8 +17,10 @@ export default class ScreenTile extends Component {
                 navigation={this.props.navigation}
                 color="#723"
                 onPress={() => {
-                    activityInstantSave(name)
-                    this.props.navigation.navigate(paths.Home)
+                    Activity.instantInitSave(
+                        name,
+                        this.props.navigation.navigate,
+                    )
                 }}
                 onLongPress={() => {
                     this.props.navigation.navigate(paths.TimePick, {

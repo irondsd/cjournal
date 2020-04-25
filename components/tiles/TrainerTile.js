@@ -3,7 +3,6 @@ import Tile from '../Tile'
 import { strings } from '../../localizations'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
-import { activityInstantSave } from '../../helpers/activityInstantSave'
 
 const name = activityTypes.Trainer
 

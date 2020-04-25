@@ -3,7 +3,7 @@ import Tile from '../Tile'
 import { strings } from '../../localizations'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
-import { activityInstantSave } from '../../helpers/activityInstantSave'
+import Activity from '../../classes/Activity'
 
 const name = activityTypes.Workout
 
@@ -16,8 +16,10 @@ export default class ScreenTile extends Component {
                 navigation={this.props.navigation}
                 color="#343d4c"
                 onPress={() => {
-                    activityInstantSave(name)
-                    this.props.navigation.navigate(paths.Home)
+                    Activity.instantInitSave(
+                        name,
+                        this.props.navigation.navigate,
+                    )
                 }}
                 onLongPress={() => {
                     this.props.navigation.navigate(paths.TimePick, {
