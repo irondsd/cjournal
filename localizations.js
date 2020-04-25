@@ -1,5 +1,4 @@
 import LocalizedStrings from 'react-native-localization'
-import BloodPressure from './components/BloodPressure'
 
 export const strings = new LocalizedStrings({
     'en-US': {

@@ -3,7 +3,7 @@ import sync from './sync'
 
 let unsubscribe
 let scheduled = false
-
+// TODO: fix require cycle?
 export function scheduleSync() {
     if (scheduled === false) {
         scheduled = true

@@ -57,9 +57,9 @@ export const activityDeleted = activity => {
     }
 }
 
-export const activitySendFailed = activity => {
+export const activitySyncFailed = activity => {
     return {
-        type: 'ACTIVITY_SEND_FAILED',
+        type: 'ACTIVITY_SYNC_FAILED',
         payload: activity,
     }
 }

@@ -1,4 +1,4 @@
-export const backendUrl = 'http://217.197.236.243:3333'
+export const backendUrl = 'http://217.197.236.243:8626'
 export const apiUrl = `${backendUrl}/api/`
 export const identityUrl = `http://identity.incart.ru:7050`
 export const registrationUrl = `${identityUrl}/Identity/Account/Register`
