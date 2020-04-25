@@ -16,6 +16,7 @@ export const editable = [
     activityTypes.Smoking,
     activityTypes.ReliefOfAttack,
     activityTypes.CourseTherapy,
+    activityTypes.MedicineTest,
     activityTypes.Headache,
     activityTypes.RetrosternalPain,
     activityTypes.HeartAreaPain,
