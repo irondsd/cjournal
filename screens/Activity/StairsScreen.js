@@ -143,15 +143,12 @@ class StairsScreen extends Component {
             ...data,
             ...positions,
         }
-        let activity = new Activity(
-            null,
+        let activity = Activity.init(
             activityTypes.Stairs,
             timestamp(this.state.startDate),
             timestamp(),
-            getUtcOffset(),
             tasks_id,
             this.props.idinv,
-            timestamp(),
             '',
             data,
         )

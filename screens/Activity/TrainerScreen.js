@@ -91,15 +91,12 @@ class TrainerScreen extends Component {
             )
 
             if (this.state.duration == 0) timeEnded = null
-            let activity = new Activity(
-                null,
+            let activity = Activity.init(
                 this.state.activity_type,
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
-                getUtcOffset(),
                 null,
                 this.props.user.idinv,
-                timestamp(),
                 '',
                 { calories: this.state.calories, type: this.state.type },
             )

@@ -104,15 +104,12 @@ class PillsScreen extends Component {
     }
 
     handleSubmit() {
-        let activity = new Activity(
-            null,
+        let activity = Activity.init(
             this.state.activity_type,
             timestamp(this.state.dateTime),
             null,
-            getUtcOffset(),
             this.state.tasks_id ? this.state.tasks_id : null,
             this.props.user.idinv,
-            timestamp(),
             '',
             { pill: this.state.pill },
         )

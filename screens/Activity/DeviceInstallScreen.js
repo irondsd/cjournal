@@ -53,19 +53,14 @@ class DeviceInstallScreen extends Component {
             ? parseInt(this.state.tasks_id)
             : null
         if (tasks_id) cancelLocalNotification(tasks_id)
-        let activity = new Activity(
-            null,
+        let activity = Activity.init(
             activityTypes.DeviceInstall,
             timestamp(),
             null,
-            getUtcOffset(),
             tasks_id,
             this.props.user.idinv,
-            timestamp(),
             '',
-            {
-                device_id: this.state.device_id,
-            },
+            { device_id: this.state.device_id },
         )
         console.log(activity)
         this.props.add(activity)

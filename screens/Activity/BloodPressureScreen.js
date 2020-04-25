@@ -119,15 +119,15 @@ class BloodPressureScreen extends Component {
         )
             return showError('Not filled up')
 
-        let activity = new Activity(
-            null,
+        let time_started = timestamp(this.state.dateTime)
+        let time_ended = time_started + this.state.duration * 60
+
+        let activity = Activity.init(
             this.state.activity_type,
-            timestamp(this.state.dateTime),
-            null,
-            getUtcOffset(),
+            time_started,
+            time_ended,
             null,
             this.props.user.idinv,
-            timestamp(),
             '',
             { bloodPressure: this.state.bloodPressure },
         )

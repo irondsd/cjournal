@@ -88,18 +88,16 @@ class TimePickScreen extends Component {
             timeEnded.getMinutes() + parseInt(this.state.duration),
         )
         if (this.state.duration == 0) timeEnded = null
-        let activity = new Activity(
-            null,
+        let activity = Activity.init(
             this.props.navigation.state.params.sender,
             timestamp(this.state.dateTime),
             timeEnded ? timestamp(timeEnded) : null,
-            getUtcOffset(),
             null,
             this.props.user.idinv,
-            timestamp(),
             this.state.comment,
             {},
         )
+        console.log(activity)
         if (this.state.audioFile) activity.data.audioFile = this.state.audioFile
         if (this.state.defaultTime) activity.data.default_time = true
 

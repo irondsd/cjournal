@@ -102,15 +102,12 @@ class SleepScreen extends Component {
     finish() {
         clearInterval(this.state.intervalId)
         removeScreen()
-        let activity = new Activity(
-            null,
+        let activity = Activity.init(
             activityTypes.Sleep,
             timestamp(this.state.startDate),
             timestamp(),
-            getUtcOffset(),
             null,
             this.props.idinv,
-            timestamp(),
             '',
             {},
         )

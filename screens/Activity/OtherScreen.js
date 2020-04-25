@@ -112,15 +112,12 @@ class OtherScreen extends Component {
             addHint(this.state.activity_type, this.state.type)
 
             if (this.state.duration == 0) timeEnded = null
-            let activity = new Activity(
-                null,
+            let activity = Activity.init(
                 this.state.activity_type,
                 timestamp(this.state.dateTime),
                 timeEnded ? timestamp(timeEnded) : null,
-                getUtcOffset(),
                 null,
                 this.props.user.idinv,
-                timestamp(),
                 '',
                 { type: this.state.type },
             )

@@ -121,15 +121,12 @@ class WalkingScreen extends Component {
             positions: this.GPS.getFirstAndLastPosition(),
         }
 
-        let activity = new Activity(
-            null,
+        let activity = Activity.init(
             activityTypes.Walking,
             this.state.timestampStart,
             timestamp(),
-            getUtcOffset(),
             this.state.tasks_id,
             this.props.idinv,
-            timestamp(),
             '',
             data,
         )
