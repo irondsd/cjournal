@@ -45,8 +45,7 @@ export default function activityReducer(state = [], { type, payload }) {
                 payload.last_updated,
                 payload.comment,
                 payload.data,
-                {},
-                payload.idinv,
+                payload.system,
             )
             addOrUpdate(state, activity)
             showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
@@ -107,7 +106,7 @@ export default function activityReducer(state = [], { type, payload }) {
             payload.activity.setId(payload.id)
             save(state)
             return state
-        case 'ACTIVITY_SEND_FAILED':
+        case 'ACTIVITY_SYNC_FAILED':
             payload.increaseFailedSyncCount()
             save(state)
             scheduleSync()

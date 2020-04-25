@@ -13,5 +13,5 @@ export default function activityPostData(id, access_token, activity) {
         body: JSON.stringify({
             ...activity,
         }),
-    }).then(res => res.json())
+    })
 }

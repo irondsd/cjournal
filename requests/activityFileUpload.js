@@ -58,7 +58,7 @@ export default async function activityPostData(id, access_token, activity) {
     })
         .promise.then(response => {
             // console.log('FILES UPLOADED!') // response.statusCode, response.headers, response.body
-            return JSON.parse(response.body)
+            return { status: response.statusCode, ok: true }
         })
         .catch(err => {
             if (err.description === 'cancelled') {
