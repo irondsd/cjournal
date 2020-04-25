@@ -62,13 +62,20 @@ export default class ActivityListItem extends Component {
         }
     }
 
+    isSynced() {
+        return (
+            this.props.item.data.system &&
+            (this.props.item.data.awaitsSync || this.props.item.data.awaitsEdit)
+        )
+    }
+
     render() {
         return (
             <ListItem
                 activity_type={this.props.item.activity_type}
                 time={this.time()}
                 data={this.data()}
-                synced={this.props.item.synced()}
+                synced={this.isSynced()}
                 comment={this.hasComment()}
                 audio={this.hasAudio()}
                 photo={this.hasPhoto()}
