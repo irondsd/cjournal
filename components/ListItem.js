@@ -27,15 +27,41 @@ export default class ListItem extends Component {
                         {strings[this.props.activity_type] ||
                             strings.UnknownActivity}
                     </Text>
-                    <Text style={styles.subtitle}>
-                        {this.props.time}
-                        {this.props.data ? ' - ' + this.props.data : null}
-                    </Text>
+                    <View style={styles.sub}>
+                        {this.props.comment && (
+                            <Icon
+                                style={styles.icon}
+                                name="comment"
+                                color="#999"
+                                size={12}
+                            />
+                        )}
+                        {this.props.photo && (
+                            <Icon
+                                style={styles.icon}
+                                name="camera"
+                                color="#999"
+                                size={12}
+                            />
+                        )}
+                        {this.props.audio && (
+                            <Icon
+                                style={styles.icon}
+                                name="microphone"
+                                color="#999"
+                                size={12}
+                            />
+                        )}
+                        <Text style={styles.subtitle}>
+                            {this.props.time}
+                            {this.props.data ? ' - ' + this.props.data : null}
+                        </Text>
+                    </View>
                     {this.props.synced === false ? (
                         <Icon
                             style={styles.synced}
                             name="repeat"
-                            color="#EEE"
+                            color="#eee"
                             size={30}
                         />
                     ) : null}
@@ -58,6 +84,10 @@ const styles = StyleSheet.create({
         color: 'black',
         width: width - 50,
     },
+    sub: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
     subtitle: {
         fontSize: 13,
         textAlign: 'left',
@@ -75,5 +105,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 50,
         top: 10,
+    },
+    icon: {
+        marginLeft: 3,
+        marginRight: 3,
     },
 })

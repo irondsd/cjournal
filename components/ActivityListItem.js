@@ -7,6 +7,14 @@ import { paths, editable, activityTypes } from '../constants'
 import ListItem from './ListItem'
 
 export default class ActivityListItem extends Component {
+    constructor(props) {
+        super(props)
+
+        this.comment = false
+        this.photo = false
+        this.audio = false
+    }
+
     time() {
         let time
         time = displayDateTime(new Date(this.props.item.time_started * 1000))
@@ -34,6 +42,14 @@ export default class ActivityListItem extends Component {
             if (this.props.item.data.type) {
                 data = this.props.item.data.type
             }
+
+            if (this.props.item.data.audio || this.props.item.data.audioFile)
+                this.audio = true
+
+            if (this.props.item.data.image || this.props.item.data.photoFile)
+                this.photo = true
+
+            if (this.props.item.comment) this.comment = true
         }
 
         return data
@@ -57,6 +73,9 @@ export default class ActivityListItem extends Component {
                 time={this.time()}
                 data={this.data()}
                 synced={this.props.item.synced()}
+                comment={this.comment}
+                audio={this.audio}
+                photo={this.photo}
                 // disabled={!editable.includes(this.props.item.activity_type)}
                 onPress={() => this.onPress()}
             />
