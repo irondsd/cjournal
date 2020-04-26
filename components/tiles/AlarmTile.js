@@ -7,7 +7,7 @@ import Activity from '../../classes/Activity'
 
 const name = activityTypes.Alarm
 
-export default class ScreenTile extends Component {
+export default class AlarmTile extends Component {
     render() {
         return (
             <Tile
@@ -17,7 +17,6 @@ export default class ScreenTile extends Component {
                 color="#a00"
                 shadeColor="#000"
                 onPress={() => {
-                    // activitySaveWithLocation(name)
                     Activity.instantInitWithLocationSave(name)
                 }}
                 onLongPress={() => {
