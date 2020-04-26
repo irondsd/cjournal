@@ -5,7 +5,6 @@ import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
 const name = activityTypes.Service
-let clicked = false
 
 export default class ScreenTile extends Component {
     render() {
