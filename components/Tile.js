@@ -24,6 +24,27 @@ export default class aTile extends Component {
         shadeColor: '#000',
     }
 
+    constructor(props) {
+        super(props)
+
+        this.clicked = false
+    }
+
+    onPressMethod = () => {
+        if (!this.clicked) {
+            this.clicked = true
+            if (!this.props.disabled) {
+                this.props.onPress()
+            } else {
+                showError(strings.OverlapMsg)
+            }
+
+            setTimeout(() => {
+                this.clicked = false
+            }, 1000)
+        }
+    }
+
     render() {
         return (
             <TouchableOpacity
@@ -36,11 +57,7 @@ export default class aTile extends Component {
                     }
                 }}
                 onPress={() => {
-                    if (!this.props.disabled) {
-                        this.props.onPress()
-                    } else {
-                        showError(strings.OverlapMsg)
-                    }
+                    this.onPressMethod()
                 }}>
                 <LinearGradient
                     style={styles.box}
