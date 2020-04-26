@@ -13,10 +13,10 @@ import activityPutFile from '../requests/activityPutFile'
 import activityDeleteData from '../requests/ActivityDeleteData'
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
-import { defaultDurations, paths } from '../constants'
+import { defaultDurations, paths, locationRetryLimit } from '../constants'
 import idGenerator from '../helpers/idGenerator'
 import { getUtcOffset } from '../helpers/dateTime'
-import { addActivity } from '../redux/actions'
+import { addActivity, updateActivity } from '../redux/actions'
 
 export default class Activity {
     constructor(
@@ -143,6 +143,24 @@ export default class Activity {
         let activity = Activity.instantInit(activity_type, idinv)
         store.dispatch(addActivity(activity))
         navigate(paths.Home)
+    }
+
+    static async instantInitWithLocationSave(activity_type) {
+        let idinv = store.getState().user.idinv
+        let activity = Activity.instantInit(activity_type, idinv)
+        store.dispatch(addActivity(activity))
+
+        // retry location for 5 times
+        for (let i = 0; i < locationRetryLimit; i++) {
+            try {
+                let res = await activity.attachLocation()
+                // console.log('location success')
+                store.dispatch(updateActivity(activity, activity))
+                break
+            } catch (err) {
+                console.log(err)
+            }
+        }
     }
 
     isEqual(other) {
@@ -319,7 +337,7 @@ export default class Activity {
                     this.attachToData({
                         position: position,
                     })
-                    resolve()
+                    resolve('Success')
                 })
                 .catch(err => {
                     reject(err)
@@ -369,12 +387,7 @@ function moveFile(filepath, filename) {
 export function update(array, originalActivity, activity) {
     for (let i = 0; i < array.length; i++) {
         if (originalActivity.isEqual(array[i])) {
-            if (activity.id) {
-                // if there's id, it's already synced
-                // then we need to update it
-                activity.setToUpdate()
-            }
-
+            activity.setToUpdate()
             array[i] = activity
         }
     }

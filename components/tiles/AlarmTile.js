@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Tile from '../Tile'
 import { strings } from '../../localizations'
-import { activitySaveWithLocation } from '../../helpers/activitySaveWithLocation'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
+import Activity from '../../classes/Activity'
 
 const name = activityTypes.Alarm
 
@@ -17,8 +17,8 @@ export default class ScreenTile extends Component {
                 color="#a00"
                 shadeColor="#000"
                 onPress={() => {
-                    activitySaveWithLocation(name)
-                    this.props.navigation.navigate(paths.Home)
+                    // activitySaveWithLocation(name)
+                    Activity.instantInitWithLocationSave(name)
                 }}
                 onLongPress={() => {
                     this.props.navigation.navigate(paths.Alarm, {
