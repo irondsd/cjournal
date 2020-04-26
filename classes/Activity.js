@@ -157,8 +157,6 @@ export default class Activity {
     }
 
     synced() {
-        if (!this.id) return false
-
         if (this.system) {
             if (this.system.awaitsSync) return false
             if (this.system.awaitsEdit) return false
