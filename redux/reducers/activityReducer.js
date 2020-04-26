@@ -12,6 +12,8 @@ import Activity, {
 } from '../../classes/Activity'
 import { scheduleSync } from '../../services/connectivityWatcher'
 
+// TODO: activityArray class
+
 export default function activityReducer(state = [], { type, payload }) {
     switch (type) {
         case 'REPLACE_ACTIVITIES':

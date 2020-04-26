@@ -55,7 +55,7 @@ export default class CameraScreen extends Component {
                 />
             )
         } else {
-            return <View style={styles.container}></View>
+            return <View style={styles.container} />
         }
     }
 }
@@ -67,3 +67,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
     },
 })
+
+// TODO: translate buttons
+// TODO: journal screen camera
