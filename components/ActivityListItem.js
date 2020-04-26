@@ -63,10 +63,14 @@ export default class ActivityListItem extends Component {
     }
 
     isSynced() {
-        return (
-            this.props.item.data.system &&
-            (this.props.item.data.awaitsSync || this.props.item.data.awaitsEdit)
-        )
+        let synced = true
+
+        if (this.props.item.system) {
+            if (this.props.item.system.awaitsSync) synced = false
+            if (this.props.item.system.awaitsEdit) synced = false
+        }
+
+        return synced
     }
 
     render() {
