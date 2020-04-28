@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Platform, Alert } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor, appColor } from '../constants'
+import { backgroundColor, appColor, defaultHints } from '../constants'
 import {
     activityTypes,
     editable,
@@ -20,6 +20,7 @@ import DeleteButton from '../components/DeleteButton'
 import AudioRecorder from '../components/AudioRecorder'
 import ActivitySelect from '../components/ActivitySelect'
 import DropDownInput from '../components/DropDownInput'
+import DropDownSelect from '../components/DropDownSelect'
 import { activitySingleOverlap } from '../helpers/activityOverlap'
 import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
@@ -27,6 +28,7 @@ import Comment from '../components/Comment'
 import TakePhoto from '../components/TakePhoto'
 import { loadHints } from '../services/hints'
 import BloodPressure from '../components/BloodPressure'
+import CaloriesInput from '../components/CaloriesInput'
 
 class ActivityDetailsScreen extends Component {
     constructor(props) {
@@ -53,6 +55,7 @@ class ActivityDetailsScreen extends Component {
                 photo: false,
                 others: false,
                 bloodPressure: false,
+                trainer: false,
             },
             loadedOthers: [],
         }
@@ -127,6 +130,7 @@ class ActivityDetailsScreen extends Component {
         let comment = true
         let bloodPressure = false
         let audio = true
+        let trainer = false
 
         if (pillsList.includes(activity.activity_type)) {
             pills = true
@@ -160,6 +164,10 @@ class ActivityDetailsScreen extends Component {
             comment = false
             audio = false
         }
+        if (activity.activity_type === activityTypes.Trainer) {
+            trainer = true
+            comment = false
+        }
 
         this.setState({
             switches: {
@@ -172,6 +180,7 @@ class ActivityDetailsScreen extends Component {
                 photo: photo,
                 others: others,
                 bloodPressure: bloodPressure,
+                trainer: trainer,
             },
         })
     }
@@ -324,9 +333,12 @@ class ActivityDetailsScreen extends Component {
     }
 
     fillOthersList(activity) {
-        let list = []
-
         if (!activity) activity = this.state.activity
+
+        if (activity.activity_type === activityTypes.Trainer) {
+            return this.fillTrainerList()
+        }
+
         if (
             !othersList.includes(activity.activity_type) &&
             activity.activity_type !== activityTypes.VerticalPositionCalibration
@@ -336,6 +348,10 @@ class ActivityDetailsScreen extends Component {
         loadHints(activity.activity_type).then(res => {
             this.setState({ loadedOthers: res })
         })
+    }
+
+    fillTrainerList = () => {
+        this.setState({ loadedOthers: defaultHints.Trainer })
     }
 
     onPillChange(itemValue) {
@@ -356,6 +372,20 @@ class ActivityDetailsScreen extends Component {
         let activity = { ...this.state.activity }
         let data = { ...this.state.data }
         data.type = value
+        activity.data = data
+        this.setState(
+            {
+                activity: activity,
+                data: data,
+            },
+            () => this.update(),
+        )
+    }
+
+    onCaloriesChange = value => {
+        let activity = { ...this.state.activity }
+        let data = { ...this.state.data }
+        data.calories = value
         activity.data = data
         this.setState(
             {
@@ -410,7 +440,6 @@ class ActivityDetailsScreen extends Component {
     }
 
     render() {
-        console.log(this.state.activity.data)
         return (
             <View style={defaultStyles.container}>
                 {this.state.switches.activity && (
@@ -518,6 +547,26 @@ class ActivityDetailsScreen extends Component {
                             removePhoto={this.removePhoto}
                         />
                     ))}
+                {this.state.switches.trainer && (
+                    <View
+                        style={
+                            Platform.OS === 'ios'
+                                ? { zIndex: 10, width: '100%' }
+                                : { width: '100%' }
+                        }>
+                        <DropDownSelect
+                            list={this.state.loadedOthers}
+                            open={true}
+                            placeholder={strings.TrainerType}
+                            value={this.state.activity.data.type}
+                            onChangeText={this.onOthersChange}
+                        />
+                        <CaloriesInput
+                            value={this.state.activity.data.calories}
+                            onChangeText={this.onCaloriesChange}
+                        />
+                    </View>
+                )}
                 {this.state.switches.audio && (
                     <AudioRecorder
                         link={this.state.data.audio}

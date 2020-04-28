@@ -19,4 +19,11 @@ export const defaultHints = {
         strings.LeaningForward,
         strings.LeaningToTheRight,
     ],
+    Trainer: [
+        strings.TrainerWalk,
+        strings.TrainerRun,
+        strings.Cycling,
+        strings.Elliptical,
+        strings.StairStepper,
+    ],
 }
