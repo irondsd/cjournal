@@ -97,7 +97,7 @@ export function iconPicker(activity_type) {
         case activityTypes.VisionDisturbances:
             img = require('../resources/icons/vision.png')
             break
-        case activityTypes.Positive:
+        case activityTypes.PositiveEmotions:
             img = require('../resources/icons/happy.png')
             break
         case activityTypes.Running:
@@ -109,7 +109,7 @@ export function iconPicker(activity_type) {
         case activityTypes.Bicycling:
             img = require('../resources/icons/bicycle.png')
             break
-        case activityTypes.Negative:
+        case activityTypes.NegativeEmotions:
             img = require('../resources/icons/bad.png')
             break
         case activityTypes.Sex:

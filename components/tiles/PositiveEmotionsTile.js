@@ -5,7 +5,7 @@ import Activity from '../../classes/Activity'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'
 
-const name = activityTypes.Negative
+const name = activityTypes.PositiveEmotions
 
 export default class ScreenTile extends Component {
     render() {
@@ -14,7 +14,8 @@ export default class ScreenTile extends Component {
                 text={strings[name]}
                 img={iconPicker(name)}
                 navigation={this.props.navigation}
-                color="#444"
+                color="#dd0"
+                shadeColor="#000"
                 onPress={() => {
                     Activity.instantInitSave(
                         name,
