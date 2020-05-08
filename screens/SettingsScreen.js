@@ -58,11 +58,11 @@ class SettingsScreen extends Component {
                 </TouchableWithoutFeedback>
                 <View />
                 <Text style={styles.name}>{this.props.user.username}</Text>
-                {this.props.user.idinv && (
+                {this.props.user.idinv ? (
                     <Text style={styles.information}>{`${strings.idinv}: ${
                         this.props.user.idinv
                     }`}</Text>
-                )}
+                ) : null}
                 <View
                     style={
                         this.state.devSettingsHidden
