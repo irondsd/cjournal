@@ -69,6 +69,7 @@ export default class DropDownInput extends Component {
     refineList = value => {
         let list = this.props.list
         list = list.filter(e => {
+            if (!e) return null
             return e.toLowerCase().includes(value.toLowerCase())
         })
         this.setState({
