@@ -4,6 +4,7 @@ import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import requestStoragePermission from '../permissions/requestStoragePermission'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { strings } from '../localizations'
 
 export default class CameraScreen extends Component {
     constructor(props) {
@@ -45,8 +46,8 @@ export default class CameraScreen extends Component {
             return (
                 <CameraKitCameraScreen
                     actions={{
-                        rightButtonText: 'Done',
-                        leftButtonText: 'Cancel',
+                        rightButtonText: strings.Ok,
+                        leftButtonText: strings.Cancel,
                     }}
                     onBottomButtonPressed={event =>
                         this.onBottomButtonPressed(event)
@@ -67,6 +68,3 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
     },
 })
-
-// TODO: translate buttons
-// TODO: journal screen camera
