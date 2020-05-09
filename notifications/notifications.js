@@ -5,7 +5,6 @@ import NavigationService from '../navigation/NavigationService'
 import { strings } from '../localizations'
 import { showToast } from '../services/toast'
 import { localTime } from '../helpers/dateTime'
-import { postponeNotificationBy } from '../constants/'
 
 export function setupNotifications() {
     // console.log('notifications service initiated')
@@ -59,7 +58,9 @@ function onNotificationOpened(notification) {
 
         // reschedule
         let dateTime = new Date()
-        dateTime.setMinutes(dateTime.getMinutes() + postponeNotificationBy)
+        dateTime.setMinutes(
+            dateTime.getMinutes() + store.getState().settings.notificationDelay,
+        )
         scheduleNotification(
             notification.id,
             notification.title,
@@ -68,7 +69,7 @@ function onNotificationOpened(notification) {
         )
         showToast(
             `${strings.Postponed} ${strings.by} ${localTime(
-                postponeNotificationBy,
+                store.getState().settings.notificationDelay,
             )}`,
         )
     } else {

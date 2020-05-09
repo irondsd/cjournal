@@ -17,7 +17,12 @@ import SaveButton from '../components/SaveButton'
 import ToggleSwitch from '../components/ToggleSwitch'
 import { version } from '../package.json'
 import { displayName } from '../app.json'
-import { setNotifications, setIdinvFilter } from '../redux/actions'
+import {
+    setNotifications,
+    setIdinvFilter,
+    setNotificationDelay,
+} from '../redux/actions'
+import NumInput from '../components/SettingsNumInput'
 
 class SettingsScreen extends Component {
     state = {
@@ -83,6 +88,14 @@ class SettingsScreen extends Component {
                             this.props.setNotifications(value)
                         }
                     />
+                    <NumInput
+                        text={strings.PostponeNotificationsBy}
+                        value={'' + this.props.notificationDelay}
+                        onValueChange={value => {
+                            console.log(value)
+                            this.props.setNotificationDelay(value)
+                        }}
+                    />
                 </View>
                 <View style={styles.buttonView}>
                     <View>
@@ -114,6 +127,7 @@ function mapStateToProps(state) {
         user: state.user,
         notifications: state.settings.notifications,
         idinvFilter: state.settings.idinvFilter,
+        notificationDelay: state.settings.notificationDelay,
     }
 }
 
@@ -126,6 +140,9 @@ const mapDispatchToProps = dispatch => ({
     },
     setIdinvFilter: value => {
         dispatch(setIdinvFilter(value))
+    },
+    setNotificationDelay: value => {
+        dispatch(setNotificationDelay(value))
     },
 })
 
