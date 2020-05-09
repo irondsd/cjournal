@@ -114,11 +114,32 @@ class ActivityDetailsScreen extends Component {
                     data: {
                         ...prevState.data,
                         photoFile: nextProps.navigation.state.params.image.uri,
+                        image: null,
                     },
                 }
             } else return null
         } else {
             return { photoFile: '' }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.data.image === null) {
+            if (prevState.data.photoFile != this.state.data.photoFile) {
+                // image updated
+                let activity = { ...this.state.activity }
+                let data = { ...this.state.data }
+
+                activity.data = data
+
+                this.setState(
+                    {
+                        activity: activity,
+                        data: data,
+                    },
+                    () => this.update(),
+                )
+            }
         }
     }
 
@@ -137,6 +158,7 @@ class ActivityDetailsScreen extends Component {
             duration = false
             photo = true
             audio = false
+            comment = false
         }
 
         if (othersList.includes(activity.activity_type)) {
@@ -530,19 +552,26 @@ class ActivityDetailsScreen extends Component {
                         <TakePhoto
                             photo={this.state.data.photoFile}
                             openCamera={() =>
-                                this.props.navigation.navigate('Camera', {
-                                    returnTo: paths.ActivityDetails,
-                                })
+                                this.props.navigation.navigate(
+                                    paths.JournalCamera,
+                                    {
+                                        returnTo: paths.ActivityDetails,
+                                    },
+                                )
                             }
                             removePhoto={this.removePhoto}
                         />
                     ) : (
                         <TakePhoto
                             link={this.state.data.image}
+                            photo={this.state.data.photoFile}
                             openCamera={() =>
-                                this.props.navigation.navigate('Camera', {
-                                    returnTo: paths.ActivityDetails,
-                                })
+                                this.props.navigation.navigate(
+                                    paths.JournalCamera,
+                                    {
+                                        returnTo: paths.ActivityDetails,
+                                    },
+                                )
                             }
                             removePhoto={this.removePhoto}
                         />
