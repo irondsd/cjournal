@@ -85,5 +85,3 @@ function onNotificationOpened(notification) {
         }
     }
 }
-
-// TODO: delay options
