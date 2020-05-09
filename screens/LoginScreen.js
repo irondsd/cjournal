@@ -23,8 +23,6 @@ import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import TouchableIcon from '../components/TouchableIcon'
 
-// TODO: browser login
-
 class LoginScreen extends Component {
     constructor(props) {
         super(props)

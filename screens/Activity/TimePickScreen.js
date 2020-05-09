@@ -30,8 +30,6 @@ import Comment from '../../components/Comment'
 import TimeSwitch from '../../components/TimeSwitch'
 import SaveButton from '../../components/SaveButton'
 
-// TODO: default durations
-
 class TimePickScreen extends Component {
     constructor(props) {
         super(props)
