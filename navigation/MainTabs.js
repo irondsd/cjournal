@@ -45,6 +45,7 @@ const JournalStack = createStackNavigator({
     Journal: JournalScreen,
     ActivityDetails: ActivityDetailsScreen,
     ActivityStats: ActivityStatsScreen,
+    JournalCamera: CameraScreen,
 })
 
 const HomeStack = createStackNavigator({
@@ -96,6 +97,7 @@ JournalStack.navigationOptions = ({ navigation }) => {
 
     if (
         routeName === paths.ActivityDetails ||
+        routeName === paths.JournalCamera ||
         routeName === paths.ActivityStats
     ) {
         tabBarVisible = false

@@ -31,6 +31,7 @@ export const paths = {
     Alarm: 'Alarm',
     DeviceInstall: 'DeviceInstall',
     Camera: 'Camera',
+    JournalCamera: 'JournalCamera',
     Welcome: 'Welcome',
     Trainer: 'Trainer',
     BloodPressure: 'BloodPressure',
