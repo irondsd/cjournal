@@ -188,4 +188,5 @@ export const en = {
     UnknownActivity: 'Unknown activity',
     IdinvFilter: 'IdInv filter',
     Notifications: 'Notifications',
+    PostponeNotificationsBy: 'Postpone notifications by (min)',
 }

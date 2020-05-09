@@ -187,4 +187,5 @@ export const ru = {
     UnknownActivity: 'Неизвестная активность',
     IdinvFilter: 'Фильтр по № обследования',
     Notifications: 'Уведомления',
+    PostponeNotificationsBy: 'Отложить уведомление на (мин)',
 }
