@@ -12,6 +12,13 @@ export const setIdinvFilter = value => {
     }
 }
 
+export const setNotificationDelay = value => {
+    return {
+        type: 'SET_NOTIFICATION_DELAY',
+        payload: value,
+    }
+}
+
 export const loadSettings = settings => {
     return {
         type: 'LOAD_SETTINGS',

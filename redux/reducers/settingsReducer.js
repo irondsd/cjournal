@@ -1,9 +1,11 @@
 import { settingsAsyncSave } from '../../services/asyncStorage'
 import PushNotification from 'react-native-push-notification'
+import { postponeNotificationBy } from '../../constants'
 
 const initialState = {
     notifications: true,
     idinvFilter: false,
+    notificationDelay: postponeNotificationBy,
 }
 
 export default function userReducer(state = initialState, { type, payload }) {
@@ -26,6 +28,13 @@ export default function userReducer(state = initialState, { type, payload }) {
                 idinvFilter: payload,
             }
 
+            settingsAsyncSave(state)
+            return state
+        case 'SET_NOTIFICATION_DELAY':
+            state = {
+                ...state,
+                notificationDelay: payload,
+            }
             settingsAsyncSave(state)
             return state
         case 'LOAD_SETTINGS':
