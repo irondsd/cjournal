@@ -1,6 +1,7 @@
 export * from './durations'
 export * from './months'
 export * from './activityTypes'
+export * from './activityPaths'
 export * from './editable'
 export * from './paths'
 export * from './overlaps'
