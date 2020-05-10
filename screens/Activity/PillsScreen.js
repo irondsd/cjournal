@@ -41,11 +41,7 @@ class PillsScreen extends Component {
     }
 
     static navigationOptions = ({ navigation }) => ({
-        title: `${
-            navigation.state.params.sender
-                ? strings[navigation.state.params.sender]
-                : strings['MedicineTest']
-        }`,
+        title: `${navigation.state.params.sender}`,
     })
 
     componentDidMount() {
