@@ -5,6 +5,7 @@ import NavigationService from '../navigation/NavigationService'
 import { strings } from '../localizations'
 import { showToast } from '../services/toast'
 import { localTime } from '../helpers/dateTime'
+import { activityPaths } from '../constants'
 
 export function setupNotifications() {
     // console.log('notifications service initiated')
@@ -73,15 +74,22 @@ function onNotificationOpened(notification) {
             )}`,
         )
     } else {
+        let id = notification.id
+        if (id && typeof id.valueOf() === 'string') id = parseInt(id)
+
         let task = store.getState().tasks.find(task => {
-            return task.id == notification.id
+            return task.id == id
         })
+
         if (task && !task.isCompleted()) {
-            NavigationService.navigate(task.activity_type, {
-                tasks_id: notification.id,
+            let navigateTo = activityPaths[task.activity_type]
+
+            NavigationService.navigate(navigateTo, {
+                tasks_id: id,
+                sender: task.activity_type,
             })
         } else {
-            // console.log('already completed task notification')
+            console.log('already completed task notification')
         }
     }
 }
