@@ -92,7 +92,6 @@ class SettingsScreen extends Component {
                         text={strings.PostponeNotificationsBy}
                         value={'' + this.props.notificationDelay}
                         onValueChange={value => {
-                            console.log(value)
                             this.props.setNotificationDelay(value)
                         }}
                     />

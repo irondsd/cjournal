@@ -24,9 +24,11 @@ export default class NumInput extends Component {
 
         if (/^\d+$/.test(value.toString())) {
             if (value < 1) {
+                this.DelayInput.focus()
                 this.props.onValueChange(1)
-            } else if (value > 300) {
-                this.props.onValueChange(300)
+            } else if (value > 60) {
+                this.DelayInput.focus()
+                this.props.onValueChange(60)
             } else {
                 this.props.onValueChange(parseInt(value))
             }
@@ -42,6 +44,8 @@ export default class NumInput extends Component {
                     value={this.props.value}
                     keyboardType={'numeric'}
                     style={styles.Input}
+                    ref={input => (this.DelayInput = input)}
+                    selectTextOnFocus
                 />
             </View>
         )
