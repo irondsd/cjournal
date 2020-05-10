@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { backgroundColor, appColor, defaultHints } from '../constants'
 import {
     activityTypes,
-    editable,
     paths,
     durations,
     pillsList,

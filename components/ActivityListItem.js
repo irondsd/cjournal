@@ -83,7 +83,6 @@ export default class ActivityListItem extends Component {
                 comment={this.hasComment()}
                 audio={this.hasAudio()}
                 photo={this.hasPhoto()}
-                // disabled={!editable.includes(this.props.item.activity_type)}
                 onPress={() => this.onPress()}
             />
         )

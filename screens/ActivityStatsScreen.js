@@ -6,7 +6,6 @@ import {
     durations,
     appColor,
     activityTypes,
-    editable,
     paths,
 } from '../constants'
 import { displayDate, displayTime } from '../helpers/dateTime'
@@ -19,8 +18,6 @@ import BackButton from '../components/BackButton'
 import Activity from '../classes/Activity'
 import { displayDateTime } from '../helpers/dateTime'
 import Map from '../components/Map'
-
-// TODO: redo all
 
 type Props = {}
 class ActivityStatsScreen extends Component<Props> {
