@@ -73,6 +73,7 @@ const HomeStack = createStackNavigator({
     Trainer: TrainerScreen,
     BloodPressure: BloodPressureScreen,
     VerticalPositionCalibration: VerticalPositionCalibrationScreen,
+    Debug: DebugScreen,
 })
 
 const TasksStack = createStackNavigator({

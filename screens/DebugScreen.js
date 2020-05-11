@@ -4,28 +4,32 @@ import {
     StyleSheet,
     Text,
     View,
-    Alert,
-    BackHandler,
-    Vibration,
+    PermissionsAndroid,
+    TextInput,
 } from 'react-native'
-import { secs2time } from '../helpers/dateTime'
-import BackgroundTimer from 'react-native-background-timer'
-import { strings } from '../localizations'
-import { addActivity } from '../redux/actions'
+import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
-import { HeaderBackButton } from 'react-navigation'
-// import KeepAwake from 'react-native-keep-awake'
-import { backgroundColor, paths, defaultStyles } from '../constants'
+import { logoutUser, addActivity } from '../redux/actions'
+import {
+    backgroundColor,
+    paths,
+    activityTypes,
+    defaultStyles,
+    borderGrey,
+} from '../constants'
+import { strings } from '../localizations'
+import { CameraKitCameraScreen } from 'react-native-camera-kit'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
+import requestCameraPermission from '../permissions/requestCameraPermissions'
 import SaveButton from '../components/SaveButton'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import {
-    cancelLocalNotification,
-    scheduleNotification,
-} from '../notifications/notifications'
+import DeviceIdInput from '../components/DeviceIdInput'
+import { cancelLocalNotification } from '../notifications/notifications'
+import { getUtcOffset } from '../helpers/dateTime'
+import sync from '../services/sync'
 
-class Debug extends Component {
+class DebugScreen extends Component {
     static navigationOptions = {
         title: 'Debug',
     }
@@ -33,24 +37,34 @@ class Debug extends Component {
     render() {
         return (
             <View style={defaultStyles.container}>
-                <TouchableOpacity
-                    style={{ width: 200, height: 50 }}
+                <SaveButton
+                    title={'run sync'}
                     onPress={() => {
-                        let dateTime = new Date()
-                        dateTime.setSeconds(dateTime.getSeconds() + 10)
-                        scheduleNotification(999, 'Title', 'Message', dateTime)
-                    }}>
-                    <Text>Schedule</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{ width: 200, height: 50 }}
+                        sync(this.props.user.id, this.props.tokens)
+                    }}
+                />
+                <SaveButton
+                    title={'refresh tokens'}
                     onPress={() => {
-                        cancelLocalNotification(999)
-                    }}>
-                    <Text>Cancel</Text>
-                </TouchableOpacity>
+                        this.props.tokens
+                            .update()
+                            .then(res => {
+                                console.log(res)
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    }}
+                />
             </View>
         )
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        user: state.user,
+        tokens: state.tokens,
     }
 }
 
@@ -60,29 +74,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(null, mapDispatchToProps)(Debug)
-
-const styles = StyleSheet.create({
-    mainContent: {
-        backgroundColor: 'green',
-    },
-    stage: {
-        position: 'absolute',
-        top: 50,
-    },
-    text: {
-        padding: 10,
-        flex: 3,
-    },
-    timer: {
-        fontSize: 80,
-        fontWeight: '200',
-        flex: 5,
-        fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
-    },
-    button: {
-        width: '90%',
-        justifyContent: 'flex-end',
-        paddingBottom: 20,
-    },
-})
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(DebugScreen)

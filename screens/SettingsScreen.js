@@ -25,6 +25,8 @@ import {
 import NumInput from '../components/SettingsNumInput'
 
 class SettingsScreen extends Component {
+    shortPresses = 0
+
     state = {
         devSettingsHidden: true,
     }
@@ -51,6 +53,17 @@ class SettingsScreen extends Component {
             <View style={styles.container}>
                 <StatusBar backgroundColor={'white'} barStyle="dark-content" />
                 <TouchableWithoutFeedback
+                    onPress={() => {
+                        this.shortPresses += 1
+
+                        setTimeout(() => {
+                            this.shortPresses = 0
+                        }, 3000)
+
+                        if (this.shortPresses >= 10) {
+                            this.props.navigation.navigate('Debug')
+                        }
+                    }}
                     delayLongPress={3000}
                     onLongPress={() => {
                         this.setState({
