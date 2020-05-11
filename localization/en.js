@@ -92,7 +92,7 @@ export const en = {
     November: 'November',
     October: 'October',
     Ok: 'Ok',
-    ActiveOrthostasis: 'Active ActiveOrthostasis',
+    ActiveOrthostasis: 'Active Orthostasis',
     Other: 'Other',
     OtherActivity: 'Other activity',
     OtherComplaints: 'Other',
