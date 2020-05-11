@@ -44,7 +44,7 @@ export default async function sync(id, tokens) {
                 })
                 if (errors >= 5 && tokens.isExpired()) {
                     console.log(
-                        `Tokens expored, errors: ${errors}, logging out`,
+                        `Tokens expired, errors: ${errors}, logging out`,
                     )
                     store.dispatch(logoutUser())
                     NavigationService.navigate(paths.Welcome)
