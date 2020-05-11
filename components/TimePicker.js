@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { displayDate, displayTime } from '../helpers/dateTime'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { borderGrey, secondaryGrey } from '../constants'
 
 export default class TimePicker extends Component {

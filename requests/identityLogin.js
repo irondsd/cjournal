@@ -2,7 +2,7 @@ import { identityTokenUrl } from '../constants'
 import { tokensReceived, updateUser } from '../redux/actions/'
 import { loginConfirm } from './loginConfirm'
 import { Alert } from 'react-native'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import timeoutFetch from '../helpers/timeoutFetch'
 
 export function identityLogin(username, password) {

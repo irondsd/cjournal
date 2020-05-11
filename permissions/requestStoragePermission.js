@@ -1,5 +1,5 @@
 import { PermissionsAndroid, Platform } from 'react-native'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 
 export default async function requestExternalWritePermission() {
     if (Platform.OS === 'ios') return true

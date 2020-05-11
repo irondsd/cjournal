@@ -8,7 +8,7 @@ import {
     Image,
 } from 'react-native'
 import { apiUrl, appColor, registrationUrl, paths } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { withNavigation } from 'react-navigation'
 // import { authorization } from '../services/identity'
 import Tokens from '../classes/Tokens'

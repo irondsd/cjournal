@@ -8,7 +8,7 @@ import {
     Image,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import IconAnt from 'react-native-vector-icons/dist/AntDesign'
 const RNFS = require('react-native-fs')
 import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'

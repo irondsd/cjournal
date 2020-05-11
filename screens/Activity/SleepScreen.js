@@ -12,7 +12,7 @@ import {
 import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import { connect } from 'react-redux'
 import { addActivity } from '../../redux/actions'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import { backgroundColor, paths, activityTypes } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'

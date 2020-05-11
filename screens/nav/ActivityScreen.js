@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, appColor, activityTypes } from '../../constants'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import TileWrapper from '../../components/TileWrapper'
 import SexTile from '../../components/tiles/SexTile'
 import TileSpacer from '../../components/TileSpacer'
@@ -48,4 +48,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(ActivityScreen)
+export default connect(
+    mapStateToProps,
+    null,
+)(ActivityScreen)

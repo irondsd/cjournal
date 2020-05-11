@@ -7,7 +7,7 @@ import { authorize, refresh } from 'react-native-app-auth'
 import { identityServerConfig } from '../constants/config'
 import { loginConfirm } from '../requests/loginConfirm'
 import { Alert } from 'react-native'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 
 export default class Tokens {
     constructor(access_token, refresh_token, token_lifetime, isLoggedIn) {

@@ -9,7 +9,7 @@ import {
     StatusBar,
 } from 'react-native'
 import { appColor } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import RegisterOrLogin from '../components/RegisterOrLogin'
 
 export default class WelcomeScreen extends Component {

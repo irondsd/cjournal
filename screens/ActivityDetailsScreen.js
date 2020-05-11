@@ -11,7 +11,7 @@ import {
     defaultStyles,
 } from '../constants/'
 import { displayDate, displayTime } from '../helpers/dateTime'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { updateActivity, deleteActivity } from '../redux/actions'
 import TimePicker from '../components/TimePicker'
 import DurationPicker from '../components/DurationPicker'

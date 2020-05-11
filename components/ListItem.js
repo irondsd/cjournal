@@ -8,7 +8,7 @@ import {
     Dimensions,
 } from 'react-native'
 import { displayDateTime } from '../helpers/dateTime'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { iconPicker } from '../helpers/iconPicker'
 import Icon from 'react-native-vector-icons/FontAwesome'
 

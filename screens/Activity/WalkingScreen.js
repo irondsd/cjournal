@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import BackgroundTimer from 'react-native-background-timer'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import { addActivity, cancelNotification } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'

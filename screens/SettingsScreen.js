@@ -11,7 +11,7 @@ import {
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
 import { backgroundColor, profileEditUrl } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import TouchableIcon from '../components/TouchableIcon'
 import SaveButton from '../components/SaveButton'
 import ToggleSwitch from '../components/ToggleSwitch'

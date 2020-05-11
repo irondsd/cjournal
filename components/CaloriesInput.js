@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, TextInput, Text } from 'react-native'
 import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 
 export default class CaloriesInput extends Component {
     render() {

@@ -1,4 +1,4 @@
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { months } from '../constants'
 export function displayDate(dateTime) {
     if (dateTime.getDate() === new Date(Date.now()).getDate()) {

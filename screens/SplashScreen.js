@@ -17,7 +17,7 @@ import {
     tokensReceived,
     loadSettings,
 } from '../redux/actions'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { asyncGetAll, removeScreen, removeAll } from '../services/asyncStorage'
 import Barometer from '../sensors/Barometer'
 import { idinvWatcher } from '../services/idinvWatcher'

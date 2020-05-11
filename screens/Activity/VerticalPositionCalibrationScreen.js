@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import { displayDate, displayTime, getUtcOffset } from '../../helpers/dateTime'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import TimePicker from '../../components/TimePicker'

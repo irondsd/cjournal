@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, TextInput } from 'react-native'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { borderGrey, secondaryGrey, placeholderGrey } from '../constants'
 
 export default class Comment extends Component {

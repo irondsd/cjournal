@@ -9,7 +9,7 @@ import {
     StatusBar,
 } from 'react-native'
 import { apiUrl, appColor } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { identityLogin } from '../requests/identityLogin'
 import { connect } from 'react-redux'
 import TouchableIcon from './TouchableIcon'
@@ -76,7 +76,7 @@ class LoginForm extends Component {
                 </View>
 
                 <View style={[styles.inputBox, styles.buttonsBox]}>
-                    <View style={[styles.iconBox, styles.buttonQrBox]}></View>
+                    <View style={[styles.iconBox, styles.buttonQrBox]} />
                     <TouchableOpacity
                         style={[styles.inputBox, styles.buttonBox]}
                         onPress={() => {
@@ -96,7 +96,10 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(
+    null,
+    mapDispatchToProps,
+)(LoginForm)
 
 const width = Dimensions.get('window').width * 0.7
 

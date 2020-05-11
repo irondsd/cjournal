@@ -2,7 +2,7 @@ const PushNotification = require('react-native-push-notification')
 import store from '../redux/store'
 import { cancelNotification } from '../redux/actions/notificationsActions'
 import NavigationService from '../navigation/NavigationService'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { showToast } from '../services/toast'
 import { localTime } from '../helpers/dateTime'
 import { activityPaths } from '../constants'

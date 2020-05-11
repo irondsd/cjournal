@@ -9,7 +9,7 @@ import {
     secondaryColor,
     secondaryGrey,
 } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import JournalScreen from '../screens/JournalScreen'
 import TasksScreen from '../screens/TasksScreen'
 import HomeScreen from '../screens/HomeScreen'

@@ -7,7 +7,7 @@ import {
     TextInput,
     TouchableOpacity,
 } from 'react-native'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import DropDownSelect from './DropDownSelect'
 import {
     editable,

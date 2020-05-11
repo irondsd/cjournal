@@ -8,7 +8,7 @@ import {
     ScrollView,
 } from 'react-native'
 import { durations } from '../constants/'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { localTime } from '../helpers/dateTime'
 import { sortNumbers } from '../helpers/sort'
 import Icon from 'react-native-vector-icons/dist/FontAwesome'

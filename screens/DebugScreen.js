@@ -17,7 +17,7 @@ import {
     defaultStyles,
     borderGrey,
 } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Activity from '../classes/Activity'

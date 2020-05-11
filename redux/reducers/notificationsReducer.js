@@ -3,7 +3,7 @@ import {
     cancelLocalNotification,
     scheduleNotification,
 } from '../../notifications/notifications'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import PushNotification from 'react-native-push-notification'
 
 export default function notificationsReducer(state = [], { type, payload }) {

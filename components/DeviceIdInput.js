@@ -9,7 +9,7 @@ import {
     placeholderGrey,
     secondaryGrey,
 } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class DeviceIdInput extends Component {

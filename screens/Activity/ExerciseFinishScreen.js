@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, defaultStyles } from '../../constants'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import { updateActivity } from '../../redux/actions'
 import { paths } from '../../constants'
 
@@ -40,8 +40,16 @@ class FinishScreen extends Component {
             stats:
                 this.props.navigation.state.params.activity.activity_type ==
                 'Walking'
-                    ? `${strings.Steps}: ${this.props.navigation.state.params.activity.data.steps}, ${strings.Distance}: ${this.props.navigation.state.params.activity.data.distance} ${strings.Meters}`
-                    : `${strings.Meters}: ${this.props.navigation.state.params.activity.data.meters}`,
+                    ? `${strings.Steps}: ${
+                          this.props.navigation.state.params.activity.data.steps
+                      }, ${strings.Distance}: ${
+                          this.props.navigation.state.params.activity.data
+                              .distance
+                      } ${strings.Meters}`
+                    : `${strings.Meters}: ${
+                          this.props.navigation.state.params.activity.data
+                              .meters
+                      }`,
         })
     }
 
@@ -121,7 +129,10 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FinishScreen)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(FinishScreen)
 
 const imgSize = Dimensions.get('window').width / 3.75
 

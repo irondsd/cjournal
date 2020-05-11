@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import PositiveEmotionsTile from '../../components/tiles/PositiveEmotionsTile'
 import NegativeEmotionsTile from '../../components/tiles/NegativeEmotionsTile'
 import OtherEmotions from '../../components/tiles/OtherEmotions'

@@ -16,7 +16,7 @@ import {
     defaultStyles,
     width,
 } from '../../constants'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
 import Activity from '../../classes/Activity'

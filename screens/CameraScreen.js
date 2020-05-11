@@ -4,7 +4,7 @@ import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import requestStoragePermission from '../permissions/requestStoragePermission'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 
 export default class CameraScreen extends Component {
     constructor(props) {

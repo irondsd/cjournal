@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Tile from '../Tile'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import Activity from '../../classes/Activity'
 import { activityTypes, paths } from '../../constants'
 import { iconPicker } from '../../helpers/iconPicker'

@@ -2,7 +2,7 @@ import { Platform } from 'react-native'
 import { activityAsyncSave } from '../../services/asyncStorage'
 import { sortActivities } from '../../helpers/sort'
 import { showError, showToast } from '../../services/toast'
-import { strings } from '../../localizations'
+import { strings } from '../../localization'
 import Activity, {
     exists,
     addOrUpdate,

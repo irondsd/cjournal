@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { borderGrey, secondaryGrey } from '../constants'
 
 export default class TimeSwitch extends Component {

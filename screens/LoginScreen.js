@@ -16,7 +16,7 @@ import {
 } from 'react-native'
 import LoginForm from '../components/LoginForm'
 import { appColor } from '../constants'
-import { strings } from '../localizations'
+import { strings } from '../localization'
 import { connect } from 'react-redux'
 import store from '../redux/store'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
