@@ -25,8 +25,8 @@ export function identityLogin(username, password) {
                 if (res.error) throw new Error(res.error)
 
                 if (res.access_token) {
-                    loginConfirm(res.access_token).then(res => {
-                        dispatch(updateUser(res))
+                    loginConfirm(res.access_token).then(user => {
+                        dispatch(updateUser(user))
                     })
                     dispatch(tokensReceived(res))
                 }
