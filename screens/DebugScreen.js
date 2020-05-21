@@ -28,6 +28,7 @@ import DeviceIdInput from '../components/DeviceIdInput'
 import { cancelLocalNotification } from '../notifications/notifications'
 import { getUtcOffset } from '../helpers/dateTime'
 import sync from '../services/sync'
+import { idinvWatcher } from '../services/idinvWatcher'
 
 class DebugScreen extends Component {
     static navigationOptions = {
@@ -37,6 +38,16 @@ class DebugScreen extends Component {
     render() {
         return (
             <View style={defaultStyles.container}>
+                <SaveButton
+                    title={'run idinv watcher'}
+                    onPress={() => {
+                        idinvWatcher(
+                            this.props.user.id,
+                            this.props.tokens.access_token,
+                            this.props.user.idinv,
+                        )
+                    }}
+                />
                 <SaveButton
                     title={'run sync'}
                     onPress={() => {
