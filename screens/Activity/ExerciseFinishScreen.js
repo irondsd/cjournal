@@ -74,7 +74,7 @@ class FinishScreen extends Component {
                     <TouchableOpacity
                         onPress={() => {
                             let activity = this.state.activity
-                            activity.data.state = 'Bad'
+                            activity.data.state = strings.Bad
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
                         }}>
@@ -87,7 +87,7 @@ class FinishScreen extends Component {
                     <TouchableOpacity
                         onPress={() => {
                             let activity = this.state.activity
-                            activity.data.state = 'Normal'
+                            activity.data.state = strings.Normal
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
                         }}>
@@ -100,7 +100,7 @@ class FinishScreen extends Component {
                     <TouchableOpacity
                         onPress={() => {
                             let activity = this.state.activity
-                            activity.data.state = 'Good'
+                            activity.data.state = strings.Good
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
                         }}>
