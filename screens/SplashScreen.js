@@ -21,6 +21,7 @@ import { strings } from '../localization'
 import { asyncGetAll, removeScreen, removeAll } from '../services/asyncStorage'
 import Barometer from '../sensors/Barometer'
 import { idinvWatcher } from '../services/idinvWatcher'
+import { requestExternalReadPermission } from '../permissions/requestStoragePermission'
 
 class SplashScreen extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class SplashScreen extends Component {
 
     componentDidMount() {
         Barometer.calibrate(30)
+        requestExternalReadPermission()
         asyncGetAll()
             .then(res => {
                 if (res.tokens) this.props.tokensReceived(res.tokens)
