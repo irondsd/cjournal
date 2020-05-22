@@ -335,7 +335,7 @@ export default class Activity {
             GPSClass.getPosition()
                 .then(position => {
                     this.attachToData({
-                        position: position,
+                        position: [position.coords],
                     })
                     resolve('Success')
                 })
