@@ -1,9 +1,9 @@
 import NetInfo from '@react-native-community/netinfo'
-import sync from './sync'
+// import sync from './sync'
 
 let unsubscribe
 let scheduled = false
-// TODO: fix require cycle?
+// TODO: find a solution
 export function scheduleSync() {
     if (scheduled === false) {
         scheduled = true
@@ -21,10 +21,10 @@ export async function isConnected() {
     })
 }
 
-const listener = isConnected => {
+const listener = isConnectedm => {
     if (isConnected && scheduled) {
         scheduled = false
-        sync()
+        console.log('scheduled sync fired')
         if (unsubscribe) unsubscribe()
     }
 }
