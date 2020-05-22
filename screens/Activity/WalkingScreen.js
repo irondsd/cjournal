@@ -118,7 +118,7 @@ class WalkingScreen extends Component {
         let data = {
             steps: this.state.steps,
             distance: this.state.distance,
-            positions: this.GPS.getFirstAndLastPosition(),
+            position: this.GPS.getFirstAndLastPosition(),
         }
 
         let activity = Activity.init(
@@ -212,17 +212,6 @@ class WalkingScreen extends Component {
         BackgroundTimer.clearTimeout(this.timeoutId)
         this.GPS.watchStop()
         this.Pedometer.stopUpdates()
-
-        // this.setState({
-        //     timer: '0:00',
-        //     tasks_id: null,
-        //     progress: 100,
-        //     distance: 0,
-        //     steps: 0,
-        //     started: false,
-        //     timestampStart: 0,
-        //     timestampEnd: 0,
-        // })
 
         timerOn = false
     }

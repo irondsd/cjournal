@@ -94,13 +94,18 @@ export default class GPS {
     }
 
     getFirstAndLastPosition() {
-        result = {
-            positionStart: null,
-            positionEnd: null,
-        }
-        if (this.positions.length > 1) result.positionStart = this.positions[0]
+        let position = []
+
+        if (this.positions.length > 1)
+            position.push({
+                latitude: this.positions[0][0],
+                longitude: this.positions[0][1],
+            })
         if (this.positions.length > 2)
-            result.positionEnd = this.positions[this.positions.length - 1]
-        return result
+            position.push({
+                latitude: this.positions[this.positions.length - 1][0],
+                longitude: this.positions[this.positions.length - 1][1],
+            })
+        return position
     }
 }

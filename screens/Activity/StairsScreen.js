@@ -137,12 +137,9 @@ class StairsScreen extends Component {
             metersMax: this.state.metersMax,
             steps: this.state.steps,
             distance: this.state.distance,
+            position: this.GPS.getFirstAndLastPosition(),
         }
-        let positions = this.GPS.getFirstAndLastPosition()
-        data = {
-            ...data,
-            ...positions,
-        }
+
         let activity = Activity.init(
             activityTypes.Stairs,
             timestamp(this.state.startDate),
