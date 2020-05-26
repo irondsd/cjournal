@@ -10,7 +10,8 @@
         "build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && rm -r android/app/src/main/res/drawable* android/app/src/main/res/raw && cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && cd ..",
         "pods": "cd ios && pod install && cd ..",
         "android-r": "react-native run-android --variant=release",
-        "ios-r": "react-native run-ios --configuration Release --device \"iPhone\""
+        "ios-r": "react-native run-ios --configuration Release --device \"iPhone\"",
+        "build-play": "cd android && ./gradlew bundleRelease"
     },
     "dependencies": {
         "@JWWon/react-native-universal-pedometer": "git+https://github.com/stephenheron/react-native-universal-pedometer.git",
