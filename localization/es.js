@@ -189,4 +189,10 @@ export const es = {
     IdinvFilter: 'IdInv filter',
     Notifications: 'Notifications',
     PostponeNotificationsBy: 'Postpone notifications by (min)',
+    State: 'Your well-being',
+    CoveredDistance: 'Covered distance',
+    AscentTo: 'AscentTo',
+    NumberOfSteps: 'Number of steps',
+    meters: 'metros',
+    steps: 'steps',
 }

@@ -188,4 +188,10 @@ export const ru = {
     IdinvFilter: 'Фильтр по № обследования',
     Notifications: 'Уведомления',
     PostponeNotificationsBy: 'Отложить уведомление на (мин)',
+    State: 'Ваше состояние',
+    CoveredDistance: 'Пройденное расстояние',
+    AscentTo: 'Подъём на',
+    NumberOfSteps: 'Сделано шагов',
+    meters: 'метров',
+    steps: 'шагов',
 }
