@@ -24,17 +24,17 @@ class ActivityStatsScreen extends Component<Props> {
     constructor(props) {
         super(props)
         this.state = {
+            loaded: false,
+            time: '',
             stats: '',
-            coords: null,
+            originalActivity: {
+                data: {
+                    position: [],
+                },
+            },
         }
 
-        this.goBack = this.goBack.bind(this)
         this.deleteActivity = this.deleteActivity.bind(this)
-        this.updateStats = this.updateStats.bind(this)
-    }
-
-    goBack() {
-        this.props.navigation.navigate(paths.Jounal)
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -42,7 +42,6 @@ class ActivityStatsScreen extends Component<Props> {
         headerRight: (
             <DeleteButton callback={navigation.state.params.deleteActivity} />
         ),
-        // headerLeft: <BackButton goBack={navigation.state.params.goBack} />
     })
 
     deleteActivity = () => {
@@ -51,120 +50,79 @@ class ActivityStatsScreen extends Component<Props> {
     }
 
     componentDidMount() {
-        this.props.navigation.addListener('willFocus', this.updateStats)
         this.setState({
             originalActivity: this.props.navigation.state.params,
         })
+
+        this.fillStats()
     }
 
-    updateStats() {
+    componentDidUpdate() {
+        if (!this.state.loaded) {
+            this.fillStats()
+        }
+    }
+
+    fillStats = () => {
+        if (!this.state.originalActivity.activity_type) return
         let stats = ''
-        let data = this.props.navigation.state.params.data
-        this.props.navigation.setParams({ deleteActivity: this.deleteActivity })
-        this.props.navigation.setParams({ goBack: this.goBack })
+        const data = this.state.originalActivity.data
+        console.log(data)
 
-        if (this.props.navigation.state.params) {
-            if (this.props.navigation.state.params.data) {
-                let coords = null
-                let data = this.props.navigation.state.params.data
+        if (data.hasOwnProperty('state'))
+            stats += `${strings.State}: ${data.state}\n`
+        if (data.hasOwnProperty('distance'))
+            stats += `${strings.CoveredDistance}: ${data.distance} ${
+                strings.meters
+            }\n`
+        if (data.hasOwnProperty('metersMax'))
+            stats += `${strings.AscentTo}: ${data.metersMax} ${
+                strings.meters
+            }\n`
+        if (data.hasOwnProperty('steps'))
+            stats += `${strings.NumberOfSteps}: ${data.steps} ${
+                strings.steps
+            }\n`
 
-                if (data.position && data.position.coords) {
-                    coords = data.position.coords
-                }
-                if (data.positionStart) {
-                    coords = {
-                        latitude: data.positionStart[0],
-                        longitude: data.positionStart[1],
-                    }
-                }
-
-                // this.setState({ coords: coords })
-            }
-        }
-
-        switch (this.props.navigation.state.params.activity_type) {
-            case activityTypes.Walking:
-                if (this.props.navigation.state.params.data) {
-                    stats = `${strings.YouWalked} ${
-                        this.props.navigation.state.params.data.distance
-                    } ${strings.Meters} ${strings.and} ${
-                        this.props.navigation.state.params.data.steps
-                    } ${strings.Steps}`
-                }
-                break
-            case activityTypes.Stairs:
-                stats =
-                    strings.YouClimbed +
-                    ' ' +
-                    this.props.navigation.state.params.data.meters +
-                    ' ' +
-                    strings.Meters
-                break
-            case activityTypes.NormalWalking:
-                stats =
-                    strings.Steps +
-                    ': ' +
-                    this.props.navigation.state.params.data.steps +
-                    '\n' +
-                    strings.Meters +
-                    ': ' +
-                    this.props.navigation.state.params.data.distance
-                break
-            case activityTypes.Running:
-                stats =
-                    strings.Steps +
-                    ': ' +
-                    this.props.navigation.state.params.data.steps +
-                    '\n' +
-                    strings.Meters +
-                    ': ' +
-                    this.props.navigation.state.params.data.distance
-                break
-            case activityTypes.Bicycling:
-                stats =
-                    strings.Meters +
-                    ': ' +
-                    this.props.navigation.state.params.data.distance
-                break
-            case activityTypes.MedicineTest:
-                stats =
-                    strings.TakingMedicine +
-                    ': ' +
-                    this.props.navigation.state.params.data.pill
-                break
-            case activityTypes.ActiveOrthostasis:
-                stats = 'Active orthostasis'
-                break
-            case activityTypes.DeviceInstall:
-                stats =
-                    strings.DeviceId +
-                    ': ' +
-                    this.props.navigation.state.params.data.device_id
-                break
-            case activityTypes.Alarm:
-                stats =
-                    strings.Alarm +
-                    ' ' +
-                    displayDateTime(
-                        new Date(
-                            this.props.navigation.state.params.time_started *
-                                1000,
-                        ),
-                    )
-                break
-            default:
-                break
-        }
         this.setState({
             stats: stats,
+            loaded: true,
+            time: this.setTime(),
         })
+    }
+
+    setTime = () => {
+        let time
+        time = displayDateTime(
+            new Date(this.state.originalActivity.time_started * 1000),
+        )
+        if (
+            this.state.originalActivity.time_ended != null &&
+            this.state.originalActivity.time_ended != 'null' &&
+            this.state.originalActivity.time_ended !=
+                this.state.originalActivity.time_started
+        ) {
+            time +=
+                ' — ' +
+                displayDateTime(
+                    new Date(this.state.originalActivity.time_ended * 1000),
+                )
+        }
+
+        return time
     }
 
     render() {
         return (
             <View style={styles.container}>
-                {this.state.coords && <Map coords={this.state.coords} />}
-                <Text style={styles.stats}>{this.state.stats}</Text>
+                <Text style={styles.Title}>{`${
+                    strings[this.state.originalActivity.activity_type]
+                }`}</Text>
+                <Text style={styles.Time}>{this.state.time}</Text>
+                {this.state.originalActivity.data.position && (
+                    <Map coords={this.state.originalActivity.data.position} />
+                )}
+                <Text style={styles.Stats}>{this.state.stats}</Text>
             </View>
         )
     }
@@ -193,12 +151,27 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: backgroundColor,
         flexDirection: 'column',
-        justifyContent: 'center',
         padding: 20,
     },
-    stats: {
+    Title: {
+        margin: 30,
+        marginBottom: 10,
         fontSize: 30,
-        color: 'darkgrey',
+        color: 'black',
         textAlign: 'center',
+    },
+    Time: {
+        margin: 30,
+        fontSize: 20,
+        color: 'black',
+        textAlign: 'center',
+    },
+    Stats: {
+        margin: 30,
+        fontSize: 20,
+        fontWeight: '100',
+        color: '#666',
+        textAlign: 'center',
+        lineHeight: 30,
     },
 })
