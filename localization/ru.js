@@ -194,4 +194,6 @@ export const ru = {
     NumberOfSteps: 'Сделано шагов',
     meters: 'метров',
     steps: 'шагов',
+    Success: 'Успех',
+    IdinvChangeSuccess: 'Idinv успешно изменён',
 }

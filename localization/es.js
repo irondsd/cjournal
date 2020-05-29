@@ -195,4 +195,6 @@ export const es = {
     NumberOfSteps: 'Numero de pasos',
     meters: 'metros',
     steps: 'pasos',
+    Success: 'Éxito',
+    IdinvChangeSuccess: '¡Idinv cambió con éxito!',
 }
