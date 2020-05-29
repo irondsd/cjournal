@@ -157,7 +157,7 @@ class PillsScreen extends Component {
                 <TakePhoto
                     photo={this.state.photoFile}
                     openCamera={() =>
-                        this.props.navigation.navigate('Camera', {
+                        this.props.navigation.navigate(paths.Camera, {
                             returnTo: paths.Pills,
                         })
                     }

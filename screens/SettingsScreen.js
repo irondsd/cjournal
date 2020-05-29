@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
-import { backgroundColor, profileEditUrl } from '../constants'
+import { backgroundColor, profileEditUrl, paths } from '../constants'
 import { strings } from '../localization'
 import TouchableIcon from '../components/TouchableIcon'
 import SaveButton from '../components/SaveButton'
@@ -31,17 +31,22 @@ class SettingsScreen extends Component {
         devSettingsHidden: true,
     }
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         title: strings.Settings,
         headerRight: (
             <TouchableIcon
                 name="qrcode"
                 color="#000"
                 size={25}
-                style={{ right: 15 }}
+                style={{ margin: 15 }}
+                onPress={() => {
+                    navigation.navigate(paths.QRScan, {
+                        returnTo: paths.Settings,
+                    })
+                }}
             />
         ),
-    }
+    })
 
     logout() {
         this.props.logout()
