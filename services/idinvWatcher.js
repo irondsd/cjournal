@@ -3,6 +3,8 @@ import { stateIniFilePath } from '../constants'
 import { userFetchData } from '../requests/userFetchData'
 import { requestExternalReadPermission } from '../permissions/requestStoragePermission'
 var RNFS = require('react-native-fs')
+import store from '../redux/store'
+import { Alert } from 'react-native'
 
 export async function idinvWatcher(id, access_token, idinv) {
     let filepath = stateIniFilePath
@@ -24,8 +26,8 @@ export async function idinvWatcher(id, access_token, idinv) {
                     userUpdateIdinv(id, access_token, parsed_idinv).then(
                         res => {
                             if (res.ok) {
-                                userFetchData(id, access_token)
                                 console.log('idinv updated')
+                                store.dispatch(userFetchData(id, access_token))
                             }
                         },
                     )
