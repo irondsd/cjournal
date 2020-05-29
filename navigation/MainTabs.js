@@ -37,6 +37,7 @@ import ActivityStatsScreen from '../screens/ActivityStatsScreen'
 import DeviceInstallScreen from '../screens/Activity/DeviceInstallScreen'
 import CameraScreen from '../screens/CameraScreen'
 import OtherScreen from '../screens/Activity/OtherScreen'
+import QRScanScreen from '../screens/QRScanScreen'
 import TrainerScreen from '../screens/Activity/TrainerScreen'
 import BloodPressureScreen from '../screens/Activity/BloodPressureScreen'
 import VerticalPositionCalibrationScreen from '../screens/Activity/VerticalPositionCalibrationScreen'
@@ -74,6 +75,7 @@ const HomeStack = createStackNavigator({
     BloodPressure: BloodPressureScreen,
     VerticalPositionCalibration: VerticalPositionCalibrationScreen,
     Debug: DebugScreen,
+    QRScan: QRScanScreen,
 })
 
 const TasksStack = createStackNavigator({
@@ -139,6 +141,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
         routeName === paths.ExerciseFinish ||
         routeName === paths.Trainer ||
         routeName === paths.Alarm ||
+        routeName === paths.QRScan ||
         routeName === paths.Sleep
     ) {
         tabBarVisible = false

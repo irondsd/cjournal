@@ -30,4 +30,5 @@ export const paths = {
     Trainer: 'Trainer',
     BloodPressure: 'BloodPressure',
     VerticalPositionCalibration: 'VerticalPositionCalibration',
+    QRScan: 'QRScan',
 }
