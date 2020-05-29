@@ -7,6 +7,7 @@ import {
     StatusBar,
     Linking,
     TouchableWithoutFeedback,
+    Alert,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
@@ -23,12 +24,16 @@ import {
     setNotificationDelay,
 } from '../redux/actions'
 import NumInput from '../components/SettingsNumInput'
+import userUpdateIdinv from '../requests/userUpdateIdinv'
+import { userFetchData } from '../requests/userFetchData'
+import store from '../redux/store'
 
 class SettingsScreen extends Component {
     shortPresses = 0
 
     state = {
         devSettingsHidden: true,
+        idinvSetTo: '',
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -51,6 +56,47 @@ class SettingsScreen extends Component {
     logout() {
         this.props.logout()
         this.props.navigation.navigate('Auth')
+    }
+
+    componentDidUpdate() {
+        this.checkIncomingIdinv()
+    }
+
+    checkIncomingIdinv = () => {
+        if (this.props.navigation.state.params) {
+            if (this.props.navigation.state.params.qrValue) {
+                let qrValue = this.props.navigation.state.params.qrValue
+
+                if (this.state.idinvSetTo === qrValue) return
+                if (this.props.user.idinv === qrValue) return
+
+                this.setState({
+                    idinvSetTo: qrValue,
+                })
+                userUpdateIdinv(this.props.id, this.props.access_token, qrValue)
+                    .then(res => {
+                        if (res.ok) {
+                            Alert.alert(
+                                strings.Success,
+                                strings.IdinvChangeSuccess,
+                            )
+
+                            store.dispatch(
+                                userFetchData(
+                                    this.props.id,
+                                    this.props.access_token,
+                                ),
+                            )
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        this.setState({
+                            idinvSetTo: '',
+                        })
+                    })
+            }
+        }
     }
 
     render() {
@@ -145,6 +191,8 @@ function mapStateToProps(state) {
         notifications: state.settings.notifications,
         idinvFilter: state.settings.idinvFilter,
         notificationDelay: state.settings.notificationDelay,
+        id: state.user.id,
+        access_token: state.tokens.access_token,
     }
 }
 
