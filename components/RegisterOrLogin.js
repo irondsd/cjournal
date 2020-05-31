@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Linking,
     Image,
+    Alert,
 } from 'react-native'
 import { apiUrl, appColor, registrationUrl, paths } from '../constants'
 import { strings } from '../localization'
@@ -21,7 +22,9 @@ class RegisterOrLogin extends Component {
                 this.props.navigation.navigate(paths.Home)
             })
             .catch(err => {
-                console.log(err)
+                if (err.message.includes('Network error')) {
+                    Alert.alert(strings.NoConn, strings.CantConnectIdentity)
+                }
             })
     }
 
