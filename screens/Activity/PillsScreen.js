@@ -41,7 +41,7 @@ class PillsScreen extends Component {
     }
 
     static navigationOptions = ({ navigation }) => ({
-        title: `${navigation.state.params.sender}`,
+        title: `${strings[navigation.state.params.sender]}`,
     })
 
     componentDidMount() {
