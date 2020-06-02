@@ -36,6 +36,10 @@ export default class App extends Component {
     }
 
     componentDidMount() {
+        this.AudioRecordInit()
+    }
+
+    AudioRecordInit() {
         const options = {
             sampleRate: 12000,
             channels: 1,
@@ -60,6 +64,8 @@ export default class App extends Component {
     record = async () => {
         let permissions = await requestMicrophonePermissions()
         if (!permissions) return
+
+        this.AudioRecordInit()
 
         if (!this.state.recording) {
             this.setState({ bars: [] })
