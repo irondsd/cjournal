@@ -60,6 +60,15 @@ class SettingsScreen extends Component {
 
     componentDidUpdate() {
         this.checkIncomingIdinv()
+        this.checkErrors()
+    }
+
+    checkErrors = () => {
+        if (this.props.navigation.state.params) {
+            if (this.props.navigation.state.params.qrError) {
+                Alert.alert(strings.Error, strings.ErrQR)
+            }
+        }
     }
 
     checkIncomingIdinv = () => {
