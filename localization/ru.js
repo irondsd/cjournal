@@ -40,7 +40,7 @@ export const ru = {
     ElectrodeReplacement: 'Замена электрода',
     EmotionalStress: 'Эмоциональная нагрузка',
     Error: 'Ошибка',
-    ErrQR: 'Не удаётся прочесть QR код',
+    ErrQR: 'Неверный QR код',
     ExerciseFinish: 'Завершение задания',
     ExerciseFinishText: 'Поздравляем, вы справились с заданием!',
     Nausea: 'Дурнота (Тошнота)',

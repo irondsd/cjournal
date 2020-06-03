@@ -40,7 +40,7 @@ export const en = {
     ElectrodeReplacement: 'Electrode replacement',
     EmotionalStress: 'Emotional stress',
     Error: 'Error',
-    ErrQR: 'Error readying QR code',
+    ErrQR: 'Invalid QR code',
     ExerciseFinish: 'Exercise finish',
     ExerciseFinishText: 'Good job! You completed the exercise!',
     Fatigue: 'Fatigue',
