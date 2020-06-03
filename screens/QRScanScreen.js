@@ -10,7 +10,10 @@ import { paths } from '../constants'
 export default class QRScanScreen extends Component {
     constructor(props) {
         super(props)
-        this.state = { isPermitted: false }
+        this.state = {
+            isPermitted: false,
+            success: false,
+        }
 
         this.verifyPermissions = this.verifyPermissions.bind(this)
     }
@@ -29,13 +32,20 @@ export default class QRScanScreen extends Component {
     }
 
     onBarcodeScan(qrvalue) {
+        this.setState({ success: true })
         let decoded = decode(qrvalue)
 
         if (decoded)
             this.props.navigation.navigate(paths.Settings, { qrValue: decoded })
+        else {
+            this.props.navigation.navigate(paths.Settings, {
+                qrError: 'invalid code',
+            })
+        }
     }
 
     render() {
+        if (this.state.success) return null
         return (
             <CameraKitCameraScreen
                 showFrame={true}
