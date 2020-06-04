@@ -41,6 +41,7 @@ export const ru = {
     EmotionalStress: 'Эмоциональная нагрузка',
     Error: 'Ошибка',
     ErrQR: 'Неверный QR код',
+    SameQR: 'Этот idinv уже установлен',
     ExerciseFinish: 'Завершение задания',
     ExerciseFinishText: 'Поздравляем, вы справились с заданием!',
     Nausea: 'Дурнота (Тошнота)',

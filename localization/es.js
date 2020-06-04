@@ -41,6 +41,7 @@ export const es = {
     EmotionalStress: 'Estrés emocional',
     Error: 'Error',
     ErrQR: 'Código QR inválido',
+    SameQR: 'Este idinv ya está configurado',
     ExerciseFinish: 'Ejercicio finalizado',
     ExerciseFinishText: '¡Buen trabajo! ¡Has completado el ejercicio!',
     Fatigue: 'Fatiga',
