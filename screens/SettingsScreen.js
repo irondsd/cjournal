@@ -27,6 +27,7 @@ import NumInput from '../components/SettingsNumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
 import { userFetchData } from '../requests/userFetchData'
 import store from '../redux/store'
+import { decode } from '../helpers/encode'
 
 class SettingsScreen extends Component {
     shortPresses = 0
@@ -34,6 +35,7 @@ class SettingsScreen extends Component {
     state = {
         devSettingsHidden: true,
         idinvSetTo: '',
+        idinvChangeInProgress: false,
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -59,53 +61,51 @@ class SettingsScreen extends Component {
     }
 
     componentDidUpdate() {
-        this.checkIncomingIdinv()
-        this.checkErrors()
+        this.checkIncomingQR()
     }
 
-    checkErrors = () => {
-        if (this.props.navigation.state.params) {
-            if (this.props.navigation.state.params.qrError) {
-                Alert.alert(strings.Error, strings.ErrQR)
-            }
-        }
-    }
-
-    checkIncomingIdinv = () => {
+    checkIncomingQR = () => {
+        if (this.state.idinvChangeInProgress) return
         if (this.props.navigation.state.params) {
             if (this.props.navigation.state.params.qrValue) {
-                let qrValue = this.props.navigation.state.params.qrValue
+                const qrValue = this.props.navigation.state.params.qrValue
 
-                if (this.state.idinvSetTo === qrValue) return
-                if (this.props.user.idinv === qrValue) return
+                // decode and check for errors
+                const decoded = decode(qrValue)
 
-                this.setState({
-                    idinvSetTo: qrValue,
-                })
-                userUpdateIdinv(this.props.id, this.props.access_token, qrValue)
-                    .then(res => {
-                        if (res.ok) {
-                            Alert.alert(
-                                strings.Success,
-                                strings.IdinvChangeSuccess,
-                            )
+                if (!decoded) return Alert.alert(strings.Error, strings.ErrQR)
 
-                            store.dispatch(
-                                userFetchData(
-                                    this.props.id,
-                                    this.props.access_token,
-                                ),
-                            )
-                        }
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        this.setState({
-                            idinvSetTo: '',
-                        })
-                    })
+                if (this.state.idinvSetTo === decoded) return
+
+                if (this.props.user.idinv === decoded)
+                    return Alert.alert(strings.Error, strings.SameQR)
+
+                this.setIdinv(decoded)
             }
         }
+    }
+
+    setIdinv(idinv) {
+        this.setState({
+            idinvSetTo: idinv,
+            idinvChangeInProgress: true,
+        })
+        userUpdateIdinv(this.props.id, this.props.access_token, idinv)
+            .then(res => {
+                if (res.ok) {
+                    Alert.alert(strings.Success, strings.IdinvChangeSuccess)
+                    store.dispatch(
+                        userFetchData(this.props.id, this.props.access_token),
+                    )
+                    this.setState({ idinvChangeInProgress: false })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                this.setState({
+                    idinvSetTo: '',
+                })
+            })
     }
 
     render() {
