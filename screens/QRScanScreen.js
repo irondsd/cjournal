@@ -4,7 +4,6 @@ import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { strings } from '../localization'
-import { decode } from '../helpers/encode'
 import { paths } from '../constants'
 
 export default class QRScanScreen extends Component {
@@ -32,14 +31,12 @@ export default class QRScanScreen extends Component {
     }
 
     onBarcodeScan(qrvalue) {
-        this.setState({ success: true })
-        let decoded = decode(qrvalue)
+        if (!this.state.success) {
+            this.setState({ success: true })
+            let returnTo = this.props.navigation.state.params.returnTo
 
-        if (decoded)
-            this.props.navigation.navigate(paths.Settings, { qrValue: decoded })
-        else {
-            this.props.navigation.navigate(paths.Settings, {
-                qrError: 'invalid code',
+            this.props.navigation.navigate(returnTo, {
+                qrValue: qrvalue,
             })
         }
     }
