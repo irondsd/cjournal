@@ -16,6 +16,7 @@
     "dependencies": {
         "@JWWon/react-native-universal-pedometer": "git+https://github.com/stephenheron/react-native-universal-pedometer.git",
         "@react-native-community/async-storage": "^1.6.3",
+        "@react-native-community/datetimepicker": "^2.4.0",
         "@react-native-community/geolocation": "^2.0.2",
         "@react-native-community/netinfo": "^5.0.0",
         "react": "16.9.0",
@@ -31,7 +32,7 @@
         "react-native-gesture-handler": "^1.5.2",
         "react-native-linear-gradient": "^2.5.6",
         "react-native-localization": "^2.1.6",
-        "react-native-modal-datetime-picker": "^7.6.0",
+        "react-native-modal-datetime-picker": "^8.7.1",
         "react-native-push-notification": "^3.1.9",
         "react-native-reanimated": "^1.4.0",
         "react-native-root-toast": "^3.2.0",
