@@ -43,16 +43,20 @@ export default class QRScanScreen extends Component {
 
     render() {
         if (this.state.success) return null
+        if (!this.state.isPermitted) return null
         return (
             <CameraKitCameraScreen
-                showFrame={true}
+                // showFrame={true}
                 scanBarcode={true}
-                laserColor={'blue'}
-                frameColor={'yellow'}
-                colorForScannerFrame={'black'}
-                onReadCode={event =>
+                // laserColor={'blue'}
+                // frameColor={'yellow'}
+                // colorForScannerFrame={'black'}
+                onReadQRCode={event => {
                     this.onBarcodeScan(event.nativeEvent.codeStringValue)
-                }
+                }}
+                onReadCode={event => {
+                    this.onBarcodeScan(event.nativeEvent.codeStringValue)
+                }}
             />
         )
     }
