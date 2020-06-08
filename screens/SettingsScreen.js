@@ -97,6 +97,7 @@ class SettingsScreen extends Component {
                     store.dispatch(
                         userFetchData(this.props.id, this.props.access_token),
                     )
+                    this.props.setIdinvFilter(true)
                     this.setState({ idinvChangeInProgress: false })
                 }
             })
