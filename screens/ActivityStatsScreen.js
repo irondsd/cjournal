@@ -18,6 +18,7 @@ import BackButton from '../components/BackButton'
 import Activity from '../classes/Activity'
 import { displayDateTime } from '../helpers/dateTime'
 import Map from '../components/Map'
+import OpenInMaps from '../components/OpenInMaps'
 
 type Props = {}
 class ActivityStatsScreen extends Component<Props> {
@@ -120,7 +121,14 @@ class ActivityStatsScreen extends Component<Props> {
                 }`}</Text>
                 <Text style={styles.Time}>{this.state.time}</Text>
                 {this.state.originalActivity.data.position && (
-                    <Map coords={this.state.originalActivity.data.position} />
+                    <View>
+                        <Map
+                            coords={this.state.originalActivity.data.position}
+                        />
+                        <OpenInMaps
+                            coords={this.state.originalActivity.data.position}
+                        />
+                    </View>
                 )}
                 <Text style={styles.Stats}>{this.state.stats}</Text>
             </View>
