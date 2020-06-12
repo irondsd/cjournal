@@ -75,26 +75,11 @@ class BloodPressureScreen extends Component {
             dateTime.getSeconds() - defaultDurations[activity_type].offset,
         )
         let duration = defaultDurations[activity_type].duration
-        this.setState(
-            {
-                dateTime: dateTime,
-                activity_type: activity_type,
-                tasks_id: tasks_id,
-                duration: duration / 60,
-            },
-            () => this.loadList(),
-        )
-    }
-
-    loadList = () => {
-        loadHints(this.state.activity_type).then(res => {
-            // load defaults
-            if (res.length === 0) {
-                res = defaultHints[this.state.activity_type]
-                saveDefaultHints(this.state.activity_type, res)
-            }
-
-            this.setState({ list: res })
+        this.setState({
+            dateTime: dateTime,
+            activity_type: activity_type,
+            tasks_id: tasks_id,
+            duration: duration / 60,
         })
     }
 
