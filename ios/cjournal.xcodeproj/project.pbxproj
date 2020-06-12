@@ -729,7 +729,7 @@
 			baseConfigurationReference = 67625FA92F7CC5AA70901739 /* Pods-cjournal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 35362XBA55;
 				INFOPLIST_FILE = cjournal/Info.plist;
@@ -752,7 +752,7 @@
 			baseConfigurationReference = 73E01D06398BD6ACAB3DFBCB /* Pods-cjournal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 35362XBA55;
 				INFOPLIST_FILE = cjournal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

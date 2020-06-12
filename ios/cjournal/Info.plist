@@ -48,16 +48,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>Cardio Journal app requires access to the camera to capture photos</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Cardio Journal app requires access to the photo library to display captured photos</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Cardio Journal app requires access to geoposition to accurately calculate distance walked</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Cardio Journal app requires access to geoposition to send help in case of emergency</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Cardio Journal app requires access to the photo library to display captured photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
