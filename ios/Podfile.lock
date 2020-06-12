@@ -271,6 +271,8 @@ PODS:
     - React
   - RNCPushNotificationIOS (1.0.3):
     - React
+  - RNDateTimePicker (2.4.0):
+    - React
   - RNFS (2.16.2):
     - React
   - RNGestureHandler (1.5.2):
@@ -332,6 +334,7 @@ DEPENDENCIES:
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios/RNCPushNotificationIOS.podspec`)"
+  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -420,6 +423,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/async-storage"
   RNCPushNotificationIOS:
     :path: "../node_modules/@react-native-community/push-notification-ios/RNCPushNotificationIOS.podspec"
+  RNDateTimePicker:
+    :path: "../node_modules/@react-native-community/datetimepicker"
   RNFS:
     :path: "../node_modules/react-native-fs"
   RNGestureHandler:
@@ -478,6 +483,7 @@ SPEC CHECKSUMS:
   RNBackgroundFetch: 08bdaaa13a5aa71cdce42068def5602ed1e982c2
   RNCAsyncStorage: 6b57de0f6cb0dcfd17521af1681fa39001d3efff
   RNCPushNotificationIOS: 5403d137a49c55f0dc2273be8473873e934359cd
+  RNDateTimePicker: 39a3987baca0848368f71f02c45bf6e1e61041c0
   RNFS: 0d4191b1052bef9ce70deff00a5b4169c62bbd9b
   RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
