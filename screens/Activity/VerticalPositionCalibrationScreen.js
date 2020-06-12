@@ -125,15 +125,22 @@ class VerticalPositionCalibrationScreen extends Component {
                     dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
                 />
-                <DropDownInput
-                    list={this.state.list}
-                    open={true}
-                    onChangeText={text => {
-                        this.setState({
-                            type: text,
-                        })
-                    }}
-                />
+                <View
+                    style={
+                        Platform.OS === 'ios'
+                            ? { zIndex: 10, width: '100%' }
+                            : { width: '100%' }
+                    }>
+                    <DropDownInput
+                        list={this.state.list}
+                        open={true}
+                        onChangeText={text => {
+                            this.setState({
+                                type: text,
+                            })
+                        }}
+                    />
+                </View>
                 <View style={{ zIndex: 1, width: '100%' }}>
                     <SaveButton
                         style={styles.button}
