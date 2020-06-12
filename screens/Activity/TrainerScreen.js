@@ -161,23 +161,37 @@ class TrainerScreen extends Component {
                     dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
                 />
-                <DurationPicker
-                    duration={this.state.duration}
-                    handler={this.onPickerChange}
-                    value={this.state.duration}
-                />
-                <DropDownSelect
-                    list={this.state.list}
-                    open={true}
-                    // maxLines={5}
-                    value={this.state.type}
-                    placeholder={strings.TrainerType}
-                    onSelect={value => {
-                        this.setState({
-                            type: value,
-                        })
-                    }}
-                />
+                <View
+                    style={
+                        Platform.OS === 'ios'
+                            ? { zIndex: 10, width: '100%' }
+                            : { width: '100%' }
+                    }>
+                    <DurationPicker
+                        duration={this.state.duration}
+                        handler={this.onPickerChange}
+                        value={this.state.duration}
+                    />
+                </View>
+                <View
+                    style={
+                        Platform.OS === 'ios'
+                            ? { zIndex: 10, width: '100%' }
+                            : { width: '100%' }
+                    }>
+                    <DropDownSelect
+                        list={this.state.list}
+                        open={true}
+                        // maxLines={5}
+                        value={this.state.type}
+                        placeholder={strings.TrainerType}
+                        onSelect={value => {
+                            this.setState({
+                                type: value,
+                            })
+                        }}
+                    />
+                </View>
                 <CaloriesInput
                     value={this.state.calories}
                     onChangeText={value => this.setState({ calories: value })}
