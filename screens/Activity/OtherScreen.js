@@ -184,20 +184,34 @@ class OtherScreen extends Component {
                     dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
                 />
-                <DurationPicker
-                    duration={this.state.duration}
-                    handler={this.onPickerChange}
-                    value={this.state.duration}
-                />
-                <DropDownInput
-                    list={this.state.list}
-                    open={true}
-                    onChangeText={text => {
-                        this.setState({
-                            type: text,
-                        })
-                    }}
-                />
+                <View
+                    style={
+                        Platform.OS === 'ios'
+                            ? { zIndex: 11, width: '100%' }
+                            : { width: '100%' }
+                    }>
+                    <DurationPicker
+                        duration={this.state.duration}
+                        handler={this.onPickerChange}
+                        value={this.state.duration}
+                    />
+                </View>
+                <View
+                    style={
+                        Platform.OS === 'ios'
+                            ? { zIndex: 10, width: '100%' }
+                            : { width: '100%' }
+                    }>
+                    <DropDownInput
+                        list={this.state.list}
+                        open={true}
+                        onChangeText={text => {
+                            this.setState({
+                                type: text,
+                            })
+                        }}
+                    />
+                </View>
                 <AudioRecorder
                     audioFile={this.state.audioFile}
                     setAudio={this.setAudio}
