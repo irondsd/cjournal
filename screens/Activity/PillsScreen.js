@@ -147,13 +147,20 @@ class PillsScreen extends Component {
                     dateTime={this.state.dateTime}
                     handler={this.changeDateTime}
                 />
-                <DropDownInput
-                    placeholder={strings.Drug}
-                    list={this.state.pills}
-                    onChangeText={this.onPillChange}
-                    open={true}
-                    value={this.state.pill}
-                />
+                <View
+                    style={
+                        Platform.OS === 'ios'
+                            ? { zIndex: 10, width: '100%' }
+                            : { width: '100%' }
+                    }>
+                    <DropDownInput
+                        placeholder={strings.Drug}
+                        list={this.state.pills}
+                        onChangeText={this.onPillChange}
+                        open={true}
+                        value={this.state.pill}
+                    />
+                </View>
                 <TakePhoto
                     photo={this.state.photoFile}
                     openCamera={() =>
