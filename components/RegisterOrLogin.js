@@ -34,9 +34,7 @@ class RegisterOrLogin extends Component {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => {
-                        Linking.openURL(registrationUrl).catch(err =>
-                            console.error('An error occurred', err),
-                        )
+                        this.props.register()
                     }}>
                     <Text style={styles.buttonText}>{strings.Register}</Text>
                 </TouchableOpacity>
