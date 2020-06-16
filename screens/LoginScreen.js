@@ -8,7 +8,6 @@ import {
     Dimensions,
     KeyboardAvoidingView,
     TouchableHighlight,
-    PermissionsAndroid,
     BackHandler,
     Alert,
     StatusBar,

@@ -5,7 +5,6 @@ import {
     Text,
     TouchableOpacity,
     Dimensions,
-    PermissionsAndroid,
 } from 'react-native'
 import Sound from 'react-native-sound'
 import AudioRecord from 'react-native-audio-record'

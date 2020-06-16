@@ -1,12 +1,5 @@
 import React, { Component } from 'react'
-import {
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-    PermissionsAndroid,
-    TextInput,
-} from 'react-native'
+import { Platform, StyleSheet, Text, View, TextInput } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
 import { logoutUser, addActivity } from '../redux/actions'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, PermissionsAndroid } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import requestStoragePermission from '../permissions/requestStoragePermission'
