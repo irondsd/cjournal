@@ -28,6 +28,8 @@ export default async function requestExternalWritePermission() {
     }
 }
 export async function requestExternalReadPermission() {
+    if (Platform.OS === 'ios') return true
+
     try {
         const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
