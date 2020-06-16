@@ -7,12 +7,35 @@ import {
     Image,
     Dimensions,
     StatusBar,
+    Alert,
 } from 'react-native'
-import { appColor } from '../constants'
+import { appColor, paths } from '../constants'
 import { strings } from '../localization'
 import RegisterOrLogin from '../components/RegisterOrLogin'
+import { WebView } from 'react-native-webview'
+import { SafeAreaView } from 'react-navigation'
 
 export default class WelcomeScreen extends Component {
+    componentDidMount() {
+        this.checkMessage()
+    }
+
+    componentDidUpdate() {
+        this.checkMessage()
+    }
+
+    checkMessage = () => {
+        if (
+            this.props.navigation.state.params &&
+            this.props.navigation.state.params.message
+        ) {
+            Alert.alert(
+                strings.Success,
+                this.props.navigation.state.params.message,
+            )
+        }
+    }
+
     render() {
         return (
             <View behavior="padding" style={styles.container}>
@@ -28,7 +51,11 @@ export default class WelcomeScreen extends Component {
                     />
                     <Text style={styles.title}>{strings.AppTitle}</Text>
                 </View>
-                <RegisterOrLogin />
+                <RegisterOrLogin
+                    register={() =>
+                        this.props.navigation.navigate(paths.Register)
+                    }
+                />
             </View>
         )
     }
