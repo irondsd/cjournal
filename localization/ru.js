@@ -197,4 +197,5 @@ export const ru = {
     steps: 'шагов',
     Success: 'Успех',
     IdinvChangeSuccess: 'Idinv успешно изменён',
+    RegisterSuccess: 'Вы успешно зарегистрировались. Теперь вы можете войти',
 }

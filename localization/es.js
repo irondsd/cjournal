@@ -198,4 +198,6 @@ export const es = {
     steps: 'pasos',
     Success: 'Éxito',
     IdinvChangeSuccess: '¡Idinv cambió con éxito!',
+    RegisterSuccess:
+        'Se ha registrado exitosamente. Ahora puedes iniciar sesión',
 }
