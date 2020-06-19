@@ -200,4 +200,6 @@ export const es = {
     IdinvChangeSuccess: '¡Idinv cambió con éxito!',
     RegisterSuccess:
         'Se ha registrado exitosamente. Ahora puedes iniciar sesión',
+    email: 'email',
+    repeatPassword: 'repite la contraseña',
 }

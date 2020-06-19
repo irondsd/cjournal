@@ -198,4 +198,6 @@ export const ru = {
     Success: 'Успех',
     IdinvChangeSuccess: 'Idinv успешно изменён',
     RegisterSuccess: 'Вы успешно зарегистрировались. Теперь вы можете войти',
+    email: 'электронная почта',
+    repeatPassword: 'повторите пароль',
 }

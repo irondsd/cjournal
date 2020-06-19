@@ -199,4 +199,6 @@ export const en = {
     Success: 'Success',
     IdinvChangeSuccess: 'Idinv changed successfully!',
     RegisterSuccess: 'You have successfully registered. Now you can login',
+    email: 'email',
+    repeatPassword: 'repeat password',
 }
