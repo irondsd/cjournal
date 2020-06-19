@@ -11,8 +11,8 @@ import {
 import { apiUrl, appColor, registrationUrl, paths } from '../constants'
 import { strings } from '../localization'
 import { withNavigation } from 'react-navigation'
-// import { authorization } from '../services/identity'
 import Tokens from '../classes/Tokens'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 class RegisterOrLogin extends Component {
     Login = async () => {
@@ -36,6 +36,12 @@ class RegisterOrLogin extends Component {
                     onPress={() => {
                         this.props.register()
                     }}>
+                    <Icon
+                        style={styles.img}
+                        name={'user-plus'}
+                        color={'#FFF'}
+                        size={20}
+                    />
                     <Text style={styles.buttonText}>{strings.Register}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
