@@ -202,4 +202,13 @@ export const es = {
         'Se ha registrado exitosamente. Ahora puedes iniciar sesión',
     email: 'email',
     repeatPassword: 'repite la contraseña',
+    ErrorUppercase:
+        "Las contraseñas deben tener al menos una mayúscula ('A' - 'Z')",
+    ErrorDigit: "Las contraseñas deben tener al menos un dígito ('0'-'9')",
+    ErrorAlphanumeric:
+        'Las contraseñas deben tener al menos un carácter no alfanumérico',
+    ErrorPassLen: 'La contraseña debe tener al menos 6 símbolos',
+    ErrorPassNotEq: 'Las contraseñas no son iguales',
+    ErrorEmail: 'El correo electrónico no es válido',
+    ErrorFill: 'Completa todos los campos',
 }

@@ -201,4 +201,12 @@ export const en = {
     RegisterSuccess: 'You have successfully registered. Now you can login',
     email: 'email',
     repeatPassword: 'repeat password',
+    ErrorUppercase: "Passwords must have at least one uppercase ('A'-'Z')",
+    ErrorDigit: "Passwords must have at least one digit ('0'-'9')",
+    ErrorAlphanumeric:
+        'Passwords must have at least one non alphanumeric character',
+    ErrorPassLen: 'Password must be at least 6 symbols',
+    ErrorPassNotEq: 'Passwords are not equal',
+    ErrorEmail: 'Email is not valid',
+    ErrorFill: 'Fill in all fields',
 }
