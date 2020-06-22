@@ -5,3 +5,4 @@ export const registrationUrl = `${identityUrl}/Identity/Account/Register`
 export const profileEditUrl = `${identityUrl}/Identity/Account/Manage`
 export const identityTokenUrl = `${identityUrl}/connect/token`
 export const identityUserInfoUrl = `${identityUrl}/connect/userinfo`
+export const identityRegistrationUrl = `${identityUrl}/ApiAnonymous/Register`

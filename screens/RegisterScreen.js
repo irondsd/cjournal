@@ -12,6 +12,8 @@ import { WebView } from 'react-native-webview'
 import { SafeAreaView } from 'react-navigation'
 import { strings } from '../localization'
 import Toast from 'react-native-root-toast'
+import { identityRegistration } from '../requests/identityRegistration'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class RegisterScreen extends Component {
     state = {
@@ -46,7 +48,24 @@ export default class RegisterScreen extends Component {
                         if (!/^[a-z0-9]+$/i.test(this.state.password)) {
                             if (/[0-9]/.test(this.state.password)) {
                                 if (/[A-Z]/.test(this.state.password)) {
-                                    console.log('Through')
+                                    identityRegistration(
+                                        this.state.email,
+                                        this.state.password,
+                                    )
+                                        .then(res => {
+                                            this.props.navigation.navigate(
+                                                paths.Welcome,
+                                                {
+                                                    message:
+                                                        strings.RegisterSuccess,
+                                                },
+                                            )
+                                        })
+                                        .catch(err => {
+                                            this.showError(
+                                                strings.ErrorEmailInUse,
+                                            )
+                                        })
                                 } else {
                                     this.showError(strings.ErrorUppercase)
                                 }
@@ -54,7 +73,7 @@ export default class RegisterScreen extends Component {
                                 this.showError(strings.ErrorDigit)
                             }
                         } else {
-                            this.showError(strings.ErrorAlphanumerical)
+                            this.showError(strings.ErrorAlphanumeric)
                         }
                     } else {
                         this.showError(strings.ErrorPassLen)
@@ -96,6 +115,26 @@ export default class RegisterScreen extends Component {
                     onNavigationStateChange={this.onNavigationStateChange}
                 /> */}
                 <View>
+                    <View style={styles.iconView}>
+                        <Icon
+                            style={styles.icon}
+                            name={'at'}
+                            color={'#fff'}
+                            size={25}
+                        />
+                        <Icon
+                            style={styles.icon}
+                            name={'lock'}
+                            color={'#fff'}
+                            size={25}
+                        />
+                        <Icon
+                            style={styles.icon}
+                            name={'lock'}
+                            color={'#fff'}
+                            size={25}
+                        />
+                    </View>
                     <TextInput
                         placeholder={strings.email}
                         placeholderTextColor="#dddddd"
@@ -179,6 +218,7 @@ const styles = StyleSheet.create({
     input: {
         marginTop: 5,
         padding: 10,
+        paddingLeft: 45,
         height: 50,
         color: 'white',
         fontSize: 20,
@@ -206,5 +246,15 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontSize: 17,
+    },
+    iconView: {
+        position: 'absolute',
+    },
+    icon: {
+        marginTop: 5,
+        height: 50,
+        width: 50,
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
 })
