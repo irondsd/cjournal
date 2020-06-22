@@ -131,9 +131,9 @@ android {
         applicationId "com.cjournal"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
+        versionCode 10
         multiDexEnabled true
-        versionName "3.7.8"
+        versionName "3.8.0"
         manifestPlaceholders = [
             appAuthRedirectScheme: 'com.cjournal'
         ]
