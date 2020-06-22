@@ -209,4 +209,5 @@ export const en = {
     ErrorPassNotEq: 'Passwords are not equal',
     ErrorEmail: 'Email is not valid',
     ErrorFill: 'Fill in all fields',
+    ErrorEmailInUse: 'This email is already in use',
 }

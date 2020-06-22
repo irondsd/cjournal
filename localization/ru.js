@@ -207,4 +207,5 @@ export const ru = {
     ErrorPassNotEq: 'Пароли не совпадают',
     ErrorEmail: 'Неправильная электронная почта',
     ErrorFill: 'Заполните поля',
+    ErrorEmailInUse: 'Пользователь с этой почтой уже зарегистрирован',
 }

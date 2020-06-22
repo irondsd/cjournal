@@ -211,4 +211,5 @@ export const es = {
     ErrorPassNotEq: 'Las contraseñas no son iguales',
     ErrorEmail: 'El correo electrónico no es válido',
     ErrorFill: 'Completa todos los campos',
+    ErrorEmailInUse: 'Este correo electrónico ya está en uso',
 }
