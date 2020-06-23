@@ -10,6 +10,7 @@ import NavigationService from '../navigation/NavigationService'
 import { logoutUser } from '../redux/actions'
 import { paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
+import { activityFetchIdinv } from '../requests/activityFetchIdinv'
 
 let errors = 0
 let executing = false
@@ -55,8 +56,14 @@ export default async function sync(id, tokens) {
     if (!tokens.access_token) return (executing = false)
     syncActivities(activities, id, tokens.access_token)
         .then(() => {
+            if (store.getState().settings.idinvFilter) {
+                let idinv = store.getState().user.idinv
+                store.dispatch(activityFetchIdinv(idinv, tokens.access_token))
+            } else {
+                store.dispatch(activityFetchData(id, tokens.access_token))
+            }
+
             store.dispatch(userFetchData(id, tokens.access_token))
-            store.dispatch(activityFetchData(id, tokens.access_token))
             store.dispatch(tasksFetchData(id, tokens.access_token))
             store.dispatch(identityUserInfo(tokens.access_token))
 
