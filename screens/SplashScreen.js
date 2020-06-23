@@ -16,6 +16,7 @@ import {
     loadNotifications,
     tokensReceived,
     loadSettings,
+    setIdinvFilter,
 } from '../redux/actions'
 import { strings } from '../localization'
 import { asyncGetAll, removeScreen, removeAll } from '../services/asyncStorage'
@@ -42,6 +43,12 @@ class SplashScreen extends Component {
                             res.tokens.access_token,
                             res.user.idinv,
                         )
+                    }
+
+                    if (res.user.idinv !== '') {
+                        this.props.setIdinvFilter(true)
+                    } else {
+                        this.props.setIdinvFilter(false)
                     }
                 }
                 if (res.activity) this.props.replaceActivities(res.activity)
@@ -97,6 +104,7 @@ const mapDispatchToProps = {
     loadNotifications,
     tokensReceived,
     loadSettings,
+    setIdinvFilter,
 }
 
 export default connect(
