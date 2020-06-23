@@ -8,6 +8,7 @@ import ActivityListItem from '../components/ActivityListItem'
 import { deleteActivity } from '../redux/actions/activityActions'
 import sync from '../services/sync'
 import store from '../redux/store'
+import { activityFetchIdinv } from '../requests/activityFetchIdinv'
 
 type Props = {}
 class JournalScreen extends Component<Props> {
@@ -50,7 +51,19 @@ class JournalScreen extends Component<Props> {
     }
 
     runSync() {
-        sync(this.props.user.id, this.props.tokens)
+        // sync(this.props.user.id, this.props.tokens)
+
+        if (this.props.idinvFilter) {
+            this.props.fetchIdinv(
+                this.props.user.idinv,
+                this.props.tokens.access_token,
+            )
+        } else {
+            this.props.fetchData(
+                this.props.user.id,
+                this.props.tokens.access_token,
+            )
+        }
     }
 
     _renderItem = ({ item, index }) => {
@@ -102,6 +115,9 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => ({
     fetchData: (id, access_token) => {
         dispatch(activityFetchData(id, access_token))
+    },
+    fetchIdinv: (idinv, access_token) => {
+        dispatch(activityFetchIdinv(idinv, access_token))
     },
     removeDeleted: activity => {
         dispatch(deleteActivity(activity))
