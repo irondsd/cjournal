@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localization'
 import { tasksFetchData } from '../requests/tasksFetchData'
+import { tasksFetchIdinv } from '../requests/tasksFetchIdinv'
 import TasksListItem from '../components/TasksListItem'
 import store from '../redux/store'
 
@@ -48,9 +49,15 @@ class TasksScreen extends Component<Props> {
     }
 
     fetch() {
-        let id = this.props.user.id
-        let tokens = this.props.tokens
-        this.props.fetchData(id, tokens.access_token)
+        if (this.props.settings.idinvFilter) {
+            let idinv = this.props.user.idinv
+            let tokens = this.props.tokens
+            this.props.fetchIdinv(idinv, tokens.access_token)
+        } else {
+            let id = this.props.user.id
+            let tokens = this.props.tokens
+            this.props.fetchData(id, tokens.access_token)
+        }
     }
 
     _renderItem = ({ item, index }) => {
@@ -84,12 +91,16 @@ function mapStateToProps(state) {
         user: state.user,
         tasks: state.tasks,
         tokens: state.tokens,
+        settings: state.settings,
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     fetchData: (id, access_token) => {
         dispatch(tasksFetchData(id, access_token))
+    },
+    fetchIdinv: (idinv, access_token) => {
+        dispatch(tasksFetchIdinv(idinv, access_token))
     },
 })
 
