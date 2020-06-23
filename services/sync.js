@@ -11,6 +11,7 @@ import { logoutUser } from '../redux/actions'
 import { paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
 import { activityFetchIdinv } from '../requests/activityFetchIdinv'
+import { tasksFetchIdinv } from '../requests/tasksFetchIdinv'
 
 let errors = 0
 let executing = false
@@ -59,12 +60,13 @@ export default async function sync(id, tokens) {
             if (store.getState().settings.idinvFilter) {
                 let idinv = store.getState().user.idinv
                 store.dispatch(activityFetchIdinv(idinv, tokens.access_token))
+                store.dispatch(tasksFetchIdinv(idinv, tokens.access_token))
             } else {
                 store.dispatch(activityFetchData(id, tokens.access_token))
+                store.dispatch(tasksFetchData(id, tokens.access_token))
             }
 
             store.dispatch(userFetchData(id, tokens.access_token))
-            store.dispatch(tasksFetchData(id, tokens.access_token))
             store.dispatch(identityUserInfo(tokens.access_token))
 
             executing = false
