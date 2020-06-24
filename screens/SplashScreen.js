@@ -34,6 +34,7 @@ class SplashScreen extends Component {
         requestExternalReadPermission()
         asyncGetAll()
             .then(res => {
+                if (res.settings) this.props.loadSettings(res.settings)
                 if (res.tokens) this.props.tokensReceived(res.tokens)
                 if (res.user) {
                     this.props.updateUser(res.user)
@@ -55,7 +56,6 @@ class SplashScreen extends Component {
                 if (res.tasks) this.props.replaceTasks(res.tasks)
                 if (res.notifications)
                     this.props.loadNotifications(res.notifications)
-                if (res.settings) this.props.loadSettings(res.settings)
                 if (res.tokens) {
                     if (res.screen) {
                         this.props.navigation.navigate(
