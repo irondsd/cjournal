@@ -26,16 +26,12 @@ export default class TasksListItem extends Component {
     onPress() {
         if (this.props.item.completed) return
 
-        if (pillsList.includes(this.props.item.activity_type)) {
-            this.props.navigation.navigate(paths.Pills, {
-                tasks_id: this.props.item.id,
-                sender: this.props.item.activity_type,
-            })
-        } else {
-            this.props.navigation.navigate(this.props.item.activity_type, {
-                tasks_id: this.props.item.id,
-            })
-        }
+        let navigateTo = activityPaths[task.activity_type]
+
+        this.props.navigation.navigate(navigateTo, {
+            tasks_id: this.props.item.id,
+            sender: this.props.item.activity_type,
+        })
     }
 
     render() {
