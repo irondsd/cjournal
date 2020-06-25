@@ -10,6 +10,8 @@ import {
 } from '../redux/actions/activityActions'
 import activityPutData from '../requests/ActivityPutData'
 import activityPutFile from '../requests/activityPutFile'
+import activityPutIdinv from '../requests/activityPutIdinv'
+import activityPutFileIdinv from '../requests/activityPutFileIdinv'
 import activityDeleteData from '../requests/ActivityDeleteData'
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
@@ -285,34 +287,69 @@ export default class Activity {
 
     editOnServer(id, access_token) {
         this.addLastSyncAttempt()
-        return new Promise((resolve, reject) => {
-            if (this.data.audioFile || this.data.photoFile) {
-                activityPutFile(id, access_token, this)
-                    .then(res => {
-                        if (res.ok) {
+
+        if (store.getState().settings.idinvFilter) {
+            // with idinv filter
+            let idinv = store.getState().user.idinv
+            return new Promise((resolve, reject) => {
+                if (this.data.audioFile || this.data.photoFile) {
+                    activityPutFileIdinv(idinv, access_token, this)
+                        .then(res => {
+                            if (res.ok) {
+                                store.dispatch(activitySynced(this))
+                                resolve()
+                            } else {
+                                // console.log('upload error no id returned')
+                                reject('upload file fail')
+                            }
+                        })
+                        .catch(error => {
+                            // console.log('upload error', error)
+                            reject(error)
+                        })
+                } else {
+                    activityPutIdinv(idinv, access_token, this)
+                        .then(res => {
+                            // console.log('successfully updated', res)
                             store.dispatch(activitySynced(this))
                             resolve()
-                        } else {
-                            // console.log('upload error no id returned')
-                            reject('upload file fail')
-                        }
-                    })
-                    .catch(error => {
-                        // console.log('upload error', error)
-                        reject(error)
-                    })
-            } else {
-                activityPutData(id, access_token, this)
-                    .then(res => {
-                        // console.log('successfully updated', res)
-                        store.dispatch(activitySynced(this))
-                        resolve()
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
-            }
-        })
+                        })
+                        .catch(error => {
+                            reject(error)
+                        })
+                }
+            })
+        } else {
+            // without idinv filter
+            return new Promise((resolve, reject) => {
+                if (this.data.audioFile || this.data.photoFile) {
+                    activityPutFile(id, access_token, this)
+                        .then(res => {
+                            if (res.ok) {
+                                store.dispatch(activitySynced(this))
+                                resolve()
+                            } else {
+                                // console.log('upload error no id returned')
+                                reject('upload file fail')
+                            }
+                        })
+                        .catch(error => {
+                            // console.log('upload error', error)
+                            reject(error)
+                        })
+                } else {
+                    activityPutData(id, access_token, this)
+                        .then(res => {
+                            // console.log('successfully updated', res)
+                            store.dispatch(activitySynced(this))
+                            resolve()
+                        })
+                        .catch(error => {
+                            reject(error)
+                        })
+                }
+            })
+        }
     }
 
     deleteOnServer(id, access_token) {
