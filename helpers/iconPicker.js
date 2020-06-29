@@ -5,181 +5,175 @@ export function iconPicker(activity_type) {
 
     switch (activity_type) {
         case activityTypes.Sleep:
-            img = require('../resources/icons/sleep.png')
+            img = require('../resources/squareIcons/sleep.png')
             break
         case activityTypes.Stairs:
-            img = require('../resources/icons/stairs.png')
+            img = require('../resources/squareIcons/stairs.png')
             break
         case activityTypes.Walking:
-            img = require('../resources/icons/walking.png')
+            img = require('../resources/squareIcons/6minwalking.png')
             break
         case activityTypes.Trainer:
-            img = require('../resources/icons/trainer.png')
+            img = require('../resources/squareIcons/trainer.png')
             break
         case activityTypes.Shower:
-            img = require('../resources/icons/shower.png')
+            img = require('../resources/squareIcons/shower.png')
             break
         case activityTypes.OtherLoad:
-            img = require('../resources/icons/exercise.png')
+            img = require('../resources/squareIcons/physicalload.png')
             break
         case activityTypes.OtherActivity:
-            img = require('../resources/icons/activity.png')
+            img = require('../resources/squareIcons/activity.png')
             break
         case activityTypes.OtherEmotions:
-            img = require('../resources/icons/mood.png')
+            img = require('../resources/squareIcons/otheremotions.png')
             break
         case activityTypes.OtherPain:
-            img = require('../resources/icons/otherpain.png')
+            img = require('../resources/squareIcons/otherpain.png')
             break
         case activityTypes.OtherComplaints:
-            img = require('../resources/icons/complaint.png')
+            img = require('../resources/squareIcons/complaints.png')
             break
         case activityTypes.OtherWeakness:
-            img = require('../resources/icons/confusion.png')
+            img = require('../resources/squareIcons/negativeemotions.png')
             break
         case activityTypes.Activity:
-            img = require('../resources/icons/activity.png')
+            img = require('../resources/squareIcons/activity.png')
             break
         case activityTypes.Service:
-            img = require('../resources/icons/service.png')
+            img = require('../resources/squareIcons/service.png')
             break
         case activityTypes.Meal:
-            img = require('../resources/icons/meal.png')
+            img = require('../resources/squareIcons/meal.png')
             break
         case activityTypes.Alcohol:
-            img = require('../resources/icons/alcohol.png')
+            img = require('../resources/squareIcons/alcohol.png')
             break
         case activityTypes.Smoking:
-            img = require('../resources/icons/smoking.png')
+            img = require('../resources/squareIcons/smoking.png')
             break
         case activityTypes.CourseTherapy:
-            img = require('../resources/icons/pill.png')
+            img = require('../resources/squareIcons/coursetherapy.png')
             break
         case activityTypes.ReliefOfAttack:
-            img = require('../resources/icons/pill.png')
+            img = require('../resources/squareIcons/reliefofattack.png')
             break
         case activityTypes.Headache:
-            img = require('../resources/icons/sad.png')
+            img = require('../resources/squareIcons/headache.png')
             break
         case activityTypes.HeartAreaPain:
-            img = require('../resources/icons/chestpain.png')
+            img = require('../resources/squareIcons/heartareapain.png')
             break
         case activityTypes.RetrosternalPain:
-            img = require('../resources/icons/chestpain.png')
+            img = require('../resources/squareIcons/pain.png')
             break
         case activityTypes.Arrhythmia:
-            img = require('../resources/icons/arrhythmia.png')
+            img = require('../resources/squareIcons/arrhythmia.png')
             break
         case activityTypes.Palpitation:
-            img = require('../resources/icons/heartpain.png')
+            img = require('../resources/squareIcons/palpitation.png')
             break
         case activityTypes.Dyspnea:
-            img = require('../resources/icons/lungs.png')
+            img = require('../resources/squareIcons/dyspnea.png')
             break
         case activityTypes.Tachypnea:
-            img = require('../resources/icons/lungs.png')
+            img = require('../resources/squareIcons/tachypnea.png')
             break
         case activityTypes.Nausea:
-            img = require('../resources/icons/dizzy.png')
+            img = require('../resources/squareIcons/nausea.png')
             break
         case activityTypes.Syncope:
-            img = require('../resources/icons/dizzy.png')
+            img = require('../resources/squareIcons/syncope.png')
             break
         case activityTypes.Fatigue:
-            img = require('../resources/icons/fatigue.png')
-            break
-        case activityTypes.Nausea:
-            img = require('../resources/icons/dizzy.png')
+            img = require('../resources/squareIcons/fatigue.png')
             break
         case activityTypes.Stupefaction:
-            img = require('../resources/icons/dizzy.png')
+            img = require('../resources/squareIcons/weakness.png')
             break
         case activityTypes.VisionDisturbances:
-            img = require('../resources/icons/vision.png')
+            img = require('../resources/squareIcons/vision.png')
             break
         case activityTypes.PositiveEmotions:
-            img = require('../resources/icons/happy.png')
+            img = require('../resources/squareIcons/positiveemotions.png')
             break
         case activityTypes.Running:
-            img = require('../resources/icons/running.png')
+            img = require('../resources/squareIcons/running.png')
             break
         case activityTypes.NormalWalking:
-            img = require('../resources/icons/walking.png')
+            img = require('../resources/squareIcons/walking.png')
             break
         case activityTypes.Bicycling:
-            img = require('../resources/icons/bicycle.png')
+            img = require('../resources/squareIcons/bicycle.png')
             break
         case activityTypes.NegativeEmotions:
-            img = require('../resources/icons/bad.png')
+            img = require('../resources/squareIcons/negativeemotions.png')
             break
         case activityTypes.Sex:
-            img = require('../resources/icons/sex.png')
+            img = require('../resources/squareIcons/sex.png')
             break
         case activityTypes.Alarm:
-            img = require('../resources/icons/trouble.png')
+            img = require('../resources/squareIcons/alarm.png')
             break
         case activityTypes.Toilet:
-            img = require('../resources/icons/toilet.png')
+            img = require('../resources/squareIcons/toilet.png')
             break
         case activityTypes.ActiveOrthostasis:
-            img = require('../resources/icons/laying.png')
+            img = require('../resources/squareIcons/orthostasis.png')
             break
         case activityTypes.TakingMedicine:
-            img = require('../resources/icons/drug.png')
-            break
-        case activityTypes.Influence:
-            img = require('../resources/icons/influence.png')
+            img = require('../resources/squareIcons/pills.png')
             break
         case activityTypes.PhysicalLoad:
-            img = require('../resources/icons/physical.png')
+            img = require('../resources/squareIcons/physicalload.png')
             break
         case activityTypes.Pain:
-            img = require('../resources/icons/pain.png')
+            img = require('../resources/squareIcons/pain.png')
             break
         case activityTypes.Complaints:
-            img = require('../resources/icons/complaint.png')
+            img = require('../resources/squareIcons/complaints.png')
             break
         case activityTypes.Weakness:
-            img = require('../resources/icons/nausea.png')
+            img = require('../resources/squareIcons/weakness.png')
             break
         case activityTypes.EmotionalStress:
-            img = require('../resources/icons/mood.png')
+            img = require('../resources/squareIcons/emotionalstress.png')
             break
         case activityTypes.Tests:
-            img = require('../resources/icons/tests.png')
+            img = require('../resources/squareIcons/tests.png')
             break
         case activityTypes.Straining:
-            img = require('../resources/icons/straining.png')
+            img = require('../resources/squareIcons/straining.png')
             break
         case activityTypes.MedicineTest:
-            img = require('../resources/icons/pill.png')
+            img = require('../resources/squareIcons/pills.png')
             break
         case activityTypes.PsychoemotionalTest:
-            img = require('../resources/icons/psychological.png')
+            img = require('../resources/squareIcons/psychoemotionaltest.png')
             break
         case activityTypes.Press:
-            img = require('../resources/icons/pressure.png')
+            img = require('../resources/squareIcons/press.png')
             break
         case activityTypes.CuffFix:
-            img = require('../resources/icons/cuff.png')
+            img = require('../resources/squareIcons/cufffix.png')
             break
         case activityTypes.ElectrodeReplacement:
-            img = require('../resources/icons/electrode.png')
+            img = require('../resources/squareIcons/electrodereplacement.png')
             break
         case activityTypes.DeviceInstall:
-            img = require('../resources/icons/device.png')
+            img = require('../resources/squareIcons/cufffix.png')
             break
         case activityTypes.VerticalPositionCalibration:
-            img = require('../resources/icons/vertical.png')
+            img = require('../resources/squareIcons/calibration.png')
             break
         case activityTypes.DeepBreathing:
-            img = require('../resources/icons/lungs.png')
+            img = require('../resources/squareIcons/deepbreathing.png')
             break
         case activityTypes.Workout:
-            img = require('../resources/icons/workout.png')
+            img = require('../resources/squareIcons/workout.png')
             break
         default:
-            img = require('../resources/icons/unknown.png')
+            img = require('../resources/squareIcons/activity.png')
             break
     }
 
