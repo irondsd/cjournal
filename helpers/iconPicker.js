@@ -161,7 +161,7 @@ export function iconPicker(activity_type) {
             img = require('../resources/squareIcons/electrodereplacement.png')
             break
         case activityTypes.DeviceInstall:
-            img = require('../resources/squareIcons/cufffix.png')
+            img = require('../resources/squareIcons/device.png')
             break
         case activityTypes.VerticalPositionCalibration:
             img = require('../resources/squareIcons/calibration.png')
@@ -173,7 +173,7 @@ export function iconPicker(activity_type) {
             img = require('../resources/squareIcons/workout.png')
             break
         default:
-            img = require('../resources/squareIcons/activity.png')
+            img = require('../resources/squareIcons/unknown.png')
             break
     }
 
