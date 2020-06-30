@@ -28,8 +28,8 @@ class ActivityScreen extends Component<Props> {
                 </TileWrapper>
                 <TileWrapper>
                     <SexTile navigation={this.props.navigation} />
-                    <ToiletTile navigation={this.props.navigation} />
                     <ShowerTile navigation={this.props.navigation} />
+                    <ToiletTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
                     <TileSpacer />
