@@ -62,8 +62,8 @@ export default class aTile extends Component {
                 <LinearGradient
                     style={styles.box}
                     colors={[this.props.color, this.props.shadeColor]}
-                    start={{ x: 0.0, y: 0.0 }}
-                    end={{ x: 1.0, y: 1.0 }}>
+                    start={{ x: 0.0, y: 1.0 }}
+                    end={{ x: 1.0, y: 0.0 }}>
                     <Image style={styles.img} source={this.props.img} />
                 </LinearGradient>
                 <View style={styles.titleBox}>
