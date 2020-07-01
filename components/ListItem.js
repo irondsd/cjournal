@@ -9,8 +9,8 @@ import {
 } from 'react-native'
 import { displayDateTime } from '../helpers/dateTime'
 import { strings } from '../localization'
-import { iconPicker } from '../helpers/iconPicker'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import ActivityIcon from './ActivityIcon'
 
 export default class ListItem extends Component {
     render() {
@@ -18,10 +18,13 @@ export default class ListItem extends Component {
             <TouchableOpacity
                 style={styles.item}
                 onPress={() => this.props.onPress()}>
-                <Image
-                    style={styles.img}
-                    source={iconPicker(this.props.activity_type)}
-                />
+                <View style={styles.img}>
+                    <ActivityIcon
+                        icon={this.props.activity_type}
+                        size={40}
+                        fill={'#000'}
+                    />
+                </View>
                 <View>
                     <Text style={styles.title}>
                         {strings[this.props.activity_type] ||
@@ -94,12 +97,8 @@ const styles = StyleSheet.create({
         color: 'grey',
     },
     img: {
-        alignSelf: 'center',
-        width: 40,
-        height: 40,
         marginLeft: 5,
         marginRight: 5,
-        tintColor: 'black',
     },
     synced: {
         position: 'absolute',
