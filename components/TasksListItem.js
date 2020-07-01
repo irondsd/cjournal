@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, TouchableOpacity, StyleSheet, View, Image } from 'react-native'
 import { displayDateTime } from '../helpers/dateTime'
 import { strings } from '../localization'
-import { iconPicker } from '../helpers/iconPicker'
 import { paths, activityTypes, pillsList, othersList } from '../constants'
 import ListItem from './ListItem'
 
