@@ -64,7 +64,11 @@ export default class aTile extends Component {
                     colors={[this.props.color, this.props.shadeColor]}
                     start={{ x: 0.0, y: 1.0 }}
                     end={{ x: 1.0, y: 0.0 }}>
-                    <ActivityIcon icon={this.props.img} />
+                    <ActivityIcon
+                        icon={this.props.img}
+                        fill={'#fff'}
+                        size={imgSize}
+                    />
                 </LinearGradient>
                 <View style={styles.titleBox}>
                     <Text adjustsFontSizeToFit style={styles.text}>
