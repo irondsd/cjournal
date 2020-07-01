@@ -3,7 +3,6 @@ import {
     Text,
     View,
     StyleSheet,
-    Image,
     TouchableOpacity,
     Platform,
 } from 'react-native'
@@ -18,6 +17,7 @@ import { pSBC } from '../helpers/colors'
 import LinearGradient from 'react-native-linear-gradient'
 import { showToast, showError } from '../services/toast'
 import { strings } from '../localization'
+import ActivityIcon from './ActivityIcon'
 
 export default class aTile extends Component {
     static defaultProps = {
@@ -64,7 +64,7 @@ export default class aTile extends Component {
                     colors={[this.props.color, this.props.shadeColor]}
                     start={{ x: 0.0, y: 1.0 }}
                     end={{ x: 1.0, y: 0.0 }}>
-                    <Image style={styles.img} source={this.props.img} />
+                    <ActivityIcon icon={this.props.img} />
                 </LinearGradient>
                 <View style={styles.titleBox}>
                     <Text adjustsFontSizeToFit style={styles.text}>
