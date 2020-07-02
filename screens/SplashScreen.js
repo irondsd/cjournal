@@ -23,6 +23,7 @@ import { asyncGetAll, removeScreen, removeAll } from '../services/asyncStorage'
 import Barometer from '../sensors/Barometer'
 import { idinvWatcher } from '../services/idinvWatcher'
 import { requestExternalReadPermission } from '../permissions/requestStoragePermission'
+import Logo from '../resources/svg/logo'
 
 class SplashScreen extends Component {
     constructor(props) {
@@ -86,9 +87,10 @@ class SplashScreen extends Component {
                     // hidden={true}
                 />
                 <View style={styles.logoContainer}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../resources/logo.png')}
+                    <Logo
+                        width={logoSize * 1.5}
+                        height={logoSize}
+                        fill={'#fff'}
                     />
                     <Text style={styles.title}>{strings.AppTitle}</Text>
                 </View>

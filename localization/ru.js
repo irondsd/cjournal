@@ -5,7 +5,7 @@ export const ru = {
     Alcohol: 'Алкоголь',
     Alert: 'Внимание',
     and: 'и',
-    AppTitle: 'Кардио журнал',
+    AppTitle: 'Кардиожурнал',
     April: 'Апреля',
     Arrhythmia: 'Перебои (Аритмия)',
     AskMeLater: 'Спросить позже',

@@ -21,6 +21,7 @@ import store from '../redux/store'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import TouchableIcon from '../components/TouchableIcon'
+import Logo from '../resources/svg/logo'
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -133,9 +134,10 @@ class LoginScreen extends Component {
                         styles.logoContainer,
                         this.state.keyboardHidden ? null : { top: -10 },
                     ]}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../resources/logo.png')}
+                    <Logo
+                        width={logoSize * 1.5}
+                        height={logoSize}
+                        fill={'#fff'}
                     />
 
                     <Text style={styles.title}>{strings.AppTitle}</Text>
@@ -182,10 +184,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         top: '22%',
-    },
-    logo: {
-        width: logoSize,
-        height: logoSize - 10,
     },
     title: {
         color: 'white',

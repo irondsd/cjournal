@@ -9,11 +9,12 @@ import {
     StatusBar,
     Alert,
 } from 'react-native'
-import { appColor, paths } from '../constants'
+import { appColor, paths, logoSize } from '../constants'
 import { strings } from '../localization'
 import RegisterOrLogin from '../components/RegisterOrLogin'
 import { WebView } from 'react-native-webview'
 import { SafeAreaView } from 'react-navigation'
+import Logo from '../resources/svg/logo'
 
 export default class WelcomeScreen extends Component {
     componentDidMount() {
@@ -45,9 +46,10 @@ export default class WelcomeScreen extends Component {
                     // hidden={true}
                 />
                 <View style={styles.logoContainer}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../resources/logo.png')}
+                    <Logo
+                        width={logoSize * 1.5}
+                        height={logoSize}
+                        fill={'#fff'}
                     />
                     <Text style={styles.title}>{strings.AppTitle}</Text>
                 </View>
@@ -61,8 +63,6 @@ export default class WelcomeScreen extends Component {
     }
 }
 
-const logoSize = Dimensions.get('window').width / 2
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -74,13 +74,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         top: '22%',
     },
-    logo: {
-        width: logoSize,
-        height: logoSize,
-    },
     title: {
         color: 'white',
         fontSize: 30,
+        fontFamily: Platform.OS === 'ios' ? 'Helvetica' : 'Roboto',
     },
     login: {
         margin: 20,

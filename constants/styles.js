@@ -8,6 +8,7 @@ if (height / width < 1.7) tileSize = (height - 60 - 80) / 5.5
 export const borderRadius = tileSize / 4
 export const imgSize = tileSize * 0.9
 export const tileFontSize = width * 0.034
+export const logoSize = Dimensions.get('window').width / 2
 
 export const defaultStyles = StyleSheet.create({
     container: {
