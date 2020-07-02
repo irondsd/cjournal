@@ -13,6 +13,7 @@ import { strings } from '../localization'
 import { withNavigation } from 'react-navigation'
 import Tokens from '../classes/Tokens'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Incart from '../resources/svg/incart.svg'
 
 class RegisterOrLogin extends Component {
     Login = async () => {
@@ -40,7 +41,7 @@ class RegisterOrLogin extends Component {
                         style={styles.img}
                         name={'user-plus'}
                         color={'#FFF'}
-                        size={20}
+                        size={22}
                     />
                     <Text style={styles.buttonText}>{strings.Register}</Text>
                 </TouchableOpacity>
@@ -48,11 +49,16 @@ class RegisterOrLogin extends Component {
                     style={styles.button}
                     onPress={() => {
                         this.Login()
-                        // this.props.navigation.navigate('Login')
                     }}>
-                    <Image
-                        style={styles.img}
-                        source={require('../resources/incart.png')}
+                    <Incart
+                        style={{
+                            position: 'absolute',
+                            left: 7,
+                            top: 7,
+                        }}
+                        width={33}
+                        height={33}
+                        fill={'#fff'}
                     />
                     <Text style={styles.buttonText}>{strings.Login}</Text>
                 </TouchableOpacity>
@@ -72,10 +78,6 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: '#ffffff99',
         alignItems: 'center',
-        // shadowOffset: { height: 5 },
-        // shadowColor: '#000',
-        // shadowOpacity: 0.2,
-        // shadowRadius: 10,
         backgroundColor: '#00000004',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -94,10 +96,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     img: {
-        width: 25,
-        height: 23,
+        width: 30,
+        height: 30,
         position: 'absolute',
-        left: 10,
-        top: 10,
+        left: 13,
+        top: 11,
     },
 })
