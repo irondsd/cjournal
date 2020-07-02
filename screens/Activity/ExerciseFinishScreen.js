@@ -14,6 +14,9 @@ import { backgroundColor, defaultStyles } from '../../constants'
 import { strings } from '../../localization'
 import { updateActivity } from '../../redux/actions'
 import { paths } from '../../constants'
+import FeelingGood from '../../resources/svg/positiveemotions.svg'
+import FeelingNormal from '../../resources/svg/normal.svg'
+import FeelingBad from '../../resources/svg/negativeemotions.svg'
 
 class FinishScreen extends Component {
     static navigationOptions = {
@@ -78,9 +81,11 @@ class FinishScreen extends Component {
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
                         }}>
-                        <Image
+                        <FeelingBad
                             style={styles.img}
-                            source={require('../../resources/icons/bad.png')}
+                            width={imgSize}
+                            height={imgSize}
+                            fill={'grey'}
                         />
                         <Text style={styles.text}>{strings.Bad}</Text>
                     </TouchableOpacity>
@@ -91,9 +96,11 @@ class FinishScreen extends Component {
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
                         }}>
-                        <Image
+                        <FeelingNormal
                             style={styles.img}
-                            source={require('../../resources/icons/mood.png')}
+                            width={imgSize}
+                            height={imgSize}
+                            fill={'grey'}
                         />
                         <Text style={styles.text}>{strings.Normal}</Text>
                     </TouchableOpacity>
@@ -104,9 +111,11 @@ class FinishScreen extends Component {
                             this.props.update(this.state.activity, activity)
                             this.props.navigation.navigate(paths.Home)
                         }}>
-                        <Image
+                        <FeelingGood
                             style={styles.img}
-                            source={require('../../resources/icons/happy.png')}
+                            width={imgSize}
+                            height={imgSize}
+                            fill={'grey'}
                         />
                         <Text style={styles.text}>{strings.Good}</Text>
                     </TouchableOpacity>
@@ -134,7 +143,7 @@ export default connect(
     mapDispatchToProps,
 )(FinishScreen)
 
-const imgSize = Dimensions.get('window').width / 3.75
+const imgSize = Dimensions.get('window').width / 2.5
 
 const styles = StyleSheet.create({
     text: {
@@ -151,8 +160,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     img: {
-        width: imgSize,
-        height: imgSize,
         tintColor: 'grey',
         marginLeft: 10,
         marginRight: 10,
