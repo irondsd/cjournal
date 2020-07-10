@@ -9,6 +9,7 @@ import { deleteActivity } from '../redux/actions/activityActions'
 import sync from '../services/sync'
 import store from '../redux/store'
 import { activityFetchIdinv } from '../requests/activityFetchIdinv'
+import syncActivities from '../services/syncActivities'
 
 type Props = {}
 class JournalScreen extends Component<Props> {
@@ -51,8 +52,14 @@ class JournalScreen extends Component<Props> {
     }
 
     runSync() {
-        // sync(this.props.user.id, this.props.tokens)
+        // running posts and puts
+        syncActivities(
+            this.props.activity,
+            this.props.user.id,
+            this.props.tokens.access_token,
+        )
 
+        // running gets
         if (this.props.idinvFilter) {
             this.props.fetchIdinv(
                 this.props.user.idinv,
