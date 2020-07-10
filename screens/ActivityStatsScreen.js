@@ -51,6 +51,10 @@ class ActivityStatsScreen extends Component<Props> {
     }
 
     componentDidMount() {
+        this.props.navigation.setParams({
+            deleteActivity: this.deleteActivity,
+        })
+
         this.setState({
             originalActivity: this.props.navigation.state.params,
         })
