@@ -204,7 +204,7 @@ export const en = {
     ErrorUppercase: "Passwords must have at least one uppercase ('A'-'Z')",
     ErrorDigit: "Passwords must have at least one digit ('0'-'9')",
     ErrorAlphanumeric:
-        'Passwords must have at least one non alphanumeric character',
+        'Passwords must have at least one non alphanumeric character (!@#$%^&*)',
     ErrorPassLen: 'Password must be at least 6 symbols',
     ErrorPassNotEq: 'Passwords are not equal',
     ErrorEmail: 'Email is not valid',
