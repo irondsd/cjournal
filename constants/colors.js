@@ -1,4 +1,4 @@
-export const appColor = '#e84d2e'
+export const appColor = '#344f9c'
 export const secondaryColor = '#355599'
 export const backgroundColor = '#fcfeff'
 export const secondaryGrey = '#888888'
