@@ -311,8 +311,12 @@ export default class Activity {
                     activityPutIdinv(idinv, access_token, this)
                         .then(res => {
                             // console.log('successfully updated', res)
-                            store.dispatch(activitySynced(this))
-                            resolve()
+                            if (res.ok) {
+                                store.dispatch(activitySynced(this))
+                                resolve()
+                            } else {
+                                reject(res)
+                            }
                         })
                         .catch(error => {
                             reject(error)
