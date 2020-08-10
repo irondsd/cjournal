@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import Tile from '../Tile'
 import { strings } from '../../localization'
 import { activityTypes, paths } from '../../constants'
-import { iconPicker } from '../../helpers/iconPicker'
 import Activity from '../../classes/Activity'
-// import Activity from '../../classes/Activity'
 
 const name = activityTypes.Bicycling
 
@@ -13,9 +11,10 @@ export default class ScreenTile extends Component {
         return (
             <Tile
                 text={strings[name]}
-                img={iconPicker(name)}
+                img={name}
                 navigation={this.props.navigation}
-                color="#343d4c"
+                shadeColor="#b3caeb"
+                color="#3e77cc"
                 onPress={() => {
                     Activity.instantInitSave(
                         name,

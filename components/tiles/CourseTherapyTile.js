@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Tile from '../Tile'
 import { strings } from '../../localization'
 import { activityTypes, paths } from '../../constants'
-import { iconPicker } from '../../helpers/iconPicker'
 
 const name = activityTypes.CourseTherapy
 
@@ -11,9 +10,10 @@ export default class ScreenTile extends Component {
         return (
             <Tile
                 text={strings[name]}
-                img={iconPicker(name)}
+                img={name}
                 navigation={this.props.navigation}
-                color="#127f37"
+                shadeColor="#b3caeb"
+                color="#3e77cc"
                 onPress={() => {
                     this.props.navigation.navigate(paths.Pills, {
                         sender: name,
