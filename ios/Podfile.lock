@@ -202,7 +202,7 @@ PODS:
     - React
   - react-native-universal-pedometer (1.0.3):
     - React
-  - react-native-webview (10.3.1):
+  - react-native-webview (10.1.1):
     - React
   - React-RCTActionSheet (0.62.2):
     - React-Core/RCTActionSheetHeaders (= 0.62.2)
@@ -290,7 +290,7 @@ PODS:
     - RNSound/Core (= 0.11.0)
   - RNSound/Core (0.11.0):
     - React
-  - RNSVG (12.0.3):
+  - RNSVG (12.1.0):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -473,7 +473,7 @@ SPEC CHECKSUMS:
   react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-netinfo: 332d617e448eddc12697c7818185861e6114aebf
   react-native-universal-pedometer: ac9a110a38fa397636d993341fd5c24ecba77f8c
-  react-native-webview: 938d49de66f0d5c95134f19682243cbe53294f51
+  react-native-webview: 3ab69facc798f3bf2ab7c6e3dcdc76904dbba2c6
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
   React-RCTBlob: a332773f0ebc413a0ce85942a55b064471587a71
@@ -496,7 +496,7 @@ SPEC CHECKSUMS:
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   RNSensors: 60197256ecd4e1e906dcaf6d634793f876eaa63b
   RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
-  RNSVG: 7e16ddfc6e00d5aa69c9eb83e699bcce5dcb85d4
+  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
