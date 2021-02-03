@@ -8,7 +8,7 @@ import {
     Image,
     Alert,
 } from 'react-native'
-import { apiUrl, appColor, registrationUrl, paths } from '../constants'
+import { apiUrl, appColor, paths } from '../constants'
 import { strings } from '../localization'
 import { withNavigation } from 'react-navigation'
 import Tokens from '../classes/Tokens'

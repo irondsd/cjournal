@@ -12,7 +12,10 @@ import { WebView } from 'react-native-webview'
 import { SafeAreaView } from 'react-navigation'
 import { strings } from '../localization'
 import Toast from 'react-native-root-toast'
-import { identityRegistration } from '../requests/identityRegistration'
+import {
+    identityRegistration,
+    identityUrl,
+} from '../requests/identityRegistration'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class RegisterScreen extends Component {
@@ -24,7 +27,7 @@ export default class RegisterScreen extends Component {
 
     onNavigationStateChange = event => {
         if (event.navigationType === 'formsubmit') {
-            if (event.url === 'http://identity.incart.ru:7050/') {
+            if (event.url === identityUrl) {
                 this.props.navigation.navigate(paths.Welcome, {
                     message: strings.RegisterSuccess,
                 })

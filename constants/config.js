@@ -1,8 +1,7 @@
 export const identityServerConfig = {
-    issuer: 'http://identity.incart.ru:7050/',
+    issuer: 'https://identity.incart.ru/',
     clientId: 'com.cjournal',
     redirectUrl: 'com.cjournal://oauth',
-    dangerouslyAllowInsecureHttpRequests: true,
     scopes: [
         'openid',
         'profile',
