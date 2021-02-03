@@ -8,6 +8,7 @@ import {
     appColor,
     secondaryColor,
     secondaryGrey,
+    tintColor,
 } from '../constants'
 import { strings } from '../localization'
 import JournalScreen from '../screens/JournalScreen'
@@ -193,6 +194,7 @@ export const MainTabs = createMaterialTopTabNavigator(
                 backgroundColor: backgroundColor,
             },
             upperCaseLabel: false,
+            indicatorStyle: { backgroundColor: tintColor },
             activeTintColor: appColor,
             inactiveTintColor: secondaryGrey,
             showIcon: true,

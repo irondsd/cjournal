@@ -1,5 +1,6 @@
 export const appColor = '#344f9c'
 export const secondaryColor = '#355599'
+export const tintColor = '#5D77B4'
 export const backgroundColor = '#fcfeff'
 export const secondaryGrey = '#888888'
 export const borderGrey = '#d6d7da'
