@@ -11,7 +11,8 @@
         "pods": "cd ios && pod install && cd ..",
         "android-r": "react-native run-android --variant=release",
         "ios-r": "react-native run-ios --configuration Release --device \"iPhone (Konstantin)\"",
-        "build-play": "cd android && ./gradlew bundleRelease"
+        "build-play": "cd android && ./gradlew bundleRelease",
+        "clean": "cd android && ./gradlew clean && cd .."
     },
     "dependencies": {
         "@JWWon/react-native-universal-pedometer": "git+https://github.com/stephenheron/react-native-universal-pedometer.git",
