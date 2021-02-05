@@ -18,6 +18,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* cjournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cjournalTests.m */; };
 		3D4FA9136F8B5DEE91447E6B /* libPods-cjournal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EBB0679085B504993923B11 /* libPods-cjournal.a */; };
+		404312F025CC83D400F5D2A3 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		73EED102CC996E70795E9D07 /* libPods-cjournal-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2AC1FD1D981893831C1DCD8 /* libPods-cjournal-tvOS.a */; };
 		E965AA8BB663571A662B04AE /* libPods-cjournal-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F51EFBBEBF6D25C3D1E20B5 /* libPods-cjournal-tvOSTests.a */; };
 /* End PBXBuildFile section */
@@ -389,6 +390,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				404312F025CC83D400F5D2A3 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -424,7 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		099F75F2F9C0136BAF8D499D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
