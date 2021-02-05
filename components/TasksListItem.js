@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { Text, TouchableOpacity, StyleSheet, View, Image } from 'react-native'
 import { displayDateTime } from '../helpers/dateTime'
 import { strings } from '../localization'
-import { paths, activityTypes, pillsList, othersList } from '../constants'
+import {
+    paths,
+    activityTypes,
+    pillsList,
+    othersList,
+    activityPaths,
+} from '../constants'
 import ListItem from './ListItem'
 
 export default class TasksListItem extends Component {
@@ -25,7 +31,7 @@ export default class TasksListItem extends Component {
     onPress() {
         if (this.props.item.completed) return
 
-        let navigateTo = activityPaths[task.activity_type]
+        let navigateTo = activityPaths[this.props.item.activity_type]
 
         this.props.navigation.navigate(navigateTo, {
             tasks_id: this.props.item.id,
