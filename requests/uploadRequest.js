@@ -45,13 +45,19 @@ export const uploadRequest = (path, method, access_token, activity) => {
                 ...fields,
             },
         })
-            .promise.then(response => {
-                if (res.ok) return resolve({ status: response.statusCode, ok: true })
-                reject({ { status: response.statusCode, ok: false } })
+            .promise.then(res => {
+                console.log(res)
+                if (res.statusCode === 201 || res.statusCode === 200)
+                    return resolve({
+                        status: res.statusCode,
+                        ok: true,
+                        message: 'successfully uploaded',
+                    })
+                reject({ status: res.statusCode, ok: false })
             })
             .catch(err => {
                 console.error(err)
-                reject(err)
+                reject({ error: err })
             })
     })
 }

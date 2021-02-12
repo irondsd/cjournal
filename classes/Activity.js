@@ -1,24 +1,20 @@
 import timestamp from '../helpers/timestamp'
 import store from '../redux/store'
-import activityPostData from '../requests/activityPostData'
-import activityFileUpload from '../requests/activityFileUpload'
+import { Post, Put, Delete } from '../requests/newRequest'
 import {
     activitySetId,
     activitySyncFailed,
     activitySynced,
     activityDeleted,
-} from '../redux/actions/activityActions'
-import activityPutData from '../requests/ActivityPutData'
-import activityPutFile from '../requests/activityPutFile'
-import activityPutIdinv from '../requests/activityPutIdinv'
-import activityPutFileIdinv from '../requests/activityPutFileIdinv'
-import activityDeleteData from '../requests/ActivityDeleteData'
+    addActivity,
+    updateActivity,
+} from '../redux/actions'
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
 import { defaultDurations, paths, locationRetryLimit } from '../constants'
 import idGenerator from '../helpers/idGenerator'
 import { getUtcOffset } from '../helpers/dateTime'
-import { addActivity, updateActivity } from '../redux/actions'
+import { uploadRequest } from '../requests/uploadRequest'
 
 export default class Activity {
     constructor(
@@ -57,11 +53,8 @@ export default class Activity {
     }
 
     setToDelete() {
-        if (this.system) {
-            this.system.awaitsDelete = true
-        } else {
-            this.system = { awaitsDelete: true }
-        }
+        if (!this.system) this.system = {}
+        this.system.awaitsDelete = true
     }
 
     setToUpdate() {
@@ -194,37 +187,25 @@ export default class Activity {
     sync(id, access_token) {
         return new Promise((resolve, reject) => {
             if (this.system.awaitsSync) {
-                this.createOnServer(id, access_token)
-                    .then(() => {
-                        resolve()
-                    })
-                    .catch(error => {
-                        // console.log('post activity fail', error)
-                        store.dispatch(activitySyncFailed(this))
-                        reject(error)
-                    })
+                return this.createOnServer(id, access_token)
+                    .then(res => resolve(store.dispatch(activitySynced(this))))
+                    .catch(error =>
+                        reject(store.dispatch(activitySyncFailed(this))),
+                    )
             }
             if (this.system.awaitsEdit) {
-                this.editOnServer(id, access_token)
-                    .then(() => {
-                        resolve()
-                    })
-                    .catch(error => {
-                        // console.log('put activity fail', error)
-                        store.dispatch(activitySyncFailed(this))
-                        reject(error)
-                    })
+                return this.editOnServer(id, access_token)
+                    .then(res => resolve(store.dispatch(activitySynced(this))))
+                    .catch(error =>
+                        reject(store.dispatch(activitySyncFailed(this))),
+                    )
             }
             if (this.system.awaitsDelete) {
-                this.deleteOnServer(id, access_token)
-                    .then(() => {
-                        resolve()
-                    })
-                    .catch(error => {
-                        // console.log('delete activity fail', error)
-                        store.dispatch(activitySyncFailed(this))
-                        reject(error)
-                    })
+                return this.deleteOnServer(id, access_token)
+                    .then(() => resolve(store.dispatch(activityDeleted(this))))
+                    .catch(error =>
+                        reject(store.dispatch(activitySyncFailed(this))),
+                    )
             }
         })
     }
@@ -253,121 +234,30 @@ export default class Activity {
 
     createOnServer(id, access_token) {
         this.addLastSyncAttempt()
-        return new Promise((resolve, reject) => {
-            if (this.hasFiles()) {
-                activityFileUpload(id, access_token, this)
-                    .then(res => {
-                        if (res.ok) {
-                            store.dispatch(activitySynced(this))
-                            resolve()
-                        } else {
-                            reject('post file activity fail')
-                        }
-                    })
-                    .catch(error => {
-                        // console.log('upload error', error)
-                        reject(error)
-                    })
-            } else {
-                activityPostData(id, access_token, this)
-                    .then(res => {
-                        if (res.ok) {
-                            store.dispatch(activitySynced(this))
-                            resolve()
-                        } else {
-                            reject('post activity fail')
-                        }
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
-            }
-        })
+
+        const path = store.getState().settings.idinvFilter
+            ? `idinv/${store.getState().user.idinv}/activity/`
+            : `users/${id}/activity/`
+
+        if (this.system?.upload)
+            return uploadRequest(path, 'POST', access_token, this)
+        else return Post(path, access_token, this)
     }
 
     editOnServer(id, access_token) {
         this.addLastSyncAttempt()
 
-        if (store.getState().settings.idinvFilter) {
-            // with idinv filter
-            let idinv = store.getState().user.idinv
-            return new Promise((resolve, reject) => {
-                if (this.data.audioFile || this.data.photoFile) {
-                    activityPutFileIdinv(idinv, access_token, this)
-                        .then(res => {
-                            if (res.ok) {
-                                store.dispatch(activitySynced(this))
-                                resolve()
-                            } else {
-                                // console.log('upload error no id returned')
-                                reject('upload file fail')
-                            }
-                        })
-                        .catch(error => {
-                            // console.log('upload error', error)
-                            reject(error)
-                        })
-                } else {
-                    activityPutIdinv(idinv, access_token, this)
-                        .then(res => {
-                            // console.log('successfully updated', res)
-                            if (res.ok) {
-                                store.dispatch(activitySynced(this))
-                                resolve()
-                            } else {
-                                reject(res)
-                            }
-                        })
-                        .catch(error => {
-                            reject(error)
-                        })
-                }
-            })
-        } else {
-            // without idinv filter
-            return new Promise((resolve, reject) => {
-                if (this.data.audioFile || this.data.photoFile) {
-                    activityPutFile(id, access_token, this)
-                        .then(res => {
-                            if (res.ok) {
-                                store.dispatch(activitySynced(this))
-                                resolve()
-                            } else {
-                                // console.log('upload error no id returned')
-                                reject('upload file fail')
-                            }
-                        })
-                        .catch(error => {
-                            // console.log('upload error', error)
-                            reject(error)
-                        })
-                } else {
-                    activityPutData(id, access_token, this)
-                        .then(res => {
-                            // console.log('successfully updated', res)
-                            store.dispatch(activitySynced(this))
-                            resolve()
-                        })
-                        .catch(error => {
-                            reject(error)
-                        })
-                }
-            })
-        }
+        const path = store.getState().settings.idinvFilter
+            ? `idinv/${store.getState().user.idinv}/activity/${this.id}`
+            : `users/${id}/activity/${this.id}`
+
+        if (this.system?.upload)
+            return uploadRequest(path, 'PUT', access_token, this)
+        else return Put(path, access_token, this)
     }
 
     deleteOnServer(id, access_token) {
-        return new Promise((resolve, reject) => {
-            activityDeleteData(id, access_token, this.id)
-                .then(res => {
-                    // console.log('successfully deleted', res)
-                    store.dispatch(activityDeleted(this))
-                    resolve()
-                })
-                .catch(error => {
-                    reject(error)
-                })
-        })
+        return Delete(`users/${id}/activity/${this.id}`, access_token)
     }
 
     attachLocation() {

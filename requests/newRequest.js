@@ -7,7 +7,7 @@ const defaultHeaders = new Headers({
     'Content-Type': 'application/json',
 })
 
-function request(path, token, method, body) {
+function newRequest(path, token, method, body) {
     const url = apiUrl + path
     let init = {}
     init.method = method
@@ -20,7 +20,10 @@ function request(path, token, method, body) {
     return new Promise((resolve, reject) => {
         fetchWithTimeout(req)
             .then(res => {
-                if (res.ok) return res.json()
+                if (res.ok) {
+                    if (res.status === 204) return {}
+                    return res.json()
+                }
                 reject(JSON.stringify(res))
             })
             .then(res => {
@@ -32,18 +35,18 @@ function request(path, token, method, body) {
     })
 }
 
+export function Get(path, token, body) {
+    return newRequest(path, token, 'GET', body)
+}
+
 export function Post(path, token, body) {
-    return request(path, token, 'POST', body)
+    return newRequest(path, token, 'POST', body)
 }
 
 export function Put(path, token, body) {
-    return request(path, token, 'POST', body)
-}
-
-export function Get(path, token, body) {
-    return request(path, token, 'GET', body)
+    return newRequest(path, token, 'PUT', body)
 }
 
 export function Delete(path, token, body) {
-    return request(path, token, 'DELETE', body)
+    return newRequest(path, token, 'DELETE', body)
 }
