@@ -49,6 +49,8 @@ export default function activityReducer(state = [], { type, payload }) {
                 payload.data,
                 payload.system,
             )
+            if (activity.hasFiles()) activity.system.upload = true
+
             addOrUpdate(state, activity)
             showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
             state = sort(state)

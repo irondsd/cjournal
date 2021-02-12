@@ -13,16 +13,21 @@ function newRequest(path, token, method, body) {
     init.method = method
     init.body = JSON.stringify(body)
     init.headers = defaultHeaders
-    init = signRequest(init, token)
 
-    const req = new Request(url, init)
+    let req = new Request(url, init)
+    req = signRequest(req, token)
 
     return new Promise((resolve, reject) => {
         fetchWithTimeout(req)
             .then(res => {
                 if (res.ok) {
-                    if (res.status === 204) return {}
-                    return res.json()
+                    const contentType = res.headers.get('content-type')
+                    if (
+                        contentType &&
+                        contentType.indexOf('application/json') !== -1
+                    )
+                        return res.json()
+                    else return {}
                 }
                 reject(JSON.stringify(res))
             })
