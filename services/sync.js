@@ -1,17 +1,22 @@
-import { activityFetchData } from '../requests/activityFetchData'
-import { userFetchData } from '../requests/userFetchData'
-import { tasksFetchData } from '../requests/tasksFetchData'
-import { identityUserInfo } from '../requests/identityUserInfo'
 import store from '../redux/store'
 import syncActivities from './syncActivities'
 import Barometer from '../sensors/Barometer'
 import timestamp from '../helpers/timestamp'
 import NavigationService from '../navigation/NavigationService'
-import { logoutUser } from '../redux/actions'
-import { paths } from '../constants'
+import {
+    activityFetchFailed,
+    identityUser,
+    logoutUser,
+    replaceTasks,
+    tasksFetchFailed,
+    updateActivities,
+    updateUser,
+    userFetchFailed,
+} from '../redux/actions'
+import { identityUserInfoUrl, paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
-import { activityFetchIdinv } from '../requests/activityFetchIdinv'
-import { tasksFetchIdinv } from '../requests/tasksFetchIdinv'
+import { Get } from '../requests/newRequest'
+import { UserInfo } from '../requests/identityRequest'
 
 let errors = 0
 let executing = false
@@ -57,20 +62,37 @@ export default async function sync(id, tokens) {
     if (!tokens.access_token) return (executing = false)
     syncActivities(activities, id, tokens.access_token)
         .then(() => {
+            let activityUrl = `users/${id}/activity`
+            let tasksUrl = `users/${id}/tasks`
+            const userUrl = `users/${id}`
+
             if (store.getState().settings.idinvFilter) {
-                let idinv = store.getState().user.idinv
-                store.dispatch(activityFetchIdinv(idinv, tokens.access_token))
-                store.dispatch(tasksFetchIdinv(idinv, tokens.access_token))
-            } else {
-                store.dispatch(activityFetchData(id, tokens.access_token))
-                store.dispatch(tasksFetchData(id, tokens.access_token))
+                activityUrl = `idinv/${store.getState().user.idinv}/activity`
+                tasksUrl = `idinv/${store.getState().user.idinv}/tasks`
             }
 
-            store.dispatch(userFetchData(id, tokens.access_token))
-            store.dispatch(identityUserInfo(tokens.access_token))
+            const promises = [
+                Get(activityUrl, tokens.access_token)
+                    .then(res => store.dispatch(updateActivities(res)))
+                    .catch(err => store.dispatch(activityFetchFailed())),
+                Get(tasksUrl, tokens.access_token)
+                    .then(res => store.dispatch(replaceTasks(res)))
+                    .catch(err => store.dispatch(tasksFetchFailed())),
+                Get(userUrl, tokens.access_token)
+                    .then(res => store.dispatch(updateUser(res)))
+                    .catch(err => store.dispatch(userFetchFailed())),
+                UserInfo(tokens.access_token)
+                    .then(res => store.dispatch(identityUser(res)))
+                    .catch(err => store.dispatch(logoutUser())),
+            ]
 
-            executing = false
-            console.log('sync done')
+            Promise.all(promises)
+                .then(() => {
+                    executing = false
+                })
+                .catch(() => {
+                    executing = false
+                })
         })
         .catch(err => {
             executing = false
