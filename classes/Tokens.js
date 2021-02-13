@@ -1,11 +1,10 @@
 import timestamp from '../helpers/timestamp'
 import store from '../redux/store'
-import identityRefreshToken from '../requests/identityRefreshToken'
 import { tokensReceived, updateUser } from '../redux/actions'
 import { updateTokenBeforeExpiration } from '../constants'
 import { authorize, refresh } from 'react-native-app-auth'
 import { identityServerConfig } from '../constants/config'
-import { loginConfirm } from '../requests/loginConfirm'
+import { Post } from '../requests/newRequest'
 import { Alert } from 'react-native'
 import { strings } from '../localization'
 
@@ -23,8 +22,7 @@ export default class Tokens {
             authorize(identityServerConfig)
                 .then(result => {
                     if (result.accessToken) {
-                        result = tokensConverter(result)
-                        loginConfirm(result.access_token)
+                        Post('login', result.accessToken)
                             .then(res => {
                                 if (res.error) {
                                     Alert.alert(
@@ -60,8 +58,6 @@ export default class Tokens {
                 .then(result => {
                     this.ongoingUpdate = false
                     if (result.accessToken) {
-                        result = tokensConverter(result)
-
                         store.dispatch(tokensReceived(result))
                         resolve(result)
                     }
@@ -79,15 +75,6 @@ export default class Tokens {
     }
 
     expiresSoon() {
-        // 10 minutes before it expires
         return this.token_lifetime - timestamp() < updateTokenBeforeExpiration
-    }
-}
-
-function tokensConverter(tokens) {
-    return {
-        access_token: tokens.accessToken,
-        refresh_token: tokens.refreshToken,
-        token_lifetime: timestamp(new Date(tokens.accessTokenExpirationDate)),
     }
 }
