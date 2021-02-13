@@ -25,7 +25,6 @@ import {
 } from '../redux/actions'
 import NumInput from '../components/SettingsNumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
-import { userFetchData } from '../requests/userFetchData'
 import store from '../redux/store'
 import { decode } from '../helpers/encode'
 
@@ -94,10 +93,10 @@ class SettingsScreen extends Component {
             .then(res => {
                 if (res.ok) {
                     Alert.alert(strings.Success, strings.IdinvChangeSuccess)
-                    store.dispatch(
-                        userFetchData(this.props.id, this.props.access_token),
-                    )
-                    this.props.setIdinvFilter(true)
+                    Get(`users/${this.props.id}`, this.props.access_token)
+                        .then(res => store.dispatch(updateUser(res)))
+                        .catch(err => store.dispatch(userFetchFailed())),
+                        this.props.setIdinvFilter(true)
                     this.setState({ idinvChangeInProgress: false })
                 }
             })
@@ -131,16 +130,18 @@ class SettingsScreen extends Component {
                             devSettingsHidden: !this.state.devSettingsHidden,
                         })
                     }}>
-                    <Text style={styles.information}>{`${displayName} - ${
-                        strings.Version
-                    }: ${version}`}</Text>
+                    <Text
+                        style={
+                            styles.information
+                        }>{`${displayName} - ${strings.Version}: ${version}`}</Text>
                 </TouchableWithoutFeedback>
                 <View />
                 <Text style={styles.name}>{this.props.user.username}</Text>
                 {this.props.user.idinv ? (
-                    <Text style={styles.information}>{`${strings.idinv}: ${
-                        this.props.user.idinv
-                    }`}</Text>
+                    <Text
+                        style={
+                            styles.information
+                        }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
                 ) : null}
                 <View
                     style={
@@ -221,10 +222,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(SettingsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)
 
 const styles = StyleSheet.create({
     container: {

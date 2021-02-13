@@ -3,12 +3,10 @@ import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localization'
-import { activityFetchData } from '../requests/activityFetchData'
 import ActivityListItem from '../components/ActivityListItem'
 import { deleteActivity } from '../redux/actions/activityActions'
 import sync from '../services/sync'
 import store from '../redux/store'
-import { activityFetchIdinv } from '../requests/activityFetchIdinv'
 import syncActivities from '../services/syncActivities'
 
 type Props = {}
@@ -52,25 +50,26 @@ class JournalScreen extends Component<Props> {
     }
 
     runSync() {
-        // running posts and puts
         syncActivities(
             this.props.activity,
             this.props.user.id,
             this.props.tokens.access_token,
-        )
+        ).then(() => {
+            // get
+        })
 
-        // running gets
-        if (this.props.idinvFilter) {
-            this.props.fetchIdinv(
-                this.props.user.idinv,
-                this.props.tokens.access_token,
-            )
-        } else {
-            this.props.fetchData(
-                this.props.user.id,
-                this.props.tokens.access_token,
-            )
-        }
+        // // running gets
+        // if (this.props.idinvFilter) {
+        //     this.props.fetchIdinv(
+        //         this.props.user.idinv,
+        //         this.props.tokens.access_token,
+        //     )
+        // } else {
+        //     this.props.fetchData(
+        //         this.props.user.id,
+        //         this.props.tokens.access_token,
+        //     )
+        // }
     }
 
     _renderItem = ({ item, index }) => {
@@ -131,10 +130,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(JournalScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(JournalScreen)
 
 const styles = StyleSheet.create({
     container: {

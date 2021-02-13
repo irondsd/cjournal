@@ -3,7 +3,6 @@ import {
     identityTokenUrl,
     identityUserInfoUrl,
 } from '../constants'
-import identityRefreshToken from './identityRefreshToken'
 import { signRequest } from './signRequest'
 import { fetchWithTimeout } from './TimeoutReq'
 

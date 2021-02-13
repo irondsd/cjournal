@@ -18,12 +18,11 @@ import Incart from '../resources/svg/incart.svg'
 class RegisterOrLogin extends Component {
     Login = async () => {
         Tokens.receive()
-            // authorization()
             .then(res => {
                 this.props.navigation.navigate(paths.Home)
             })
             .catch(err => {
-                if (err.message.includes('Network error')) {
+                if (err.message?.includes('Network error')) {
                     Alert.alert(strings.NoConn, strings.CantConnectIdentity)
                 }
             })

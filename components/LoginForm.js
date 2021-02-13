@@ -10,23 +10,10 @@ import {
 } from 'react-native'
 import { apiUrl, appColor } from '../constants'
 import { strings } from '../localization'
-import { identityLogin } from '../requests/identityLogin'
 import { connect } from 'react-redux'
 import TouchableIcon from './TouchableIcon'
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: '',
-            password: '',
-        }
-    }
-
-    login() {
-        this.props.login(this.state.username, this.state.password)
-    }
-
     render() {
         return (
             <View style={styles.box}>
@@ -96,10 +83,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    null,
-    mapDispatchToProps,
-)(LoginForm)
+export default connect(null, mapDispatchToProps)(LoginForm)
 
 const width = Dimensions.get('window').width * 0.7
 

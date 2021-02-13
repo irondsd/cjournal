@@ -1,11 +1,11 @@
 import userUpdateIdinv from '../requests/userUpdateIdinv'
 import { stateIniFilePath } from '../constants'
-import { userFetchData } from '../requests/userFetchData'
 import { requestExternalReadPermission } from '../permissions/requestStoragePermission'
-var RNFS = require('react-native-fs')
+import RNFS from 'react-native-fs'
 import store from '../redux/store'
 import { Alert } from 'react-native'
-import { setIdinvFilter } from '../redux/actions'
+import { setIdinvFilter, updateUser, userFetchFailed } from '../redux/actions'
+import { Get } from '../requests/newRequest'
 
 export async function idinvWatcher(id, access_token, idinv) {
     let filepath = stateIniFilePath
@@ -28,8 +28,14 @@ export async function idinvWatcher(id, access_token, idinv) {
                         res => {
                             if (res.ok) {
                                 console.log('idinv updated')
-                                store.dispatch(userFetchData(id, access_token))
-                                store.dispatch(setIdinvFilter(true))
+                                Get(`users/${id}`, access_token)
+                                    .then(res =>
+                                        store.dispatch(updateUser(res)),
+                                    )
+                                    .catch(err =>
+                                        store.dispatch(userFetchFailed()),
+                                    ),
+                                    store.dispatch(setIdinvFilter(true))
                             }
                         },
                     )
