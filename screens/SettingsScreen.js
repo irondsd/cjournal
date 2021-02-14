@@ -56,7 +56,9 @@ class SettingsScreen extends Component {
 
     logout() {
         this.props.logout()
-        this.props.navigation.navigate('Auth')
+        setTimeout(() => {
+            this.props.navigation.navigate('Auth')
+        }, 100)
     }
 
     componentDidUpdate() {
