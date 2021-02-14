@@ -61,10 +61,13 @@ class JournalScreen extends Component<Props> {
             this.props.tokens.access_token,
         ).then(() => {
             const url = this.props.idinvFilter
-                ? `users/${this.props.user.id}/activity`
-                : `idinv/${this.props.user.idinv}/activity`
+                ? `idinv/${this.props.user.idinv}/activity`
+                : `users/${this.props.user.id}/activity`
             Get(url, this.props.tokens.access_token)
-                .then(res => store.dispatch(updateActivities(res)))
+                .then(res => {
+                    console.log(url)
+                    store.dispatch(updateActivities(res))
+                })
                 .catch(err => store.dispatch(activityFetchFailed()))
         })
     }
