@@ -467,7 +467,7 @@ class ActivityDetailsScreen extends Component {
                     <View
                         style={
                             Platform.OS === 'ios'
-                                ? { zIndex: 10, width: '100%' }
+                                ? { zIndex: 20, width: '100%' }
                                 : { width: '100%' }
                         }>
                         <ActivitySelect
