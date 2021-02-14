@@ -4,3 +4,10 @@ export const tokensReceived = tokens => {
         payload: tokens,
     }
 }
+
+export const tokensLoaded = tokens => {
+    return {
+        type: 'TOKENS_LOADED',
+        payload: tokens,
+    }
+}

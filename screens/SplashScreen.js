@@ -14,7 +14,7 @@ import {
     replaceActivities,
     replaceTasks,
     loadNotifications,
-    tokensReceived,
+    tokensLoaded,
     loadSettings,
     setIdinvFilter,
 } from '../redux/actions'
@@ -36,7 +36,7 @@ class SplashScreen extends Component {
         asyncGetAll()
             .then(res => {
                 if (res.settings) this.props.loadSettings(res.settings)
-                if (res.tokens) this.props.tokensReceived(res.tokens)
+                if (res.tokens) this.props.tokensLoaded(res.tokens)
                 if (res.user) {
                     this.props.updateUser(res.user)
                     if (res.user.id && res.tokens.access_token) {
@@ -104,15 +104,12 @@ const mapDispatchToProps = {
     replaceTasks,
     updateUser,
     loadNotifications,
-    tokensReceived,
+    tokensLoaded,
     loadSettings,
     setIdinvFilter,
 }
 
-export default connect(
-    null,
-    mapDispatchToProps,
-)(SplashScreen)
+export default connect(null, mapDispatchToProps)(SplashScreen)
 
 const logoSize = Dimensions.get('window').width / 2
 
