@@ -110,90 +110,89 @@ export default class RegisterScreen extends Component {
                     barStyle="light-content"
                     // hidden={true}
                 />
-                {/* <WebView
-                    source={{
-                        uri:
-                            'http://identity.incart.ru:7050/Identity/Account/Register/',
-                    }}
-                    onNavigationStateChange={this.onNavigationStateChange}
-                /> */}
                 <View>
-                    <View style={styles.iconView}>
+                    <View style={styles.inputContainer}>
                         <Icon
-                            style={styles.icon}
                             name={'at'}
                             color={'#fff'}
                             size={25}
-                        />
-                        <Icon
                             style={styles.icon}
-                            name={'lock'}
-                            color={'#fff'}
-                            size={25}
                         />
-                        <Icon
-                            style={styles.icon}
-                            name={'lock'}
-                            color={'#fff'}
-                            size={25}
+                        <TextInput
+                            placeholder={strings.email}
+                            placeholderTextColor="#dddddd"
+                            style={styles.input}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            autoFocus={true}
+                            ref="email"
+                            returnKeyType="next"
+                            onSubmitEditing={() => this.refs.password.focus()}
+                            keyboardType={'default'}
+                            onChangeText={text => {
+                                this.setState({
+                                    email: text,
+                                })
+                            }}
+                            value={this.state.username}
                         />
                     </View>
-                    <TextInput
-                        placeholder={strings.email}
-                        placeholderTextColor="#dddddd"
-                        style={styles.input}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        autoFocus={true}
-                        ref="email"
-                        returnKeyType="next"
-                        onSubmitEditing={() => this.refs.password.focus()}
-                        keyboardType={'default'}
-                        onChangeText={text => {
-                            this.setState({
-                                email: text,
-                            })
-                        }}
-                        value={this.state.username}
-                    />
-                    <TextInput
-                        placeholder={strings.password}
-                        placeholderTextColor="#dddddd"
-                        style={styles.input}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        autoFocus={false}
-                        ref="password"
-                        returnKeyType="next"
-                        secureTextEntry={true}
-                        onSubmitEditing={() => this.refs.repeatPassword.focus()}
-                        keyboardType={'default'}
-                        onChangeText={text => {
-                            this.setState({
-                                password: text,
-                            })
-                        }}
-                        value={this.state.password}
-                    />
-                    <TextInput
-                        placeholder={strings.repeatPassword}
-                        placeholderTextColor="#dddddd"
-                        style={styles.input}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        autoFocus={false}
-                        ref="repeatPassword"
-                        returnKeyType="next"
-                        secureTextEntry={true}
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                        keyboardType={'default'}
-                        onChangeText={text => {
-                            this.setState({
-                                repeatPassword: text,
-                            })
-                        }}
-                        value={this.state.repeatPassword}
-                    />
+                    <View style={styles.inputContainer}>
+                        <Icon
+                            name={'lock'}
+                            color={'#fff'}
+                            size={25}
+                            style={styles.icon}
+                        />
+                        <TextInput
+                            placeholder={strings.password}
+                            placeholderTextColor="#dddddd"
+                            style={styles.input}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            autoFocus={false}
+                            ref="password"
+                            returnKeyType="next"
+                            secureTextEntry={true}
+                            onSubmitEditing={() =>
+                                this.refs.repeatPassword.focus()
+                            }
+                            keyboardType={'default'}
+                            onChangeText={text => {
+                                this.setState({
+                                    password: text,
+                                })
+                            }}
+                            value={this.state.password}
+                        />
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Icon
+                            name={'lock'}
+                            color={'#fff'}
+                            size={25}
+                            style={styles.icon}
+                        />
+                        <TextInput
+                            placeholder={strings.repeatPassword}
+                            placeholderTextColor="#dddddd"
+                            style={styles.input}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            autoFocus={false}
+                            ref="repeatPassword"
+                            returnKeyType="next"
+                            secureTextEntry={true}
+                            onSubmitEditing={() => this.runCheck()}
+                            keyboardType={'default'}
+                            onChangeText={text => {
+                                this.setState({
+                                    repeatPassword: text,
+                                })
+                            }}
+                            value={this.state.repeatPassword}
+                        />
+                    </View>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
@@ -218,18 +217,20 @@ const styles = StyleSheet.create({
         padding: 30,
         paddingBottom: 30,
     },
-    input: {
+    inputContainer: {
         marginTop: 5,
         padding: 10,
-        paddingLeft: 45,
         height: 50,
-        color: 'white',
-        fontSize: 20,
         backgroundColor: '#ffffff05',
         borderRadius: 10,
         borderColor: '#ffffff44',
         borderWidth: 0.5,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
+    input: { color: 'white', fontSize: 20 },
     button: {
         marginTop: 10,
         padding: 10,
@@ -238,10 +239,6 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: '#ffffff99',
         alignItems: 'center',
-        // shadowOffset: { height: 5 },
-        // shadowColor: '#000',
-        // shadowOpacity: 0.2,
-        // shadowRadius: 10,
         backgroundColor: '#00000004',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -250,14 +247,8 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 17,
     },
-    iconView: {
-        position: 'absolute',
-    },
     icon: {
-        marginTop: 5,
-        height: 50,
-        width: 50,
-        textAlign: 'center',
-        textAlignVertical: 'center',
+        marginLeft: 5,
+        marginRight: 10,
     },
 })
