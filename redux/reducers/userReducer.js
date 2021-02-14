@@ -2,7 +2,7 @@ import { userAsyncSave } from '../../services/asyncStorage'
 import { clearFiles } from '../../services/fs'
 import { scheduleSync } from '../../services/connectivityWatcher'
 import { removeAll } from '../../services/asyncStorage'
-import { resetHits } from '../../services/hints'
+import { resetHints } from '../../services/hints'
 
 const initialState = {
     username: '',
@@ -39,7 +39,7 @@ export default function userReducer(state = initialState, { type, payload }) {
         case 'LOGOUT_USER':
             removeAll()
             clearFiles()
-            resetHits()
+            resetHints()
             return initialState
         default:
             return state

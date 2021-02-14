@@ -13,7 +13,7 @@ export async function addHint(name, item) {
     } else {
         list = [
             item,
-            ...list.filter(function(value, index, arr) {
+            ...list.filter((value, index, arr) => {
                 return value !== item
             }),
         ]
@@ -36,7 +36,7 @@ export async function loadHints(name) {
     })
 }
 
-export function resetHits() {
+export function resetHints() {
     for (const property in defaultHints) {
         AsyncStorage.removeItem(property)
     }
