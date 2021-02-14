@@ -4,10 +4,15 @@ import { connect } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localization'
 import ActivityListItem from '../components/ActivityListItem'
-import { deleteActivity } from '../redux/actions/activityActions'
+import {
+    activityFetchFailed,
+    deleteActivity,
+    updateActivities,
+} from '../redux/actions/activityActions'
 import sync from '../services/sync'
 import store from '../redux/store'
 import syncActivities from '../services/syncActivities'
+import { Get } from '../requests/newRequest'
 
 type Props = {}
 class JournalScreen extends Component<Props> {
@@ -55,21 +60,13 @@ class JournalScreen extends Component<Props> {
             this.props.user.id,
             this.props.tokens.access_token,
         ).then(() => {
-            // get
+            const url = this.props.idinvFilter
+                ? `users/${this.props.user.id}/activity`
+                : `idinv/${this.props.user.idinv}/activity`
+            Get(url, this.props.tokens.access_token)
+                .then(res => store.dispatch(updateActivities(res)))
+                .catch(err => store.dispatch(activityFetchFailed()))
         })
-
-        // // running gets
-        // if (this.props.idinvFilter) {
-        //     this.props.fetchIdinv(
-        //         this.props.user.idinv,
-        //         this.props.tokens.access_token,
-        //     )
-        // } else {
-        //     this.props.fetchData(
-        //         this.props.user.id,
-        //         this.props.tokens.access_token,
-        //     )
-        // }
     }
 
     _renderItem = ({ item, index }) => {
