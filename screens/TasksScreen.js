@@ -5,6 +5,8 @@ import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localization'
 import TasksListItem from '../components/TasksListItem'
 import store from '../redux/store'
+import { Get } from '../requests/newRequest'
+import { replaceTasks, tasksFetchFailed } from '../redux/actions'
 
 type Props = {}
 class TasksScreen extends Component<Props> {
@@ -47,16 +49,12 @@ class TasksScreen extends Component<Props> {
     }
 
     fetch() {
-        // TODO: fix
-        // if (this.props.settings.idinvFilter) {
-        //     let idinv = this.props.user.idinv
-        //     let tokens = this.props.tokens
-        //     this.props.fetchIdinv(idinv, tokens.access_token)
-        // } else {
-        //     let id = this.props.user.id
-        //     let tokens = this.props.tokens
-        //     this.props.fetchData(id, tokens.access_token)
-        // }
+        const url = this.props.idinvFilter
+            ? `users/${this.props.user.id}/tasks`
+            : `idinv/${this.props.user.idinv}/tasks`
+        Get(url, this.props.tokens.access_token)
+            .then(res => store.dispatch(replaceTasks(res)))
+            .catch(err => store.dispatch(tasksFetchFailed()))
     }
 
     _renderItem = ({ item, index }) => {
@@ -90,7 +88,7 @@ function mapStateToProps(state) {
         user: state.user,
         tasks: state.tasks,
         tokens: state.tokens,
-        settings: state.settings,
+        idinvFilter: state.settings.idinvFilter,
     }
 }
 
