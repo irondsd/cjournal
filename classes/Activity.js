@@ -12,39 +12,29 @@ import {
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
 import { defaultDurations, paths, locationRetryLimit } from '../constants'
-import idGenerator from '../helpers/idGenerator'
 import { getUtcOffset } from '../helpers/dateTime'
 import { uploadRequest } from '../requests/uploadRequest'
+import objectId from '../helpers/objectId'
 
 export default class Activity {
-    constructor(
-        id,
-        activity_type,
-        time_started,
-        time_ended,
-        utc_offset,
-        tasks_id,
-        idinv,
-        last_updated,
-        comment,
-        data,
-        system = {},
-    ) {
-        this.id = id
-        this.activity_type = activity_type
-        this.time_started = time_started
-        this.time_ended = time_ended
-        this.utc_offset = utc_offset
-        this.tasks_id = tasks_id
-        this.last_updated = last_updated
-        this.comment = comment
-        this.idinv = idinv
-        this.data = data
-        this.system = system
+    constructor(activity) {
+        this._id = activity._id
+        this.activity_type = activity.activity_type
+        this.time_started = activity.time_started
+        this.time_ended = activity.time_ended
+        this.utc_offset = activity.utc_offset
+        this.task = activity.task
+        this.updated_at = activity.updated_at
+        this.comment = activity.comment
+        this.idinv = activity.idinv
+        this.user = activity.user
+        this.patient = activity.patient
+        this.data = activity.data
+        this.system = activity.system
     }
 
-    setId(id) {
-        this.id = id
+    setId(_id) {
+        this._id = _id
     }
 
     attachToData(data) {
@@ -65,28 +55,25 @@ export default class Activity {
         }
     }
 
-    static instantInit(activity_type, idinv = null, comment = '', data = {}) {
-        return new Activity(
-            idGenerator(store.getState().user.id),
-            activity_type,
-            timestamp(),
-            null,
-            new Date().getTimezoneOffset() * -1,
-            null,
-            idinv,
-            timestamp(),
-            comment,
-            data,
-            { awaitsSync: true },
-        )
+    static instantInit(activity_type, comment = '', data = {}) {
+        return new Activity({
+            _id: objectId(),
+            activity_type: activity_type,
+            time_started: timestamp(),
+            time_ended: undefined,
+            utc_offset: getUtcOffset(),
+            task: null,
+            user: store.getState().user._id,
+            patient: store.getState().user.patient,
+            idinv: store.getState().user.idinv,
+            updated_at: timestamp(),
+            comment: comment,
+            data: data,
+            system: { awaitsSync: true },
+        })
     }
 
-    static instantInitWithDefaultTime(
-        activity_type,
-        idinv = null,
-        comment = '',
-        data = {},
-    ) {
+    static instantInitWithDefaultTime(activity_type, comment = '', data = {}) {
         let time_started = timestamp() - defaultDurations[activity_type].offset
         let time_ended = time_started + defaultDurations[activity_type].duration
         data = {
@@ -94,55 +81,49 @@ export default class Activity {
             default_time: true,
         }
 
-        return new Activity(
-            idGenerator(store.getState().user.id),
-            activity_type,
-            time_started,
-            time_ended,
-            new Date().getTimezoneOffset() * -1,
-            null,
-            idinv,
-            timestamp(),
-            comment,
-            data,
-            { awaitsSync: true },
-        )
+        return new Activity({
+            _id: objectId(),
+            activity_type: activity_type,
+            time_started: timestamp(),
+            time_ended: undefined,
+            utc_offset: getUtcOffset(),
+            task: null,
+            user: store.getState().user._id,
+            patient: store.getState().user.patient,
+            idinv: store.getState().user.idinv,
+            updated_at: timestamp(),
+            comment: comment,
+            data: data,
+            system: { awaitsSync: true },
+        })
     }
 
-    static init(
-        activity_type,
-        time_started,
-        time_ended,
-        tasks_id,
-        idinv,
-        comment,
-        data,
-    ) {
-        return new Activity(
-            idGenerator(store.getState().user.id),
-            activity_type,
-            time_started,
-            time_ended,
-            getUtcOffset(),
-            tasks_id,
-            idinv,
-            timestamp(),
-            comment,
-            data,
-            { awaitsSync: true },
-        )
+    static init(activity_type, time_started, time_ended, task, comment, data) {
+        return new Activity({
+            _id: objectId(),
+            activity_type: activity_type,
+            time_started: time_started,
+            time_ended: time_ended,
+            utc_offset: getUtcOffset(),
+            task: task,
+            user: store.getState().user._id,
+            patient: store.getState().user.patient,
+            idinv: store.getState().user.idinv,
+            updated_at: timestamp(),
+            comment: comment,
+            data: data,
+            system: { awaitsSync: true },
+        })
     }
 
     static instantInitSave(activity_type, navigate) {
-        let idinv = store.getState().user.idinv
-        let activity = Activity.instantInit(activity_type, idinv)
+        const activity = Activity.instantInit(activity_type)
         store.dispatch(addActivity(activity))
         navigate(paths.Home)
     }
 
     static async instantInitWithLocationSave(activity_type) {
-        let idinv = store.getState().user.idinv
-        let activity = Activity.instantInit(activity_type, idinv)
+        let activity = Activity.instantInit(activity_type)
         store.dispatch(addActivity(activity))
 
         // retry location for 5 times
@@ -159,14 +140,14 @@ export default class Activity {
     }
 
     isEqual(other) {
-        if (this.id === other.id && this.id !== null) return true
+        if (this._id === other._id && this._id !== null) return true
         if (this.activity_type !== other.activity_type) return false
         if (this.time_started !== other.time_started) return false
         return true
     }
 
     isNewerThan(other) {
-        return this.last_updated > other.last_updated
+        return this.updated_at > other.updated_at
     }
 
     synced() {
@@ -184,24 +165,24 @@ export default class Activity {
         return false
     }
 
-    sync(id, access_token) {
+    sync(_id, access_token) {
         return new Promise((resolve, reject) => {
             if (this.system.awaitsSync) {
-                return this.createOnServer(id, access_token)
+                return this.createOnServer(_id, access_token)
                     .then(res => resolve(store.dispatch(activitySynced(this))))
                     .catch(error =>
                         reject(store.dispatch(activitySyncFailed(this))),
                     )
             }
             if (this.system.awaitsEdit) {
-                return this.editOnServer(id, access_token)
+                return this.editOnServer(_id, access_token)
                     .then(res => resolve(store.dispatch(activitySynced(this))))
                     .catch(error =>
                         reject(store.dispatch(activitySyncFailed(this))),
                     )
             }
             if (this.system.awaitsDelete) {
-                return this.deleteOnServer(id, access_token)
+                return this.deleteOnServer(_id, access_token)
                     .then(() => resolve(store.dispatch(activityDeleted(this))))
                     .catch(error =>
                         reject(store.dispatch(activitySyncFailed(this))),
@@ -232,32 +213,32 @@ export default class Activity {
         delete this.system
     }
 
-    createOnServer(id, access_token) {
+    createOnServer(_id, access_token) {
         this.addLastSyncAttempt()
 
         const path = store.getState().settings.idinvFilter
             ? `idinv/${store.getState().user.idinv}/activity/`
-            : `users/${id}/activity/`
+            : `users/${_id}/activity/`
 
         if (this.system?.upload)
             return uploadRequest(path, 'POST', access_token, this)
         else return Post(path, access_token, this)
     }
 
-    editOnServer(id, access_token) {
+    editOnServer(_id, access_token) {
         this.addLastSyncAttempt()
 
         const path = store.getState().settings.idinvFilter
-            ? `idinv/${store.getState().user.idinv}/activity/${this.id}`
-            : `users/${id}/activity/${this.id}`
+            ? `idinv/${store.getState().user.idinv}/activity/${this._id}`
+            : `users/${_id}/activity/${this._id}`
 
         if (this.system?.upload)
             return uploadRequest(path, 'PUT', access_token, this)
         else return Put(path, access_token, this)
     }
 
-    deleteOnServer(id, access_token) {
-        return Delete(`users/${id}/activity/${this.id}`, access_token)
+    deleteOnServer(_id, access_token) {
+        return Delete(`users/${_id}/activity/${this._id}`, access_token)
     }
 
     attachLocation() {
