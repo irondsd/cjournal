@@ -57,12 +57,12 @@ class JournalScreen extends Component<Props> {
     runSync() {
         syncActivities(
             this.props.activity,
-            this.props.user.id,
+            this.props.user._id,
             this.props.tokens.access_token,
         ).then(() => {
             const url = this.props.idinvFilter
                 ? `idinv/${this.props.user.idinv}/activity`
-                : `users/${this.props.user.id}/activity`
+                : `users/${this.props.user._id}/activity`
             Get(url, this.props.tokens.access_token)
                 .then(res => {
                     console.log(url)

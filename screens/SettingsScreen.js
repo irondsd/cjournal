@@ -91,11 +91,11 @@ class SettingsScreen extends Component {
             idinvSetTo: idinv,
             idinvChangeInProgress: true,
         })
-        userUpdateIdinv(this.props.id, this.props.access_token, idinv)
+        userUpdateIdinv(this.props._id, this.props.access_token, idinv)
             .then(res => {
                 if (res.ok) {
                     Alert.alert(strings.Success, strings.IdinvChangeSuccess)
-                    Get(`users/${this.props.id}`, this.props.access_token)
+                    Get(`users/${this.props._id}`, this.props.access_token)
                         .then(res => store.dispatch(updateUser(res)))
                         .catch(err => store.dispatch(userFetchFailed())),
                         this.props.setIdinvFilter(true)
@@ -204,7 +204,7 @@ function mapStateToProps(state) {
         notifications: state.settings.notifications,
         idinvFilter: state.settings.idinvFilter,
         notificationDelay: state.settings.notificationDelay,
-        id: state.user.id,
+        _id: state.user._id,
         access_token: state.tokens.access_token,
     }
 }

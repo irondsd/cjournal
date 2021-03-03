@@ -242,30 +242,30 @@ class ActivityDetailsScreen extends Component {
     }
 
     update() {
-        let originalActivity = new Activity(
-            this.state.originalActivity.id,
-            this.state.originalActivity.activity_type,
-            this.state.originalActivity.time_started,
-            this.state.originalActivity.time_ended,
-            this.state.originalActivity.utc_offset,
-            this.state.originalActivity.tasks_id,
-            this.state.originalActivity.idinv,
-            this.state.originalActivity.last_updated,
-            this.state.originalActivity.comment,
-            this.state.originalActivity.data,
-        )
-        let activity = new Activity(
-            this.state.activity.id,
-            this.state.activity.activity_type,
-            this.state.activity.time_started,
-            this.state.activity.time_ended,
-            this.state.activity.utc_offset,
-            this.state.activity.tasks_id,
-            this.props.user.idinv,
-            timestamp(),
-            this.state.activity.comment,
-            this.state.activity.data,
-        )
+        const originalActivity = new Activity({
+            _id: this.state.originalActivity._id,
+            activity_type: this.state.originalActivity.activity_type,
+            time_started: this.state.originalActivity.time_started,
+            time_ended: this.state.originalActivity.time_ended,
+            utc_offset: this.state.originalActivity.utc_offset,
+            task: this.state.originalActivity.task,
+            idinv: this.state.originalActivity.idinv,
+            last_updated: this.state.originalActivity.last_updated,
+            comment: this.state.originalActivity.comment,
+            data: this.state.originalActivity.data,
+        })
+        const activity = new Activity({
+            _id: this.state.activity._id,
+            activity_type: this.state.activity.activity_type,
+            time_started: this.state.activity.time_started,
+            time_ended: this.state.activity.time_ended,
+            utc_offset: this.state.activity.utc_offset,
+            task: this.state.activity.task,
+            idinv: this.props.user.idinv,
+            updated_at: timestamp(),
+            comment: this.state.activity.comment,
+            data: this.state.activity.data,
+        })
         this.props.update(originalActivity, activity)
         this.setState({
             originalActivity: activity,

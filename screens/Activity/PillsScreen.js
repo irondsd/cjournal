@@ -32,7 +32,7 @@ class PillsScreen extends Component {
             pills: [],
             input: false,
             activity_type: null,
-            tasks_id: null,
+            task: null,
         }
 
         this.changeDateTime = this.changeDateTime.bind(this)
@@ -71,25 +71,25 @@ class PillsScreen extends Component {
         }
         this.setState({ pills: pills })
 
-        let tasks_id = findLatestTask(this.props.tasks, activity_type)
+        let task = findLatestTask(this.props.tasks, activity_type)
         let pill = null
         let task = null
 
         if (
             this.props.navigation.state.params &&
-            this.props.navigation.state.params.tasks_id
+            this.props.navigation.state.params.task
         ) {
-            tasks_id = this.props.navigation.state.params.tasks_id
+            task = this.props.navigation.state.params.task
         }
 
-        task = findTaskById(this.props.tasks, tasks_id)
+        task = findTaskById(this.props.tasks, task)
         if (task) {
             pill = task.data.pill
         }
 
         this.setState({
             pill: pill,
-            tasks_id: tasks_id,
+            task: task,
         })
     }
 
@@ -104,7 +104,7 @@ class PillsScreen extends Component {
             this.state.activity_type,
             timestamp(this.state.dateTime),
             null,
-            this.state.tasks_id ? this.state.tasks_id : null,
+            this.state.task ? this.state.task : null,
             this.props.user.idinv,
             '',
             { pill: this.state.pill },
@@ -196,10 +196,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(PillsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PillsScreen)
 
 const styles = StyleSheet.create({
     center: {

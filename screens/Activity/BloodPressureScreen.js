@@ -63,13 +63,13 @@ class BloodPressureScreen extends Component {
         let activity_type = this.props.navigation.state.params.sender
         let dateTime = new Date()
         dateTime.setMilliseconds(0)
-        let tasks_id = null
-        tasks_id = findLatestTask(this.props.tasks, activity_type)
+        let task = null
+        task = findLatestTask(this.props.tasks, activity_type)
         if (
             this.props.navigation.state.params &&
-            this.props.navigation.state.params.tasks_id
+            this.props.navigation.state.params.task
         ) {
-            tasks_id = this.props.navigation.state.params.tasks_id
+            task = this.props.navigation.state.params.task
         }
         dateTime.setSeconds(
             dateTime.getSeconds() - defaultDurations[activity_type].offset,
@@ -78,7 +78,7 @@ class BloodPressureScreen extends Component {
         this.setState({
             dateTime: dateTime,
             activity_type: activity_type,
-            tasks_id: tasks_id,
+            task: task,
             duration: duration / 60,
         })
     }
@@ -202,10 +202,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(BloodPressureScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(BloodPressureScreen)
 
 const styles = StyleSheet.create({
     input: {

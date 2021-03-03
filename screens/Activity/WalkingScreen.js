@@ -63,7 +63,7 @@ class WalkingScreen extends Component {
 
         this.state = {
             timer: '0:00',
-            tasks_id: null,
+            task: null,
             progress: 100,
             distance: 0,
             steps: 0,
@@ -85,17 +85,17 @@ class WalkingScreen extends Component {
     componentDidMount() {
         requestLocationPermissions()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
-        let tasks_id = findLatestTask(this.props.tasks, activityTypes.Walking)
+        let task = findLatestTask(this.props.tasks, activityTypes.Walking)
         if (
             this.props.navigation.state.params &&
-            this.props.navigation.state.params.tasks_id
+            this.props.navigation.state.params.task
         ) {
-            tasks_id = this.props.navigation.state.params.tasks_id
-            cancelNotification(this.props.navigation.state.params.tasks_id)
+            task = this.props.navigation.state.params.task
+            cancelNotification(this.props.navigation.state.params.task)
         }
         this.setState({
             timer: secs2time(walkingDuration),
-            tasks_id: tasks_id,
+            task: task,
         })
     }
 
@@ -113,7 +113,7 @@ class WalkingScreen extends Component {
 
     record() {
         // console.log('record', timestamp(), this.state)
-        if (this.state.tasks_id) cancelNotification(this.state.tasks_id)
+        if (this.state.task) cancelNotification(this.state.task)
 
         let data = {
             steps: this.state.steps,
@@ -125,7 +125,7 @@ class WalkingScreen extends Component {
             activityTypes.Walking,
             this.state.timestampStart,
             timestamp(),
-            this.state.tasks_id,
+            this.state.task,
             this.props.idinv,
             '',
             data,
@@ -272,10 +272,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(WalkingScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(WalkingScreen)
 
 const styles = StyleSheet.create({
     stats: {

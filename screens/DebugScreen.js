@@ -35,7 +35,7 @@ class DebugScreen extends Component {
                     title={'run idinv watcher'}
                     onPress={() => {
                         idinvWatcher(
-                            this.props.user.id,
+                            this.props.user._id,
                             this.props.tokens.access_token,
                             this.props.user.idinv,
                         )
@@ -44,7 +44,7 @@ class DebugScreen extends Component {
                 <SaveButton
                     title={'run sync'}
                     onPress={() => {
-                        sync(this.props.user.id, this.props.tokens)
+                        sync(this.props.user._id, this.props.tokens)
                     }}
                 />
                 <SaveButton
@@ -78,7 +78,4 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(DebugScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(DebugScreen)

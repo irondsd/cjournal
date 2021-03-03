@@ -39,9 +39,9 @@ class SplashScreen extends Component {
                 if (res.tokens) this.props.tokensLoaded(res.tokens)
                 if (res.user) {
                     this.props.updateUser(res.user)
-                    if (res.user.id && res.tokens.access_token) {
+                    if (res.user._id && res.tokens.access_token) {
                         idinvWatcher(
-                            res.user.id,
+                            res.user._id,
                             res.tokens.access_token,
                             res.user.idinv,
                         )

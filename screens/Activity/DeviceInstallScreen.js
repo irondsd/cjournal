@@ -30,27 +30,25 @@ class DeviceInstallScreen extends Component {
     state = {
         opneScanner: false,
         device_id: '',
-        tasks_id: null,
+        task: null,
     }
 
     componentDidMount() {
         this.setState({
-            tasks_id: this.props.navigation.state.params
-                ? this.props.navigation.state.params.tasks_id
+            task: this.props.navigation.state.params
+                ? this.props.navigation.state.params.task
                 : null,
         })
     }
 
     record() {
-        let tasks_id = this.state.tasks_id
-            ? parseInt(this.state.tasks_id)
-            : null
-        if (tasks_id) cancelLocalNotification(tasks_id)
+        let task = this.state.task ? parseInt(this.state.task) : null
+        if (task) cancelLocalNotification(task)
         let activity = Activity.init(
             activityTypes.DeviceInstall,
             timestamp(),
             null,
-            tasks_id,
+            task,
             this.props.user.idinv,
             '',
             { device_id: this.state.device_id },
@@ -138,7 +136,4 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(DeviceInstallScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(DeviceInstallScreen)

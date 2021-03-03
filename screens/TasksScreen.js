@@ -51,7 +51,7 @@ class TasksScreen extends Component<Props> {
     fetch() {
         const url = this.props.idinvFilter
             ? `idinv/${this.props.user.idinv}/tasks`
-            : `users/${this.props.user.id}/tasks`
+            : `users/${this.props.user._id}/tasks`
         Get(url, this.props.tokens.access_token)
             .then(res => store.dispatch(replaceTasks(res)))
             .catch(err => store.dispatch(tasksFetchFailed()))

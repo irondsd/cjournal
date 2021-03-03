@@ -60,7 +60,7 @@ class StairsScreen extends Component {
             metersMax: 0,
             button_text: strings.Start,
             started: false,
-            tasks_id: null,
+            task: null,
             mmHg: 0,
             steps: 0,
             distance: 0,
@@ -101,19 +101,19 @@ class StairsScreen extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
-        let tasks_id = findLatestTask(this.props.tasks, activityTypes.Stairs)
+        let task = findLatestTask(this.props.tasks, activityTypes.Stairs)
         if (
             this.props.navigation.state.params &&
-            this.props.navigation.state.params.tasks_id
+            this.props.navigation.state.params.task
         ) {
-            tasks_id = this.props.navigation.state.params.tasks_id
+            task = this.props.navigation.state.params.task
         }
 
         // zero it out
         this.setState({
             startDate: new Date(),
             meters: '0.0',
-            tasks_id: tasks_id,
+            task: task,
             steps: 0,
             distance: 0,
         })
@@ -127,10 +127,8 @@ class StairsScreen extends Component {
     }
 
     record() {
-        let tasks_id = this.state.tasks_id
-            ? parseInt(this.state.tasks_id)
-            : null
-        if (tasks_id) cancelNotification(tasks_id)
+        let task = this.state.task ? parseInt(this.state.task) : null
+        if (task) cancelNotification(task)
         endDate = new Date()
         data = {
             meters: this.state.meters,
@@ -144,7 +142,7 @@ class StairsScreen extends Component {
             activityTypes.Stairs,
             timestamp(this.state.startDate),
             timestamp(),
-            tasks_id,
+            task,
             this.props.idinv,
             '',
             data,
@@ -245,10 +243,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(StairsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(StairsScreen)
 
 const styles = StyleSheet.create({
     mainContent: {

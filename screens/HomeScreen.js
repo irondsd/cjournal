@@ -46,8 +46,8 @@ class HomeScreen extends Component {
     }
 
     runSync() {
-        if (this.props.user.id && this.props.tokens) {
-            sync(this.props.user.id, this.props.tokens)
+        if (this.props.user._id && this.props.tokens) {
+            sync(this.props.user._id, this.props.tokens)
         }
     }
 
@@ -132,7 +132,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(
-    mapStateToProps,
-    null,
-)(HomeScreen)
+export default connect(mapStateToProps, null)(HomeScreen)
