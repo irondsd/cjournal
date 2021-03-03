@@ -10,7 +10,7 @@ import { activityPaths } from '../constants'
 export function setupNotifications() {
     // console.log('notifications service initiated')
     PushNotification.configure({
-        onNotification: function(notification) {
+        onNotification: function (notification) {
             onNotificationOpened(notification)
         },
         permissions: {
@@ -23,9 +23,9 @@ export function setupNotifications() {
     })
 }
 
-export function scheduleNotification(id, title, message, dateTime) {
+export function scheduleNotification(_id, title, message, dateTime) {
     PushNotification.localNotificationSchedule({
-        id: id.toString(),
+        _id: _id.toString(),
         title: strings[title],
         message: message,
         vibrate: true,
@@ -37,25 +37,25 @@ export function scheduleNotification(id, title, message, dateTime) {
         ongoing: false, // (optional) set whether this is an "ongoing" notification
         soundName: 'default',
     })
-    // console.log(`not ${id} scheduled for ${dateTime.toLocaleTimeString()}`)
+    // console.log(`not ${_id} scheduled for ${dateTime.toLocaleTimeString()}`)
 }
 
-export function cancelLocalNotification(id) {
-    // console.log('cancelled notification', id)
-    PushNotification.cancelLocalNotifications({ id: id.toString() })
-    PushNotification.clearLocalNotification(id)
+export function cancelLocalNotification(_id) {
+    // console.log('cancelled notification', _id)
+    PushNotification.cancelLocalNotifications({ _id: _id.toString() })
+    PushNotification.clearLocalNotification(_id)
 }
 
-export function dismissLocalNotification(id) {
-    id = parseInt(id)
-    PushNotification.clearLocalNotification(id)
+export function dismissLocalNotification(_id) {
+    _id = parseInt(_id)
+    PushNotification.clearLocalNotification(_id)
 }
 
 function onNotificationOpened(notification) {
-    dismissLocalNotification(notification.id)
+    dismissLocalNotification(notification._id)
 
     if (notification.action === strings.RemindLater) {
-        cancelNotification(notification.id)
+        cancelNotification(notification._id)
 
         // reschedule
         let dateTime = new Date()
@@ -63,7 +63,7 @@ function onNotificationOpened(notification) {
             dateTime.getMinutes() + store.getState().settings.notificationDelay,
         )
         scheduleNotification(
-            notification.id,
+            notification._id,
             notification.title,
             notification.message,
             dateTime,
@@ -74,18 +74,18 @@ function onNotificationOpened(notification) {
             )}`,
         )
     } else {
-        let id = notification.id
-        if (id && typeof id.valueOf() === 'string') id = parseInt(id)
+        let _id = notification._id
+        if (_id && typeof _id.valueOf() === 'string') _id = parseInt(_id)
 
         let task = store.getState().tasks.find(task => {
-            return task.id == id
+            return task._id == _id
         })
 
         if (task && !task.isCompleted()) {
             let navigateTo = activityPaths[task.activity_type]
 
             NavigationService.navigate(navigateTo, {
-                tasks_id: id,
+                task: _id,
                 sender: task.activity_type,
             })
         } else {

@@ -33,12 +33,12 @@ export const deleteActivity = activity => {
     }
 }
 
-export const activitySetId = (id, activity) => {
+export const activitySetId = (_id, activity) => {
     return {
         type: 'ACTIVITY_SET_ID',
         payload: {
             activity: activity,
-            id: id,
+            _id: _id,
         },
     }
 }

@@ -17,17 +17,17 @@ class App extends Component {
                 startOnBoot: true, // <-- Android-only
             },
             () => {
-                if (this.props.id && this.props.tokens) {
-                    sync(this.props.id, this.props.tokens)
+                if (this.props.user._id && this.props.tokens) {
+                    sync(this.props.user._id, this.props.tokens)
                     if (
-                        this.props.id &&
+                        this.props.user._id &&
                         this.props.tokens.access_token &&
-                        this.props.idinv
+                        this.props.user.idinv
                     )
                         idinvWatcher(
-                            this.props.id,
+                            this.props.user._id,
                             this.props.tokens.access_token,
-                            this.props.idinv,
+                            this.props.user.idinv,
                         )
                 } else {
                     console.log(`Sync aborted, not logged in`)
@@ -69,10 +69,9 @@ class App extends Component {
 
 function mapStateToProps(state) {
     const isLoggedIn = state.user.isLoggedIn
-    const id = state.user.id
+    const user = state.user
     const tokens = state.tokens
-    const idinv = state.user.idinv
-    return { isLoggedIn, id, tokens, idinv }
+    return { isLoggedIn, user, tokens, idinv }
 }
 
 export default connect(mapStateToProps)(App)

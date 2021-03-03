@@ -34,7 +34,7 @@ export default class TasksListItem extends Component {
         let navigateTo = activityPaths[this.props.item.activity_type]
 
         this.props.navigation.navigate(navigateTo, {
-            tasks_id: this.props.item.id,
+            task: this.props.item._id,
             sender: this.props.item.activity_type,
         })
     }

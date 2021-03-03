@@ -10,7 +10,7 @@ export default function tasksReducer(state = [], { type, payload }) {
 
             state = payload.map(task => {
                 task = new Task(
-                    task.id,
+                    task._id,
                     task.activity_type,
                     task.time,
                     task.completed,
@@ -32,7 +32,7 @@ export default function tasksReducer(state = [], { type, payload }) {
             return state
         case 'TASK_COMPLETE':
             for (task of state) {
-                if (task.id === payload) task.complete()
+                if (task._id === payload) task.complete()
             }
             save(state)
             return state
@@ -40,9 +40,9 @@ export default function tasksReducer(state = [], { type, payload }) {
             scheduleSync()
             return state
         case 'ADD_ACTIVITY':
-            if (payload.tasks_id && !payload.data.failed) {
+            if (payload.task && !payload.data.failed) {
                 for (task in state) {
-                    if (task.id == payload.tasks_id) {
+                    if (task._id == payload.task) {
                         task.complete()
                     }
                 }

@@ -7,7 +7,7 @@ import { Alert } from 'react-native'
 import { setIdinvFilter, updateUser, userFetchFailed } from '../redux/actions'
 import { Get } from '../requests/newRequest'
 
-export async function idinvWatcher(id, access_token, idinv) {
+export async function idinvWatcher(_id, access_token, idinv) {
     let filepath = stateIniFilePath
     // console.log('reading', filepath)
 
@@ -28,7 +28,7 @@ export async function idinvWatcher(id, access_token, idinv) {
                         res => {
                             if (res.ok) {
                                 console.log('idinv updated')
-                                Get(`users/${id}`, access_token)
+                                Get(`users/${_id}`, access_token)
                                     .then(res =>
                                         store.dispatch(updateUser(res)),
                                     )

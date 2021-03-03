@@ -13,7 +13,7 @@ export function loginConfirm(access_token) {
         })
             .then(res => res.json())
             .then(res => {
-                idinvWatcher(res.id, access_token, res.idinv)
+                idinvWatcher(res._id, access_token, res.idinv)
                 resolve(res)
             })
             .catch(err => {

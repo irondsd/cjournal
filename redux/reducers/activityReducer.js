@@ -18,37 +18,13 @@ export default function activityReducer(state = [], { type, payload }) {
     switch (type) {
         case 'REPLACE_ACTIVITIES':
             state = payload.map(activity => {
-                return new Activity(
-                    activity.id,
-                    activity.activity_type,
-                    activity.time_started,
-                    activity.time_ended,
-                    activity.utc_offset,
-                    activity.tasks_id,
-                    activity.idinv,
-                    activity.last_updated,
-                    activity.comment,
-                    activity.data,
-                    activity.system,
-                )
+                return new Activity({ ...activity })
             })
             save(state)
             return state
 
         case 'ADD_ACTIVITY':
-            let activity = new Activity(
-                payload.id,
-                payload.activity_type,
-                payload.time_started,
-                payload.time_ended,
-                payload.utc_offset,
-                payload.tasks_id,
-                payload.idinv,
-                payload.last_updated,
-                payload.comment,
-                payload.data,
-                payload.system,
-            )
+            let activity = new Activity({ ...payload })
             if (activity.hasFiles()) activity.system.upload = true
 
             addOrUpdate(state, activity)
@@ -63,20 +39,7 @@ export default function activityReducer(state = [], { type, payload }) {
                     return !activity.synced()
                 }),
                 ...payload.map(activity => {
-                    activity = new Activity(
-                        activity.id,
-                        activity.activity_type,
-                        activity.time_started,
-                        activity.time_ended,
-                        activity.utc_offset,
-                        activity.tasks_id,
-                        activity.idinv,
-                        activity.last_updated,
-                        activity.comment,
-                        activity.data,
-                        {},
-                        activity.idinv,
-                    )
+                    activity = new Activity({ ...activity })
                     addOrUpdate(state, activity)
                     return activity
                 }),
@@ -107,7 +70,7 @@ export default function activityReducer(state = [], { type, payload }) {
             save(state)
             return state
         case 'ACTIVITY_SET_ID':
-            payload.activity.setId(payload.id)
+            payload.activity.setId(payload._id)
             save(state)
             return state
         case 'ACTIVITY_SYNC_FAILED':

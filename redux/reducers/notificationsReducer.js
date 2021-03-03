@@ -36,11 +36,11 @@ export default function notificationsReducer(state = [], { type, payload }) {
                         }
                     }
                     // cheching if we have a notification at this time already
-                    let vacant = isVacant(state, dateTime, payload[i].id)
+                    let vacant = isVacant(state, dateTime, payload[i]._id)
                     if (!vacant) dateTime.setHours(dateTime.getHours() + 1) // if so, adding 1 hour
 
                     let notification = {
-                        id: payload[i].id,
+                        _id: payload[i]._id,
                         time: (dateTime.getTime() + '').substring(0, 10),
                     }
 
@@ -53,7 +53,7 @@ export default function notificationsReducer(state = [], { type, payload }) {
                                 state.splice(i, 1) // removing
                                 state.push(notification)
                                 scheduleNotification(
-                                    payload[i].id,
+                                    payload[i]._id,
                                     strings[payload[i].activity_type],
                                     strings.notifText,
                                     dateTime,
@@ -65,7 +65,7 @@ export default function notificationsReducer(state = [], { type, payload }) {
                     if (!found) {
                         state.push(notification)
                         scheduleNotification(
-                            payload[i].id,
+                            payload[i]._id,
                             payload[i].activity_type,
                             strings.notifText,
                             dateTime,
@@ -78,13 +78,13 @@ export default function notificationsReducer(state = [], { type, payload }) {
                 index = findExists(payload, state[i])
                 if (index === false) {
                     //not found, removing notification
-                    cancelLocalNotification(state[i].id)
+                    cancelLocalNotification(state[i]._id)
                     state.splice(i, 1)
                 } else {
                     // there's id, let's check if it's completed
                     if (payload[index].completed === 1) {
                         // it is, so removing
-                        cancelLocalNotification(state[i].id)
+                        cancelLocalNotification(state[i]._id)
                         state.splice(i, 1)
                     }
                 }
@@ -126,7 +126,7 @@ function save(notifications) {
 }
 
 function areEqual(obj1, obj2) {
-    if (obj1.id == obj2.id) {
+    if (obj1._id == obj2._id) {
         return true
     } else {
         return false
@@ -143,12 +143,12 @@ function findExists(state, notification) {
     return false
 }
 
-function isVacant(state, dateTime, id) {
+function isVacant(state, dateTime, _id) {
     let vacant = true
 
     for (let i = 0; i < state.length; i++) {
         if (state[i].time == (dateTime.getTime() + '').substring(0, 10)) {
-            if (state[i].id != id) {
+            if (state[i]._id != _id) {
                 vacant = false
             }
         }
