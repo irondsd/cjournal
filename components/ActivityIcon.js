@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { activityTypes, imgSize } from '../constants'
 import PropTypes from 'prop-types'
-import Walking from '../resources/svg/6minwalking.svg'
+import WalkingTest from '../resources/svg/6minwalking.svg'
 import ElectrodeReplacement from '../resources/svg/electrodereplacement.svg'
 import PhysicalLoad from '../resources/svg/physicalload.svg'
 import Straining from '../resources/svg/straining.svg'
@@ -312,9 +312,9 @@ class ActivityIcon extends Component {
                         fill={this.props.fill}
                     />
                 )
-            case activityTypes.Walking:
+            case activityTypes.WalkingTest:
                 return (
-                    <Walking
+                    <WalkingTest
                         width={this.props.size}
                         height={this.props.size}
                         fill={this.props.fill}
