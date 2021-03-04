@@ -40,7 +40,7 @@ import VisionDisturbances from '../resources/svg/vision.svg'
 import CuffFix from '../resources/svg/cufffix.svg'
 import OtherEmotions from '../resources/svg/otheremotions.svg'
 import Shower from '../resources/svg/shower.svg'
-import NormalWalking from '../resources/svg/walking.svg'
+import Walking from '../resources/svg/walking.svg'
 import DeepBreathing from '../resources/svg/deepbreathing.svg'
 import OtherPain from '../resources/svg/otherpain.svg'
 import Sleep from '../resources/svg/sleep.svg'
@@ -312,9 +312,9 @@ class ActivityIcon extends Component {
                         fill={this.props.fill}
                     />
                 )
-            case activityTypes.NormalWalking:
+            case activityTypes.Walking:
                 return (
-                    <NormalWalking
+                    <Walking
                         width={this.props.size}
                         height={this.props.size}
                         fill={this.props.fill}

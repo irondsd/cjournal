@@ -7,7 +7,7 @@ export const activityTypes = {
     ElectrodeReplacement: 'ElectrodeReplacement',
     Running: 'Running',
     Bicycling: 'Bicycling',
-    NormalWalking: 'NormalWalking',
+    WalkingTest: 'WalkingTest',
     Syncope: 'Syncope',
     Trainer: 'Trainer',
     PhysicalLoad: 'PhysicalLoad',

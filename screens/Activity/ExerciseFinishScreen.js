@@ -42,17 +42,9 @@ class FinishScreen extends Component {
             activity: this.props.navigation.state.params.activity,
             stats:
                 this.props.navigation.state.params.activity.activity_type ==
-                'Walking'
-                    ? `${strings.Steps}: ${
-                          this.props.navigation.state.params.activity.data.steps
-                      }, ${strings.Distance}: ${
-                          this.props.navigation.state.params.activity.data
-                              .distance
-                      } ${strings.Meters}`
-                    : `${strings.Meters}: ${
-                          this.props.navigation.state.params.activity.data
-                              .meters
-                      }`,
+                'WalkingTest'
+                    ? `${strings.Steps}: ${this.props.navigation.state.params.activity.data.steps}, ${strings.Distance}: ${this.props.navigation.state.params.activity.data.distance} ${strings.Meters}`
+                    : `${strings.Meters}: ${this.props.navigation.state.params.activity.data.meters}`,
         })
     }
 
@@ -138,10 +130,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(FinishScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(FinishScreen)
 
 const imgSize = Dimensions.get('window').width / 2.5
 

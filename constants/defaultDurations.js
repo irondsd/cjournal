@@ -4,7 +4,7 @@ export const defaultDurations = {
     ElectrodeReplacement: { duration: 60, offset: 60 },
     Running: { duration: 600, offset: 0 },
     Bicycling: { duration: 600, offset: 0 },
-    NormalWalking: { duration: 600, offset: 0 },
+    Walking: { duration: 600, offset: 0 },
     Syncope: { duration: 300, offset: 300 },
     Trainer: { duration: 600, offset: 0 },
     Sex: { duration: 600, offset: 0 },

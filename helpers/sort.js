@@ -12,16 +12,6 @@ export function sortActivities(array) {
     return array.sort(compare)
 }
 
-// export function sortTasks(array) {
-//     function compare(a, b) {
-//         if (a.time > b.time) return -1
-//         if (a.time < b.time) return 1
-//         return 0
-//     }
-
-//     return array.sort(compare)
-// }
-
 export function sortNumbers(array) {
     function compare(a, b) {
         return a - b

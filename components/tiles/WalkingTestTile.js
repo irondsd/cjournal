@@ -3,9 +3,7 @@ import Tile from '../Tile'
 import { strings } from '../../localization'
 import { activityTypes, paths } from '../../constants'
 
-import Activity from '../../classes/Activity'
-
-const name = activityTypes.NormalWalking
+const name = activityTypes.WalkingTest
 
 export default class ScreenTile extends Component {
     render() {
@@ -17,15 +15,10 @@ export default class ScreenTile extends Component {
                 shadeColor="#b3caeb"
                 color="#3e77cc"
                 onPress={() => {
-                    Activity.instantInitSave(
-                        name,
-                        this.props.navigation.navigate,
-                    )
+                    this.props.navigation.navigate(paths.WalkingTest)
                 }}
                 onLongPress={() => {
-                    this.props.navigation.navigate(paths.TimePick, {
-                        sender: name,
-                    })
+                    this.props.navigation.navigate(paths.WalkingTest)
                 }}
             />
         )

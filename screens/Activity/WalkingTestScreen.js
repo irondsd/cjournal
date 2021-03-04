@@ -40,9 +40,9 @@ import { createIconSetFromFontello } from 'react-native-vector-icons'
 
 let timerOn = false
 
-class WalkingScreen extends Component {
+class WalkingTestScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
-        title: strings.Walking,
+        title: strings.WalkingTest,
         headerLeft: (
             <BackButton
                 goBack={() => {
@@ -85,7 +85,7 @@ class WalkingScreen extends Component {
     componentDidMount() {
         requestLocationPermissions()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
-        let task = findLatestTask(this.props.tasks, activityTypes.Walking)
+        let task = findLatestTask(this.props.tasks, activityTypes.WalkingTest)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.task
@@ -122,7 +122,7 @@ class WalkingScreen extends Component {
         }
 
         let activity = Activity.init(
-            activityTypes.Walking,
+            activityTypes.WalkingTest,
             this.state.timestampStart,
             timestamp(),
             this.state.task,
@@ -272,7 +272,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalkingScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(WalkingTestScreen)
 
 const styles = StyleSheet.create({
     stats: {

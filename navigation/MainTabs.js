@@ -21,7 +21,7 @@ import TimePickScreen from '../screens/Activity/TimePickScreen'
 import ActivityScreen from '../screens/nav/ActivityScreen'
 import PhysicalLoadScreen from '../screens/nav/PhysicalLoadScreen'
 import ServiceScreen from '../screens/nav/ServiceScreen'
-import WalkingScreen from '../screens/Activity/WalkingScreen'
+import WalkingTestScreen from '../screens/Activity/WalkingTestScreen'
 import SleepScreen from '../screens/Activity/SleepScreen'
 import ExerciseFinishScreen from '../screens/Activity/ExerciseFinishScreen'
 import TakingMedicineScreen from '../screens/nav/TakingMedicineScreen'
@@ -57,7 +57,7 @@ const HomeStack = createStackNavigator({
     Activity: ActivityScreen,
     PhysicalLoad: PhysicalLoadScreen,
     Service: ServiceScreen,
-    Walking: WalkingScreen,
+    WalkingTest: WalkingTestScreen,
     Sleep: SleepScreen,
     ExerciseFinish: ExerciseFinishScreen,
     TakingMedicine: TakingMedicineScreen,

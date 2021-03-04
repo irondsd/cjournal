@@ -6,7 +6,7 @@ export const editable = [
     activityTypes.Toilet,
     activityTypes.Syncope,
     activityTypes.Shower,
-    activityTypes.NormalWalking,
+    activityTypes.Walking,
     activityTypes.Bicycling,
     activityTypes.Running,
     activityTypes.Meal,

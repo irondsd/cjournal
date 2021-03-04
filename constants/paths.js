@@ -11,7 +11,7 @@ export const paths = {
     Activity: 'Activity',
     PhysicalLoad: 'PhysicalLoad',
     Service: 'Service',
-    Walking: 'Walking',
+    WalkingTest: 'WalkingTest',
     Other: 'Other',
     Sleep: 'Sleep',
     ExerciseFinish: 'ExerciseFinish',

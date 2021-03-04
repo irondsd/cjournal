@@ -1,7 +1,7 @@
 export const overlaps = {
     Sleep: [
         'Walking',
-        'NormalWalking',
+        'WalkingTest',
         'Running',
         'Bicycle',
         'Trainer',
@@ -25,7 +25,7 @@ export const overlaps = {
         'Shower',
         'OtherActivity',
         'Walking',
-        'NormalWalking',
+        'WalkingTest',
         'Running',
         'Bicycle',
         'Trainer',
@@ -34,7 +34,7 @@ export const overlaps = {
     Activity: [
         'Sleep',
         'Walking',
-        'NormalWalking',
+        'WalkingTest',
         'Running',
         'Bicycle',
         'Trainer',
