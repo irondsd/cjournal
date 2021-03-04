@@ -25,7 +25,7 @@ export function setupNotifications() {
 
 export function scheduleNotification(_id, title, message, dateTime) {
     PushNotification.localNotificationSchedule({
-        _id: _id.toString(),
+        _id: _id,
         title: strings[title],
         message: message,
         vibrate: true,

@@ -71,7 +71,7 @@ function mapStateToProps(state) {
     const isLoggedIn = state.user.isLoggedIn
     const user = state.user
     const tokens = state.tokens
-    return { isLoggedIn, user, tokens, idinv }
+    return { isLoggedIn, user, tokens }
 }
 
 export default connect(mapStateToProps)(App)

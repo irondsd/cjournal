@@ -71,25 +71,22 @@ class PillsScreen extends Component {
         }
         this.setState({ pills: pills })
 
-        let task = findLatestTask(this.props.tasks, activity_type)
+        let task_id = findLatestTask(this.props.tasks, activity_type)
         let pill = null
         let task = null
 
-        if (
-            this.props.navigation.state.params &&
-            this.props.navigation.state.params.task
-        ) {
-            task = this.props.navigation.state.params.task
+        if (this.props.navigation.state.params?.task) {
+            task_id = this.props.navigation.state.params.task
         }
 
-        task = findTaskById(this.props.tasks, task)
+        task = findTaskById(this.props.tasks, task_id)
         if (task) {
             pill = task.data.pill
         }
 
         this.setState({
             pill: pill,
-            task: task,
+            task: task_id,
         })
     }
 
@@ -104,7 +101,7 @@ class PillsScreen extends Component {
             this.state.activity_type,
             timestamp(this.state.dateTime),
             null,
-            this.state.task ? this.state.task : null,
+            this.state.task_id ? this.state.task_id : null,
             this.props.user.idinv,
             '',
             { pill: this.state.pill },
