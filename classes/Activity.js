@@ -20,16 +20,16 @@ export default class Activity {
     constructor(activity) {
         this._id = activity._id
         this.activity_type = activity.activity_type
-        this.time_started = activity.time_started
+        this.time_started = activity.time_started || timestamp()
         this.time_ended = activity.time_ended
-        this.utc_offset = activity.utc_offset
+        this.utc_offset = activity.utc_offset || getUtcOffset()
         this.task = activity.task
-        this.updated_at = activity.updated_at
+        this.updated_at = activity.updated_at || timestamp()
         this.comment = activity.comment
         this.idinv = activity.idinv
         this.user = activity.user
         this.patient = activity.patient
-        this.data = activity.data
+        this.data = activity.data || {}
         this.system = activity.system
     }
 
