@@ -100,8 +100,8 @@ class PillsScreen extends Component {
         let activity = Activity.init(
             this.state.activity_type,
             timestamp(this.state.dateTime),
-            null,
-            this.state.task_id ? this.state.task_id : null,
+            undefined,
+            this.state.task_id || undefined,
             this.props.user.idinv,
             '',
             { pill: this.state.pill },

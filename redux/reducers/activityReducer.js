@@ -40,7 +40,7 @@ export default function activityReducer(state = [], { type, payload }) {
                 }),
                 ...payload.map(activity => {
                     activity = new Activity({ ...activity })
-                    addOrUpdate(state, activity)
+                    state = addOrUpdate(state, activity)
                     return activity
                 }),
             ]

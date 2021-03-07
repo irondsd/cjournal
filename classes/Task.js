@@ -101,7 +101,5 @@ export function findLatestTask(array, activity_type) {
 }
 
 export function findTaskById(array, _id) {
-    const task = array.find(task => task._id === id)
-    if (task) return task
-    return null
+    return array.find(task => task._id === _id)
 }

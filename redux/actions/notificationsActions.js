@@ -1,13 +1,13 @@
-export const cancelNotification = id => {
+export const cancelNotification = _id => {
     return {
         type: 'CANCEL_NOTIFICATION',
-        payload: id
+        payload: _id,
     }
 }
 
 export const loadNotifications = array => {
     return {
         type: 'LOAD_NOTIFICATIONS',
-        payload: array
+        payload: array,
     }
 }

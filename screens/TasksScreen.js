@@ -93,8 +93,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchData: (id, access_token) => {
-        dispatch(tasksFetchData(id, access_token))
+    fetchData: (_id, access_token) => {
+        dispatch(tasksFetchData(_id, access_token))
     },
     fetchIdinv: (idinv, access_token) => {
         dispatch(tasksFetchIdinv(idinv, access_token))

@@ -65,7 +65,6 @@ class JournalScreen extends Component<Props> {
                 : `users/${this.props.user._id}/activity`
             Get(url, this.props.tokens.access_token)
                 .then(res => {
-                    console.log(url)
                     store.dispatch(updateActivities(res))
                 })
                 .catch(err => store.dispatch(activityFetchFailed()))
@@ -119,8 +118,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchData: (id, access_token) => {
-        dispatch(activityFetchData(id, access_token))
+    fetchData: (_id, access_token) => {
+        dispatch(activityFetchData(_id, access_token))
     },
     fetchIdinv: (idinv, access_token) => {
         dispatch(activityFetchIdinv(idinv, access_token))
