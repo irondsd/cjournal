@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import NavContainer from './navigation/NavContainer'
 import BackgroundFetch from 'react-native-background-fetch'
-import sync from './services/sync'
-import NavigationService from './navigation/NavigationService'
-import { idinvWatcher } from './services/idinvWatcher'
-import { setupNotifications } from './notifications/notifications'
+import { connect } from 'react-redux'
+import sync from './src/services/sync'
+import NavContainer from './src/navigation/NavContainer'
+import NavigationService from './src/navigation/NavigationService'
+import { idinvWatcher } from './src/services/idinvWatcher'
+import { setupNotifications } from './src/notifications/notifications'
 
 class App extends Component {
     componentDidMount() {

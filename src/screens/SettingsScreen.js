@@ -16,8 +16,8 @@ import { strings } from '../localization'
 import TouchableIcon from '../components/TouchableIcon'
 import SaveButton from '../components/SaveButton'
 import ToggleSwitch from '../components/ToggleSwitch'
-import { version } from '../package.json'
-import { displayName } from '../app.json'
+import { version } from '../../package.json'
+import { displayName } from '../../app.json'
 import {
     setNotifications,
     setIdinvFilter,

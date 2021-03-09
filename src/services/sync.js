@@ -73,8 +73,16 @@ export default async function sync(id, tokens) {
 
             const promises = [
                 Get(activityUrl, tokens.access_token)
-                    .then(res => store.dispatch(updateActivities(res)))
-                    .catch(err => store.dispatch(activityFetchFailed())),
+                    .then(res => {
+                        // TODO: remove
+                        console.log(res)
+                        store.dispatch(updateActivities(res))
+                    })
+                    .catch(err => {
+                        // TODO: remove
+                        console.log(err)
+                        store.dispatch(activityFetchFailed())
+                    }),
                 Get(tasksUrl, tokens.access_token)
                     .then(res => store.dispatch(replaceTasks(res)))
                     .catch(err => store.dispatch(tasksFetchFailed())),
