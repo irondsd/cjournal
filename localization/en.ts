@@ -24,7 +24,6 @@ export const en = {
     CantConnectBackend: "Can't connect to backend server",
     CantGoBack: "Can't go back, you need to finish exercise first",
     Comment: 'Comment',
-    Complaints: 'Disturbance of respiration',
     Complaints: 'Complaints',
     CourseTherapy: 'Course therapy',
     CuffFix: 'Cuff fix',

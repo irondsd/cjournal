@@ -24,7 +24,6 @@ export const es = {
     CantConnectBackend: 'No se puede conectar al servidor de fondo',
     CantGoBack: 'No puedes volver, necesitas terminar el ejercicio primero',
     Comment: 'Comentario',
-    Complaints: 'Alteración de la respiración',
     Complaints: 'Quejas',
     CourseTherapy: 'Curso de terapia',
     CuffFix: 'Brazalete fijar',

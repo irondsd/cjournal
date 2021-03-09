@@ -24,7 +24,6 @@ export const ru = {
     CantConnectBackend: 'Невозможно соединиться с бэкенд сервером',
     CantGoBack: 'Нельзя вернуться, сначала закончите задание',
     Comment: 'Комментарий',
-    Complaints: 'Нарушения дыхания',
     Complaints: 'Жалобы',
     CourseTherapy: 'Курсовая терапия',
     CuffFix: 'Повторное наложение манжеты',
