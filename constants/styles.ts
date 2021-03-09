@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { backgroundColor, borderGrey } from './colors'
 export const { height, width } = Dimensions.get('window')
-// export const tileMargin = Dimensions.get('window').width / 50
 export const tileMargin = height / 80
 export let tileSize = width / 4.15
 if (height / width < 1.7) tileSize = (height - 60 - 80) / 5.5
@@ -15,7 +14,6 @@ export const defaultStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: backgroundColor,
         flexDirection: 'column',
-        // justifyContent: 'space-between',
         alignItems: 'center',
         padding: 20,
         width: '100%',
