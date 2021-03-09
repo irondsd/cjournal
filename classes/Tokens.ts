@@ -8,8 +8,27 @@ import { Post } from '../requests/newRequest'
 import { Alert } from 'react-native'
 import { strings } from '../localization'
 
-export default class Tokens {
-    constructor(access_token, refresh_token, token_lifetime, isLoggedIn) {
+export interface ITokens {
+    access_token: string
+    refresh_token: string
+    token_lifetime: number
+    isLoggedIn: boolean
+    ongoingUpdate: boolean
+}
+
+export default class Tokens implements ITokens {
+    access_token: string
+    refresh_token: string
+    token_lifetime: number
+    isLoggedIn: boolean
+    ongoingUpdate: boolean
+
+    constructor(
+        access_token: string,
+        refresh_token: string,
+        token_lifetime: number,
+        isLoggedIn: boolean,
+    ) {
         this.access_token = access_token
         this.refresh_token = refresh_token
         this.token_lifetime = token_lifetime
