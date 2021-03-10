@@ -102,7 +102,6 @@ class PillsScreen extends Component {
             timestamp(this.state.dateTime),
             undefined,
             this.state.task_id || undefined,
-            this.props.user.idinv,
             '',
             { pill: this.state.pill },
         )
@@ -118,6 +117,7 @@ class PillsScreen extends Component {
                     photoFile: nextProps.navigation.state.params.image.uri,
                 }
             }
+            return {}
         } else {
             return { photoFile: '' }
         }
