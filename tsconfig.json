@@ -5,13 +5,17 @@
   "esModuleInterop": true,
   "isolatedModules": true,
   "jsx": "react",
-  "lib": [
-    "es6"
-  ],
+  "lib": ["es6"],
   "moduleResolution": "node",
   "noEmit": true,
   "strict": true,
   "target": "esnext"
+  },
+  "baseUrl": ".",
+  "paths": {
+    "@/*": [
+      "src/*"
+    ]
   },
   "exclude": [
     "node_modules", 
@@ -20,5 +24,5 @@
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"
-  ]
+  ],
 }
