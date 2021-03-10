@@ -15,7 +15,7 @@ import {
 } from '../redux/actions'
 import { identityUserInfoUrl, paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
-import { Get } from '../requests/newRequest'
+import { Get, Post } from '../requests/newRequest'
 import { UserInfo } from '../requests/identityRequest'
 
 let errors = 0
@@ -64,7 +64,7 @@ export default async function sync(id, tokens) {
         .then(() => {
             let activityUrl = `users/${id}/activity`
             let tasksUrl = `users/${id}/tasks`
-            const userUrl = `users/${id}`
+            const login = `login`
 
             if (store.getState().settings.idinvFilter) {
                 activityUrl = `idinv/${store.getState().user.idinv}/activity`
@@ -73,25 +73,18 @@ export default async function sync(id, tokens) {
 
             const promises = [
                 Get(activityUrl, tokens.access_token)
-                    .then(res => {
-                        // TODO: remove
-                        console.log(res)
-                        store.dispatch(updateActivities(res))
-                    })
-                    .catch(err => {
-                        // TODO: remove
-                        console.log(err)
-                        store.dispatch(activityFetchFailed())
-                    }),
+                    .then(res => store.dispatch(updateActivities(res)))
+                    .catch(err => store.dispatch(activityFetchFailed())),
                 Get(tasksUrl, tokens.access_token)
                     .then(res => store.dispatch(replaceTasks(res)))
                     .catch(err => store.dispatch(tasksFetchFailed())),
-                Get(userUrl, tokens.access_token)
-                    .then(res => store.dispatch(updateUser(res)))
+                Post(login, tokens.access_token)
+                    .then(user => {
+                        const { identity } = user
+                        store.dispatch(updateUser(user))
+                        store.dispatch(identityUser(identity))
+                    })
                     .catch(err => store.dispatch(userFetchFailed())),
-                UserInfo(tokens.access_token)
-                    .then(res => store.dispatch(identityUser(res)))
-                    .catch(err => store.dispatch(logoutUser())),
             ]
 
             Promise.all(promises)
