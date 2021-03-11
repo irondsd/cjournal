@@ -6,6 +6,12 @@ export const pillsList = [
     activityTypes.CourseTherapy,
 ]
 
+export const prescriptions = {
+    [activityTypes.CourseTherapy]: 'course_therapy',
+    [activityTypes.ReliefOfAttack]: 'relief_of_attack',
+    [activityTypes.MedicineTest]: 'tests',
+}
+
 export const bloodPressureList = [
     activityTypes.Press,
     activityTypes.ActiveOrthostasis,
