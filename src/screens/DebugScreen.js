@@ -22,6 +22,7 @@ import { cancelLocalNotification } from '../notifications/notifications'
 import { getUtcOffset } from '../helpers/dateTime'
 import sync from '../services/sync'
 import { idinvWatcher } from '../services/idinvWatcher'
+import { activityAsyncSave } from '../services/asyncStorage'
 
 class DebugScreen extends Component {
     static navigationOptions = {
@@ -58,6 +59,12 @@ class DebugScreen extends Component {
                             .catch(err => {
                                 console.log(err)
                             })
+                    }}
+                />
+                <SaveButton
+                    title={'clear activity localstorage'}
+                    onPress={() => {
+                        activityAsyncSave([])
                     }}
                 />
             </View>
