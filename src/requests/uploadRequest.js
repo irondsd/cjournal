@@ -56,7 +56,7 @@ export const uploadRequest = (path, method, access_token, activity) => {
                 reject({ status: res.statusCode, ok: false })
             })
             .catch(err => {
-                console.error(err)
+                console.log('UPLOAD ERROR: ', err)
                 reject({ error: err })
             })
     })
