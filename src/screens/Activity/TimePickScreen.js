@@ -91,7 +91,6 @@ class TimePickScreen extends Component {
             timestamp(this.state.dateTime),
             timeEnded ? timestamp(timeEnded) : null,
             null,
-            this.props.user.idinv,
             this.state.comment,
             {},
         )
@@ -205,10 +204,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(TimePickScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(TimePickScreen)
 
 const styles = StyleSheet.create({
     time: {
