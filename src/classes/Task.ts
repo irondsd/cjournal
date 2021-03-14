@@ -39,7 +39,7 @@ export default class Task implements ITaskClass {
         completed: boolean,
         last_updated: number,
         data: any,
-        notification: any,
+        notification?: any,
     ) {
         this._id = _id
         this.activity_type = activity_type

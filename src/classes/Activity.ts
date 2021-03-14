@@ -424,7 +424,7 @@ export function exists(array: IActivityClass[], activity: IActivityClass) {
     return false
 }
 
-export function sort(array: IActivityClass[]): IActivity[] {
+export function sort(array: IActivityClass[]): IActivityClass[] {
     function compare(a: IActivity, b: IActivity) {
         if (a.time_started > b.time_started) return -1
         if (a.time_started < b.time_started) return 1
