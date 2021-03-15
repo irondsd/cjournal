@@ -10,3 +10,5 @@ export default createStore(
     allReducers,
     composeEnhancers(applyMiddleware(...middleware)),
 )
+
+export type RootState = ReturnType<typeof allReducers>
