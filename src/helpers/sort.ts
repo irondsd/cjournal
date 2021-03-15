@@ -1,5 +1,7 @@
-export function sortActivities(array) {
-    function compare(a, b) {
+import { IActivity } from '../classes/Activity'
+
+export function sortActivities(array: IActivity[]): IActivity[] {
+    function compare(a: IActivity, b: IActivity) {
         if (a.time_started > b.time_started) {
             return -1
         }
@@ -12,8 +14,8 @@ export function sortActivities(array) {
     return array.sort(compare)
 }
 
-export function sortNumbers(array) {
-    function compare(a, b) {
+export function sortNumbers(array: number[]): number[] {
+    function compare(a: number, b: number) {
         return a - b
     }
 
