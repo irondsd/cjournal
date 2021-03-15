@@ -11,12 +11,11 @@
   "strict": true,
   "target": "esnext"
   },
-  "baseUrl": ".",
-  "paths": {
-    "@/*": [
-      "src/*"
-    ]
-  },
+  "baseUrl": "src",
+  "include": [
+    "src/components",
+    "src/custom.d.ts"
+  ],
   "exclude": [
     "node_modules", 
     "android", 
