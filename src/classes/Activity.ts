@@ -107,10 +107,6 @@ export default class Activity implements IActivityClass {
         this.system = activity.system
     }
 
-    setId(_id: string) {
-        this._id = _id
-    }
-
     attachToData(data: IAData) {
         this.data = { ...this.data, ...data }
         this.setToUpdate()
@@ -155,7 +151,7 @@ export default class Activity implements IActivityClass {
         activity_type: string,
         comment: string = '',
         data: IAData = {},
-    ): IActivity {
+    ): IActivityClass {
         let time_started =
             timestamp() -
             defaultDurations[activity_type as keyof typeof defaultDurations]
@@ -189,11 +185,11 @@ export default class Activity implements IActivityClass {
     static init(
         activity_type: string,
         time_started: number,
-        time_ended: number,
-        task: string,
-        comment: string,
-        data: IAData,
-    ): IActivity {
+        time_ended: number | undefined,
+        task: string | undefined,
+        comment: string | undefined,
+        data: IAData = {},
+    ): IActivityClass {
         return new Activity({
             _id: objectId(),
             activity_type: activity_type,
@@ -235,10 +231,8 @@ export default class Activity implements IActivityClass {
     }
 
     isEqual(other: IActivity): boolean {
-        if (this._id === other._id && this._id !== null) return true
-        if (this.activity_type !== other.activity_type) return false
-        if (this.time_started !== other.time_started) return false
-        return true
+        if (this._id === other._id) return true
+        return false
     }
 
     isNewerThan(other: IActivity): boolean {
@@ -378,6 +372,7 @@ export function addOrUpdate(array: IActivityClass[], activity: IActivityClass) {
                 // we have a newer version locally
                 array[i].setToUpdate()
             }
+            break
         }
     }
 
@@ -402,6 +397,7 @@ export function update(
         if (originalActivity.isEqual(array[i])) {
             activity.setToUpdate()
             array[i] = activity
+            break
         }
     }
 }
