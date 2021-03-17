@@ -6,8 +6,8 @@ import {
 import { signRequest } from './signRequest'
 import { fetchWithTimeout } from './TimeoutReq'
 
-function newRequest(url, token, body) {
-    let init = {}
+function newRequest(url: string, token: string, body?: any) {
+    let init: RequestInit = {}
     init.method = 'POST'
     init.headers = new Headers({ 'Content-Type': 'multipart/form-data' })
     init.body = new FormData()
@@ -34,21 +34,21 @@ function newRequest(url, token, body) {
     })
 }
 
-export function UserInfo(token) {
+export function UserInfo(token: string) {
     return newRequest(identityUserInfoUrl, token)
 }
 
-export function Registration(token, email, password) {
+export function Registration(token: string, email: string, password: string) {
     // TODO: check
-    return newRequest(identityRegistrationUrl, token, body)
+    // return newRequest(identityRegistrationUrl, token, body)
 }
 
-export function identityLogin(token, email, password) {
+export function identityLogin(token: string, email: string, password: string) {
     // TODO: check
-    return newRequest(identityTokenUrl, token, body)
+    // return newRequest(identityTokenUrl, token, body)
 }
 
-export function RefreshToken(token, refresh_token) {
+export function RefreshToken(token: string, refresh_token: string) {
     const body = {
         grant_type: 'refresh_token',
         client_id: 'ApiClient',

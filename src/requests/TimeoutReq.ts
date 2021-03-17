@@ -1,6 +1,10 @@
-export async function fetchWithTimeout(req, timeout = 5000) {
-    const controller = new AbortController()
+export async function fetchWithTimeout(
+    req: any,
+    timeout: number = 5000,
+): Promise<Response> {
     const timeoutId = setTimeout(() => controller.abort(), timeout)
+    const controller = new AbortController()
+
     req.signal = controller.signal
     return new Promise((resolve, reject) => {
         fetch(req)

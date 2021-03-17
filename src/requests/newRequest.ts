@@ -7,9 +7,14 @@ const defaultHeaders = new Headers({
     'Content-Type': 'application/json',
 })
 
-function newRequest(path, token, method, body) {
+function newRequest(
+    path: string,
+    token: string,
+    method: string,
+    body?: Body,
+): Promise<Request> {
     const url = apiUrl + path
-    let init = {}
+    let init: RequestInit = {}
     init.method = method
     init.body = JSON.stringify(body)
     init.headers = defaultHeaders
@@ -31,7 +36,7 @@ function newRequest(path, token, method, body) {
                 }
                 reject(JSON.stringify(res))
             })
-            .then(res => {
+            .then((res: any) => {
                 resolve(res)
             })
             .catch(err => {
@@ -40,18 +45,34 @@ function newRequest(path, token, method, body) {
     })
 }
 
-export function Get(path, token, body) {
+export function Get(
+    path: string,
+    token: string,
+    body?: Body,
+): Promise<Request> {
     return newRequest(path, token, 'GET', body)
 }
 
-export function Post(path, token, body) {
+export function Post(
+    path: string,
+    token: string,
+    body?: Body,
+): Promise<Request> {
     return newRequest(path, token, 'POST', body)
 }
 
-export function Put(path, token, body) {
+export function Put(
+    path: string,
+    token: string,
+    body?: Body,
+): Promise<Request> {
     return newRequest(path, token, 'PUT', body)
 }
 
-export function Delete(path, token, body) {
+export function Delete(
+    path: string,
+    token: string,
+    body?: Body,
+): Promise<Request> {
     return newRequest(path, token, 'DELETE', body)
 }

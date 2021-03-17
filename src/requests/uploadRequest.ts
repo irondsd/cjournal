@@ -1,8 +1,13 @@
 import RNFS from 'react-native-fs'
+import { IActivity } from '../classes/Activity'
 import { apiUrl } from '../constants'
 
-// TODO: better
-export const uploadRequest = (path, method, access_token, activity) => {
+export const uploadRequest = (
+    path: string,
+    method: 'POST' | 'PUT',
+    access_token: string,
+    activity: IActivity,
+) => {
     return new Promise((resolve, reject) => {
         const uploadUrl = apiUrl + path
         const files = []
@@ -22,18 +27,18 @@ export const uploadRequest = (path, method, access_token, activity) => {
                 filetype: 'image/jpeg',
             })
 
-        let fields = { ...activity }
+        let fields: { [key: string]: any } = { ...activity }
 
         let data = { ...activity.data }
         delete data.photoFile
         delete data.audioFile
         fields.data = data
 
-        for (key in fields) {
+        for (const key in fields) {
             if (typeof fields[key] !== 'string')
                 fields[key] = JSON.stringify(fields[key])
         }
-
+        console.log(files)
         RNFS.uploadFiles({
             toUrl: uploadUrl,
             files: files,
@@ -46,11 +51,12 @@ export const uploadRequest = (path, method, access_token, activity) => {
             },
         })
             .promise.then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res.statusCode === 201 || res.statusCode === 200)
                     return resolve({
                         status: res.statusCode,
                         ok: true,
+                        body: res.body,
                         message: 'successfully uploaded',
                     })
                 reject({ status: res.statusCode, ok: false })

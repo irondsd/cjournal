@@ -1,16 +1,11 @@
 import { apiUrl } from '../constants'
-import timeoutFetch from '../helpers/timeoutFetch'
 import { idinvWatcher } from '../services/idinvWatcher'
+import { Post } from './newRequest'
 
-export function loginConfirm(access_token) {
+export function loginConfirm(access_token: string) {
     return new Promise((resolve, reject) => {
         const url = apiUrl + 'login'
-        timeoutFetch(url, {
-            method: 'POST',
-            headers: {
-                Authorization: 'Bearer ' + access_token,
-            },
-        })
+        Post(url, access_token)
             .then(res => res.json())
             .then(res => {
                 idinvWatcher(res._id, access_token, res.idinv)
@@ -18,7 +13,7 @@ export function loginConfirm(access_token) {
             })
             .catch(err => {
                 err.error = err.message
-                resolve(err)
+                reject(err)
             })
     })
 }
