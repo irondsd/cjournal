@@ -1,6 +1,6 @@
 import { activityTypes } from './activityTypes'
 
-export const editable = [
+export const editable: string[] = [
     activityTypes.Sleep,
     activityTypes.Sex,
     activityTypes.Toilet,

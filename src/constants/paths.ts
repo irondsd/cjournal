@@ -1,4 +1,4 @@
-export const paths = {
+export const paths: { [key: string]: string } = {
     Login: 'Login',
     Register: 'Register',
     Home: 'Home',

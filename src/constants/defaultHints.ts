@@ -1,6 +1,10 @@
 import { strings } from '../localization'
 
-export const defaultHints = {
+interface IHints {
+    [key: string]: string[]
+}
+
+export const defaultHints: IHints = {
     OtherActivity: [],
     OtherComplaints: [],
     OtherLoad: [strings.WeightLifting, strings.PhysicalLabor],

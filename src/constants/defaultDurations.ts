@@ -1,4 +1,8 @@
-export const defaultDurations = {
+interface IDuration {
+    [key: string]: { duration: number; offset: number }
+}
+
+export const defaultDurations: IDuration = {
     Sleep: { duration: 28800, offset: 28800 },
     CuffFix: { duration: 60, offset: 60 },
     ElectrodeReplacement: { duration: 60, offset: 60 },

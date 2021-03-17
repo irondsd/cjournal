@@ -1,4 +1,4 @@
-export const overlaps = {
+export const overlaps: { [key: string]: string[] } = {
     Sleep: [
         'Walking',
         'WalkingTest',

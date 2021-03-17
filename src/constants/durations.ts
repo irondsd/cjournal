@@ -1,4 +1,4 @@
-export const durations = [
+export const durations: number[] = [
     0,
     1,
     2,
