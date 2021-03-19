@@ -25,17 +25,17 @@ interface Props {
     options: string[]
 }
 
-const DropDownInput = ({
+export const DropDownInput = ({
     open = false,
     linesToShow = 5,
     value,
     placeholder,
-    options,
+    options = [],
     onChange,
 }: Props) => {
-    const [isOpen, setIsOpen] = useState(open)
-    const [filteredList, setFilteredList] = useState(options)
-    const [inputValue, setInputValue] = useState(value)
+    const [isOpen, setIsOpen] = useState<boolean>(open)
+    const [filteredList, setFilteredList] = useState<string[]>(options)
+    const [inputValue, setInputValue] = useState<string>(value)
 
     const onTextChange = (value: string) => {
         filterList(value)
@@ -63,17 +63,17 @@ const DropDownInput = ({
             return e.toLowerCase().includes(value.toLowerCase())
         })
         setFilteredList(list)
-        setIsOpen(!!list.length)
+        setIsOpen(!!list?.length)
     }
 
     let popUpHeight = 200
-    if (filteredList.length < linesToShow)
-        popUpHeight = filteredList.length * 40
+    if (filteredList?.length < linesToShow)
+        popUpHeight = filteredList?.length * 40
     else popUpHeight = linesToShow * 40
 
     const popUpRender = () => {
         return [
-            filteredList.map((el, index) => {
+            filteredList?.map((el, index) => {
                 return (
                     <TouchableOpacity
                         onPress={() => {
@@ -94,7 +94,7 @@ const DropDownInput = ({
     }, [inputValue])
 
     useEffect(() => {
-        if (open && !filteredList.length) setIsOpen(false)
+        if (open && !filteredList?.length) setIsOpen(false)
     }, [])
 
     return (
@@ -117,7 +117,7 @@ const DropDownInput = ({
                         color={placeholderGrey}
                     />
                 )}
-                {options.length > 0 && (
+                {options?.length > 0 && (
                     <Icon
                         style={styles.iconDown}
                         name={isOpen ? 'angle-up' : 'angle-down'}
@@ -137,8 +137,6 @@ const DropDownInput = ({
         </View>
     )
 }
-
-export default DropDownInput
 
 const styles = StyleSheet.create({
     View: {
