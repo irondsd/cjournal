@@ -1,7 +1,5 @@
-import { Platform } from 'react-native'
 import { activityAsyncSave } from '../../services/asyncStorage'
-import { sortActivities } from '../../helpers/sort'
-import { showError, showToast } from '../../services/toast'
+import { showToast } from '../../services/toast'
 import { strings } from '../../localization'
 import Activity, {
     exists,
@@ -11,28 +9,50 @@ import Activity, {
     update,
 } from '../../classes/Activity'
 import { scheduleSync } from '../../services/connectivityWatcher'
+import {
+    REPLACE_ACTIVITIES,
+    ADD_ACTIVITY,
+    UPDATE_ACTIVITIES,
+    UPDATE_ACTIVITY,
+    DELETE_ACTIVITY,
+    ACTIVITY_SYNC_FAILED,
+    ACTIVITY_FETCH_FAILED,
+    ACTIVITY_SYNCED,
+    ACTIVITY_DELETED,
+    LOGOUT_USER,
+} from '../types'
+import { IActivityClass } from '../../classes/Activity'
 
-// TODO: activityArray class
+export type ActivityAction = {
+    type: string
+    payload: IActivityClass[] & IActivityClass
+}
 
-export default function activityReducer(state = [], { type, payload }) {
+export default function activityReducer(
+    state: IActivityClass[] = [],
+    { type, payload }: ActivityAction,
+) {
     switch (type) {
-        case 'REPLACE_ACTIVITIES':
+        case REPLACE_ACTIVITIES:
             state = payload.map(activity => {
                 return new Activity({ ...activity })
             })
             save(state)
             return state
 
-        case 'ADD_ACTIVITY':
+        case ADD_ACTIVITY:
             let activity = new Activity({ ...payload })
-            if (activity.hasFiles()) activity.system.upload = true
+            if (activity.hasFiles()) {
+                if (!activity.system) activity.system = {}
+                activity.system.upload = true
+            }
 
             addOrUpdate(state, activity)
             showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
             state = sort(state)
             save(state)
             return state
-        case 'UPDATE_ACTIVITIES':
+        case UPDATE_ACTIVITIES:
             if (!state) state = []
             state = [
                 ...state.filter(activity => {
@@ -53,14 +73,14 @@ export default function activityReducer(state = [], { type, payload }) {
             save(state)
             return state
 
-        case 'UPDATE_ACTIVITY':
+        case UPDATE_ACTIVITY:
             if (!state) state = []
             update(state, payload[0], payload[1])
             showToast(`${strings.Saved} ${strings[payload[1].activity_type]}!`)
             state = sort(state)
             save(state)
             return state
-        case 'DELETE_ACTIVITY':
+        case DELETE_ACTIVITY:
             if (payload.system) {
                 payload.system.awaitsDelete = true
             } else {
@@ -69,33 +89,29 @@ export default function activityReducer(state = [], { type, payload }) {
 
             save(state)
             return state
-        case 'ACTIVITY_SET_ID':
-            payload.activity.setId(payload._id)
-            save(state)
-            return state
-        case 'ACTIVITY_SYNC_FAILED':
+        case ACTIVITY_SYNC_FAILED:
             payload.increaseFailedSyncCount()
             save(state)
             scheduleSync()
             return state
-        case 'ACTIVITY_FETCH_FAILED':
+        case ACTIVITY_FETCH_FAILED:
             scheduleSync()
             return state
-        case 'ACTIVITY_SYNCED':
+        case ACTIVITY_SYNCED:
             payload.successfullySynced()
             save(state)
             return state
-        case 'ACTIVITY_DELETED':
+        case ACTIVITY_DELETED:
             state = remove(state, payload)
             save(state)
             return state
-        case 'LOGOUT_USER':
+        case LOGOUT_USER:
             return []
         default:
             return state
     }
 }
 
-function save(state) {
+function save(state: IActivityClass[]) {
     activityAsyncSave(state)
 }
