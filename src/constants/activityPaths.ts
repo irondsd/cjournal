@@ -1,4 +1,4 @@
-export const activityPaths = {
+export const activityPaths: { [key: string]: any } = {
     Sleep: 'TimePick',
     Stairs: 'Stairs',
     Walking: 'TimePick',

@@ -1,4 +1,8 @@
-export const activityTypes = {
+interface IActivityTypes {
+    [index: string]: string
+}
+
+export const activityTypes: IActivityTypes = {
     Activity: 'Activity',
     Sleep: 'Sleep',
     Stairs: 'Stairs',
