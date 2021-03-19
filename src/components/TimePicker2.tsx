@@ -19,11 +19,11 @@ export const TimePicker = ({
 }: TimePickerProps) => {
     const [dateTime, setDateTime] = useState<Date>(new Date(time * 1000))
     const [showDatePicker, setShowDatePicker] = useState(false)
-    const [showTimePicker, setShowTimePicker] = useState(false)
+    const [mode, setMode] = useState<'date' | 'time'>('date')
 
     const handleTimePicked = (time: Date) => {
-        setShowTimePicker(false)
-        const newDateTime = dateTime
+        setShowDatePicker(false)
+        const newDateTime = new Date(dateTime.getTime())
         newDateTime.setHours(
             time.getHours(),
             time.getMinutes(),
@@ -34,7 +34,7 @@ export const TimePicker = ({
 
     const handleDatePicked = (date: Date) => {
         setShowDatePicker(false)
-        const newDateTime = dateTime
+        const newDateTime = new Date(dateTime.getTime())
         newDateTime.setFullYear(date.getFullYear())
         newDateTime.setMonth(date.getMonth())
         newDateTime.setDate(date.getDate())
@@ -49,35 +49,37 @@ export const TimePicker = ({
         <View style={styles.container}>
             <View style={styles.time}>
                 <Text style={styles.timeText}>{strings.Time + ':'}</Text>
-                <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                <TouchableOpacity
+                    onPress={() => {
+                        setMode('date')
+                        setShowDatePicker(true)
+                    }}>
                     <Text style={styles.selectText}>
                         {displayDate(dateTime)}
                     </Text>
                 </TouchableOpacity>
                 <Text style={styles.timeText}> {strings.at}</Text>
-                <TouchableOpacity onPress={() => setShowTimePicker(true)}>
+                <TouchableOpacity
+                    onPress={() => {
+                        setMode('time')
+                        setShowDatePicker(true)
+                    }}>
                     <Text style={styles.selectText}>
                         {displayTime(dateTime)}
                     </Text>
                 </TouchableOpacity>
             </View>
             {!disabled && (
-                <>
-                    <DateTimePicker
-                        isVisible={showTimePicker}
-                        onConfirm={handleTimePicked}
-                        onCancel={() => setShowTimePicker(false)}
-                        mode="time"
-                        date={dateTime}
-                    />
-                    <DateTimePicker
-                        isVisible={showDatePicker}
-                        onConfirm={handleDatePicked}
-                        onCancel={() => setShowDatePicker(false)}
-                        mode="date"
-                        date={dateTime}
-                    />
-                </>
+                <DateTimePicker
+                    isVisible={showDatePicker}
+                    onConfirm={value => {
+                        if (mode === 'date') handleDatePicked(value)
+                        else handleTimePicked(value)
+                    }}
+                    onCancel={() => setShowDatePicker(false)}
+                    mode={mode}
+                    date={dateTime}
+                />
             )}
         </View>
     )
