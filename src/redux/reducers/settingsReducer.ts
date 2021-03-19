@@ -1,16 +1,36 @@
 import { settingsAsyncSave } from '../../services/asyncStorage'
 import PushNotification from 'react-native-push-notification'
-import { postponeNotificationBy } from '../../constants'
+import { delayNotificationBy } from '../../constants'
+import {
+    SET_NOTIFICATIONS,
+    SET_IDINV_FILTER,
+    SET_NOTIFICATION_DELAY,
+    LOAD_SETTINGS,
+} from '../types'
 
-const initialState = {
-    notifications: true,
-    idinvFilter: false,
-    notificationDelay: postponeNotificationBy,
+export interface ISettings {
+    notifications: boolean
+    idinvFilter: boolean
+    notificationDelay: number
 }
 
-export default function userReducer(state = initialState, { type, payload }) {
+const initialState: ISettings = {
+    notifications: true,
+    idinvFilter: false,
+    notificationDelay: delayNotificationBy,
+}
+
+export type SettingsAction = {
+    type: string
+    payload: boolean & number
+}
+
+export default function userReducer(
+    state = initialState,
+    { type, payload }: SettingsAction,
+) {
     switch (type) {
-        case 'SET_NOTIFICATIONS':
+        case SET_NOTIFICATIONS:
             state = {
                 ...state,
                 notifications: payload,
@@ -22,7 +42,7 @@ export default function userReducer(state = initialState, { type, payload }) {
 
             settingsAsyncSave(state)
             return state
-        case 'SET_IDINV_FILTER':
+        case SET_IDINV_FILTER:
             state = {
                 ...state,
                 idinvFilter: payload,
@@ -30,14 +50,14 @@ export default function userReducer(state = initialState, { type, payload }) {
 
             settingsAsyncSave(state)
             return state
-        case 'SET_NOTIFICATION_DELAY':
+        case SET_NOTIFICATION_DELAY:
             state = {
                 ...state,
                 notificationDelay: payload,
             }
             settingsAsyncSave(state)
             return state
-        case 'LOAD_SETTINGS':
+        case LOAD_SETTINGS:
             state = payload
 
             if (!state.notifications) {
