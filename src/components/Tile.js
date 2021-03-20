@@ -17,7 +17,7 @@ import { pSBC } from '../helpers/colors'
 import LinearGradient from 'react-native-linear-gradient'
 import { showToast, showError } from '../services/toast'
 import { strings } from '../localization'
-import ActivityIcon from './ActivityIcon'
+import ActivityIcon from './ActivityIconTS'
 
 export default class aTile extends Component {
     static defaultProps = {
