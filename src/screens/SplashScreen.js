@@ -13,7 +13,6 @@ import {
     updateUser,
     replaceActivities,
     replaceTasks,
-    loadNotifications,
     tokensLoaded,
     loadSettings,
     setIdinvFilter,
@@ -55,8 +54,6 @@ class SplashScreen extends Component {
                 }
                 if (res.activity) this.props.replaceActivities(res.activity)
                 if (res.tasks) this.props.replaceTasks(res.tasks)
-                if (res.notifications)
-                    this.props.loadNotifications(res.notifications)
                 if (res.tokens) {
                     if (res.screen) {
                         this.props.navigation.navigate(
@@ -103,7 +100,6 @@ const mapDispatchToProps = {
     replaceActivities,
     replaceTasks,
     updateUser,
-    loadNotifications,
     tokensLoaded,
     loadSettings,
     setIdinvFilter,
