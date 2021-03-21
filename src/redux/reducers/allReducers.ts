@@ -10,7 +10,6 @@ export const allReducers = combineReducers({
     user: userReducer,
     activity: activityReducer,
     tasks: tasksReducer,
-    notifications: notificationsReducer,
     tokens: tokensReducer,
     settings: settingsReducer,
 })
