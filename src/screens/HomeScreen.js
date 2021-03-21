@@ -5,19 +5,21 @@ import { backgroundColor, appColor, activityTypes } from '../constants'
 import { strings } from '../localization'
 import SettingsButton from '../components/SettingsButton'
 import sync from '../services/sync'
-import ActivityTile from '../components/tiles/ActivityTile'
-import PhysicalLoadTile from '../components/tiles/PhysicalLoadTile'
-import ServiceTile from '../components/tiles/ServiceTile'
-import PillsTile from '../components/tiles/PillsTile'
-import PainTile from '../components/tiles/PainTile'
-import ComplaintsTile from '../components/tiles/ComplaintsTile'
-import WeaknessTile from '../components/tiles/WeaknessTile'
-import TestsTile from '../components/tiles/TestsTile'
-import EmotionalStressTile from '../components/tiles/EmotionalStressTile'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
 import TileWrapper from '../components/TileWrapper'
-import SleepTile from '../components/tiles/SleepTile'
-import AlarmTile from '../components/tiles/AlarmTile'
+import {
+    ActivityTile,
+    PhysicalLoadTile,
+    ServiceTile,
+    TakingMedicineTile,
+    PainTile,
+    ComplaintsTile,
+    WeaknessTile,
+    TestsTile,
+    EmotionalStressTile,
+    SleepTile,
+    AlarmTile,
+} from '../components/tiles'
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -106,7 +108,7 @@ class HomeScreen extends Component {
                     <WeaknessTile navigation={this.props.navigation} />
                 </TileWrapper>
                 <TileWrapper>
-                    <PillsTile
+                    <TakingMedicineTile
                         navigation={this.props.navigation}
                         disabled={this.state.Pills}
                     />
