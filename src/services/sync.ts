@@ -1,11 +1,8 @@
 import store from '../redux/store'
 import syncActivities from './syncActivities'
-import Barometer from '../sensors/Barometer'
-import timestamp from '../helpers/timestamp'
 import NavigationService from '../navigation/NavigationService'
 import {
     activityFetchFailed,
-    identityUser,
     logoutUser,
     replaceTasks,
     tasksFetchFailed,
@@ -13,26 +10,28 @@ import {
     updateUser,
     userFetchFailed,
 } from '../redux/actions'
-import { identityUserInfoUrl, paths } from '../constants'
+import { paths } from '../constants'
 import { isConnected } from './connectivityWatcher'
 import { Get, Post } from '../requests/newRequest'
-import { UserInfo } from '../requests/identityRequest'
+import { ITokens, ITokensClass } from '../classes/Tokens'
+import { IUser } from '../redux/reducers/userReducer'
+import { IActivity, IActivityClass } from '../classes/Activity'
+import { ITask, ITaskClass } from '../classes/Task'
 
 let errors = 0
 let executing = false
 
-export default async function sync(id, tokens) {
+export default async function sync(id: string, tokens: ITokensClass) {
     if (!tokens || !id) return console.log('no tokens, sync aborted')
 
     if (executing) return console.log('sync already running')
 
-    let activities = store.getState().activity
+    const activities = store.getState().activity
     tokens = store.getState().tokens
 
     executing = true
 
     if (tokens.expiresSoon()) {
-        // console.log('going to update tokens', tokens.refresh_token)
         tokens
             .update()
             .then(tokens => {
@@ -73,21 +72,27 @@ export default async function sync(id, tokens) {
 
             const promises = [
                 Get(activityUrl, tokens.access_token)
-                    .then(res => store.dispatch(updateActivities(res)))
+                    .then((res: IActivityClass[]) =>
+                        store.dispatch(updateActivities(res)),
+                    )
                     .catch(err => store.dispatch(activityFetchFailed())),
                 Get(tasksUrl, tokens.access_token)
-                    .then(res => store.dispatch(replaceTasks(res)))
+                    .then((res: ITaskClass[]) =>
+                        store.dispatch(replaceTasks(res)),
+                    )
                     .catch(err => store.dispatch(tasksFetchFailed())),
                 Post(login, tokens.access_token)
-                    .then(user => {
+                    .then((user: IUser) => {
                         const { identity } = user
                         store.dispatch(updateUser(user))
-                        store.dispatch(identityUser(identity))
                     })
-                    .catch(err => store.dispatch(userFetchFailed())),
+                    .catch(err => {
+                        console.log(err)
+                        store.dispatch(userFetchFailed())
+                    }),
             ]
 
-            Promise.all(promises)
+            Promise.all(promises as any)
                 .then(() => {
                     executing = false
                 })

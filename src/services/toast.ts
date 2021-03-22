@@ -1,6 +1,6 @@
 import Toast from 'react-native-root-toast'
 
-const toast = (message, color) => {
+const toast = (message: string, color: string) => {
     let toast = Toast.show(message, {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
@@ -24,10 +24,10 @@ const toast = (message, color) => {
     })
 }
 
-export function showToast(message) {
+export function showToast(message: string) {
     toast(message, '#005500')
 }
 
-export function showError(message) {
+export function showError(message: string) {
     toast(message, '#550000')
 }

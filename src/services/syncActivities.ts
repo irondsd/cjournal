@@ -1,4 +1,10 @@
-export default function syncActivities(activities, id, access_token) {
+import { IActivityClass } from '../classes/Activity'
+
+export default function syncActivities(
+    activities: IActivityClass[],
+    id: string,
+    access_token: string,
+) {
     return Promise.all([
         ...activities.map(activity => {
             if (!activity.synced()) {
