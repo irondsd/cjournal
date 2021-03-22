@@ -10,7 +10,7 @@ import {
 import { displayDateTime } from '../helpers/dateTime'
 import { strings } from '../localization'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import ActivityIcon from './ActivityIcon'
+import ActivityIcon from './ActivityIconTS'
 
 export default class ListItem extends Component {
     render() {
