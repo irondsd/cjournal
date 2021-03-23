@@ -1,7 +1,7 @@
 import { tokensAsyncSave } from '../../services/asyncStorage'
 import timestamp from '../../helpers/timestamp'
 import Tokens from '../../classes/Tokens'
-import { ITokens } from '../../classes/Tokens'
+import { ITokens, ITokensClass } from '../../classes/Tokens'
 import { TOKENS_RECEIVED, TOKENS_LOADED } from '../types'
 
 const initialState: ITokens = {
@@ -24,7 +24,7 @@ export type TokensAction = {
 }
 
 export default function userReducer(
-    state = initialState,
+    state: ITokensClass = initialState as ITokensClass,
     { type, payload }: TokensAction,
 ) {
     switch (type) {

@@ -16,7 +16,14 @@ export interface ITokens {
     ongoingUpdate: boolean
 }
 
-export default class Tokens implements ITokens {
+export interface ITokensClass extends ITokens {
+    // receive: () => Promise<ITokens>
+    update: () => Promise<ITokens>
+    expiresSoon: () => boolean
+    isExpired: () => boolean
+}
+
+export default class Tokens implements ITokensClass {
     access_token: string
     refresh_token: string
     token_lifetime: number
@@ -36,13 +43,13 @@ export default class Tokens implements ITokens {
         this.ongoingUpdate = false
     }
 
-    static async receive() {
+    static async receive(): Promise<ITokens> {
         return new Promise((resolve, reject) => {
             authorize(identityServerConfig)
-                .then(result => {
+                .then((result: any) => {
                     if (result.accessToken) {
                         Post('login', result.accessToken)
-                            .then(res => {
+                            .then((res: any) => {
                                 if (res.error) {
                                     Alert.alert(
                                         strings.Error,
@@ -66,7 +73,7 @@ export default class Tokens implements ITokens {
         })
     }
 
-    async update() {
+    async update(): Promise<ITokens> {
         return new Promise((resolve, reject) => {
             if (this.ongoingUpdate) return reject('already updating')
             this.ongoingUpdate = true
@@ -74,7 +81,7 @@ export default class Tokens implements ITokens {
             refresh(identityServerConfig, {
                 refreshToken: this.refresh_token,
             })
-                .then(result => {
+                .then((result: any) => {
                     this.ongoingUpdate = false
                     if (result.accessToken) {
                         store.dispatch(tokensReceived(result))
