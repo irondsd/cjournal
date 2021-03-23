@@ -45,34 +45,18 @@ function newRequest(
     })
 }
 
-export function Get(
-    path: string,
-    token: string,
-    body?: Body,
-): Promise<Request> {
+export function Get(path: string, token: string, body?: Body): Promise<any> {
     return newRequest(path, token, 'GET', body)
 }
 
-export function Post(
-    path: string,
-    token: string,
-    body?: Body,
-): Promise<Request> {
+export function Post(path: string, token: string, body?: Body): Promise<any> {
     return newRequest(path, token, 'POST', body)
 }
 
-export function Put(
-    path: string,
-    token: string,
-    body?: Body,
-): Promise<Request> {
+export function Put(path: string, token: string, body?: Body): Promise<any> {
     return newRequest(path, token, 'PUT', body)
 }
 
-export function Delete(
-    path: string,
-    token: string,
-    body?: Body,
-): Promise<Request> {
+export function Delete(path: string, token: string, body?: Body): Promise<any> {
     return newRequest(path, token, 'DELETE', body)
 }
