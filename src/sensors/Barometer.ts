@@ -1,18 +1,34 @@
 import { barometer } from 'react-native-sensors'
-import { average, altMeter } from '../helpers/math'
+import { average } from '../helpers/math'
 
-export default class Barometer {
+interface BarometerClass {
+    initialPressure: number
+    lastValue: number
+    hPa: number
+    mmHg: string
+    pressures: number[]
+    bar: number | null
+}
+
+export default class Barometer implements BarometerClass {
+    initialPressure: number
+    lastValue: number
+    hPa: number
+    mmHg: string
+    pressures: number[]
+    bar: any // sensor
+
     constructor() {
         this.initialPressure = 0
         this.lastValue = 0
         this.hPa = 0
-        this.mmHg = 0
+        this.mmHg = '0'
         this.pressures = []
         this.bar = null
     }
 
     initialize(callback) {
-        bar = barometer.subscribe(
+        const bar = barometer.subscribe(
             ({ pressure }) => {
                 if (this.initialPressure === 0 && this.pressures.length > 30) {
                     this.initialPressure = average(this.pressures)
@@ -22,7 +38,7 @@ export default class Barometer {
                 this.lastValue = pressure
                 this.hPa = average(this.pressures)
                 this.mmHg = (
-                    average(this.pressures).toFixed(1) / 1.3332236
+                    parseFloat(average(this.pressures).toFixed(1)) / 1.3332236
                 ).toFixed(0)
 
                 if (this.pressures.length > 300) {
@@ -51,7 +67,7 @@ export default class Barometer {
                 this.lastValue = pressure
                 this.hPa = average(this.pressures)
                 this.mmHg = (
-                    average(this.pressures).toFixed(1) / 1.3332236
+                    parseFloat(average(this.pressures).toFixed(1)) / 1.3332236
                 ).toFixed(0)
             },
             error => {
@@ -66,7 +82,7 @@ export default class Barometer {
 
     static calibrate(seconds = 10) {
         // console.log('Calibrating barometer...')
-        bar = barometer.subscribe(
+        const bar = barometer.subscribe(
             ({ pressure }) => {},
             error => {
                 // console.log('Barometer is not available on this device')

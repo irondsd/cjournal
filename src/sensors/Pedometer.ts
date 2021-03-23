@@ -1,6 +1,19 @@
-import Pedometer from '@JWWon/react-native-universal-pedometer'
+import Pedometer, {
+    PedometerInterface,
+    PedometerErrorInterface,
+} from '@JWWon/react-native-universal-pedometer'
 
-export default class PedometerSensor {
+interface Pedometer {
+    steps: number
+    distance: number
+    callback: (data: PedometerInterface) => void
+}
+
+export default class PedometerSensor implements Pedometer {
+    steps: number
+    distance: number
+    callback: (data: PedometerInterface) => void
+
     constructor(cb = null) {
         this.steps = 0
         this.distance = 0
@@ -14,6 +27,9 @@ export default class PedometerSensor {
                 Pedometer.startPedometerUpdatesFromDate(
                     dateTime.getTime(),
                     pedometerData => {
+                        if (isPedometerError(pedometerData))
+                            return console.log(pedometerData)
+
                         console.log(pedometerData)
                         this.steps = pedometerData.numberOfSteps
                         this.distance = pedometerData.distance
@@ -21,7 +37,7 @@ export default class PedometerSensor {
                     },
                 )
             } else {
-                console.log('Not available')
+                console.log('Pedometer is not available')
             }
         })
     }
@@ -29,4 +45,11 @@ export default class PedometerSensor {
     stopUpdates() {
         Pedometer.stopPedometerUpdates()
     }
+}
+
+function isPedometerError(
+    data: PedometerInterface | PedometerErrorInterface,
+): data is PedometerErrorInterface {
+    if ((data as PedometerErrorInterface).code) return false
+    else return true
 }
