@@ -1,9 +1,10 @@
 import { strings } from '../localization'
 import { months } from '../constants'
-export function displayDate(dateTime) {
+
+export function displayDate(dateTime: Date): string {
     if (dateTime.getDate() === new Date(Date.now()).getDate()) {
         if (
-            dateTime.getYear() === new Date().getYear() &&
+            dateTime.getFullYear() === new Date().getFullYear() &&
             dateTime.getMonth() === new Date().getMonth()
         ) {
             return strings.Today
@@ -12,7 +13,7 @@ export function displayDate(dateTime) {
 
     if (dateTime.getDate() === new Date(Date.now()).getDate() - 1) {
         if (
-            dateTime.getYear() === new Date().getYear() &&
+            dateTime.getFullYear() === new Date().getFullYear() &&
             dateTime.getMonth() === new Date().getMonth()
         ) {
             return strings.Yesterday
@@ -21,33 +22,33 @@ export function displayDate(dateTime) {
 
     if (dateTime.getDate() === new Date(Date.now()).getDate() + 1) {
         if (
-            dateTime.getYear() === new Date().getYear() &&
+            dateTime.getFullYear() === new Date().getFullYear() &&
             dateTime.getMonth() === new Date().getMonth()
         ) {
             return strings.Tomorrow
         }
     }
 
-    date = `${dateTime.getDate()} ${strings[months[dateTime.getMonth()]]}`
+    const date = `${dateTime.getDate()} ${strings[months[dateTime.getMonth()]]}`
     return date
 }
 
-export function displayDateTime(dateTime) {
+export function displayDateTime(dateTime: Date): string {
     return (
         displayDate(dateTime) + ' ' + strings.at + ' ' + displayTime(dateTime)
     )
 }
 
-export function displayTime(dateTime) {
-    dateTime = dateTime.toTimeString().substring(0, 5)
-    return dateTime
+export function displayTime(dateTime: Date): string {
+    return dateTime.toTimeString().substring(0, 5)
 }
 
-export function secs2time(seconds) {
-    var sec_num = parseInt(seconds, 10) // don't forget the second param
-    var hours = Math.floor(sec_num / 3600)
-    var minutes = Math.floor((sec_num - hours * 3600) / 60)
-    var seconds = sec_num - hours * 3600 - minutes * 60
+export function secs2time(secondsNumber: number) {
+    let hours: string | number = Math.floor(secondsNumber / 3600)
+    let minutes: string | number = Math.floor(
+        (secondsNumber - hours * 3600) / 60,
+    )
+    let seconds: string | number = secondsNumber - hours * 3600 - minutes * 60
 
     if (hours < 10) {
         hours = '0' + hours
@@ -65,7 +66,7 @@ export function secs2time(seconds) {
     }
 }
 
-export function localTime(minutes) {
+export function localTime(minutes: number): string {
     if (minutes === 0) return strings.NotSelected
 
     switch (strings.minute) {
@@ -91,30 +92,14 @@ export function localTime(minutes) {
     }
 }
 
-function minutesRU(minutes) {
-    if (
-        minutes
-            .toString()
-            .split('')
-            .pop() == '1' &&
-        minutes != 11
-    ) {
+function minutesRU(minutes: number): string {
+    if (minutes.toString().split('').pop() == '1' && minutes != 11) {
         return minutes + ' ' + strings.minute
     }
 
     if (
-        parseInt(
-            minutes
-                .toString()
-                .split('')
-                .pop(),
-        ) >= 2 &&
-        parseInt(
-            minutes
-                .toString()
-                .split('')
-                .pop(),
-        ) <= 4
+        parseInt(`${minutes.toString().split('').pop()}`) >= 2 &&
+        parseInt(`${minutes.toString().split('').pop()}`) <= 4
     ) {
         if (minutes > 20 || minutes < 10) {
             return minutes + ' ' + strings.minutes + 'ы'
@@ -124,12 +109,12 @@ function minutesRU(minutes) {
     return minutes + ' ' + strings.minutes
 }
 
-function hoursRU(minutes) {
+function hoursRU(minutes: number): string {
     if (minutes === 60) return minutes / 60 + ' ' + strings.hour
 
     if (minutes % 60 != 0) {
         return (
-            hoursRU(parseInt(minutes / 60) * 60) +
+            hoursRU(parseInt(`${minutes / 60}`) * 60) +
             ` ${strings.and} ` +
             minutesRU(minutes % 60)
         )
@@ -141,12 +126,12 @@ function hoursRU(minutes) {
     return minutes / 60 + ' ' + strings.hours
 }
 
-function hoursINT(minutes) {
+function hoursINT(minutes: number): string {
     if (minutes == 60) return minutes / 60 + ' ' + strings.hour
 
     if (minutes % 60 != 0) {
         return (
-            hoursINT(parseInt(minutes / 60) * 60) +
+            hoursINT(parseInt(`${minutes / 60}`) * 60) +
             ` ${strings.and} ` +
             minutesINT(minutes % 60)
         )
@@ -155,11 +140,11 @@ function hoursINT(minutes) {
     return minutes / 60 + ' ' + strings.hours
 }
 
-function minutesINT(minutes) {
+function minutesINT(minutes: number): string {
     if (minutes == 1) return minutes + ' ' + strings.minute
     return minutes + ' ' + strings.minutes
 }
 
-export function getUtcOffset() {
+export function getUtcOffset(): number {
     return new Date().getTimezoneOffset() * -1
 }
