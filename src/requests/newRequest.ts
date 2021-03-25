@@ -11,7 +11,7 @@ function newRequest(
     path: string,
     token: string,
     method: string,
-    body?: Body,
+    body?: any,
 ): Promise<Request> {
     const url = apiUrl + path
     let init: RequestInit = {}
@@ -45,18 +45,18 @@ function newRequest(
     })
 }
 
-export function Get(path: string, token: string, body?: Body): Promise<any> {
+export function Get(path: string, token: string, body?: any): Promise<any> {
     return newRequest(path, token, 'GET', body)
 }
 
-export function Post(path: string, token: string, body?: Body): Promise<any> {
+export function Post(path: string, token: string, body?: any): Promise<any> {
     return newRequest(path, token, 'POST', body)
 }
 
-export function Put(path: string, token: string, body?: Body): Promise<any> {
+export function Put(path: string, token: string, body?: any): Promise<any> {
     return newRequest(path, token, 'PUT', body)
 }
 
-export function Delete(path: string, token: string, body?: Body): Promise<any> {
+export function Delete(path: string, token: string, body?: any): Promise<any> {
     return newRequest(path, token, 'DELETE', body)
 }
