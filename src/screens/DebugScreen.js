@@ -23,10 +23,30 @@ import { getUtcOffset } from '../helpers/dateTime'
 import sync from '../services/sync'
 import { idinvWatcher } from '../services/idinvWatcher'
 import { activityAsyncSave } from '../services/asyncStorage'
+import { uploadRequest } from '../requests/uploadRequest'
+import RNFS from 'react-native-fs'
+import { Get, Post } from '../requests/newRequest'
 
 class DebugScreen extends Component {
     static navigationOptions = {
         title: 'Debug',
+    }
+
+    uploadFile() {
+        const filepath = `/storage/emulated/0/Pictures/1615886423543.jpg`
+        const activity = Activity.instantInit('Stairs', 'test test', {
+            photoFile: filepath,
+        })
+        uploadRequest(
+            'users/6038c6126b418c4b34dfb227/activity',
+            'POST',
+            this.props.tokens.access_token,
+            activity,
+        )
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -65,6 +85,13 @@ class DebugScreen extends Component {
                     title={'clear activity localstorage'}
                     onPress={() => {
                         activityAsyncSave([])
+                    }}
+                />
+
+                <SaveButton
+                    title={'upload file'}
+                    onPress={() => {
+                        this.uploadFile()
                     }}
                 />
             </View>
