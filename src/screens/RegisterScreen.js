@@ -7,15 +7,12 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native'
-import { appColor, paths, tileSize } from '../constants'
+import { appColor, identityUrl, paths, tileSize } from '../constants'
 import { WebView } from 'react-native-webview'
 import { SafeAreaView } from 'react-navigation'
 import { strings } from '../localization'
 import Toast from 'react-native-root-toast'
-import {
-    identityRegistration,
-    identityUrl,
-} from '../requests/identityRegistration'
+import { Registration } from '../requests/identityRequest'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class RegisterScreen extends Component {
@@ -26,6 +23,7 @@ export default class RegisterScreen extends Component {
     }
 
     onNavigationStateChange = event => {
+        // ! checkout
         if (event.navigationType === 'formsubmit') {
             if (event.url === identityUrl) {
                 this.props.navigation.navigate(paths.Welcome, {
@@ -51,7 +49,7 @@ export default class RegisterScreen extends Component {
                         if (!/^[a-z0-9]+$/i.test(this.state.password)) {
                             if (/[0-9]/.test(this.state.password)) {
                                 if (/[A-Z]/.test(this.state.password)) {
-                                    identityRegistration(
+                                    Registration(
                                         this.state.email,
                                         this.state.password,
                                     )

@@ -38,9 +38,15 @@ export function UserInfo(token: string) {
     return newRequest(identityUserInfoUrl, token)
 }
 
-export function Registration(token: string, email: string, password: string) {
-    // TODO: check
-    // return newRequest(identityRegistrationUrl, token, body)
+export function Registration(email: string, password: string) {
+    let formData = new FormData()
+    formData.append('email', email)
+    formData.append('password', password)
+
+    return fetch(identityRegistrationUrl, {
+        method: 'POST',
+        body: formData,
+    })
 }
 
 export function identityLogin(token: string, email: string, password: string) {
