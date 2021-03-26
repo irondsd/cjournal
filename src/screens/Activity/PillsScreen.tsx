@@ -10,7 +10,6 @@ import { findLatestTask } from '../../classes/Task'
 import { TimePicker } from '../../components/TimePicker2'
 import TakePhoto from '../../components/TakePhoto'
 import { DropDownInput } from '../../components/DropDownInput2'
-import SaveButton from '../../components/SaveButton'
 import Activity from '../../classes/Activity'
 import { RootState } from '../../redux/store'
 import { IAData } from '../../classes/Activity'
@@ -128,21 +127,5 @@ PillsScreen.navigationOptions = ({ navigation }) => {
         title: navigation.getParam('headerTitle'),
     }
 }
-
-const styles = StyleSheet.create({
-    center: {
-        alignItems: 'center',
-    },
-    photo: {
-        height: 200,
-    },
-
-    button: {
-        zIndex: 1,
-        flex: 2,
-        margin: 20,
-        justifyContent: 'flex-end',
-    },
-})
 
 export default PillsScreen
