@@ -86,7 +86,10 @@ export const TimePicker = ({
 }
 
 const styles = StyleSheet.create({
-    container: { width: '100%', marginTop: 5, marginBottom: 5 },
+    container: {
+        marginTop: 5,
+        marginBottom: 5,
+    },
     time: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
