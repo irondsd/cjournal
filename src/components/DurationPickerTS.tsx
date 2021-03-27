@@ -79,7 +79,7 @@ export const DurationPicker: FC<DurationPickerProps> = ({
                     style={styles.iconDown}
                     name={isOpen ? 'angle-up' : 'angle-down'}
                     size={30}
-                    // onPress={() => setIsOpen(!isOpen)}
+                    onPress={() => setIsOpen(!isOpen)}
                     color={isOpen ? '#aaa' : placeholderGrey}
                 />
                 {isOpen && (
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10,
         marginBottom: 10,
+        zIndex: 11,
     },
     duration: {
         width: '45%',
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     },
     popUp: {
         position: 'absolute',
-        zIndex: 10000,
+        zIndex: 100,
         top: 49,
         bottom: 0,
         width: '100%',
@@ -154,6 +155,7 @@ const styles = StyleSheet.create({
     },
     popUpText: {
         fontSize: 17,
+        zIndex: 1001,
         lineHeight: 40,
         color: secondaryGrey,
     },
