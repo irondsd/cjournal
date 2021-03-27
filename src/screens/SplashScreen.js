@@ -46,7 +46,7 @@ class SplashScreen extends Component {
                         )
                     }
 
-                    if (res.user.idinv !== '') {
+                    if (res.user.idinv) {
                         this.props.setIdinvFilter(true)
                     } else {
                         this.props.setIdinvFilter(false)
