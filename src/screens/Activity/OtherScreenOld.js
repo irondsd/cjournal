@@ -244,10 +244,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(OtherScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(OtherScreen)
 
 const styles = StyleSheet.create({
     input: {
