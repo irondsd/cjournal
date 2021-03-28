@@ -1,4 +1,4 @@
-import { AppRegistry, LogBox } from 'react-native'
+import { AppRegistry, YellowBox } from 'react-native'
 import App from './App'
 import { name as appName } from './app.json'
 import React, { Component } from 'react'
@@ -18,6 +18,10 @@ export default class AppContainer extends Component {
     }
 }
 
-// LogBox.ignoreLogs(['Require cycle:', 'ListView is deprecated'])
+YellowBox.ignoreWarnings([
+    'Require cycle',
+    'ListView is deprecated',
+    'ReactNativeFiberHostComponent',
+])
 
 AppRegistry.registerComponent(appName, () => AppContainer)
