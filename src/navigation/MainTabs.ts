@@ -42,6 +42,7 @@ import QRScanScreen from '../screens/QRScanScreen'
 import TrainerScreen from '../screens/Activity/TrainerScreen'
 import BloodPressureScreen from '../screens/Activity/BloodPressureScreen'
 import VerticalPositionCalibrationScreen from '../screens/Activity/VerticalPositionCalibrationScreen'
+import { TabbarIcon } from '../components/TabbarIcon'
 
 const JournalStack = createStackNavigator({
     Journal: JournalScreen,
@@ -178,14 +179,7 @@ export const MainTabs = createMaterialTopTabNavigator(
                 } else if (routeName === paths.Tasks) {
                     iconName = `ios-list-box`
                 }
-                return (
-                    <Icon
-                        name={iconName}
-                        size={25}
-                        color={tintColor}
-                        style={{ top: -2 }}
-                    />
-                )
+                return TabbarIcon(iconName, 25, tintColor, { top: -2 })
             },
         }),
         tabBarOptions: {
