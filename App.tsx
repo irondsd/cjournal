@@ -1,14 +1,18 @@
-import React, { Component } from 'react'
+import React, { FC, useEffect } from 'react'
 import BackgroundFetch from 'react-native-background-fetch'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import sync from './src/services/sync'
 import NavContainer from './src/navigation/NavContainer'
 import NavigationService from './src/navigation/NavigationService'
 import { idinvWatcher } from './src/services/idinvWatcher'
 import { setupNotifications } from './src/notifications/notifications'
+import { RootState } from './src/redux/store'
 
-class App extends Component {
-    componentDidMount() {
+const App: FC = () => {
+    const user = useSelector((state: RootState) => state.user)
+    const tokens = useSelector((state: RootState) => state.tokens)
+
+    useEffect(() => {
         setupNotifications()
         BackgroundFetch.configure(
             {
@@ -17,18 +21,10 @@ class App extends Component {
                 startOnBoot: true, // <-- Android-only
             },
             () => {
-                if (this.props.user._id && this.props.tokens) {
-                    sync(this.props.user._id, this.props.tokens)
-                    if (
-                        this.props.user._id &&
-                        this.props.tokens.access_token &&
-                        this.props.user.idinv
-                    )
-                        idinvWatcher(
-                            this.props.user._id,
-                            this.props.tokens.access_token,
-                            this.props.user.idinv,
-                        )
+                if (user._id && tokens) {
+                    sync(user._id, tokens)
+                    if (user._id && tokens.access_token && user.idinv)
+                        idinvWatcher(user._id, tokens.access_token, user.idinv)
                 } else {
                     console.log(`Sync aborted, not logged in`)
                 }
@@ -54,24 +50,15 @@ class App extends Component {
                     break
             }
         })
-    }
+    }, [])
 
-    render() {
-        return (
-            <NavContainer
-                ref={navigatorRef => {
-                    NavigationService.setTopLevelNavigator(navigatorRef)
-                }}
-            />
-        )
-    }
+    return (
+        <NavContainer
+            ref={navigatorRef => {
+                NavigationService.setTopLevelNavigator(navigatorRef)
+            }}
+        />
+    )
 }
 
-function mapStateToProps(state) {
-    const isLoggedIn = state.user.isLoggedIn
-    const user = state.user
-    const tokens = state.tokens
-    return { isLoggedIn, user, tokens }
-}
-
-export default connect(mapStateToProps)(App)
+export default App
