@@ -1,4 +1,4 @@
-export async function fetchWithTimeout(
+export async function TimeoutReq(
     req: any,
     timeout: number = 5000,
 ): Promise<Response> {

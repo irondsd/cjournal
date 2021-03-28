@@ -1,5 +1,5 @@
 import { signRequest } from './signRequest'
-import { fetchWithTimeout } from './TimeoutReq'
+import { TimeoutReq } from './TimeoutReq'
 import { apiUrl } from '../constants'
 
 const defaultHeaders = new Headers({
@@ -23,7 +23,7 @@ function newRequest(
     req = signRequest(req, token)
 
     return new Promise((resolve, reject) => {
-        fetchWithTimeout(req)
+        TimeoutReq(req)
             .then(res => {
                 if (res.ok) {
                     const contentType = res.headers.get('content-type')
