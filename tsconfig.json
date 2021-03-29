@@ -11,7 +11,8 @@
   "strict": true,
   "target": "esnext"
   },
-  "baseUrl": "src",
+  "baseUrl": ".",
+  "paths": { "~/*": [ "src/*" ] },
   "include": [
     "src/components",
     "src/custom.d.ts"
