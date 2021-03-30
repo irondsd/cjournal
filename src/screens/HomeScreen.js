@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor, appColor, activityTypes } from '../constants'
+import { backgroundColor, appColor, activityTypes, paths } from '../constants'
 import { strings } from '../localization'
-import SettingsButton from '../components/SettingsButton'
+import { SettingsButton } from '../components/SettingsButton'
 import sync from '../services/sync'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
 import TileWrapper from '../components/TileWrapper'
@@ -22,9 +22,15 @@ import {
 } from '../components/tiles'
 
 class HomeScreen extends Component {
-    static navigationOptions = {
-        title: strings.Home,
-        headerRight: <SettingsButton />,
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: strings.Home,
+            headerRight: (
+                <SettingsButton
+                    onPress={() => navigation.navigate(paths.Settings)}
+                />
+            ),
+        }
     }
 
     constructor(props) {
