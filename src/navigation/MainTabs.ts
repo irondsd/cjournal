@@ -35,7 +35,6 @@ import { TestsScreen } from '../screens/nav/TestsScreen'
 import DebugScreen from '../screens/DebugScreen'
 import AlarmScreen from '../screens/Activity/AlarmScreen'
 import ActivityStatsScreen from '../screens/ActivityStatsScreen'
-import DeviceInstallScreen from '../screens/Activity/DeviceInstallScreen'
 import CameraScreen from '../screens/CameraScreen'
 import OtherScreen from '../screens/Activity/OtherScreenOld'
 import QRScanScreen from '../screens/QRScanScreen'
@@ -70,7 +69,6 @@ const HomeStack = createStackNavigator({
     Pills: PillsScreen,
     Tests: TestsScreen,
     Alarm: AlarmScreen,
-    DeviceInstall: DeviceInstallScreen,
     Camera: CameraScreen,
     Other: OtherScreen,
     Trainer: TrainerScreen,
