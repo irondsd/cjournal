@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localization'
-import ActivityListItem from '../components/ActivityListItem'
+import { ActivityListItem } from '../components/ActivityListItem'
 import {
     activityFetchFailed,
     deleteActivity,
@@ -82,7 +82,10 @@ class JournalScreen extends Component<Props> {
         }
 
         return (
-            <ActivityListItem item={item} navigation={this.props.navigation} />
+            <ActivityListItem
+                activity={item}
+                navigation={this.props.navigation}
+            />
         )
     }
 
