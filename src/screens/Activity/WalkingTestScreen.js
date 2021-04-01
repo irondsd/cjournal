@@ -26,7 +26,7 @@ import {
     secondaryGrey,
     width,
 } from '../../constants'
-import BackButton from '../../components/BackButton'
+import { BackButton } from '../../components/BackButton'
 import { showError } from '../../services/toast'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
@@ -45,12 +45,9 @@ class WalkingTestScreen extends Component {
         title: strings.WalkingTest,
         headerLeft: (
             <BackButton
-                goBack={() => {
-                    if (timerOn) {
-                        Alert.alert(strings.Alert, strings.CantGoBack)
-                    } else {
-                        navigation.goBack()
-                    }
+                onPress={() => {
+                    if (timerOn) Alert.alert(strings.Alert, strings.CantGoBack)
+                    else navigation.goBack()
                 }}
             />
         ),

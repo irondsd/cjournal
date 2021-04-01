@@ -25,7 +25,7 @@ import {
     defaultStyles,
     width,
 } from '../../constants'
-import BackButton from '../../components/BackButton'
+import { BackButton } from '../../components/BackButton'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import Barometer from '../../sensors/Barometer'
@@ -40,12 +40,9 @@ class StairsScreen extends Component {
         title: strings.Stairs,
         headerLeft: (
             <BackButton
-                goBack={() => {
-                    if (started) {
-                        Alert.alert(strings.Alert, strings.CantGoBack)
-                    } else {
-                        navigation.goBack()
-                    }
+                onPress={() => {
+                    if (started) Alert.alert(strings.Alert, strings.CantGoBack)
+                    else navigation.goBack()
                 }}
             />
         ),

@@ -14,7 +14,6 @@ import { updateActivity, deleteActivity } from '../redux/actions/'
 import TimePicker from '../components/TimePicker'
 import DurationPicker from '../components/DurationPicker'
 import DeleteButton from '../components/DeleteButton'
-import BackButton from '../components/BackButton'
 import Activity from '../classes/Activity'
 import { displayDateTime } from '../helpers/dateTime'
 import Map from '../components/Map'
@@ -77,17 +76,11 @@ class ActivityStatsScreen extends Component<Props> {
         if (data.hasOwnProperty('state'))
             stats += `${strings.State}: ${data.state}\n`
         if (data.hasOwnProperty('distance'))
-            stats += `${strings.CoveredDistance}: ${data.distance} ${
-                strings.meters
-            }\n`
+            stats += `${strings.CoveredDistance}: ${data.distance} ${strings.meters}\n`
         if (data.hasOwnProperty('metersMax'))
-            stats += `${strings.AscentTo}: ${data.metersMax} ${
-                strings.meters
-            }\n`
+            stats += `${strings.AscentTo}: ${data.metersMax} ${strings.meters}\n`
         if (data.hasOwnProperty('steps'))
-            stats += `${strings.NumberOfSteps}: ${data.steps} ${
-                strings.steps
-            }\n`
+            stats += `${strings.NumberOfSteps}: ${data.steps} ${strings.steps}\n`
 
         this.setState({
             stats: stats,
@@ -153,10 +146,7 @@ const mapDispatchToProps = dispatch => ({
     },
 })
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(ActivityStatsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityStatsScreen)
 
 const styles = StyleSheet.create({
     container: {
