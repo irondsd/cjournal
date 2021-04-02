@@ -5,7 +5,7 @@ import Geolocation, {
 } from '@react-native-community/geolocation'
 
 type CallbackType = (data: any) => void | undefined
-type LocationType = {
+export type LocationType = {
     latitude: number
     longitude: number
 }
@@ -15,7 +15,7 @@ interface IGPS {
     speed: number
     positions: any
     allowed: boolean
-    callback: CallbackType
+    callback?: CallbackType
     watchId: number | undefined
 }
 
@@ -24,10 +24,10 @@ export default class GPS implements IGPS {
     speed: number
     positions: LocationType[]
     allowed: boolean
-    callback: CallbackType
+    callback?: CallbackType
     watchId: number | undefined
 
-    constructor(callback: CallbackType) {
+    constructor(callback?: CallbackType) {
         this.distance = 0
         this.speed = 0
         this.positions = []

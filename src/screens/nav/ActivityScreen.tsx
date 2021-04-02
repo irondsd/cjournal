@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import TileWrapper from '../../components/TileWrapper'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
-import TileSpacer from '../../components/TileSpacer'
+import { TileSpacer } from '../../components/TileSpacer'
 import {
     SexTile,
     ToiletTile,

@@ -9,7 +9,7 @@ import {
     FatigueTile,
 } from '../../components/tiles'
 import TileWrapper from '../../components/TileWrapper'
-import TileSpacer from '../../components/TileSpacer'
+import { TileSpacer } from '../../components/TileSpacer'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const WeaknessScreen: NavigationStackScreenComponent = ({

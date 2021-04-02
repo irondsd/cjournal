@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
 import TileWrapper from '../../components/TileWrapper'
-import TileSpacer from '../../components/TileSpacer'
+import { TileSpacer } from '../../components/TileSpacer'
 import {
     HeadacheTile,
     RetrosternalPainTile,

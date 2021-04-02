@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
 import {
-    WalkingTile,
+    WalkingTestTile,
     StairsTile,
     PsychoemotionalTestTile,
     PressTile,
@@ -11,7 +11,7 @@ import {
     DeepBreathingTile,
 } from '../../components/tiles'
 import TileWrapper from '../../components/TileWrapper'
-import TileSpacer from '../../components/TileSpacer'
+import { TileSpacer } from '../../components/TileSpacer'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const TestsScreen: NavigationStackScreenComponent = ({ navigation }) => {
@@ -26,7 +26,7 @@ export const TestsScreen: NavigationStackScreenComponent = ({ navigation }) => {
         <View>
             <TileWrapper>
                 <StairsTile navigation={navigation} />
-                <WalkingTile navigation={navigation} />
+                <WalkingTestTile navigation={navigation} />
                 <DeepBreathingTile navigation={navigation} />
             </TileWrapper>
             <TileWrapper>
