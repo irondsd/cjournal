@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React, { FC } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { tileMargin, tileSize } from '../constants/styles'
 
-export default class aTile extends Component {
-    render() {
-        return <View style={styles.container}></View>
-    }
+export const TileSpacer: FC = () => {
+    return <View style={styles.container} />
 }
 
 const styles = StyleSheet.create({
