@@ -1,9 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { displayDateTime } from '../helpers/dateTime'
 import { paths, editable } from '../constants'
-import ListItem from './ListItem'
+import { ListItem } from './ListItem'
 import { IActivityClass } from '../classes/Activity'
 import { NavigationParams } from 'react-navigation'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 interface ActivityListItemProps {
     activity: IActivityClass
@@ -29,7 +31,7 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
     }
 
     const getInfo = () => {
-        let data = null
+        let data
 
         if (activity.data) {
             if (activity.data.pill) data = activity.data.pill
@@ -41,22 +43,6 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
         return data
     }
 
-    const isSynced = (): boolean => {
-        return activity.synced()
-    }
-
-    const hasComment = () => {
-        return !!activity.comment
-    }
-
-    const hasAudio = () => {
-        return !!activity.data.audio || !!activity.data.audioFile
-    }
-
-    const hasPhoto = () => {
-        return !!activity.data.image || !!activity.data.photoFile
-    }
-
     const onPress = () => {
         if (editable.includes(activity.activity_type)) {
             navigation.navigate(paths.ActivityDetails, activity)
@@ -65,15 +51,43 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
         }
     }
 
+    const getIcons = () => {
+        const icons: ReactNode[] = []
+
+        const props = {
+            color: '#999999',
+            size: 12,
+            style: { paddingRight: 3 },
+        }
+
+        if (activity.hasComment()) {
+            const name = 'comment'
+            icons.push(<Icon name={name} {...props} key={name} />)
+        }
+        if (activity.hasPhoto()) {
+            const name = 'camera'
+            icons.push(<Icon name={name} {...props} key={name} />)
+        }
+        if (activity.hasAudio()) {
+            const name = 'microphone'
+            icons.push(<Icon name={name} {...props} key={name} />)
+        }
+        if (activity.hasLocation()) {
+            const name = 'location-on'
+            icons.push(
+                <MaterialIcons name={name} {...props} size={14} key={name} />,
+            )
+        }
+        return icons
+    }
+
     return (
         <ListItem
             activity_type={activity.activity_type}
             time={calculateTime()}
-            data={getInfo()}
-            synced={isSynced()}
-            comment={hasComment()}
-            audio={hasAudio()}
-            photo={hasPhoto()}
+            info={getInfo()}
+            synced={activity.synced()}
+            icons={getIcons()}
             onPress={onPress}
         />
     )

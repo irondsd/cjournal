@@ -19,6 +19,7 @@ import {
 import { getUtcOffset } from '../helpers/dateTime'
 import { uploadRequest } from '../requests/uploadRequest'
 import objectId from '../helpers/objectId'
+import { LocationType } from '../sensors/GPS'
 
 export type ActivityType = keyof typeof activityTypes
 
@@ -45,6 +46,10 @@ export interface IActivityClass extends IActivity {
     isNewerThan(other: IActivity): boolean
     synced(): boolean
     hasFiles(): boolean
+    hasLocation(): boolean
+    hasPhoto(): boolean
+    hasAudio(): boolean
+    hasComment(): boolean
     sync(_id: string, access_token: string): void
     increaseFailedSyncCount(): void
     addLastSyncAttempt(): void
@@ -68,12 +73,13 @@ export interface IASystem {
 export interface IAData {
     pill?: string
     steps?: number
-    locations?: string[]
+    locations?: LocationType[]
     default_time?: true
     audioFile?: string
     photoFile?: string
     audio?: string
     image?: string
+    type?: string
 }
 
 export default class Activity implements IActivityClass {
@@ -250,12 +256,34 @@ export default class Activity implements IActivityClass {
     }
 
     hasFiles() {
-        if (this.data?.audioFile || this.data?.photoFile) return true
-        return false
+        return !!this.data?.audioFile || !!this.data?.photoFile
+    }
+
+    hasLocation() {
+        return !!this.data?.locations
+    }
+
+    hasPhoto() {
+        return !!this.data?.photoFile || !!this.data?.image
+    }
+
+    hasAudio() {
+        return !!this.data?.audioFile || !!this.data?.audio
+    }
+
+    hasComment() {
+        return !!this.comment
+    }
+
+    applyUser() {
+        if (!this.user) this.user = store.getState().user._id
+        if (!this.idinv) this.idinv = store.getState().user.idinv
     }
 
     sync(_id: string, access_token: string) {
         return new Promise((resolve, reject) => {
+            this.applyUser()
+
             if (this.system?.awaitsSync) {
                 return this.createOnServer(_id, access_token)
                     .then(res => resolve(store.dispatch(activitySynced(this))))
