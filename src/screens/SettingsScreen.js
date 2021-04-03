@@ -26,7 +26,8 @@ import {
 import NumInput from '../components/SettingsNumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
 import store from '../redux/store'
-import { decode } from '../helpers/encode'
+import { decodeIdinv } from '../helpers/encode'
+import { IdinvBlock } from '../components/IdinvBlock'
 
 class SettingsScreen extends Component {
     shortPresses = 0
@@ -139,12 +140,6 @@ class SettingsScreen extends Component {
                 </TouchableWithoutFeedback>
                 <View />
                 <Text style={styles.name}>{this.props.user.username}</Text>
-                {this.props.user.idinv ? (
-                    <Text
-                        style={
-                            styles.information
-                        }>{`${strings.idinv}: ${this.props.user.idinv}`}</Text>
-                ) : null}
                 <View
                     style={
                         this.state.devSettingsHidden
@@ -173,6 +168,7 @@ class SettingsScreen extends Component {
                         }}
                     />
                 </View>
+                <IdinvBlock idinv={this.props.user.idinv} />
                 <View style={styles.buttonView}>
                     <View>
                         <SaveButton
@@ -232,27 +228,25 @@ const styles = StyleSheet.create({
         backgroundColor: backgroundColor,
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        alignItems: 'center',
         padding: 10,
     },
     name: {
         fontSize: 30,
-        textAlign: 'center',
         margin: 20,
-    },
-    email: {
-        fontSize: 15,
-        textAlign: 'center',
-        margin: 10,
     },
     information: {
         fontSize: 15,
-        textAlign: 'center',
+    },
+    email: {
+        fontSize: 15,
         margin: 10,
     },
     buttonView: {
         flex: 1,
+        width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'flex-end',
     },
 })
