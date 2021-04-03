@@ -6,24 +6,21 @@ import { NavigationParams } from 'react-navigation'
 import { ITaskClass } from '../classes/Task'
 
 interface TasksListItemProps {
-    activity: ITaskClass
+    task: ITaskClass
     navigation: NavigationParams
 }
 
-export const TasksListItem: FC<TasksListItemProps> = ({
-    activity,
-    navigation,
-}) => {
+export const TasksListItem: FC<TasksListItemProps> = ({ task, navigation }) => {
     const getTime = () => {
-        return displayDateTime(new Date(activity.time * 1000))
+        return displayDateTime(new Date(task.time * 1000))
     }
 
     const getInfo = () => {
         let data
 
-        if (activity.data) {
-            if (activity.data.pill) {
-                data = activity.data.pill
+        if (task.data) {
+            if (task.data.pill) {
+                data = task.data.pill
             }
         }
 
@@ -31,19 +28,19 @@ export const TasksListItem: FC<TasksListItemProps> = ({
     }
 
     const onPress = () => {
-        if (activity.completed) return
+        if (task.completed) return
 
-        let navigateTo = activityPaths[activity.activity_type]
+        let navigateTo = activityPaths[task.activity_type]
 
         navigation.navigate(navigateTo, {
-            task: activity._id,
-            sender: activity.activity_type,
+            task: task._id,
+            sender: task.activity_type,
         })
     }
 
     return (
         <ListItem
-            activity_type={activity.activity_type}
+            activity_type={task.activity_type}
             time={getTime()}
             info={getInfo()}
             onPress={onPress}
