@@ -1,17 +1,17 @@
 {
     "name": "cjournal",
-    "version": "4.0.1",
+    "version": "4.0.4",
     "private": true,
     "scripts": {
+        "start": "react-native start",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
-        "start": "react-native start",
-        "build:a": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && rm -r android/app/src/main/res/drawable* android/app/src/main/res/raw && cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && cd ..",
-        "pods": "cd ios && pod install && cd ..",
         "release:a": "react-native run-android --variant=release",
         "release:i": "react-native run-ios --configuration Release --device \"iPhone (Konstantin)\"",
+        "build:a": "react-native bundle --platform android --dev false --entry-file index.tsx --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && rm -r android/app/src/main/res/drawable* android/app/src/main/res/raw && cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && cd ..",
         "build:play": "cd android && ./gradlew bundleRelease",
         "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/cjournal/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
+        "pods": "cd ios && pod install && cd ..",
         "clean": "cd android && ./gradlew clean && cd .."
     },
     "dependencies": {
@@ -35,6 +35,7 @@
         "react-native-localization": "^2.1.6",
         "react-native-modal-datetime-picker": "^8.7.1",
         "react-native-push-notification": "^3.1.9",
+        "react-native-qrcode-svg": "^6.1.1",
         "react-native-reanimated": "^1.4.0",
         "react-native-root-siblings": "^4.0.6",
         "react-native-root-toast": "^3.2.1",
