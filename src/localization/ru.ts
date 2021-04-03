@@ -66,7 +66,7 @@ export const ru = {
     Journal: 'Дневник',
     July: 'Июля',
     June: 'Июня',
-    Locating: 'Поиск местоположения!',
+    Locating: 'Поиск местоположения...',
     LocationPermissions: 'Разрешение на использование геолокации',
     LocationPermissionsMessage: 'Cardio Journal нужен доступ к геолокации',
     Login: 'Войти с Инкарт',

@@ -65,7 +65,7 @@ export const es = {
     Journal: 'Diario',
     July: 'Julio',
     June: 'Junio',
-    Locating: '¡Buscando ubicación!',
+    Locating: '¡Buscando ubicación...',
     LocationPermissions: 'Permisos de ubicación',
     LocationPermissionsMessage: 'Cardio Journal necesita acceso a tu ubicación',
     Login: 'Entrar con Incart',

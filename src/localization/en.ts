@@ -65,7 +65,7 @@ export const en = {
     Journal: 'Journal',
     July: 'July',
     June: 'June',
-    Locating: 'Looking for location!',
+    Locating: 'Looking for location...',
     LocationPermissions: 'Location Permissions',
     LocationPermissionsMessage: 'Cardio Journal needs access to your location',
     Login: 'Login with Incart',
