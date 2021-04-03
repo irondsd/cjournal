@@ -7,14 +7,8 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native'
-import {
-    appColor,
-    identityUrl,
-    paths,
-    placeholderGrey,
-    tileSize,
-} from '../constants'
-import { WebView } from 'react-native-webview'
+import { appColor, paths } from '../constants'
+
 import { SafeAreaView } from 'react-navigation'
 import { strings } from '../localization'
 import Toast from 'react-native-root-toast'
