@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../constants'
 import { strings } from '../localization'
-import TasksListItem from '../components/TasksListItem'
+import { TasksListItem } from '../components/TasksListItem'
 import store from '../redux/store'
 import { Get } from '../requests/newRequest'
 import { replaceTasks, tasksFetchFailed } from '../redux/actions'
@@ -58,7 +58,7 @@ class TasksScreen extends Component<Props> {
     }
 
     _renderItem = ({ item, index }) => {
-        return <TasksListItem item={item} navigation={this.props.navigation} />
+        return <TasksListItem task={item} navigation={this.props.navigation} />
     }
 
     render() {

@@ -28,24 +28,28 @@ export const ListItem: FC<ListItemProps> = ({
             <View style={styles.img}>
                 <ActivityIcon icon={activity_type} size={40} fill={'#000'} />
             </View>
-            <View>
-                <Text style={styles.title}>
-                    {strings[activity_type] || strings.UnknownActivity}
-                </Text>
-                <View style={styles.sub}>
-                    {icons?.map((icon, idx) => icon)}
-                    <Text style={styles.subtitle}>
-                        {time}
-                        {info ? ' - ' + info : null}
+            <View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                }}>
+                <View style={{ maxWidth: '80%' }}>
+                    <Text style={styles.title}>
+                        {strings[activity_type] || strings.UnknownActivity}
                     </Text>
+                    <View style={styles.sub}>
+                        {icons?.map((icon, idx) => icon)}
+                        <Text style={styles.subtitle}>
+                            {time}
+                            {info ? ' - ' + info : null}
+                        </Text>
+                    </View>
                 </View>
-                {!synced && (
-                    <Icon
-                        style={styles.synced}
-                        name="repeat"
-                        color="#eeeeee"
-                        size={30}
-                    />
+                {synced === false && (
+                    <View style={styles.synced}>
+                        <Icon name="repeat" color="#eeeeee" size={30} />
+                    </View>
                 )}
             </View>
         </TouchableOpacity>
@@ -77,9 +81,8 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     synced: {
-        position: 'absolute',
-        right: 50,
-        top: 10,
+        flex: 1,
+        alignItems: 'flex-end',
     },
     icon: {
         marginLeft: 3,
