@@ -1,11 +1,11 @@
 import { qrEncodePrefix } from '../constants'
 import base64 from 'react-native-base64'
 
-export function encode(value: string): string {
+export function encodeIdinv(value: string): string {
     return qrEncodePrefix + ':' + base64.encode(value)
 }
 
-export function decode(value: string): string | undefined {
+export function decodeIdinv(value: string): string | undefined {
     const [prefix, base64String] = value.split(':')
 
     if (prefix === qrEncodePrefix) {
