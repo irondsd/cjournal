@@ -99,7 +99,7 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <TouchableWithoutFeedback
                 onPress={() => {
-                    setPresses(prev => prev++)
+                    setPresses(prev => (prev += 1))
 
                     setTimeout(() => {
                         setPresses(0)
