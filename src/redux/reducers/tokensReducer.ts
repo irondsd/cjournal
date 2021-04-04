@@ -2,7 +2,7 @@ import { tokensAsyncSave } from '../../services/asyncStorage'
 import timestamp from '../../helpers/timestamp'
 import Tokens from '../../classes/Tokens'
 import { ITokens, ITokensClass } from '../../classes/Tokens'
-import { TOKENS_RECEIVED, TOKENS_LOADED } from '../types'
+import { TOKENS_RECEIVED, TOKENS_LOADED, LOGOUT_USER } from '../types'
 
 const initialState: ITokens = {
     isLoggedIn: false,
@@ -50,6 +50,8 @@ export default function userReducer(
 
             tokensAsyncSave(state)
             return state
+        case LOGOUT_USER:
+            return initialState
         default:
             return state
     }
