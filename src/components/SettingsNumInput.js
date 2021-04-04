@@ -26,9 +26,9 @@ export default class NumInput extends Component {
             if (value < 1) {
                 this.DelayInput.focus()
                 this.props.onValueChange(1)
-            } else if (value > 60) {
+            } else if (value > 240) {
                 this.DelayInput.focus()
-                this.props.onValueChange(60)
+                this.props.onValueChange(240)
             } else {
                 this.props.onValueChange(parseInt(value))
             }
@@ -39,14 +39,16 @@ export default class NumInput extends Component {
         return (
             <View style={styles.View}>
                 <Text style={styles.Text}>{this.props.text}</Text>
-                <TextInput
-                    onChangeText={this.onValueChange}
-                    value={this.props.value}
-                    keyboardType={'numeric'}
-                    style={styles.Input}
-                    ref={input => (this.DelayInput = input)}
-                    selectTextOnFocus
-                />
+                <View style={styles.border}>
+                    <TextInput
+                        onChangeText={this.onValueChange}
+                        style={styles.Input}
+                        value={this.props.value}
+                        keyboardType={'numeric'}
+                        ref={input => (this.DelayInput = input)}
+                        selectTextOnFocus
+                    />
+                </View>
             </View>
         )
     }
@@ -65,12 +67,14 @@ var styles = StyleSheet.create({
         flex: 1,
         flexShrink: 0,
     },
-    Input: {
+    border: {
+        paddingLeft: 10,
+        paddingRight: 10,
         borderWidth: 1,
         borderRadius: 3,
-        width: 50,
-        padding: 10,
-        fontSize: 17,
         borderColor: borderGrey,
+    },
+    Input: {
+        fontSize: 17,
     },
 })

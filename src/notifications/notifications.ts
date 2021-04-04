@@ -62,13 +62,14 @@ function onNotificationOpened(notification: any) {
     cancelLocalNotification(notification.id)
 
     if (notification.action === strings.RemindLater) {
-        const time = timestamp() + store.getState().settings.notificationDelay
+        const { notificationDelay } = store.getState().settings
+        const time = timestamp() + notificationDelay * 60
 
         // reschedule
         scheduleNotification(notification.title, notification.message, time)
         showToast(
             `${strings.Postponed} ${strings.by} ${localTime(
-                store.getState().settings.notificationDelay,
+                notificationDelay,
             )}`,
         )
     } else {
