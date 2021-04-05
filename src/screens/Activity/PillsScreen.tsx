@@ -65,33 +65,21 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
         const time_started = timestamp()
         const activity_type: string = params?.sender
         const task = params?.task || findLatestTask(tasks, activity_type)
-
         setActivity({
             activity_type,
             time_started,
             task,
         })
-
         // set pills list
         const pillsType = prescriptions[activity_type]
         const patient = user.patient || {}
         const pillsList: string[] =
             patient[pillsType as keyof typeof patient] || []
         setPillsList(pillsList)
-
         // set up photo
         const photoFile = params?.image?.uri
-
         setData({ photoFile: photoFile })
     }, [params])
-
-    useEffect(() => {
-        const sender = params?.sender
-        const title = strings[sender as keyof typeof strings] as string
-        navigation.setParams({
-            headerTitle: title,
-        })
-    }, [])
 
     return (
         <View style={defaultStyles.container}>
@@ -123,8 +111,11 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
 }
 
 PillsScreen.navigationOptions = ({ navigation }) => {
+    const { sender } = navigation?.state?.params
+    const title = strings[sender]
+
     return {
-        title: navigation.getParam('headerTitle'),
+        title: title,
     }
 }
 
