@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
-import { backgroundColor, profileEditUrl } from '../constants'
+import { backgroundColor, paths, profileEditUrl } from '../constants'
 import { strings } from '../localization'
 import SaveButton from '../components/SaveButton'
 import ToggleSwitch from '../components/ToggleSwitch'
@@ -25,11 +25,12 @@ import {
 } from '../redux/actions'
 import NumInput from '../components/SettingsNumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
-import store, { RootState } from '../redux/store'
+import { RootState } from '../redux/store'
 import { decodeIdinv } from '../helpers/encode'
 import { IdinvBlock } from '../components/IdinvBlock'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { Get } from '../requests/newRequest'
+import { TouchableIcon } from '../components/TouchableIcon'
 
 export const SettingsScreen: NavigationStackScreenComponent = ({
     navigation,
@@ -45,21 +46,22 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
 
     const logout = () => {
         dispatch(logoutUser())
-        // navigation.navigate('Auth')
     }
 
     const setIdinv = (idinv: string) => {
         setIdinvChanging(true)
         userUpdateIdinv(user._id, tokens.access_token, idinv)
             .then(res => {
-                if (res.ok) {
-                    Alert.alert(strings.Success, strings.IdinvChangeSuccess)
-                    Get(`users/${user._id}`, tokens.access_token)
-                        .then(res => dispatch(updateUser(res)))
-                        .catch(err => dispatch(userFetchFailed())),
-                        setIdinvFilter(true)
-                    setIdinvChanging(false)
-                }
+                Alert.alert(strings.Success, strings.IdinvChangeSuccess)
+                Get(`users/${user._id}`, tokens.access_token)
+                    .then(res => {
+                        dispatch(updateUser(res))
+                    })
+                    .catch(err => {
+                        dispatch(userFetchFailed())
+                    }),
+                    setIdinvFilter(true)
+                setIdinvChanging(false)
             })
             .catch(err => {
                 console.log(err)
@@ -83,6 +85,10 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
             setIdinv(idinv)
         }
     }
+
+    useEffect(() => {
+        if (!tokens.isLoggedIn) navigation.navigate('Auth')
+    }, [tokens])
 
     useEffect(() => {
         checkIncomingQR()
@@ -172,6 +178,19 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
 SettingsScreen.navigationOptions = ({ navigation }) => {
     return {
         title: navigation.getParam('headerTitle'),
+        headerRight: (
+            <TouchableIcon
+                name="qrcode"
+                color="#000"
+                size={25}
+                style={{ margin: 15 }}
+                onPress={() => {
+                    navigation.navigate(paths.QRScan, {
+                        returnTo: paths.Settings,
+                    })
+                }}
+            />
+        ),
     }
 }
 
