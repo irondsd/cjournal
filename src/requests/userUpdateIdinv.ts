@@ -1,4 +1,3 @@
-import { apiUrl } from '../constants'
 import { Put } from './newRequest'
 
 export default function userUpdateIdinv(
@@ -6,6 +5,5 @@ export default function userUpdateIdinv(
     access_token: string,
     idinv: string,
 ): Promise<any> {
-    const url = apiUrl + `users/${_id}/`
-    return Put(url, access_token, { idinv: idinv })
+    return Put(`users/${_id}/`, access_token, { idinv: idinv })
 }
