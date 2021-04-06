@@ -25,6 +25,7 @@ import { activityAsyncSave } from '../services/asyncStorage'
 import { uploadRequest } from '../requests/uploadRequest'
 import RNFS from 'react-native-fs'
 import { Get, Post } from '../requests/newRequest'
+import { logPath, readLog, writeLog } from '../services/logger'
 
 class DebugScreen extends Component {
     static navigationOptions = {
@@ -32,20 +33,18 @@ class DebugScreen extends Component {
     }
 
     uploadFile() {
-        const filepath = `/storage/emulated/0/Pictures/1615886423543.jpg`
-        const activity = Activity.instantInit('Stairs', 'test test', {
-            photoFile: filepath,
+        const activity = Activity.instantInit('Stairs', '', {
+            logFile: logPath,
         })
+
         uploadRequest(
-            'users/6038c6126b418c4b34dfb227/activity',
+            `users/${this.props.user._id}/activity`,
             'POST',
             this.props.tokens.access_token,
             activity,
         )
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => console.log(err))
+            .then(res => console.log('upload success', res))
+            .catch(err => console.log('upload error: ', err))
     }
 
     render() {
@@ -88,9 +87,16 @@ class DebugScreen extends Component {
                 />
 
                 <SaveButton
-                    title={'upload file'}
+                    title={'upload log'}
                     onPress={() => {
                         this.uploadFile()
+                    }}
+                />
+                <SaveButton
+                    title={'read log'}
+                    onPress={async () => {
+                        const log = await readLog()
+                        console.log(log)
                     }}
                 />
             </View>
