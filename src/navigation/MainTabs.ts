@@ -1,20 +1,16 @@
-import React from 'react'
-import { View, Text } from 'react-native'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
     backgroundColor,
     paths,
     appColor,
-    secondaryColor,
     secondaryGrey,
     tintColor,
 } from '../constants'
 import { strings } from '../localization'
 import JournalScreen from '../screens/JournalScreen'
-import TasksScreen from '../screens/TasksScreen'
+import { TasksScreen } from '../screens/TasksScreen'
 import HomeScreen from '../screens/HomeScreen'
-import Icon from 'react-native-vector-icons/Ionicons'
 import ActivityDetailsScreen from '../screens/ActivityDetailsScreen'
 import { SettingsScreen } from '../screens/SettingsScreen'
 import TimePickScreen from '../screens/Activity/TimePickScreen'
@@ -22,7 +18,7 @@ import { ActivityScreen } from '../screens/nav/ActivityScreen'
 import { PhysicalLoadScreen } from '../screens/nav/PhysicalLoadScreen'
 import { ServiceScreen } from '../screens/nav/ServiceScreen'
 import WalkingTestScreen from '../screens/Activity/WalkingTestScreen'
-import SleepScreen from '../screens/Activity/SleepScreen'
+import { SleepScreen } from '../screens/Activity/SleepScreen'
 import ExerciseFinishScreen from '../screens/Activity/ExerciseFinishScreen'
 import { TakingMedicineScreen } from '../screens/nav/TakingMedicineScreen'
 import { PainScreen } from '../screens/nav/PainScreen'
