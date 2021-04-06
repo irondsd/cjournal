@@ -10,7 +10,7 @@ export const uploadRequest = (
 ) => {
     return new Promise((resolve, reject) => {
         const uploadUrl = apiUrl + path
-        const files = []
+        const files: RNFS.UploadFileItem[] = []
 
         if (activity.data.audioFile)
             files.push({
@@ -26,6 +26,13 @@ export const uploadRequest = (
                 filepath: activity.data.photoFile,
                 filetype: 'image/jpeg',
             })
+        if (activity.data.logFile)
+            files.push({
+                name: 'log',
+                filename: 'log.log',
+                filepath: activity.data.logFile,
+                filetype: 'text/plain',
+            })
 
         let fields: { [key: string]: any } = { ...activity }
 
@@ -38,7 +45,7 @@ export const uploadRequest = (
             if (typeof fields[key] !== 'string')
                 fields[key] = JSON.stringify(fields[key])
         }
-        console.log(files)
+
         RNFS.uploadFiles({
             toUrl: uploadUrl,
             files: files,
