@@ -77,6 +77,8 @@ export interface IAData {
     default_time?: true
     audioFile?: string
     photoFile?: string
+    logFile?: string
+    log?: string
     audio?: string
     image?: string
     type?: string
