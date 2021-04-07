@@ -10,7 +10,7 @@ import {
     Alert,
 } from 'react-native'
 import { secs2time } from '../../helpers/dateTime'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addActivity } from '../../redux/actions'
 import { strings } from '../../localization'
 import { paths, activityTypes } from '../../constants'
@@ -18,15 +18,17 @@ import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
-import { RootState } from '../../redux/store'
+import { Logger } from '../../services/logger'
 
 export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const [timer, setTimer] = useState<string>('00:00')
     const [startedAt, setStartedAt] = useState(timestamp())
+    const logger = new Logger('sleep' + timestamp())
 
     const dispatch = useDispatch()
 
     const backPressed = () => {
+        logger.log('debug', `back button press attempt at ${timestamp()}`)
         Alert.alert(
             `${strings.Terminate}?`,
             strings.TerminateSleep,
@@ -47,22 +49,31 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
 
     const submit = () => {
         removeScreen()
-        const newAct = Activity.init(
+        const createdActivity = Activity.init(
             activityTypes.Sleep,
             startedAt,
             timestamp(),
             undefined,
             undefined,
-            {},
+            { logFile: logger.filename },
         )
-        dispatch(addActivity(newAct))
-        navigation.navigate(paths.Home)
+        logger.log('debug', `activity: ${JSON.stringify(createdActivity)}`)
+        dispatch(addActivity(createdActivity))
+        logger.log('debug', 'recorded, navigating to finish')
+        navigation.navigate(paths.SleepFinish, {
+            activity: createdActivity,
+        })
     }
 
     useEffect(() => {
         // restore screen
-        if (navigation.state?.params?.startedAt)
+        if (navigation.state?.params?.startedAt) {
+            logger.log(
+                'debug',
+                `screen restored with value ${navigation.state.params.startedAt}`,
+            )
             setStartedAt(navigation.state.params.startedAt)
+        }
 
         // save screen
         screenAsyncSave({
@@ -82,8 +93,13 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             const seconds = timestamp() - startedAt
+            const timerValue = secs2time(seconds)
+            logger.log(
+                'debug',
+                `seconds elapsed: ${seconds}, timer value: ${timerValue}`,
+            )
 
-            setTimer(secs2time(seconds))
+            setTimer(timerValue)
         }, 1000)
 
         return () => clearInterval(intervalId)
