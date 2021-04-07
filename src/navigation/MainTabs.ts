@@ -25,6 +25,7 @@ import { PainScreen } from '../screens/nav/PainScreen'
 import { ComplaintsScreen } from '../screens/nav/ComplaintsScreen'
 import StairsScreen from '../screens/Activity/StairsScreen'
 import { EmotionalStressScreen } from '../screens/nav/EmotionalStressScreen'
+import { SleepFinishScreen } from '../screens/Activity/SleepFinishScreen'
 import { WeaknessScreen } from '../screens/nav/WeaknessScreen'
 import { PillsScreen } from '../screens/Activity/PillsScreen'
 import { TestsScreen } from '../screens/nav/TestsScreen'
@@ -38,6 +39,7 @@ import TrainerScreen from '../screens/Activity/TrainerScreen'
 import BloodPressureScreen from '../screens/Activity/BloodPressureScreen'
 import VerticalPositionCalibrationScreen from '../screens/Activity/VerticalPositionCalibrationScreen'
 import { TabbarIcon } from '../components/TabbarIcon'
+import { noTabbarScreens } from '../constants/noTabbarScreens'
 
 const JournalStack = createStackNavigator({
     Journal: JournalScreen,
@@ -56,6 +58,7 @@ const HomeStack = createStackNavigator({
     WalkingTest: WalkingTestScreen,
     Sleep: SleepScreen,
     ExerciseFinish: ExerciseFinishScreen,
+    SleepFinish: SleepFinishScreen,
     TakingMedicine: TakingMedicineScreen,
     Pain: PainScreen,
     Complaints: ComplaintsScreen,
@@ -125,21 +128,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
         // getting the last route name
     }
 
-    if (
-        routeName === paths.Walking ||
-        routeName === paths.Stairs ||
-        routeName === paths.ExerciseFinish ||
-        routeName === paths.Pills ||
-        routeName === paths.BloodPressure ||
-        routeName === paths.TimePick ||
-        routeName === paths.Other ||
-        routeName === paths.VerticalPositionCalibration ||
-        routeName === paths.ExerciseFinish ||
-        routeName === paths.Trainer ||
-        routeName === paths.Alarm ||
-        routeName === paths.QRScan ||
-        routeName === paths.Sleep
-    ) {
+    if (noTabbarScreens.includes(routeName)) {
         tabBarVisible = false
         swipeEnabled = false
     }
