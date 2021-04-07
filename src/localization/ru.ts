@@ -208,4 +208,5 @@ export const ru = {
     ErrorEmail: 'Неправильная электронная почта',
     ErrorFill: 'Заполните поля',
     ErrorEmailInUse: 'Пользователь с этой почтой уже зарегистрирован',
+    SleepFinishQuestion: 'Как вы спали?',
 }

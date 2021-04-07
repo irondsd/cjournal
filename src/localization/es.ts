@@ -211,4 +211,5 @@ export const es = {
     ErrorEmail: 'El correo electrónico no es válido',
     ErrorFill: 'Completa todos los campos',
     ErrorEmailInUse: 'Este correo electrónico ya está en uso',
+    SleepFinishQuestion: '¿Como estuvo tu sueño?',
 }
