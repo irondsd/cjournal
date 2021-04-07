@@ -15,6 +15,7 @@ export const paths: { [key: string]: string } = {
     Other: 'Other',
     Sleep: 'Sleep',
     ExerciseFinish: 'ExerciseFinish',
+    SleepFinish: 'SleepFinish',
     TakingMedicine: 'TakingMedicine',
     Pain: 'Pain',
     Complaints: 'Complaints',
