@@ -6,7 +6,6 @@ import Activity, {
     addOrUpdate,
     sort,
     remove,
-    update,
 } from '../../classes/Activity'
 import { scheduleSync } from '../../services/connectivityWatcher'
 import {
@@ -55,9 +54,7 @@ export default function activityReducer(
         case UPDATE_ACTIVITIES:
             if (!state) state = []
             state = [
-                ...state.filter(activity => {
-                    return !activity.synced()
-                }),
+                ...state.filter(activity => !activity.synced()),
                 ...payload.map(activity => {
                     activity = new Activity({ ...activity })
                     state = addOrUpdate(state, activity)
@@ -74,9 +71,9 @@ export default function activityReducer(
             return state
 
         case UPDATE_ACTIVITY:
-            if (!state) state = []
-            update(state, payload[0], payload[1])
-            showToast(`${strings.Saved} ${strings[payload[1].activity_type]}!`)
+            const index = state.findIndex(a => a._id === payload._id)
+            state[index] = payload
+            showToast(`${strings.Saved} ${strings[payload.activity_type]}!`)
             state = sort(state)
             save(state)
             return state

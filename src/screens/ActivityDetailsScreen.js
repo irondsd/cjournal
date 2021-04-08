@@ -620,8 +620,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    update: (originalActivity, updatedActivity) => {
-        dispatch(updateActivity(originalActivity, updatedActivity))
+    update: activity => {
+        dispatch(updateActivity(activity))
     },
     remove: activity => {
         dispatch(deleteActivity(activity))

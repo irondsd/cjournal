@@ -33,14 +33,10 @@ export const updateActivities = (activities: IActivityClass[]) => {
     }
 }
 
-// TODO: better
-export const updateActivity = (
-    originalActivity: IActivityClass,
-    changedActivity: IActivityClass,
-) => {
+export const updateActivity = (activity: IActivityClass) => {
     return {
         type: UPDATE_ACTIVITY,
-        payload: [originalActivity, changedActivity],
+        payload: activity,
     }
 }
 
