@@ -210,4 +210,5 @@ export const en = {
     ErrorFill: 'Fill in all fields',
     ErrorEmailInUse: 'This email is already in use',
     SleepFinishQuestion: 'How was your sleep?',
+    SleepFinishTerminateQuestion: 'Do you want to skip the question?',
 }

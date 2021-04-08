@@ -209,4 +209,5 @@ export const ru = {
     ErrorFill: 'Заполните поля',
     ErrorEmailInUse: 'Пользователь с этой почтой уже зарегистрирован',
     SleepFinishQuestion: 'Как вы спали?',
+    SleepFinishTerminateQuestion: 'Вы хотите пропустить выбор?',
 }

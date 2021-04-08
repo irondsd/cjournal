@@ -212,4 +212,5 @@ export const es = {
     ErrorFill: 'Completa todos los campos',
     ErrorEmailInUse: 'Este correo electrónico ya está en uso',
     SleepFinishQuestion: '¿Como estuvo tu sueño?',
+    SleepFinishTerminateQuestion: '¿Desea omitir la pregunta?',
 }
