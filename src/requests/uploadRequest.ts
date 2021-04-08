@@ -1,6 +1,6 @@
 import RNFS from 'react-native-fs'
 import { IActivity } from '../classes/Activity'
-import { apiUrl } from '../constants'
+import { acceptedResCodes, apiUrl } from '../constants'
 
 export const uploadRequest = (
     path: string,
@@ -58,8 +58,7 @@ export const uploadRequest = (
             },
         })
             .promise.then(res => {
-                // console.log(res)
-                if (res.statusCode === 201 || res.statusCode === 200)
+                if (acceptedResCodes.includes(res.statusCode))
                     return resolve({
                         status: res.statusCode,
                         ok: true,
