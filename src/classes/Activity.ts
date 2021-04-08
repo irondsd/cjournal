@@ -82,6 +82,7 @@ export interface IAData {
     audio?: string
     image?: string
     type?: string
+    feeling?: string
 }
 
 export default class Activity implements IActivityClass {
@@ -230,7 +231,7 @@ export default class Activity implements IActivityClass {
             try {
                 let res = await activity.attachLocation()
                 // console.log('location success')
-                store.dispatch(updateActivity(activity, activity))
+                store.dispatch(updateActivity(activity))
                 break
             } catch (err) {
                 console.log(err)
@@ -239,8 +240,7 @@ export default class Activity implements IActivityClass {
     }
 
     isEqual(other: IActivity): boolean {
-        if (this._id === other._id) return true
-        return false
+        return this._id === other._id
     }
 
     isNewerThan(other: IActivity): boolean {
@@ -258,7 +258,7 @@ export default class Activity implements IActivityClass {
     }
 
     hasFiles() {
-        return !!this.data?.audioFile || !!this.data?.photoFile
+        return !!Object.keys(this.data).find(key => key.endsWith('File'))
     }
 
     hasLocation() {
@@ -292,15 +292,13 @@ export default class Activity implements IActivityClass {
                     .catch(error =>
                         reject(store.dispatch(activitySyncFailed(this))),
                     )
-            }
-            if (this.system?.awaitsEdit) {
+            } else if (this.system?.awaitsEdit) {
                 return this.editOnServer(_id, access_token)
                     .then(res => resolve(store.dispatch(activitySynced(this))))
                     .catch(error =>
                         reject(store.dispatch(activitySyncFailed(this))),
                     )
-            }
-            if (this.system?.awaitsDelete) {
+            } else if (this.system?.awaitsDelete) {
                 if (this.system.awaitsDelete && this.system.awaitsSync)
                     return Promise.resolve(activityDeleted(this))
                 return this.deleteOnServer(_id, access_token)
@@ -416,20 +414,6 @@ export function addOrUpdate(array: IActivityClass[], activity: IActivityClass) {
 function moveFile(filepath: string, filename: string) {
     filename = filename.split('/')[1]
     moveToParentDir(filepath, filename)
-}
-
-export function update(
-    array: IActivityClass[],
-    originalActivity: IActivityClass,
-    activity: IActivityClass,
-) {
-    for (let i = 0; i < array.length; i++) {
-        if (originalActivity.isEqual(array[i])) {
-            activity.setToUpdate()
-            array[i] = activity
-            break
-        }
-    }
 }
 
 export function remove(array: IActivityClass[], activity: IActivityClass) {
