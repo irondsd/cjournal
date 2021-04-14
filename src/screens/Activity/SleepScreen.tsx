@@ -19,6 +19,7 @@ import timestamp from '../../helpers/timestamp'
 import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { Logger } from '../../services/logger'
+import { terminateAlarm } from '../../helpers/terminateAlarm'
 
 export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const [timer, setTimer] = useState<string>('00:00')
@@ -28,22 +29,7 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const dispatch = useDispatch()
 
     const backPressed = () => {
-        logger.log('debug', `back button press attempt at ${timestamp()}`)
-        Alert.alert(
-            `${strings.Terminate}?`,
-            strings.TerminateSleep,
-            [
-                {
-                    text: strings.Cancel,
-                    style: 'cancel',
-                },
-                {
-                    text: strings.Terminate,
-                    onPress: () => submit(),
-                },
-            ],
-            { cancelable: false },
-        )
+        terminateAlarm(strings.TerminateSleep, submit)
         return true
     }
 
@@ -55,11 +41,9 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
             timestamp(),
             undefined,
             undefined,
-            { logFile: logger.filename },
+            {},
         )
-        logger.log('debug', `activity: ${JSON.stringify(createdActivity)}`)
         dispatch(addActivity(createdActivity))
-        logger.log('debug', 'recorded, navigating to finish')
         navigation.navigate(paths.SleepFinish, {
             activity: createdActivity,
         })
@@ -67,13 +51,8 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
 
     useEffect(() => {
         // restore screen
-        if (navigation.state?.params?.startedAt) {
-            logger.log(
-                'debug',
-                `screen restored with value ${navigation.state.params.startedAt}`,
-            )
+        if (navigation.state?.params?.startedAt)
             setStartedAt(navigation.state.params.startedAt)
-        }
 
         // save screen
         screenAsyncSave({

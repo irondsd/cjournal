@@ -27,6 +27,7 @@ export default async function requestExternalWritePermission() {
         return false
     }
 }
+
 export async function requestExternalReadPermission() {
     if (Platform.OS === 'ios') return true
 
