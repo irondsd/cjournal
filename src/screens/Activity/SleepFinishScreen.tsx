@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     StyleSheet,
     Text,
@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux'
 import { updateActivity } from '../../redux/actions'
 import { strings } from '../../localization'
 import { paths, width } from '../../constants'
-import { IAData } from '../../classes/Activity'
+import { IActivityClass, IAData } from '../../classes/Activity'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 // @ts-ignore: svg import error
 import FeelingGood from '../../resources/svg/positiveemotions.svg'
@@ -19,6 +19,8 @@ import FeelingGood from '../../resources/svg/positiveemotions.svg'
 import FeelingNormal from '../../resources/svg/normal.svg'
 // @ts-ignore: svg import error
 import FeelingBad from '../../resources/svg/negativeemotions.svg'
+import { terminateAlarm } from '../../helpers/terminateAlarm'
+import { writeLog } from '../../services/logger'
 
 const smileSize = width / 2.5
 
@@ -28,9 +30,9 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
     const dispatch = useDispatch()
 
     const submit = (feeling: IAData['feeling']) => {
-        const activity = navigation.state?.params?.activity
+        const activity: IActivityClass = navigation.state.params.activity
         activity.data.feeling = strings[feeling]
-        dispatch(updateActivity(activity, activity))
+        dispatch(updateActivity(activity))
         navigation.navigate(paths.Home)
     }
 
@@ -41,6 +43,25 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
         fill: '#ffffff88',
     }
 
+    const backPressed = () => {
+        terminateAlarm(strings.SleepFinishTerminateQuestion, () =>
+            navigation.navigate(paths.Home),
+        )
+        return true
+    }
+
+    useEffect(() => {
+        if (!navigation.state?.params?.activity) {
+            writeLog('error', 'SleepFinish no activity')
+            navigation.navigate(paths.Home)
+        }
+
+        BackHandler.addEventListener('hardwareBackPress', backPressed)
+
+        return () =>
+            BackHandler.removeEventListener('hardwareBackPress', backPressed)
+    }, [])
+
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'black'} barStyle="light-content" />
@@ -48,21 +69,21 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
             <View style={styles.feelingsBox}>
                 <TouchableOpacity
                     onPress={() => {
-                        submit('bad')
+                        submit('Bad')
                     }}>
                     <FeelingBad {...smileProps} />
                     <Text style={styles.text}>{strings.Bad}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
-                        submit('normal')
+                        submit('Normal')
                     }}>
                     <FeelingNormal {...smileProps} />
                     <Text style={styles.text}>{strings.Normal}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
-                        submit('good')
+                        submit('Good')
                     }}>
                     <FeelingGood {...smileProps} />
                     <Text style={styles.text}>{strings.Good}</Text>
