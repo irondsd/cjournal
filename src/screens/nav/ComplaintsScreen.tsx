@@ -9,7 +9,7 @@ import {
     OtherComplaintsTile,
     VisionDisturbancesTile,
 } from '../../components/tiles'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const ComplaintsScreen: NavigationStackScreenComponent = ({
@@ -24,16 +24,16 @@ export const ComplaintsScreen: NavigationStackScreenComponent = ({
 
     return (
         <View>
-            <TileWrapper>
+            <TileLine>
                 <ArrhythmiaTile navigation={navigation} />
                 <PalpitationTile navigation={navigation} />
                 <DyspneaTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <TachypneaTile navigation={navigation} />
                 <VisionDisturbancesTile navigation={navigation} />
                 <OtherComplaintsTile navigation={navigation} />
-            </TileWrapper>
+            </TileLine>
         </View>
     )
 }

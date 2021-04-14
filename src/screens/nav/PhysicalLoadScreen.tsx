@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import {
     OtherLoadTile,
     RunningTile,
@@ -24,16 +24,16 @@ export const PhysicalLoadScreen: NavigationStackScreenComponent = ({
 
     return (
         <View>
-            <TileWrapper>
+            <TileLine>
                 <WalkingTile navigation={navigation} />
                 <RunningTile navigation={navigation} />
                 <BicyclingTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <WorkoutTile navigation={navigation} />
                 <TrainerTile navigation={navigation} />
                 <OtherLoadTile navigation={navigation} />
-            </TileWrapper>
+            </TileLine>
         </View>
     )
 }

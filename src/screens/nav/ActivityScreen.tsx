@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { TileSpacer } from '../../components/TileSpacer'
 import {
@@ -26,21 +26,21 @@ export const ActivityScreen: NavigationStackScreenComponent = ({
 
     return (
         <View>
-            <TileWrapper>
+            <TileLine>
                 <MealTile navigation={navigation} />
                 <AlcoholTile navigation={navigation} />
                 <SmokingTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <SexTile navigation={navigation} />
                 <ShowerTile navigation={navigation} />
                 <ToiletTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <TileSpacer />
                 <OtherActivityTile navigation={navigation} />
                 <TileSpacer />
-            </TileWrapper>
+            </TileLine>
         </View>
     )
 }

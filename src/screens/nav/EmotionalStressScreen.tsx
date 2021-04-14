@@ -5,7 +5,7 @@ import {
     OtherEmotionsTile,
     NegativeEmotionsTile,
 } from '../../components/tiles'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const EmotionalStressScreen: NavigationStackScreenComponent = ({
@@ -19,10 +19,10 @@ export const EmotionalStressScreen: NavigationStackScreenComponent = ({
     }, [])
 
     return (
-        <TileWrapper>
+        <TileLine>
             <PositiveEmotionsTile navigation={navigation} />
             <NegativeEmotionsTile navigation={navigation} />
             <OtherEmotionsTile navigation={navigation} />
-        </TileWrapper>
+        </TileLine>
     )
 }

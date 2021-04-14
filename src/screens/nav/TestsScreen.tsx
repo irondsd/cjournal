@@ -10,7 +10,7 @@ import {
     ActiveOrthostasisTile,
     DeepBreathingTile,
 } from '../../components/tiles'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { TileSpacer } from '../../components/TileSpacer'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
@@ -24,21 +24,21 @@ export const TestsScreen: NavigationStackScreenComponent = ({ navigation }) => {
 
     return (
         <View>
-            <TileWrapper>
+            <TileLine>
                 <StairsTile navigation={navigation} />
                 <WalkingTestTile navigation={navigation} />
                 <DeepBreathingTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <PressTile navigation={navigation} />
                 <StrainingTile navigation={navigation} />
                 <ActiveOrthostasisTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <TileSpacer />
                 <PsychoemotionalTestTile navigation={navigation} />
                 <TileSpacer />
-            </TileWrapper>
+            </TileLine>
         </View>
     )
 }

@@ -5,7 +5,7 @@ import {
     ElectrodeReplacementTile,
     VerticalPositionCalibrationTile,
 } from '../../components/tiles'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const ServiceScreen: NavigationStackScreenComponent = ({
@@ -19,10 +19,10 @@ export const ServiceScreen: NavigationStackScreenComponent = ({
     }, [])
 
     return (
-        <TileWrapper>
+        <TileLine>
             <CuffFixTile navigation={navigation} />
             <ElectrodeReplacementTile navigation={navigation} />
             <VerticalPositionCalibrationTile navigation={navigation} />
-        </TileWrapper>
+        </TileLine>
     )
 }

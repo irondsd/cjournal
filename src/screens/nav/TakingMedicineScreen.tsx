@@ -5,7 +5,7 @@ import {
     ReliefOfAttackTile,
     MedicineTestTile,
 } from '../../components/tiles'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const TakingMedicineScreen: NavigationStackScreenComponent = ({
@@ -19,10 +19,10 @@ export const TakingMedicineScreen: NavigationStackScreenComponent = ({
     }, [])
 
     return (
-        <TileWrapper>
+        <TileLine>
             <CourseTherapyTile navigation={navigation} />
             <ReliefOfAttackTile navigation={navigation} />
             <MedicineTestTile navigation={navigation} />
-        </TileWrapper>
+        </TileLine>
     )
 }

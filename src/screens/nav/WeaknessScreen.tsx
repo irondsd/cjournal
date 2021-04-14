@@ -8,7 +8,7 @@ import {
     SyncopeTile,
     FatigueTile,
 } from '../../components/tiles'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { TileSpacer } from '../../components/TileSpacer'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
@@ -24,16 +24,16 @@ export const WeaknessScreen: NavigationStackScreenComponent = ({
 
     return (
         <View>
-            <TileWrapper>
+            <TileLine>
                 <SyncopeTile navigation={navigation} />
                 <NauseaTile navigation={navigation} />
                 <StupefactionTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <FatigueTile navigation={navigation} />
                 <OtherWeaknessTile navigation={navigation} />
                 <TileSpacer />
-            </TileWrapper>
+            </TileLine>
         </View>
     )
 }

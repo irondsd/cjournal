@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import TileWrapper from '../../components/TileWrapper'
+import { TileLine }  from '../../components/TileLine'
 import { TileSpacer } from '../../components/TileSpacer'
 import {
     HeadacheTile,
@@ -21,16 +21,16 @@ export const PainScreen: NavigationStackScreenComponent = ({ navigation }) => {
 
     return (
         <View>
-            <TileWrapper>
+            <TileLine>
                 <RetrosternalPainTile navigation={navigation} />
                 <HeartAreaPainTile navigation={navigation} />
                 <HeadacheTile navigation={navigation} />
-            </TileWrapper>
-            <TileWrapper>
+            </TileLine>
+            <TileLine>
                 <TileSpacer />
                 <OtherPainTile navigation={navigation} />
                 <TileSpacer />
-            </TileWrapper>
+            </TileLine>
         </View>
     )
 }
