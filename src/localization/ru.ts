@@ -210,4 +210,6 @@ export const ru = {
     ErrorEmailInUse: 'Пользователь с этой почтой уже зарегистрирован',
     SleepFinishQuestion: 'Как вы спали?',
     SleepFinishTerminateQuestion: 'Вы хотите пропустить выбор?',
+    Deleted: 'Удалено: ',
+    WaitingPermissions: 'Ожидание разрешений...',
 }

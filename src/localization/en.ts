@@ -211,4 +211,6 @@ export const en = {
     ErrorEmailInUse: 'This email is already in use',
     SleepFinishQuestion: 'How was your sleep?',
     SleepFinishTerminateQuestion: 'Do you want to skip the question?',
+    Deleted: 'Deleted',
+    WaitingPermissions: 'Waiting for permissions...',
 }

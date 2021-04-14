@@ -213,4 +213,6 @@ export const es = {
     ErrorEmailInUse: 'Este correo electrónico ya está en uso',
     SleepFinishQuestion: '¿Como estuvo tu sueño?',
     SleepFinishTerminateQuestion: '¿Desea omitir la pregunta?',
+    Deleted: 'Eliminado',
+    WaitingPermissions: 'Esperando permisos...',
 }
