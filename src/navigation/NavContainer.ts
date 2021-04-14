@@ -1,7 +1,7 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { Auth } from './Auth'
 import { MainTabs } from './MainTabs'
-import SplashScreen from '../screens/SplashScreen'
+import { SplashScreen } from '../screens/SplashScreen'
 
 export default createAppContainer(
     createSwitchNavigator(
