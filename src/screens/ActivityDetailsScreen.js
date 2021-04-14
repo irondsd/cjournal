@@ -242,18 +242,6 @@ class ActivityDetailsScreen extends Component {
     }
 
     update() {
-        const originalActivity = new Activity({
-            _id: this.state.originalActivity._id,
-            activity_type: this.state.originalActivity.activity_type,
-            time_started: this.state.originalActivity.time_started,
-            time_ended: this.state.originalActivity.time_ended,
-            utc_offset: this.state.originalActivity.utc_offset,
-            task: this.state.originalActivity.task,
-            idinv: this.state.originalActivity.idinv,
-            last_updated: this.state.originalActivity.last_updated,
-            comment: this.state.originalActivity.comment,
-            data: this.state.originalActivity.data,
-        })
         const activity = new Activity({
             _id: this.state.activity._id,
             activity_type: this.state.activity.activity_type,
@@ -266,7 +254,7 @@ class ActivityDetailsScreen extends Component {
             comment: this.state.activity.comment,
             data: this.state.activity.data,
         })
-        this.props.update(originalActivity, activity)
+        this.props.update(activity)
         this.setState({
             originalActivity: activity,
         })

@@ -21,6 +21,7 @@ import {
     LOGOUT_USER,
 } from '../types'
 import { IActivityClass } from '../../classes/Activity'
+import { writeLog } from '../../services/logger'
 
 export type ActivityAction = {
     type: string
@@ -70,22 +71,25 @@ export default function activityReducer(
             save(state)
             return state
 
-        case UPDATE_ACTIVITY:
+        case UPDATE_ACTIVITY: {
             const index = state.findIndex(a => a._id === payload._id)
             state[index] = payload
             showToast(`${strings.Saved} ${strings[payload.activity_type]}!`)
             state = sort(state)
             save(state)
             return state
-        case DELETE_ACTIVITY:
-            if (payload.system) {
-                payload.system.awaitsDelete = true
-            } else {
-                payload.system = { awaitsDelete: true }
-            }
-
-            save(state)
+        }
+        case DELETE_ACTIVITY: {
+            const index = state.findIndex(a => a._id === payload._id)
+            if (index) state[index].setToDelete()
+            else
+                writeLog(
+                    'error',
+                    `attempt to delete activity with non existing id: ${payload._id}`,
+                )
+            showToast(`${strings.Deleted} ${strings[payload.activity_type]}!`)
             return state
+        }
         case ACTIVITY_SYNC_FAILED:
             payload.increaseFailedSyncCount()
             save(state)
