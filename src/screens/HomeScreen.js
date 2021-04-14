@@ -6,7 +6,7 @@ import { strings } from '../localization'
 import { SettingsButton } from '../components/SettingsButton'
 import sync from '../services/sync'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
-import TileWrapper from '../components/TileWrapper'
+import { TileLine }  from '../components/TileLine'
 import {
     ActivityTile,
     PhysicalLoadTile,
@@ -90,14 +90,14 @@ class HomeScreen extends Component {
     render() {
         return (
             <View>
-                <TileWrapper>
+                <TileLine>
                     <SleepTile
                         navigation={this.props.navigation}
                         disabled={this.state.Sleep}
                     />
                     <AlarmTile navigation={this.props.navigation} />
-                </TileWrapper>
-                <TileWrapper>
+                </TileLine>
+                <TileLine>
                     <PhysicalLoadTile
                         navigation={this.props.navigation}
                         disabled={this.state.PhysicalLoad}
@@ -107,13 +107,13 @@ class HomeScreen extends Component {
                         disabled={this.state.Activity}
                     />
                     <EmotionalStressTile navigation={this.props.navigation} />
-                </TileWrapper>
-                <TileWrapper>
+                </TileLine>
+                <TileLine>
                     <PainTile navigation={this.props.navigation} />
                     <ComplaintsTile navigation={this.props.navigation} />
                     <WeaknessTile navigation={this.props.navigation} />
-                </TileWrapper>
-                <TileWrapper>
+                </TileLine>
+                <TileLine>
                     <TakingMedicineTile
                         navigation={this.props.navigation}
                         disabled={this.state.Pills}
@@ -126,7 +126,7 @@ class HomeScreen extends Component {
                         navigation={this.props.navigation}
                         disabled={this.state.Service}
                     />
-                </TileWrapper>
+                </TileLine>
             </View>
         )
     }

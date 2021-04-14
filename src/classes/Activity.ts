@@ -59,6 +59,7 @@ export interface IActivityClass extends IActivity {
     deleteOnServer(_id: string, access_token: string): void
     attachLocation(): void
     setToUpdate(): void
+    setToDelete(): void
 }
 
 export interface IASystem {
