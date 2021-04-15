@@ -1,7 +1,7 @@
 import { tasksAsyncSave } from '../../services/asyncStorage'
-import Task, { addOrUpdate, exists, sort } from '../../classes/Task'
+import Task, { addOrUpdate, sort } from '../../classes/Task'
 import { scheduleSync } from '../../services/connectivityWatcher'
-import { ITask, ITaskClass } from '../../classes/Task'
+import { ITaskClass } from '../../classes/Task'
 import { IActivity } from '../../classes/Activity'
 import {
     REPLACE_TASKS,
@@ -13,12 +13,7 @@ import {
     TASK_DELAY_NOTIFICATION,
     TASK_CANCEL_NOTIFICATION,
 } from '../types'
-import {
-    scheduleNotification,
-    cancelLocalNotification,
-    cancelAllLocalNotifications,
-} from '../../notifications/notifications'
-import { strings } from '../../localization'
+import { cancelAllLocalNotifications } from '../../notifications/notifications'
 
 export type TaskActions = {
     type: string
@@ -31,35 +26,31 @@ export default function tasksReducer(
 ) {
     switch (type) {
         case REPLACE_TASKS:
-            state = payload.map((task: ITaskClass) => {
-                task = new Task({ ...task })
-                addOrUpdate(state, task)
-                return task
-            })
-
+            state = payload.map((task: ITaskClass) => new Task({ ...task }))
             state = sort(state)
+
+            // todo: set notifications
+
             save(state)
             return state
         case TASK_COMPLETE:
-            const task = state.find(({ _id }) => _id === payload._id)
-            if (task) {
-                task.complete()
-                addOrUpdate(state, task)
+            const id = state.findIndex(({ _id }) => _id === payload._id)
+            if (id) {
+                state[id].complete()
+                save(state)
             }
-            save(state)
             return state
         case TASKS_FETCH_FAILED:
             scheduleSync()
             return state
         case ADD_ACTIVITY:
             if (payload.task) {
-                const task = state.find(({ _id }) => _id === payload.task)
-                if (task) {
-                    task.complete()
-                    addOrUpdate(state, task)
+                const id = state.findIndex(({ _id }) => _id === payload.task)
+                if (id) {
+                    state[id].complete()
+                    save(state)
                 }
             }
-            save(state)
             return state
         case TASK_SET_NOTIFICATIONS:
             payload.setNotification()
