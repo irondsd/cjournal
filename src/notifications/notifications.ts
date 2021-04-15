@@ -52,6 +52,13 @@ export function scheduleNotification(
 export function cancelLocalNotification(id: number) {
     console.log('cancelled notification', id)
     PushNotification.cancelLocalNotifications({ id: `${id}` })
+    // @ts-ignore: wrong imported types
+    PushNotification.clearLocalNotification(id)
+}
+
+export function dismissLocalNotification(id: number) {
+    // @ts-ignore: wrong imported types
+    PushNotification.clearLocalNotification(id)
 }
 
 export function cancelAllLocalNotifications() {
