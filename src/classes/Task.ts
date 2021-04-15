@@ -62,12 +62,12 @@ export default class Task implements ITaskClass {
 
     complete() {
         this.completed = true
-        this.last_updated = timestamp()
+        this.last_updated = this.last_updated + 1
     }
 
     uncomplete() {
         this.completed = false
-        this.last_updated = timestamp()
+        this.last_updated = this.last_updated + 1
     }
 
     setNotification(time: number | undefined) {
@@ -94,7 +94,6 @@ export default class Task implements ITaskClass {
     }
 
     cancelNotification() {
-        taskCancelNotification(this)
         cancelLocalNotification(this.notification.id)
         delete this.notification
     }
