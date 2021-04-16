@@ -1,6 +1,4 @@
-import PushNotification, {
-    PushNotificationScheduleObject,
-} from 'react-native-push-notification'
+import PushNotification from 'react-native-push-notification'
 import store from '../redux/store'
 import NavigationService from '../navigation/NavigationService'
 import { strings } from '../localization'
@@ -9,6 +7,19 @@ import { localTime } from '../helpers/dateTime'
 import { activityPaths } from '../constants'
 import timestamp from '../helpers/timestamp'
 import { taskCancelNotification } from '../redux/actions'
+
+type FiredNotification = {
+    actions: string[]
+    action?: string
+    fireDate: number
+    title: string
+    foreground: boolean
+    id: string
+    message: string
+    notificationId: number
+    userInteraction: boolean
+    userInfo: string
+}
 
 export function setupNotifications() {
     console.log('notifications service initiated')
@@ -27,11 +38,12 @@ export function setupNotifications() {
 }
 
 export function scheduleNotification(
+    id: string,
     title: string,
     message: string,
     time: number,
 ) {
-    const notificationTitle = strings[title as keyof typeof strings] as string
+    const notificationTitle: string = strings[title]
 
     PushNotification.localNotificationSchedule({
         id: time,
@@ -45,8 +57,9 @@ export function scheduleNotification(
         playSound: true, // (optional) default: true
         ongoing: false, // (optional) set whether this is an "ongoing" notification
         soundName: 'default',
+        userInfo: id,
     })
-    // console.log(`not ${_id} scheduled for ${dateTime.toLocaleTimeString()}`)
+    console.log(`notification with id ${time} scheduled`)
 }
 
 export function cancelLocalNotification(id: number) {
@@ -65,26 +78,27 @@ export function cancelAllLocalNotifications() {
     PushNotification.cancelAllLocalNotifications()
 }
 
-function onNotificationOpened(notification: any) {
-    cancelLocalNotification(notification.id)
+function onNotificationOpened(notification: FiredNotification) {
+    cancelLocalNotification(notification.notificationId)
 
     if (notification.action === strings.RemindLater) {
+        // todo: not working
         const { notificationDelay } = store.getState().settings
         const time = timestamp() + notificationDelay * 60
+        const id = notification.userInfo
 
         // reschedule
-        scheduleNotification(notification.title, notification.message, time)
+        scheduleNotification(id, notification.title, notification.message, time)
         showToast(
             `${strings.Postponed} ${strings.by} ${localTime(
                 notificationDelay,
             )}`,
         )
     } else {
-        let id = notification.id
-        if (id && typeof id === 'string') id = parseInt(id)
+        const taskId = parseInt(notification.userInfo)
 
         let task = store.getState().tasks.find(task => {
-            return task.notification?.id === id
+            return task.notification?.id === taskId
         })
 
         if (task && !task.isCompleted()) {
@@ -97,7 +111,8 @@ function onNotificationOpened(notification: any) {
                 sender: task.activity_type,
             })
         } else {
-            console.log('already completed task notification')
+            // there's no task or
+            // task is completed
         }
     }
 }
