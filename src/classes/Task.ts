@@ -72,6 +72,7 @@ export default class Task implements ITaskClass {
 
     setNotification(time: number | undefined) {
         scheduleNotification(
+            this._id,
             this.activity_type,
             strings.notifText,
             time || this.time,
@@ -85,7 +86,12 @@ export default class Task implements ITaskClass {
     delayNotification() {
         const time = this.notification.time + delayNotificationBy
         taskCancelNotification(this.notification.id)
-        scheduleNotification(this.activity_type, strings.notifText, time)
+        scheduleNotification(
+            this._id,
+            this.activity_type,
+            strings.notifText,
+            time,
+        )
         // schedule
         this.notification = {
             time: time,
