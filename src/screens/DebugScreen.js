@@ -17,7 +17,10 @@ import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import SaveButton from '../components/SaveButton'
-import { cancelLocalNotification } from '../notifications/notifications'
+import {
+    cancelLocalNotification,
+    scheduleNotification,
+} from '../notifications/notifications'
 import { getUtcOffset } from '../helpers/dateTime'
 import sync from '../services/sync'
 import { idinvWatcher } from '../services/idinvWatcher'
@@ -97,6 +100,17 @@ class DebugScreen extends Component {
                     onPress={async () => {
                         const log = await readLog()
                         console.log(log)
+                    }}
+                />
+                <SaveButton
+                    title={'notification in 10 sec'}
+                    onPress={async () => {
+                        scheduleNotification(
+                            '6069b8e036a80830b443739d',
+                            'Test',
+                            'Test notification for debug',
+                            timestamp() + 10,
+                        )
                     }}
                 />
             </View>
