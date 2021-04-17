@@ -3,7 +3,7 @@ import {
     cancelLocalNotification,
     scheduleNotification,
 } from '../notifications/notifications'
-import { delayNotificationBy } from '../constants'
+import { delayNotificationBy, taskExpiration } from '../constants'
 import { strings } from '../localization'
 import { taskCancelNotification } from '../redux/actions'
 
@@ -12,7 +12,10 @@ export interface ITask {
     activity_type: string
     time: number
     completed: boolean
-    last_updated: number
+    updated_at: number
+    idinv?: string
+    user: string
+    comment: string
     data: any
     notification?: INotification
 }
@@ -32,6 +35,8 @@ export interface ITaskClass extends ITask {
     setNotification: (time?: number) => void
     delayNotification: () => void
     cancelNotification: () => void
+    hasNotification: () => boolean
+    eligibleForNotification: () => boolean
 }
 
 export default class Task implements ITaskClass {
@@ -39,8 +44,11 @@ export default class Task implements ITaskClass {
     activity_type: string
     time: number
     completed: boolean
-    last_updated: number
+    updated_at: number
+    user: string
     data: any
+    idinv?: string
+    comment: string
     notification?: any
 
     constructor(task: ITask) {
@@ -48,7 +56,10 @@ export default class Task implements ITaskClass {
         this.activity_type = task.activity_type
         this.time = task.time
         this.completed = task.completed
-        this.last_updated = task.last_updated
+        this.user = task.user
+        this.updated_at = task.updated_at
+        this.idinv = task.idinv
+        this.comment = task.comment
         this.data = task.data
         this.notification = task.notification
     }
@@ -62,12 +73,12 @@ export default class Task implements ITaskClass {
 
     complete() {
         this.completed = true
-        this.last_updated = this.last_updated + 1
+        this.updated_at = this.updated_at + 1
     }
 
     uncomplete() {
         this.completed = false
-        this.last_updated = this.last_updated + 1
+        this.updated_at = this.updated_at + 1
     }
 
     setNotification(time: number | undefined) {
@@ -81,6 +92,9 @@ export default class Task implements ITaskClass {
             time: time || this.time,
             delayed: 0,
         }
+
+        // add 1s so current is newer than the one from backend
+        this.updated_at += 1
     }
 
     delayNotification() {
@@ -97,6 +111,7 @@ export default class Task implements ITaskClass {
             time: time,
             delayed: this.notification.delayed + 1,
         }
+        this.updated_at
     }
 
     cancelNotification() {
@@ -104,12 +119,20 @@ export default class Task implements ITaskClass {
         delete this.notification
     }
 
+    hasNotification() {
+        return !!this?.notification?.id || !!this?.notification?.time
+    }
+
+    eligibleForNotification() {
+        return timestamp() - this.time < taskExpiration
+    }
+
     isCompleted(): boolean {
         return !!this.completed
     }
 
     isNewerThan(other: ITask): boolean {
-        return this.last_updated > other.last_updated
+        return this.updated_at > other.updated_at
     }
 }
 
