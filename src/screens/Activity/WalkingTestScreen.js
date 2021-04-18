@@ -11,7 +11,7 @@ import {
 import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import BackgroundTimer from 'react-native-background-timer'
 import { strings } from '../../localization'
-import { addActivity, cancelNotification } from '../../redux/actions'
+import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { HeaderBackButton } from 'react-navigation'
 import { calculateDistance } from '../../helpers/GPS'
@@ -88,7 +88,6 @@ class WalkingTestScreen extends Component {
             this.props.navigation.state.params.task
         ) {
             task = this.props.navigation.state.params.task
-            cancelNotification(this.props.navigation.state.params.task)
         }
         this.setState({
             timer: secs2time(walkingDuration),
@@ -109,9 +108,6 @@ class WalkingTestScreen extends Component {
     }
 
     record() {
-        // console.log('record', timestamp(), this.state)
-        if (this.state.task) cancelNotification(this.state.task)
-
         let data = {
             steps: this.state.steps,
             distance: this.state.distance,
