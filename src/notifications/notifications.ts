@@ -59,7 +59,9 @@ export function scheduleNotification(
         soundName: 'default',
         userInfo: id,
     })
-    console.log(`notification with id ${time} scheduled`)
+    console.log(
+        `notification with id ${time} scheduled at ${new Date(time * 1000)}`,
+    )
 }
 
 export function cancelLocalNotification(id: number) {
@@ -95,10 +97,10 @@ function onNotificationOpened(notification: FiredNotification) {
             )}`,
         )
     } else {
-        const taskId = parseInt(notification.userInfo)
+        const taskId = notification.userInfo
 
-        let task = store.getState().tasks.find(task => {
-            return task.notification?.id === taskId
+        const task = store.getState().tasks.find(task => {
+            return task._id === taskId
         })
 
         if (task && !task.isCompleted()) {
