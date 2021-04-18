@@ -6,7 +6,7 @@ import { strings } from '../localization'
 import { TasksListItem } from '../components/TasksListItem'
 import { RootState } from '../redux/store'
 import { Get } from '../requests/newRequest'
-import { replaceTasks, tasksFetchFailed } from '../redux/actions'
+import { updateTasks, tasksFetchFailed } from '../redux/actions'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const TasksScreen: NavigationStackScreenComponent = ({ navigation }) => {
@@ -23,7 +23,7 @@ export const TasksScreen: NavigationStackScreenComponent = ({ navigation }) => {
             ? `idinv/${user.idinv}/tasks`
             : `users/${user._id}/tasks`
         Get(url, tokens.access_token)
-            .then(res => dispatch(replaceTasks(res)))
+            .then(res => dispatch(updateTasks(res)))
             .catch(err => dispatch(tasksFetchFailed()))
     }
 

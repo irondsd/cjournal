@@ -6,7 +6,7 @@ import { strings } from '../localization'
 import { TasksListItem } from '../components/TasksListItem'
 import store from '../redux/store'
 import { Get } from '../requests/newRequest'
-import { replaceTasks, tasksFetchFailed } from '../redux/actions'
+import { loadTasks, tasksFetchFailed } from '../redux/actions'
 
 type Props = {}
 class TasksScreen extends Component<Props> {
@@ -53,7 +53,7 @@ class TasksScreen extends Component<Props> {
             ? `idinv/${this.props.user.idinv}/tasks`
             : `users/${this.props.user._id}/tasks`
         Get(url, this.props.tokens.access_token)
-            .then(res => store.dispatch(replaceTasks(res)))
+            .then(res => store.dispatch(loadTasks(res)))
             .catch(err => store.dispatch(tasksFetchFailed()))
     }
 

@@ -5,7 +5,7 @@ import { appColor, width } from '../constants'
 import {
     updateUser,
     replaceActivities,
-    replaceTasks,
+    loadTasks,
     tokensLoaded,
     loadSettings,
     setIdinvFilter,
@@ -56,7 +56,7 @@ export const SplashScreen: NavigationStackScreenComponent = ({
                     }
                 }
                 if (res.activity) dispatch(replaceActivities(res.activity))
-                if (res.tasks) dispatch(replaceTasks(res.tasks))
+                if (res.tasks) dispatch(loadTasks(res.tasks))
                 if (res.tokens) {
                     if (res.screen) {
                         navigation.navigate(res.screen.screen, res.screen)

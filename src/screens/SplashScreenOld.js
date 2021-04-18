@@ -12,7 +12,7 @@ import { appColor } from '../constants'
 import {
     updateUser,
     replaceActivities,
-    replaceTasks,
+    loadTasks,
     tokensLoaded,
     loadSettings,
     setIdinvFilter,
@@ -53,7 +53,7 @@ class SplashScreen extends Component {
                     }
                 }
                 if (res.activity) this.props.replaceActivities(res.activity)
-                if (res.tasks) this.props.replaceTasks(res.tasks)
+                if (res.tasks) this.props.loadTasks(res.tasks)
                 if (res.tokens) {
                     if (res.screen) {
                         this.props.navigation.navigate(
@@ -98,7 +98,7 @@ class SplashScreen extends Component {
 
 const mapDispatchToProps = {
     replaceActivities,
-    replaceTasks,
+    loadTasks,
     updateUser,
     tokensLoaded,
     loadSettings,
