@@ -1,5 +1,6 @@
 import {
-    REPLACE_TASKS,
+    LOAD_TASKS,
+    UPDATE_TASKS,
     TASK_COMPLETE,
     TASKS_FETCH_FAILED,
     LOGOUT_USER,
@@ -10,9 +11,16 @@ import {
 } from '../types'
 import { ITaskClass } from '../../classes/Task'
 
-export const replaceTasks = (tasks: ITaskClass[]) => {
+export const loadTasks = (tasks: ITaskClass[]) => {
     return {
-        type: REPLACE_TASKS,
+        type: LOAD_TASKS,
+        payload: tasks,
+    }
+}
+
+export const updateTasks = (tasks: ITaskClass[]) => {
+    return {
+        type: UPDATE_TASKS,
         payload: tasks,
     }
 }
