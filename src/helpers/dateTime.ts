@@ -1,5 +1,6 @@
 import { strings } from '../localization'
 import { months } from '../constants'
+import timestamp from './timestamp'
 
 export function displayDate(dateTime: Date): string {
     if (dateTime.getDate() === new Date(Date.now()).getDate()) {
@@ -147,4 +148,21 @@ function minutesINT(minutes: number): string {
 
 export function getUtcOffset(): number {
     return new Date().getTimezoneOffset() * -1
+}
+
+export function getNearestHalfAnHour(unixTimestamp: number): number {
+    const time = new Date(unixTimestamp * 1000)
+    const hours = time.getHours()
+    const minutes = time.getMinutes()
+
+    if (minutes < 25) {
+        time.setMinutes(30)
+    } else if (minutes < 55) {
+        time.setHours(hours + 1)
+        time.setMinutes(0)
+    }
+    time.setSeconds(0)
+    time.setMilliseconds(0)
+
+    return timestamp(time)
 }
