@@ -4,7 +4,7 @@ import NavigationService from '../navigation/NavigationService'
 import {
     activityFetchFailed,
     logoutUser,
-    replaceTasks,
+    updateTasks,
     tasksFetchFailed,
     updateActivities,
     updateUser,
@@ -78,7 +78,7 @@ export default async function sync(id: string, tokens: ITokensClass) {
                     .catch(err => store.dispatch(activityFetchFailed())),
                 Get(tasksUrl, tokens.access_token)
                     .then((res: ITaskClass[]) =>
-                        store.dispatch(replaceTasks(res)),
+                        store.dispatch(updateTasks(res)),
                     )
                     .catch(err => store.dispatch(tasksFetchFailed())),
                 Post(login, tokens.access_token)

@@ -19,7 +19,7 @@ export type IdentityTokensResponce = {
 }
 
 export type TokensAction = {
-    type: typeof TOKENS_RECEIVED | typeof TOKENS_LOADED
+    type: typeof TOKENS_RECEIVED | typeof TOKENS_LOADED | typeof LOGOUT_USER
     payload: ITokens & IdentityTokensResponce
 }
 
@@ -51,7 +51,7 @@ export default function userReducer(
             tokensAsyncSave(state)
             return state
         case LOGOUT_USER:
-            return initialState
+            return initialState as ITokensClass
         default:
             return state
     }
