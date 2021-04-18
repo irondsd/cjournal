@@ -198,8 +198,8 @@ PODS:
     - React
   - react-native-geolocation (2.0.2):
     - React
-  - react-native-netinfo (5.0.0):
-    - React
+  - react-native-netinfo (5.9.10):
+    - React-Core
   - react-native-universal-pedometer (1.0.3):
     - React
   - react-native-webview (10.1.1):
@@ -269,11 +269,11 @@ PODS:
     - React
   - RNBackgroundFetch (2.7.1):
     - React
-  - RNCAsyncStorage (1.6.3):
-    - React
+  - RNCAsyncStorage (1.12.1):
+    - React-Core
   - RNCPushNotificationIOS (1.0.3):
     - React
-  - RNDateTimePicker (2.4.0):
+  - RNDateTimePicker (2.6.2):
     - React
   - RNFS (2.16.2):
     - React
@@ -453,11 +453,11 @@ SPEC CHECKSUMS:
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
-  DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
-  glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
   React: 29a8b1a02bd764fb7644ef04019270849b9a7ac3
@@ -467,13 +467,13 @@ SPEC CHECKSUMS:
   React-jsi: b6dc94a6a12ff98e8877287a0b7620d365201161
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
-  react-native-app-auth: 048f9ea8c2358ce1207207a0e74fb16563a3a2bd
-  react-native-background-timer: 0d34748e53a972507c66963490c775321a88f6f2
-  react-native-camera-kit: ded127598a48890a360fbf5e26cf7c44fcc5b873
-  react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
-  react-native-netinfo: 332d617e448eddc12697c7818185861e6114aebf
-  react-native-universal-pedometer: ac9a110a38fa397636d993341fd5c24ecba77f8c
-  react-native-webview: 3ab69facc798f3bf2ab7c6e3dcdc76904dbba2c6
+  react-native-app-auth: 33fdb8dbdd61c1c4c6931eb322cb6622b3726401
+  react-native-background-timer: 1b6e6b4e10f1b74c367a1fdc3c72b67c619b222b
+  react-native-camera-kit: 498a6d111a904834e0824e9073cfadef7303235f
+  react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
+  react-native-netinfo: 30fb89fa913c342be82a887b56e96be6d71201dd
+  react-native-universal-pedometer: e1fe077f0496279f6b4f591ab0fa437297353707
+  react-native-webview: 885999ae7ae0eb0077f13c7ffe94ffe2a268b9e0
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
   React-RCTBlob: a332773f0ebc413a0ce85942a55b064471587a71
@@ -484,18 +484,18 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  ReactNativeLocalization: 9abfb1717d6c6f2e3a4e444c4402d52acbf784cc
-  RNAudioRecord: f38c2caac4bbbc34f24563869745110970f1dfe3
-  RNBackgroundFetch: 08bdaaa13a5aa71cdce42068def5602ed1e982c2
-  RNCAsyncStorage: 6b57de0f6cb0dcfd17521af1681fa39001d3efff
-  RNCPushNotificationIOS: 5403d137a49c55f0dc2273be8473873e934359cd
-  RNDateTimePicker: 39a3987baca0848368f71f02c45bf6e1e61041c0
+  ReactNativeLocalization: dbb269b27d8a84bb22b9c2cdec38ba780b51dd72
+  RNAudioRecord: 162fee3b8fb628773ec704bf0333823125be2ed7
+  RNBackgroundFetch: 8d8d66b47eafcb9e772b2eb95057939038b3ef95
+  RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
+  RNCPushNotificationIOS: 83ec11fe19d4ea9e32cc339d8e7d2cc3c88f543e
+  RNDateTimePicker: 968ccf716b3b6aee07849641966005924de5c0f9
   RNFS: 0d4191b1052bef9ce70deff00a5b4169c62bbd9b
   RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
   RNSensors: 60197256ecd4e1e906dcaf6d634793f876eaa63b
-  RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
+  RNSound: da030221e6ac7e8290c6b43f2b5f2133a8e225b0
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
