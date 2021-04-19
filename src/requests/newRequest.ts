@@ -1,5 +1,5 @@
 import { signRequest } from './signRequest'
-import { TimeoutRequest } from './TimeoutRequestuest'
+import { TimeoutRequest } from './TimeoutRequest'
 import { apiUrl } from '../constants'
 
 const defaultHeaders = new Headers({
