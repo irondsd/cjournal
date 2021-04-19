@@ -15,11 +15,11 @@
         "clean": "cd android && ./gradlew clean && cd .."
     },
     "dependencies": {
-        "@JWWon/react-native-universal-pedometer": "git+https://github.com/stephenheron/react-native-universal-pedometer.git",
         "@react-native-community/async-storage": "^1.12.1",
         "@react-native-community/datetimepicker": "^2.6.2",
         "@react-native-community/geolocation": "^2.0.2",
         "@react-native-community/netinfo": "^5.9.10",
+        "@t2tx/react-native-universal-pedometer": "^2.0.3",
         "react": "^16.11.0",
         "react-native": "^0.62.2",
         "react-native-app-auth": "^5.1.1",

@@ -1,7 +1,6 @@
 import Pedometer, {
     PedometerInterface,
-    PedometerErrorInterface,
-} from '@JWWon/react-native-universal-pedometer'
+} from '@t2tx/react-native-universal-pedometer'
 
 interface Pedometer {
     steps: number
@@ -27,9 +26,6 @@ export default class PedometerSensor implements Pedometer {
                 Pedometer.startPedometerUpdatesFromDate(
                     dateTime.getTime(),
                     pedometerData => {
-                        if (isPedometerError(pedometerData))
-                            return console.log(pedometerData)
-
                         console.log(pedometerData)
                         this.steps = pedometerData.numberOfSteps
                         this.distance = pedometerData.distance
@@ -45,11 +41,4 @@ export default class PedometerSensor implements Pedometer {
     stopUpdates() {
         Pedometer.stopPedometerUpdates()
     }
-}
-
-function isPedometerError(
-    data: PedometerInterface | PedometerErrorInterface,
-): data is PedometerErrorInterface {
-    if ((data as PedometerErrorInterface).code) return false
-    else return true
 }
