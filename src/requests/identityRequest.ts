@@ -4,7 +4,7 @@ import {
     identityUserInfoUrl,
 } from '../constants'
 import { signRequest } from './signRequest'
-import { fetchWithTimeout } from './TimeoutReq'
+import { TimeoutReq } from './TimeoutReq'
 
 function newRequest(url: string, token: string, body?: any) {
     let init: RequestInit = {}
@@ -18,7 +18,7 @@ function newRequest(url: string, token: string, body?: any) {
     req = signRequest(req, token)
 
     return new Promise((resolve, reject) => {
-        fetchWithTimeout(req)
+        TimeoutReq(req)
             .then(res => {
                 if (res.ok) {
                     return res.json()
