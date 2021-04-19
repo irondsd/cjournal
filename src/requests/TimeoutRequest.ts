@@ -1,4 +1,4 @@
-export async function TimeoutReq(
+export async function TimeoutRequest(
     req: any,
     timeout: number = 5000,
 ): Promise<Response> {
