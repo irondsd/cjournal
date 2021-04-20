@@ -10,7 +10,7 @@
         "release:i": "react-native run-ios --configuration Release --device \"iPhone (Konstantin)\"",
         "build:a": "react-native bundle --platform android --dev false --entry-file index.tsx --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && rm -r android/app/src/main/res/drawable* android/app/src/main/res/raw && cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && cd ..",
         "build:play": "cd android && ./gradlew bundleRelease",
-        "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/cjournal/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
+        "build:ios": "react-native bundle --entry-file='index.tsx' --bundle-output='./ios/cjournal/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
         "pods": "cd ios && pod install && cd ..",
         "clean": "cd android && ./gradlew clean && cd .."
     },
