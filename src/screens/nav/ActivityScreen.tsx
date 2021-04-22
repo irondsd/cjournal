@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { TileSpacer } from '../../components/TileSpacer'
 import {

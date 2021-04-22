@@ -5,7 +5,7 @@ import {
     ElectrodeReplacementTile,
     VerticalPositionCalibrationTile,
 } from '../../components/tiles'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const ServiceScreen: NavigationStackScreenComponent = ({
@@ -25,4 +25,10 @@ export const ServiceScreen: NavigationStackScreenComponent = ({
             <VerticalPositionCalibrationTile navigation={navigation} />
         </TileLine>
     )
+}
+
+ServiceScreen.navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('headerTitle'),
+    }
 }

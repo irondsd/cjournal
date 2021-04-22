@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import {
     OtherLoadTile,
     RunningTile,
@@ -36,4 +36,10 @@ export const PhysicalLoadScreen: NavigationStackScreenComponent = ({
             </TileLine>
         </View>
     )
+}
+
+PhysicalLoadScreen.navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('headerTitle'),
+    }
 }

@@ -5,7 +5,7 @@ import {
     ReliefOfAttackTile,
     MedicineTestTile,
 } from '../../components/tiles'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const TakingMedicineScreen: NavigationStackScreenComponent = ({
@@ -25,4 +25,10 @@ export const TakingMedicineScreen: NavigationStackScreenComponent = ({
             <MedicineTestTile navigation={navigation} />
         </TileLine>
     )
+}
+
+TakingMedicineScreen.navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('headerTitle'),
+    }
 }

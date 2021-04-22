@@ -5,7 +5,7 @@ import {
     OtherEmotionsTile,
     NegativeEmotionsTile,
 } from '../../components/tiles'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const EmotionalStressScreen: NavigationStackScreenComponent = ({
@@ -25,4 +25,10 @@ export const EmotionalStressScreen: NavigationStackScreenComponent = ({
             <OtherEmotionsTile navigation={navigation} />
         </TileLine>
     )
+}
+
+EmotionalStressScreen.navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('headerTitle'),
+    }
 }

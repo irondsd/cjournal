@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import { TileSpacer } from '../../components/TileSpacer'
 import {
     HeadacheTile,
@@ -33,4 +33,10 @@ export const PainScreen: NavigationStackScreenComponent = ({ navigation }) => {
             </TileLine>
         </View>
     )
+}
+
+PainScreen.navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('headerTitle'),
+    }
 }

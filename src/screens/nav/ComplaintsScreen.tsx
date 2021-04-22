@@ -9,7 +9,7 @@ import {
     OtherComplaintsTile,
     VisionDisturbancesTile,
 } from '../../components/tiles'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const ComplaintsScreen: NavigationStackScreenComponent = ({
@@ -36,4 +36,10 @@ export const ComplaintsScreen: NavigationStackScreenComponent = ({
             </TileLine>
         </View>
     )
+}
+
+ComplaintsScreen.navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('headerTitle'),
+    }
 }

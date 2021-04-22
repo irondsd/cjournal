@@ -10,7 +10,7 @@ import {
     ActiveOrthostasisTile,
     DeepBreathingTile,
 } from '../../components/tiles'
-import { TileLine }  from '../../components/TileLine'
+import { TileLine } from '../../components/TileLine'
 import { TileSpacer } from '../../components/TileSpacer'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
@@ -41,4 +41,10 @@ export const TestsScreen: NavigationStackScreenComponent = ({ navigation }) => {
             </TileLine>
         </View>
     )
+}
+
+TestsScreen.navigationOptions = ({ navigation }) => {
+    return {
+        title: navigation.getParam('headerTitle'),
+    }
 }
