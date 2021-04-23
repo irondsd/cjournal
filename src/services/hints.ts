@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { defaultHints } from '../constants/defaultHints'
 
 export async function addHint(name: string, item: string) {

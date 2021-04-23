@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { IActivityClass } from '../classes/Activity'
 import { ITaskClass } from '../classes/Task'
 import { ITokens } from '../classes/Tokens'
