@@ -10,8 +10,7 @@ import {
 import { appColor, paths, logoSize } from '../constants'
 import { strings } from '../localization'
 import RegisterOrLogin from '../components/RegisterOrLogin'
-// @ts-ignore: it's showing error on the next line, even though in other files no
-import Logo from '../resources/svg/logo.svg'
+import { Logo } from '../components/Logo'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const WelcomeScreen: NavigationStackScreenComponent = ({
@@ -31,7 +30,7 @@ export const WelcomeScreen: NavigationStackScreenComponent = ({
         <View style={styles.container}>
             <StatusBar backgroundColor={appColor} barStyle="light-content" />
             <View style={styles.logoContainer}>
-                <Logo width={logoSize * 1.5} height={logoSize} fill={'#fff'} />
+                <Logo size={logoSize} />
                 <Text style={styles.title}>{strings.AppTitle}</Text>
             </View>
             <RegisterOrLogin

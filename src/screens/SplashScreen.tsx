@@ -15,8 +15,7 @@ import { asyncGetAll, removeScreen } from '../services/asyncStorage'
 import Barometer from '../sensors/Barometer'
 import { idinvWatcher } from '../services/idinvWatcher'
 import { requestExternalReadPermission } from '../permissions/requestStoragePermission'
-// @ts-ignore: svg import error
-import Logo from '../resources/svg/logo'
+import { Logo } from '../components/Logo'
 import { writeLog } from '../services/logger'
 import timestamp from '../helpers/timestamp'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
@@ -79,7 +78,7 @@ export const SplashScreen: NavigationStackScreenComponent = ({
         <View style={styles.container}>
             <StatusBar backgroundColor={appColor} barStyle="light-content" />
             <View style={styles.logoContainer}>
-                <Logo width={logoSize * 1.5} height={logoSize} fill={'#fff'} />
+                <Logo size={logoSize} />
                 <Text style={styles.title}>{strings.AppTitle}</Text>
             </View>
         </View>
