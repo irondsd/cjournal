@@ -1,26 +1,26 @@
 import React, { FC } from 'react'
-import { TextStyle } from 'react-native'
+import { ViewStyle } from 'react-native'
 import { TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { IconProps } from 'react-native-vector-icons/Icon'
+import { Icon, Set } from './Icon'
 
-interface TouchableIcon {
+interface TouchableIconProps extends Omit<IconProps, 'style'> {
     onPress: () => void
-    style?: TextStyle
-    color?: string
-    size?: number
-    name: string
+    set?: Set
+    style?: ViewStyle
 }
 
-export const TouchableIcon: FC<TouchableIcon> = ({
+export const TouchableIcon: FC<TouchableIconProps> = ({
+    name,
+    set = 'FontAwesome5',
     onPress,
     style,
     color = '#ffffff',
     size = 30,
-    name,
 }) => {
     return (
         <TouchableOpacity style={style} onPress={onPress}>
-            <Icon name={name} color={color} size={size} />
+            <Icon set={set} name={name} color={color} size={size} />
         </TouchableOpacity>
     )
 }
