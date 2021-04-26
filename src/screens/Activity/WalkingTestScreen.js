@@ -119,8 +119,7 @@ class WalkingTestScreen extends Component {
             this.state.timestampStart,
             timestamp(),
             this.state.task,
-            this.props.idinv,
-            '',
+            undefined,
             data,
         )
         this.props.add(activity)
