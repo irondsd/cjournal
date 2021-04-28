@@ -180,6 +180,7 @@ SettingsScreen.navigationOptions = ({ navigation }) => {
         title: navigation.getParam('headerTitle'),
         headerRight: (
             <TouchableIcon
+                set="FontAwesome"
                 name="qrcode"
                 color="#000"
                 size={25}
