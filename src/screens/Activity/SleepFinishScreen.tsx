@@ -13,12 +13,7 @@ import { strings } from '../../localization'
 import { paths, width } from '../../constants'
 import { IActivityClass, IAData } from '../../classes/Activity'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
-// @ts-ignore: svg import error
-import FeelingGood from '../../resources/svg/positiveemotions.svg'
-// @ts-ignore: svg import error
-import FeelingNormal from '../../resources/svg/normal.svg'
-// @ts-ignore: svg import error
-import FeelingBad from '../../resources/svg/negativeemotions.svg'
+import { FeelingsIcon } from '../../components/FeelingsIcon'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
 import { writeLog } from '../../services/logger'
 
@@ -37,9 +32,7 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
     }
 
     const smileProps = {
-        style: styles.img,
-        width: smileSize,
-        height: smileSize,
+        size: smileSize,
         fill: '#ffffff88',
     }
 
@@ -71,21 +64,21 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
                     onPress={() => {
                         submit('Bad')
                     }}>
-                    <FeelingBad {...smileProps} />
+                    <FeelingsIcon feeling="bad" {...smileProps} />
                     <Text style={styles.text}>{strings.Bad}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
                         submit('Normal')
                     }}>
-                    <FeelingNormal {...smileProps} />
+                    <FeelingsIcon feeling="normal" {...smileProps} />
                     <Text style={styles.text}>{strings.Normal}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
                         submit('Good')
                     }}>
-                    <FeelingGood {...smileProps} />
+                    <FeelingsIcon feeling="good" {...smileProps} />
                     <Text style={styles.text}>{strings.Good}</Text>
                 </TouchableOpacity>
             </View>
@@ -120,9 +113,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'flex-end',
-    },
-    img: {
-        marginLeft: 10,
-        marginRight: 10,
     },
 })
