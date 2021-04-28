@@ -13,7 +13,6 @@ import { strings } from '../localization'
 import { updateActivity, deleteActivity } from '../redux/actions/'
 import TimePicker from '../components/TimePicker'
 import DurationPicker from '../components/DurationPicker'
-import DeleteButton from '../components/DeleteButton'
 import Activity from '../classes/Activity'
 import { displayDateTime } from '../helpers/dateTime'
 import Map from '../components/Map'
@@ -40,7 +39,14 @@ class ActivityStatsScreen extends Component<Props> {
     static navigationOptions = ({ navigation }) => ({
         title: strings.AtivityStats,
         headerRight: (
-            <DeleteButton callback={navigation.state.params.deleteActivity} />
+            <TouchableIcon
+                name="trash"
+                color="#000"
+                size={20}
+                set="FontAwesome5"
+                style={{ margin: 15 }}
+                onPress={navigation.state.params.deleteActivity}
+            />
         ),
     })
 
