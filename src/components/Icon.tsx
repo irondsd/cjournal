@@ -6,6 +6,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Octicons from 'react-native-vector-icons/Octicons'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Zocial from 'react-native-vector-icons/Zocial'
 import { IconProps as VectorIconProps } from 'react-native-vector-icons/Icon'
 
@@ -18,12 +19,13 @@ export type Set =
     | 'Octicons'
     | 'Zocial'
     | 'SimpleLineIcons'
+    | 'MaterialIcons'
 
 interface IconProps extends VectorIconProps {
     set?: Set
 }
 
-export const Icon: FC<IconProps & { set: Set }> = ({
+export const Icon: FC<IconProps & { set?: Set }> = ({
     set = 'FontAwesome5',
     ...props
 }) => {
@@ -40,6 +42,8 @@ export const Icon: FC<IconProps & { set: Set }> = ({
             return <IonIcons {...props} />
         case 'MaterialCommunityIcons':
             return <MaterialCommunityIcons {...props} />
+        case 'MaterialIcons':
+            return <MaterialIcons {...props} />
         case 'SimpleLineIcons':
             return <SimpleLineIcons {...props} />
         case 'Octicons':
