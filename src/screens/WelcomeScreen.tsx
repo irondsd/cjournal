@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { appColor, paths, logoSize } from '../constants'
 import { strings } from '../localization'
-import RegisterOrLogin from '../components/RegisterOrLogin'
+import { RegisterOrLogin } from '../components/RegisterOrLogin'
 import { Logo } from '../components/Logo'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
@@ -33,9 +33,7 @@ export const WelcomeScreen: NavigationStackScreenComponent = ({
                 <Logo size={logoSize} />
                 <Text style={styles.title}>{strings.AppTitle}</Text>
             </View>
-            <RegisterOrLogin
-                register={() => navigation.navigate(paths.Register)}
-            />
+            <RegisterOrLogin navigation={navigation} />
         </View>
     )
 }
