@@ -21,7 +21,7 @@ export type Set =
     | 'SimpleLineIcons'
     | 'MaterialIcons'
 
-interface IconProps extends VectorIconProps {
+export interface IconProps extends VectorIconProps {
     set?: Set
 }
 

@@ -4,8 +4,7 @@ import { paths, editable } from '../constants'
 import { ListItem } from './ListItem'
 import { IActivityClass } from '../classes/Activity'
 import { NavigationParams } from 'react-navigation'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { Icon, IconProps } from '../components/Icon'
 
 interface ActivityListItemProps {
     activity: IActivityClass
@@ -54,10 +53,11 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
     const getIcons = () => {
         const icons: ReactNode[] = []
 
-        const props = {
+        const props: Partial<IconProps> = {
             color: '#999999',
             size: 12,
             style: { paddingRight: 3 },
+            set: 'FontAwesome',
         }
 
         if (activity.hasComment()) {
@@ -75,7 +75,13 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
         if (activity.hasLocation()) {
             const name = 'location-on'
             icons.push(
-                <MaterialIcons name={name} {...props} size={14} key={name} />,
+                <Icon
+                    name={name}
+                    {...props}
+                    size={14}
+                    key={name}
+                    set="MaterialIcons"
+                />,
             )
         }
         return icons
