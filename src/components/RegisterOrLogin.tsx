@@ -22,8 +22,6 @@ export const RegisterOrLogin: FC<RegisterOrLoginProps> = ({ navigation }) => {
 
     const register = () => navigation.navigate(paths.Register)
 
-    // todo: replace icons with icons component
-
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={register}>
