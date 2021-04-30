@@ -93,7 +93,7 @@ class ActivityDetailsScreen extends Component {
         }
 
         let addDuration
-        if (!durations.includes(duration)) {
+        if (!durations?.includes(duration)) {
             addDuration = duration
         }
 
@@ -114,12 +114,13 @@ class ActivityDetailsScreen extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.navigation.state.params) {
-            if (nextProps.navigation.state.params.image) {
+        if (nextProps?.navigation?.state?.params) {
+            if (nextProps?.navigation?.state?.params?.image) {
                 return {
                     data: {
                         ...prevState.data,
-                        photoFile: nextProps.navigation.state.params.image.uri,
+                        photoFile:
+                            nextProps.navigation?.state?.params?.image?.uri,
                         image: null,
                     },
                 }
@@ -159,7 +160,7 @@ class ActivityDetailsScreen extends Component {
         let audio = true
         let trainer = false
 
-        if (pillsList.includes(activity.activity_type)) {
+        if (pillsList?.includes(activity.activity_type)) {
             pills = true
             duration = false
             photo = true
@@ -167,7 +168,7 @@ class ActivityDetailsScreen extends Component {
             comment = false
         }
 
-        if (othersList.includes(activity.activity_type)) {
+        if (othersList?.includes(activity.activity_type)) {
             duration = true
             others = true
             comment = false
@@ -333,13 +334,13 @@ class ActivityDetailsScreen extends Component {
 
         if (!activity) activity = this.state.activity
         if (activity.activity_type === activityTypes.CourseTherapy)
-            pills = this.props.user.course_therapy
+            pills.concat(this.props.user.course_therapy)
         if (activity.activity_type === activityTypes.ReliefOfAttack)
-            pills = this.props.user.relief_of_attack
+            pills.concat(this.props.user.relief_of_attack)
         if (activity.activity_type === activityTypes.MedicineTest)
-            pills = this.props.user.tests
+            pills.concat(this.props.user.tests)
 
-        if (!pills.includes(activity.data.pill)) {
+        if (Array.isArray(pills) && !pills?.includes(activity.data.pill)) {
             pills = [activity.data.pill, ...pills]
         }
 
