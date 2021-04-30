@@ -20,6 +20,7 @@ import { getUtcOffset } from '../helpers/dateTime'
 import { uploadRequest } from '../requests/uploadRequest'
 import objectId from '../helpers/objectId'
 import { LocationType } from '../sensors/GPS'
+import { objectCleanUp } from '../helpers/utils'
 
 export type ActivityType = keyof typeof activityTypes
 
@@ -113,7 +114,7 @@ export default class Activity implements IActivityClass {
         this.idinv = activity.idinv
         this.user = activity.user
         this.patient = activity.patient
-        this.data = activity.data || {}
+        this.data = objectCleanUp(activity.data) || {}
         this.system = activity.system
     }
 
@@ -259,7 +260,8 @@ export default class Activity implements IActivityClass {
     }
 
     hasFiles() {
-        return !!Object.keys(this.data).find(key => key.endsWith('File'))
+        const data = objectCleanUp(this.data)
+        return !!Object.keys(data).find(key => key.endsWith('File'))
     }
 
     hasLocation() {

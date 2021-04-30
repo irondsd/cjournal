@@ -14,6 +14,7 @@ import Activity from '../../classes/Activity'
 import { RootState } from '../../redux/store'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
+import { objectCleanUp } from '../../helpers/utils'
 
 type PillsActivityType = {
     activity_type?: string
@@ -54,7 +55,7 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
             undefined,
             activity.task,
             undefined,
-            data,
+            objectCleanUp(data),
         )
         dispatch(addActivity(newAct))
         navigation.navigate(paths.Home)
@@ -78,7 +79,7 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
         setPillsList(pillsList)
         // set up photo
         const photoFile = params?.image?.uri
-        setData({ photoFile: photoFile })
+        if (photoFile) setData({ photoFile: photoFile })
     }, [params])
 
     return (
