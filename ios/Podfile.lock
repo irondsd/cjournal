@@ -194,6 +194,8 @@ PODS:
     - React-Core
   - react-native-background-timer (2.1.1):
     - React
+  - react-native-camera-kit (8.0.4):
+    - React
   - react-native-geolocation (2.0.2):
     - React
   - react-native-netinfo (5.0.0):
@@ -261,8 +263,6 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - ReactNativeCameraKit (11.1.0):
-    - React-Core
   - ReactNativeLocalization (2.1.6):
     - React
   - RNAudioRecord (0.2.2):
@@ -316,6 +316,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-app-auth (from `../node_modules/react-native-app-auth`)
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
+  - react-native-camera-kit (from `../node_modules/react-native-camera-kit`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - "react-native-universal-pedometer (from `../node_modules/@t2tx/react-native-universal-pedometer`)"
@@ -331,7 +332,6 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/callinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - ReactNativeCameraKit (from `../node_modules/react-native-camera-kit`)
   - ReactNativeLocalization (from `../node_modules/react-native-localization`)
   - RNAudioRecord (from `../node_modules/react-native-audio-record`)
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
@@ -388,6 +388,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-app-auth"
   react-native-background-timer:
     :path: "../node_modules/react-native-background-timer"
+  react-native-camera-kit:
+    :path: "../node_modules/react-native-camera-kit"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-netinfo:
@@ -416,8 +418,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  ReactNativeCameraKit:
-    :path: "../node_modules/react-native-camera-kit"
   ReactNativeLocalization:
     :path: "../node_modules/react-native-localization"
   RNAudioRecord:
@@ -469,6 +469,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
   react-native-app-auth: 65e59e33e956bd6d83599c22b8f9bea529a0ea5c
   react-native-background-timer: 1b6e6b4e10f1b74c367a1fdc3c72b67c619b222b
+  react-native-camera-kit: 498a6d111a904834e0824e9073cfadef7303235f
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-netinfo: 841c2a83fe7df998fed56fd48b73229f17a5aa5b
   react-native-universal-pedometer: 5ee0100c8f6b6e673b0a01bc3317f26ad3b5d97f
@@ -483,7 +484,6 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  ReactNativeCameraKit: 4a48dab8133c54a28e3c73df077c54ac8d8e33b0
   ReactNativeLocalization: dbb269b27d8a84bb22b9c2cdec38ba780b51dd72
   RNAudioRecord: 162fee3b8fb628773ec704bf0333823125be2ed7
   RNBackgroundFetch: 8d8d66b47eafcb9e772b2eb95057939038b3ef95
