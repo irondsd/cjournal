@@ -106,7 +106,6 @@ export const AudioRecorder: FC<AudioRecorderProps> = ({ onChange, file }) => {
             setPaused(false)
             Sound.setCategory('Playback')
             sound.play(success => {
-                console.log(success, sound)
                 if (success) {
                     console.log('successfully finished playing')
                 } else {
