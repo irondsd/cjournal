@@ -16,9 +16,10 @@ import {
     defaultStyles,
     placeholderGrey,
 } from '../constants'
-interface Props {
+
+type Props = {
     open: boolean
-    linesToShow?: number
+    maxLines?: number
     value: string
     placeholder: string
     onChange: (value: string) => void
@@ -27,7 +28,7 @@ interface Props {
 
 export const DropDownInput = ({
     open = false,
-    linesToShow = 5,
+    maxLines = 5,
     value,
     placeholder,
     options = [],
@@ -67,9 +68,8 @@ export const DropDownInput = ({
     }
 
     let popUpHeight = 200
-    if (filteredList?.length < linesToShow)
-        popUpHeight = filteredList?.length * 40
-    else popUpHeight = linesToShow * 40
+    if (filteredList?.length < maxLines) popUpHeight = filteredList?.length * 40
+    else popUpHeight = maxLines * 40
 
     const popUpRender = () => {
         return [
@@ -122,7 +122,7 @@ export const DropDownInput = ({
                         style={styles.iconDown}
                         name={isOpen ? 'angle-up' : 'angle-down'}
                         size={30}
-                        onPress={() => setIsOpen(true)}
+                        onPress={() => setIsOpen(v => !v)}
                         color={isOpen ? '#aaa' : placeholderGrey}
                     />
                 )}
@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     },
     popUp: {
         position: 'absolute',
+        elevation: 3,
         zIndex: 10,
         top: 49,
         bottom: 0,
