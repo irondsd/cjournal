@@ -128,11 +128,9 @@ export const DropDownInput = ({
                 )}
             </View>
             {isOpen && (
-                <ScrollView
-                    keyboardShouldPersistTaps="always"
-                    style={[styles.popUp, { height: popUpHeight }]}>
-                    {popUpRender()}
-                </ScrollView>
+                <View style={[styles.popUp, { height: popUpHeight }]}>
+                    <ScrollView>{popUpRender()}</ScrollView>
+                </View>
             )}
         </View>
     )

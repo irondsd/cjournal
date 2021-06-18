@@ -5,7 +5,7 @@ import { TimePicker } from './TimePicker2'
 import { TimeSwitch, TimeSwitchValues } from './TimeSwitchTS'
 import { DurationPicker } from './DurationPickerTS'
 
-interface TimePickCombinedProps {
+type TimePickCombinedProps = {
     time_started: number
     time_ended: number
     onChange: (time_started: number, time_ended: number) => void
@@ -21,7 +21,7 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
     time_ended,
     onChange,
 }) => {
-    const [renderTime] = useState(timestamp()) // * when component was rendered
+    const [renderTime] = useState(timestamp()) // when component was rendered
     const [from, setFrom] = useState<TimeSwitchValues>(
         TimeSwitchValues.fromStart,
     )
@@ -46,7 +46,7 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
     }, [duration])
 
     useEffect(() => {
-        //
+        console.log(time)
     }, [time])
 
     return (
