@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import {
     Text,
     View,
@@ -17,7 +17,7 @@ import {
     placeholderGrey,
 } from '../constants'
 
-type Props = {
+export type DropDownProps = {
     open: boolean
     maxLines?: number
     value: string
@@ -26,14 +26,14 @@ type Props = {
     options: string[]
 }
 
-export const DropDownInput = ({
+export const DropDownInput: FC<DropDownProps> = ({
     open = false,
     maxLines = 5,
     value,
     placeholder,
     options = [],
     onChange,
-}: Props) => {
+}) => {
     const [isOpen, setIsOpen] = useState<boolean>(open)
     const [filteredList, setFilteredList] = useState<string[]>(options)
     const [inputValue, setInputValue] = useState<string>(value)
@@ -136,7 +136,7 @@ export const DropDownInput = ({
     )
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     View: {
         width: '100%',
         marginTop: 10,
@@ -153,6 +153,12 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         height: 50,
         width: 30,
+    },
+    placeholder: {
+        flex: 1,
+        top: 13,
+        fontSize: 17,
+        color: placeholderGrey,
     },
     iconClear: {
         paddingTop: 14,
