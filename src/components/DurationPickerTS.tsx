@@ -85,6 +85,13 @@ export const DurationPicker: FC<DurationPickerProps> = ({
                 {isOpen && (
                     <ScrollView style={[styles.popUp, { height: popUpHeight }]}>
                         {popUpRender()}
+                        {/* <TouchableOpacity
+                            onPress={() => console.log('ggg')}
+                            style={{
+                                backgroundColor: 'red',
+                                flex: 1,
+                                height: 100,
+                            }}></TouchableOpacity> */}
                     </ScrollView>
                 )}
             </View>
@@ -97,7 +104,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10,
         marginBottom: 10,
-        zIndex: 11,
     },
     duration: {
         width: '45%',
@@ -155,7 +161,6 @@ const styles = StyleSheet.create({
     },
     popUpText: {
         fontSize: 17,
-        zIndex: 1001,
         lineHeight: 40,
         color: secondaryGrey,
     },
