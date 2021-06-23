@@ -68,7 +68,7 @@ export const DropDownInput: FC<DropDownProps> = ({
     }
 
     let popUpHeight = 200
-    if (filteredList?.length < maxLines) popUpHeight = filteredList?.length * 40
+    if (filteredList.length < maxLines) popUpHeight = filteredList.length * 40
     else popUpHeight = maxLines * 40
 
     const popUpRender = () => {
@@ -93,12 +93,18 @@ export const DropDownInput: FC<DropDownProps> = ({
         onChange(inputValue)
     }, [inputValue])
 
+    // useEffect(() => {
+    // if (open && !filteredList.length) {
+    //     setIsOpen(false)
+    // }
+    // }, [])
+
     useEffect(() => {
-        if (open && !filteredList?.length) setIsOpen(false)
-    }, [])
+        if (options.length && !filterList.length) setFilteredList(options)
+    }, [options])
 
     return (
-        <View style={styles.View}>
+        <View style={styles.container}>
             <View style={defaultStyles.border}>
                 <TextInput
                     onSubmitEditing={onSubmit}
@@ -128,20 +134,19 @@ export const DropDownInput: FC<DropDownProps> = ({
                 )}
             </View>
             {isOpen && (
-                <View style={[styles.popUp, { height: popUpHeight }]}>
-                    <ScrollView>{popUpRender()}</ScrollView>
-                </View>
+                <ScrollView style={[styles.popUp, { height: popUpHeight }]}>
+                    {popUpRender()}
+                </ScrollView>
             )}
         </View>
     )
 }
 
 export const styles = StyleSheet.create({
-    View: {
+    container: {
         width: '100%',
         marginTop: 10,
         marginBottom: 10,
-        zIndex: 9,
     },
     inputText: {
         fontSize: 17,
@@ -167,8 +172,7 @@ export const styles = StyleSheet.create({
     },
     popUp: {
         position: 'absolute',
-        elevation: 3,
-        zIndex: 10,
+        zIndex: 100,
         top: 49,
         bottom: 0,
         width: '100%',
@@ -177,7 +181,7 @@ export const styles = StyleSheet.create({
         borderWidth: 0.5,
         borderColor: borderGrey,
         paddingLeft: 15,
-        paddingRight: 30,
+        paddingRight: 15,
         backgroundColor: 'white',
     },
     popUpText: {
