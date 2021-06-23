@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { hintStoragePrefix } from '../constants'
 import { defaultHints } from '../constants/defaultHints'
 
 export async function addHint(name: string, item: string) {
@@ -14,16 +15,16 @@ export async function addHint(name: string, item: string) {
     }
     if (list.length > 10) list.pop()
 
-    AsyncStorage.setItem(name, JSON.stringify(list))
+    AsyncStorage.setItem(hintStoragePrefix + name, JSON.stringify(list))
 }
 
 export function saveDefaultHints(name: string, list: string[]) {
-    AsyncStorage.setItem(name, JSON.stringify(list))
+    AsyncStorage.setItem(hintStoragePrefix + name, JSON.stringify(list))
 }
 
 export async function loadHints(name: string): Promise<string[]> {
     return new Promise(resolve => {
-        AsyncStorage.getItem(name).then(res => {
+        AsyncStorage.getItem(hintStoragePrefix + name).then(res => {
             if (!res) return resolve([])
             resolve(JSON.parse(res))
         })
