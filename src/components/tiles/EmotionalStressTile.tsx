@@ -8,7 +8,7 @@ import {
     tileShadeColor,
 } from '../../constants'
 
-const name = activityTypes.ActiveOrthostasis
+const name = activityTypes.EmotionalStress
 
 export const EmotionalStressTile: FC<TileChildProps> = ({
     navigation,
