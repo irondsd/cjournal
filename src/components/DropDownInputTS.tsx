@@ -93,15 +93,16 @@ export const DropDownInput: FC<DropDownProps> = ({
         onChange(inputValue)
     }, [inputValue])
 
-    // useEffect(() => {
-    // if (open && !filteredList.length) {
-    //     setIsOpen(false)
-    // }
-    // }, [])
+    useEffect(() => {
+        if (options.length && !filterList.length) {
+            setFilteredList(options)
+            if (open) setIsOpen(true)
+        }
+    }, [options])
 
     useEffect(() => {
-        if (options.length && !filterList.length) setFilteredList(options)
-    }, [options])
+        if (!filteredList.length && isOpen) setIsOpen(false)
+    }, [isOpen])
 
     return (
         <View style={styles.container}>
@@ -123,7 +124,7 @@ export const DropDownInput: FC<DropDownProps> = ({
                         color={placeholderGrey}
                     />
                 )}
-                {options?.length > 0 && (
+                {filteredList.length > 0 && (
                     <Icon
                         style={styles.iconDown}
                         name={isOpen ? 'angle-up' : 'angle-down'}
@@ -134,7 +135,9 @@ export const DropDownInput: FC<DropDownProps> = ({
                 )}
             </View>
             {isOpen && (
-                <ScrollView style={[styles.popUp, { height: popUpHeight }]}>
+                <ScrollView
+                    keyboardShouldPersistTaps="always"
+                    style={[styles.popUp, { height: popUpHeight }]}>
                     {popUpRender()}
                 </ScrollView>
             )}
