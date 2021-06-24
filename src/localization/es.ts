@@ -215,4 +215,5 @@ export const es = {
     SleepFinishTerminateQuestion: '¿Desea omitir la pregunta?',
     Deleted: 'Eliminado',
     WaitingPermissions: 'Esperando permisos...',
+    hintPlaceholder: 'Por favor, complete',
 }

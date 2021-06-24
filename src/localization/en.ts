@@ -213,4 +213,5 @@ export const en = {
     SleepFinishTerminateQuestion: 'Do you want to skip the question?',
     Deleted: 'Deleted',
     WaitingPermissions: 'Waiting for permissions...',
+    hintPlaceholder: 'Please fill in',
 }

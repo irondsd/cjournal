@@ -212,4 +212,5 @@ export const ru = {
     SleepFinishTerminateQuestion: 'Вы хотите пропустить выбор?',
     Deleted: 'Удалено: ',
     WaitingPermissions: 'Ожидание разрешений...',
+    hintPlaceholder: 'Пожалуйста, заполните',
 }
