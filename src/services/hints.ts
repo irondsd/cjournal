@@ -5,7 +5,7 @@ import { defaultHints } from '../constants/defaultHints'
 export async function addHint(name: string, item: string) {
     if (!item) return
 
-    const saved = await AsyncStorage.getItem(name)
+    const saved = await AsyncStorage.getItem(hintStoragePrefix + name)
     let list: string[] = JSON.parse(saved || '[]')
 
     if (!list.includes(item)) {
