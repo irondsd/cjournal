@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Text, TextInputProps } from 'react-native'
 import { borderGrey, placeholderGrey } from '../constants'
 import { strings } from '../localization'
 
-type BloodPressureValues = {
+export type BloodPressureValues = {
     before: [number | undefined, number | undefined]
     after: [number | undefined, number | undefined]
 }
