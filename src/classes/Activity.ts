@@ -21,6 +21,7 @@ import { uploadRequest } from '../requests/uploadRequest'
 import objectId from '../helpers/objectId'
 import { LocationType } from '../sensors/GPS'
 import { objectCleanUp } from '../helpers/utils'
+import { BloodPressureValues } from '../components/BloodPressureTS'
 
 export type ActivityType = keyof typeof activityTypes
 
@@ -85,6 +86,7 @@ export interface IAData {
     image?: string
     type?: string
     feeling?: string
+    bloodPressure?: BloodPressureValues
 }
 
 export default class Activity implements IActivityClass {
