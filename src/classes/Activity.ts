@@ -87,6 +87,7 @@ export interface IAData {
     type?: string
     feeling?: string
     bloodPressure?: BloodPressureValues
+    calories?: number
 }
 
 export default class Activity implements IActivityClass {
