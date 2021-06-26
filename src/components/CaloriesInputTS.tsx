@@ -16,7 +16,7 @@ export const CaloriesInput: FC<CaloriesInputProps> = ({ value, onChange }) => {
                 underlineColorAndroid="transparent"
                 style={styles.TextInputStyle}
                 keyboardType={'numeric'}
-                value={`${value}`}
+                value={value ? `${value}` : undefined}
                 onChangeText={v => onChange(parseInt(v))}
             />
         </View>
