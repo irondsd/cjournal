@@ -8,6 +8,7 @@ export type OthersPickersProps = {
     activity_type: string
     open?: boolean
     maxLines?: number
+    placeholder?: string
     value: string
     onChange: (value: string) => void
 }
@@ -16,6 +17,7 @@ export const OthersPickers: FC<OthersPickersProps> = ({
     activity_type,
     open = false,
     maxLines = 5,
+    placeholder = strings.hintPlaceholder,
     value,
     onChange,
 }) => {
@@ -27,6 +29,7 @@ export const OthersPickers: FC<OthersPickersProps> = ({
             // load defaults
             if (res.length === 0) {
                 saveDefaultHints(activity_type, defaultHints[activity_type])
+                res = defaultHints[activity_type]
             }
             setOptions(res)
         })
@@ -38,7 +41,7 @@ export const OthersPickers: FC<OthersPickersProps> = ({
             open={open}
             maxLines={maxLines}
             value={value}
-            placeholder={strings.hintPlaceholder}
+            placeholder={placeholder}
             onChange={onChange}
         />
     )
