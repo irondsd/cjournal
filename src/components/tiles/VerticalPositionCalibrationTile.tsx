@@ -21,12 +21,12 @@ export const VerticalPositionCalibrationTile: FC<TileChildProps> = ({
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(paths.VerticalPositionCalibration, {
+                navigation.navigate(paths.Other, {
                     sender: name,
                 })
             }}
             onLongPress={() => {
-                navigation.navigate(paths.VerticalPositionCalibration, {
+                navigation.navigate(paths.Other, {
                     sender: name,
                 })
             }}
