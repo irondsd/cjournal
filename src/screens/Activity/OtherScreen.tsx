@@ -20,6 +20,8 @@ type OtherActivityType = {
     time_ended?: number
 }
 
+// todo: refactor to join Others, Trainer and Vertical pos calib screen
+
 export const OtherScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const dispatch = useDispatch()
     const params = navigation?.state?.params
