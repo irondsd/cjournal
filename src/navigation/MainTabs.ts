@@ -37,7 +37,6 @@ import { OtherScreen } from '../screens/Activity/OtherScreen'
 import { QRScanScreen } from '../screens/QRScanScreen'
 import { TrainerScreen } from '../screens/Activity/TrainerScreen'
 import { BloodPressureScreen } from '../screens/Activity/BloodPressureScreen'
-import VerticalPositionCalibrationScreen from '../screens/Activity/VerticalPositionCalibrationScreen'
 import { TabbarIcon } from '../components/TabbarIcon'
 import { noTabbarScreens } from '../constants/noTabbarScreens'
 
@@ -72,7 +71,7 @@ const HomeStack = createStackNavigator({
     Other: OtherScreen,
     Trainer: TrainerScreen,
     BloodPressure: BloodPressureScreen,
-    VerticalPositionCalibration: VerticalPositionCalibrationScreen,
+    VerticalPositionCalibration: OtherScreen,
     Debug: DebugScreen,
     QRScan: QRScanScreen,
 })
