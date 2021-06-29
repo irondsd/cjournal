@@ -21,12 +21,10 @@ export const Comment: FC<CommentProps> = ({
             maxLength={80}
             placeholderTextColor={placeholderGrey}
             style={styles.input}
-            autoCapitalize="none"
+            autoCapitalize="sentences"
             autoCorrect={true}
-            returnKeyType="next"
-            onChangeText={text => {
-                onChange(text)
-            }}
+            returnKeyType="done"
+            onChangeText={text => onChange(text)}
             onEndEditing={event => onEndEditing?.(event.nativeEvent.text)}
             value={value}
         />
