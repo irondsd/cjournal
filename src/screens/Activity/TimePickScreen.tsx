@@ -4,7 +4,7 @@ import { defaultStyles, paths } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Comment } from '../../components/CommentTS'
 import Activity from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
@@ -13,19 +13,23 @@ import { AudioRecorder } from '../../components/AudioRecorderTS'
 import { TimePickCombined } from '../../components/TimePickCombined'
 import { addHint } from '../../services/hints'
 import { addActivity } from '../../redux/actions'
+import { findLatestTask } from '../../classes/Task'
+import { RootState } from '../../redux/store'
 
 type activityType = {
     activity_type?: string
     time_started?: number
     time_ended?: number
+    task?: string
     comment?: string
 }
 
 export const TimePickScreen: NavigationStackScreenComponent = ({
     navigation,
 }) => {
+    const tasks = useSelector((state: RootState) => state.tasks)
     const dispatch = useDispatch()
-    const params = navigation?.state?.params
+    const { params } = navigation.state
     const [activity, setActivity] = useState<activityType>({})
     const [data, setData] = useState<IAData>({})
 
@@ -34,8 +38,8 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
             activity.activity_type,
             activity.time_started,
             activity.time_ended,
-            undefined,
-            undefined,
+            activity.task,
+            activity.comment,
             data,
         )
         // console.log(newAct)
@@ -48,10 +52,12 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
         // setup activity
         const time_started = timestamp()
         const activity_type: string = params?.sender
+        const task = params?.task || findLatestTask(tasks, activity_type)
 
         setActivity({
             activity_type,
             time_started,
+            task,
         })
     }, [params])
 
@@ -61,7 +67,7 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
         navigation.setParams({
             headerTitle: title,
         })
-    }, [])
+    }, [params])
 
     return (
         <View style={defaultStyles.container}>
