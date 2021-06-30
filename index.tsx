@@ -19,9 +19,10 @@ export default class AppContainer extends Component {
 }
 
 YellowBox.ignoreWarnings([
-    'Require cycle',
+    'Require cycle', // bad code
     'ListView is deprecated',
     'ReactNativeFiberHostComponent',
+    'Animated: `useNativeDriver`', // toasts
 ])
 
 AppRegistry.registerComponent(appName, () => AppContainer)
