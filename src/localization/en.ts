@@ -214,4 +214,5 @@ export const en = {
     Deleted: 'Deleted',
     WaitingPermissions: 'Waiting for permissions...',
     hintPlaceholder: 'Please fill in',
+    m: 'm',
 }

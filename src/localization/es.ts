@@ -216,4 +216,5 @@ export const es = {
     Deleted: 'Eliminado',
     WaitingPermissions: 'Esperando permisos...',
     hintPlaceholder: 'Por favor, complete',
+    m: 'm',
 }

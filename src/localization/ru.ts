@@ -213,4 +213,5 @@ export const ru = {
     Deleted: 'Удалено: ',
     WaitingPermissions: 'Ожидание разрешений...',
     hintPlaceholder: 'Пожалуйста, заполните',
+    m: 'м',
 }
