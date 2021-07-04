@@ -1,7 +1,7 @@
 import { paths } from './paths'
 
 export const noTabbarScreens = [
-    paths.Walking,
+    paths.WalkingTest,
     paths.Stairs,
     paths.ExerciseFinish,
     paths.Pills,
