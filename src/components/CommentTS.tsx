@@ -3,7 +3,7 @@ import { StyleSheet, TextInput } from 'react-native'
 import { strings } from '../localization'
 import { borderGrey, placeholderGrey } from '../constants'
 
-interface CommentProps {
+type CommentProps = {
     value: string
     onChange: (value: string) => void
     onEndEditing?: (value: string) => void
