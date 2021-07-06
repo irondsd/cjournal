@@ -9,7 +9,12 @@ export const usePedometer = (): {
     stopUpdates: () => void
 } => {
     const [watchStarted, setWatchStarted] = useState(false)
-    const [pedometerData, setPedometerData] = useState<PedometerInterface>()
+    const [pedometerData, setPedometerData] = useState<PedometerInterface>({
+        numberOfSteps: 0,
+        distance: 0,
+        startDate: 0,
+        endDate: 0,
+    })
 
     const startUpdates = () => setWatchStarted(true)
     const stopUpdates = () => setWatchStarted(false)
