@@ -76,6 +76,7 @@ export interface IASystem {
 export interface IAData {
     pill?: string
     steps?: number
+    distance?: number
     locations?: LocationType[]
     default_time?: true
     audioFile?: string
