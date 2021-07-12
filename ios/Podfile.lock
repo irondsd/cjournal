@@ -194,6 +194,8 @@ PODS:
     - React-Core
   - react-native-background-timer (2.1.1):
     - React
+  - react-native-barometer (1.0.11):
+    - React
   - react-native-camera-kit (8.0.4):
     - React
   - react-native-geolocation (2.0.2):
@@ -316,6 +318,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-app-auth (from `../node_modules/react-native-app-auth`)
   - react-native-background-timer (from `../node_modules/react-native-background-timer`)
+  - react-native-barometer (from `../node_modules/react-native-barometer`)
   - react-native-camera-kit (from `../node_modules/react-native-camera-kit`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
@@ -388,6 +391,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-app-auth"
   react-native-background-timer:
     :path: "../node_modules/react-native-background-timer"
+  react-native-barometer:
+    :path: "../node_modules/react-native-barometer"
   react-native-camera-kit:
     :path: "../node_modules/react-native-camera-kit"
   react-native-geolocation:
@@ -469,6 +474,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
   react-native-app-auth: 65e59e33e956bd6d83599c22b8f9bea529a0ea5c
   react-native-background-timer: 1b6e6b4e10f1b74c367a1fdc3c72b67c619b222b
+  react-native-barometer: 3ff4d43929638a6bdcd653b184259850f503f826
   react-native-camera-kit: 498a6d111a904834e0824e9073cfadef7303235f
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-netinfo: 841c2a83fe7df998fed56fd48b73229f17a5aa5b

@@ -6359,6 +6359,11 @@ react-native-background-timer@^2.1.1:
   resolved "https://registry.yarnpkg.com/react-native-background-timer/-/react-native-background-timer-2.1.1.tgz#9a2489681ab2f8033c213c73272e9d4c47572cd5"
   integrity sha512-cuXIIv+dcG8a8qkTD8pMzeqOEZCO+UGKglZWIe1osve+yJslmCowYQff+bI9xa7NOt2w+Vtd4L3d9JonlSqODg==
 
+react-native-barometer@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/react-native-barometer/-/react-native-barometer-1.0.11.tgz#7cc48b985f938e4cca8c77e20264618772b67aa4"
+  integrity sha512-3y5SJSy+Dvi/pQ2ruEJTr3LqNpVG17QxczBB619QAWh/Kb6jJh3wRe2TEqzwzQ/71P1KrGbHQFAVUp9yJMnWZg==
+
 react-native-base64@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/react-native-base64/-/react-native-base64-0.0.2.tgz#c28463c2c6779ac3ec5fdd12979ebc8c5f9b410a"
