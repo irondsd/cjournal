@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
 import { backgroundColor, paths, profileEditUrl } from '../constants'
 import { strings } from '../localization'
-import SaveButton from '../components/SaveButton'
-import ToggleSwitch from '../components/ToggleSwitch'
+import { Button } from '../components/Button'
+import { ToggleSwitch } from '../components/settings/ToggleSwitch'
 import { version } from '../../package.json'
 import { displayName } from '../../app.json'
 import {
@@ -23,7 +23,7 @@ import {
     updateUser,
     userFetchFailed,
 } from '../redux/actions'
-import NumInput from '../components/SettingsNumInput'
+import { NumInput } from '../components/settings/NumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
 import { RootState } from '../redux/store'
 import { decodeIdinv } from '../helpers/encode'
@@ -129,21 +129,19 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
             {settingsShow ? (
                 <View>
                     <ToggleSwitch
-                        text={strings.IdinvFilter}
+                        title={strings.IdinvFilter}
                         value={settings.idinvFilter}
-                        onValueChange={value => dispatch(setIdinvFilter(value))}
+                        onChange={value => dispatch(setIdinvFilter(value))}
                     />
                     <ToggleSwitch
-                        text={strings.Notifications}
+                        title={strings.Notifications}
                         value={settings.notifications}
-                        onValueChange={value =>
-                            dispatch(setNotifications(value))
-                        }
+                        onChange={value => dispatch(setNotifications(value))}
                     />
                     <NumInput
-                        text={strings.PostponeNotificationsBy}
-                        value={`${settings.notificationDelay}`}
-                        onValueChange={value => {
+                        title={strings.PostponeNotificationsBy}
+                        value={settings.notificationDelay}
+                        onChange={value => {
                             dispatch(setNotificationDelay(value))
                         }}
                     />
@@ -153,7 +151,7 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
             )}
             <View style={styles.buttonView}>
                 <View>
-                    <SaveButton
+                    <Button
                         title={strings.EditProfile}
                         onPress={() => {
                             Linking.openURL(profileEditUrl).catch(err =>
@@ -163,7 +161,7 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
                     />
                 </View>
                 <View>
-                    <SaveButton
+                    <Button
                         title={strings.Logout}
                         onPress={() => {
                             logout()
