@@ -20,7 +20,7 @@ export const setIdinvFilter = (value: boolean) => {
     }
 }
 
-export const setNotificationDelay = (value: boolean) => {
+export const setNotificationDelay = (value: number) => {
     return {
         type: SET_NOTIFICATION_DELAY,
         payload: value,
