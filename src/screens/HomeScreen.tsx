@@ -50,7 +50,7 @@ export const HomeScreen: NavigationStackScreenComponent = ({ navigation }) => {
     }, [])
 
     useEffect(() => {
-        const title = strings['Activity']
+        const title = strings.Home
         navigation.setParams({
             headerTitle: title,
         })

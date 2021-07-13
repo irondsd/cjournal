@@ -6,7 +6,7 @@ import { IActivityClass } from '../classes/Activity'
 import { NavigationParams } from 'react-navigation'
 import { Icon, IconProps } from '../components/Icon'
 
-interface ActivityListItemProps {
+type ActivityListItemProps = {
     activity: IActivityClass
     navigation: NavigationParams
 }
@@ -43,6 +43,7 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
     }
 
     const onPress = () => {
+        // todo: routing
         if (editable.includes(activity.activity_type)) {
             navigation.navigate(paths.ActivityDetails, activity)
         } else {

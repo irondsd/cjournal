@@ -6,7 +6,7 @@ import { strings } from '../localization'
 import { SettingsButton } from '../components/SettingsButton'
 import sync from '../services/sync'
 import { overlappingGreying, overlappingTime } from '../helpers/activityOverlap'
-import { TileLine }  from '../components/TileLine'
+import { TileLine } from '../components/TileLine'
 import {
     ActivityTile,
     PhysicalLoadTile,
