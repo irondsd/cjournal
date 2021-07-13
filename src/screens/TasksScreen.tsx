@@ -38,10 +38,6 @@ export const TasksScreen: NavigationStackScreenComponent = ({ navigation }) => {
     }, [isActive])
 
     useEffect(() => {
-        navigation.setParams({
-            headerTitle: strings.Tasks,
-        })
-
         const focusSub = navigation.addListener('willFocus', () => {
             fetch()
             setIsActive(true)
