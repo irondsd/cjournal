@@ -3,7 +3,9 @@ import { en } from './en'
 import { ru } from './ru'
 import { es } from './es'
 
-export const strings: { [key: string]: any } = new LocalizedStrings({
+type IndexType = keyof typeof en
+
+export const strings: { [key in IndexType]: string } = new LocalizedStrings({
     en: en,
     es: es,
     ru: ru,
