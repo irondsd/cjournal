@@ -71,7 +71,6 @@ const HomeStack = createStackNavigator({
     Other: OtherScreen,
     Trainer: TrainerScreen,
     BloodPressure: BloodPressureScreen,
-    VerticalPositionCalibration: OtherScreen,
     Debug: DebugScreen,
     QRScan: QRScanScreen,
 })

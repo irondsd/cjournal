@@ -31,6 +31,5 @@ export enum Routes {
     Welcome = 'Welcome',
     Trainer = 'Trainer',
     BloodPressure = 'BloodPressure',
-    VerticalPositionCalibration = 'VerticalPositionCalibration',
     QRScan = 'QRScan',
 }
