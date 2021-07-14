@@ -3,7 +3,7 @@ import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
@@ -21,12 +21,12 @@ export const VerticalPositionCalibrationTile: FC<TileChildProps> = ({
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(paths.Other, {
+                navigation.navigate(Routes.Other, {
                     sender: name,
                 })
             }}
             onLongPress={() => {
-                navigation.navigate(paths.Other, {
+                navigation.navigate(Routes.Other, {
                     sender: name,
                 })
             }}

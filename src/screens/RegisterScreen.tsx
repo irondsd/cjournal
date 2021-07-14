@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native'
-import { appColor, paths } from '../constants'
+import { appColor, Routes } from '../constants'
 
 import { SafeAreaView } from 'react-navigation'
 import { strings } from '../localization'
@@ -43,7 +43,7 @@ export const RegisterScreen: NavigationStackScreenComponent = ({
         } else {
             Registration(email, password)
                 .then(res => {
-                    navigation.navigate(paths.Welcome, {
+                    navigation.navigate(Routes.Welcome, {
                         message: strings.RegisterSuccess,
                     })
                 })

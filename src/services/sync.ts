@@ -10,7 +10,7 @@ import {
     updateUser,
     userFetchFailed,
 } from '../redux/actions'
-import { paths } from '../constants'
+import { Routes } from '../constants'
 import { isConnected } from './connectivityWatcher'
 import { Get, Post } from '../requests/newRequest'
 import { ITokens, ITokensClass } from '../classes/Tokens'
@@ -53,7 +53,7 @@ export default async function sync(id: string, tokens: ITokensClass) {
                         `Tokens expired, errors: ${errors}, logging out`,
                     )
                     store.dispatch(logoutUser())
-                    NavigationService.navigate(paths.Welcome)
+                    NavigationService.navigate(Routes.Welcome)
                 }
             })
     }

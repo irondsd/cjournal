@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react'
 import { displayDateTime } from '../helpers/dateTime'
-import { paths, editable } from '../constants'
+import { Routes, editable } from '../constants'
 import { ListItem } from './ListItem'
 import { IActivityClass } from '../classes/Activity'
 import { NavigationParams } from 'react-navigation'
@@ -45,9 +45,9 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
     const onPress = () => {
         // todo: routing
         if (editable.includes(activity.activity_type)) {
-            navigation.navigate(paths.ActivityDetails, activity)
+            navigation.navigate(Routes.ActivityDetails, activity)
         } else {
-            navigation.navigate(paths.ActivityStats, activity)
+            navigation.navigate(Routes.ActivityStats, activity)
         }
     }
 

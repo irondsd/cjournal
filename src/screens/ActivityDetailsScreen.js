@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { backgroundColor, appColor, defaultHints } from '../constants'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     durations,
     pillsList,
     othersList,
@@ -271,7 +271,7 @@ class ActivityDetailsScreen extends Component {
 
     deleteActivity = () => {
         this.props.remove(this.props.navigation.state.params)
-        this.props.navigation.navigate(paths.Jounal)
+        this.props.navigation.navigate(Routes.Journal)
     }
 
     goBack() {
@@ -549,9 +549,9 @@ class ActivityDetailsScreen extends Component {
                             photo={this.state.data.photoFile}
                             openCamera={() =>
                                 this.props.navigation.navigate(
-                                    paths.JournalCamera,
+                                    Routes.JournalCamera,
                                     {
-                                        returnTo: paths.ActivityDetails,
+                                        returnTo: Routes.ActivityDetails,
                                     },
                                 )
                             }
@@ -563,9 +563,9 @@ class ActivityDetailsScreen extends Component {
                             photo={this.state.data.photoFile}
                             openCamera={() =>
                                 this.props.navigation.navigate(
-                                    paths.JournalCamera,
+                                    Routes.JournalCamera,
                                     {
-                                        returnTo: paths.ActivityDetails,
+                                        returnTo: Routes.ActivityDetails,
                                     },
                                 )
                             }

@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
-import { backgroundColor, paths, profileEditUrl } from '../constants'
+import { backgroundColor, Routes, profileEditUrl } from '../constants'
 import { strings } from '../localization'
 import { Button } from '../components/Button'
 import { ToggleSwitch } from '../components/settings/ToggleSwitch'
@@ -184,8 +184,8 @@ SettingsScreen.navigationOptions = ({ navigation }) => {
                 size={25}
                 style={{ margin: 15 }}
                 onPress={() => {
-                    navigation.navigate(paths.QRScan, {
-                        returnTo: paths.Settings,
+                    navigation.navigate(Routes.QRScan, {
+                        returnTo: Routes.Settings,
                     })
                 }}
             />

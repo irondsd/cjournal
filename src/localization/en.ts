@@ -105,7 +105,7 @@ export const en = {
     Pain: 'Pain',
     Palpitation: 'Palpitation',
     password: 'password',
-    PhysicalLoad: 'Psysical load',
+    PhysicalLoad: 'Physical load',
     PositionalChanges: 'Positional changes',
     PositiveEmotions: 'Positive emotions',
     Postponed: 'Postponed',

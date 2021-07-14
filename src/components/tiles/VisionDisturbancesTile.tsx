@@ -3,7 +3,7 @@ import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
@@ -25,7 +25,7 @@ export const VisionDisturbancesTile: FC<TileChildProps> = ({
                 Activity.instantInitSave(name, navigation.navigate)
             }}
             onLongPress={() => {
-                navigation.navigate(paths.TimePick, {
+                navigation.navigate(Routes.TimePick, {
                     sender: name,
                 })
             }}

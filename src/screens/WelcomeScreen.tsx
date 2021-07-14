@@ -7,7 +7,7 @@ import {
     StatusBar,
     Alert,
 } from 'react-native'
-import { appColor, paths, logoSize } from '../constants'
+import { appColor, Routes, logoSize } from '../constants'
 import { strings } from '../localization'
 import { RegisterOrLogin } from '../components/RegisterOrLogin'
 import { Logo } from '../components/Logo'

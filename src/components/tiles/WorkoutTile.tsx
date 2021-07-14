@@ -4,7 +4,7 @@ import { strings } from '../../localization'
 import Activity from '../../classes/Activity'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
@@ -22,7 +22,7 @@ export const WorkoutTile: FC<TileChildProps> = ({ navigation, disabled }) => {
                 Activity.instantInitSave(name, navigation.navigate)
             }}
             onLongPress={() => {
-                navigation.navigate(paths.TimePick, {
+                navigation.navigate(Routes.TimePick, {
                     sender: name,
                 })
             }}

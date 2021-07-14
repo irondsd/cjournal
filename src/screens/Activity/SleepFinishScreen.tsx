@@ -10,7 +10,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { updateActivity } from '../../redux/actions'
 import { strings } from '../../localization'
-import { paths, width } from '../../constants'
+import { Routes, width } from '../../constants'
 import { IActivityClass, IAData } from '../../classes/Activity'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { FeelingsIcon } from '../../components/FeelingsIcon'
@@ -28,7 +28,7 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
         const activity: IActivityClass = navigation.state.params.activity
         activity.data.feeling = strings[feeling]
         dispatch(updateActivity(activity))
-        navigation.navigate(paths.Home)
+        navigation.navigate(Routes.Home)
     }
 
     const smileProps = {
@@ -38,7 +38,7 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
 
     const backPressed = () => {
         terminateAlarm(strings.SleepFinishTerminateQuestion, () =>
-            navigation.navigate(paths.Home),
+            navigation.navigate(Routes.Home),
         )
         return true
     }
@@ -46,7 +46,7 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
     useEffect(() => {
         if (!navigation.state?.params?.activity) {
             writeLog('error', 'SleepFinish no activity')
-            navigation.navigate(paths.Home)
+            navigation.navigate(Routes.Home)
         }
 
         BackHandler.addEventListener('hardwareBackPress', backPressed)

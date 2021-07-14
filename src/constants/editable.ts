@@ -1,4 +1,4 @@
-import { ActivityTypes } from './activityTypes'
+import { ActivityTypes } from './ActivityTypes'
 
 export const editable = [
     ActivityTypes.Sleep,

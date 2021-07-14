@@ -13,7 +13,7 @@ import GPS from '../sensors/GPS'
 import {
     ActivityTypes,
     defaultDurations,
-    paths,
+    Routes,
     locationRetryLimit,
 } from '../constants'
 import { getUtcOffset } from '../helpers/dateTime'
@@ -223,7 +223,7 @@ export default class Activity implements IActivityClass {
     static instantInitSave(activity_type: string, navigate: any) {
         const activity = Activity.instantInit(activity_type)
         store.dispatch(addActivity(activity))
-        navigate(paths.Home)
+        navigate(Routes.Home)
     }
 
     static async instantInitWithLocationSave(activity_type: string) {

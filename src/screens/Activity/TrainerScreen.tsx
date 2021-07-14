@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { defaultStyles, paths, ActivityTypes } from '../../constants'
+import { defaultStyles, Routes, ActivityTypes } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
@@ -40,7 +40,7 @@ export const TrainerScreen: NavigationStackScreenComponent = ({
         // console.log(newAct)
         if (data.type) addHint(activity.activity_type, data.type)
         dispatch(addActivity(newAct))
-        navigation.navigate(paths.Home)
+        navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {

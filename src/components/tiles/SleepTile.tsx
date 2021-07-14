@@ -3,7 +3,7 @@ import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
@@ -19,10 +19,10 @@ export const SleepTile: FC<TileChildProps> = ({ navigation, disabled }) => {
             shadeColor="#0642bc"
             disabled={disabled}
             onPress={() => {
-                navigation.navigate(paths.Sleep)
+                navigation.navigate(Routes.Sleep)
             }}
             onLongPress={() => {
-                navigation.navigate(paths.TimePick, {
+                navigation.navigate(Routes.TimePick, {
                     sender: name,
                 })
             }}

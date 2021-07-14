@@ -3,7 +3,7 @@ import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
@@ -19,10 +19,10 @@ export const TestsTile: FC<TileChildProps> = ({ navigation, disabled }) => {
             color={tileShadeColor}
             disabled={disabled}
             onPress={() => {
-                navigation.navigate(paths.Tests)
+                navigation.navigate(Routes.Tests)
             }}
             onLongPress={() => {
-                navigation.navigate(paths.Tests)
+                navigation.navigate(Routes.Tests)
             }}
         />
     )

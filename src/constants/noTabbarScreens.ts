@@ -1,18 +1,17 @@
-import { paths } from './paths'
+import { Routes } from './../navigation/Routes'
 
 export const noTabbarScreens = [
-    paths.WalkingTest,
-    paths.Stairs,
-    paths.ExerciseFinish,
-    paths.Pills,
-    paths.BloodPressure,
-    paths.TimePick,
-    paths.Other,
-    paths.VerticalPositionCalibration,
-    paths.ExerciseFinish,
-    paths.Trainer,
-    paths.Alarm,
-    paths.QRScan,
-    paths.Sleep,
-    paths.SleepFinish,
+    Routes.WalkingTest,
+    Routes.Stairs,
+    Routes.ExerciseFinish,
+    Routes.Pills,
+    Routes.BloodPressure,
+    Routes.TimePick,
+    Routes.Other,
+    Routes.ExerciseFinish,
+    Routes.Trainer,
+    Routes.Alarm,
+    Routes.QRScan,
+    Routes.Sleep,
+    Routes.SleepFinish,
 ]

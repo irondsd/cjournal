@@ -3,7 +3,7 @@ import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
@@ -18,12 +18,12 @@ export const ActiveOrthostasisTile: FC<TileChildProps> = ({ navigation }) => {
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(paths.BloodPressure, {
+                navigation.navigate(Routes.BloodPressure, {
                     sender: name,
                 })
             }}
             onLongPress={() => {
-                navigation.navigate(paths.BloodPressure, {
+                navigation.navigate(Routes.BloodPressure, {
                     sender: name,
                 })
             }}

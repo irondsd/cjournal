@@ -2,7 +2,7 @@ import { createMaterialTopTabNavigator } from 'react-navigation-tabs'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
     backgroundColor,
-    paths,
+    Routes,
     appColor,
     secondaryGrey,
     tintColor,
@@ -97,9 +97,9 @@ JournalStack.navigationOptions = ({ navigation }) => {
     }
 
     if (
-        routeName === paths.ActivityDetails ||
-        routeName === paths.JournalCamera ||
-        routeName === paths.ActivityStats
+        routeName === Routes.ActivityDetails ||
+        routeName === Routes.JournalCamera ||
+        routeName === Routes.ActivityStats
     ) {
         tabBarVisible = false
         swipeEnabled = false
@@ -121,7 +121,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
     let tabBarVisible = true
     let swipeEnabled = true
     // preventing tabbar from appearing on certain screens
-    let routeName = ''
+    let routeName: Routes
     for (let i = 0; i < routes.length; i++) {
         routeName = routes[i].routeName
         // getting the last route name
@@ -147,18 +147,18 @@ export const MainTabs = createMaterialTopTabNavigator(
         Tasks: TasksStack,
     },
     {
-        initialRouteName: paths.Home,
+        initialRouteName: Routes.Home,
         tabBarPosition: 'bottom',
         swipeEnabled: true,
         defaultNavigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ focused, horizontal, tintColor }) => {
                 const { routeName } = navigation.state
                 let iconName
-                if (routeName === paths.Home) {
+                if (routeName === Routes.Home) {
                     iconName = `ios-home`
-                } else if (routeName === paths.Jounal) {
+                } else if (routeName === Routes.Journal) {
                     iconName = `ios-journal`
-                } else if (routeName === paths.Tasks) {
+                } else if (routeName === Routes.Tasks) {
                     iconName = `ios-list-box`
                 }
                 return TabbarIcon(iconName, 25, tintColor, { top: -2 })

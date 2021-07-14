@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import {
-    paths,
+    Routes,
     defaultStyles,
     prescriptions,
     ActivityTypes,
@@ -63,7 +63,7 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
             objectCleanUp(data),
         )
         dispatch(addActivity(newAct))
-        navigation.navigate(paths.Home)
+        navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {
@@ -105,8 +105,8 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
             <TakePhoto
                 photo={data.photoFile}
                 openCamera={() =>
-                    navigation.navigate(paths.Camera, {
-                        returnTo: paths.Pills,
+                    navigation.navigate(Routes.Camera, {
+                        returnTo: Routes.Pills,
                     })
                 }
                 removePhoto={clearPhoto}

@@ -1,12 +1,12 @@
 import PushNotification from 'react-native-push-notification'
 import store from '../redux/store'
 import NavigationService from '../navigation/NavigationService'
-import { strings } from '../localization'
+import { strings, Strings } from '../localization'
 import { showToast } from '../services/toast'
 import { localTime } from '../helpers/dateTime'
-import { activityPaths } from '../constants'
 import timestamp from '../helpers/timestamp'
 import { taskCancelNotification } from '../redux/actions'
+import { ActivityRouter } from '../navigation/ActivityRouter'
 
 type FiredNotification = {
     actions: string[]
@@ -43,7 +43,7 @@ export function scheduleNotification(
     message: string,
     time: number,
 ) {
-    const notificationTitle: string = strings[title]
+    const notificationTitle: string = strings[title as Strings]
 
     PushNotification.localNotificationSchedule({
         id: time,
@@ -105,10 +105,9 @@ function onNotificationOpened(notification: FiredNotification) {
 
         if (task && !task.isCompleted()) {
             taskCancelNotification(task)
-            let navigateTo =
-                activityPaths[task.activity_type as keyof typeof activityPaths]
+            const route = ActivityRouter(task.activity_type)
 
-            NavigationService.navigate(navigateTo, {
+            NavigationService.navigate(route, {
                 task: task._id,
                 sender: task.activity_type,
             })

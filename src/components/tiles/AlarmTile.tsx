@@ -3,7 +3,7 @@ import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
-    paths,
+    Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
@@ -22,7 +22,7 @@ export const AlarmTile: FC<TileChildProps> = ({ navigation }) => {
                 Activity.instantInitWithLocationSave(name)
             }}
             onLongPress={() => {
-                navigation.navigate(paths.Alarm, {
+                navigation.navigate(Routes.Alarm, {
                     longPress: true,
                 })
             }}

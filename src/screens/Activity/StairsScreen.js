@@ -20,7 +20,7 @@ import { findLatestTask } from '../../classes/Task'
 import { cancelNotification } from '../../redux/actions'
 import {
     backgroundColor,
-    paths,
+    Routes,
     ActivityTypes,
     defaultStyles,
     width,

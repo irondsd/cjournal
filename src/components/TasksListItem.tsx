@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { displayDateTime } from '../helpers/dateTime'
-import { activityPaths } from '../constants'
+import { activityRoutes } from '../constants'
 import { ListItem } from './ListItem'
 import { NavigationParams } from 'react-navigation'
 import { ITaskClass } from '../classes/Task'
@@ -30,7 +30,7 @@ export const TasksListItem: FC<TasksListItemProps> = ({ task, navigation }) => {
     const onPress = () => {
         if (task.completed) return
 
-        let navigateTo = activityPaths[task.activity_type]
+        const navigateTo = activityRoutes[task.activity_type]
 
         navigation.navigate(navigateTo, {
             task: task._id,

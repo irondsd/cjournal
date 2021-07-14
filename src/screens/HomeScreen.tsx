@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { connect, useSelector } from 'react-redux'
-import { backgroundColor, appColor, ActivityTypes, paths } from '../constants'
+import { backgroundColor, appColor, ActivityTypes, Routes } from '../constants'
 import { strings } from '../localization'
 import { SettingsButton } from '../components/SettingsButton'
 import sync from '../services/sync'
@@ -107,7 +107,7 @@ HomeScreen.navigationOptions = ({ navigation }) => {
         title: navigation.getParam('headerTitle'),
         headerRight: (
             <SettingsButton
-                onPress={() => navigation.navigate(paths.Settings)}
+                onPress={() => navigation.navigate(Routes.Settings)}
             />
         ),
     }

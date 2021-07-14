@@ -10,7 +10,7 @@ import {
 import {
     ActivityTypes,
     defaultStyles,
-    paths,
+    Routes,
     walkingDuration,
 } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
@@ -95,7 +95,7 @@ export const WalkingTestScreen: NavigationStackScreenComponent = ({
         )
         // console.log(newAct)
         dispatch(addActivity(newAct))
-        navigation.navigate(paths.Home)
+        navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {

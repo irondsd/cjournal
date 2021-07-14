@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { logoutUser, addActivity } from '../redux/actions'
 import {
     backgroundColor,
-    paths,
+    Routes,
     ActivityTypes,
     defaultStyles,
     borderGrey,

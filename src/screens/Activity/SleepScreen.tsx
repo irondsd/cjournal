@@ -13,7 +13,7 @@ import { secs2time } from '../../helpers/dateTime'
 import { useDispatch } from 'react-redux'
 import { addActivity } from '../../redux/actions'
 import { strings } from '../../localization'
-import { paths, ActivityTypes } from '../../constants'
+import { Routes, ActivityTypes } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
@@ -44,7 +44,7 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
             {},
         )
         dispatch(addActivity(createdActivity))
-        navigation.navigate(paths.SleepFinish, {
+        navigation.navigate(Routes.SleepFinish, {
             activity: createdActivity,
         })
     }

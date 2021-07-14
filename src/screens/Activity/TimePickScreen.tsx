@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { ActivityTypes, defaultStyles, paths } from '../../constants'
+import { ActivityTypes, defaultStyles, Routes } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
@@ -45,7 +45,7 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
         // console.log(newAct)
         if (data.type) addHint(activity.activity_type, data.type)
         dispatch(addActivity(newAct))
-        navigation.navigate(paths.Home)
+        navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {

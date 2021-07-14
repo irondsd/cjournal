@@ -3,13 +3,17 @@ import {
     cancelLocalNotification,
     scheduleNotification,
 } from '../notifications/notifications'
-import { delayNotificationBy, taskExpiration } from '../constants'
+import {
+    delayNotificationBy,
+    taskExpiration,
+    ActivityTypes,
+} from '../constants'
 import { strings } from '../localization'
 import { taskCancelNotification } from '../redux/actions'
 
 export interface ITask {
     _id: string
-    activity_type: string
+    activity_type: ActivityTypes
     time: number
     completed: boolean
     updated_at: number
@@ -41,7 +45,7 @@ export interface ITaskClass extends ITask {
 
 export default class Task implements ITaskClass {
     _id: string
-    activity_type: string
+    activity_type: ActivityTypes
     time: number
     completed: boolean
     updated_at: number

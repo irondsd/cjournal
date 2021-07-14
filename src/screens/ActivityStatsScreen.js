@@ -6,7 +6,7 @@ import {
     durations,
     appColor,
     ActivityTypes,
-    paths,
+    Routes,
 } from '../constants'
 import { displayDate, displayTime } from '../helpers/dateTime'
 import { strings } from '../localization'
@@ -52,7 +52,7 @@ class ActivityStatsScreen extends Component<Props> {
 
     deleteActivity = () => {
         this.props.remove(this.state.originalActivity)
-        this.props.navigation.navigate(paths.Jounal)
+        this.props.navigation.navigate(Routes.Journal)
     }
 
     componentDidMount() {

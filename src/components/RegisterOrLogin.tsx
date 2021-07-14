@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native'
-import { paths } from '../constants'
+import { Routes } from '../constants'
 import { strings } from '../localization'
 import Tokens from '../classes/Tokens'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -14,13 +14,13 @@ type RegisterOrLoginProps = {
 export const RegisterOrLogin: FC<RegisterOrLoginProps> = ({ navigation }) => {
     const login = async () =>
         Tokens.receive()
-            .then(res => navigation.navigate(paths.Home))
+            .then(res => navigation.navigate(Routes.Home))
             .catch(err => {
                 if (err.message?.includes('Network error'))
                     Alert.alert(strings.NoConn, strings.CantConnectIdentity)
             })
 
-    const register = () => navigation.navigate(paths.Register)
+    const register = () => navigation.navigate(Routes.Register)
 
     return (
         <View style={styles.container}>

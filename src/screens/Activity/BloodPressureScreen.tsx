@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { defaultStyles, paths } from '../../constants'
+import { defaultStyles, Routes } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
@@ -37,7 +37,7 @@ export const BloodPressureScreen: NavigationStackScreenComponent = ({
             data,
         )
         dispatch(addActivity(newAct))
-        navigation.navigate(paths.Home)
+        navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { paths, ActivityTypes, defaultStyles, width } from '../../constants'
+import { Routes, ActivityTypes, defaultStyles, width } from '../../constants'
 import { strings } from '../../localization'
 import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -49,7 +49,7 @@ const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
             { ...data, locations: locations },
         )
         dispatch(addActivity(newAct))
-        navigation.navigate(paths.Home)
+        navigation.navigate(Routes.Home)
     }
 
     const startUpdates = () => {

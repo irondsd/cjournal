@@ -1,5 +1,4 @@
 export const backendUrl = 'http://217.197.236.243:8628'
-// export const backendUrl = 'http://192.168.1.10:8628'
 export const apiUrl = `${backendUrl}/api/`
 export const identityUrl = `https://identity.incart.ru`
 export const profileEditUrl = `${identityUrl}/Identity/Account/Manage`

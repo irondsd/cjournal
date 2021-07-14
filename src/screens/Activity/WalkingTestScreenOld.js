@@ -18,7 +18,7 @@ import { calculateDistance } from '../../helpers/GPS'
 import {
     backgroundColor,
     ActivityTypes,
-    paths,
+    Routes,
     defaultStyles,
     walkingDuration,
     appColor,
@@ -123,7 +123,7 @@ class WalkingTestScreen extends Component {
             data,
         )
         this.props.add(activity)
-        this.props.navigation.navigate(paths.ExerciseFinish, {
+        this.props.navigation.navigate(Routes.ExerciseFinish, {
             activity: activity,
         })
     }
