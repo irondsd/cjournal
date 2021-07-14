@@ -1,7 +1,6 @@
 export * from './durations'
 export * from './months'
 export * from './ActivityTypes'
-export * from './activityRoutes'
 export * from './editable'
 export * from '../navigation/Routes'
 export * from './overlaps'

@@ -1,4 +1,4 @@
-import { Routes } from './../navigation/Routes'
+import { Routes } from './Routes'
 
 export const noTabbarScreens = [
     Routes.WalkingTest,

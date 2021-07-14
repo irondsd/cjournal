@@ -38,7 +38,7 @@ import { QRScanScreen } from '../screens/QRScanScreen'
 import { TrainerScreen } from '../screens/Activity/TrainerScreen'
 import { BloodPressureScreen } from '../screens/Activity/BloodPressureScreen'
 import { TabbarIcon } from '../components/TabbarIcon'
-import { noTabbarScreens } from '../constants/noTabbarScreens'
+import { noTabbarScreens } from './noTabbarScreens'
 
 const JournalStack = createStackNavigator({
     Journal: JournalScreen,
