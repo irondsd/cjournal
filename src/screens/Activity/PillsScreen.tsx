@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { paths, defaultStyles, prescriptions } from '../../constants'
+import {
+    paths,
+    defaultStyles,
+    prescriptions,
+    ActivityTypes,
+} from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
@@ -17,7 +22,7 @@ import { Button } from '../../components/Button'
 import { objectCleanUp } from '../../helpers/utils'
 
 type PillsActivityType = {
-    activity_type?: string
+    activity_type?: ActivityTypes
     time_started?: number
     task?: string
 }
@@ -67,7 +72,7 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
         const activity_type: string = params?.sender
         const task = params?.task || findLatestTask(tasks, activity_type)
         setActivity({
-            activity_type,
+            activity_type: ActivityTypes[activity_type],
             time_started,
             task,
         })

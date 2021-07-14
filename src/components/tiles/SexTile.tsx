@@ -2,14 +2,14 @@ import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     tileColor,
     tileShadeColor,
 } from '../../constants'
 import Activity from '../../classes/Activity'
 
-const name = activityTypes.Sex
+const name = ActivityTypes.Sex
 
 export const SexTile: FC<TileChildProps> = ({ navigation, disabled }) => {
     return (

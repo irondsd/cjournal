@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { defaultStyles, paths } from '../../constants'
+import { ActivityTypes, defaultStyles, paths } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
@@ -15,7 +15,7 @@ import { addHint } from '../../services/hints'
 import { addActivity } from '../../redux/actions'
 
 type OtherActivityType = {
-    activity_type?: string
+    activity_type?: ActivityTypes
     time_started?: number
     time_ended?: number
 }
@@ -49,7 +49,7 @@ export const OtherScreen: NavigationStackScreenComponent = ({ navigation }) => {
         const activity_type: string = params?.sender
 
         setActivity({
-            activity_type,
+            activity_type: ActivityTypes[activity_type],
             time_started,
         })
     }, [params])

@@ -5,7 +5,7 @@ import {
     backgroundColor,
     durations,
     appColor,
-    activityTypes,
+    ActivityTypes,
     paths,
 } from '../constants'
 import { displayDate, displayTime } from '../helpers/dateTime'

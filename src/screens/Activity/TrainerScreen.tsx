@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { defaultStyles, paths, activityTypes } from '../../constants'
+import { defaultStyles, paths, ActivityTypes } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
@@ -46,7 +46,7 @@ export const TrainerScreen: NavigationStackScreenComponent = ({
     useEffect(() => {
         // setup activity
         const time_started = timestamp()
-        const activity_type = activityTypes.Trainer
+        const activity_type = ActivityTypes.Trainer
 
         setActivity({
             activity_type,

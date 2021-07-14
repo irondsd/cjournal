@@ -1,5 +1,5 @@
 import React from 'react'
-import { activityTypes } from '../constants'
+import { ActivityTypes } from '../constants'
 import WalkingTest from '../resources/svg/6minwalking.svg'
 import ElectrodeReplacement from '../resources/svg/electrodereplacement.svg'
 import PhysicalLoad from '../resources/svg/physicalload.svg'
@@ -69,117 +69,117 @@ const ActivityIcon: React.FC<ActivityIconProps> = ({
     }
 
     switch (icon) {
-        case activityTypes.Sleep:
+        case ActivityTypes.Sleep:
             return <Sleep {...props} />
-        case activityTypes.Stairs:
+        case ActivityTypes.Stairs:
             return <Stairs {...props} />
-        case activityTypes.Walking:
+        case ActivityTypes.Walking:
             return <Walking {...props} />
-        case activityTypes.Trainer:
+        case ActivityTypes.Trainer:
             return <Trainer {...props} />
-        case activityTypes.Shower:
+        case ActivityTypes.Shower:
             return <Shower {...props} />
-        case activityTypes.OtherLoad:
+        case ActivityTypes.OtherLoad:
             return <PhysicalLoad {...props} />
-        case activityTypes.OtherActivity:
+        case ActivityTypes.OtherActivity:
             return <Activity {...props} />
-        case activityTypes.OtherEmotions:
+        case ActivityTypes.OtherEmotions:
             return <OtherEmotions {...props} />
-        case activityTypes.OtherPain:
+        case ActivityTypes.OtherPain:
             return <OtherPain {...props} />
-        case activityTypes.OtherComplaints:
+        case ActivityTypes.OtherComplaints:
             return <Complaints {...props} />
-        case activityTypes.OtherWeakness:
+        case ActivityTypes.OtherWeakness:
             return <NegativeEmotions {...props} />
-        case activityTypes.Activity:
+        case ActivityTypes.Activity:
             return <Activity {...props} />
-        case activityTypes.Service:
+        case ActivityTypes.Service:
             return <Service {...props} />
-        case activityTypes.Meal:
+        case ActivityTypes.Meal:
             return <Meal {...props} />
-        case activityTypes.Alcohol:
+        case ActivityTypes.Alcohol:
             return <Alcohol {...props} />
-        case activityTypes.Smoking:
+        case ActivityTypes.Smoking:
             return <Smoking {...props} />
-        case activityTypes.CourseTherapy:
+        case ActivityTypes.CourseTherapy:
             return <CourseTherapy {...props} />
-        case activityTypes.ReliefOfAttack:
+        case ActivityTypes.ReliefOfAttack:
             return <ReliefOfAttack {...props} />
-        case activityTypes.Headache:
+        case ActivityTypes.Headache:
             return <Headache {...props} />
-        case activityTypes.HeartAreaPain:
+        case ActivityTypes.HeartAreaPain:
             return <HeartAreaPain {...props} />
-        case activityTypes.RetrosternalPain:
+        case ActivityTypes.RetrosternalPain:
             return <Pain {...props} />
-        case activityTypes.Arrhythmia:
+        case ActivityTypes.Arrhythmia:
             return <Arrhythmia {...props} />
-        case activityTypes.Palpitation:
+        case ActivityTypes.Palpitation:
             return <Palpitation {...props} />
-        case activityTypes.Dyspnea:
+        case ActivityTypes.Dyspnea:
             return <Dyspnea {...props} />
-        case activityTypes.Tachypnea:
+        case ActivityTypes.Tachypnea:
             return <Tachypnea {...props} />
-        case activityTypes.Nausea:
+        case ActivityTypes.Nausea:
             return <Nausea {...props} />
-        case activityTypes.Syncope:
+        case ActivityTypes.Syncope:
             return <Syncope {...props} />
-        case activityTypes.Fatigue:
+        case ActivityTypes.Fatigue:
             return <Fatigue {...props} />
-        case activityTypes.Stupefaction:
+        case ActivityTypes.Stupefaction:
             return <Weakness {...props} />
-        case activityTypes.VisionDisturbances:
+        case ActivityTypes.VisionDisturbances:
             return <VisionDisturbances {...props} />
-        case activityTypes.PositiveEmotions:
+        case ActivityTypes.PositiveEmotions:
             return <PositiveEmotions {...props} />
-        case activityTypes.Running:
+        case ActivityTypes.Running:
             return <Running {...props} />
-        case activityTypes.WalkingTest:
+        case ActivityTypes.WalkingTest:
             return <WalkingTest {...props} />
-        case activityTypes.Bicycling:
+        case ActivityTypes.Bicycling:
             return <Bicycle {...props} />
-        case activityTypes.NegativeEmotions:
+        case ActivityTypes.NegativeEmotions:
             return <NegativeEmotions {...props} />
-        case activityTypes.Sex:
+        case ActivityTypes.Sex:
             return <Sex {...props} />
-        case activityTypes.Alarm:
+        case ActivityTypes.Alarm:
             return <Alarm {...props} />
-        case activityTypes.Toilet:
+        case ActivityTypes.Toilet:
             return <Toilet {...props} />
-        case activityTypes.ActiveOrthostasis:
+        case ActivityTypes.ActiveOrthostasis:
             return <ActiveOrthostasis {...props} />
-        case activityTypes.TakingMedicine:
+        case ActivityTypes.TakingMedicine:
             return <Pills {...props} />
-        case activityTypes.PhysicalLoad:
+        case ActivityTypes.PhysicalLoad:
             return <PhysicalLoad {...props} />
-        case activityTypes.Pain:
+        case ActivityTypes.Pain:
             return <Pain {...props} />
-        case activityTypes.Complaints:
+        case ActivityTypes.Complaints:
             return <Complaints {...props} />
-        case activityTypes.Weakness:
+        case ActivityTypes.Weakness:
             return <Weakness {...props} />
-        case activityTypes.EmotionalStress:
+        case ActivityTypes.EmotionalStress:
             return <EmotionalStress {...props} />
-        case activityTypes.Tests:
+        case ActivityTypes.Tests:
             return <Tests {...props} />
-        case activityTypes.Straining:
+        case ActivityTypes.Straining:
             return <Straining {...props} />
-        case activityTypes.MedicineTest:
+        case ActivityTypes.MedicineTest:
             return <Pills {...props} />
-        case activityTypes.PsychoemotionalTest:
+        case ActivityTypes.PsychoemotionalTest:
             return <PsychoemotionalTest {...props} />
-        case activityTypes.Press:
+        case ActivityTypes.Press:
             return <Press {...props} />
-        case activityTypes.CuffFix:
+        case ActivityTypes.CuffFix:
             return <CuffFix {...props} />
-        case activityTypes.ElectrodeReplacement:
+        case ActivityTypes.ElectrodeReplacement:
             return <ElectrodeReplacement {...props} />
-        case activityTypes.DeviceInstall:
+        case ActivityTypes.DeviceInstall:
             return <DeviceInstall {...props} />
-        case activityTypes.VerticalPositionCalibration:
+        case ActivityTypes.VerticalPositionCalibration:
             return <VerticalPositionCalibration {...props} />
-        case activityTypes.DeepBreathing:
+        case ActivityTypes.DeepBreathing:
             return <DeepBreathing {...props} />
-        case activityTypes.Workout:
+        case ActivityTypes.Workout:
             return <Workout {...props} />
         default:
             return <Unknown {...props} />

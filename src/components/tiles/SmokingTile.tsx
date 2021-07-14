@@ -2,14 +2,14 @@ import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     tileColor,
     tileShadeColor,
 } from '../../constants'
 import Activity from '../../classes/Activity'
 
-const name = activityTypes.Smoking
+const name = ActivityTypes.Smoking
 
 export const SmokingTile: FC<TileChildProps> = ({ navigation, disabled }) => {
     return (

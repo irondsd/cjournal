@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     tileColor,
     tileShadeColor,
 } from '../../constants'
 
-const name = activityTypes.OtherPain
+const name = ActivityTypes.OtherPain
 
 export const OtherPainTile: FC<TileChildProps> = ({ navigation, disabled }) => {
     return (

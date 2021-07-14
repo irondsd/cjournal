@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { defaultStyles, paths } from '../../constants'
+import { ActivityTypes, defaultStyles, paths } from '../../constants'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
@@ -17,7 +17,7 @@ import { findLatestTask } from '../../classes/Task'
 import { RootState } from '../../redux/store'
 
 type activityType = {
-    activity_type?: string
+    activity_type?: ActivityTypes
     time_started?: number
     time_ended?: number
     task?: string
@@ -55,7 +55,7 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
         const task = params?.task || findLatestTask(tasks, activity_type)
 
         setActivity({
-            activity_type,
+            activity_type: ActivityTypes[activity_type],
             time_started,
             task,
         })

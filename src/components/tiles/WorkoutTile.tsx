@@ -3,13 +3,13 @@ import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import Activity from '../../classes/Activity'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     tileColor,
     tileShadeColor,
 } from '../../constants'
 
-const name = activityTypes.Workout
+const name = ActivityTypes.Workout
 
 export const WorkoutTile: FC<TileChildProps> = ({ navigation, disabled }) => {
     return (

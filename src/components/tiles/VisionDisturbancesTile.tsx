@@ -2,14 +2,14 @@ import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     tileColor,
     tileShadeColor,
 } from '../../constants'
 import Activity from '../../classes/Activity'
 
-const name = activityTypes.VisionDisturbances
+const name = ActivityTypes.VisionDisturbances
 
 export const VisionDisturbancesTile: FC<TileChildProps> = ({
     navigation,

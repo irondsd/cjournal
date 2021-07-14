@@ -3,7 +3,7 @@ import { StyleSheet, View, Platform, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { backgroundColor, appColor, defaultHints } from '../constants'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     durations,
     pillsList,
@@ -175,7 +175,7 @@ class ActivityDetailsScreen extends Component {
         }
 
         if (
-            activity.activity_type === activityTypes.VerticalPositionCalibration
+            activity.activity_type === ActivityTypes.VerticalPositionCalibration
         ) {
             pills = false
             duration = false
@@ -186,14 +186,14 @@ class ActivityDetailsScreen extends Component {
         }
 
         if (
-            activity.activity_type === activityTypes.ActiveOrthostasis ||
-            activity.activity_type === activityTypes.Press
+            activity.activity_type === ActivityTypes.ActiveOrthostasis ||
+            activity.activity_type === ActivityTypes.Press
         ) {
             bloodPressure = true
             comment = false
             audio = false
         }
-        if (activity.activity_type === activityTypes.Trainer) {
+        if (activity.activity_type === ActivityTypes.Trainer) {
             trainer = true
             comment = false
         }
@@ -235,7 +235,8 @@ class ActivityDetailsScreen extends Component {
                 } else {
                     // resetting time
                     activity = { ...this.state.activity }
-                    activity.time_started = this.state.originalActivity.time_started
+                    activity.time_started =
+                        this.state.originalActivity.time_started
                     activity.time_ended =
                         parseInt(activity.time_started) +
                         this.state.duration * 60
@@ -333,11 +334,11 @@ class ActivityDetailsScreen extends Component {
         let pills = []
 
         if (!activity) activity = this.state.activity
-        if (activity.activity_type === activityTypes.CourseTherapy)
+        if (activity.activity_type === ActivityTypes.CourseTherapy)
             pills.concat(this.props.user.course_therapy)
-        if (activity.activity_type === activityTypes.ReliefOfAttack)
+        if (activity.activity_type === ActivityTypes.ReliefOfAttack)
             pills.concat(this.props.user.relief_of_attack)
-        if (activity.activity_type === activityTypes.MedicineTest)
+        if (activity.activity_type === ActivityTypes.MedicineTest)
             pills.concat(this.props.user.tests)
 
         if (Array.isArray(pills) && !pills?.includes(activity.data.pill)) {
@@ -352,13 +353,13 @@ class ActivityDetailsScreen extends Component {
     fillOthersList(activity) {
         if (!activity) activity = this.state.activity
 
-        if (activity.activity_type === activityTypes.Trainer) {
+        if (activity.activity_type === ActivityTypes.Trainer) {
             return this.fillTrainerList()
         }
 
         if (
             !othersList.includes(activity.activity_type) &&
-            activity.activity_type !== activityTypes.VerticalPositionCalibration
+            activity.activity_type !== ActivityTypes.VerticalPositionCalibration
         )
             return
 

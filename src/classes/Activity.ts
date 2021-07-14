@@ -11,7 +11,7 @@ import {
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
 import {
-    activityTypes,
+    ActivityTypes,
     defaultDurations,
     paths,
     locationRetryLimit,
@@ -23,11 +23,9 @@ import { LocationType } from '../sensors/GPS'
 import { objectCleanUp } from '../helpers/utils'
 import { BloodPressureValues } from '../components/BloodPressureTS'
 
-export type ActivityType = keyof typeof activityTypes
-
 export interface IActivity {
     _id: string
-    activity_type: ActivityType
+    activity_type: ActivityTypes
     time_started: number
     time_ended?: number
     utc_offset?: number
@@ -93,7 +91,7 @@ export interface IAData {
 
 export default class Activity implements IActivityClass {
     _id: string
-    activity_type: ActivityType
+    activity_type: ActivityTypes
     time_started: number
     time_ended?: number
     utc_offset?: number

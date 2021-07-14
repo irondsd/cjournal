@@ -21,7 +21,7 @@ import { cancelNotification } from '../../redux/actions'
 import {
     backgroundColor,
     paths,
-    activityTypes,
+    ActivityTypes,
     defaultStyles,
     width,
 } from '../../constants'
@@ -98,7 +98,7 @@ class StairsScreen extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
 
-        let task = findLatestTask(this.props.tasks, activityTypes.Stairs)
+        let task = findLatestTask(this.props.tasks, ActivityTypes.Stairs)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.task
@@ -136,7 +136,7 @@ class StairsScreen extends Component {
         }
 
         let activity = Activity.init(
-            activityTypes.Stairs,
+            ActivityTypes.Stairs,
             timestamp(this.state.startDate),
             timestamp(),
             task,

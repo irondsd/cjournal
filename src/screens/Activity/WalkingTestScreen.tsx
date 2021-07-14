@@ -8,7 +8,7 @@ import {
     BackHandler,
 } from 'react-native'
 import {
-    activityTypes,
+    ActivityTypes,
     defaultStyles,
     paths,
     walkingDuration,
@@ -40,7 +40,7 @@ type ActivityType = {
     comment?: string
 }
 
-const TYPE = activityTypes.WalkingTest
+const TYPE = ActivityTypes.WalkingTest
 
 export const WalkingTestScreen: NavigationStackScreenComponent = ({
     navigation,

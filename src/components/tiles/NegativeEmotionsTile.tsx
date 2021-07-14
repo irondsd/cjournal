@@ -2,14 +2,14 @@ import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     tileColor,
     tileShadeColor,
 } from '../../constants'
 import Activity from '../../classes/Activity'
 
-const name = activityTypes.NegativeEmotions
+const name = ActivityTypes.NegativeEmotions
 
 export const NegativeEmotionsTile: FC<TileChildProps> = ({
     navigation,

@@ -17,7 +17,7 @@ import { HeaderBackButton } from 'react-navigation'
 import { calculateDistance } from '../../helpers/GPS'
 import {
     backgroundColor,
-    activityTypes,
+    ActivityTypes,
     paths,
     defaultStyles,
     walkingDuration,
@@ -82,7 +82,7 @@ class WalkingTestScreen extends Component {
     componentDidMount() {
         requestLocationPermissions()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
-        let task = findLatestTask(this.props.tasks, activityTypes.WalkingTest)
+        let task = findLatestTask(this.props.tasks, ActivityTypes.WalkingTest)
         if (
             this.props.navigation.state.params &&
             this.props.navigation.state.params.task
@@ -115,7 +115,7 @@ class WalkingTestScreen extends Component {
         }
 
         let activity = Activity.init(
-            activityTypes.WalkingTest,
+            ActivityTypes.WalkingTest,
             this.state.timestampStart,
             timestamp(),
             this.state.task,

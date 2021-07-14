@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { paths, activityTypes, defaultStyles, width } from '../../constants'
+import { paths, ActivityTypes, defaultStyles, width } from '../../constants'
 import { strings } from '../../localization'
 import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
@@ -70,7 +70,7 @@ const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
 
         // setup activity
         const time_started = timestamp()
-        const activity_type = activityTypes.Alarm
+        const activity_type = ActivityTypes.Alarm
 
         setActivity({
             activity_type,

@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
 import {
-    activityTypes,
+    ActivityTypes,
     paths,
     tileColor,
     tileShadeColor,
 } from '../../constants'
 
-const name = activityTypes.Service
+const name = ActivityTypes.Service
 
 export const ServiceTile: FC<TileChildProps> = ({ navigation, disabled }) => {
     return (

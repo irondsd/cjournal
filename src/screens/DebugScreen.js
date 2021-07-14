@@ -6,7 +6,7 @@ import { logoutUser, addActivity } from '../redux/actions'
 import {
     backgroundColor,
     paths,
-    activityTypes,
+    ActivityTypes,
     defaultStyles,
     borderGrey,
 } from '../constants'

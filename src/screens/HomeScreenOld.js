@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import { backgroundColor, appColor, activityTypes, paths } from '../constants'
+import { backgroundColor, appColor, ActivityTypes, paths } from '../constants'
 import { strings } from '../localization'
 import { SettingsButton } from '../components/SettingsButton'
 import sync from '../services/sync'
