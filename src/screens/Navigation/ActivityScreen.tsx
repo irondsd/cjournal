@@ -23,7 +23,7 @@ export const ActivityScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <View style={defaultStyles.tileScreen}>
+        <View style={defaultStyles.navScreen}>
             <TileLine>
                 <MealTile navigation={navigation} />
                 <AlcoholTile navigation={navigation} />

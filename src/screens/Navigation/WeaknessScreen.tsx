@@ -21,7 +21,7 @@ export const WeaknessScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <View style={defaultStyles.tileScreen}>
+        <View style={defaultStyles.navScreen}>
             <TileLine>
                 <SyncopeTile navigation={navigation} />
                 <NauseaTile navigation={navigation} />

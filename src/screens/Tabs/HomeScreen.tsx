@@ -74,7 +74,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     }, [navigation])
 
     return (
-        <View style={defaultStyles.tileScreen}>
+        <View style={defaultStyles.navScreen}>
             <StatusBar
                 backgroundColor={backgroundColor}
                 barStyle="dark-content"

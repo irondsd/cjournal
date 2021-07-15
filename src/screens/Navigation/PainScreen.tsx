@@ -20,7 +20,7 @@ export const PainScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <View style={defaultStyles.tileScreen}>
+        <View style={defaultStyles.navScreen}>
             <TileLine>
                 <RetrosternalPainTile navigation={navigation} />
                 <HeartAreaPainTile navigation={navigation} />

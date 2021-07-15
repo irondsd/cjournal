@@ -23,7 +23,7 @@ export const TestsScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <View style={defaultStyles.tileScreen}>
+        <View style={defaultStyles.navScreen}>
             <TileLine>
                 <StairsTile navigation={navigation} />
                 <WalkingTestTile navigation={navigation} />

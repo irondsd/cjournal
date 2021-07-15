@@ -21,7 +21,7 @@ export const PhysicalLoadScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <View style={defaultStyles.tileScreen}>
+        <View style={defaultStyles.navScreen}>
             <TileLine>
                 <WalkingTile navigation={navigation} />
                 <RunningTile navigation={navigation} />

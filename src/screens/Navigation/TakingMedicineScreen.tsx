@@ -18,7 +18,7 @@ export const TakingMedicineScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <View style={defaultStyles.tileScreen}>
+        <View style={defaultStyles.navScreen}>
             <TileLine>
                 <CourseTherapyTile navigation={navigation} />
                 <ReliefOfAttackTile navigation={navigation} />
