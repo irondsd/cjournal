@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { FC, useState, useRef } from 'react'
 import {
     StyleSheet,
     StatusBar,
@@ -6,19 +6,26 @@ import {
     View,
     TouchableOpacity,
     Text,
+    SafeAreaView,
 } from 'react-native'
-import { appColor, Routes } from '../constants'
-
-import { SafeAreaView } from 'react-navigation'
-import { strings } from '../localization'
+import { appColor, Routes } from '../../constants'
+import { strings } from '../../localization'
 import Toast from 'react-native-root-toast'
-import { Registration } from '../requests/identityRequest'
+import { Registration } from '../../requests/identityRequest'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../../navigation/NavContainer'
 
-export const RegisterScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+type RegisterScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Register'
+>
+
+type RegisterScreenProps = {
+    navigation: RegisterScreenNavigationProp
+}
+
+export const RegisterScreen: FC<RegisterScreenProps> = ({ navigation }) => {
     const [email, setEmail] = useState<string>()
     const [password, setPassword] = useState<string>()
     const [repeatPassword, setRepeatPassword] = useState<string>()

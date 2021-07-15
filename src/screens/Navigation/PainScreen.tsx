@@ -9,18 +9,18 @@ import {
     HeartAreaPainTile,
     OtherPainTile,
 } from '../../components/tiles'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles } from '../../constants'
 
-export const PainScreen: NavigationStackScreenComponent = ({ navigation }) => {
+export const PainScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.Pain
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <View>
+        <View style={defaultStyles.tileScreen}>
             <TileLine>
                 <RetrosternalPainTile navigation={navigation} />
                 <HeartAreaPainTile navigation={navigation} />

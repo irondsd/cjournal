@@ -6,24 +6,25 @@ import {
     MedicineTestTile,
 } from '../../components/tiles'
 import { TileLine } from '../../components/TileLine'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles } from '../../constants'
+import { View } from 'react-native'
 
-export const TakingMedicineScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const TakingMedicineScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.TakingMedicine
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <TileLine>
-            <CourseTherapyTile navigation={navigation} />
-            <ReliefOfAttackTile navigation={navigation} />
-            <MedicineTestTile navigation={navigation} />
-        </TileLine>
+        <View style={defaultStyles.tileScreen}>
+            <TileLine>
+                <CourseTherapyTile navigation={navigation} />
+                <ReliefOfAttackTile navigation={navigation} />
+                <MedicineTestTile navigation={navigation} />
+            </TileLine>
+        </View>
     )
 }
 

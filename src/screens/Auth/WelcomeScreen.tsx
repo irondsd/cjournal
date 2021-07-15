@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import {
     Platform,
     StyleSheet,
@@ -7,24 +7,38 @@ import {
     StatusBar,
     Alert,
 } from 'react-native'
-import { appColor, Routes, logoSize } from '../constants'
-import { strings } from '../localization'
-import { RegisterOrLogin } from '../components/RegisterOrLogin'
-import { Logo } from '../components/Logo'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { appColor, Routes, logoSize } from '../../constants'
+import { strings } from '../../localization'
+import { RegisterOrLogin } from '../../components/RegisterOrLogin'
+import { Logo } from '../../components/Logo'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
 
-export const WelcomeScreen: NavigationStackScreenComponent = ({
+type WelcomeScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Welcome'
+>
+type WelcomeScreenRouteProp = RouteProp<RootStackParamList, 'Welcome'>
+
+type WelcomeScreenProps = {
+    navigation: WelcomeScreenNavigationProp
+    route: WelcomeScreenRouteProp
+}
+
+export const WelcomeScreen: FC<WelcomeScreenProps> = ({
     navigation,
+    route,
 }) => {
     const showMessage = () => {
-        if (navigation?.state?.params?.message) {
-            Alert.alert(strings.Success, navigation.state.params.message)
+        if (route.params?.message) {
+            Alert.alert(strings.Success, route.params.message)
         }
     }
 
     useEffect(() => {
         showMessage()
-    }, [navigation.state?.params])
+    }, [route.params?.message])
 
     return (
         <View style={styles.container}>

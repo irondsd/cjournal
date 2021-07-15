@@ -6,24 +6,25 @@ import {
     NegativeEmotionsTile,
 } from '../../components/tiles'
 import { TileLine } from '../../components/TileLine'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { View } from 'react-native'
+import { defaultStyles } from '../../constants'
 
-export const EmotionalStressScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const EmotionalStressScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.EmotionalStress
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <TileLine>
-            <PositiveEmotionsTile navigation={navigation} />
-            <NegativeEmotionsTile navigation={navigation} />
-            <OtherEmotionsTile navigation={navigation} />
-        </TileLine>
+        <View style={defaultStyles.tileScreen}>
+            <TileLine>
+                <PositiveEmotionsTile navigation={navigation} />
+                <NegativeEmotionsTile navigation={navigation} />
+                <OtherEmotionsTile navigation={navigation} />
+            </TileLine>
+        </View>
     )
 }
 

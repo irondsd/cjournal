@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { TileLine } from '../../components/TileLine'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { TileSpacer } from '../../components/TileSpacer'
 import {
     SexTile,
@@ -13,19 +12,18 @@ import {
     SmokingTile,
 } from '../../components/tiles'
 import { strings } from '../../localization'
+import { defaultStyles } from '../../constants'
 
-export const ActivityScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const ActivityScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings['Activity']
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <View>
+        <View style={defaultStyles.tileScreen}>
             <TileLine>
                 <MealTile navigation={navigation} />
                 <AlcoholTile navigation={navigation} />

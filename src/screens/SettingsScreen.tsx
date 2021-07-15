@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useLayoutEffect } from 'react'
 import {
     StyleSheet,
     Text,
@@ -28,12 +28,26 @@ import userUpdateIdinv from '../requests/userUpdateIdinv'
 import { RootState } from '../redux/store'
 import { decodeIdinv } from '../helpers/encode'
 import { IdinvBlock } from '../components/IdinvBlock'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { Get } from '../requests/newRequest'
 import { TouchableIcon } from '../components/TouchableIcon'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../navigation/NavContainer'
+import { RouteProp } from '@react-navigation/native'
 
-export const SettingsScreen: NavigationStackScreenComponent = ({
+type SettingsScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Settings'
+>
+type SettingsScreenRouteProp = RouteProp<RootStackParamList, 'Settings'>
+
+type SettingsScreenProps = {
+    navigation: SettingsScreenNavigationProp
+    route: SettingsScreenRouteProp
+}
+
+export const SettingsScreen: FC<SettingsScreenProps> = ({
     navigation,
+    route,
 }) => {
     const [settingsShow, setSettingsShow] = useState(false)
     const [idinvChanging, setIdinvChanging] = useState(false)
@@ -70,8 +84,8 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
 
     const checkIncomingQR = () => {
         if (idinvChanging) return
-        if (navigation.state?.params?.qrValue) {
-            const qrValue = navigation.state.params.qrValue
+        if (route.params?.qrValue) {
+            const qrValue = route.params.qrValue
 
             // decode and check for errors
             const idinv = decodeIdinv(qrValue)
@@ -87,18 +101,28 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
     }
 
     useEffect(() => {
-        if (!tokens.isLoggedIn) navigation.navigate('Auth')
-    }, [tokens])
-
-    useEffect(() => {
         checkIncomingQR()
-    }, [navigation.state.params])
+    }, [route.params?.qrValue])
 
-    useEffect(() => {
-        const title = navigation.setParams({
-            headerTitle: strings['Settings'],
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: strings.Settings,
+            headerRight: () => (
+                <TouchableIcon
+                    set="FontAwesome"
+                    name="qrcode"
+                    color="#000"
+                    size={25}
+                    style={{ margin: 15 }}
+                    onPress={() => {
+                        navigation.navigate(Routes.QRScan, {
+                            returnTo: Routes.Settings,
+                        })
+                    }}
+                />
+            ),
         })
-    }, [])
+    }, [navigation])
 
     return (
         <View style={styles.container}>
@@ -112,7 +136,7 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
                     }, 3000)
 
                     if (presses >= 10) {
-                        navigation.navigate('Debug')
+                        navigation.navigate(Routes.Debug)
                     }
                 }}
                 delayLongPress={3000}
@@ -171,26 +195,6 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
             </View>
         </View>
     )
-}
-
-SettingsScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-        headerRight: (
-            <TouchableIcon
-                set="FontAwesome"
-                name="qrcode"
-                color="#000"
-                size={25}
-                style={{ margin: 15 }}
-                onPress={() => {
-                    navigation.navigate(Routes.QRScan, {
-                        returnTo: Routes.Settings,
-                    })
-                }}
-            />
-        ),
-    }
 }
 
 const styles = StyleSheet.create({

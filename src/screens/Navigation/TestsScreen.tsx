@@ -12,18 +12,18 @@ import {
 } from '../../components/tiles'
 import { TileLine } from '../../components/TileLine'
 import { TileSpacer } from '../../components/TileSpacer'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles } from '../../constants'
 
-export const TestsScreen: NavigationStackScreenComponent = ({ navigation }) => {
+export const TestsScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.Tests
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <View>
+        <View style={defaultStyles.tileScreen}>
             <TileLine>
                 <StairsTile navigation={navigation} />
                 <WalkingTestTile navigation={navigation} />

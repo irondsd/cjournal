@@ -10,20 +10,18 @@ import {
 } from '../../components/tiles'
 import { TileLine } from '../../components/TileLine'
 import { TileSpacer } from '../../components/TileSpacer'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles } from '../../constants'
 
-export const WeaknessScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const WeaknessScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.Weakness
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <View>
+        <View style={defaultStyles.tileScreen}>
             <TileLine>
                 <SyncopeTile navigation={navigation} />
                 <NauseaTile navigation={navigation} />

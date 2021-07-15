@@ -6,14 +6,11 @@ import {
     VerticalPositionCalibrationTile,
 } from '../../components/tiles'
 import { TileLine } from '../../components/TileLine'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
-export const ServiceScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const ServiceScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.Service
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])

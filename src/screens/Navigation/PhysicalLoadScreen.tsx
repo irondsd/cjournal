@@ -10,20 +10,18 @@ import {
     TrainerTile,
     WorkoutTile,
 } from '../../components/tiles'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles } from '../../constants'
 
-export const PhysicalLoadScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const PhysicalLoadScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.PhysicalLoad
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <View>
+        <View style={defaultStyles.tileScreen}>
             <TileLine>
                 <WalkingTile navigation={navigation} />
                 <RunningTile navigation={navigation} />

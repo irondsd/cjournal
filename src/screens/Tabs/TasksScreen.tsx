@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, StatusBar } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { backgroundColor, listUpdateInterval } from '../constants'
-import { strings } from '../localization'
-import { ActivityListItem } from '../components/ActivityListItem'
-import { RootState } from '../redux/store'
-import { Get } from '../requests/newRequest'
-import { updateTasks, tasksFetchFailed } from '../redux/actions'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { backgroundColor, listUpdateInterval } from '../../constants'
+import { strings } from '../../localization'
+import { TasksListItem } from '../../components/TasksListItem'
+import { RootState } from '../../redux/store'
+import { Get } from '../../requests/newRequest'
+import { updateTasks, tasksFetchFailed } from '../../redux/actions'
 
-export const JournalScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const TasksScreen = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
-    const activity = useSelector((state: RootState) => state.activity)
+    const tasks = useSelector((state: RootState) => state.tasks)
     const user = useSelector((state: RootState) => state.user)
     const settings = useSelector((state: RootState) => state.settings)
     const tokens = useSelector((state: RootState) => state.tokens)
@@ -22,8 +19,8 @@ export const JournalScreen: NavigationStackScreenComponent = ({
 
     const fetch = () => {
         const url = settings.idinvFilter
-            ? `idinv/${user.idinv}/activity`
-            : `users/${user._id}/activity`
+            ? `idinv/${user.idinv}/tasks`
+            : `users/${user._id}/tasks`
         Get(url, tokens.access_token)
             .then(res => dispatch(updateTasks(res)))
             .catch(err => dispatch(tasksFetchFailed()))
@@ -55,7 +52,7 @@ export const JournalScreen: NavigationStackScreenComponent = ({
     }, [])
 
     const renderItem = ({ item }) => {
-        return <ActivityListItem activity={item} navigation={navigation} />
+        return <TasksListItem task={item} navigation={navigation} />
     }
 
     return (
@@ -63,7 +60,7 @@ export const JournalScreen: NavigationStackScreenComponent = ({
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <FlatList
                 style={styles.list}
-                data={activity}
+                data={tasks}
                 contentContainerStyle={{ paddingBottom: 30 }}
                 overScrollMode={'always'}
                 renderItem={renderItem}
@@ -71,12 +68,6 @@ export const JournalScreen: NavigationStackScreenComponent = ({
             />
         </View>
     )
-}
-
-JournalScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: strings.Journal,
-    }
 }
 
 const styles = StyleSheet.create({

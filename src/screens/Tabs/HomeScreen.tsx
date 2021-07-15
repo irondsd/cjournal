@@ -1,11 +1,17 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, useLayoutEffect } from 'react'
 import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import { connect, useSelector } from 'react-redux'
-import { backgroundColor, appColor, ActivityTypes, Routes } from '../constants'
-import { strings } from '../localization'
-import { SettingsButton } from '../components/SettingsButton'
-import sync from '../services/sync'
-import { TileLine } from '../components/TileLine'
+import {
+    backgroundColor,
+    appColor,
+    ActivityTypes,
+    Routes,
+    defaultStyles,
+} from '../../constants'
+import { strings } from '../../localization'
+import { SettingsButton } from '../../components/SettingsButton'
+import sync from '../../services/sync'
+import { TileLine } from '../../components/TileLine'
 import {
     ActivityTile,
     PhysicalLoadTile,
@@ -18,11 +24,18 @@ import {
     EmotionalStressTile,
     SleepTile,
     AlarmTile,
-} from '../components/tiles'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
-import { RootState } from '../redux/store'
+} from '../../components/tiles'
+import { RootState } from '../../redux/store'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../../navigation/NavContainer'
 
-export const HomeScreen: NavigationStackScreenComponent = ({ navigation }) => {
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>
+
+type HomeScreenProps = {
+    navigation: HomeScreenNavigationProp
+}
+
+export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     const user = useSelector((state: RootState) => state.user)
     const tokens = useSelector((state: RootState) => state.tokens)
 
@@ -49,15 +62,23 @@ export const HomeScreen: NavigationStackScreenComponent = ({ navigation }) => {
         // todo disabled
     }, [])
 
-    useEffect(() => {
-        const title = strings.Home
-        navigation.setParams({
-            headerTitle: title,
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: strings.Home,
+            headerRight: () => (
+                <SettingsButton
+                    onPress={() => navigation.navigate(Routes.Settings)}
+                />
+            ),
         })
-    }, [])
+    }, [navigation])
 
     return (
-        <View>
+        <View style={defaultStyles.tileScreen}>
+            <StatusBar
+                backgroundColor={backgroundColor}
+                barStyle="dark-content"
+            />
             <TileLine>
                 <SleepTile navigation={navigation} disabled={disabled.sleep} />
                 <AlarmTile navigation={navigation} />
@@ -100,15 +121,4 @@ export const HomeScreen: NavigationStackScreenComponent = ({ navigation }) => {
             </TileLine>
         </View>
     )
-}
-
-HomeScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-        headerRight: (
-            <SettingsButton
-                onPress={() => navigation.navigate(Routes.Settings)}
-            />
-        ),
-    }
 }

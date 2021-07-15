@@ -10,20 +10,18 @@ import {
     VisionDisturbancesTile,
 } from '../../components/tiles'
 import { TileLine } from '../../components/TileLine'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles } from '../../constants'
 
-export const ComplaintsScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const ComplaintsScreen = ({ navigation }) => {
     useEffect(() => {
         const title = strings.Complaints
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
 
     return (
-        <View>
+        <View style={defaultStyles.tileScreen}>
             <TileLine>
                 <ArrhythmiaTile navigation={navigation} />
                 <PalpitationTile navigation={navigation} />
