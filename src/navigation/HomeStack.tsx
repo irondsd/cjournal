@@ -17,15 +17,6 @@ import { JournalScreen } from '../screens/Tabs/JournalScreen'
 import { TasksScreen } from '../screens/Tabs/TasksScreen'
 import { SettingsButton } from '../components/SettingsButton'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-import { ActivityScreen } from '../screens/Navigation/ActivityScreen'
-import { PhysicalLoadScreen } from '../screens/Navigation/PhysicalLoadScreen'
-import { ServiceScreen } from '../screens/Navigation/ServiceScreen'
-import { TakingMedicineScreen } from '../screens/Navigation/TakingMedicineScreen'
-import { TestsScreen } from '../screens/Navigation/TestsScreen'
-import { PainScreen } from '../screens/Navigation/PainScreen'
-import { WeaknessScreen } from '../screens/Navigation/WeaknessScreen'
-import { ComplaintsScreen } from '../screens/Navigation/ComplaintsScreen'
-import { EmotionalStressScreen } from '../screens/Navigation/EmotionalStressScreen'
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -74,7 +65,7 @@ export const HomeStack = ({ navigation, route }) => {
             swipeEnabled={true}
             tabBarOptions={TAB_BAR_OPTIONS}>
             <Tab.Screen
-                name="Journal"
+                name={Routes.Journal}
                 component={JournalScreen}
                 options={{
                     title: strings.Journal,
@@ -84,7 +75,7 @@ export const HomeStack = ({ navigation, route }) => {
                 }}
             />
             <Tab.Screen
-                name="Home"
+                name={Routes.Home}
                 component={HomeScreen}
                 options={{
                     title: strings.Home,
@@ -94,7 +85,7 @@ export const HomeStack = ({ navigation, route }) => {
                 }}
             />
             <Tab.Screen
-                name="Tasks"
+                name={Routes.Tasks}
                 component={TasksScreen}
                 options={{
                     title: strings.Tasks,
