@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { ActivityTypes, defaultStyles, Routes } from '../../constants'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +14,20 @@ import { addHint } from '../../services/hints'
 import { addActivity } from '../../redux/actions'
 import { findLatestTask } from '../../classes/Task'
 import { RootState } from '../../redux/store'
+import { RouteProp } from '@react-navigation/native'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+
+type TimePickScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'TimePick'
+>
+type TimePickScreenRouteProp = RouteProp<RootStackParamList, 'TimePick'>
+
+type TimePickScreenProps = {
+    navigation: TimePickScreenNavigationProp
+    route: TimePickScreenRouteProp
+}
 
 type activityType = {
     activity_type?: ActivityTypes
@@ -24,12 +37,13 @@ type activityType = {
     comment?: string
 }
 
-export const TimePickScreen: NavigationStackScreenComponent = ({
+export const TimePickScreen: FC<TimePickScreenProps> = ({
     navigation,
+    route,
 }) => {
     const tasks = useSelector((state: RootState) => state.tasks)
     const dispatch = useDispatch()
-    const { params } = navigation.state
+    const { params } = route
     const [activity, setActivity] = useState<activityType>({})
     const [data, setData] = useState<IAData>({})
 
@@ -64,7 +78,7 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
     useEffect(() => {
         const sender = params?.sender
         const title: string = strings[sender]
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [params])
@@ -89,10 +103,4 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
             <Button title={strings.Save} onPress={submit} />
         </View>
     )
-}
-
-TimePickScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-    }
 }

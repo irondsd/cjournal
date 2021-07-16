@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { Routes, ActivityTypes, defaultStyles, width } from '../../constants'
@@ -8,18 +8,32 @@ import AudioRecorder from '../../components/AudioRecorder'
 import Activity, { IAData } from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import GPS, { LocationType } from '../../sensors/GPS'
-import Comment from '../../components/Comment'
+import { Comment } from '../../components/CommentTS'
 import { Button } from '../../components/Button'
 import Icon from 'react-native-vector-icons/dist/MaterialIcons'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { RootStackParamList } from '../../navigation/NavContainer'
+
+type AlarmScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Alarm'
+>
+type AlarmScreenRouteProp = RouteProp<RootStackParamList, 'Alarm'>
+
+type AlarmScreenProps = {
+    navigation: AlarmScreenNavigationProp
+    route: AlarmScreenRouteProp
+}
 
 type AlarmScreenActivityType = {
-    activity_type?: string
+    activity_type?: ActivityTypes
     time_started?: number
     comment?: string | undefined
 }
 
-const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
+export const AlarmScreen: FC<AlarmScreenProps> = ({ navigation }) => {
     const dispatch = useDispatch()
     const [activity, setActivity] = useState<AlarmScreenActivityType>({})
     const [locations, setLocations] = useState<LocationType[]>([])
@@ -77,8 +91,7 @@ const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
             time_started,
         })
 
-        // set title
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: strings.Alarm,
         })
 
@@ -106,10 +119,10 @@ const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
             </KeyboardAvoidingView>
             <View style={styles.long}>
                 <Comment
-                    onChangeText={value => {
+                    onChange={value => {
                         updateActivityValue('comment', value)
                     }}
-                    comment={activity.comment}
+                    value={activity.comment}
                 />
                 <AudioRecorder
                     audioFile={data.audioFile}
@@ -142,11 +155,3 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
 })
-
-AlarmScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-    }
-}
-
-export default AlarmScreen

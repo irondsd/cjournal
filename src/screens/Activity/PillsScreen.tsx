@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import {
     Routes,
@@ -6,7 +6,6 @@ import {
     prescriptions,
     ActivityTypes,
 } from '../../constants'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useSelector, useDispatch } from 'react-redux'
@@ -20,18 +19,31 @@ import { RootState } from '../../redux/store'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { objectCleanUp } from '../../helpers/utils'
+import { RouteProp } from '@react-navigation/native'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
 
+type PillsScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Pills'
+>
+type PillsScreenRouteProp = RouteProp<RootStackParamList, 'Pills'>
+
+type PillsScreenProps = {
+    navigation: PillsScreenNavigationProp
+    route: PillsScreenRouteProp
+}
 type PillsActivityType = {
     activity_type?: ActivityTypes
     time_started?: number
     task?: string
 }
 
-export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
+export const PillsScreen: FC<PillsScreenProps> = ({ navigation, route }) => {
     const user = useSelector((state: RootState) => state.user)
     const tasks = useSelector((state: RootState) => state.tasks)
     const dispatch = useDispatch()
-    const params = navigation?.state?.params
+    const { params } = route
     const [activity, setActivity] = useState<PillsActivityType>({})
     const [data, setData] = useState<IAData>({})
     const [pillsList, setPillsList] = useState<string[]>([])
@@ -67,9 +79,15 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
     }
 
     useEffect(() => {
+        const sender = params.sender
+        const title: string = strings[sender]
+        navigation.setOptions({
+            headerTitle: title,
+        })
+
         // setup activity
         const time_started = timestamp()
-        const activity_type: string = params?.sender
+        const activity_type: ActivityTypes = params.sender
         const task = params?.task || findLatestTask(tasks, activity_type)
         setActivity({
             activity_type: ActivityTypes[activity_type],
@@ -115,14 +133,3 @@ export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
         </View>
     )
 }
-
-PillsScreen.navigationOptions = ({ navigation }) => {
-    const { sender } = navigation?.state?.params
-    const title = strings[sender]
-
-    return {
-        title: title,
-    }
-}
-
-export default PillsScreen
