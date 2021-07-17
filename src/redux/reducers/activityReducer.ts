@@ -81,7 +81,8 @@ export default function activityReducer(
         }
         case DELETE_ACTIVITY: {
             const index = state.findIndex(a => a._id === payload._id)
-            if (index) state[index].setToDelete()
+
+            if (index !== undefined) state[index].setToDelete()
             else
                 writeLog(
                     'error',
