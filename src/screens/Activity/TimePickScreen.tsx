@@ -67,7 +67,7 @@ export const TimePickScreen: NavigationStackScreenComponent = ({
         navigation.setParams({
             headerTitle: title,
         })
-    }, [params])
+    }, [])
 
     return (
         <View style={defaultStyles.container}>
