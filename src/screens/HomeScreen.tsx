@@ -46,8 +46,8 @@ export const HomeScreen: NavigationStackScreenComponent = ({ navigation }) => {
     }
 
     useEffect(() => {
-        // todo disabled
-    }, [])
+        runSync()
+    })
 
     useEffect(() => {
         const title = strings.Home

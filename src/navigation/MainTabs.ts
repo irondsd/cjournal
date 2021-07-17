@@ -30,6 +30,7 @@ import { WeaknessScreen } from '../screens/nav/WeaknessScreen'
 import { PillsScreen } from '../screens/Activity/PillsScreen'
 import { TestsScreen } from '../screens/nav/TestsScreen'
 import DebugScreen from '../screens/DebugScreen'
+import HomeScreenOld from '../screens/HomeScreenOld'
 import AlarmScreen from '../screens/Activity/AlarmScreen'
 import ActivityStatsScreen from '../screens/ActivityStatsScreen'
 import { CameraScreen } from '../screens/CameraScreen'
@@ -48,7 +49,7 @@ const JournalStack = createStackNavigator({
 })
 
 const HomeStack = createStackNavigator({
-    Home: HomeScreen,
+    Home: HomeScreenOld,
     Settings: SettingsScreen,
     TimePick: TimePickScreen,
     Activity: ActivityScreen,
