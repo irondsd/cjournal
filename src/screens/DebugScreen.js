@@ -24,7 +24,7 @@ import {
 import { getUtcOffset } from '../helpers/dateTime'
 import sync from '../services/sync'
 import { idinvWatcher } from '../services/idinvWatcher'
-import { activityAsyncSave } from '../services/asyncStorage'
+import { activityAsyncSave, tasksAsyncSave } from '../services/asyncStorage'
 import { uploadRequest } from '../requests/uploadRequest'
 import RNFS from 'react-native-fs'
 import { Get, Post } from '../requests/newRequest'
@@ -83,9 +83,10 @@ class DebugScreen extends Component {
                     }}
                 />
                 <SaveButton
-                    title={'clear activity localstorage'}
+                    title={'clear activity and task localstorage'}
                     onPress={() => {
                         activityAsyncSave([])
+                        tasksAsyncSave([])
                     }}
                 />
 
