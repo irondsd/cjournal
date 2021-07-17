@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { StyleSheet, View, FlatList, StatusBar } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../constants'
@@ -17,6 +17,10 @@ export const TasksScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const settings = useSelector((state: RootState) => state.settings)
     const tokens = useSelector((state: RootState) => state.tokens)
     const dispatch = useDispatch()
+
+    const undoneTasks = useMemo(() => {
+        return tasks.filter(t => t.completed === false)
+    }, [tasks])
 
     const fetch = () => {
         const url = settings.idinvFilter
@@ -61,7 +65,7 @@ export const TasksScreen: NavigationStackScreenComponent = ({ navigation }) => {
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <FlatList
                 style={styles.list}
-                data={tasks}
+                data={undoneTasks}
                 contentContainerStyle={{ paddingBottom: 30 }}
                 overScrollMode={'always'}
                 renderItem={renderItem}
