@@ -18,6 +18,7 @@ import {
 } from '../constants'
 import { getUtcOffset } from '../helpers/dateTime'
 import { uploadRequest } from '../requests/uploadRequest'
+import { completeTask } from '../requests/completeTask'
 import objectId from '../helpers/objectId'
 import { LocationType } from '../sensors/GPS'
 import { objectCleanUp } from '../helpers/utils'
@@ -344,9 +345,13 @@ export default class Activity implements IActivityClass {
             ? `idinv/${store.getState().user.idinv}/activity/`
             : `users/${_id}/activity/`
 
-        if (this.system?.upload)
+        if (this.system?.upload) {
+            if (this.task) completeTask(_id, access_token, this.task)
             return uploadRequest(path, 'POST', access_token, this)
-        else return Post(path, access_token, this)
+        } else {
+            if (this.task) completeTask(_id, access_token, this.task)
+            return Post(path, access_token, this)
+        }
     }
 
     editOnServer(_id: string, access_token: string) {
