@@ -6,7 +6,7 @@ import { strings } from '../localization'
 import { ActivityListItem } from '../components/ActivityListItem'
 import { RootState } from '../redux/store'
 import { Get } from '../requests/newRequest'
-import { updateTasks, tasksFetchFailed } from '../redux/actions'
+import { updateActivities, activityFetchFailed } from '../redux/actions'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
 export const JournalScreen: NavigationStackScreenComponent = ({
@@ -25,8 +25,8 @@ export const JournalScreen: NavigationStackScreenComponent = ({
             ? `idinv/${user.idinv}/activity`
             : `users/${user._id}/activity`
         Get(url, tokens.access_token)
-            .then(res => dispatch(updateTasks(res)))
-            .catch(err => dispatch(tasksFetchFailed()))
+            .then(res => dispatch(updateActivities(res)))
+            .catch(err => dispatch(activityFetchFailed()))
     }
 
     useEffect(() => {
