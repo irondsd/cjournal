@@ -17,6 +17,7 @@ import Activity from '../classes/Activity'
 import { displayDateTime } from '../helpers/dateTime'
 import Map from '../components/Map'
 import OpenInMaps from '../components/OpenInMaps'
+import { TouchableIcon } from '../components/TouchableIcon'
 
 type Props = {}
 class ActivityStatsScreen extends Component<Props> {
