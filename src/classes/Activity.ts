@@ -42,8 +42,6 @@ export interface IActivity {
 export interface IActivityClass extends IActivity {
     isEqual(other: IActivity): boolean
     isNewerThan(other: IActivity): boolean
-    isEqual(other: IActivity): boolean
-    isNewerThan(other: IActivity): boolean
     synced(): boolean
     hasFiles(): boolean
     hasLocation(): boolean
