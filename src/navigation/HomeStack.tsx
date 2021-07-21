@@ -46,7 +46,7 @@ export const HomeStack = ({ navigation, route }) => {
         navigation.setOptions({
             headerTitle: strings[routeName],
             headerRight: () => {
-                if (routeName !== 'Home') return null
+                if (routeName !== undefined && routeName !== 'Home') return null
                 return (
                     <SettingsButton
                         onPress={() => {
