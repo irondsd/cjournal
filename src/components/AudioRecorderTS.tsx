@@ -33,6 +33,17 @@ export const AudioRecorder: FC<AudioRecorderProps> = ({ onChange, file }) => {
         AudioRecord.init(options)
     }
 
+    const stopRecord = async () => {
+        clearInterval(intervalId)
+        clearTimeout(timeoutId)
+        const audioFile = await AudioRecord.stop()
+        console.log('stop record')
+        onChange(audioFile)
+        setAudioFile(audioFile)
+        console.log('audioFile', audioFile)
+        setRecording(false)
+    }
+
     const startRecord = async () => {
         let permissions = await requestMicrophonePermissions()
         if (!permissions) return
@@ -41,32 +52,32 @@ export const AudioRecorder: FC<AudioRecorderProps> = ({ onChange, file }) => {
 
         if (!recording) {
             setBars([])
-            const timeoutId = setTimeout(stopRecord, 10000)
             const intervalId = setInterval(() => {
-                setBars(bars => [...bars, Math.random() * (35 - 10) + 10])
+                const min = 10
+                const max = 35
+                const newBar = Math.floor(Math.random() * (max - min + 1)) + min
+
+                setBars(bars => [...bars, newBar])
             }, 200)
+            const timeoutId = setTimeout(async () => {
+                clearInterval(intervalId)
+                clearTimeout(timeoutId)
+                const audioFile = await AudioRecord.stop()
+                console.log('stop record')
+                onChange(audioFile)
+                setAudioFile(audioFile)
+                console.log('audioFile', audioFile)
+                setRecording(false)
+            }, 10000)
             setTimeoutId(timeoutId)
             setIntervalId(intervalId)
 
-            // console.log('start record')
+            console.log('start record')
             setRecording(true)
             setLoaded(false)
             AudioRecord.start()
         } else {
             stopRecord()
-        }
-    }
-
-    const stopRecord = async () => {
-        if (recording) {
-            clearInterval(intervalId)
-            clearTimeout(timeoutId)
-            const audioFile = await AudioRecord.stop()
-            console.log('stop record')
-            onChange(audioFile)
-            setAudioFile(audioFile)
-            console.log('audioFile', audioFile)
-            setRecording(false)
         }
     }
 
