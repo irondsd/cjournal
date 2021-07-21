@@ -33,6 +33,8 @@ import { TouchableIcon } from '../components/TouchableIcon'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../navigation/NavContainer'
 import { RouteProp } from '@react-navigation/native'
+import { useUser } from '../context/userContext'
+import { useAuth } from '../context/authContext'
 
 type SettingsScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -52,9 +54,8 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
     const [settingsShow, setSettingsShow] = useState(false)
     const [idinvChanging, setIdinvChanging] = useState(false)
     const [presses, setPresses] = useState(0)
-
-    const user = useSelector((state: RootState) => state.user)
-    const tokens = useSelector((state: RootState) => state.tokens)
+    const user = useUser()
+    const tokens = useAuth()
     const settings = useSelector((state: RootState) => state.settings)
     const dispatch = useDispatch()
 
@@ -123,7 +124,7 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
             ),
         })
     }, [navigation])
-
+    console.log(user)
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />

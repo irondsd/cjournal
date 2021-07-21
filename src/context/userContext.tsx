@@ -38,7 +38,7 @@ function userReducer(state, action): State {
         case 'LOAD': {
             return {
                 ...state,
-                ...action.tokens,
+                ...action.user,
             }
         }
         case 'RESET': {
@@ -54,7 +54,7 @@ function UserProvider({ children }) {
     const [state, dispatch] = useReducer(userReducer, defaultState)
 
     const load = (user: State) => {
-        dispatch({ type: 'LOGIN', user })
+        dispatch({ type: 'LOAD', user })
     }
 
     const reset = () => {
