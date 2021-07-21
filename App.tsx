@@ -2,11 +2,12 @@ import React, { FC, useEffect } from 'react'
 import BackgroundFetch from 'react-native-background-fetch'
 import { useSelector } from 'react-redux'
 import sync from './src/services/sync'
-import NavContainer from './src/navigation/NavContainer'
-import NavigationService from './src/navigation/NavigationService'
+import { NavContainer } from './src/navigation/NavContainer'
 import { idinvWatcher } from './src/services/idinvWatcher'
 import { setupNotifications } from './src/notifications/notifications'
 import { RootState } from './src/redux/store'
+import { AuthProvider } from './src/context/authContext'
+import { UserProvider } from './src/context/userContext'
 
 const App: FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -53,11 +54,15 @@ const App: FC = () => {
     }, [])
 
     return (
-        <NavContainer
-            ref={navigatorRef => {
-                NavigationService.setTopLevelNavigator(navigatorRef)
-            }}
-        />
+        <AuthProvider>
+            <UserProvider>
+                <NavContainer
+                // ref={navigatorRef => {
+                //     NavigationService.setTopLevelNavigator(navigatorRef)
+                // }}
+                />
+            </UserProvider>
+        </AuthProvider>
     )
 }
 
