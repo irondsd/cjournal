@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React, { FC, useEffect } from 'react'
 import { useAuth } from '../context/authContext'
+import { useUser } from '../context/userContext'
 import {
     SplashScreen,
     RegisterScreen,
@@ -26,7 +27,7 @@ import {
     TimePickScreen,
     CameraScreen,
 } from '../screens'
-import { tokensAsyncGet } from '../services/asyncStorage'
+import { tokensAsyncGet, userAsyncGet } from '../services/asyncStorage'
 import { ActivityTypes, Routes } from '../constants'
 import { HomeStack } from './HomeStack'
 
@@ -61,12 +62,15 @@ const RootStack = createStackNavigator<RootStackParamList>()
 
 export const NavContainer: FC = () => {
     const { restore, logout, isLoading, isLoggedIn } = useAuth()
+    const { load } = useUser()
 
     useEffect(() => {
         const secureStoreLoad = async () => {
             try {
                 const tokens = await tokensAsyncGet()
+                const user = await userAsyncGet()
                 if (tokens.access_token) restore(tokens)
+                if (user._id) load(user)
             } catch (e) {
                 logout()
             }
