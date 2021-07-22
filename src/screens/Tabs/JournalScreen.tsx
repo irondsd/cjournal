@@ -6,24 +6,30 @@ import { strings } from '../../localization'
 import { ActivityListItem } from '../../components/ActivityListItem'
 import { RootState } from '../../redux/store'
 import { Get } from '../../requests/newRequest'
-import { updateTasks, tasksFetchFailed } from '../../redux/actions'
+import { updateActivities, activityFetchFailed } from '../../redux/actions'
+import { useUser } from '../../context/userContext'
+import { useAuth } from '../../context/authContext'
 
 export const JournalScreen = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
     const activity = useSelector((state: RootState) => state.activity)
-    const user = useSelector((state: RootState) => state.user)
+    const user = useUser()
     const settings = useSelector((state: RootState) => state.settings)
-    const tokens = useSelector((state: RootState) => state.tokens)
+    // const tokens = useSelector((state: RootState) => state.tokens)
+    const tokens = useAuth()
     const dispatch = useDispatch()
 
     const fetch = () => {
         const url = settings.idinvFilter
             ? `idinv/${user.idinv}/activity`
             : `users/${user._id}/activity`
+
         Get(url, tokens.access_token)
-            .then(res => dispatch(updateTasks(res)))
-            .catch(err => dispatch(tasksFetchFailed()))
+            .then(res => {
+                dispatch(updateActivities(res))
+            })
+            .catch(err => dispatch(activityFetchFailed()))
     }
 
     useEffect(() => {
@@ -37,17 +43,17 @@ export const JournalScreen = ({ navigation }) => {
     }, [isActive])
 
     useEffect(() => {
-        const focusSub = navigation.addListener('willFocus', () => {
+        const focusUnsub = navigation.addListener('focus', () => {
             fetch()
             setIsActive(true)
         })
-        const blurSub = navigation.addListener('willBlur', () => {
+        const blurUnsub = navigation.addListener('blur', () => {
             setIsActive(false)
         })
 
         return () => {
-            focusSub.remove()
-            blurSub.remove()
+            focusUnsub()
+            blurUnsub()
         }
     }, [])
 
