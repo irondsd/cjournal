@@ -7,14 +7,16 @@ import { TasksListItem } from '../../components/TasksListItem'
 import { RootState } from '../../redux/store'
 import { Get } from '../../requests/newRequest'
 import { updateTasks, tasksFetchFailed } from '../../redux/actions'
+import { useUser } from '../../context/userContext'
+import { useAuth } from '../../context/authContext'
 
 export const TasksScreen = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
     const tasks = useSelector((state: RootState) => state.tasks)
-    const user = useSelector((state: RootState) => state.user)
+    const user = useUser()
     const settings = useSelector((state: RootState) => state.settings)
-    const tokens = useSelector((state: RootState) => state.tokens)
+    const tokens = useAuth()
     const dispatch = useDispatch()
 
     const fetch = () => {
@@ -37,17 +39,17 @@ export const TasksScreen = ({ navigation }) => {
     }, [isActive])
 
     useEffect(() => {
-        const focusSub = navigation.addListener('willFocus', () => {
+        const focusUnsub = navigation.addListener('focus', () => {
             fetch()
             setIsActive(true)
         })
-        const blurSub = navigation.addListener('willBlur', () => {
+        const blurUnsub = navigation.addListener('blur', () => {
             setIsActive(false)
         })
 
         return () => {
-            focusSub.remove()
-            blurSub.remove()
+            focusUnsub()
+            blurUnsub()
         }
     }, [])
 
