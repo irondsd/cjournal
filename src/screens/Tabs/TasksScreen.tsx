@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, StatusBar } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../../constants'
@@ -9,8 +9,18 @@ import { Get } from '../../requests/newRequest'
 import { updateTasks, tasksFetchFailed } from '../../redux/actions'
 import { useUser } from '../../context/userContext'
 import { useAuth } from '../../context/authContext'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { HomeTabsParamList } from '../../navigation/HomeStack'
 
-export const TasksScreen = ({ navigation }) => {
+type TasksScreenNavigationProp = StackNavigationProp<HomeTabsParamList, 'Tasks'>
+type TasksScreenRouteProp = RouteProp<HomeTabsParamList, 'Tasks'>
+
+type TasksScreenProps = {
+    navigation: TasksScreenNavigationProp
+    route: TasksScreenRouteProp
+}
+export const TasksScreen: FC<TasksScreenProps> = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
     const tasks = useSelector((state: RootState) => state.tasks)

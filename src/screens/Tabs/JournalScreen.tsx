@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, StatusBar } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../../constants'
@@ -9,8 +9,22 @@ import { Get } from '../../requests/newRequest'
 import { updateActivities, activityFetchFailed } from '../../redux/actions'
 import { useUser } from '../../context/userContext'
 import { useAuth } from '../../context/authContext'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { HomeTabsParamList } from '../../navigation/HomeStack'
 
-export const JournalScreen = ({ navigation }) => {
+type JournalScreenNavigationProp = StackNavigationProp<
+    HomeTabsParamList,
+    'Journal'
+>
+type JournalScreenRouteProp = RouteProp<HomeTabsParamList, 'Journal'>
+
+type JournalScreenProps = {
+    navigation: JournalScreenNavigationProp
+    route: JournalScreenRouteProp
+}
+
+export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
     const activity = useSelector((state: RootState) => state.activity)
@@ -74,12 +88,6 @@ export const JournalScreen = ({ navigation }) => {
             />
         </View>
     )
-}
-
-JournalScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: strings.Journal,
-    }
 }
 
 const styles = StyleSheet.create({

@@ -18,7 +18,13 @@ import { TasksScreen } from '../screens/Tabs/TasksScreen'
 import { SettingsButton } from '../components/SettingsButton'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
-const Tab = createMaterialTopTabNavigator()
+export type HomeTabsParamList = {
+    Journal: undefined
+    Home: undefined
+    Tasks: undefined
+}
+
+const Tab = createMaterialTopTabNavigator<HomeTabsParamList>()
 
 const TAB_BAR_OPTIONS: MaterialTopTabBarOptions = {
     style: {
