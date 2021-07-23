@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import {
     Platform,
     StyleSheet,
@@ -17,11 +17,24 @@ import { Routes, ActivityTypes } from '../../constants'
 import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { Logger } from '../../services/logger'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
 
-export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
+type SleepScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Sleep'
+>
+type SleepScreenRouteProp = RouteProp<RootStackParamList, 'Sleep'>
+
+type SleepScreenProps = {
+    navigation: SleepScreenNavigationProp
+    route: SleepScreenRouteProp
+}
+
+export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
     const [timer, setTimer] = useState<string>('00:00')
     const [startedAt, setStartedAt] = useState(timestamp())
     const logger = new Logger('sleep' + timestamp())
@@ -45,21 +58,25 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
         )
         dispatch(addActivity(createdActivity))
         navigation.navigate(Routes.SleepFinish, {
-            activity: createdActivity,
+            activity: createdActivity._id,
         })
     }
 
     useEffect(() => {
         // restore screen
-        if (navigation.state?.params?.startedAt)
-            setStartedAt(navigation.state.params.startedAt)
+        if (route.params?.startedAt) setStartedAt(route.params?.startedAt)
 
         // save screen
+        // todo
         screenAsyncSave({
             screen: 'Sleep',
-            startedAt: navigation.state?.params?.startedAt
-                ? navigation.state?.params?.startedAt
+            startedAt: route.params?.startedAt
+                ? route.params?.startedAt
                 : startedAt,
+        })
+
+        navigation.setOptions({
+            headerShown: false,
         })
 
         // prevent going back without saving
@@ -100,10 +117,6 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
             </View>
         </View>
     )
-}
-
-SleepScreen.navigationOptions = () => {
-    return { header: null, headerLeft: null }
 }
 
 const styles = StyleSheet.create({
