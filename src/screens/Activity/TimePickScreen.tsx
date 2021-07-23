@@ -5,7 +5,7 @@ import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch, useSelector } from 'react-redux'
 import { Comment } from '../../components/CommentTS'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { AudioRecorder } from '../../components/AudioRecorderTS'
@@ -29,14 +29,6 @@ type TimePickScreenProps = {
     route: TimePickScreenRouteProp
 }
 
-type activityType = {
-    activity_type?: ActivityTypes
-    time_started?: number
-    time_ended?: number
-    task?: string
-    comment?: string
-}
-
 export const TimePickScreen: FC<TimePickScreenProps> = ({
     navigation,
     route,
@@ -44,7 +36,11 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     const tasks = useSelector((state: RootState) => state.tasks)
     const dispatch = useDispatch()
     const { params } = route
-    const [activity, setActivity] = useState<activityType>({})
+    const [activity, setActivity] = useState<Partial<IActivity>>({
+        activity_type: ActivityTypes[params.sender],
+        time_started: timestamp(),
+        task: params.task,
+    })
     const [data, setData] = useState<IAData>({})
 
     const submit = () => {
@@ -63,16 +59,10 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     }
 
     useEffect(() => {
-        // setup activity
-        const time_started = timestamp()
-        const activity_type: string = params?.sender
-        const task = params?.task || findLatestTask(tasks, activity_type)
+        // find task
+        const task = findLatestTask(tasks, activity.activity_type)
 
-        setActivity({
-            activity_type: ActivityTypes[activity_type],
-            time_started,
-            task,
-        })
+        if (task) setActivity({ task })
     }, [params])
 
     useEffect(() => {

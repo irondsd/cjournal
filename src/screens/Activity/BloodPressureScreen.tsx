@@ -1,30 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { defaultStyles, Routes } from '../../constants'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles, Routes, ActivityTypes } from '../../constants'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch } from 'react-redux'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { TimePickCombined } from '../../components/TimePickCombined'
 import { addActivity } from '../../redux/actions'
 import { BloodPressure } from '../../components/BloodPressureTS'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
 
-type BloodPressureActivityType = {
-    activity_type?: string
-    time_started?: number
-    time_ended?: number
-    data?: IAData
+type BloodPressureScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'BloodPressure'
+>
+type BloodPressureScreenRouteProp = RouteProp<
+    RootStackParamList,
+    'BloodPressure'
+>
+
+type BloodPressureScreenProps = {
+    navigation: BloodPressureScreenNavigationProp
+    route: BloodPressureScreenRouteProp
 }
 
-export const BloodPressureScreen: NavigationStackScreenComponent = ({
+export const BloodPressureScreen: FC<BloodPressureScreenProps> = ({
     navigation,
+    route,
 }) => {
     const dispatch = useDispatch()
-    const params = navigation?.state?.params
-    const [activity, setActivity] = useState<BloodPressureActivityType>({})
+    const { params } = route
+    const [activity, setActivity] = useState<Partial<IActivity>>({
+        activity_type: ActivityTypes[params.sender],
+        time_started: timestamp(),
+    })
     const [data, setData] = useState<IAData>({})
 
     const submit = () => {
@@ -41,20 +54,9 @@ export const BloodPressureScreen: NavigationStackScreenComponent = ({
     }
 
     useEffect(() => {
-        // setup activity
-        const time_started = timestamp()
-        const activity_type: string = params?.sender
-
-        setActivity({
-            activity_type,
-            time_started,
-        })
-    }, [params])
-
-    useEffect(() => {
-        const sender = params?.sender
-        const title: string = strings[sender]
-        navigation.setParams({
+        const { sender } = params
+        const title = strings[sender]
+        navigation.setOptions({
             headerTitle: title,
         })
     }, [])
@@ -80,10 +82,4 @@ export const BloodPressureScreen: NavigationStackScreenComponent = ({
             <Button title={strings.Save} onPress={submit} />
         </View>
     )
-}
-
-BloodPressureScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-    }
 }

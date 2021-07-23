@@ -1,31 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { defaultStyles, Routes, ActivityTypes } from '../../constants'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch } from 'react-redux'
 import { OthersPickers } from '../../components/OthersPickers'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { CaloriesInput } from '../../components/CaloriesInputTS'
 import { TimePickCombined } from '../../components/TimePickCombined'
 import { addHint } from '../../services/hints'
 import { addActivity } from '../../redux/actions'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
 
-type TrainerActivityType = {
-    activity_type?: string
-    time_started?: number
-    time_ended?: number
+type TrainerScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Trainer'
+>
+type TrainerScreenRouteProp = RouteProp<RootStackParamList, 'Trainer'>
+
+type TrainerScreenProps = {
+    navigation: TrainerScreenNavigationProp
+    route: TrainerScreenRouteProp
 }
 
-export const TrainerScreen: NavigationStackScreenComponent = ({
+export const TrainerScreen: FC<TrainerScreenProps> = ({
     navigation,
+    route,
 }) => {
     const dispatch = useDispatch()
-    const params = navigation?.state?.params
-    const [activity, setActivity] = useState<TrainerActivityType>({})
+    const { params } = route
+    const [activity, setActivity] = useState<Partial<IActivity>>({
+        activity_type: ActivityTypes[params.sender],
+        time_started: timestamp(),
+        task: params.task,
+    })
     const [data, setData] = useState<IAData>({})
 
     const submit = () => {
@@ -44,18 +56,7 @@ export const TrainerScreen: NavigationStackScreenComponent = ({
     }
 
     useEffect(() => {
-        // setup activity
-        const time_started = timestamp()
-        const activity_type = ActivityTypes.Trainer
-
-        setActivity({
-            activity_type,
-            time_started,
-        })
-    }, [params])
-
-    useEffect(() => {
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: strings.Trainer,
         })
     }, [])
@@ -82,10 +83,4 @@ export const TrainerScreen: NavigationStackScreenComponent = ({
             <Button title={strings.Save} onPress={submit} />
         </View>
     )
-}
-
-TrainerScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-    }
 }

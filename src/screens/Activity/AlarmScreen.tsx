@@ -5,7 +5,7 @@ import { Routes, ActivityTypes, defaultStyles, width } from '../../constants'
 import { strings } from '../../localization'
 import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
-import Activity, { IAData } from '../../classes/Activity'
+import Activity, { IActivity, IAData } from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import GPS, { LocationType } from '../../sensors/GPS'
 import { Comment } from '../../components/CommentTS'
@@ -27,15 +27,9 @@ type AlarmScreenProps = {
     route: AlarmScreenRouteProp
 }
 
-type AlarmScreenActivityType = {
-    activity_type?: ActivityTypes
-    time_started?: number
-    comment?: string | undefined
-}
-
 export const AlarmScreen: FC<AlarmScreenProps> = ({ navigation }) => {
     const dispatch = useDispatch()
-    const [activity, setActivity] = useState<AlarmScreenActivityType>({})
+    const [activity, setActivity] = useState<Partial<IActivity>>({})
     const [locations, setLocations] = useState<LocationType[]>([])
     const [data, setData] = useState<IAData>({})
 
