@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, useContext } from 'react'
 import { ITask } from '../classes/Task'
+import timestamp from '../helpers/timestamp'
 
 const defaultState: Tasks = {}
 
@@ -7,14 +8,18 @@ type Tasks = {
     [_id: string]: ITask
 }
 
-type TasksFunctions = {
+type TaskFunctions = {
     tasksRestore?: (tasks: Tasks) => void
     loadTasksFromArray?: (tasks: ITask[]) => void
-    taskComplete?: (task: ITask) => void
+    TaskComplete?: (task: ITask) => void
+    taskAddOrUpdate?: (task: ITask) => void
     tasksReset?: () => void
+    taskSynced?: (task: ITask) => void
+    TaskCompleted?: (task: ITask) => void
+    taskSyncFailed?: (task: ITask) => void
 }
 
-const TasksContext = createContext<{ tasks: Tasks } & TasksFunctions>({
+const TasksContext = createContext<{ tasks: Tasks } & TaskFunctions>({
     tasks: defaultState,
 })
 
@@ -32,17 +37,22 @@ function tasksReducer(state, { type, payload }): Tasks {
 
             return newState
         }
-        case 'ADD_OR_UPDATE': {
+        case 'COMPLETE': {
             const newState: Tasks = { ...state }
-            newState[payload._id] = payload
+            const { _id } = payload
+            newState[_id].completed = true
+            newState[_id].updated_at = timestamp()
+
             return newState
         }
-        case 'DELETE': {
+        case 'SYNC_FAILED': {
             const newState = { ...state }
             const { _id } = payload
 
             if (!newState[_id].system) newState[_id].system = {}
-            newState[_id].system.awaitsDelete = true
+            if (!newState[_id].system.failedSyncs)
+                newState[_id].system.failedSyncs = 0
+            newState[_id].system.failedSyncs += 1
 
             return newState
         }
@@ -64,19 +74,27 @@ function TasksProvider({ children }) {
     const loadTasksFromArray = (tasks: ITask[]) => {
         tasksDispatch({ type: 'LOAD_ARRAY', payload: tasks })
     }
-    const taskComplete = (task: ITask) => {
-        tasksDispatch({ type: 'DELETE', payload: task })
+    const TaskComplete = (task: ITask) => {
+        tasksDispatch({ type: 'COMPLETE', payload: task })
     }
     const tasksReset = () => {
         tasksDispatch({ type: 'RESET', payload: undefined })
+    }
+    const taskSynced = (task: ITask) => {
+        tasksDispatch({ type: 'SYNCED', payload: task })
+    }
+    const taskSyncFailed = (task: ITask) => {
+        tasksDispatch({ type: 'SYNC_FAILED', payload: task })
     }
 
     const value = {
         tasks,
         tasksRestore,
         loadTasksFromArray,
-        taskComplete,
+        TaskComplete,
         tasksReset,
+        taskSynced,
+        taskSyncFailed,
     }
     return (
         <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
