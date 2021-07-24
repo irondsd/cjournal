@@ -10,9 +10,10 @@ type Activities = {
 
 type ActivityFunctions = {
     activitiesRestore?: (activities: Activities) => void
-    loadActivitiesFromArray?: (activities: IActivity[]) => void
+    activitiesLoadFromArray?: (activities: IActivity[]) => void
     activityDelete?: (activity: IActivity) => void
-    activityAddOrUpdate?: (activity: IActivity) => void
+    activityAdde?: (activity: IActivity) => void
+    activityUpdate?: (activity: IActivity) => void
     activitiesReset?: () => void
     activitySynced?: (activity: IActivity) => void
     activityDeleted?: (activity: IActivity) => void
@@ -25,7 +26,7 @@ const ActivitiesContext = createContext<
     activities: defaultState,
 })
 
-function activitiesReducer(state, { type, payload }): Activities {
+function activitiesReducer(state: Activities, { type, payload }): Activities {
     switch (type) {
         case 'RESTORE': {
             return payload
@@ -39,18 +40,28 @@ function activitiesReducer(state, { type, payload }): Activities {
 
             return newState
         }
-        case 'ADD_OR_UPDATE': {
+        case 'ADD': {
             const newState: Activities = { ...state }
-            newState[payload._id] = payload
+            const activity: IActivity = payload
+            if (!activity.system) activity.system = {}
+            activity.system.awaitsSync = true
+            newState[activity._id] = activity
+            return newState
+        }
+        case 'UPDATE': {
+            const newState: Activities = { ...state }
+            const activity: IActivity = payload
+            if (!activity.system) activity.system = {}
+            activity.system.awaitsEdit = true
+            newState[activity._id] = activity
             return newState
         }
         case 'DELETE': {
-            const newState = { ...state }
-            const { _id } = payload
-
-            if (!newState[_id].system) newState[_id].system = {}
-            newState[_id].system.awaitsDelete = true
-
+            const newState: Activities = { ...state }
+            const activity: IActivity = payload
+            if (!activity.system) activity.system = {}
+            activity.system.awaitsDelete = true
+            newState[activity._id] = activity
             return newState
         }
         case 'SYNCED': {
@@ -60,14 +71,12 @@ function activitiesReducer(state, { type, payload }): Activities {
             return newState
         }
         case 'SYNC_FAILED': {
-            const newState = { ...state }
-            const { _id } = payload
-
-            if (!newState[_id].system) newState[_id].system = {}
-            if (!newState[_id].system.failedSyncs)
-                newState[_id].system.failedSyncs = 0
-            newState[_id].system.failedSyncs += 1
-
+            const newState: Activities = { ...state }
+            const activity: IActivity = payload
+            if (!activity.system) activity.system = {}
+            if (!activity.system.failedSyncs) activity.system.failedSyncs = 0
+            activity.system.failedSyncs += 1
+            newState[activity._id] = activity
             return newState
         }
         case 'DELETED': {
@@ -96,14 +105,17 @@ function ActivitiesProvider({ children }) {
     const activitiesRestore = (activities: Activities) => {
         activitiesDispatch({ type: 'RESTORE', payload: activities })
     }
-    const loadActivitiesFromArray = (activities: IActivity[]) => {
+    const activitiesLoadFromArray = (activities: IActivity[]) => {
         activitiesDispatch({ type: 'LOAD_ARRAY', payload: activities })
     }
     const activityDelete = (activity: IActivity) => {
         activitiesDispatch({ type: 'DELETE', payload: activity })
     }
-    const activityAddOrUpdate = (activity: IActivity) => {
-        activitiesDispatch({ type: 'ADD_OR_UPDATE', payload: activity })
+    const activityAdd = (activity: IActivity) => {
+        activitiesDispatch({ type: 'ADD', payload: activity })
+    }
+    const activityUpdate = (activity: IActivity) => {
+        activitiesDispatch({ type: 'UPDATE', payload: activity })
     }
     const activitiesReset = () => {
         activitiesDispatch({ type: 'RESET', payload: undefined })
@@ -121,11 +133,12 @@ function ActivitiesProvider({ children }) {
     const value = {
         activities,
         activitiesRestore,
-        loadActivitiesFromArray,
-        activityDelete,
-        activityAddOrUpdate,
+        activitiesLoadFromArray,
         activitiesReset,
         activitySynced,
+        activityAdd,
+        activityUpdate,
+        activityDelete,
         activityDeleted,
         activitySyncFailed,
     }
