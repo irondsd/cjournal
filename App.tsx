@@ -8,6 +8,9 @@ import { setupNotifications } from './src/notifications/notifications'
 import { RootState } from './src/redux/store'
 import { AuthProvider } from './src/context/authContext'
 import { UserProvider } from './src/context/userContext'
+import { ActivitiesProvider } from './src/context/activitiesContext'
+import { TasksProvider } from './src/context/tasksContext'
+import { SettingsProvider } from './src/context/settingsContext'
 
 const App: FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -56,11 +59,17 @@ const App: FC = () => {
     return (
         <AuthProvider>
             <UserProvider>
-                <NavContainer
-                // ref={navigatorRef => {
-                //     NavigationService.setTopLevelNavigator(navigatorRef)
-                // }}
-                />
+                <SettingsProvider>
+                    <ActivitiesProvider>
+                        <TasksProvider>
+                            <NavContainer
+                            // ref={navigatorRef => {
+                            //     NavigationService.setTopLevelNavigator(navigatorRef)
+                            // }}
+                            />
+                        </TasksProvider>
+                    </ActivitiesProvider>
+                </SettingsProvider>
             </UserProvider>
         </AuthProvider>
     )
