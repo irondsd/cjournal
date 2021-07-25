@@ -1,10 +1,16 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import React, {
+    FC,
+    createContext,
+    useReducer,
+    useContext,
+    useEffect,
+} from 'react'
 import { IActivity } from '../classes/Activity'
-import { ActivityTypes } from '../constants'
+import { activitiesAsyncSave } from '../services/asyncStorage'
 
 const defaultState: Activities = {}
 
-type Activities = {
+export type Activities = {
     [_id: string]: IActivity
 }
 
@@ -12,12 +18,24 @@ type ActivityFunctions = {
     activitiesRestore?: (activities: Activities) => void
     activitiesLoadFromArray?: (activities: IActivity[]) => void
     activityDelete?: (activity: IActivity) => void
-    activityAdde?: (activity: IActivity) => void
+    activityAdd?: (activity: IActivity) => void
     activityUpdate?: (activity: IActivity) => void
     activitiesReset?: () => void
     activitySynced?: (activity: IActivity) => void
     activityDeleted?: (activity: IActivity) => void
     activitySyncFailed?: (activity: IActivity) => void
+}
+
+enum Actions {
+    RESTORE,
+    LOAD_ARRAY,
+    ADD,
+    UPDATE,
+    DELETE,
+    SYNCED,
+    SYNC_FAILED,
+    DELETED,
+    RESET,
 }
 
 const ActivitiesContext = createContext<
@@ -26,21 +44,24 @@ const ActivitiesContext = createContext<
     activities: defaultState,
 })
 
-function activitiesReducer(state: Activities, { type, payload }): Activities {
+function activitiesReducer(
+    state: Activities,
+    { type, payload }: { type: Actions; payload: any },
+): Activities {
     switch (type) {
-        case 'RESTORE': {
+        case Actions.RESTORE: {
             return payload
         }
-        case 'LOAD_ARRAY': {
+        case Actions.LOAD_ARRAY: {
             const newState: Activities = {}
 
-            payload.forEach(a => {
+            payload.forEach((a: IActivity) => {
                 newState[a._id] = a
             })
 
             return newState
         }
-        case 'ADD': {
+        case Actions.ADD: {
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
@@ -48,7 +69,7 @@ function activitiesReducer(state: Activities, { type, payload }): Activities {
             newState[activity._id] = activity
             return newState
         }
-        case 'UPDATE': {
+        case Actions.UPDATE: {
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
@@ -56,7 +77,7 @@ function activitiesReducer(state: Activities, { type, payload }): Activities {
             newState[activity._id] = activity
             return newState
         }
-        case 'DELETE': {
+        case Actions.DELETE: {
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
@@ -64,22 +85,22 @@ function activitiesReducer(state: Activities, { type, payload }): Activities {
             newState[activity._id] = activity
             return newState
         }
-        case 'SYNCED': {
+        case Actions.SYNCED: {
             const newState: Activities = { ...state }
             const { _id } = payload
             delete newState[_id].system
             return newState
         }
-        case 'SYNC_FAILED': {
+        case Actions.SYNC_FAILED: {
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
             if (!activity.system.failedSyncs) activity.system.failedSyncs = 0
             activity.system.failedSyncs += 1
-            newState[activity._id] = activity
+
             return newState
         }
-        case 'DELETED': {
+        case Actions.DELETED: {
             const newState = { ...state }
             const { _id } = payload
 
@@ -87,7 +108,7 @@ function activitiesReducer(state: Activities, { type, payload }): Activities {
 
             return newState
         }
-        case 'RESET': {
+        case Actions.RESET: {
             return defaultState
         }
         default: {
@@ -96,38 +117,38 @@ function activitiesReducer(state: Activities, { type, payload }): Activities {
     }
 }
 
-function ActivitiesProvider({ children }) {
+const ActivitiesProvider: FC = ({ children }) => {
     const [activities, activitiesDispatch] = useReducer(
         activitiesReducer,
         defaultState,
     )
 
     const activitiesRestore = (activities: Activities) => {
-        activitiesDispatch({ type: 'RESTORE', payload: activities })
+        activitiesDispatch({ type: Actions.RESTORE, payload: activities })
     }
     const activitiesLoadFromArray = (activities: IActivity[]) => {
-        activitiesDispatch({ type: 'LOAD_ARRAY', payload: activities })
+        activitiesDispatch({ type: Actions.LOAD_ARRAY, payload: activities })
     }
     const activityDelete = (activity: IActivity) => {
-        activitiesDispatch({ type: 'DELETE', payload: activity })
+        activitiesDispatch({ type: Actions.DELETE, payload: activity })
     }
     const activityAdd = (activity: IActivity) => {
-        activitiesDispatch({ type: 'ADD', payload: activity })
+        activitiesDispatch({ type: Actions.ADD, payload: activity })
     }
     const activityUpdate = (activity: IActivity) => {
-        activitiesDispatch({ type: 'UPDATE', payload: activity })
+        activitiesDispatch({ type: Actions.UPDATE, payload: activity })
     }
     const activitiesReset = () => {
-        activitiesDispatch({ type: 'RESET', payload: undefined })
+        activitiesDispatch({ type: Actions.RESET, payload: undefined })
     }
     const activitySynced = (activity: IActivity) => {
-        activitiesDispatch({ type: 'SYNCED', payload: activity })
+        activitiesDispatch({ type: Actions.SYNCED, payload: activity })
     }
     const activityDeleted = (activity: IActivity) => {
-        activitiesDispatch({ type: 'DELETED', payload: activity })
+        activitiesDispatch({ type: Actions.DELETED, payload: activity })
     }
     const activitySyncFailed = (activity: IActivity) => {
-        activitiesDispatch({ type: 'SYNC_FAILED', payload: activity })
+        activitiesDispatch({ type: Actions.SYNC_FAILED, payload: activity })
     }
 
     const value = {
@@ -142,6 +163,11 @@ function ActivitiesProvider({ children }) {
         activityDeleted,
         activitySyncFailed,
     }
+
+    useEffect(() => {
+        if (Object.keys(activities).length) activitiesAsyncSave(activities)
+    }, [activities])
+
     return (
         <ActivitiesContext.Provider value={value}>
             {children}
