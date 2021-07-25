@@ -8,6 +8,8 @@ import { useUser } from '../context/userContext'
 import { completeTask } from '../requests/completeTask'
 import { Delete, Get, Post, Put } from '../requests/newRequest'
 import { uploadRequest } from '../requests/uploadRequest'
+import { useEffect } from 'react'
+import { login } from '../requests/login'
 
 const needsSync = (activity: IActivity) => {
     if (activity.system) {
@@ -29,7 +31,7 @@ export const useSync = () => {
     } = useActivities()
     const { loadTasksFromArray } = useTasks()
     const { access_token } = useAuth()
-    const { _id, idinv } = useUser()
+    const { _id, idinv, load: userLoad } = useUser()
     const { idinvFilter } = useSettings()
 
     const syncActivities = () => {
@@ -127,6 +129,16 @@ export const useSync = () => {
                 console.log('activities fetch failed: ', err)
             })
     }
+
+    const fetchUser = () => {
+        login(access_token).then(user => {
+            userLoad(user)
+        })
+    }
+
+    useEffect(() => {
+        if (!_id) fetchUser()
+    }, [_id])
 
     return { fetchActivities, syncActivities, syncActivity, fetchTasks }
 }
