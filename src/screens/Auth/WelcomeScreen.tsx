@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useLayoutEffect } from 'react'
 import {
     Platform,
     StyleSheet,
@@ -35,6 +35,12 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = ({
             Alert.alert(strings.Success, route.params.message)
         }
     }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerShown: false,
+        })
+    }, [])
 
     useEffect(() => {
         showMessage()

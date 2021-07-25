@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react'
+import React, { FC, useState, useRef, useLayoutEffect } from 'react'
 import {
     StyleSheet,
     StatusBar,
@@ -76,6 +76,12 @@ export const RegisterScreen: FC<RegisterScreenProps> = ({ navigation }) => {
 
         return errors
     }
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerShown: false,
+        })
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>
