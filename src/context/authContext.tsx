@@ -6,77 +6,111 @@ import React, {
     useEffect,
 } from 'react'
 import { tokensAsyncSave } from '../services/asyncStorage'
-import { authorize as makeAuth, refresh } from 'react-native-app-auth'
+import {
+    authorize as authAuthorize,
+    refresh as authRefresh,
+} from 'react-native-app-auth'
 import { identityServerConfig } from '../constants/config'
-import { updateTokenBeforeExpiration } from '../constants'
-import { Post } from '../requests/newRequest'
-import { Alert } from 'react-native'
-import { strings } from '../localization'
 import timestamp from '../helpers/timestamp'
 
-const defaultState: AuthState = {
+const defaultState: AuthState & Tokens = {
     isLoading: true,
     isLoggedIn: false,
     ongoingUpdate: false,
-    access_token: undefined,
-    refresh_token: undefined,
-    token_lifetime: undefined,
+    access_token: null,
+    refresh_token: null,
+    token_lifetime: null,
+}
+
+type Tokens = {
+    access_token: string | null
+    refresh_token: string | null
+    token_lifetime: number | null
 }
 
 export type AuthState = {
     isLoading: boolean
     isLoggedIn: boolean
     ongoingUpdate: boolean
-    access_token?: string
-    refresh_token?: string
-    token_lifetime?: number
 }
 
 type AuthFunctions = {
-    login?: (s: AuthState) => void
-    restore?: (s: AuthState) => void
+    login?: (s: Tokens) => void
+    restore?: (s: Tokens) => void
     logout?: () => void
     loginError?: () => void
     authorize?: () => void
+    refresh?: () => void
 }
 
-type IdentityResponce = {
-    accessToken: string
-    refreshToken: string
-    accessTokenExpirationDate: string
+enum ActionTypes {
+    RESTORE,
+    REFRESH,
+    LOGIN,
+    LOGIN_ERROR,
+    LOGOUT,
+    START_UPDATE,
 }
+
+type Action = { type: ActionTypes; payload?: Tokens }
 
 const AuthContext = createContext<AuthState & AuthFunctions>(defaultState)
 
-function authReducer(state: AuthState, { type, payload }: any): AuthState {
+function authReducer(
+    state: AuthState & Tokens,
+    { type, payload }: Action,
+): AuthState & Tokens {
     switch (type) {
-        case 'RESTORE': {
-            const isLoggedIn = payload.access_token ? true : false
+        case ActionTypes.RESTORE: {
+            const isLoggedIn = payload?.access_token ? true : false
             return {
                 ...state,
                 ...payload,
                 isLoggedIn,
                 isLoading: false,
+                ongoingUpdate: true,
             }
         }
-        case 'LOGIN': {
-            const isLoggedIn = payload.access_token ? true : false
+        case ActionTypes.LOGIN: {
+            const isLoggedIn = payload?.access_token ? true : false
             return {
                 ...state,
                 ...payload,
                 isLoggedIn,
                 isLoading: false,
+                ongoingUpdate: true,
             }
         }
-        case 'LOGIN_ERROR': {
+        case ActionTypes.REFRESH: {
+            const isLoggedIn = payload?.access_token ? true : false
+            return {
+                ...state,
+                ...payload,
+                isLoggedIn,
+                isLoading: false,
+                ongoingUpdate: true,
+            }
+        }
+        case ActionTypes.LOGIN_ERROR: {
             return {
                 ...defaultState,
                 isLoading: false,
                 isLoggedIn: false,
+                ongoingUpdate: true,
             }
         }
-        case 'LOGOUT':
-            return defaultState
+        case ActionTypes.LOGOUT:
+            return {
+                ...defaultState,
+                isLoading: false,
+                ongoingUpdate: true,
+            }
+        case ActionTypes.START_UPDATE: {
+            return {
+                ...state,
+                ongoingUpdate: true,
+            }
+        }
         default: {
             throw new Error(`Unhandled action type: ${type}`)
         }
@@ -86,40 +120,38 @@ function authReducer(state: AuthState, { type, payload }: any): AuthState {
 const AuthProvider: FC = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, defaultState)
 
-    const login = (tokens: AuthState) => {
-        dispatch({ type: 'LOGIN', tokens })
+    const login = (tokens: Tokens) => {
+        dispatch({ type: ActionTypes.LOGIN, payload: tokens })
     }
 
     const logout = () => {
-        dispatch({ type: 'LOGOUT' })
+        dispatch({ type: ActionTypes.LOGOUT })
     }
 
-    const restore = (tokens: AuthState) => {
-        dispatch({ type: 'RESTORE', tokens })
+    const restore = (tokens: Tokens) => {
+        dispatch({ type: ActionTypes.RESTORE, payload: tokens })
     }
 
     const loginError = () => {
-        dispatch({ type: 'LOGIN_ERROR' })
+        dispatch({ type: ActionTypes.LOGIN_ERROR })
     }
 
     const authorize = () => {
-        makeAuth(identityServerConfig)
-            .then((identityResponce: IdentityResponce) => {
-                if (identityResponce.accessToken) {
-                    const token_lifetime = timestamp(
-                        new Date(identityResponce.accessTokenExpirationDate),
-                    )
-                    const access_token = identityResponce.accessToken
-                    const refresh_token = identityResponce.refreshToken
-                    dispatch({
-                        type: 'LOGIN',
-                        payload: {
-                            access_token,
-                            refresh_token,
-                            token_lifetime,
-                        },
-                    })
-                }
+        authAuthorize(identityServerConfig)
+            .then(identityResponce => {
+                const token_lifetime = timestamp(
+                    new Date(identityResponce.accessTokenExpirationDate),
+                )
+                const access_token = identityResponce.accessToken
+                const refresh_token = identityResponce.refreshToken
+                dispatch({
+                    type: ActionTypes.LOGIN,
+                    payload: {
+                        access_token,
+                        refresh_token,
+                        token_lifetime,
+                    },
+                })
             })
             .catch(err => {
                 console.log('login error: ', err)
@@ -127,11 +159,46 @@ const AuthProvider: FC = ({ children }) => {
             })
     }
 
+    const refresh = () => {
+        if (!state.refresh_token) return
+        dispatch({ type: ActionTypes.START_UPDATE })
+        authRefresh(identityServerConfig, {
+            refreshToken: state.refresh_token,
+        })
+            .then(identityResponce => {
+                const token_lifetime = timestamp(
+                    new Date(identityResponce.accessTokenExpirationDate),
+                )
+                const access_token = identityResponce.accessToken
+                const refresh_token = identityResponce.refreshToken
+                dispatch({
+                    type: ActionTypes.REFRESH,
+                    payload: {
+                        access_token,
+                        refresh_token,
+                        token_lifetime,
+                    },
+                })
+            })
+            .catch(err => {
+                console.error('identity refresh error', err.message)
+                dispatch({ type: ActionTypes.LOGIN_ERROR })
+            })
+    }
+
     useEffect(() => {
         if (state.access_token) tokensAsyncSave(state)
     }, [state])
 
-    const value = { ...state, login, logout, restore, loginError, authorize }
+    const value = {
+        ...state,
+        login,
+        logout,
+        restore,
+        loginError,
+        authorize,
+        refresh,
+    }
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
