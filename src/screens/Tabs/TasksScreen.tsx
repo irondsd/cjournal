@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useMemo } from 'react'
 import { StyleSheet, View, FlatList, StatusBar } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../../constants'
@@ -12,6 +12,7 @@ import { useAuth } from '../../context/authContext'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
 import { HomeTabsParamList } from '../../navigation/HomeStack'
+import { useTasks } from '../../context/tasksContext'
 
 type TasksScreenNavigationProp = StackNavigationProp<HomeTabsParamList, 'Tasks'>
 type TasksScreenRouteProp = RouteProp<HomeTabsParamList, 'Tasks'>
@@ -23,7 +24,8 @@ type TasksScreenProps = {
 export const TasksScreen: FC<TasksScreenProps> = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
-    const tasks = useSelector((state: RootState) => state.tasks)
+    const { tasks } = useTasks()
+    const tasksArray = useMemo(() => Object.values(tasks), [tasks])
     const user = useUser()
     const settings = useSelector((state: RootState) => state.settings)
     const tokens = useAuth()
@@ -72,7 +74,7 @@ export const TasksScreen: FC<TasksScreenProps> = ({ navigation }) => {
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <FlatList
                 style={styles.list}
-                data={tasks}
+                data={tasksArray}
                 contentContainerStyle={{ paddingBottom: 30 }}
                 overScrollMode={'always'}
                 renderItem={renderItem}

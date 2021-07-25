@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useMemo } from 'react'
 import { StyleSheet, View, FlatList, StatusBar } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { backgroundColor, listUpdateInterval } from '../../constants'
@@ -12,6 +12,8 @@ import { useAuth } from '../../context/authContext'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
 import { HomeTabsParamList } from '../../navigation/HomeStack'
+import { useActivities } from '../../context/activitiesContext'
+import { useSync } from '../../hooks/useSync'
 
 type JournalScreenNavigationProp = StackNavigationProp<
     HomeTabsParamList,
@@ -27,29 +29,26 @@ type JournalScreenProps = {
 export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
-    const activity = useSelector((state: RootState) => state.activity)
+    const { activities } = useActivities()
+    const activitiesArray = useMemo(
+        () => Object.values(activities),
+        [activities],
+    )
+
     const user = useUser()
     const settings = useSelector((state: RootState) => state.settings)
     // const tokens = useSelector((state: RootState) => state.tokens)
     const tokens = useAuth()
     const dispatch = useDispatch()
-
-    const fetch = () => {
-        const url = settings.idinvFilter
-            ? `idinv/${user.idinv}/activity`
-            : `users/${user._id}/activity`
-
-        Get(url, tokens.access_token)
-            .then(res => {
-                dispatch(updateActivities(res))
-            })
-            .catch(err => dispatch(activityFetchFailed()))
-    }
+    const { fetchActivities } = useSync()
 
     useEffect(() => {
         if (!isActive) return
         // when the screen is active, we run fetch on interval
-        const intervalId = setInterval(() => fetch(), listUpdateInterval)
+        const intervalId = setInterval(
+            () => fetchActivities(),
+            listUpdateInterval,
+        )
 
         return () => {
             clearInterval(intervalId)
@@ -58,7 +57,7 @@ export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
 
     useEffect(() => {
         const focusUnsub = navigation.addListener('focus', () => {
-            fetch()
+            fetchActivities()
             setIsActive(true)
         })
         const blurUnsub = navigation.addListener('blur', () => {
@@ -80,7 +79,7 @@ export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <FlatList
                 style={styles.list}
-                data={activity}
+                data={activitiesArray}
                 contentContainerStyle={{ paddingBottom: 30 }}
                 overScrollMode={'always'}
                 renderItem={renderItem}
