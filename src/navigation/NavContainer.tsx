@@ -23,13 +23,22 @@ import {
     OtherScreen,
     TrainerScreen,
     PillsScreen,
+    SleepScreen,
+    SleepFinishScreen,
     WalkingTestScreen,
     TimePickScreen,
     CameraScreen,
 } from '../screens'
-import { tokensAsyncGet, userAsyncGet } from '../services/asyncStorage'
+import {
+    activitiesAsyncGet,
+    tasksAsyncGet,
+    tokensAsyncGet,
+    userAsyncGet,
+} from '../services/asyncStorage'
 import { ActivityTypes, Routes } from '../constants'
 import { HomeStack } from './HomeStack'
+import { useActivities } from '../context/activitiesContext'
+import { useTasks } from '../context/tasksContext'
 
 export type RootStackParamList = {
     Home: undefined
@@ -45,6 +54,7 @@ export type RootStackParamList = {
     Complaints: undefined
     EmotionalStress: undefined
     Alarm: undefined
+    Sleep: { startedAt: number }
     Welcome: { message?: string }
     QRScan: { returnTo: Routes }
     Camera: { returnTo: Routes }
@@ -61,18 +71,24 @@ export type RootStackParamList = {
 const RootStack = createStackNavigator<RootStackParamList>()
 
 export const NavContainer: FC = () => {
-    const { restore, logout, isLoading, isLoggedIn } = useAuth()
+    const { restore, loginError, isLoading, isLoggedIn } = useAuth()
     const { load } = useUser()
+    const { activitiesRestore } = useActivities()
+    const { tasksRestore } = useTasks()
 
     useEffect(() => {
         const secureStoreLoad = async () => {
             try {
                 const tokens = await tokensAsyncGet()
                 const user = await userAsyncGet()
+
                 if (tokens.access_token) restore(tokens)
+                else loginError()
                 if (user._id) load(user)
+                activitiesAsyncGet().then(res => activitiesRestore(res))
+                tasksAsyncGet().then(res => tasksRestore(res))
             } catch (e) {
-                logout()
+                loginError()
             }
         }
 
@@ -83,9 +99,11 @@ export const NavContainer: FC = () => {
         return <SplashScreen />
     }
 
+    const initialRoute = Routes.Home // todo last screen
+
     return (
         <NavigationContainer>
-            <RootStack.Navigator>
+            <RootStack.Navigator initialRouteName={initialRoute}>
                 {isLoggedIn ? (
                     <>
                         <RootStack.Screen
@@ -163,6 +181,14 @@ export const NavContainer: FC = () => {
                         <RootStack.Screen
                             name={Routes.Camera}
                             component={CameraScreen}
+                        />
+                        <RootStack.Screen
+                            name={Routes.Sleep}
+                            component={SleepScreen}
+                        />
+                        <RootStack.Screen
+                            name={Routes.SleepFinish}
+                            component={SleepFinishScreen}
                         />
                     </>
                 ) : (
