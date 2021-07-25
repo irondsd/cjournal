@@ -54,7 +54,9 @@ enum ActionTypes {
 
 type Action = { type: ActionTypes; payload?: Tokens }
 
-const AuthContext = createContext<AuthState & AuthFunctions>(defaultState)
+const AuthContext = createContext<AuthState & Tokens & AuthFunctions>(
+    defaultState,
+)
 
 function authReducer(
     state: AuthState & Tokens,
