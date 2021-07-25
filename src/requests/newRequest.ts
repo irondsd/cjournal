@@ -45,8 +45,8 @@ function newRequest(
     })
 }
 
-export function Get(path: string, token: string, body?: any): Promise<any> {
-    return newRequest(path, token, 'GET', body)
+export function Get(path: string, token: string): Promise<any> {
+    return newRequest(path, token, 'GET')
 }
 
 export function Post(path: string, token: string, body?: any): Promise<any> {
