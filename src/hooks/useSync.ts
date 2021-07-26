@@ -50,7 +50,7 @@ export const useSync = () => {
         await checkExpiration()
 
         const activityArray = Object.values(activities)
-        console.log(activityArray)
+
         activityArray.forEach(activity => {
             if (needsSync(activity)) syncActivity(activity)
         })
@@ -116,7 +116,7 @@ export const useSync = () => {
         }
     }
 
-    const fetchActivities = async () => {
+    const fetchActivities = async (): Promise<void> => {
         await checkExpiration()
 
         const url = idinvFilter
@@ -159,6 +159,10 @@ export const useSync = () => {
     useEffect(() => {
         if (!_id) fetchUser()
     }, [_id])
+
+    useEffect(() => {
+        syncActivities()
+    }, [activities])
 
     return { fetchActivities, syncActivities, syncActivity, fetchTasks }
 }
