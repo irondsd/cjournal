@@ -138,27 +138,32 @@ const AuthProvider: FC = ({ children }) => {
         dispatch({ type: ActionTypes.LOGIN_ERROR })
     }
 
-    const authorize = () => {
-        authAuthorize(identityServerConfig)
-            .then(identityResponce => {
-                const token_lifetime = timestamp(
-                    new Date(identityResponce.accessTokenExpirationDate),
-                )
-                const access_token = identityResponce.accessToken
-                const refresh_token = identityResponce.refreshToken
-                dispatch({
-                    type: ActionTypes.LOGIN,
-                    payload: {
-                        access_token,
-                        refresh_token,
-                        token_lifetime,
-                    },
+    const authorize = async (): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            authAuthorize(identityServerConfig)
+                .then(identityResponce => {
+                    const token_lifetime = timestamp(
+                        new Date(identityResponce.accessTokenExpirationDate),
+                    )
+                    const access_token = identityResponce.accessToken
+                    const refresh_token = identityResponce.refreshToken
+                    dispatch({
+                        type: ActionTypes.LOGIN,
+                        payload: {
+                            access_token,
+                            refresh_token,
+                            token_lifetime,
+                        },
+                    })
+                    console.log('successfully logged in')
+                    resolve()
                 })
-            })
-            .catch(err => {
-                console.log('login error: ', err)
-                loginError()
-            })
+                .catch(err => {
+                    console.log('login error: ', err)
+                    loginError()
+                    reject()
+                })
+        })
     }
 
     const refresh = async (): Promise<void> => {
