@@ -154,9 +154,14 @@ export const useSync = () => {
     const fetchUser = async () => {
         await checkExpiration()
 
-        login(access_token).then(user => {
-            userLoad(user)
-        })
+        login(access_token)
+            .then(user => {
+                userLoad(user)
+            })
+            .catch(err => {
+                console.log(_id)
+                console.log('login err', err)
+            })
     }
 
     useEffect(() => {
