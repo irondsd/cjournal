@@ -14,6 +14,7 @@ import { RouteProp } from '@react-navigation/native'
 import { HomeTabsParamList } from '../../navigation/HomeStack'
 import { useActivities } from '../../context/activitiesContext'
 import { useSync } from '../../hooks/useSync'
+import { useSettings } from '../../context/settingsContext'
 
 type JournalScreenNavigationProp = StackNavigationProp<
     HomeTabsParamList,
@@ -35,11 +36,6 @@ export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
         [activities],
     )
 
-    const user = useUser()
-    const settings = useSelector((state: RootState) => state.settings)
-    // const tokens = useSelector((state: RootState) => state.tokens)
-    const tokens = useAuth()
-    const dispatch = useDispatch()
     const { fetchActivities } = useSync()
 
     useEffect(() => {

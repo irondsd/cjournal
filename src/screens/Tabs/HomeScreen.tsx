@@ -25,9 +25,9 @@ import {
     SleepTile,
     AlarmTile,
 } from '../../components/tiles'
-import { RootState } from '../../redux/store'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../../navigation/NavContainer'
+import { useSync } from '../../hooks/useSync'
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>
 
@@ -36,8 +36,7 @@ type HomeScreenProps = {
 }
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
-    const user = useSelector((state: RootState) => state.user)
-    const tokens = useSelector((state: RootState) => state.tokens)
+    const { syncActivities } = useSync()
 
     const [disabled, setDisabled] = useState({
         sleep: false,
@@ -50,16 +49,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         TakingMedicineTile: false,
         tests: false,
         service: false,
-    }) // todo
-
-    const runSync = () => {
-        if (user._id && tokens.access_token) {
-            sync(user._id, tokens)
-        }
-    }
+    })
 
     useEffect(() => {
-        // todo disabled
+        syncActivities()
     }, [])
 
     useLayoutEffect(() => {

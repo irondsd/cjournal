@@ -13,6 +13,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
 import { HomeTabsParamList } from '../../navigation/HomeStack'
 import { useTasks } from '../../context/tasksContext'
+import { useSync } from '../../hooks/useSync'
 
 type TasksScreenNavigationProp = StackNavigationProp<HomeTabsParamList, 'Tasks'>
 type TasksScreenRouteProp = RouteProp<HomeTabsParamList, 'Tasks'>
@@ -26,24 +27,13 @@ export const TasksScreen: FC<TasksScreenProps> = ({ navigation }) => {
 
     const { tasks } = useTasks()
     const tasksArray = useMemo(() => Object.values(tasks), [tasks])
-    const user = useUser()
-    const settings = useSelector((state: RootState) => state.settings)
-    const tokens = useAuth()
-    const dispatch = useDispatch()
 
-    const fetch = () => {
-        const url = settings.idinvFilter
-            ? `idinv/${user.idinv}/tasks`
-            : `users/${user._id}/tasks`
-        Get(url, tokens.access_token)
-            .then(res => dispatch(updateTasks(res)))
-            .catch(err => dispatch(tasksFetchFailed()))
-    }
+    const { fetchTasks } = useSync()
 
     useEffect(() => {
         if (!isActive) return
         // when the screen is active, we run fetch on interval
-        const intervalId = setInterval(() => fetch(), listUpdateInterval)
+        const intervalId = setInterval(() => fetchTasks(), listUpdateInterval)
 
         return () => {
             clearInterval(intervalId)
@@ -52,7 +42,7 @@ export const TasksScreen: FC<TasksScreenProps> = ({ navigation }) => {
 
     useEffect(() => {
         const focusUnsub = navigation.addListener('focus', () => {
-            fetch()
+            fetchTasks()
             setIsActive(true)
         })
         const blurUnsub = navigation.addListener('blur', () => {
