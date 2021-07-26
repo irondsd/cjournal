@@ -39,8 +39,8 @@ type AuthFunctions = {
     restore?: (s: Tokens) => void
     logout?: () => void
     loginError?: () => void
-    authorize?: () => void
-    refresh?: () => void
+    authorize?: () => Promise<void>
+    refresh?: () => Promise<void>
 }
 
 enum ActionTypes {
@@ -194,7 +194,7 @@ const AuthProvider: FC = ({ children }) => {
                     resolve()
                 })
                 .catch(err => {
-                    console.error('identity refresh error', err.message)
+                    console.log('identity refresh error', err.message)
                     dispatch({ type: ActionTypes.LOGIN_ERROR })
                     reject()
                 })
