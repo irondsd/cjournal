@@ -161,31 +161,39 @@ const AuthProvider: FC = ({ children }) => {
             })
     }
 
-    const refresh = () => {
-        if (!state.refresh_token) return
-        dispatch({ type: ActionTypes.START_UPDATE })
-        authRefresh(identityServerConfig, {
-            refreshToken: state.refresh_token,
-        })
-            .then(identityResponce => {
-                const token_lifetime = timestamp(
-                    new Date(identityResponce.accessTokenExpirationDate),
-                )
-                const access_token = identityResponce.accessToken
-                const refresh_token = identityResponce.refreshToken
-                dispatch({
-                    type: ActionTypes.REFRESH,
-                    payload: {
-                        access_token,
-                        refresh_token,
-                        token_lifetime,
-                    },
+    const refresh = async (): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            if (!state.refresh_token) {
+                console.log('should not happen')
+                return reject()
+            }
+            dispatch({ type: ActionTypes.START_UPDATE })
+            authRefresh(identityServerConfig, {
+                refreshToken: state.refresh_token,
+            })
+                .then(identityResponce => {
+                    const token_lifetime = timestamp(
+                        new Date(identityResponce.accessTokenExpirationDate),
+                    )
+                    const access_token = identityResponce.accessToken
+                    const refresh_token = identityResponce.refreshToken
+                    dispatch({
+                        type: ActionTypes.REFRESH,
+                        payload: {
+                            access_token,
+                            refresh_token,
+                            token_lifetime,
+                        },
+                    })
+                    console.log('tokens refreshed')
+                    resolve()
                 })
-            })
-            .catch(err => {
-                console.error('identity refresh error', err.message)
-                dispatch({ type: ActionTypes.LOGIN_ERROR })
-            })
+                .catch(err => {
+                    console.error('identity refresh error', err.message)
+                    dispatch({ type: ActionTypes.LOGIN_ERROR })
+                    reject()
+                })
+        })
     }
 
     useEffect(() => {
