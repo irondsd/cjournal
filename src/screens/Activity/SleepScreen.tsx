@@ -24,6 +24,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
 import { useActivities } from '../../context/activitiesContext'
 import { useSettings } from '../../context/settingsContext'
+import { useMakeActivity } from '../../hooks/useMakeActivity'
 
 type SleepScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -42,6 +43,7 @@ export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
     const logger = new Logger('sleep' + timestamp())
     const { activityAdd } = useActivities()
     const { setLastScreen, resetLastScreen } = useSettings()
+    const [activity] = useMakeActivity({ activity_type: ActivityTypes.Sleep })
 
     const backPressed = () => {
         terminateAlarm(strings.TerminateSleep, submit)
@@ -50,14 +52,14 @@ export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
 
     const submit = () => {
         resetLastScreen()
-        const createdActivity = Activity.init(
-            ActivityTypes.Sleep,
-            startedAt,
-            timestamp(),
-            undefined,
-            undefined,
-            {},
-        )
+
+        const createdActivity = {
+            ...activity,
+            time_started: startedAt,
+            time_ended: timestamp(),
+            updated_at: timestamp(),
+        }
+
         activityAdd(createdActivity)
         navigation.navigate(Routes.SleepFinish, {
             activity: createdActivity._id,

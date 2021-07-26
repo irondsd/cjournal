@@ -40,10 +40,10 @@ export const SleepFinishScreen: FC<SleepFinishScreenProps> = ({
     const submit = (feeling: IAData['feeling']) => {
         const activity_id = route.params.activity
         const activity = activities[activity_id]
-        console.log(activity)
-        // activity.data.feeling = strings[feeling]
-        // activityUpdate(activity)
-        // navigation.navigate(Routes.Home)
+
+        activity.data.feeling = strings[feeling]
+        activityUpdate(activity)
+        navigation.navigate(Routes.Home)
     }
 
     const smileProps = {
