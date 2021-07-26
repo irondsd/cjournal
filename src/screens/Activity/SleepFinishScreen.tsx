@@ -18,6 +18,7 @@ import { writeLog } from '../../services/logger'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
+import { useActivities } from '../../context/activitiesContext'
 
 type SleepFinishScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -34,13 +35,14 @@ export const SleepFinishScreen: FC<SleepFinishScreenProps> = ({
     navigation,
     route,
 }) => {
-    const dispatch = useDispatch()
+    const { activities, activityUpdate } = useActivities()
 
     const submit = (feeling: IAData['feeling']) => {
         const activity_id = route.params.activity
-        // todo use context get activity
+        const activity = activities[activity_id]
+        console.log(activity)
         // activity.data.feeling = strings[feeling]
-        // dispatch(updateActivity(activity))
+        // activityUpdate(activity)
         // navigation.navigate(Routes.Home)
     }
 
@@ -58,7 +60,7 @@ export const SleepFinishScreen: FC<SleepFinishScreenProps> = ({
 
     useEffect(() => {
         navigation.setOptions({
-            header: null,
+            headerShown: false,
         })
 
         BackHandler.addEventListener('hardwareBackPress', backPressed)

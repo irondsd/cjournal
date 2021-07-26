@@ -22,6 +22,8 @@ import { terminateAlarm } from '../../helpers/terminateAlarm'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
+import { useActivities } from '../../context/activitiesContext'
+import { useSettings } from '../../context/settingsContext'
 
 type SleepScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -38,8 +40,8 @@ export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
     const [timer, setTimer] = useState<string>('00:00')
     const [startedAt, setStartedAt] = useState(timestamp())
     const logger = new Logger('sleep' + timestamp())
-
-    const dispatch = useDispatch()
+    const { activityAdd } = useActivities()
+    const { setLastScreen, resetLastScreen } = useSettings()
 
     const backPressed = () => {
         terminateAlarm(strings.TerminateSleep, submit)
@@ -47,7 +49,7 @@ export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
     }
 
     const submit = () => {
-        removeScreen()
+        resetLastScreen()
         const createdActivity = Activity.init(
             ActivityTypes.Sleep,
             startedAt,
@@ -56,7 +58,7 @@ export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
             undefined,
             {},
         )
-        dispatch(addActivity(createdActivity))
+        activityAdd(createdActivity)
         navigation.navigate(Routes.SleepFinish, {
             activity: createdActivity._id,
         })
@@ -66,13 +68,8 @@ export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
         // restore screen
         if (route.params?.startedAt) setStartedAt(route.params?.startedAt)
 
-        // save screen
-        // todo
-        screenAsyncSave({
-            screen: 'Sleep',
-            startedAt: route.params?.startedAt
-                ? route.params?.startedAt
-                : startedAt,
+        setLastScreen(Routes.Sleep, {
+            startedAt: route.params?.startedAt || startedAt,
         })
 
         navigation.setOptions({
