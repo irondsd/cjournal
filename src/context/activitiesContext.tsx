@@ -4,6 +4,7 @@ import React, {
     useReducer,
     useContext,
     useEffect,
+    useState,
 } from 'react'
 import { IActivity } from '../classes/Activity'
 import { activitiesAsyncSave } from '../services/asyncStorage'
@@ -39,9 +40,10 @@ enum Actions {
 }
 
 const ActivitiesContext = createContext<
-    { activities: Activities } & ActivityFunctions
+    { activities: Activities; sorted: IActivity[] } & ActivityFunctions
 >({
     activities: defaultState,
+    sorted: [],
 })
 
 function activitiesReducer(
@@ -122,6 +124,7 @@ const ActivitiesProvider: FC = ({ children }) => {
         activitiesReducer,
         defaultState,
     )
+    const [sorted, setSorted] = useState<IActivity[]>([])
 
     const activitiesRestore = (activities: Activities) => {
         activitiesDispatch({ type: Actions.RESTORE, payload: activities })
@@ -153,6 +156,7 @@ const ActivitiesProvider: FC = ({ children }) => {
 
     const value = {
         activities,
+        sorted,
         activitiesRestore,
         activitiesLoadFromArray,
         activitiesReset,
@@ -166,6 +170,12 @@ const ActivitiesProvider: FC = ({ children }) => {
 
     useEffect(() => {
         if (Object.keys(activities).length) activitiesAsyncSave(activities)
+
+        const array = Object.values(activities)
+        const sorted = array.sort(function (a, b) {
+            return b['time_started'] - a['time_started']
+        })
+        setSorted(sorted)
     }, [activities])
 
     return (

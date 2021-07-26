@@ -30,11 +30,7 @@ type JournalScreenProps = {
 export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
-    const { activities } = useActivities()
-    const activitiesArray = useMemo(
-        () => Object.values(activities),
-        [activities],
-    )
+    const { sorted } = useActivities()
 
     const { fetchActivities } = useSync()
 
@@ -75,7 +71,7 @@ export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <FlatList
                 style={styles.list}
-                data={activitiesArray}
+                data={sorted}
                 contentContainerStyle={{ paddingBottom: 30 }}
                 overScrollMode={'always'}
                 renderItem={renderItem}
