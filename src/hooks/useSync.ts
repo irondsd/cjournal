@@ -39,10 +39,12 @@ export const useSync = () => {
     const checkExpiration = async (): Promise<void> => {
         const needUpdate =
             token_lifetime - timestamp() < updateTokenBeforeExpiration
-        return new Promise(() => {
-            if (!needUpdate) return Promise.resolve
+        return new Promise((resolve, reject) => {
+            if (!needUpdate) return resolve()
 
-            return refresh()
+            refresh()
+                .then(() => resolve())
+                .catch(() => reject())
         })
     }
 
@@ -57,6 +59,7 @@ export const useSync = () => {
     }
 
     const syncActivity = (activity: IActivity) => {
+        console.log('syncing', activity)
         const url = idinv
             ? `idinv/${idinv}/activity/`
             : `users/${_id}/activity/`
@@ -159,10 +162,6 @@ export const useSync = () => {
     useEffect(() => {
         if (!_id) fetchUser()
     }, [_id])
-
-    useEffect(() => {
-        syncActivities()
-    }, [activities])
 
     return { fetchActivities, syncActivities, syncActivity, fetchTasks }
 }
