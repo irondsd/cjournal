@@ -31,7 +31,7 @@ export interface IActivity {
     utc_offset?: number
     task?: string
     updated_at: number
-    comment: string
+    comment?: string
     idinv?: string
     user: string
     patient?: string
