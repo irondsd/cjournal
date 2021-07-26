@@ -10,6 +10,8 @@ import { Delete, Get, Post, Put } from '../requests/newRequest'
 import { uploadRequest } from '../requests/uploadRequest'
 import { useEffect } from 'react'
 import { login } from '../requests/login'
+import timestamp from '../helpers/timestamp'
+import { updateTokenBeforeExpiration } from '../constants'
 
 const needsSync = (activity: IActivity) => {
     if (activity.system) {
@@ -30,11 +32,23 @@ export const useSync = () => {
         activitySyncFailed,
     } = useActivities()
     const { loadTasksFromArray } = useTasks()
-    const { access_token } = useAuth()
+    const { access_token, token_lifetime, refresh } = useAuth()
     const { _id, idinv, load: userLoad } = useUser()
     const { idinvFilter } = useSettings()
 
-    const syncActivities = () => {
+    const checkExpiration = async (): Promise<void> => {
+        const needUpdate =
+            token_lifetime - timestamp() < updateTokenBeforeExpiration
+        return new Promise(() => {
+            if (!needUpdate) return Promise.resolve
+
+            return refresh()
+        })
+    }
+
+    const syncActivities = async () => {
+        await checkExpiration()
+
         const activityArray = Object.values(activities)
         console.log(activityArray)
         activityArray.forEach(activity => {
@@ -102,7 +116,9 @@ export const useSync = () => {
         }
     }
 
-    const fetchActivities = () => {
+    const fetchActivities = async () => {
+        await checkExpiration()
+
         const url = idinvFilter
             ? `idinv/${idinv}/activity`
             : `users/${_id}/activity`
@@ -117,7 +133,9 @@ export const useSync = () => {
             })
     }
 
-    const fetchTasks = () => {
+    const fetchTasks = async () => {
+        await checkExpiration()
+
         const url = idinvFilter ? `idinv/${idinv}/tasks` : `users/${_id}/tasks`
 
         Get(url, access_token)
@@ -130,7 +148,9 @@ export const useSync = () => {
             })
     }
 
-    const fetchUser = () => {
+    const fetchUser = async () => {
+        await checkExpiration()
+
         login(access_token).then(user => {
             userLoad(user)
         })
