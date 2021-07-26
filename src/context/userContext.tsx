@@ -1,4 +1,11 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import React, {
+    FC,
+    createContext,
+    useReducer,
+    useContext,
+    useEffect,
+} from 'react'
+import { userAsyncSave } from '../services/asyncStorage'
 
 const defaultState: User = {
     _id: null,
@@ -14,7 +21,7 @@ const defaultState: User = {
     identity: null,
 }
 
-type User = {
+export type User = {
     _id: string | null
     sub: string | null
     username: string | null
@@ -49,7 +56,7 @@ type UserFunctions = {
 
 const UserContext = createContext<User & UserFunctions>(defaultState)
 
-function userReducer(state, action): User {
+function userReducer(state: any, action: any): User {
     switch (action.type) {
         case 'LOAD': {
             return {
@@ -66,7 +73,7 @@ function userReducer(state, action): User {
     }
 }
 
-function UserProvider({ children }) {
+const UserProvider: FC = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, defaultState)
 
     const load = (user: User) => {
@@ -77,7 +84,12 @@ function UserProvider({ children }) {
         dispatch({ type: 'RESET' })
     }
 
+    useEffect(() => {
+        if (state._id) userAsyncSave(state)
+    }, [state])
+
     const value = { ...state, load, reset }
+
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
