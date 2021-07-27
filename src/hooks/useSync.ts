@@ -48,79 +48,105 @@ export const useSync = () => {
         })
     }
 
-    const syncActivities = async () => {
-        await checkExpiration()
+    const syncActivities = async (): Promise<void> => {
+        return new Promise(async (resolve, reject) => {
+            await checkExpiration()
 
-        const activityArray = Object.values(activities)
+            const activityArray = Object.values(activities)
 
-        activityArray.forEach(activity => {
-            if (needsSync(activity)) syncActivity(activity)
+            const promises = []
+            activityArray.forEach(activity => {
+                if (needsSync(activity)) promises.push(syncActivity(activity))
+            })
+            if (!promises.length) return resolve()
+
+            Promise.all(promises)
+                .then(() => resolve())
+                .catch(() => reject())
         })
     }
 
-    const syncActivity = (activity: IActivity) => {
-        console.log('syncing', activity)
-        const url = idinv
-            ? `idinv/${idinv}/activity/`
-            : `users/${_id}/activity/`
+    const syncActivity = async (activity: IActivity): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            const url = idinv
+                ? `idinv/${idinv}/activity/`
+                : `users/${_id}/activity/`
 
-        if (activity.system?.awaitsSync) {
-            if (activity.task) completeTask(_id, access_token, activity.task)
+            if (activity.system?.awaitsSync) {
+                if (activity.task)
+                    completeTask(_id, access_token, activity.task)
 
-            if (activity.system?.upload)
-                return uploadRequest(url, 'POST', access_token, activity)
+                if (activity.system?.upload)
+                    return uploadRequest(url, 'POST', access_token, activity)
+                        .then(() => {
+                            activitySynced(activity)
+                            resolve()
+                        })
+                        .catch(err => {
+                            console.log('act post upload err', err)
+                            activitySyncFailed(activity)
+                            reject()
+                        })
+                return Post(url, access_token, activity)
                     .then(() => {
                         activitySynced(activity)
+                        resolve()
                     })
                     .catch(err => {
-                        console.log(err)
+                        console.log('act post err', err)
                         activitySyncFailed(activity)
+                        reject()
                     })
-            return Post(url, access_token, activity)
-                .then(() => {
-                    activitySynced(activity)
-                })
-                .catch(err => {
-                    console.log(err)
-                    activitySyncFailed(activity)
-                })
-        } else if (activity.system?.awaitsEdit) {
-            const putUrl = url + _id
-            if (activity.system?.upload)
-                return uploadRequest(url, 'PUT', access_token, activity)
+            } else if (activity.system?.awaitsEdit) {
+                const putUrl = url + _id
+                if (activity.system?.upload)
+                    return uploadRequest(url, 'PUT', access_token, activity)
+                        .then(() => {
+                            activitySynced(activity)
+                            resolve()
+                        })
+                        .catch(err => {
+                            console.log('act put err', err)
+                            activitySyncFailed(activity)
+                            reject()
+                        })
+                return Put(putUrl, access_token, activity)
                     .then(() => {
                         activitySynced(activity)
+                        resolve()
                     })
                     .catch(err => {
-                        console.log(err)
+                        console.log('act put err', err)
                         activitySyncFailed(activity)
+                        reject()
                     })
-            return Put(putUrl, access_token, activity)
-                .then(() => {
-                    activitySynced(activity)
-                })
-                .catch(err => {
-                    console.log(err)
-                    activitySyncFailed(activity)
-                })
-        } else if (activity.system?.awaitsDelete) {
-            const deleteUrl = url + _id
-            if (activity.system.awaitsDelete && activity.system.awaitsSync)
-                return activityDeleted(activity)
-
-            return Delete(deleteUrl, access_token, activity)
-                .then(() => {
+            } else if (activity.system?.awaitsDelete) {
+                const deleteUrl = url + _id
+                if (
+                    activity.system.awaitsDelete &&
+                    activity.system.awaitsSync
+                ) {
                     activityDeleted(activity)
-                })
-                .catch(err => {
-                    console.log(err)
-                    activitySyncFailed(activity)
-                })
-        }
+                    return resolve()
+                }
+
+                return Delete(deleteUrl, access_token, activity)
+                    .then(() => {
+                        activityDeleted(activity)
+                        resolve()
+                    })
+                    .catch(err => {
+                        console.log('act del err', err)
+                        activitySyncFailed(activity)
+                        reject()
+                    })
+            }
+        })
     }
 
     const fetchActivities = async (): Promise<void> => {
         await checkExpiration()
+        await syncActivities()
 
         const url = idinvFilter
             ? `idinv/${idinv}/activity`
