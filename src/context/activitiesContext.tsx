@@ -7,7 +7,9 @@ import React, {
     useState,
 } from 'react'
 import { IActivity } from '../classes/Activity'
+import { strings } from '../localization'
 import { activitiesAsyncSave } from '../services/asyncStorage'
+import { showToast } from '../services/toast'
 
 const defaultState: Activities = {}
 
@@ -134,12 +136,15 @@ const ActivitiesProvider: FC = ({ children }) => {
     }
     const activityDelete = (activity: IActivity) => {
         activitiesDispatch({ type: Actions.DELETE, payload: activity })
+        showToast(`${strings.Deleted} ${strings[activity.activity_type]}!`)
     }
     const activityAdd = (activity: IActivity) => {
         activitiesDispatch({ type: Actions.ADD, payload: activity })
+        showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
     }
     const activityUpdate = (activity: IActivity) => {
         activitiesDispatch({ type: Actions.UPDATE, payload: activity })
+        showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
     }
     const activitiesReset = () => {
         activitiesDispatch({ type: Actions.RESET, payload: undefined })
