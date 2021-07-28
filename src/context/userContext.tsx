@@ -8,26 +8,26 @@ import React, {
 import { userAsyncSave } from '../services/asyncStorage'
 
 const defaultState: User = {
-    _id: null,
-    sub: null,
-    username: null,
-    idinv: null,
+    _id: undefined,
+    sub: undefined,
+    username: undefined,
+    idinv: undefined,
     patient: {
         hide_elements: [],
         course_therapy: [],
         relief_of_attack: [],
         tests: [],
     },
-    identity: null,
+    identity: undefined,
 }
 
 export type User = {
-    _id: string | null
-    sub: string | null
-    username: string | null
-    idinv: string | null
-    patient: Patient | null
-    identity: Identity | null
+    _id: string | undefined
+    sub: string | undefined
+    username: string | undefined
+    idinv: string | undefined
+    patient: Patient | undefined
+    identity: Identity | undefined
 }
 
 type Patient = {
