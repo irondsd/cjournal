@@ -32,7 +32,7 @@ export const useSync = () => {
         activitySyncFailed,
     } = useActivities()
     const { loadTasksFromArray } = useTasks()
-    const { access_token, token_lifetime, refresh } = useAuth()
+    const { access_token, token_lifetime, ongoingUpdate, refresh } = useAuth()
     const { _id, idinv, load: userLoad } = useUser()
     const { idinvFilter } = useSettings()
 
@@ -40,7 +40,7 @@ export const useSync = () => {
         const needUpdate =
             token_lifetime - timestamp() < updateTokenBeforeExpiration
         return new Promise((resolve, reject) => {
-            if (!needUpdate) return resolve()
+            if (!needUpdate || ongoingUpdate) return resolve()
 
             refresh()
                 .then(() => resolve())
@@ -185,8 +185,7 @@ export const useSync = () => {
                 userLoad(user)
             })
             .catch(err => {
-                console.log(_id)
-                console.log('login err', err)
+                console.log('backend login err', err)
             })
     }
 
