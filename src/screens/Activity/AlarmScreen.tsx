@@ -34,7 +34,10 @@ export const AlarmScreen: FC<AlarmScreenProps> = ({ navigation }) => {
     const { activityAdd } = useActivities()
 
     const submit = () => {
-        const createdActivity = { ...activity }
+        const createdActivity = {
+            ...activity,
+            data: { ...activity.data, locations },
+        }
         activityAdd(createdActivity)
         navigation.navigate(Routes.Home)
     }
