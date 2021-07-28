@@ -217,4 +217,5 @@ export const es = {
     WaitingPermissions: 'Esperando permisos...',
     hintPlaceholder: 'Por favor, complete',
     m: 'm',
+    ReqLocation: 'Solicitando la ubicación...',
 }

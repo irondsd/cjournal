@@ -214,4 +214,5 @@ export const ru = {
     WaitingPermissions: 'Ожидание разрешений...',
     hintPlaceholder: 'Пожалуйста, заполните',
     m: 'м',
+    ReqLocation: 'Запрос местоположения...',
 }
