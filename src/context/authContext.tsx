@@ -48,6 +48,7 @@ enum ActionTypes {
     REFRESH,
     LOGIN,
     LOGIN_ERROR,
+    REFRESH_ERROR,
     LOGOUT,
     START_UPDATE,
 }
@@ -70,7 +71,7 @@ function authReducer(
                 ...payload,
                 isLoggedIn,
                 isLoading: false,
-                ongoingUpdate: true,
+                ongoingUpdate: false,
             }
         }
         case ActionTypes.LOGIN: {
@@ -80,7 +81,7 @@ function authReducer(
                 ...payload,
                 isLoggedIn,
                 isLoading: false,
-                ongoingUpdate: true,
+                ongoingUpdate: false,
             }
         }
         case ActionTypes.REFRESH: {
@@ -90,22 +91,25 @@ function authReducer(
                 ...payload,
                 isLoggedIn,
                 isLoading: false,
-                ongoingUpdate: true,
+                ongoingUpdate: false,
             }
+        }
+        case ActionTypes.REFRESH_ERROR: {
+            return state
         }
         case ActionTypes.LOGIN_ERROR: {
             return {
                 ...defaultState,
                 isLoading: false,
                 isLoggedIn: false,
-                ongoingUpdate: true,
+                ongoingUpdate: false,
             }
         }
         case ActionTypes.LOGOUT:
             return {
                 ...defaultState,
                 isLoading: false,
-                ongoingUpdate: true,
+                ongoingUpdate: false,
             }
         case ActionTypes.START_UPDATE: {
             return {
@@ -159,7 +163,7 @@ const AuthProvider: FC = ({ children }) => {
                     resolve()
                 })
                 .catch(err => {
-                    console.log('login error: ', err)
+                    console.log('identity login error: ', err)
                     loginError()
                     reject()
                 })
@@ -169,7 +173,7 @@ const AuthProvider: FC = ({ children }) => {
     const refresh = async (): Promise<void> => {
         return new Promise((resolve, reject) => {
             if (!state.refresh_token) {
-                console.log('should not happen')
+                console.log('should not ever happen')
                 return reject()
             }
             dispatch({ type: ActionTypes.START_UPDATE })
@@ -194,8 +198,8 @@ const AuthProvider: FC = ({ children }) => {
                     resolve()
                 })
                 .catch(err => {
-                    console.log('identity refresh error', err.message)
-                    dispatch({ type: ActionTypes.LOGIN_ERROR })
+                    console.log('identity refresh error', err)
+                    dispatch({ type: ActionTypes.REFRESH_ERROR })
                     reject()
                 })
         })
