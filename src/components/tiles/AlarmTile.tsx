@@ -8,10 +8,13 @@ import {
     tileShadeColor,
 } from '../../constants'
 import Activity from '../../classes/Activity'
+import { useInitActivity } from '../../hooks/useInitActivity'
 
 const name = ActivityTypes.Alarm
 
 export const AlarmTile: FC<TileChildProps> = ({ navigation }) => {
+    const { initWithLocationSave } = useInitActivity()
+
     return (
         <Tile
             text={strings[name]}
@@ -19,7 +22,7 @@ export const AlarmTile: FC<TileChildProps> = ({ navigation }) => {
             color="#b51515"
             shadeColor="#b51515"
             onPress={() => {
-                Activity.instantInitWithLocationSave(name)
+                initWithLocationSave(name)
             }}
             onLongPress={() => {
                 navigation.navigate(Routes.Alarm, {
