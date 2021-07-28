@@ -59,6 +59,14 @@ function activitiesReducer(
         case Actions.LOAD_ARRAY: {
             const newState: Activities = {}
 
+            // preserve ones there were not synced yet
+            for (const _id in state) {
+                if (state[_id].system) {
+                    const activity = state[_id]
+                    newState[_id] = activity
+                }
+            }
+
             payload.forEach((a: IActivity) => {
                 newState[a._id] = a
             })
@@ -66,6 +74,7 @@ function activitiesReducer(
             return newState
         }
         case Actions.ADD: {
+            // todo check for files and set upload
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
@@ -74,6 +83,7 @@ function activitiesReducer(
             return newState
         }
         case Actions.UPDATE: {
+            // todo check for files and set upload
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
