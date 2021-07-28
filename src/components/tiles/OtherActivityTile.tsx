@@ -7,16 +7,16 @@ import {
     tileColor,
     tileShadeColor,
 } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
 
 const name = ActivityTypes.OtherActivity
 
-export const OtherActivityTile: FC<TileChildProps> = ({
-    navigation,
-    disabled,
-}) => {
+export const OtherActivityTile: FC<TileChildProps> = ({ disabled }) => {
+    const navigation = useNavigation()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             shadeColor={tileColor}
             color={tileShadeColor}

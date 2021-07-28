@@ -7,19 +7,24 @@ import {
     tileColor,
     tileShadeColor,
 } from '../../constants'
-import Activity from '../../classes/Activity'
+import { useInitActivity } from '../../hooks/useInitActivity'
+import { useNavigation } from '@react-navigation/native'
 
 const name = ActivityTypes.Arrhythmia
 
-export const ArrhythmiaTile: FC<TileChildProps> = ({ navigation }) => {
+export const ArrhythmiaTile: FC<TileChildProps> = () => {
+    const { initSave } = useInitActivity()
+    const navigation = useNavigation()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                Activity.instantInitSave(name, navigation.navigate)
+                initSave(name)
+                navigation.navigate(Routes.Home)
             }}
             onLongPress={() => {
                 navigation.navigate(Routes.TimePick, {
