@@ -52,7 +52,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     })
 
     useEffect(() => {
-        syncActivities()
+        const focusUnsub = navigation.addListener('focus', () =>
+            syncActivities(),
+        )
+
+        return () => {
+            focusUnsub()
+        }
     }, [])
 
     useLayoutEffect(() => {
@@ -73,44 +79,23 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 barStyle="dark-content"
             />
             <TileLine>
-                <SleepTile navigation={navigation} disabled={disabled.sleep} />
-                <AlarmTile navigation={navigation} />
+                <SleepTile disabled={disabled.sleep} />
+                <AlarmTile />
             </TileLine>
             <TileLine>
-                <PhysicalLoadTile
-                    navigation={navigation}
-                    disabled={disabled.physical}
-                />
-                <ActivityTile
-                    navigation={navigation}
-                    disabled={disabled.activity}
-                />
-                <EmotionalStressTile
-                    navigation={navigation}
-                    disabled={disabled.emotional}
-                />
+                <PhysicalLoadTile disabled={disabled.physical} />
+                <ActivityTile disabled={disabled.activity} />
+                <EmotionalStressTile disabled={disabled.emotional} />
             </TileLine>
             <TileLine>
-                <PainTile navigation={navigation} disabled={disabled.pain} />
-                <ComplaintsTile
-                    navigation={navigation}
-                    disabled={disabled.complaints}
-                />
-                <WeaknessTile
-                    navigation={navigation}
-                    disabled={disabled.WeaknessTile}
-                />
+                <PainTile disabled={disabled.pain} />
+                <ComplaintsTile disabled={disabled.complaints} />
+                <WeaknessTile disabled={disabled.WeaknessTile} />
             </TileLine>
             <TileLine>
-                <TakingMedicineTile
-                    navigation={navigation}
-                    disabled={disabled.TakingMedicineTile}
-                />
-                <TestsTile navigation={navigation} disabled={disabled.tests} />
-                <ServiceTile
-                    navigation={navigation}
-                    disabled={disabled.service}
-                />
+                <TakingMedicineTile disabled={disabled.TakingMedicineTile} />
+                <TestsTile disabled={disabled.tests} />
+                <ServiceTile disabled={disabled.service} />
             </TileLine>
         </View>
     )
