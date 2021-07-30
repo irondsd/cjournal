@@ -185,6 +185,10 @@ export const useSync = () => {
                 userLoad(user)
             })
             .catch(err => {
+                try {
+                    const parsed = JSON.parse(err)
+                    console.log(parsed)
+                } catch (error) {}
                 console.log('backend login err', err)
             })
     }
