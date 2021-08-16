@@ -17,19 +17,16 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
             return Routes.WalkingTest
         case ActivityTypes.Stairs:
             return Routes.Stairs
-
         case ActivityTypes.CourseTherapy:
             return Routes.Pills
         case ActivityTypes.ReliefOfAttack:
             return Routes.Pills
         case ActivityTypes.MedicineTest:
             return Routes.Pills
-
         case ActivityTypes.ActiveOrthostasis:
             return Routes.BloodPressure
         case ActivityTypes.Press:
             return Routes.BloodPressure
-
         case ActivityTypes.VerticalPositionCalibration:
             return Routes.Other
         case ActivityTypes.OtherActivity:
@@ -44,10 +41,8 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
             return Routes.Other
         case ActivityTypes.OtherWeakness:
             return Routes.Other
-
         case ActivityTypes.Trainer:
             return Routes.Trainer
-
         default:
             return Routes.TimePick
     }
