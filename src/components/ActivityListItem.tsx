@@ -4,6 +4,7 @@ import { Routes, editable } from '../constants'
 import { ListItem } from './ListItem'
 import { IActivity, IActivityClass } from '../classes/Activity'
 import { Icon, IconProps } from '../components/Icon'
+import { ActivityRouter } from '../navigation/ActivityRouter'
 
 type ActivityListItemProps = {
     activity: IActivityClass
@@ -70,12 +71,11 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
     }
 
     const onPress = () => {
-        // todo: routing
         if (editable.includes(activity.activity_type)) {
-            navigation.navigate(Routes.ActivityDetails, activity)
-        } else {
-            navigation.navigate(Routes.ActivityStats, activity)
-        }
+            const { _id, activity_type } = activity
+            const route = ActivityRouter(activity_type)
+            navigation.navigate(route, { sender: activity_type, id: _id })
+        } else navigation.navigate(Routes.ActivityStats, activity)
     }
 
     const getIcons = () => {
