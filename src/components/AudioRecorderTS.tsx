@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import Sound from 'react-native-sound'
 import AudioRecord from 'react-native-audio-record'
 import Icon from 'react-native-vector-icons/FontAwesome'
