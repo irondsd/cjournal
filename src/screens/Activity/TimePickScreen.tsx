@@ -17,6 +17,7 @@ import { RootState } from '../../redux/store'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { useActivities } from '../../context/activitiesContext'
 
 type TimePickScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -38,10 +39,10 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     const { params } = route
     const [activity, setActivity] = useState<Partial<IActivity>>({
         activity_type: ActivityTypes[params.sender],
-        time_started: timestamp(),
         task: params.task,
     })
     const [data, setData] = useState<IAData>({})
+    const { activities } = useActivities()
 
     const submit = () => {
         const newAct = Activity.init(
@@ -59,18 +60,20 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     }
 
     useEffect(() => {
-        // find task
-        const task = findLatestTask(tasks, activity.activity_type)
+        if (params.id) {
+            const act = activities[params.id]
+            setActivity(act)
+            if (act.data) setData(act.data)
+        }
 
-        if (task) setActivity({ task })
-    }, [params])
-
-    useEffect(() => {
         const sender = params?.sender
         const title: string = strings[sender]
         navigation.setOptions({
             headerTitle: title,
         })
+
+        const task = findLatestTask(tasks, activity.activity_type)
+        if (task) setActivity({ task })
     }, [params])
 
     return (
