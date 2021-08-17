@@ -7,16 +7,8 @@ import { DurationPicker } from './DurationPickerTS'
 
 type TimePickCombinedProps = {
     time_started: number
-    time_ended: number
-    onChange: (
-        time_started: TimePair['time_started'],
-        time_ended: TimePair['time_ended'],
-    ) => void
-}
-
-type TimePair = {
-    time_started: number
-    time_ended: number | undefined
+    time_ended?: number
+    onChange: (time_started: number, time_ended?: number) => void
 }
 
 export const TimePickCombined: FC<TimePickCombinedProps> = ({
@@ -29,56 +21,41 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
         TimeSwitchValues.fromStart,
     )
     const [duration, setDuration] = useState<number>(0)
-    const [time, setTime] = useState<TimePair>({
-        time_started: time_started || renderTime,
-        time_ended: time_ended,
-    })
+    const [started, setStarted] = useState<number>(time_started)
+    const [ended, setEnded] = useState<number | undefined>(time_ended)
 
     useEffect(() => {
-        if (from === TimeSwitchValues.fromStart)
-            setTime({
-                time_started: renderTime,
-                time_ended: duration ? renderTime + duration * 60 : undefined,
-            })
-        else
-            setTime({
-                time_started: duration
-                    ? renderTime - duration * 60
-                    : renderTime,
-                time_ended: renderTime,
-            })
+        if (from === TimeSwitchValues.fromStart) {
+            setStarted(renderTime)
+            setEnded(duration ? renderTime + duration * 60 : undefined)
+        } else {
+            setStarted(duration ? renderTime - duration * 60 : renderTime)
+            setEnded(renderTime)
+        }
     }, [from])
 
     useEffect(() => {
         if (from === TimeSwitchValues.fromStart)
-            setTime({
-                ...time,
-                time_ended: duration ? renderTime + duration * 60 : undefined,
-            })
-        else
-            setTime({
-                ...time,
-                time_started: duration
-                    ? renderTime - duration * 60
-                    : renderTime,
-            })
+            setEnded(duration ? renderTime + duration * 60 : undefined)
+        else setStarted(duration ? renderTime - duration * 60 : renderTime)
     }, [duration])
 
     useEffect(() => {
-        onChange(time.time_started, time.time_ended)
-    }, [time])
+        if (time_started !== started && time_ended !== ended)
+            onChange(started, ended)
+    }, [started, ended])
+
+    useEffect(() => {
+        if (started !== time_started) setStarted(time_started)
+        if (ended !== time_ended) setEnded(time_ended)
+    }, [time_started, time_ended])
 
     return (
         <View>
             <TimeSwitch onChange={setFrom} value={from} />
             <TimePicker
                 time={time_started}
-                onChange={(value: number) =>
-                    setTime({
-                        ...time,
-                        time_started: value,
-                    })
-                }
+                onChange={value => setStarted(value)}
             />
             <DurationPicker
                 onChange={value => setDuration(value)}

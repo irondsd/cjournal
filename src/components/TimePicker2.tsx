@@ -45,6 +45,12 @@ export const TimePicker = ({
         onChange(timestamp(dateTime))
     }, [dateTime])
 
+    useEffect(() => {
+        if (time !== timestamp(dateTime)) {
+            setDateTime(new Date(time * 1000))
+        }
+    }, [time])
+
     return (
         <View style={styles.container}>
             <View style={styles.time}>
