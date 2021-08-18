@@ -1,6 +1,6 @@
 import store from '../redux/store'
 import syncActivities from './syncActivities'
-import NavigationService from '../navigation/NavigationService'
+// import NavigationService from '../navigation/NavigationService'
 import {
     activityFetchFailed,
     logoutUser,
@@ -53,7 +53,7 @@ export default async function sync(id: string, tokens: ITokensClass) {
                         `Tokens expired, errors: ${errors}, logging out`,
                     )
                     store.dispatch(logoutUser())
-                    NavigationService.navigate(Routes.Welcome)
+                    // NavigationService.navigate(Routes.Welcome)
                 }
             })
     }

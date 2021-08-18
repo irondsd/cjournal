@@ -1,6 +1,6 @@
 import PushNotification from 'react-native-push-notification'
 import store from '../redux/store'
-import NavigationService from '../navigation/NavigationService'
+// import NavigationService from '../navigation/NavigationService'
 import { strings, Strings } from '../localization'
 import { showToast } from '../services/toast'
 import { localTime } from '../helpers/dateTime'
@@ -107,10 +107,10 @@ function onNotificationOpened(notification: FiredNotification) {
             taskCancelNotification(task)
             const route = ActivityRouter(task.activity_type)
 
-            NavigationService.navigate(route, {
-                task: task._id,
-                sender: task.activity_type,
-            })
+            // NavigationService.navigate(route, {
+            //     task: task._id,
+            //     sender: task.activity_type,
+            // })
         } else {
             // there's no task or
             // task is completed
