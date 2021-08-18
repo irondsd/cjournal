@@ -15,6 +15,7 @@ import { addActivity } from '../../redux/actions'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
+import { useActivities } from '../../context/activitiesContext'
 
 type OtherScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -37,6 +38,7 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
         time_started: timestamp(),
     })
     const [data, setData] = useState<IAData>({})
+    const { activities } = useActivities()
 
     const submit = () => {
         const newAct = Activity.init(
@@ -54,12 +56,19 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
     }
 
     useEffect(() => {
-        const { sender } = params
-        const title = strings[sender]
-        navigation.setOptions({
-            headerTitle: title,
-        })
-    }, [])
+        const { sender, id } = params
+
+        if (id) {
+            const act = activities[id]
+            setActivity(act)
+            if (act.data) setData(act.data)
+        } else {
+            const title = strings[sender]
+            navigation.setOptions({
+                headerTitle: title,
+            })
+        }
+    }, [params])
 
     return (
         <View style={defaultStyles.container}>
