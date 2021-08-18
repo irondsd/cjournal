@@ -61,11 +61,16 @@ export type RootStackParamList = {
     Settings: { qrValue?: string }
     ExerciseFinish: { activity: string }
     SleepFinish: { activity: string }
-    TimePick: { sender: ActivityTypes; task?: string }
-    Other: { sender: ActivityTypes; task?: string }
-    Trainer: { sender: ActivityTypes; task?: string }
-    Pills: { sender: ActivityTypes; task?: string; image?: { uri: string } }
-    BloodPressure: { sender: ActivityTypes; task?: string }
+    TimePick: { sender: ActivityTypes; task?: string; id?: string }
+    Other: { sender: ActivityTypes; task?: string; id?: string }
+    Trainer: { sender: ActivityTypes; task?: string; id?: string }
+    Pills: {
+        sender: ActivityTypes
+        task?: string
+        image?: { uri: string }
+        id?: string
+    }
+    BloodPressure: { sender: ActivityTypes; task?: string; id?: string }
 }
 
 const RootStack = createStackNavigator<RootStackParamList>()
