@@ -60,17 +60,18 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     }
 
     useEffect(() => {
-        if (params.id) {
-            const act = activities[params.id]
+        const { sender, id } = params
+
+        if (id) {
+            const act = activities[id]
             setActivity(act)
             if (act.data) setData(act.data)
+        } else {
+            const title = strings[sender]
+            navigation.setOptions({
+                headerTitle: title,
+            })
         }
-
-        const sender = params?.sender
-        const title: string = strings[sender]
-        navigation.setOptions({
-            headerTitle: title,
-        })
 
         const task = findLatestTask(tasks, activity.activity_type)
         if (task) setActivity({ task })
