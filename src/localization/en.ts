@@ -216,4 +216,5 @@ export const en = {
     hintPlaceholder: 'Please fill in',
     m: 'm',
     ReqLocation: 'Requesting the location...',
+    Editing: 'Editing of',
 }

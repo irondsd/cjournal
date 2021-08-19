@@ -215,4 +215,5 @@ export const ru = {
     hintPlaceholder: 'Пожалуйста, заполните',
     m: 'м',
     ReqLocation: 'Запрос местоположения...',
+    Editing: 'Редактирование',
 }
