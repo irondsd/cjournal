@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
 import { View } from 'react-native'
-import timestamp from '../helpers/timestamp'
 import { TimePicker } from './TimePicker2'
 import { TimeSwitch, TimeSwitchValues } from './TimeSwitchTS'
 import { DurationPicker } from './DurationPickerTS'
@@ -16,7 +15,6 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
     time_ended,
     onChange,
 }) => {
-    const [renderTime] = useState(timestamp())
     const [from, setFrom] = useState<TimeSwitchValues>(
         TimeSwitchValues.fromStart,
     )
@@ -26,18 +24,18 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
 
     useEffect(() => {
         if (from === TimeSwitchValues.fromStart) {
-            setStarted(renderTime)
-            setEnded(duration ? renderTime + duration * 60 : undefined)
+            setStarted(time_started)
+            setEnded(duration ? time_started + duration * 60 : undefined)
         } else {
-            setStarted(duration ? renderTime - duration * 60 : renderTime)
-            setEnded(renderTime)
+            setStarted(duration ? time_started - duration * 60 : time_started)
+            setEnded(time_ended)
         }
     }, [from])
 
     useEffect(() => {
         if (from === TimeSwitchValues.fromStart)
-            setEnded(duration ? renderTime + duration * 60 : undefined)
-        else setStarted(duration ? renderTime - duration * 60 : renderTime)
+            setEnded(duration ? time_started + duration * 60 : undefined)
+        else setStarted(duration ? time_started - duration * 60 : time_started)
     }, [duration])
 
     useEffect(() => {
@@ -47,8 +45,20 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
 
     useEffect(() => {
         if (started !== time_started) setStarted(time_started)
-        if (ended !== time_ended) setEnded(time_ended)
-    }, [time_started, time_ended])
+    }, [time_started])
+
+    useEffect(() => {
+        if (ended !== time_ended) {
+            setEnded(time_ended)
+            if (time_ended)
+                setDuration(
+                    parseInt(((time_ended! - time_started) / 60).toFixed(0)),
+                )
+        }
+    }, [time_ended])
+
+    // console.log('started', time_started, started)
+    console.log('ended', time_ended, ended)
 
     return (
         <View>
