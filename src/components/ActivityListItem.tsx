@@ -5,6 +5,7 @@ import { ListItem } from './ListItem'
 import { IActivity, IActivityClass } from '../classes/Activity'
 import { Icon, IconProps } from '../components/Icon'
 import { ActivityRouter } from '../navigation/ActivityRouter'
+import { showMessage } from '../services/toast'
 
 type ActivityListItemProps = {
     activity: IActivityClass
@@ -75,7 +76,10 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
             const { _id, activity_type } = activity
             const route = ActivityRouter(activity_type)
             navigation.navigate(route, { sender: activity_type, id: _id })
-        } else navigation.navigate(Routes.ActivityStats, activity)
+        } else {
+            // not editable
+            showMessage('this activity is not editable')
+        }
     }
 
     const getIcons = () => {
