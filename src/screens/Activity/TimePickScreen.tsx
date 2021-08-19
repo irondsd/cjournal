@@ -66,6 +66,9 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
             const act = activities[id]
             setActivity(act)
             if (act.data) setData(act.data)
+            navigation.setOptions({
+                headerTitle: `${strings.Editing} ${strings[sender]}`,
+            })
         } else {
             const title = strings[sender]
             navigation.setOptions({
