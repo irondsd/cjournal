@@ -26,9 +26,8 @@ export type Identity = {
 
 export const login = (access_token: string): Promise<UserResponse> => {
     return new Promise((resolve, reject) => {
-        const url = apiUrl + 'login'
-        Post(url, access_token)
-            .then(res => res.json())
+        const path = 'login'
+        Post(path, access_token)
             .then((res: UserResponse) => {
                 resolve(res)
             })
