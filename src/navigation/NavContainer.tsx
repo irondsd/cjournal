@@ -28,6 +28,7 @@ import {
     WalkingTestScreen,
     TimePickScreen,
     CameraScreen,
+    DebugScreen,
 } from '../screens'
 import {
     activitiesAsyncGet,
@@ -194,6 +195,10 @@ export const NavContainer: FC = () => {
                         <RootStack.Screen
                             name={Routes.SleepFinish}
                             component={SleepFinishScreen}
+                        />
+                        <RootStack.Screen
+                            name={Routes.Debug}
+                            component={DebugScreen}
                         />
                     </>
                 ) : (
