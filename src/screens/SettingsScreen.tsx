@@ -16,13 +16,13 @@ import { Button } from '../components/Button'
 import { ToggleSwitch } from '../components/settings/ToggleSwitch'
 import { version } from '../../package.json'
 import { displayName } from '../../app.json'
-import {
-    setNotifications,
-    setIdinvFilter,
-    setNotificationDelay,
-    updateUser,
-    userFetchFailed,
-} from '../redux/actions'
+// import {
+//     setNotifications,
+//     setIdinvFilter,
+//     setNotificationDelay,
+//     updateUser,
+//     userFetchFailed,
+// } from '../redux/actions'
 import { NumInput } from '../components/settings/NumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
 import { RootState } from '../redux/store'
@@ -35,6 +35,7 @@ import { RootStackParamList } from '../navigation/NavContainer'
 import { RouteProp } from '@react-navigation/native'
 import { useUser } from '../context/userContext'
 import { useAuth } from '../context/authContext'
+import { useSettings } from '../context/settingsContext'
 
 type SettingsScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -56,12 +57,7 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
     const [presses, setPresses] = useState(0)
     const user = useUser()
     const tokens = useAuth()
-    const settings = useSelector((state: RootState) => state.settings)
-    const dispatch = useDispatch()
-
-    const logout = () => {
-        dispatch(logoutUser())
-    }
+    const settings = useSettings()
 
     const setIdinv = (idinv: string) => {
         setIdinvChanging(true)
@@ -70,13 +66,13 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
                 Alert.alert(strings.Success, strings.IdinvChangeSuccess)
                 Get(`users/${user._id}`, tokens.access_token)
                     .then(res => {
-                        dispatch(updateUser(res))
+                        // dispatch(updateUser(res))
                     })
                     .catch(err => {
-                        dispatch(userFetchFailed())
+                        // dispatch(userFetchFailed())
                     }),
-                    setIdinvFilter(true)
-                setIdinvChanging(false)
+                    // setIdinvFilter(true)
+                    setIdinvChanging(false)
             })
             .catch(err => {
                 console.log(err)
@@ -156,19 +152,17 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
                     <ToggleSwitch
                         title={strings.IdinvFilter}
                         value={settings.idinvFilter}
-                        onChange={value => dispatch(setIdinvFilter(value))}
+                        onChange={() => settings.toggleIdinvFilter()}
                     />
                     <ToggleSwitch
                         title={strings.Notifications}
                         value={settings.notifications}
-                        onChange={value => dispatch(setNotifications(value))}
+                        onChange={() => settings.toggleNotifications()}
                     />
                     <NumInput
                         title={strings.PostponeNotificationsBy}
                         value={settings.notificationDelay}
-                        onChange={value => {
-                            dispatch(setNotificationDelay(value))
-                        }}
+                        onChange={value => settings.setNotificationDelay(value)}
                     />
                 </View>
             ) : (
@@ -189,7 +183,7 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
                     <Button
                         title={strings.Logout}
                         onPress={() => {
-                            logout()
+                            tokens.logout()
                         }}
                     />
                 </View>
