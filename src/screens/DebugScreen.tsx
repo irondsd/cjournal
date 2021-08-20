@@ -64,11 +64,6 @@ export const DebugScreen: FC = () => {
                         })
                         .catch(err => {
                             console.log(err)
-                            // try {
-                            //     const parsed = JSON.parse(err)
-                            //     console.log(parsed)
-                            // } catch (error) {}
-                            // console.log('backend login err', err)
                         })
                 }}
             />
