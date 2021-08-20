@@ -217,4 +217,5 @@ export const en = {
     m: 'm',
     ReqLocation: 'Requesting the location...',
     Editing: 'Editing of',
+    CantEdit: `You can't edit`,
 }

@@ -219,4 +219,5 @@ export const es = {
     m: 'm',
     ReqLocation: 'Solicitando la ubicación...',
     Editing: 'Edición de',
+    CantEdit: `No puedes editar`,
 }
