@@ -57,9 +57,6 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
         }
     }, [time_ended])
 
-    // console.log('started', time_started, started)
-    console.log('ended', time_ended, ended)
-
     return (
         <View>
             <TimeSwitch onChange={setFrom} value={from} />
