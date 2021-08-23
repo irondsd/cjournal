@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import {
     View,
     Text,
@@ -13,15 +13,13 @@ import {
     Routes,
     walkingDuration,
 } from '../../constants'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch, useSelector } from 'react-redux'
 import Activity from '../../classes/Activity'
 import { Button } from '../../components/Button'
-import { addActivity } from '../../redux/actions'
 import { findLatestTask } from '../../classes/Task'
-import { RootState } from '../../redux/store'
+// import { RootState } from '../../redux/store'
 import { InfoBox } from '../../components/exercise/InfoBox'
 import { CircleProgress } from '../../components/exercise/CircleProgress'
 import { width } from '../../constants'
@@ -42,11 +40,9 @@ type ActivityType = {
 
 const TYPE = ActivityTypes.WalkingTest
 
-export const WalkingTestScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
     const dispatch = useDispatch()
-    const tasks = useSelector((state: RootState) => state.tasks)
+    // const tasks = useSelector((state: RootState) => state.tasks)
     const [activity, setActivity] = useState<ActivityType>({
         activity_type: TYPE,
     })
@@ -94,13 +90,13 @@ export const WalkingTestScreen: NavigationStackScreenComponent = ({
             },
         )
         // console.log(newAct)
-        dispatch(addActivity(newAct))
+        // dispatch(addActivity(newAct))
         navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {
-        const task = params?.task || findLatestTask(tasks, TYPE)
-        setActivity({ ...activity, task })
+        // const task = params?.task || findLatestTask(tasks, TYPE)
+        // setActivity({ ...activity, task })
         navigation.setParams({ headerTitle: strings[TYPE] })
 
         // prevent going back without saving
@@ -178,12 +174,12 @@ export const WalkingTestScreen: NavigationStackScreenComponent = ({
     )
 }
 
-WalkingTestScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-        headerLeft: null,
-    }
-}
+// WalkingTestScreen.navigationOptions = ({ navigation }) => {
+//     return {
+//         title: navigation.getParam('headerTitle'),
+//         headerLeft: null,
+//     }
+// }
 
 const styles = StyleSheet.create({
     timer: {

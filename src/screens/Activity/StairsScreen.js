@@ -10,14 +10,14 @@ import {
 import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import BackgroundTimer from 'react-native-background-timer'
 import { strings } from '../../localization'
-import { addActivity } from '../../redux/actions'
+// import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
 // import { HeaderBackButton } from 'react-navigation'
 // import { barometer } from 'react-native-sensors'
 import { average, altMeter } from '../../helpers/math'
 import { findLatestTask } from '../../classes/Task'
 // import KeepAwake from 'react-native-keep-awake'
-import { cancelNotification } from '../../redux/actions'
+// import { cancelNotification } from '../../redux/actions'
 import {
     backgroundColor,
     Routes,

@@ -8,24 +8,14 @@ import {
     TouchableWithoutFeedback,
     Alert,
 } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../redux/actions/userActions'
 import { backgroundColor, Routes, profileEditUrl } from '../constants'
 import { strings } from '../localization'
 import { Button } from '../components/Button'
 import { ToggleSwitch } from '../components/settings/ToggleSwitch'
 import { version } from '../../package.json'
 import { displayName } from '../../app.json'
-// import {
-//     setNotifications,
-//     setIdinvFilter,
-//     setNotificationDelay,
-//     updateUser,
-//     userFetchFailed,
-// } from '../redux/actions'
 import { NumInput } from '../components/settings/NumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
-import { RootState } from '../redux/store'
 import { decodeIdinv } from '../helpers/encode'
 import { IdinvBlock } from '../components/IdinvBlock'
 import { Get } from '../requests/newRequest'

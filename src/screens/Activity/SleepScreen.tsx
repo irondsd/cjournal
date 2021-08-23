@@ -10,8 +10,6 @@ import {
     Alert,
 } from 'react-native'
 import { secs2time } from '../../helpers/dateTime'
-import { useDispatch } from 'react-redux'
-import { addActivity } from '../../redux/actions'
 import { strings } from '../../localization'
 import { Routes, ActivityTypes } from '../../constants'
 import Activity from '../../classes/Activity'

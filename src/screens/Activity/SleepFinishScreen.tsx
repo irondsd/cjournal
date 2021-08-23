@@ -7,8 +7,6 @@ import {
     BackHandler,
     StatusBar,
 } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { updateActivity } from '../../redux/actions'
 import { strings } from '../../localization'
 import { Routes, smileSize } from '../../constants'
 import { IActivityClass, IAData } from '../../classes/Activity'

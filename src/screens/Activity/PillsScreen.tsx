@@ -8,20 +8,20 @@ import {
 } from '../../constants'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
-import { useSelector, useDispatch } from 'react-redux'
-import { addActivity } from '../../redux/actions'
 import { findLatestTask } from '../../classes/Task'
 import { TimePicker } from '../../components/TimePicker2'
 import TakePhoto from '../../components/TakePhoto'
 import { DropDownInput } from '../../components/DropDownInputTS'
 import Activity from '../../classes/Activity'
-import { RootState } from '../../redux/store'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { objectCleanUp } from '../../helpers/utils'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { useTasks } from '../../context/tasksContext'
+import { useUser } from '../../context/userContext'
+import { useActivities } from '../../context/activitiesContext'
 
 type PillsScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -40,13 +40,12 @@ type PillsActivityType = {
 }
 
 export const PillsScreen: FC<PillsScreenProps> = ({ navigation, route }) => {
-    const user = useSelector((state: RootState) => state.user)
-    const tasks = useSelector((state: RootState) => state.tasks)
-    const dispatch = useDispatch()
     const { params } = route
     const [activity, setActivity] = useState<PillsActivityType>({})
     const [data, setData] = useState<IAData>({})
     const [pillsList, setPillsList] = useState<string[]>([])
+    const { patient } = useUser()
+    const { activityAdd } = useActivities()
 
     const updateActivityValue = (key: string, value: any) => {
         setActivity({
@@ -74,7 +73,7 @@ export const PillsScreen: FC<PillsScreenProps> = ({ navigation, route }) => {
             undefined,
             objectCleanUp(data),
         )
-        dispatch(addActivity(newAct))
+        activityAdd(newAct)
         navigation.navigate(Routes.Home)
     }
 
@@ -88,15 +87,14 @@ export const PillsScreen: FC<PillsScreenProps> = ({ navigation, route }) => {
         // setup activity
         const time_started = timestamp()
         const activity_type: ActivityTypes = params.sender
-        const task = params?.task || findLatestTask(tasks, activity_type)
+        // const task = params?.task || findLatestTask(tasks, activity_type)
         setActivity({
             activity_type: ActivityTypes[activity_type],
             time_started,
-            task,
+            // task,
         })
         // set pills list
         const pillsType = prescriptions[activity_type]
-        const patient = user.patient || {}
         const pillsList: string[] =
             patient[pillsType as keyof typeof patient] || []
         setPillsList(pillsList)

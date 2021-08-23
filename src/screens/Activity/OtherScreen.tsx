@@ -11,7 +11,6 @@ import { Button } from '../../components/Button'
 import { AudioRecorder } from '../../components/AudioRecorderTS'
 import { TimePickCombined } from '../../components/TimePickCombined'
 import { addHint } from '../../services/hints'
-import { addActivity } from '../../redux/actions'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
@@ -31,7 +30,7 @@ type OtherScreenProps = {
 // todo: refactor to join Others, Trainer and Vertical pos calib screen
 
 export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
-    const dispatch = useDispatch()
+    const { activityAdd } = useActivities()
     const { params } = route
     const [activity, setActivity] = useState<Partial<IActivity>>({
         activity_type: ActivityTypes[params.sender],
@@ -51,7 +50,7 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
         )
         // console.log(newAct)
         if (data.type) addHint(activity.activity_type, data.type)
-        dispatch(addActivity(newAct))
+        activityAdd(newAct)
         navigation.navigate(Routes.Home)
     }
 

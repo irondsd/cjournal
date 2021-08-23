@@ -11,13 +11,12 @@ import { Button } from '../../components/Button'
 import { AudioRecorder } from '../../components/AudioRecorderTS'
 import { TimePickCombined } from '../../components/TimePickCombined'
 import { addHint } from '../../services/hints'
-import { addActivity } from '../../redux/actions'
 import { findLatestTask } from '../../classes/Task'
-import { RootState } from '../../redux/store'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useActivities } from '../../context/activitiesContext'
+import { useTasks } from '../../context/tasksContext'
 
 type TimePickScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -34,7 +33,6 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     navigation,
     route,
 }) => {
-    const tasks = useSelector((state: RootState) => state.tasks)
     const dispatch = useDispatch()
     const { params } = route
     const [activity, setActivity] = useState<Partial<IActivity>>({
@@ -42,7 +40,8 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
         task: params.task,
     })
     const [data, setData] = useState<IAData>({})
-    const { activities } = useActivities()
+    const { activities, activityAdd } = useActivities()
+    const { tasks } = useTasks()
 
     const submit = () => {
         const newAct = Activity.init(
@@ -54,8 +53,9 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
             data,
         )
         // console.log(newAct)
+        activityAdd(newAct)
         if (data.type) addHint(activity.activity_type, data.type)
-        dispatch(addActivity(newAct))
+
         navigation.navigate(Routes.Home)
     }
 
@@ -76,8 +76,8 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
             })
         }
 
-        const task = findLatestTask(tasks, activity.activity_type)
-        if (task) setActivity({ task })
+        // const task = findLatestTask(tasks, activity.activity_type)
+        // if (task) setActivity({ task })
     }, [params])
 
     return (

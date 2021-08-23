@@ -11,10 +11,10 @@ import { Button } from '../../components/Button'
 import { CaloriesInput } from '../../components/CaloriesInputTS'
 import { TimePickCombined } from '../../components/TimePickCombined'
 import { addHint } from '../../services/hints'
-import { addActivity } from '../../redux/actions'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
+import { useActivities } from '../../context/activitiesContext'
 
 type TrainerScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -31,7 +31,7 @@ export const TrainerScreen: FC<TrainerScreenProps> = ({
     navigation,
     route,
 }) => {
-    const dispatch = useDispatch()
+    const { activityAdd } = useActivities()
     const { params } = route
     const [activity, setActivity] = useState<Partial<IActivity>>({
         activity_type: ActivityTypes[params.sender],
@@ -51,7 +51,7 @@ export const TrainerScreen: FC<TrainerScreenProps> = ({
         )
         // console.log(newAct)
         if (data.type) addHint(activity.activity_type, data.type)
-        dispatch(addActivity(newAct))
+        activityAdd(newAct)
         navigation.navigate(Routes.Home)
     }
 
