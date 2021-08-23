@@ -1,34 +1,14 @@
 import React, { FC } from 'react'
-import { Platform, StyleSheet, Text, View, TextInput } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { connect } from 'react-redux'
-import { logoutUser, addActivity } from '../redux/actions'
-import {
-    backgroundColor,
-    Routes,
-    ActivityTypes,
-    defaultStyles,
-    borderGrey,
-} from '../constants'
-import { strings } from '../localization'
-import { CameraKitCameraScreen } from 'react-native-camera-kit'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { View } from 'react-native'
+import { defaultStyles } from '../constants'
 import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
-import requestCameraPermission from '../permissions/requestCameraPermissions'
 import SaveButton from '../components/SaveButton'
-import {
-    cancelLocalNotification,
-    scheduleNotification,
-} from '../notifications/notifications'
-import { getUtcOffset } from '../helpers/dateTime'
-import sync from '../services/sync'
+import { scheduleNotification } from '../notifications/notifications'
 import { idinvWatcher } from '../services/idinvWatcher'
 import { activityAsyncSave } from '../services/asyncStorage'
 import { uploadRequest } from '../requests/uploadRequest'
-import RNFS from 'react-native-fs'
-import { Get, Post } from '../requests/newRequest'
-import { logPath, readLog, writeLog } from '../services/logger'
+import { logPath, readLog } from '../services/logger'
 import { useUser } from '../context/userContext'
 import { useAuth } from '../context/authContext'
 import { login } from '../requests/login'

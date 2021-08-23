@@ -1,6 +1,4 @@
 import timestamp from '../helpers/timestamp'
-import store from '../redux/store'
-import { tokensReceived, updateUser } from '../redux/actions'
 import { updateTokenBeforeExpiration } from '../constants'
 import { authorize, refresh } from 'react-native-app-auth'
 import { identityServerConfig } from '../constants/config'
@@ -57,8 +55,8 @@ export default class Tokens implements ITokensClass {
                                     )
                                     throw new Error(res)
                                 }
-                                store.dispatch(updateUser(res))
-                                store.dispatch(tokensReceived(result))
+                                // store.dispatch(updateUser(res))
+                                // store.dispatch(tokensReceived(result))
 
                                 resolve(result)
                             })
@@ -84,7 +82,7 @@ export default class Tokens implements ITokensClass {
                 .then((result: any) => {
                     this.ongoingUpdate = false
                     if (result.accessToken) {
-                        store.dispatch(tokensReceived(result))
+                        // store.dispatch(tokensReceived(result))
                         resolve(result)
                     }
                 })

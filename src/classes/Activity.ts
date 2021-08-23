@@ -1,13 +1,5 @@
 import timestamp from '../helpers/timestamp'
-import store from '../redux/store'
 import { Post, Put, Delete } from '../requests/newRequest'
-import {
-    activitySyncFailed,
-    activitySynced,
-    activityDeleted,
-    addActivity,
-    updateActivity,
-} from '../redux/actions'
 import { moveToParentDir, downloadFile } from '../services/fs'
 import GPS from '../sensors/GPS'
 import {
@@ -17,7 +9,6 @@ import {
     locationRetryLimit,
 } from '../constants'
 import { getUtcOffset } from '../helpers/dateTime'
-import { uploadRequest } from '../requests/uploadRequest'
 import objectId from '../helpers/objectId'
 import { LocationType } from '../sensors/GPS'
 import { objectCleanUp } from '../helpers/utils'
@@ -148,9 +139,9 @@ export default class Activity implements IActivityClass {
             time_ended: undefined,
             utc_offset: getUtcOffset(),
             task: undefined,
-            user: store.getState().user._id,
-            patient: store.getState().user.patient,
-            idinv: store.getState().user.idinv,
+            // user: store.getState().user._id,
+            // patient: store.getState().user.patient,
+            // idinv: store.getState().user.idinv,
             updated_at: timestamp(),
             comment: comment,
             data: data,
@@ -183,9 +174,9 @@ export default class Activity implements IActivityClass {
             time_ended: undefined,
             utc_offset: getUtcOffset(),
             task: undefined,
-            user: store.getState().user._id,
-            patient: store.getState().user.patient,
-            idinv: store.getState().user.idinv,
+            // user: store.getState().user._id,
+            // patient: store.getState().user.patient,
+            // idinv: store.getState().user.idinv,
             updated_at: timestamp(),
             comment: comment,
             data: data,
@@ -208,9 +199,9 @@ export default class Activity implements IActivityClass {
             time_ended: time_ended,
             utc_offset: getUtcOffset(),
             task: task,
-            user: store.getState().user._id,
-            patient: store.getState().user.patient,
-            idinv: store.getState().user.idinv,
+            // user: store.getState().user._id,
+            // patient: store.getState().user.patient,
+            // idinv: store.getState().user.idinv,
             updated_at: timestamp(),
             comment: comment,
             data: data,
@@ -220,20 +211,20 @@ export default class Activity implements IActivityClass {
 
     static instantInitSave(activity_type: string, navigate: any) {
         const activity = Activity.instantInit(activity_type)
-        store.dispatch(addActivity(activity))
+        // store.dispatch(addActivity(activity))
         navigate(Routes.Home)
     }
 
     static async instantInitWithLocationSave(activity_type: string) {
         let activity = Activity.instantInit(activity_type)
-        store.dispatch(addActivity(activity))
+        // store.dispatch(addActivity(activity))
 
         // retry location for 5 times
         for (let i = 0; i < locationRetryLimit; i++) {
             try {
                 let res = await activity.attachLocation()
                 // console.log('location success')
-                store.dispatch(updateActivity(activity))
+                // store.dispatch(updateActivity(activity))
                 break
             } catch (err) {
                 console.log(err)
@@ -281,36 +272,35 @@ export default class Activity implements IActivityClass {
     }
 
     applyUser() {
-        if (!this.user) this.user = store.getState().user._id
-        if (!this.idinv) this.idinv = store.getState().user.idinv
+        // if (!this.user) this.user = store.getState().user._id
+        // if (!this.idinv) this.idinv = store.getState().user.idinv
     }
 
     sync(_id: string, access_token: string) {
-        return new Promise((resolve, reject) => {
-            this.applyUser()
-
-            if (this.system?.awaitsSync) {
-                return this.createOnServer(_id, access_token)
-                    .then(res => resolve(store.dispatch(activitySynced(this))))
-                    .catch(error =>
-                        reject(store.dispatch(activitySyncFailed(this))),
-                    )
-            } else if (this.system?.awaitsEdit) {
-                return this.editOnServer(_id, access_token)
-                    .then(res => resolve(store.dispatch(activitySynced(this))))
-                    .catch(error =>
-                        reject(store.dispatch(activitySyncFailed(this))),
-                    )
-            } else if (this.system?.awaitsDelete) {
-                if (this.system.awaitsDelete && this.system.awaitsSync)
-                    return Promise.resolve(activityDeleted(this))
-                return this.deleteOnServer(_id, access_token)
-                    .then(() => resolve(store.dispatch(activityDeleted(this))))
-                    .catch(error =>
-                        reject(store.dispatch(activitySyncFailed(this))),
-                    )
-            }
-        })
+        // return new Promise((resolve, reject) => {
+        //     this.applyUser()
+        //     if (this.system?.awaitsSync) {
+        //         return this.createOnServer(_id, access_token)
+        //             .then(res => resolve(store.dispatch(activitySynced(this))))
+        //             .catch(error =>
+        //                 reject(store.dispatch(activitySyncFailed(this))),
+        //             )
+        //     } else if (this.system?.awaitsEdit) {
+        //         return this.editOnServer(_id, access_token)
+        //             .then(res => resolve(store.dispatch(activitySynced(this))))
+        //             .catch(error =>
+        //                 reject(store.dispatch(activitySyncFailed(this))),
+        //             )
+        //     } else if (this.system?.awaitsDelete) {
+        //         if (this.system.awaitsDelete && this.system.awaitsSync)
+        //             return Promise.resolve(activityDeleted(this))
+        //         return this.deleteOnServer(_id, access_token)
+        //             .then(() => resolve(store.dispatch(activityDeleted(this))))
+        //             .catch(error =>
+        //                 reject(store.dispatch(activitySyncFailed(this))),
+        //             )
+        //     }
+        // })
     }
 
     increaseFailedSyncCount() {
@@ -338,25 +328,25 @@ export default class Activity implements IActivityClass {
     createOnServer(_id: string, access_token: string) {
         this.addLastSyncAttempt()
 
-        const path = store.getState().settings.idinvFilter
-            ? `idinv/${store.getState().user.idinv}/activity/`
-            : `users/${_id}/activity/`
+        // const path = store.getState().settings.idinvFilter
+        //     ? `idinv/${store.getState().user.idinv}/activity/`
+        //     : `users/${_id}/activity/`
 
-        if (this.system?.upload)
-            return uploadRequest(path, 'POST', access_token, this)
-        else return Post(path, access_token, this)
+        // if (this.system?.upload)
+        //     return uploadRequest(path, 'POST', access_token, this)
+        // else return Post(path, access_token, this)
     }
 
     editOnServer(_id: string, access_token: string) {
         this.addLastSyncAttempt()
 
-        const path = store.getState().settings.idinvFilter
-            ? `idinv/${store.getState().user.idinv}/activity/${this._id}`
-            : `users/${_id}/activity/${this._id}`
+        // const path = store.getState().settings.idinvFilter
+        //     ? `idinv/${store.getState().user.idinv}/activity/${this._id}`
+        //     : `users/${_id}/activity/${this._id}`
 
-        if (this.system?.upload)
-            return uploadRequest(path, 'PUT', access_token, this)
-        else return Put(path, access_token, this)
+        // if (this.system?.upload)
+        //     return uploadRequest(path, 'PUT', access_token, this)
+        // else return Put(path, access_token, this)
     }
 
     deleteOnServer(_id: string, access_token: string) {

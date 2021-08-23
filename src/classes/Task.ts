@@ -9,7 +9,6 @@ import {
     ActivityTypes,
 } from '../constants'
 import { strings } from '../localization'
-import { taskCancelNotification } from '../redux/actions'
 
 export interface ITask {
     _id: string
@@ -103,7 +102,7 @@ export default class Task implements ITaskClass {
 
     delayNotification() {
         const time = this.notification.time + delayNotificationBy
-        taskCancelNotification(this.notification.id)
+        // taskCancelNotification(this.notification.id)
         scheduleNotification(
             this._id,
             this.activity_type,
@@ -191,7 +190,7 @@ export function sort(array: ITaskClass[]): ITaskClass[] {
 }
 
 export function findLatestTask(
-    array: ITaskClass[],
+    array: ITask[],
     activity_type: string,
 ): string | undefined {
     let _id
@@ -210,9 +209,6 @@ export function findLatestTask(
     return _id
 }
 
-export function findTaskById(
-    array: ITaskClass[],
-    _id: string,
-): ITask | undefined {
+export function findTaskById(array: ITask[], _id: string): ITask | undefined {
     return array.find(task => task._id === _id)
 }
