@@ -1,11 +1,9 @@
 import React, { FC, useEffect } from 'react'
 import BackgroundFetch from 'react-native-background-fetch'
-import { useSelector } from 'react-redux'
-import sync from './src/services/sync'
+// import sync from './src/services/sync'
 import { NavContainer } from './src/navigation/NavContainer'
 import { idinvWatcher } from './src/services/idinvWatcher'
 import { setupNotifications } from './src/notifications/notifications'
-import { RootState } from './src/redux/store'
 import { AuthProvider } from './src/context/authContext'
 import { UserProvider } from './src/context/userContext'
 import { ActivitiesProvider } from './src/context/activitiesContext'
@@ -13,8 +11,8 @@ import { TasksProvider } from './src/context/tasksContext'
 import { SettingsProvider } from './src/context/settingsContext'
 
 const App: FC = () => {
-    const user = useSelector((state: RootState) => state.user)
-    const tokens = useSelector((state: RootState) => state.tokens)
+    // const user = useSelector((state: RootState) => state.user)
+    // const tokens = useSelector((state: RootState) => state.tokens)
 
     useEffect(() => {
         setupNotifications()
@@ -25,13 +23,13 @@ const App: FC = () => {
                 startOnBoot: true, // <-- Android-only
             },
             () => {
-                if (user._id && tokens) {
-                    sync(user._id, tokens)
-                    if (user._id && tokens.access_token && user.idinv)
-                        idinvWatcher(user._id, tokens.access_token, user.idinv)
-                } else {
-                    console.log(`Sync aborted, not logged in`)
-                }
+                // if (user._id && tokens) {
+                //     sync(user._id, tokens)
+                //     if (user._id && tokens.access_token && user.idinv)
+                //         idinvWatcher(user._id, tokens.access_token, user.idinv)
+                // } else {
+                //     console.log(`Sync aborted, not logged in`)
+                // }
 
                 BackgroundFetch.finish(BackgroundFetch.FETCH_RESULT_NEW_DATA)
             },
