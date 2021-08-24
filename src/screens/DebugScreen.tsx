@@ -12,10 +12,12 @@ import { logPath, readLog } from '../services/logger'
 import { useUser } from '../context/userContext'
 import { useAuth } from '../context/authContext'
 import { login } from '../requests/login'
+import { useSync } from '../hooks/useSync'
 
 export const DebugScreen: FC = () => {
     const { _id, idinv, load: userLoad } = useUser()
     const { access_token, refresh } = useAuth()
+    const { syncActivities } = useSync()
 
     const uploadFile = () => {
         const activity = Activity.instantInit('Stairs', '', {
@@ -51,6 +53,12 @@ export const DebugScreen: FC = () => {
                 title={'refresh tokens'}
                 onPress={() => {
                     refresh()
+                }}
+            />
+            <SaveButton
+                title={'sync activities'}
+                onPress={() => {
+                    syncActivities()
                 }}
             />
             <SaveButton

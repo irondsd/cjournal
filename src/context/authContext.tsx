@@ -194,7 +194,7 @@ const AuthProvider: FC = ({ children }) => {
                             token_lifetime,
                         },
                     })
-                    console.log('tokens refreshed')
+                    console.log('tokens successfully refreshed')
                     resolve()
                 })
                 .catch(err => {
