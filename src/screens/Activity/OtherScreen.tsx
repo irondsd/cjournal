@@ -15,6 +15,7 @@ import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
 import { useActivities } from '../../context/activitiesContext'
+import { useMakeActivity } from '../../hooks/useMakeActivity'
 
 type OtherScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -30,27 +31,19 @@ type OtherScreenProps = {
 // todo: refactor to join Others, Trainer and Vertical pos calib screen
 
 export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
-    const { activityAdd } = useActivities()
+    const { activities, activityAdd, activityUpdate } = useActivities()
     const { params } = route
-    const [activity, setActivity] = useState<Partial<IActivity>>({
-        activity_type: ActivityTypes[params.sender],
-        time_started: timestamp(),
+    const [activity, updateActivity, updateData] = useMakeActivity({
+        activity_type: params.sender,
     })
-    const [data, setData] = useState<IAData>({})
-    const { activities } = useActivities()
 
     const submit = () => {
-        const newAct = Activity.init(
-            activity.activity_type,
-            activity.time_started,
-            activity.time_ended,
-            undefined,
-            undefined,
-            data,
-        )
-        // console.log(newAct)
-        if (data.type) addHint(activity.activity_type, data.type)
-        activityAdd(newAct)
+        if (params.id) activityUpdate(activity)
+        else activityAdd(activity)
+
+        navigation.navigate(Routes.Home)
+        if (activity.data.type)
+            addHint(activity.activity_type, activity.data.type)
         navigation.navigate(Routes.Home)
     }
 
@@ -59,8 +52,8 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
 
         if (id) {
             const act = activities[id]
-            setActivity(act)
-            if (act.data) setData(act.data)
+            updateActivity({ ...act })
+            if (act.data) updateData({ ...act.data })
         } else {
             const title = strings[sender]
             navigation.setOptions({
@@ -74,19 +67,19 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
             <TimePickCombined
                 time_started={activity.time_started}
                 time_ended={activity.time_ended}
-                onChange={(s, e) => {
-                    setActivity({ ...activity, time_started: s, time_ended: e })
+                onChange={(time_started, time_ended) => {
+                    updateActivity({ time_started, time_ended })
                 }}
             />
             <OthersPickers
                 activity_type={activity.activity_type}
                 open={true}
-                value={data.type}
-                onChange={value => setData({ ...data, type: value })}
+                value={activity.data.type}
+                onChange={value => updateData({ type: value })}
             />
             <AudioRecorder
-                file={data.audioFile}
-                onChange={value => setData({ ...data, audioFile: value })}
+                file={activity.data.audioFile}
+                onChange={value => updateData({ audioFile: value })}
             />
             <Button title={strings.Save} onPress={submit} />
         </View>

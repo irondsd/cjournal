@@ -1,22 +1,17 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { View } from 'react-native'
-import { ActivityTypes, defaultStyles, Routes } from '../../constants'
+import { defaultStyles, Routes } from '../../constants'
 import { strings } from '../../localization'
-import timestamp from '../../helpers/timestamp'
-import { useDispatch, useSelector } from 'react-redux'
 import { Comment } from '../../components/CommentTS'
-import Activity, { IActivity } from '../../classes/Activity'
-import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { AudioRecorder } from '../../components/AudioRecorderTS'
 import { TimePickCombined } from '../../components/TimePickCombined'
-import { addHint } from '../../services/hints'
-import { findLatestTask } from '../../classes/Task'
 import { RouteProp } from '@react-navigation/native'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useActivities } from '../../context/activitiesContext'
 import { useTasks } from '../../context/tasksContext'
+import { useMakeActivity } from '../../hooks/useMakeActivity'
 
 type TimePickScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -33,28 +28,16 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     navigation,
     route,
 }) => {
-    const dispatch = useDispatch()
     const { params } = route
-    const [activity, setActivity] = useState<Partial<IActivity>>({
-        activity_type: ActivityTypes[params.sender],
-        task: params.task,
+    const { activities, activityAdd, activityUpdate } = useActivities()
+    const [activity, updateActivity, updateData] = useMakeActivity({
+        activity_type: params.sender,
     })
-    const [data, setData] = useState<IAData>({})
-    const { activities, activityAdd } = useActivities()
     const { tasks } = useTasks()
 
     const submit = () => {
-        const newAct = Activity.init(
-            activity.activity_type,
-            activity.time_started,
-            activity.time_ended,
-            activity.task,
-            activity.comment,
-            data,
-        )
-        // console.log(newAct)
-        activityAdd(newAct)
-        if (data.type) addHint(activity.activity_type, data.type)
+        if (params.id) activityUpdate(activity)
+        else activityAdd(activity)
 
         navigation.navigate(Routes.Home)
     }
@@ -64,8 +47,8 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
 
         if (id) {
             const act = activities[id]
-            setActivity(act)
-            if (act.data) setData(act.data)
+            updateActivity({ ...act })
+            if (act.data) updateData({ ...act.data })
             navigation.setOptions({
                 headerTitle: `${strings.Editing} ${strings[sender]}`,
             })
@@ -85,17 +68,17 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
             <TimePickCombined
                 time_started={activity.time_started}
                 time_ended={activity.time_ended}
-                onChange={(s, e) => {
-                    setActivity({ ...activity, time_started: s, time_ended: e })
+                onChange={(time_started, time_ended) => {
+                    updateActivity({ time_started, time_ended })
                 }}
             />
             <Comment
                 value={activity.comment}
-                onChange={comment => setActivity({ ...activity, comment })}
+                onChange={comment => updateActivity({ comment })}
             />
             <AudioRecorder
-                file={data.audioFile}
-                onChange={value => setData({ ...data, audioFile: value })}
+                file={activity.data.audioFile}
+                onChange={value => updateData({ audioFile: value })}
             />
             <Button title={strings.Save} onPress={submit} />
         </View>

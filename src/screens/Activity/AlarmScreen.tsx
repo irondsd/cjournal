@@ -29,7 +29,6 @@ export const AlarmScreen: FC<AlarmScreenProps> = ({ navigation }) => {
     const [locations, setLocations] = useState<LocationType[]>([])
     const [activity, updateActivity, updateData] = useMakeActivity({
         activity_type: ActivityTypes.Alarm,
-        time_started: timestamp(),
     })
     const { activityAdd } = useActivities()
 
@@ -87,13 +86,13 @@ export const AlarmScreen: FC<AlarmScreenProps> = ({ navigation }) => {
             <View style={styles.long}>
                 <Comment
                     onChange={value => {
-                        updateActivity('comment', value)
+                        updateActivity({ comment: value })
                     }}
                     value={activity.comment}
                 />
                 <AudioRecorder
                     audioFile={activity.data.audioFile}
-                    setAudio={value => updateData('audioFile', value)}
+                    setAudio={value => updateData({ audioFile: value })}
                 />
                 <Button
                     title={strings.Save}
