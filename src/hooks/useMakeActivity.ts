@@ -1,4 +1,3 @@
-import { time } from 'console'
 import { useState } from 'react'
 import { IActivity, IAData } from '../classes/Activity'
 import { ActivityTypes } from '../constants'
@@ -14,8 +13,8 @@ export const useMakeActivity = (
     provided: Provided,
 ): [
     activity: IActivity,
-    updateActivity: (key: string, value: any) => void,
-    updateData: (key: string, value: any) => void,
+    updateActivity: (values: Partial<IActivity>) => void,
+    updateData: (values: Partial<IAData>) => void,
 ] => {
     const { _id, idinv } = useUser()
     const [data, setData] = useState<IAData>({})
@@ -29,18 +28,18 @@ export const useMakeActivity = (
         ...provided,
     })
 
-    const updateActivityValue = (key: string, value: any) => {
+    const updateActivityValue = (values: Partial<IActivity>) => {
         setActivity({
             ...activity,
-            [key]: value,
+            ...values,
         })
     }
-    const updateDataValue = (key: string, value: any) => {
+    const updateDataValue = (values: Partial<IAData>) => {
         setData({
             ...data,
-            [key]: value,
+            ...values,
         })
     }
 
-    return [activity, updateActivityValue, updateDataValue]
+    return [{ ...activity, data }, updateActivityValue, updateDataValue]
 }
