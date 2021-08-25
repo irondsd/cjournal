@@ -26,6 +26,7 @@ const needsSync = (activity: IActivity) => {
 export const useSync = () => {
     const {
         activities,
+        sorted,
         activitiesLoadFromArray,
         activityDeleted,
         activitySynced,
@@ -52,12 +53,14 @@ export const useSync = () => {
         return new Promise(async (resolve, reject) => {
             await checkExpiration()
 
-            const activityArray = Object.values(activities)
-
+            const activityArray = [...sorted]
             const promises = []
             activityArray.forEach(activity => {
-                if (needsSync(activity)) promises.push(syncActivity(activity))
+                if (needsSync(activity)) {
+                    promises.push(syncActivity(activity))
+                }
             })
+
             if (!promises.length) return resolve()
 
             Promise.all(promises)
@@ -68,9 +71,10 @@ export const useSync = () => {
 
     const syncActivity = async (activity: IActivity): Promise<void> => {
         return new Promise((resolve, reject) => {
-            const url = idinv
-                ? `idinv/${idinv}/activity/`
-                : `users/${_id}/activity/`
+            const url =
+                activity.idinv && idinvFilter
+                    ? `idinv/${idinv}/activity/`
+                    : `users/${_id}/activity/`
 
             if (activity.system?.awaitsSync) {
                 if (activity.task)
@@ -98,7 +102,7 @@ export const useSync = () => {
                         reject()
                     })
             } else if (activity.system?.awaitsEdit) {
-                const putUrl = url + _id
+                const putUrl = url + activity._id
                 if (activity.system?.upload)
                     return uploadRequest(url, 'PUT', access_token, activity)
                         .then(() => {
@@ -106,7 +110,7 @@ export const useSync = () => {
                             resolve()
                         })
                         .catch(err => {
-                            console.log('act put err', err)
+                            console.log('act put upload err', err)
                             activitySyncFailed(activity)
                             reject()
                         })
