@@ -12,6 +12,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { useActivities } from '../../context/activitiesContext'
 import { useTasks } from '../../context/tasksContext'
 import { useMakeActivity } from '../../hooks/useMakeActivity'
+import { DeleteActivityButton } from '../../components/DeleteActivityButton'
 
 type TimePickScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -29,7 +30,8 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
     route,
 }) => {
     const { params } = route
-    const { activities, activityAdd, activityUpdate } = useActivities()
+    const { activities, activityAdd, activityUpdate, activityDelete } =
+        useActivities()
     const [activity, updateActivity, updateData] = useMakeActivity({
         activity_type: params.sender,
     })
@@ -51,6 +53,16 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
             if (act.data) updateData({ ...act.data })
             navigation.setOptions({
                 headerTitle: `${strings.Editing} ${strings[sender]}`,
+                headerRight: () => {
+                    return (
+                        <DeleteActivityButton
+                            onPress={() => {
+                                activityDelete(act)
+                                navigation.goBack()
+                            }}
+                        />
+                    )
+                },
             })
         } else {
             const title = strings[sender]
