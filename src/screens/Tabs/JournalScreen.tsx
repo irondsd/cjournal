@@ -31,6 +31,8 @@ export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
 
     const { sorted } = useActivities()
 
+    const visible = sorted.filter(a => !a?.system?.awaitsDelete)
+
     const { fetchActivities } = useSync()
 
     useEffect(() => {
@@ -70,7 +72,7 @@ export const JournalScreen: FC<JournalScreenProps> = ({ navigation }) => {
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <FlatList
                 style={styles.list}
-                data={sorted}
+                data={visible}
                 contentContainerStyle={{ paddingBottom: 30 }}
                 overScrollMode={'always'}
                 renderItem={renderItem}
