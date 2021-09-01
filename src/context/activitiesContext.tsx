@@ -52,6 +52,8 @@ function activitiesReducer(
     state: Activities,
     { type, payload }: { type: Actions; payload: any },
 ): Activities {
+    console.log('Activities call:', Actions[type])
+
     switch (type) {
         case Actions.RESTORE: {
             return payload
@@ -68,7 +70,10 @@ function activitiesReducer(
             }
 
             payload.forEach((a: IActivity) => {
-                newState[a._id] = a
+                // check if current activity is newer
+                if (state[a._id].updated_at > a.updated_at)
+                    newState[a._id] = state[a._id]
+                else newState[a._id] = a
             })
 
             return newState
@@ -79,6 +84,13 @@ function activitiesReducer(
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
             activity.system.awaitsSync = true
+
+            if (!activity.user) {
+                console.log('ERROR: activity added without user')
+                console.log(activity)
+                return state
+            }
+
             newState[activity._id] = activity
             return newState
         }
@@ -101,8 +113,11 @@ function activitiesReducer(
         }
         case Actions.SYNCED: {
             const newState: Activities = { ...state }
+
             const { _id } = payload
-            delete newState[_id].system
+            const activity = newState[_id]
+            if (activity) delete activity.system
+
             return newState
         }
         case Actions.SYNC_FAILED: {
@@ -116,9 +131,10 @@ function activitiesReducer(
         }
         case Actions.DELETED: {
             const newState = { ...state }
-            const { _id } = payload
 
-            delete newState[_id]
+            const { _id } = payload
+            const activity = newState[_id]
+            if (activity) delete activity.system
 
             return newState
         }
@@ -190,6 +206,7 @@ const ActivitiesProvider: FC = ({ children }) => {
         const sorted = array.sort(function (a, b) {
             return b['time_started'] - a['time_started']
         })
+
         setSorted(sorted)
     }, [activities])
 
