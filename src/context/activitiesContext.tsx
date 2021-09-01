@@ -10,6 +10,7 @@ import { IActivity } from '../classes/Activity'
 import { strings } from '../localization'
 import { activitiesAsyncSave } from '../services/asyncStorage'
 import { showToast } from '../services/toast'
+import timestamp from '../helpers/timestamp'
 
 const defaultState: Activities = {}
 
@@ -99,6 +100,7 @@ function activitiesReducer(
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
+            activity.updated_at = timestamp()
             activity.system.awaitsEdit = true
             newState[activity._id] = activity
             return newState
@@ -107,6 +109,7 @@ function activitiesReducer(
             const newState: Activities = { ...state }
             const activity: IActivity = payload
             if (!activity.system) activity.system = {}
+            activity.updated_at = timestamp()
             activity.system.awaitsDelete = true
             newState[activity._id] = activity
             return newState
