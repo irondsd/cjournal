@@ -25,7 +25,6 @@ const needsSync = (activity: IActivity) => {
 
 export const useSync = () => {
     const {
-        activities,
         sorted,
         activitiesLoadFromArray,
         activityDeleted,
@@ -42,7 +41,7 @@ export const useSync = () => {
             token_lifetime - timestamp() < updateTokenBeforeExpiration
         return new Promise((resolve, reject) => {
             if (!needUpdate || ongoingUpdate) return resolve()
-
+            console.log('need update, expires in', token_lifetime - timestamp())
             refresh()
                 .then(() => resolve())
                 .catch(() => reject())
@@ -53,18 +52,20 @@ export const useSync = () => {
         return new Promise(async (resolve, reject) => {
             await checkExpiration()
 
-            const activityArray = [...sorted]
             const promises = []
-            activityArray.forEach(activity => {
+            sorted.forEach(activity => {
                 if (needsSync(activity)) {
+                    console.log(activity.activity_type, activity.system)
                     promises.push(syncActivity(activity))
                 }
             })
 
             if (!promises.length) return resolve()
-
+            console.log('SYNC: ', sorted)
             Promise.all(promises)
-                .then(() => resolve())
+                .then(() => {
+                    resolve()
+                })
                 .catch(() => reject())
         })
     }
@@ -125,7 +126,7 @@ export const useSync = () => {
                         reject()
                     })
             } else if (activity.system?.awaitsDelete) {
-                const deleteUrl = url + _id
+                const deleteUrl = url + activity._id
                 if (
                     activity.system.awaitsDelete &&
                     activity.system.awaitsSync
@@ -149,8 +150,8 @@ export const useSync = () => {
     }
 
     const fetchActivities = async (): Promise<void> => {
-        await checkExpiration()
-        await syncActivities()
+        const res1 = await checkExpiration()
+        const res2 = await syncActivities()
 
         const url = idinvFilter
             ? `idinv/${idinv}/activity`
