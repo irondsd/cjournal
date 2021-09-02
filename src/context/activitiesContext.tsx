@@ -72,7 +72,9 @@ function activitiesReducer(
 
             payload.forEach((a: IActivity) => {
                 // check if current activity is newer
-                if (state[a._id].updated_at > a.updated_at)
+                const old = state[a._id]
+
+                if (old && old.updated_at > a.updated_at)
                     newState[a._id] = state[a._id]
                 else newState[a._id] = a
             })
