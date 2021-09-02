@@ -21,10 +21,14 @@ export const TrainerTile: FC<TileChildProps> = ({ disabled }) => {
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(Routes.Trainer)
+                navigation.navigate(Routes.Other, {
+                    sender: name,
+                })
             }}
             onLongPress={() => {
-                navigation.navigate(Routes.Trainer)
+                navigation.navigate(Routes.Other, {
+                    sender: name,
+                })
             }}
         />
     )

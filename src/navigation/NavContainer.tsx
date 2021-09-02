@@ -21,7 +21,6 @@ import {
     BloodPressureScreen,
     ExerciseFinishScreen,
     OtherScreen,
-    TrainerScreen,
     PillsScreen,
     SleepScreen,
     SleepFinishScreen,
@@ -178,7 +177,7 @@ export const NavContainer: FC = () => {
                         />
                         <RootStack.Screen
                             name={Routes.Trainer}
-                            component={TrainerScreen}
+                            component={OtherScreen}
                         />
                         <RootStack.Screen
                             name={Routes.Other}

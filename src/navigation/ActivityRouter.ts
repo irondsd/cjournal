@@ -7,7 +7,6 @@ export enum Routes {
     Stairs = 'Stairs',
     Pills = 'Pills',
     Other = 'Other',
-    Trainer = 'Trainer',
     BloodPressure = 'BloodPressure',
 }
 
@@ -42,7 +41,7 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
         case ActivityTypes.OtherWeakness:
             return Routes.Other
         case ActivityTypes.Trainer:
-            return Routes.Trainer
+            return Routes.Other
         default:
             return Routes.TimePick
     }

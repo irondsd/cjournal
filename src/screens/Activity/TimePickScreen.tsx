@@ -36,6 +36,7 @@ export const TimePickScreen: FC<TimePickScreenProps> = ({
         activity_type: params.sender,
     })
     const { tasks } = useTasks()
+    // todo: find task function
 
     const submit = () => {
         if (params.id) activityUpdate(activity)

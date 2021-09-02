@@ -16,6 +16,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
 import { useActivities } from '../../context/activitiesContext'
 import { useMakeActivity } from '../../hooks/useMakeActivity'
+import { DeleteActivityButton } from '../../components/DeleteActivityButton'
+import { CaloriesInput } from '../../components/CaloriesInputTS'
 
 type OtherScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -28,22 +30,21 @@ type OtherScreenProps = {
     route: OtherScreenRouteProp
 }
 
-// todo: refactor to join Others, Trainer and Vertical pos calib screen
-
 export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
-    const { activities, activityAdd, activityUpdate } = useActivities()
+    const { activities, activityAdd, activityUpdate, activityDelete } =
+        useActivities()
     const { params } = route
     const [activity, updateActivity, updateData] = useMakeActivity({
         activity_type: params.sender,
     })
 
     const submit = () => {
+        if (activity.data.type)
+            addHint(activity.activity_type, activity.data.type)
+
         if (params.id) activityUpdate(activity)
         else activityAdd(activity)
 
-        navigation.navigate(Routes.Home)
-        if (activity.data.type)
-            addHint(activity.activity_type, activity.data.type)
         navigation.navigate(Routes.Home)
     }
 
@@ -54,6 +55,19 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
             const act = activities[id]
             updateActivity({ ...act })
             if (act.data) updateData({ ...act.data })
+            navigation.setOptions({
+                headerTitle: `${strings.Editing} ${strings[sender]}`,
+                headerRight: () => {
+                    return (
+                        <DeleteActivityButton
+                            onPress={() => {
+                                activityDelete(act)
+                                navigation.goBack()
+                            }}
+                        />
+                    )
+                },
+            })
         } else {
             const title = strings[sender]
             navigation.setOptions({
@@ -77,10 +91,17 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
                 value={activity.data.type}
                 onChange={value => updateData({ type: value })}
             />
-            <AudioRecorder
-                file={activity.data.audioFile}
-                onChange={value => updateData({ audioFile: value })}
-            />
+            {activity.activity_type === ActivityTypes.Trainer ? (
+                <CaloriesInput
+                    value={activity.data.calories}
+                    onChange={v => updateData({ calories: v })}
+                />
+            ) : (
+                <AudioRecorder
+                    file={activity.data.audioFile}
+                    onChange={value => updateData({ audioFile: value })}
+                />
+            )}
             <Button title={strings.Save} onPress={submit} />
         </View>
     )
