@@ -104,6 +104,10 @@ export const DropDownInput: FC<DropDownProps> = ({
         if (!filteredList.length && isOpen) setIsOpen(false)
     }, [isOpen])
 
+    useEffect(() => {
+        setInputValue(value)
+    }, [value])
+
     return (
         <View style={styles.container}>
             <View style={defaultStyles.border}>

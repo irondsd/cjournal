@@ -87,7 +87,7 @@ export const OtherScreen: FC<OtherScreenProps> = ({ navigation, route }) => {
             />
             <OthersPickers
                 activity_type={activity.activity_type}
-                open={true}
+                open={params.id ? false : true}
                 value={activity.data.type}
                 onChange={value => updateData({ type: value })}
             />
