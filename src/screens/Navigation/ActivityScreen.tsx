@@ -25,18 +25,18 @@ export const ActivityScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <MealTile navigation={navigation} />
-                <AlcoholTile navigation={navigation} />
-                <SmokingTile navigation={navigation} />
+                <MealTile />
+                <AlcoholTile />
+                <SmokingTile />
             </TileLine>
             <TileLine>
-                <SexTile navigation={navigation} />
-                <ShowerTile navigation={navigation} />
-                <ToiletTile navigation={navigation} />
+                <SexTile />
+                <ShowerTile />
+                <ToiletTile />
             </TileLine>
             <TileLine>
                 <TileSpacer />
-                <OtherActivityTile navigation={navigation} />
+                <OtherActivityTile />
                 <TileSpacer />
             </TileLine>
         </View>

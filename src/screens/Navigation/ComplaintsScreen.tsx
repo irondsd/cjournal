@@ -23,14 +23,14 @@ export const ComplaintsScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <ArrhythmiaTile navigation={navigation} />
-                <PalpitationTile navigation={navigation} />
-                <DyspneaTile navigation={navigation} />
+                <ArrhythmiaTile />
+                <PalpitationTile />
+                <DyspneaTile />
             </TileLine>
             <TileLine>
-                <TachypneaTile navigation={navigation} />
-                <VisionDisturbancesTile navigation={navigation} />
-                <OtherComplaintsTile navigation={navigation} />
+                <TachypneaTile />
+                <VisionDisturbancesTile />
+                <OtherComplaintsTile />
             </TileLine>
         </View>
     )

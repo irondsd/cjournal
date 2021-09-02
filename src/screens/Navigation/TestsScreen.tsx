@@ -25,18 +25,18 @@ export const TestsScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <StairsTile navigation={navigation} />
-                <WalkingTestTile navigation={navigation} />
-                <DeepBreathingTile navigation={navigation} />
+                <StairsTile />
+                <WalkingTestTile />
+                <DeepBreathingTile />
             </TileLine>
             <TileLine>
-                <PressTile navigation={navigation} />
-                <StrainingTile navigation={navigation} />
-                <ActiveOrthostasisTile navigation={navigation} />
+                <PressTile />
+                <StrainingTile />
+                <ActiveOrthostasisTile />
             </TileLine>
             <TileLine>
                 <TileSpacer />
-                <PsychoemotionalTestTile navigation={navigation} />
+                <PsychoemotionalTestTile />
                 <TileSpacer />
             </TileLine>
         </View>

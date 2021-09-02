@@ -23,14 +23,14 @@ export const PhysicalLoadScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <WalkingTile navigation={navigation} />
-                <RunningTile navigation={navigation} />
-                <BicyclingTile navigation={navigation} />
+                <WalkingTile />
+                <RunningTile />
+                <BicyclingTile />
             </TileLine>
             <TileLine>
-                <WorkoutTile navigation={navigation} />
-                <TrainerTile navigation={navigation} />
-                <OtherLoadTile navigation={navigation} />
+                <WorkoutTile />
+                <TrainerTile />
+                <OtherLoadTile />
             </TileLine>
         </View>
     )

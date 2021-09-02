@@ -20,9 +20,9 @@ export const TakingMedicineScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <CourseTherapyTile navigation={navigation} />
-                <ReliefOfAttackTile navigation={navigation} />
-                <MedicineTestTile navigation={navigation} />
+                <CourseTherapyTile />
+                <ReliefOfAttackTile />
+                <MedicineTestTile />
             </TileLine>
         </View>
     )

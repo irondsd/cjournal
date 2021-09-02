@@ -17,9 +17,9 @@ export const ServiceScreen = ({ navigation }) => {
 
     return (
         <TileLine>
-            <CuffFixTile navigation={navigation} />
-            <ElectrodeReplacementTile navigation={navigation} />
-            <VerticalPositionCalibrationTile navigation={navigation} />
+            <CuffFixTile />
+            <ElectrodeReplacementTile />
+            <VerticalPositionCalibrationTile />
         </TileLine>
     )
 }

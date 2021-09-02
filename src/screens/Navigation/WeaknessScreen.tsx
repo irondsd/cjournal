@@ -23,13 +23,13 @@ export const WeaknessScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <SyncopeTile navigation={navigation} />
-                <NauseaTile navigation={navigation} />
-                <StupefactionTile navigation={navigation} />
+                <SyncopeTile />
+                <NauseaTile />
+                <StupefactionTile />
             </TileLine>
             <TileLine>
-                <FatigueTile navigation={navigation} />
-                <OtherWeaknessTile navigation={navigation} />
+                <FatigueTile />
+                <OtherWeaknessTile />
                 <TileSpacer />
             </TileLine>
         </View>

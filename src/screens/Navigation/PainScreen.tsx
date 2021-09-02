@@ -22,13 +22,13 @@ export const PainScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <RetrosternalPainTile navigation={navigation} />
-                <HeartAreaPainTile navigation={navigation} />
-                <HeadacheTile navigation={navigation} />
+                <RetrosternalPainTile />
+                <HeartAreaPainTile />
+                <HeadacheTile />
             </TileLine>
             <TileLine>
                 <TileSpacer />
-                <OtherPainTile navigation={navigation} />
+                <OtherPainTile />
                 <TileSpacer />
             </TileLine>
         </View>

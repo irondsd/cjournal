@@ -20,9 +20,9 @@ export const EmotionalStressScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <PositiveEmotionsTile navigation={navigation} />
-                <NegativeEmotionsTile navigation={navigation} />
-                <OtherEmotionsTile navigation={navigation} />
+                <PositiveEmotionsTile />
+                <NegativeEmotionsTile />
+                <OtherEmotionsTile />
             </TileLine>
         </View>
     )
