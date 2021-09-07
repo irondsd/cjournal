@@ -56,8 +56,8 @@ export type RootStackParamList = {
     Alarm: undefined
     Sleep: { startedAt: number }
     Welcome: { message?: string }
-    QRScan: { returnTo: Routes }
-    Camera: { returnTo: Routes }
+    QRScan: { returnTo: keyof RootStackParamList; sender: ActivityTypes }
+    Camera: { returnTo: keyof RootStackParamList; sender: ActivityTypes }
     Settings: { qrValue?: string }
     ExerciseFinish: { activity: string }
     SleepFinish: { activity: string }
