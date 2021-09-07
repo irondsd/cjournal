@@ -31,7 +31,7 @@ import timestamp from '../../helpers/timestamp'
 import Barometer from '../../sensors/Barometer'
 import Pedometer from '../../sensors/Pedometer'
 import GPS from '../../sensors/GPS'
-import SaveButton from '../../components/SaveButton'
+import { Button } from '../../components/Button'
 
 let started = false
 
@@ -215,7 +215,7 @@ class StairsScreen extends Component {
                     <Text style={styles.timer}>{this.state.meters}</Text>
                 </View>
                 <View style={styles.button}>
-                    <SaveButton
+                    <Button
                         title={this.state.button_text}
                         onPress={() => {
                             this.startPressed()

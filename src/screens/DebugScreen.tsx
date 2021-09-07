@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { defaultStyles } from '../constants'
 import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
-import SaveButton from '../components/SaveButton'
+import { Button } from '../components/Button'
 import { scheduleNotification } from '../notifications/notifications'
 import { idinvWatcher } from '../services/idinvWatcher'
 import { activityAsyncSave } from '../services/asyncStorage'
@@ -31,13 +31,13 @@ export const DebugScreen: FC = () => {
 
     return (
         <View style={defaultStyles.container}>
-            <SaveButton
+            <Button
                 title={'run idinv watcher'}
                 onPress={() => {
                     idinvWatcher(_id, access_token, idinv)
                 }}
             />
-            <SaveButton
+            <Button
                 title={'login'}
                 onPress={() => {
                     login(access_token)
@@ -49,39 +49,39 @@ export const DebugScreen: FC = () => {
                         })
                 }}
             />
-            <SaveButton
+            <Button
                 title={'refresh tokens'}
                 onPress={() => {
                     refresh()
                 }}
             />
-            <SaveButton
+            <Button
                 title={'sync activities'}
                 onPress={() => {
                     syncActivities()
                 }}
             />
-            <SaveButton
+            <Button
                 title={'clear activity localstorage'}
                 onPress={() => {
                     activityAsyncSave([])
                 }}
             />
 
-            <SaveButton
+            <Button
                 title={'upload log'}
                 onPress={() => {
                     uploadFile()
                 }}
             />
-            <SaveButton
+            <Button
                 title={'read log'}
                 onPress={async () => {
                     const log = await readLog()
                     console.log(log)
                 }}
             />
-            <SaveButton
+            <Button
                 title={'notification in 10 sec'}
                 onPress={async () => {
                     scheduleNotification(
