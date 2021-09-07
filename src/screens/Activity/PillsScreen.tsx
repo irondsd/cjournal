@@ -9,8 +9,8 @@ import {
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { findLatestTask } from '../../classes/Task'
-import { TimePicker } from '../../components/TimePicker2'
-import TakePhoto from '../../components/TakePhoto'
+import { TimePicker } from '../../components/TimePicker'
+import { Photo } from '../../components/Photo'
 import { DropDownInput } from '../../components/DropDownInputTS'
 import Activity from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
@@ -22,6 +22,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { useTasks } from '../../context/tasksContext'
 import { useUser } from '../../context/userContext'
 import { useActivities } from '../../context/activitiesContext'
+import { useMakeActivity } from '../../hooks/useMakeActivity'
+import { DeleteActivityButton } from '../../components/DeleteActivityButton'
 
 type PillsScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -41,91 +43,86 @@ type PillsActivityType = {
 
 export const PillsScreen: FC<PillsScreenProps> = ({ navigation, route }) => {
     const { params } = route
-    const [activity, setActivity] = useState<PillsActivityType>({})
-    const [data, setData] = useState<IAData>({})
-    const [pillsList, setPillsList] = useState<string[]>([])
+    const { activities, activityAdd, activityUpdate, activityDelete } =
+        useActivities()
+    const [activity, updateActivity, updateData] = useMakeActivity({
+        activity_type: params.sender,
+    })
+    const { tasks } = useTasks()
     const { patient } = useUser()
-    const { activityAdd } = useActivities()
-
-    const updateActivityValue = (key: string, value: any) => {
-        setActivity({
-            ...activity,
-            [key]: value,
-        })
-    }
-    const updateDataValue = (key: string, value: any) => {
-        setData({
-            ...data,
-            [key]: value,
-        })
-    }
-
-    const clearPhoto = () => {
-        updateDataValue('photoFile', undefined)
-    }
+    const [pillsList, setPillsList] = useState([])
 
     const submit = () => {
-        const newAct = Activity.init(
-            activity.activity_type!,
-            activity.time_started!,
-            undefined,
-            activity.task,
-            undefined,
-            objectCleanUp(data),
-        )
-        activityAdd(newAct)
+        if (params.id) activityUpdate(activity)
+        else activityAdd(activity)
         navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {
-        const sender = params.sender
-        const title: string = strings[sender]
-        navigation.setOptions({
-            headerTitle: title,
-        })
+        const { sender, id } = params
 
-        // setup activity
-        const time_started = timestamp()
-        const activity_type: ActivityTypes = params.sender
-        // const task = params?.task || findLatestTask(tasks, activity_type)
-        setActivity({
-            activity_type: ActivityTypes[activity_type],
-            time_started,
-            // task,
-        })
+        if (id) {
+            const act = activities[id]
+            updateActivity({ ...act })
+            if (act.data) updateData({ ...act.data })
+            navigation.setOptions({
+                headerTitle: `${strings.Editing} ${strings[sender]}`,
+                headerRight: () => {
+                    return (
+                        <DeleteActivityButton
+                            onPress={() => {
+                                activityDelete(act)
+                                navigation.goBack()
+                            }}
+                        />
+                    )
+                },
+            })
+        } else {
+            const title = strings[sender]
+            navigation.setOptions({
+                headerTitle: title,
+            })
+        }
+
         // set pills list
-        const pillsType = prescriptions[activity_type]
+        const pillsType = prescriptions[sender]
+
         const pillsList: string[] =
             patient[pillsType as keyof typeof patient] || []
         setPillsList(pillsList)
+
         // set up photo
-        const photoFile = params?.image?.uri
-        if (photoFile) setData({ photoFile: photoFile })
+        const uri = params?.image?.uri
+        if (uri) updateData({ photoFile: uri })
     }, [params])
 
     return (
         <View style={defaultStyles.container}>
-            <TimePicker
-                time={activity.time_started!}
-                onChange={(value: any) =>
-                    updateActivityValue('time_started', value)
-                }
-            />
+            <View style={{ width: '100%' }}>
+                <TimePicker
+                    time={activity.time_started!}
+                    onChange={value => updateActivity({ time_started: value })}
+                />
+            </View>
             <DropDownInput
                 placeholder={strings.Drug}
                 options={pillsList}
-                onChange={(value: any) => updateDataValue('pill', value)}
+                onChange={value => updateData({ pill: value })}
                 open={true}
-                value={data.pill!}
+                value={activity.data.pill!}
             />
-            <TakePhoto
-                photo={data.photoFile}
+            <Photo
+                value={activity.data.photoFile}
+                onChange={() => {
+                    updateData({ photoFile: undefined })
+                }}
                 openCamera={() =>
                     navigation.navigate(Routes.Camera, {
                         returnTo: Routes.Pills,
+                        sender: params.sender,
                     })
                 }
-                removePhoto={clearPhoto}
             />
             <Button title={strings.Save} onPress={submit} />
         </View>
