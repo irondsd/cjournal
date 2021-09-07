@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { TimePicker } from './TimePicker2'
+import { TimePicker } from './TimePicker'
 import { TimeSwitch, TimeSwitchValues } from './TimeSwitchTS'
 import { DurationPicker } from './DurationPickerTS'
 
