@@ -8,6 +8,7 @@ export const uploadRequest = (
     access_token: string,
     activity: IActivity,
 ) => {
+    // todo: allow multiple files
     return new Promise((resolve, reject) => {
         const uploadUrl = apiUrl + path
         const files: RNFS.UploadFileItem[] = []
