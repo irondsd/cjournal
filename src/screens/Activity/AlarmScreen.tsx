@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import { Routes, ActivityTypes, defaultStyles, width } from '../../constants'
 import { strings } from '../../localization'
-import AudioRecorder from '../../components/AudioRecorder'
+import { AudioRecorder } from '../../components/AudioRecorderTS'
 import timestamp from '../../helpers/timestamp'
 import GPS, { LocationType } from '../../sensors/GPS'
 import { Comment } from '../../components/CommentTS'
@@ -91,8 +91,8 @@ export const AlarmScreen: FC<AlarmScreenProps> = ({ navigation }) => {
                     value={activity.comment}
                 />
                 <AudioRecorder
-                    audioFile={activity.data.audioFile}
-                    setAudio={value => updateData({ audioFile: value })}
+                    file={activity.data.audioFile}
+                    onChange={value => updateData({ audioFile: value })}
                 />
                 <Button
                     title={strings.Save}

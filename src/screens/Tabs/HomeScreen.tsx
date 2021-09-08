@@ -1,16 +1,8 @@
 import React, { FC, useEffect, useState, useLayoutEffect } from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
-import { connect, useSelector } from 'react-redux'
-import {
-    backgroundColor,
-    appColor,
-    ActivityTypes,
-    Routes,
-    defaultStyles,
-} from '../../constants'
+import { View, StatusBar } from 'react-native'
+import { backgroundColor, Routes, defaultStyles } from '../../constants'
 import { strings } from '../../localization'
 import { SettingsButton } from '../../components/SettingsButton'
-import sync from '../../services/sync'
 import { TileLine } from '../../components/TileLine'
 import {
     ActivityTile,
