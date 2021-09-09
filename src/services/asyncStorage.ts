@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Activity } from '../classes/Activity'
-import { Task } from '../classes/Task'
+import { Activity } from '../types/Activity'
+import { Task } from '../types/Task'
 import { User } from '../context/userContext'
 import { Activities } from '../context/activitiesContext'
 import { AuthState } from '../context/authContext'

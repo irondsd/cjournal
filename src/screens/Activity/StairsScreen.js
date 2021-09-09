@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 // import { HeaderBackButton } from 'react-navigation'
 // import { barometer } from 'react-native-sensors'
 import { average, altMeter } from '../../helpers/math'
-import { findLatestTask } from '../../classes/Task'
+import { findLatestTask } from '../../types/Task'
 // import KeepAwake from 'react-native-keep-awake'
 // import { cancelNotification } from '../../redux/actions'
 import {

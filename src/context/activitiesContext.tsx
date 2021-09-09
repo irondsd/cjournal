@@ -6,7 +6,7 @@ import React, {
     useEffect,
     useState,
 } from 'react'
-import { Activity } from '../classes/Activity'
+import { Activity } from '../types/Activity'
 import { strings } from '../localization'
 import { activitiesAsyncSave } from '../services/asyncStorage'
 import { showToast } from '../services/toast'

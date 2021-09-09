@@ -1,5 +1,5 @@
-import { Activity } from '../classes/Activity'
-import { Task } from '../classes/Task'
+import { Activity } from '../types/Activity'
+import { Task } from '../types/Task'
 import { useActivities } from '../context/activitiesContext'
 import { useAuth } from '../context/authContext'
 import { useSettings } from '../context/settingsContext'

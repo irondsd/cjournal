@@ -14,7 +14,7 @@ import { Routes } from '../../constants'
 import { FeelingsIcon } from '../../components/FeelingsIcon'
 import { writeLog } from '../../services/logger'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
-import { Activity, Data } from '../../classes/Activity'
+import { Activity, Data } from '../../types/Activity'
 import { useActivities } from '../../context/activitiesContext'
 
 const imgSize = Dimensions.get('window').width / 2.5

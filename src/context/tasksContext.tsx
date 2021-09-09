@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext } from 'react'
-import { Task } from '../classes/Task'
+import { Task } from '../types/Task'
 import timestamp from '../helpers/timestamp'
 
 const defaultState: Tasks = {}

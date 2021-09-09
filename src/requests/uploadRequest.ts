@@ -1,5 +1,5 @@
 import RNFS from 'react-native-fs'
-import { Activity } from '../classes/Activity'
+import { Activity } from '../types/Activity'
 import { acceptedResCodes, apiUrl } from '../constants'
 
 export const uploadRequest = (

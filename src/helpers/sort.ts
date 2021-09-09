@@ -1,4 +1,4 @@
-import { Activity } from '../classes/Activity'
+import { Activity } from '../types/Activity'
 
 export function sortActivities(array: Activity[]): Activity[] {
     function compare(a: Activity, b: Activity) {

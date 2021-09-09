@@ -1,4 +1,4 @@
-import { Activity } from '../classes/Activity'
+import { Activity } from '../types/Activity'
 import { useActivities } from '../context/activitiesContext'
 import { useUser } from '../context/userContext'
 import timestamp from '../helpers/timestamp'

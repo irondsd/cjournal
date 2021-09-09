@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { strings } from '../../localization'
 import { Routes, smileSize } from '../../constants'
-import { Activity, Data } from '../../classes/Activity'
+import { Activity, Data } from '../../types/Activity'
 import { FeelingsIcon } from '../../components/FeelingsIcon'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
 import { writeLog } from '../../services/logger'

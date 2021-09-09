@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Activity, Data } from '../classes/Activity'
+import { Activity, Data } from '../types/Activity'
 import { ActivityTypes } from '../constants'
 import { useUser } from '../context/userContext'
 import objectId from '../helpers/objectId'
