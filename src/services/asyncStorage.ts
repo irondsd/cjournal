@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { IActivityClass } from '../classes/Activity'
-import { ITaskClass } from '../classes/Task'
-import { ITokens } from '../classes/Tokens'
+import { Activity } from '../classes/Activity'
+import { Task } from '../classes/Task'
 import { User } from '../context/userContext'
 import { Activities } from '../context/activitiesContext'
 import { AuthState } from '../context/authContext'
@@ -27,7 +26,7 @@ export function tokensAsyncSave(tokens: AuthState) {
     AsyncStorage.setItem(entries.tokens, JSON.stringify(tokens))
 }
 
-export function activityAsyncSave(activity: IActivityClass[]) {
+export function activityAsyncSave(activity: Activity[]) {
     AsyncStorage.setItem(entries.activity, JSON.stringify(activity))
 }
 
@@ -35,7 +34,7 @@ export function activitiesAsyncSave(activities: Activities) {
     AsyncStorage.setItem(entries.activity, JSON.stringify(activities))
 }
 
-export function tasksAsyncSave(tasks: ITaskClass[]) {
+export function tasksAsyncSave(tasks: Task[]) {
     AsyncStorage.setItem(entries.tasks, JSON.stringify(tasks))
 }
 

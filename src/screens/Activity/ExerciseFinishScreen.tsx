@@ -14,7 +14,7 @@ import { Routes } from '../../constants'
 import { FeelingsIcon } from '../../components/FeelingsIcon'
 import { writeLog } from '../../services/logger'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
-import { IActivityClass, IAData } from '../../classes/Activity'
+import { Activity, Data } from '../../classes/Activity'
 import { useActivities } from '../../context/activitiesContext'
 
 const imgSize = Dimensions.get('window').width / 2.5
@@ -24,8 +24,8 @@ export const ExerciseFinishScreen: FC<{ navigation: any }> = ({
 }) => {
     const { activityUpdate } = useActivities()
 
-    const submit = (feeling: IAData['feeling']) => {
-        const activity: IActivityClass = navigation.state.params.activity
+    const submit = (feeling: Data['feeling']) => {
+        const activity: Activity = navigation.state.params.activity
         activity.data.feeling = strings[feeling]
         activityUpdate(activity)
         navigation.navigate(Routes.Home)

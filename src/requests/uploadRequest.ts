@@ -1,12 +1,12 @@
 import RNFS from 'react-native-fs'
-import { IActivity } from '../classes/Activity'
+import { Activity } from '../classes/Activity'
 import { acceptedResCodes, apiUrl } from '../constants'
 
 export const uploadRequest = (
     path: string,
     method: 'POST' | 'PUT',
     access_token: string,
-    activity: IActivity,
+    activity: Activity,
 ) => {
     // todo: allow multiple files
     return new Promise((resolve, reject) => {

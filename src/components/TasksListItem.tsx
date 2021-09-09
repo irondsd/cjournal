@@ -2,11 +2,11 @@ import React, { FC } from 'react'
 import { displayDateTime } from '../helpers/dateTime'
 import { ListItem } from './ListItem'
 import { NavigationParams } from 'react-navigation'
-import { ITaskClass } from '../classes/Task'
+import { Task } from '../classes/Task'
 import { ActivityRouter } from '../navigation/ActivityRouter'
 
 interface TasksListItemProps {
-    task: ITaskClass
+    task: Task
     navigation: NavigationParams
 }
 

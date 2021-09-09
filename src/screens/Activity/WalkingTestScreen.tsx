@@ -16,9 +16,7 @@ import {
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch, useSelector } from 'react-redux'
-import Activity from '../../classes/Activity'
 import { Button } from '../../components/Button'
-import { findLatestTask } from '../../classes/Task'
 // import { RootState } from '../../redux/store'
 import { InfoBox } from '../../components/exercise/InfoBox'
 import { CircleProgress } from '../../components/exercise/CircleProgress'
@@ -77,18 +75,18 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
         setProgress(false)
         Vibration.vibrate(600)
 
-        const newAct = Activity.init(
-            activity.activity_type,
-            activity.time_started,
-            activity.time_ended,
-            activity.task,
-            undefined,
-            {
-                steps: pedometerData.numberOfSteps,
-                distance: parseInt(pedometerData.distance.toFixed(0)),
-                locations: geolocationData,
-            },
-        )
+        // const newAct = Activity.init(
+        //     activity.activity_type,
+        //     activity.time_started,
+        //     activity.time_ended,
+        //     activity.task,
+        //     undefined,
+        //     {
+        //         steps: pedometerData.numberOfSteps,
+        //         distance: parseInt(pedometerData.distance.toFixed(0)),
+        //         locations: geolocationData,
+        //     },
+        // )
         // console.log(newAct)
         // dispatch(addActivity(newAct))
         navigation.navigate(Routes.Home)

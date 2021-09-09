@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
-import Activity from '../../classes/Activity'
 import {
     ActivityTypes,
     Routes,

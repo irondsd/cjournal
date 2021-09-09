@@ -6,7 +6,7 @@ import React, {
     useEffect,
     useState,
 } from 'react'
-import { IActivity } from '../classes/Activity'
+import { Activity } from '../classes/Activity'
 import { strings } from '../localization'
 import { activitiesAsyncSave } from '../services/asyncStorage'
 import { showToast } from '../services/toast'
@@ -15,19 +15,19 @@ import timestamp from '../helpers/timestamp'
 const defaultState: Activities = {}
 
 export type Activities = {
-    [_id: string]: IActivity
+    [_id: string]: Activity
 }
 
 type ActivityFunctions = {
     activitiesRestore?: (activities: Activities) => void
-    activitiesLoadFromArray?: (activities: IActivity[]) => void
-    activityDelete?: (activity: IActivity) => void
-    activityAdd?: (activity: IActivity) => void
-    activityUpdate?: (activity: IActivity) => void
+    activitiesLoadFromArray?: (activities: Activity[]) => void
+    activityDelete?: (activity: Activity) => void
+    activityAdd?: (activity: Activity) => void
+    activityUpdate?: (activity: Activity) => void
     activitiesReset?: () => void
-    activitySynced?: (activity: IActivity) => void
-    activityDeleted?: (activity: IActivity) => void
-    activitySyncFailed?: (activity: IActivity) => void
+    activitySynced?: (activity: Activity) => void
+    activityDeleted?: (activity: Activity) => void
+    activitySyncFailed?: (activity: Activity) => void
 }
 
 enum Actions {
@@ -43,7 +43,7 @@ enum Actions {
 }
 
 const ActivitiesContext = createContext<
-    { activities: Activities; sorted: IActivity[] } & ActivityFunctions
+    { activities: Activities; sorted: Activity[] } & ActivityFunctions
 >({
     activities: defaultState,
     sorted: [],
@@ -70,7 +70,7 @@ function activitiesReducer(
                 }
             }
 
-            payload.forEach((a: IActivity) => {
+            payload.forEach((a: Activity) => {
                 // check if current activity is newer
                 const old = state[a._id]
 
@@ -84,7 +84,7 @@ function activitiesReducer(
         case Actions.ADD: {
             // todo check for files and set upload
             const newState: Activities = { ...state }
-            const activity: IActivity = payload
+            const activity: Activity = payload
             if (!activity.system) activity.system = {}
             activity.system.awaitsSync = true
 
@@ -100,7 +100,7 @@ function activitiesReducer(
         case Actions.UPDATE: {
             // todo check for files and set upload
             const newState: Activities = { ...state }
-            const activity: IActivity = payload
+            const activity: Activity = payload
             if (!activity.system) activity.system = {}
             activity.updated_at = timestamp()
             activity.system.awaitsEdit = true
@@ -109,7 +109,7 @@ function activitiesReducer(
         }
         case Actions.DELETE: {
             const newState: Activities = { ...state }
-            const activity: IActivity = payload
+            const activity: Activity = payload
             if (!activity.system) activity.system = {}
             activity.updated_at = timestamp()
             activity.system.awaitsDelete = true
@@ -127,7 +127,7 @@ function activitiesReducer(
         }
         case Actions.SYNC_FAILED: {
             const newState: Activities = { ...state }
-            const activity: IActivity = payload
+            const activity: Activity = payload
             if (!activity.system) activity.system = {}
             if (!activity.system.failedSyncs) activity.system.failedSyncs = 0
             activity.system.failedSyncs += 1
@@ -157,36 +157,36 @@ const ActivitiesProvider: FC = ({ children }) => {
         activitiesReducer,
         defaultState,
     )
-    const [sorted, setSorted] = useState<IActivity[]>([])
+    const [sorted, setSorted] = useState<Activity[]>([])
 
     const activitiesRestore = (activities: Activities) => {
         activitiesDispatch({ type: Actions.RESTORE, payload: activities })
     }
-    const activitiesLoadFromArray = (activities: IActivity[]) => {
+    const activitiesLoadFromArray = (activities: Activity[]) => {
         activitiesDispatch({ type: Actions.LOAD_ARRAY, payload: activities })
     }
-    const activityDelete = (activity: IActivity) => {
+    const activityDelete = (activity: Activity) => {
         activitiesDispatch({ type: Actions.DELETE, payload: activity })
         showToast(`${strings.Deleted} ${strings[activity.activity_type]}!`)
     }
-    const activityAdd = (activity: IActivity) => {
+    const activityAdd = (activity: Activity) => {
         activitiesDispatch({ type: Actions.ADD, payload: activity })
         showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
     }
-    const activityUpdate = (activity: IActivity) => {
+    const activityUpdate = (activity: Activity) => {
         activitiesDispatch({ type: Actions.UPDATE, payload: activity })
         showToast(`${strings.Saved} ${strings[activity.activity_type]}!`)
     }
     const activitiesReset = () => {
         activitiesDispatch({ type: Actions.RESET, payload: undefined })
     }
-    const activitySynced = (activity: IActivity) => {
+    const activitySynced = (activity: Activity) => {
         activitiesDispatch({ type: Actions.SYNCED, payload: activity })
     }
-    const activityDeleted = (activity: IActivity) => {
+    const activityDeleted = (activity: Activity) => {
         activitiesDispatch({ type: Actions.DELETED, payload: activity })
     }
-    const activitySyncFailed = (activity: IActivity) => {
+    const activitySyncFailed = (activity: Activity) => {
         activitiesDispatch({ type: Actions.SYNC_FAILED, payload: activity })
     }
 

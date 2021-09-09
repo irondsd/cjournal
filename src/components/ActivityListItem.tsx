@@ -2,20 +2,20 @@ import React, { FC, ReactNode } from 'react'
 import { displayDateTime } from '../helpers/dateTime'
 import { Routes, editable } from '../constants'
 import { ListItem } from './ListItem'
-import { IActivity, IActivityClass } from '../classes/Activity'
+import { Activity } from '../classes/Activity'
 import { Icon, IconProps } from '../components/Icon'
 import { ActivityRouter } from '../navigation/ActivityRouter'
 import { showMessage } from '../services/toast'
 import { strings } from '../localization'
 
 type ActivityListItemProps = {
-    activity: IActivityClass
+    activity: Activity
     navigation: any
 }
 
 // todo
 
-const synced = (activity: IActivity) => {
+const synced = (activity: Activity) => {
     if (activity.system) {
         if (activity.system.awaitsSync) return false
         if (activity.system.awaitsEdit) return false
@@ -25,19 +25,19 @@ const synced = (activity: IActivity) => {
     return true
 }
 
-const hasLocation = (activity: IActivity) => {
+const hasLocation = (activity: Activity) => {
     return !!activity.data?.locations
 }
 
-const hasPhoto = (activity: IActivity) => {
+const hasPhoto = (activity: Activity) => {
     return !!activity.data?.photoFile || !!activity.data?.image
 }
 
-const hasAudio = (activity: IActivity) => {
+const hasAudio = (activity: Activity) => {
     return !!activity.data?.audioFile || !!activity.data?.audio
 }
 
-const hasComment = (activity: IActivity) => {
+const hasComment = (activity: Activity) => {
     return !!activity.comment
 }
 

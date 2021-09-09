@@ -1,5 +1,5 @@
-import { IActivity } from '../classes/Activity'
-import { ITask } from '../classes/Task'
+import { Activity } from '../classes/Activity'
+import { Task } from '../classes/Task'
 import { useActivities } from '../context/activitiesContext'
 import { useAuth } from '../context/authContext'
 import { useSettings } from '../context/settingsContext'
@@ -13,7 +13,7 @@ import { login } from '../requests/login'
 import timestamp from '../helpers/timestamp'
 import { updateTokenBeforeExpiration } from '../constants'
 
-const needsSync = (activity: IActivity) => {
+const needsSync = (activity: Activity) => {
     if (activity.system) {
         if (activity.system.awaitsSync) return true
         if (activity.system.awaitsEdit) return true
@@ -70,7 +70,7 @@ export const useSync = () => {
         })
     }
 
-    const syncActivity = async (activity: IActivity): Promise<void> => {
+    const syncActivity = async (activity: Activity): Promise<void> => {
         return new Promise((resolve, reject) => {
             const url =
                 activity.idinv && idinvFilter
@@ -158,7 +158,7 @@ export const useSync = () => {
             : `users/${_id}/activity`
 
         Get(url, access_token)
-            .then((res: IActivity[]) => {
+            .then((res: Activity[]) => {
                 activitiesLoadFromArray(res)
             })
             .catch(err => {
@@ -173,7 +173,7 @@ export const useSync = () => {
         const url = idinvFilter ? `idinv/${idinv}/tasks` : `users/${_id}/tasks`
 
         Get(url, access_token)
-            .then((res: ITask[]) => {
+            .then((res: Task[]) => {
                 loadTasksFromArray(res)
             })
             .catch(err => {

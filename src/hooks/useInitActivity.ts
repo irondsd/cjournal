@@ -1,4 +1,4 @@
-import { IActivity } from '../classes/Activity'
+import { Activity } from '../classes/Activity'
 import { useActivities } from '../context/activitiesContext'
 import { useUser } from '../context/userContext'
 import timestamp from '../helpers/timestamp'
@@ -14,7 +14,7 @@ export const useInitActivity = () => {
     const { requestGeolocation } = useGeolocation()
 
     const initSave = (activity_type: ActivityTypes) => {
-        const activity: IActivity = {
+        const activity: Activity = {
             _id: objectId(),
             activity_type,
             time_started: timestamp(),
@@ -31,7 +31,7 @@ export const useInitActivity = () => {
         showToast(strings.ReqLocation)
         return requestGeolocation().then(res => {
             const { latitude, longitude } = res.coords
-            const activity: IActivity = {
+            const activity: Activity = {
                 _id: objectId(),
                 activity_type,
                 time_started: timestamp(),

@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { View } from 'react-native'
 import { defaultStyles } from '../constants'
-import Activity from '../classes/Activity'
 import timestamp from '../helpers/timestamp'
 import { Button } from '../components/Button'
 import { scheduleNotification } from '../notifications/notifications'
@@ -20,13 +19,13 @@ export const DebugScreen: FC = () => {
     const { syncActivities } = useSync()
 
     const uploadFile = () => {
-        const activity = Activity.instantInit('Stairs', '', {
-            logFile: logPath,
-        })
-
-        uploadRequest(`users/${_id}/activity`, 'POST', access_token, activity)
-            .then(res => console.log('upload success', res))
-            .catch(err => console.log('upload error: ', err))
+        // todo: fix
+        // const activity = Activity.instantInit('Stairs', '', {
+        //     logFile: logPath,
+        // })
+        // uploadRequest(`users/${_id}/activity`, 'POST', access_token, activity)
+        //     .then(res => console.log('upload success', res))
+        //     .catch(err => console.log('upload error: ', err))
     }
 
     return (

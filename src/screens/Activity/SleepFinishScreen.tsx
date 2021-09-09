@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { strings } from '../../localization'
 import { Routes, smileSize } from '../../constants'
-import { IActivityClass, IAData } from '../../classes/Activity'
+import { Activity, Data } from '../../classes/Activity'
 import { FeelingsIcon } from '../../components/FeelingsIcon'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
 import { writeLog } from '../../services/logger'
@@ -35,7 +35,7 @@ export const SleepFinishScreen: FC<SleepFinishScreenProps> = ({
 }) => {
     const { activities, activityUpdate } = useActivities()
 
-    const submit = (feeling: IAData['feeling']) => {
+    const submit = (feeling: Data['feeling']) => {
         const activity_id = route.params.activity
         const activity = activities[activity_id]
 

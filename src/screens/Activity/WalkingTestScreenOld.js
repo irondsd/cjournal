@@ -28,7 +28,6 @@ import {
 } from '../../constants'
 import { BackButton } from '../../components/BackButton'
 import { showError } from '../../services/toast'
-import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import requestLocationPermissions from '../../permissions/requestLocationPermissions'
 import GPS from '../../sensors/GPS'
