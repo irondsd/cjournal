@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { DropDownInput } from './DropDownInputTS'
+import { DropDownInput } from './DropDownInput'
 import { loadHints, saveDefaultHints } from '../services/hints'
 import { defaultHints } from '../constants/defaultHints'
 import { strings } from '../localization'

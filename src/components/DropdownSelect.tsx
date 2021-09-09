@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { placeholderGrey, defaultStyles } from '../constants'
-import { DropDownProps, styles } from './DropDownInputTS'
+import { DropDownProps, styles } from './DropDownInput'
 
 export const DropDownInput: FC<DropDownProps> = ({
     open = false,
@@ -34,7 +34,7 @@ export const DropDownInput: FC<DropDownProps> = ({
     const popUpHeight = maxLines * 40
 
     return (
-        <View style={styles.View}>
+        <View>
             <TouchableOpacity
                 activeOpacity={1}
                 style={defaultStyles.border}

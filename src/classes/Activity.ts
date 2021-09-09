@@ -12,7 +12,7 @@ import { getUtcOffset } from '../helpers/dateTime'
 import objectId from '../helpers/objectId'
 import { LocationType } from '../sensors/GPS'
 import { objectCleanUp } from '../helpers/utils'
-import { BloodPressureValues } from '../components/BloodPressureTS'
+import { BloodPressureValues } from '../components/BloodPressure'
 
 export interface IActivity {
     _id: string

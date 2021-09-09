@@ -16,7 +16,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient'
 import { showError } from '../services/toast'
 import { strings } from '../localization'
-import ActivityIcon from './ActivityIconTS'
+import ActivityIcon from './ActivityIcon'
 
 type TileProps = {
     title: string

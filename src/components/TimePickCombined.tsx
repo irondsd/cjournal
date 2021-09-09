@@ -1,8 +1,8 @@
 import React, { FC, useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { TimePicker } from './TimePicker'
-import { TimeSwitch, TimeSwitchValues } from './TimeSwitchTS'
-import { DurationPicker } from './DurationPickerTS'
+import { TimeSwitch, TimeSwitchValues } from './TimeSwitch'
+import { DurationPicker } from './DurationPicker'
 
 type TimePickCombinedProps = {
     time_started: number
