@@ -5,7 +5,7 @@ import React, {
     useContext,
     useEffect,
 } from 'react'
-import { tokensAsyncSave } from '../services/asyncStorage'
+import { authAsyncSave } from '../services/asyncStorage'
 import {
     authorize as authAuthorize,
     refresh as authRefresh,
@@ -13,7 +13,7 @@ import {
 import { identityServerConfig } from '../constants/config'
 import timestamp from '../helpers/timestamp'
 
-const defaultState: AuthState & Tokens = {
+const defaultState: AuthState = {
     isLoading: true,
     isLoggedIn: false,
     ongoingUpdate: false,
@@ -22,13 +22,15 @@ const defaultState: AuthState & Tokens = {
     token_lifetime: null,
 }
 
+export type AuthState = Tokens & State
+
 type Tokens = {
     access_token: string | null
     refresh_token: string | null
     token_lifetime: number | null
 }
 
-export type AuthState = {
+type State = {
     isLoading: boolean
     isLoggedIn: boolean
     ongoingUpdate: boolean
@@ -55,14 +57,9 @@ enum Actions {
 
 type Action = { type: Actions; payload?: Tokens }
 
-const AuthContext = createContext<AuthState & Tokens & AuthFunctions>(
-    defaultState,
-)
+const AuthContext = createContext<AuthState & AuthFunctions>(defaultState)
 
-function authReducer(
-    state: AuthState & Tokens,
-    { type, payload }: Action,
-): AuthState & Tokens {
+function authReducer(state: AuthState, { type, payload }: Action): AuthState {
     console.log('Auth call:', Actions[type])
     switch (type) {
         case Actions.RESTORE: {
@@ -208,7 +205,7 @@ const AuthProvider: FC = ({ children }) => {
     }
 
     useEffect(() => {
-        if (state.access_token) tokensAsyncSave(state)
+        if (state.access_token) authAsyncSave(state)
     }, [state])
 
     const value = {

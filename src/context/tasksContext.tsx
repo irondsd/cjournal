@@ -1,10 +1,10 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import React, { FC, createContext, useReducer, useContext } from 'react'
 import { Task } from '../types/Task'
 import timestamp from '../helpers/timestamp'
 
 const defaultState: Tasks = {}
 
-type Tasks = {
+export type Tasks = {
     [_id: string]: Task
 }
 
@@ -14,30 +14,38 @@ type TaskFunctions = {
     TaskComplete?: (task: Task) => void
     taskAddOrUpdate?: (task: Task) => void
     tasksReset?: () => void
-    taskSynced?: (task: Task) => void
     TaskCompleted?: (task: Task) => void
-    taskSyncFailed?: (task: Task) => void
 }
 
 const TasksContext = createContext<{ tasks: Tasks } & TaskFunctions>({
     tasks: defaultState,
 })
 
-function tasksReducer(state, { type, payload }): Tasks {
+enum Actions {
+    RESTORE,
+    LOAD_ARRAY,
+    COMPLETE,
+    RESET,
+}
+
+function tasksReducer(
+    state: Tasks,
+    { type, payload }: { type: Actions; payload: any },
+): Tasks {
     switch (type) {
-        case 'RESTORE': {
+        case Actions.RESTORE: {
             return payload
         }
-        case 'LOAD_ARRAY': {
+        case Actions.LOAD_ARRAY: {
             const newState: Tasks = {}
 
-            payload.forEach(a => {
-                newState[a._id] = a
+            payload.forEach((t: Task) => {
+                newState[t._id] = t
             })
 
             return newState
         }
-        case 'COMPLETE': {
+        case Actions.COMPLETE: {
             const newState: Tasks = { ...state }
             const { _id } = payload
             newState[_id].completed = true
@@ -45,18 +53,7 @@ function tasksReducer(state, { type, payload }): Tasks {
 
             return newState
         }
-        case 'SYNC_FAILED': {
-            const newState = { ...state }
-            const { _id } = payload
-
-            if (!newState[_id].system) newState[_id].system = {}
-            if (!newState[_id].system.failedSyncs)
-                newState[_id].system.failedSyncs = 0
-            newState[_id].system.failedSyncs += 1
-
-            return newState
-        }
-        case 'RESET': {
+        case Actions.RESET: {
             return defaultState
         }
         default: {
@@ -65,26 +62,20 @@ function tasksReducer(state, { type, payload }): Tasks {
     }
 }
 
-function TasksProvider({ children }) {
+const TasksProvider: FC = ({ children }) => {
     const [tasks, tasksDispatch] = useReducer(tasksReducer, defaultState)
 
     const tasksRestore = (tasks: Tasks) => {
-        tasksDispatch({ type: 'RESTORE', payload: tasks })
+        tasksDispatch({ type: Actions.RESTORE, payload: tasks })
     }
     const loadTasksFromArray = (tasks: Task[]) => {
-        tasksDispatch({ type: 'LOAD_ARRAY', payload: tasks })
+        tasksDispatch({ type: Actions.LOAD_ARRAY, payload: tasks })
     }
     const TaskComplete = (task: Task) => {
-        tasksDispatch({ type: 'COMPLETE', payload: task })
+        tasksDispatch({ type: Actions.COMPLETE, payload: task })
     }
     const tasksReset = () => {
-        tasksDispatch({ type: 'RESET', payload: undefined })
-    }
-    const taskSynced = (task: Task) => {
-        tasksDispatch({ type: 'SYNCED', payload: task })
-    }
-    const taskSyncFailed = (task: Task) => {
-        tasksDispatch({ type: 'SYNC_FAILED', payload: task })
+        tasksDispatch({ type: Actions.RESET, payload: undefined })
     }
 
     const value = {
@@ -93,9 +84,9 @@ function TasksProvider({ children }) {
         loadTasksFromArray,
         TaskComplete,
         tasksReset,
-        taskSynced,
-        taskSyncFailed,
     }
+
+    console.log(tasks)
     return (
         <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
     )

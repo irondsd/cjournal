@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react'
+import React, { FC, createContext, useReducer, useContext } from 'react'
 import { delayNotificationBy, Routes } from '../constants'
 
 const defaultState: Settings = {
@@ -7,7 +7,7 @@ const defaultState: Settings = {
     notificationDelay: delayNotificationBy,
 }
 
-type Settings = {
+export type Settings = {
     notifications: boolean
     idinvFilter: boolean
     notificationDelay: number
@@ -20,6 +20,7 @@ type Settings = {
 }
 
 type SettingsFunctions = {
+    restoreSettings?: (settings: Settings) => void
     toggleNotifications?: () => void
     toggleIdinvFilter?: () => void
     setNotificationDelay?: (n: number) => void
@@ -31,27 +32,39 @@ const SettingsContext = createContext<Settings & SettingsFunctions>(
     defaultState,
 )
 
-function settingsReducer(state: Settings, { type, payload }): Settings {
+enum Actions {
+    RESTORE,
+    TOGGLE_NOTIFICATIONS,
+    TOGGLE_IDINV_FILTER,
+    SET_NOTIFICATION_DELAY,
+    SET_LAST_SCREEN,
+    RESET_LAST_SCREEN,
+}
+
+function settingsReducer(
+    state: Settings,
+    { type, payload }: { type: Actions; payload: any },
+): Settings {
     switch (type) {
-        case 'RESTORE': {
+        case Actions.RESTORE: {
             return payload
         }
-        case 'TOGGLE_NOTIFICATIONS': {
+        case Actions.TOGGLE_NOTIFICATIONS: {
             const newState = { ...state }
             newState.notifications = !newState.notifications
             return newState
         }
-        case 'TOGGLE_IDINV_FILTER': {
+        case Actions.TOGGLE_IDINV_FILTER: {
             const newState = { ...state }
             newState.idinvFilter = !newState.idinvFilter
             return newState
         }
-        case 'SET_NOTIFICATION_DELAY': {
+        case Actions.SET_NOTIFICATION_DELAY: {
             const newState = { ...state }
             newState.notificationDelay = payload
             return newState
         }
-        case 'SET_LAST_SCREEN': {
+        case Actions.SET_LAST_SCREEN: {
             const newState = { ...state }
             newState.lastScreen = {
                 routeName: payload.routeName,
@@ -60,7 +73,7 @@ function settingsReducer(state: Settings, { type, payload }): Settings {
 
             return newState
         }
-        case 'RESET_LAST_SCREEN': {
+        case Actions.RESET_LAST_SCREEN: {
             const newState = { ...state }
             delete newState.lastScreen
             return newState
@@ -71,7 +84,7 @@ function settingsReducer(state: Settings, { type, payload }): Settings {
     }
 }
 
-function SettingsProvider({ children }) {
+const SettingsProvider: FC = ({ children }) => {
     const [settings, settingsDispatch] = useReducer(
         settingsReducer,
         defaultState,
@@ -79,42 +92,42 @@ function SettingsProvider({ children }) {
 
     const restoreSettings = (settings: Settings) => {
         settingsDispatch({
-            type: 'RESTORE',
+            type: Actions.RESTORE,
             payload: settings,
         })
     }
 
     const toggleNotifications = () => {
         settingsDispatch({
-            type: 'TOGGLE_NOTIFICATIONS',
+            type: Actions.TOGGLE_NOTIFICATIONS,
             payload: undefined,
         })
     }
 
     const toggleIdinvFilter = () => {
         settingsDispatch({
-            type: 'TOGGLE_IDINV_FILTER',
+            type: Actions.TOGGLE_IDINV_FILTER,
             payload: undefined,
         })
     }
 
     const setNotificationDelay = (n: number) => {
         settingsDispatch({
-            type: 'SET_NOTIFICATION_DELAY',
+            type: Actions.SET_NOTIFICATION_DELAY,
             payload: n,
         })
     }
 
     const setLastScreen = (routeName: Routes, params: any) => {
         settingsDispatch({
-            type: 'SET_LAST_SCREEN',
+            type: Actions.SET_LAST_SCREEN,
             payload: { routeName, params },
         })
     }
 
     const resetLastScreen = () => {
         settingsDispatch({
-            type: 'RESET_LAST_SCREEN',
+            type: Actions.RESET_LAST_SCREEN,
             payload: undefined,
         })
     }
