@@ -1,19 +1,17 @@
 import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
-import {
-    ActivityTypes,
-    Routes,
-    tileColor,
-    tileShadeColor,
-} from '../../constants'
+import { ActivityTypes, Routes } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
 
 const name = ActivityTypes.Sleep
 
-export const SleepTile: FC<TileChildProps> = ({ navigation, disabled }) => {
+export const SleepTile: FC<TileChildProps> = ({ disabled }) => {
+    const navigation = useNavigation()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             color="#0642bc"
             shadeColor="#0642bc"

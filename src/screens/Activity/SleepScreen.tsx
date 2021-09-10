@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import {
     Platform,
     StyleSheet,
@@ -10,23 +10,36 @@ import {
     Alert,
 } from 'react-native'
 import { secs2time } from '../../helpers/dateTime'
-import { useDispatch } from 'react-redux'
-import { addActivity } from '../../redux/actions'
 import { strings } from '../../localization'
 import { Routes, ActivityTypes } from '../../constants'
-import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
-import { screenAsyncSave, removeScreen } from '../../services/asyncStorage'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { Logger } from '../../services/logger'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { useActivities } from '../../context/activitiesContext'
+import { useSettings } from '../../context/settingsContext'
+import { useMakeActivity } from '../../hooks/useMakeActivity'
 
-export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
+type SleepScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Sleep'
+>
+type SleepScreenRouteProp = RouteProp<RootStackParamList, 'Sleep'>
+
+type SleepScreenProps = {
+    navigation: SleepScreenNavigationProp
+    route: SleepScreenRouteProp
+}
+
+export const SleepScreen: FC<SleepScreenProps> = ({ navigation, route }) => {
     const [timer, setTimer] = useState<string>('00:00')
     const [startedAt, setStartedAt] = useState(timestamp())
     const logger = new Logger('sleep' + timestamp())
-
-    const dispatch = useDispatch()
+    const { activityAdd } = useActivities()
+    const { setLastScreen, resetLastScreen } = useSettings()
+    const [activity] = useMakeActivity({ activity_type: ActivityTypes.Sleep })
 
     const backPressed = () => {
         terminateAlarm(strings.TerminateSleep, submit)
@@ -34,32 +47,31 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
     }
 
     const submit = () => {
-        removeScreen()
-        const createdActivity = Activity.init(
-            ActivityTypes.Sleep,
-            startedAt,
-            timestamp(),
-            undefined,
-            undefined,
-            {},
-        )
-        dispatch(addActivity(createdActivity))
+        resetLastScreen()
+
+        const createdActivity = {
+            ...activity,
+            time_started: startedAt,
+            time_ended: timestamp(),
+            updated_at: timestamp(),
+        }
+
+        activityAdd(createdActivity)
         navigation.navigate(Routes.SleepFinish, {
-            activity: createdActivity,
+            activity: createdActivity._id,
         })
     }
 
     useEffect(() => {
         // restore screen
-        if (navigation.state?.params?.startedAt)
-            setStartedAt(navigation.state.params.startedAt)
+        if (route.params?.startedAt) setStartedAt(route.params?.startedAt)
 
-        // save screen
-        screenAsyncSave({
-            screen: 'Sleep',
-            startedAt: navigation.state?.params?.startedAt
-                ? navigation.state?.params?.startedAt
-                : startedAt,
+        setLastScreen(Routes.Sleep, {
+            startedAt: route.params?.startedAt || startedAt,
+        })
+
+        navigation.setOptions({
+            headerShown: false,
         })
 
         // prevent going back without saving
@@ -100,10 +112,6 @@ export const SleepScreen: NavigationStackScreenComponent = ({ navigation }) => {
             </View>
         </View>
     )
-}
-
-SleepScreen.navigationOptions = () => {
-    return { header: null, headerLeft: null }
 }
 
 const styles = StyleSheet.create({

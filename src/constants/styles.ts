@@ -8,8 +8,16 @@ export const borderRadius = tileSize / 4
 export const imgSize = tileSize * 0.9
 export const tileFontSize = width * 0.034
 export const logoSize = Dimensions.get('window').width / 1.7
+export const smileSize = width / 2.5
 
 export const defaultStyles = StyleSheet.create({
+    navScreen: {
+        flex: 1,
+        backgroundColor: backgroundColor,
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+    },
     container: {
         flex: 1,
         backgroundColor: backgroundColor,

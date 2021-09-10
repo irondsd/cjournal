@@ -7,16 +7,16 @@ import {
     tileColor,
     tileShadeColor,
 } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
 
 const name = ActivityTypes.OtherEmotions
 
-export const OtherEmotionsTile: FC<TileChildProps> = ({
-    navigation,
-    disabled,
-}) => {
+export const OtherEmotionsTile: FC<TileChildProps> = ({ disabled }) => {
+    const navigation = useNavigation()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             shadeColor={tileColor}
             color={tileShadeColor}

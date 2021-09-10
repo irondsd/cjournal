@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import {
     StyleSheet,
     Text,
@@ -10,25 +10,24 @@ import {
 import { connect, useDispatch } from 'react-redux'
 import { defaultStyles } from '../../constants'
 import { strings } from '../../localization'
-import { updateActivity } from '../../redux/actions'
 import { Routes } from '../../constants'
 import { FeelingsIcon } from '../../components/FeelingsIcon'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { writeLog } from '../../services/logger'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
-import { IActivityClass, IAData } from '../../classes/Activity'
+import { Activity, Data } from '../../types/Activity'
+import { useActivities } from '../../context/activitiesContext'
 
 const imgSize = Dimensions.get('window').width / 2.5
 
-export const ExerciseFinishScreen: NavigationStackScreenComponent = ({
+export const ExerciseFinishScreen: FC<{ navigation: any }> = ({
     navigation,
 }) => {
-    const dispatch = useDispatch()
+    const { activityUpdate } = useActivities()
 
-    const submit = (feeling: IAData['feeling']) => {
-        const activity: IActivityClass = navigation.state.params.activity
+    const submit = (feeling: Data['feeling']) => {
+        const activity: Activity = navigation.state.params.activity
         activity.data.feeling = strings[feeling]
-        dispatch(updateActivity(activity))
+        activityUpdate(activity)
         navigation.navigate(Routes.Home)
     }
 

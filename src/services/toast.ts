@@ -31,3 +31,7 @@ export function showToast(message: string) {
 export function showError(message: string) {
     toast(message, '#550000')
 }
+
+export function showMessage(message: string) {
+    toast(message, '#5fc5d9')
+}

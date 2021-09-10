@@ -1,25 +1,30 @@
 import React, { FC } from 'react'
 import { Tile, TileChildProps } from '../TileTS'
 import { strings } from '../../localization'
-import Activity from '../../classes/Activity'
 import {
     ActivityTypes,
     Routes,
     tileColor,
     tileShadeColor,
 } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
+import { useInitActivity } from '../../hooks/useInitActivity'
 
 const name = ActivityTypes.Workout
 
-export const WorkoutTile: FC<TileChildProps> = ({ navigation, disabled }) => {
+export const WorkoutTile: FC<TileChildProps> = () => {
+    const { initSave } = useInitActivity()
+    const navigation = useNavigation()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                Activity.instantInitSave(name, navigation.navigate)
+                initSave(name)
+                navigation.navigate(Routes.Home)
             }}
             onLongPress={() => {
                 navigation.navigate(Routes.TimePick, {

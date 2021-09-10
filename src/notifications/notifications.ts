@@ -1,11 +1,10 @@
 import PushNotification from 'react-native-push-notification'
-import store from '../redux/store'
-import NavigationService from '../navigation/NavigationService'
+// import NavigationService from '../navigation/NavigationService'
 import { strings, Strings } from '../localization'
 import { showToast } from '../services/toast'
 import { localTime } from '../helpers/dateTime'
 import timestamp from '../helpers/timestamp'
-import { taskCancelNotification } from '../redux/actions'
+// import { taskCancelNotification } from '../redux/actions'
 import { ActivityRouter } from '../navigation/ActivityRouter'
 
 type FiredNotification = {
@@ -83,37 +82,37 @@ export function cancelAllLocalNotifications() {
 function onNotificationOpened(notification: FiredNotification) {
     cancelLocalNotification(notification.notificationId)
 
-    if (notification.action === strings.RemindLater) {
-        // todo: not working
-        const { notificationDelay } = store.getState().settings
-        const time = timestamp() + notificationDelay * 60
-        const id = notification.userInfo
+    // if (notification.action === strings.RemindLater) {
+    // todo: not working
+    //     const { notificationDelay } = store.getState().settings
+    //     const time = timestamp() + notificationDelay * 60
+    //     const id = notification.userInfo
 
-        // reschedule
-        scheduleNotification(id, notification.title, notification.message, time)
-        showToast(
-            `${strings.Postponed} ${strings.by} ${localTime(
-                notificationDelay,
-            )}`,
-        )
-    } else {
-        const taskId = notification.userInfo
+    //     // reschedule
+    //     scheduleNotification(id, notification.title, notification.message, time)
+    //     showToast(
+    //         `${strings.Postponed} ${strings.by} ${localTime(
+    //             notificationDelay,
+    //         )}`,
+    //     )
+    // } else {
+    //     const taskId = notification.userInfo
 
-        const task = store.getState().tasks.find(task => {
-            return task._id === taskId
-        })
+    //     const task = store.getState().tasks.find(task => {
+    //         return task._id === taskId
+    //     })
 
-        if (task && !task.isCompleted()) {
-            taskCancelNotification(task)
-            const route = ActivityRouter(task.activity_type)
+    //     if (task && !task.isCompleted()) {
+    //         taskCancelNotification(task)
+    //         const route = ActivityRouter(task.activity_type)
 
-            NavigationService.navigate(route, {
-                task: task._id,
-                sender: task.activity_type,
-            })
-        } else {
-            // there's no task or
-            // task is completed
-        }
-    }
+    //         // NavigationService.navigate(route, {
+    //         //     task: task._id,
+    //         //     sender: task.activity_type,
+    //         // })
+    //     } else {
+    //         // there's no task or
+    //         // task is completed
+    //     }
+    // }
 }

@@ -2,23 +2,16 @@ import React, { FC } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { Routes } from '../constants'
 import { strings } from '../localization'
-import Tokens from '../classes/Tokens'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Incart from '../resources/svg/incart.svg'
-import { NavigationParams } from 'react-navigation'
+import { useAuth } from '../context/authContext'
 
 type RegisterOrLoginProps = {
-    navigation: NavigationParams
+    navigation: any
 }
 
 export const RegisterOrLogin: FC<RegisterOrLoginProps> = ({ navigation }) => {
-    const login = async () =>
-        Tokens.receive()
-            .then(res => navigation.navigate(Routes.Home))
-            .catch(err => {
-                if (err.message?.includes('Network error'))
-                    Alert.alert(strings.NoConn, strings.CantConnectIdentity)
-            })
+    const { authorize } = useAuth()
 
     const register = () => navigation.navigate(Routes.Register)
 
@@ -33,7 +26,7 @@ export const RegisterOrLogin: FC<RegisterOrLoginProps> = ({ navigation }) => {
                 />
                 <Text style={styles.buttonText}>{strings.Register}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={login}>
+            <TouchableOpacity style={styles.button} onPress={authorize}>
                 <Incart
                     style={styles.img}
                     width={33}

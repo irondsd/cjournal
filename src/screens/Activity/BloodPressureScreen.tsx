@@ -1,82 +1,95 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { View } from 'react-native'
-import { ActivityTypes, defaultStyles, Routes } from '../../constants'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { defaultStyles, Routes } from '../../constants'
 import { strings } from '../../localization'
-import timestamp from '../../helpers/timestamp'
-import { useDispatch } from 'react-redux'
-import Activity, { IActivity } from '../../classes/Activity'
-import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { TimePickCombined } from '../../components/TimePickCombined'
-import { addActivity } from '../../redux/actions'
-import { BloodPressure } from '../../components/BloodPressureTS'
+import { BloodPressure } from '../../components/BloodPressure'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { useActivities } from '../../context/activitiesContext'
+import { useMakeActivity } from '../../hooks/useMakeActivity'
+import { DeleteActivityButton } from '../../components/DeleteActivityButton'
 
-export const BloodPressureScreen: NavigationStackScreenComponent = ({
+type BloodPressureScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'BloodPressure'
+>
+type BloodPressureScreenRouteProp = RouteProp<
+    RootStackParamList,
+    'BloodPressure'
+>
+
+type BloodPressureScreenProps = {
+    navigation: BloodPressureScreenNavigationProp
+    route: BloodPressureScreenRouteProp
+}
+
+export const BloodPressureScreen: FC<BloodPressureScreenProps> = ({
     navigation,
+    route,
 }) => {
-    const dispatch = useDispatch()
-    const params = navigation?.state?.params
-    const [activity, setActivity] = useState<Partial<IActivity>>({})
-    const [data, setData] = useState<IAData>({})
+    const { activities, activityAdd, activityUpdate, activityDelete } =
+        useActivities()
+    const { params } = route
+    const [activity, updateActivity, updateData] = useMakeActivity({
+        activity_type: params.sender,
+    })
 
     const submit = () => {
-        const newAct = Activity.init(
-            activity.activity_type,
-            activity.time_started,
-            activity.time_ended,
-            undefined,
-            undefined,
-            data,
-        )
-        dispatch(addActivity(newAct))
+        if (params.id) activityUpdate(activity)
+        else activityAdd(activity)
+
         navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {
-        // setup activity
-        const time_started = timestamp()
-        const activity_type: string = params?.sender
+        const { sender, id } = params
 
-        setActivity({
-            activity_type: ActivityTypes[activity_type],
-            time_started,
-        })
+        if (id) {
+            const act = activities[id]
+            updateActivity({ ...act })
+            if (act.data) updateData({ ...act.data })
+            navigation.setOptions({
+                headerTitle: `${strings.Editing} ${strings[sender]}`,
+                headerRight: () => {
+                    return (
+                        <DeleteActivityButton
+                            onPress={() => {
+                                activityDelete(act)
+                                navigation.goBack()
+                            }}
+                        />
+                    )
+                },
+            })
+        } else {
+            const title = strings[sender]
+            navigation.setOptions({
+                headerTitle: title,
+            })
+        }
     }, [params])
-
-    useEffect(() => {
-        const sender = params?.sender
-        const title: string = strings[sender]
-        navigation.setParams({
-            headerTitle: title,
-        })
-    }, [])
 
     return (
         <View style={defaultStyles.container}>
             <TimePickCombined
                 time_started={activity.time_started}
                 time_ended={activity.time_ended}
-                onChange={(s, e) => {
-                    setActivity({ ...activity, time_started: s, time_ended: e })
+                onChange={(time_started, time_ended) => {
+                    updateActivity({
+                        time_started,
+                        time_ended,
+                    })
                 }}
             />
 
             <BloodPressure
-                values={data.bloodPressure}
-                onChange={bp =>
-                    setData(prev => {
-                        return { ...prev, bloodPressure: bp }
-                    })
-                }
+                values={activity.data.bloodPressure}
+                onChange={bp => updateData({ bloodPressure: bp })}
             />
             <Button title={strings.Save} onPress={submit} />
         </View>
     )
-}
-
-BloodPressureScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-    }
 }

@@ -7,22 +7,24 @@ import {
     tileColor,
     tileShadeColor,
 } from '../../constants'
-import Activity from '../../classes/Activity'
+import { useInitActivity } from '../../hooks/useInitActivity'
+import { useNavigation } from '@react-navigation/native'
 
 const name = ActivityTypes.PsychoemotionalTest
 
-export const PsychoemotionalTestTile: FC<TileChildProps> = ({
-    navigation,
-    disabled,
-}) => {
+export const PsychoemotionalTestTile: FC<TileChildProps> = ({ disabled }) => {
+    const navigation = useNavigation()
+    const { initSave } = useInitActivity()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                Activity.instantInitSave(name, navigation.navigate)
+                initSave(name)
+                navigation.navigate(Routes.Home)
             }}
             onLongPress={() => {
                 navigation.navigate(Routes.TimePick, {

@@ -1,5 +1,6 @@
 export enum Routes {
     Login = 'Login',
+    Debug = 'Debug',
     Register = 'Register',
     Home = 'Home',
     Journal = 'Journal',

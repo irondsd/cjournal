@@ -16,32 +16,30 @@ import {
 import LinearGradient from 'react-native-linear-gradient'
 import { showError } from '../services/toast'
 import { strings } from '../localization'
-import ActivityIcon from './ActivityIconTS'
-import { NavigationParams } from 'react-navigation'
+import ActivityIcon from './ActivityIcon'
 
-interface TileProps {
-    text: string
+type TileProps = {
+    title: string
     color: string
     shadeColor?: string
-    onPress(): void
-    onLongPress(): void
+    onPress: () => void
+    onLongPress: () => void
     disabled?: boolean
     iconName: string
 }
 
 export type TileChildProps = {
-    navigation: NavigationParams
     disabled?: boolean
 }
 
 export const Tile: FC<TileProps> = ({
     onPress,
     onLongPress,
-    text,
+    title,
     iconName,
     color,
     shadeColor = '#000000',
-    disabled,
+    disabled = false,
 }) => {
     const [clicked, setClicked] = useState<boolean>(false)
 
@@ -81,8 +79,8 @@ export const Tile: FC<TileProps> = ({
                 <ActivityIcon icon={iconName} fill={'#ffffff'} size={imgSize} />
             </LinearGradient>
             <View style={styles.titleBox}>
-                <Text adjustsFontSizeToFit style={styles.text}>
-                    {text}
+                <Text adjustsFontSizeToFit style={styles.title}>
+                    {title}
                 </Text>
             </View>
         </TouchableOpacity>
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
         top: Platform.OS === 'ios' ? 0 : -3,
         height: tileMargin * 4.5,
     },
-    text: {
+    title: {
         color: 'black',
         fontSize: tileFontSize,
         fontWeight: '400',

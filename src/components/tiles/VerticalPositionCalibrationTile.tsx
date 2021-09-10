@@ -7,16 +7,16 @@ import {
     tileColor,
     tileShadeColor,
 } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
 
 const name = ActivityTypes.VerticalPositionCalibration
 
-export const VerticalPositionCalibrationTile: FC<TileChildProps> = ({
-    navigation,
-    disabled,
-}) => {
+export const VerticalPositionCalibrationTile: FC<TileChildProps> = () => {
+    const navigation = useNavigation()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             shadeColor={tileColor}
             color={tileShadeColor}

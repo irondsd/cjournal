@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, StyleSheet, View } from 'react-native'
 import { strings } from '../localization'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import ActivityIcon from './ActivityIconTS'
+import ActivityIcon from './ActivityIcon'
 import { width } from '../constants'
 
 interface ListItemProps {
@@ -36,7 +36,8 @@ export const ListItem: FC<ListItemProps> = ({
                 }}>
                 <View style={{ maxWidth: '80%' }}>
                     <Text style={styles.title}>
-                        {strings[activity_type] || strings.UnknownActivity}
+                        {strings[activity_type as keyof typeof strings] ||
+                            strings.UnknownActivity}
                     </Text>
                     <View style={styles.sub}>
                         {icons?.map((icon, idx) => icon)}

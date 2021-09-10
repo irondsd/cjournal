@@ -9,9 +9,9 @@ export const noTabbarScreens = [
     Routes.TimePick,
     Routes.Other,
     Routes.ExerciseFinish,
-    Routes.Trainer,
     Routes.Alarm,
     Routes.QRScan,
     Routes.Sleep,
     Routes.SleepFinish,
 ]
+// todo: delete

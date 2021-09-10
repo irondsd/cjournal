@@ -7,7 +7,6 @@ export enum Routes {
     Stairs = 'Stairs',
     Pills = 'Pills',
     Other = 'Other',
-    Trainer = 'Trainer',
     BloodPressure = 'BloodPressure',
 }
 
@@ -17,19 +16,16 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
             return Routes.WalkingTest
         case ActivityTypes.Stairs:
             return Routes.Stairs
-
         case ActivityTypes.CourseTherapy:
             return Routes.Pills
         case ActivityTypes.ReliefOfAttack:
             return Routes.Pills
         case ActivityTypes.MedicineTest:
             return Routes.Pills
-
         case ActivityTypes.ActiveOrthostasis:
             return Routes.BloodPressure
         case ActivityTypes.Press:
             return Routes.BloodPressure
-
         case ActivityTypes.VerticalPositionCalibration:
             return Routes.Other
         case ActivityTypes.OtherActivity:
@@ -44,10 +40,8 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
             return Routes.Other
         case ActivityTypes.OtherWeakness:
             return Routes.Other
-
         case ActivityTypes.Trainer:
-            return Routes.Trainer
-
+            return Routes.Other
         default:
             return Routes.TimePick
     }

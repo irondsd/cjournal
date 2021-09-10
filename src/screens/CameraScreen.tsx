@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { StyleSheet, Alert } from 'react-native'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
@@ -6,11 +6,23 @@ import requestStoragePermission from '../permissions/requestStoragePermission'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { strings } from '../localization'
 import { Splash } from '../components/Splash'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../navigation/NavContainer'
+import { RouteProp } from '@react-navigation/native'
+import { ActivityTypes } from '../constants'
 
-export const CameraScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+type CameraScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Camera'
+>
+type CameraScreenRouteProp = RouteProp<RootStackParamList, 'Camera'>
+
+type CameraScreenProps = {
+    navigation: CameraScreenNavigationProp
+    route: CameraScreenRouteProp
+}
+
+export const CameraScreen: FC<CameraScreenProps> = ({ navigation, route }) => {
     const [permitted, setPermitted] = useState(false)
 
     const onBottomButtonPressed = event => {
@@ -18,23 +30,30 @@ export const CameraScreen: NavigationStackScreenComponent = ({
             navigation.goBack()
         } else {
             if (event.type === 'right') {
-                const returnTo = navigation.state.params.returnTo
+                const { returnTo } = route.params
+                const image = event.captureImages?.pop()
+
                 navigation.navigate(returnTo, {
-                    image: event.captureImages[event.captureImages.length - 1],
+                    sender: ActivityTypes.Alarm,
+                    image: image,
                 })
             }
         }
     }
 
     useEffect(() => {
-        if (!navigation.state.params.returnTo) {
+        if (!route.params.returnTo) {
             navigation.goBack()
             Alert.alert('An error occured', 'Please contact the developer')
         }
 
         requestCameraPermission()
             .then(() => {
-                setPermitted(true)
+                requestStoragePermission()
+                    .then(() => {
+                        setPermitted(true)
+                    })
+                    .catch(() => navigation.goBack())
             })
             .catch(() => navigation.goBack())
     }, [])

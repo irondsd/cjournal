@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useLayoutEffect } from 'react'
 import {
     StyleSheet,
     Text,
@@ -8,45 +8,46 @@ import {
     TouchableWithoutFeedback,
     Alert,
 } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../redux/actions/userActions'
 import { backgroundColor, Routes, profileEditUrl } from '../constants'
 import { strings } from '../localization'
 import { Button } from '../components/Button'
 import { ToggleSwitch } from '../components/settings/ToggleSwitch'
 import { version } from '../../package.json'
 import { displayName } from '../../app.json'
-import {
-    setNotifications,
-    setIdinvFilter,
-    setNotificationDelay,
-    updateUser,
-    userFetchFailed,
-} from '../redux/actions'
 import { NumInput } from '../components/settings/NumInput'
 import userUpdateIdinv from '../requests/userUpdateIdinv'
-import { RootState } from '../redux/store'
 import { decodeIdinv } from '../helpers/encode'
 import { IdinvBlock } from '../components/IdinvBlock'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { Get } from '../requests/newRequest'
 import { TouchableIcon } from '../components/TouchableIcon'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../navigation/NavContainer'
+import { RouteProp } from '@react-navigation/native'
+import { useUser } from '../context/userContext'
+import { useAuth } from '../context/authContext'
+import { useSettings } from '../context/settingsContext'
 
-export const SettingsScreen: NavigationStackScreenComponent = ({
+type SettingsScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Settings'
+>
+type SettingsScreenRouteProp = RouteProp<RootStackParamList, 'Settings'>
+
+type SettingsScreenProps = {
+    navigation: SettingsScreenNavigationProp
+    route: SettingsScreenRouteProp
+}
+
+export const SettingsScreen: FC<SettingsScreenProps> = ({
     navigation,
+    route,
 }) => {
     const [settingsShow, setSettingsShow] = useState(false)
     const [idinvChanging, setIdinvChanging] = useState(false)
     const [presses, setPresses] = useState(0)
-
-    const user = useSelector((state: RootState) => state.user)
-    const tokens = useSelector((state: RootState) => state.tokens)
-    const settings = useSelector((state: RootState) => state.settings)
-    const dispatch = useDispatch()
-
-    const logout = () => {
-        dispatch(logoutUser())
-    }
+    const user = useUser()
+    const tokens = useAuth()
+    const settings = useSettings()
 
     const setIdinv = (idinv: string) => {
         setIdinvChanging(true)
@@ -55,13 +56,13 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
                 Alert.alert(strings.Success, strings.IdinvChangeSuccess)
                 Get(`users/${user._id}`, tokens.access_token)
                     .then(res => {
-                        dispatch(updateUser(res))
+                        // dispatch(updateUser(res))
                     })
                     .catch(err => {
-                        dispatch(userFetchFailed())
+                        // dispatch(userFetchFailed())
                     }),
-                    setIdinvFilter(true)
-                setIdinvChanging(false)
+                    // setIdinvFilter(true)
+                    setIdinvChanging(false)
             })
             .catch(err => {
                 console.log(err)
@@ -70,8 +71,8 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
 
     const checkIncomingQR = () => {
         if (idinvChanging) return
-        if (navigation.state?.params?.qrValue) {
-            const qrValue = navigation.state.params.qrValue
+        if (route.params?.qrValue) {
+            const qrValue = route.params.qrValue
 
             // decode and check for errors
             const idinv = decodeIdinv(qrValue)
@@ -87,19 +88,29 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
     }
 
     useEffect(() => {
-        if (!tokens.isLoggedIn) navigation.navigate('Auth')
-    }, [tokens])
-
-    useEffect(() => {
         checkIncomingQR()
-    }, [navigation.state.params])
+    }, [route.params?.qrValue])
 
-    useEffect(() => {
-        const title = navigation.setParams({
-            headerTitle: strings['Settings'],
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: strings.Settings,
+            headerRight: () => (
+                <TouchableIcon
+                    set="FontAwesome"
+                    name="qrcode"
+                    color="#000"
+                    size={25}
+                    style={{ margin: 15 }}
+                    onPress={() => {
+                        navigation.navigate(Routes.QRScan, {
+                            returnTo: Routes.Settings,
+                        })
+                    }}
+                />
+            ),
         })
-    }, [])
-
+    }, [navigation])
+    console.log(user)
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
@@ -112,7 +123,7 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
                     }, 3000)
 
                     if (presses >= 10) {
-                        navigation.navigate('Debug')
+                        navigation.navigate(Routes.Debug)
                     }
                 }}
                 delayLongPress={3000}
@@ -131,19 +142,17 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
                     <ToggleSwitch
                         title={strings.IdinvFilter}
                         value={settings.idinvFilter}
-                        onChange={value => dispatch(setIdinvFilter(value))}
+                        onChange={() => settings.toggleIdinvFilter()}
                     />
                     <ToggleSwitch
                         title={strings.Notifications}
                         value={settings.notifications}
-                        onChange={value => dispatch(setNotifications(value))}
+                        onChange={() => settings.toggleNotifications()}
                     />
                     <NumInput
                         title={strings.PostponeNotificationsBy}
                         value={settings.notificationDelay}
-                        onChange={value => {
-                            dispatch(setNotificationDelay(value))
-                        }}
+                        onChange={value => settings.setNotificationDelay(value)}
                     />
                 </View>
             ) : (
@@ -164,33 +173,13 @@ export const SettingsScreen: NavigationStackScreenComponent = ({
                     <Button
                         title={strings.Logout}
                         onPress={() => {
-                            logout()
+                            tokens.logout()
                         }}
                     />
                 </View>
             </View>
         </View>
     )
-}
-
-SettingsScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-        headerRight: (
-            <TouchableIcon
-                set="FontAwesome"
-                name="qrcode"
-                color="#000"
-                size={25}
-                style={{ margin: 15 }}
-                onPress={() => {
-                    navigation.navigate(Routes.QRScan, {
-                        returnTo: Routes.Settings,
-                    })
-                }}
-            />
-        ),
-    }
 }
 
 const styles = StyleSheet.create({

@@ -7,21 +7,28 @@ import {
     tileColor,
     tileShadeColor,
 } from '../../constants'
+import { useNavigation } from '@react-navigation/native'
 
 const name = ActivityTypes.Trainer
 
-export const TrainerTile: FC<TileChildProps> = ({ navigation, disabled }) => {
+export const TrainerTile: FC<TileChildProps> = ({ disabled }) => {
+    const navigation = useNavigation()
+
     return (
         <Tile
-            text={strings[name]}
+            title={strings[name]}
             iconName={name}
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(Routes.Trainer)
+                navigation.navigate(Routes.Other, {
+                    sender: name,
+                })
             }}
             onLongPress={() => {
-                navigation.navigate(Routes.Trainer)
+                navigation.navigate(Routes.Other, {
+                    sender: name,
+                })
             }}
         />
     )

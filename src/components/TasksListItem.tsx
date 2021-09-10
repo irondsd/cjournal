@@ -1,13 +1,12 @@
 import React, { FC } from 'react'
 import { displayDateTime } from '../helpers/dateTime'
 import { ListItem } from './ListItem'
-import { NavigationParams } from 'react-navigation'
-import { ITaskClass } from '../classes/Task'
+import { Task } from '../types/Task'
 import { ActivityRouter } from '../navigation/ActivityRouter'
 
 interface TasksListItemProps {
-    task: ITaskClass
-    navigation: NavigationParams
+    task: Task
+    navigation: any
 }
 
 export const TasksListItem: FC<TasksListItemProps> = ({ task, navigation }) => {

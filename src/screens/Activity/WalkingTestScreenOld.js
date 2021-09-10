@@ -28,12 +28,11 @@ import {
 } from '../../constants'
 import { BackButton } from '../../components/BackButton'
 import { showError } from '../../services/toast'
-import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import requestLocationPermissions from '../../permissions/requestLocationPermissions'
 import GPS from '../../sensors/GPS'
 import Pedometer from '../../sensors/Pedometer'
-import SaveButton from '../../components/SaveButton'
+import { Button } from '../../components/Button'
 import { findLatestTask } from '../../classes/Task'
 import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import { createIconSetFromFontello } from 'react-native-vector-icons'
@@ -235,7 +234,7 @@ class WalkingTestScreen extends Component {
                     </AnimatedCircularProgress>
                 </View>
                 <View style={styles.button}>
-                    <SaveButton
+                    <Button
                         title={
                             this.state.started
                                 ? strings.Terminate

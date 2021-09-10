@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import {
     StyleSheet,
     Text,
@@ -7,27 +7,40 @@ import {
     BackHandler,
     StatusBar,
 } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { updateActivity } from '../../redux/actions'
 import { strings } from '../../localization'
-import { Routes, width } from '../../constants'
-import { IActivityClass, IAData } from '../../classes/Activity'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { Routes, smileSize } from '../../constants'
+import { Activity, Data } from '../../types/Activity'
 import { FeelingsIcon } from '../../components/FeelingsIcon'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
 import { writeLog } from '../../services/logger'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { useActivities } from '../../context/activitiesContext'
 
-const smileSize = width / 2.5
+type SleepFinishScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'SleepFinish'
+>
+type SleepFinishScreenRouteProp = RouteProp<RootStackParamList, 'SleepFinish'>
 
-export const SleepFinishScreen: NavigationStackScreenComponent = ({
+type SleepFinishScreenProps = {
+    navigation: SleepFinishScreenNavigationProp
+    route: SleepFinishScreenRouteProp
+}
+
+export const SleepFinishScreen: FC<SleepFinishScreenProps> = ({
     navigation,
+    route,
 }) => {
-    const dispatch = useDispatch()
+    const { activities, activityUpdate } = useActivities()
 
-    const submit = (feeling: IAData['feeling']) => {
-        const activity: IActivityClass = navigation.state.params.activity
+    const submit = (feeling: Data['feeling']) => {
+        const activity_id = route.params.activity
+        const activity = activities[activity_id]
+
         activity.data.feeling = strings[feeling]
-        dispatch(updateActivity(activity))
+        activityUpdate(activity)
         navigation.navigate(Routes.Home)
     }
 
@@ -44,10 +57,9 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
     }
 
     useEffect(() => {
-        if (!navigation.state?.params?.activity) {
-            writeLog('error', 'SleepFinish no activity')
-            navigation.navigate(Routes.Home)
-        }
+        navigation.setOptions({
+            headerShown: false,
+        })
 
         BackHandler.addEventListener('hardwareBackPress', backPressed)
 
@@ -84,10 +96,6 @@ export const SleepFinishScreen: NavigationStackScreenComponent = ({
             </View>
         </View>
     )
-}
-
-SleepFinishScreen.navigationOptions = () => {
-    return { header: null, headerLeft: null }
 }
 
 const styles = StyleSheet.create({

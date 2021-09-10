@@ -10,14 +10,14 @@ import {
 import { secs2time, getUtcOffset } from '../../helpers/dateTime'
 import BackgroundTimer from 'react-native-background-timer'
 import { strings } from '../../localization'
-import { addActivity } from '../../redux/actions'
+// import { addActivity } from '../../redux/actions'
 import { connect } from 'react-redux'
-import { HeaderBackButton } from 'react-navigation'
+// import { HeaderBackButton } from 'react-navigation'
 // import { barometer } from 'react-native-sensors'
 import { average, altMeter } from '../../helpers/math'
-import { findLatestTask } from '../../classes/Task'
+import { findLatestTask } from '../../types/Task'
 // import KeepAwake from 'react-native-keep-awake'
-import { cancelNotification } from '../../redux/actions'
+// import { cancelNotification } from '../../redux/actions'
 import {
     backgroundColor,
     Routes,
@@ -26,12 +26,11 @@ import {
     width,
 } from '../../constants'
 import { BackButton } from '../../components/BackButton'
-import Activity from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import Barometer from '../../sensors/Barometer'
 import Pedometer from '../../sensors/Pedometer'
 import GPS from '../../sensors/GPS'
-import SaveButton from '../../components/SaveButton'
+import { Button } from '../../components/Button'
 
 let started = false
 
@@ -215,7 +214,7 @@ class StairsScreen extends Component {
                     <Text style={styles.timer}>{this.state.meters}</Text>
                 </View>
                 <View style={styles.button}>
-                    <SaveButton
+                    <Button
                         title={this.state.button_text}
                         onPress={() => {
                             this.startPressed()

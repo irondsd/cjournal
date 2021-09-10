@@ -2,13 +2,43 @@ import React, { FC, ReactNode } from 'react'
 import { displayDateTime } from '../helpers/dateTime'
 import { Routes, editable } from '../constants'
 import { ListItem } from './ListItem'
-import { IActivityClass } from '../classes/Activity'
-import { NavigationParams } from 'react-navigation'
+import { Activity } from '../types/Activity'
 import { Icon, IconProps } from '../components/Icon'
+import { ActivityRouter } from '../navigation/ActivityRouter'
+import { showMessage } from '../services/toast'
+import { strings } from '../localization'
 
 type ActivityListItemProps = {
-    activity: IActivityClass
-    navigation: NavigationParams
+    activity: Activity
+    navigation: any
+}
+
+// todo
+
+const synced = (activity: Activity) => {
+    if (activity.system) {
+        if (activity.system.awaitsSync) return false
+        if (activity.system.awaitsEdit) return false
+        if (activity.system.awaitsDelete) return false
+    }
+
+    return true
+}
+
+const hasLocation = (activity: Activity) => {
+    return !!activity.data?.locations
+}
+
+const hasPhoto = (activity: Activity) => {
+    return !!activity.data?.photoFile || !!activity.data?.image
+}
+
+const hasAudio = (activity: Activity) => {
+    return !!activity.data?.audioFile || !!activity.data?.audio
+}
+
+const hasComment = (activity: Activity) => {
+    return !!activity.comment
 }
 
 export const ActivityListItem: FC<ActivityListItemProps> = ({
@@ -43,11 +73,15 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
     }
 
     const onPress = () => {
-        // todo: routing
         if (editable.includes(activity.activity_type)) {
-            navigation.navigate(Routes.ActivityDetails, activity)
+            const { _id, activity_type } = activity
+            const route = ActivityRouter(activity_type)
+            navigation.navigate(route, { sender: activity_type, id: _id })
         } else {
-            navigation.navigate(Routes.ActivityStats, activity)
+            // not editable
+            showMessage(
+                `${strings.CantEdit} ${strings[activity.activity_type]}`,
+            )
         }
     }
 
@@ -61,19 +95,19 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
             set: 'FontAwesome',
         }
 
-        if (activity.hasComment()) {
+        if (hasComment(activity)) {
             const name = 'comment'
             icons.push(<Icon name={name} {...props} key={name} />)
         }
-        if (activity.hasPhoto()) {
+        if (hasPhoto(activity)) {
             const name = 'camera'
             icons.push(<Icon name={name} {...props} key={name} />)
         }
-        if (activity.hasAudio()) {
+        if (hasAudio(activity)) {
             const name = 'microphone'
             icons.push(<Icon name={name} {...props} key={name} />)
         }
-        if (activity.hasLocation()) {
+        if (hasLocation(activity)) {
             const name = 'location-on'
             icons.push(
                 <Icon
@@ -93,7 +127,7 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
             activity_type={activity.activity_type}
             time={calculateTime()}
             info={getInfo()}
-            synced={activity.synced()}
+            synced={synced(activity)}
             icons={getIcons()}
             onPress={onPress}
         />

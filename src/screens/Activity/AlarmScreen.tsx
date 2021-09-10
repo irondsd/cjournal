@@ -1,48 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
-import { useDispatch } from 'react-redux'
 import { Routes, ActivityTypes, defaultStyles, width } from '../../constants'
 import { strings } from '../../localization'
-import { addActivity } from '../../redux/actions'
-import AudioRecorder from '../../components/AudioRecorder'
-import Activity, { IActivity, IAData } from '../../classes/Activity'
-import timestamp from '../../helpers/timestamp'
+import { AudioRecorder } from '../../components/AudioRecorder'
 import GPS, { LocationType } from '../../sensors/GPS'
-import Comment from '../../components/Comment'
+import { Comment } from '../../components/CommentTS'
 import { Button } from '../../components/Button'
 import Icon from 'react-native-vector-icons/dist/MaterialIcons'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { RootStackParamList } from '../../navigation/NavContainer'
+import { useMakeActivity } from '../../hooks/useMakeActivity'
+import { useActivities } from '../../context/activitiesContext'
 
-const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
-    const dispatch = useDispatch()
-    const [activity, setActivity] = useState<Partial<IActivity>>({})
+type AlarmScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Alarm'
+>
+type AlarmScreenRouteProp = RouteProp<RootStackParamList, 'Alarm'>
+
+type AlarmScreenProps = {
+    navigation: AlarmScreenNavigationProp
+    route: AlarmScreenRouteProp
+}
+
+export const AlarmScreen: FC<AlarmScreenProps> = ({ navigation }) => {
     const [locations, setLocations] = useState<LocationType[]>([])
-    const [data, setData] = useState<IAData>({})
-
-    const updateActivityValue = (key: string, value: any) => {
-        setActivity({
-            ...activity,
-            [key]: value,
-        })
-    }
-
-    const updateDataValue = (key: string, value: any) => {
-        setData({
-            ...data,
-            [key]: value,
-        })
-    }
+    const [activity, updateActivity, updateData] = useMakeActivity({
+        activity_type: ActivityTypes.Alarm,
+    })
+    const { activityAdd } = useActivities()
 
     const submit = () => {
-        const newAct = Activity.init(
-            activity.activity_type,
-            activity.time_started,
-            timestamp(),
-            undefined,
-            undefined,
-            { ...data, locations: locations },
-        )
-        dispatch(addActivity(newAct))
+        const createdActivity = {
+            ...activity,
+            data: { ...activity.data, locations },
+        }
+        activityAdd(createdActivity)
         navigation.navigate(Routes.Home)
     }
 
@@ -62,17 +56,7 @@ const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
     useEffect(() => {
         const intervalId = startUpdates()
 
-        // setup activity
-        const time_started = timestamp()
-        const activity_type = ActivityTypes.Alarm
-
-        setActivity({
-            activity_type,
-            time_started,
-        })
-
-        // set title
-        navigation.setParams({
+        navigation.setOptions({
             headerTitle: strings.Alarm,
         })
 
@@ -100,14 +84,14 @@ const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
             </KeyboardAvoidingView>
             <View style={styles.long}>
                 <Comment
-                    onChangeText={value => {
-                        updateActivityValue('comment', value)
+                    onChange={value => {
+                        updateActivity({ comment: value })
                     }}
-                    comment={activity.comment}
+                    value={activity.comment}
                 />
                 <AudioRecorder
-                    audioFile={data.audioFile}
-                    setAudio={value => updateDataValue('audioFile', value)}
+                    file={activity.data.audioFile}
+                    onChange={value => updateData({ audioFile: value })}
                 />
                 <Button
                     title={strings.Save}
@@ -136,11 +120,3 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
 })
-
-AlarmScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: navigation.getParam('headerTitle'),
-    }
-}
-
-export default AlarmScreen

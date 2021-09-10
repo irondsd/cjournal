@@ -215,4 +215,7 @@ export const en = {
     WaitingPermissions: 'Waiting for permissions...',
     hintPlaceholder: 'Please fill in',
     m: 'm',
+    ReqLocation: 'Requesting the location...',
+    Editing: 'Editing of',
+    CantEdit: `You can't edit`,
 }

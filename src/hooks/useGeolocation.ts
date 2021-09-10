@@ -13,6 +13,7 @@ export const useGeolocation = (): {
     geolocationData: LocationType[]
     startUpdates: () => void
     stopUpdates: () => void
+    requestGeolocation: () => Promise<GeolocationResponse>
 } => {
     const [isAllowed, setIsAllowed] = useState<boolean>()
     const [watchStarted, setWatchStarted] = useState(false)
@@ -92,5 +93,5 @@ export const useGeolocation = (): {
         checkPermissions()
     }, [])
 
-    return { geolocationData, startUpdates, stopUpdates }
+    return { geolocationData, startUpdates, stopUpdates, requestGeolocation }
 }
