@@ -178,7 +178,7 @@ export const useSync = () => {
             })
             .catch(err => {
                 // todo: net service
-                console.log('activities fetch failed: ', err)
+                console.log('tasks fetch failed: ', err)
             })
     }
 

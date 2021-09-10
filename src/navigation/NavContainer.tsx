@@ -32,12 +32,14 @@ import {
 import {
     activitiesAsyncGet,
     tasksAsyncGet,
-    tokensAsyncGet,
+    authAsyncGet,
     userAsyncGet,
+    settingsAsyncGet,
 } from '../services/asyncStorage'
 import { ActivityTypes, Routes } from '../constants'
 import { HomeStack } from './HomeStack'
 import { useActivities } from '../context/activitiesContext'
+import { useSettings } from '../context/settingsContext'
 import { useTasks } from '../context/tasksContext'
 
 export type RootStackParamList = {
@@ -80,18 +82,27 @@ export const NavContainer: FC = () => {
     const { load } = useUser()
     const { activitiesRestore } = useActivities()
     const { tasksRestore } = useTasks()
+    const { restoreSettings } = useSettings()
 
     useEffect(() => {
         const secureStoreLoad = async () => {
             try {
-                const tokens = await tokensAsyncGet()
+                const tokens = await authAsyncGet()
                 const user = await userAsyncGet()
 
                 if (tokens.access_token) restore(tokens)
-                else loginError()
+                else return loginError()
+
                 if (user._id) load(user)
-                activitiesAsyncGet().then(res => activitiesRestore(res))
-                tasksAsyncGet().then(res => tasksRestore(res))
+                activitiesAsyncGet().then(res => {
+                    if (res) activitiesRestore(res)
+                })
+                tasksAsyncGet().then(res => {
+                    if (res) tasksRestore(res)
+                })
+                settingsAsyncGet().then(res => {
+                    if (res) restoreSettings(res)
+                })
             } catch (e) {
                 loginError()
             }
