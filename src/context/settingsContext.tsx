@@ -1,5 +1,12 @@
-import React, { FC, createContext, useReducer, useContext } from 'react'
+import React, {
+    FC,
+    createContext,
+    useReducer,
+    useContext,
+    useEffect,
+} from 'react'
 import { delayNotificationBy, Routes } from '../constants'
+import { settingsAsyncSave } from '../services/asyncStorage'
 
 const defaultState: Settings = {
     notifications: true,
@@ -141,6 +148,11 @@ const SettingsProvider: FC = ({ children }) => {
         toggleIdinvFilter,
         setNotificationDelay,
     }
+
+    useEffect(() => {
+        settingsAsyncSave(settings)
+    }, [settings])
+
     return (
         <SettingsContext.Provider value={value}>
             {children}

@@ -5,13 +5,14 @@ import React, {
     useContext,
     useEffect,
 } from 'react'
-import { authAsyncSave } from '../services/asyncStorage'
+import { authAsyncSave, clearStorage } from '../services/asyncStorage'
 import {
     authorize as authAuthorize,
     refresh as authRefresh,
 } from 'react-native-app-auth'
 import { identityServerConfig } from '../constants/config'
 import timestamp from '../helpers/timestamp'
+import { clearFiles } from '../services/fs'
 
 const defaultState: AuthState = {
     isLoading: true,
@@ -104,6 +105,8 @@ function authReducer(state: AuthState, { type, payload }: Action): AuthState {
             }
         }
         case Actions.LOGOUT:
+            clearStorage()
+            clearFiles()
             return {
                 ...defaultState,
                 isLoading: false,
@@ -205,7 +208,7 @@ const AuthProvider: FC = ({ children }) => {
     }
 
     useEffect(() => {
-        if (state.access_token) authAsyncSave(state)
+        authAsyncSave(state)
     }, [state])
 
     const value = {

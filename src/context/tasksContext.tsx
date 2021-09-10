@@ -1,6 +1,13 @@
-import React, { FC, createContext, useReducer, useContext } from 'react'
+import React, {
+    FC,
+    createContext,
+    useReducer,
+    useContext,
+    useEffect,
+} from 'react'
 import { Task } from '../types/Task'
 import timestamp from '../helpers/timestamp'
+import { tasksAsyncSave } from '../services/asyncStorage'
 
 const defaultState: Tasks = {}
 
@@ -86,7 +93,10 @@ const TasksProvider: FC = ({ children }) => {
         tasksReset,
     }
 
-    console.log(tasks)
+    useEffect(() => {
+        tasksAsyncSave(tasks)
+    }, [tasks])
+
     return (
         <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
     )

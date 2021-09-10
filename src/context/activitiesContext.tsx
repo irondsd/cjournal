@@ -205,14 +205,13 @@ const ActivitiesProvider: FC = ({ children }) => {
     }
 
     useEffect(() => {
-        if (Object.keys(activities).length) activitiesAsyncSave(activities)
-
         const array = Object.values(activities)
         const sorted = array.sort(function (a, b) {
             return b['time_started'] - a['time_started']
         })
 
         setSorted(sorted)
+        activitiesAsyncSave(activities)
     }, [activities])
 
     return (

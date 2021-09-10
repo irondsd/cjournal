@@ -85,7 +85,7 @@ const UserProvider: FC = ({ children }) => {
     }
 
     useEffect(() => {
-        if (state._id) userAsyncSave(state)
+        userAsyncSave(state)
     }, [state])
 
     const value = { ...state, load, reset }
