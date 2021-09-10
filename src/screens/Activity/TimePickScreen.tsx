@@ -6,7 +6,7 @@ import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch, useSelector } from 'react-redux'
 import { Comment } from '../../components/CommentTS'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { AudioRecorder } from '../../components/AudioRecorderTS'
@@ -16,21 +16,13 @@ import { addActivity } from '../../redux/actions'
 import { findLatestTask } from '../../classes/Task'
 import { RootState } from '../../redux/store'
 
-type activityType = {
-    activity_type?: ActivityTypes
-    time_started?: number
-    time_ended?: number
-    task?: string
-    comment?: string
-}
-
 export const TimePickScreen: NavigationStackScreenComponent = ({
     navigation,
 }) => {
     const tasks = useSelector((state: RootState) => state.tasks)
     const dispatch = useDispatch()
     const { params } = navigation.state
-    const [activity, setActivity] = useState<activityType>({})
+    const [activity, setActivity] = useState<Partial<IActivity>>({})
     const [data, setData] = useState<IAData>({})
 
     const submit = () => {

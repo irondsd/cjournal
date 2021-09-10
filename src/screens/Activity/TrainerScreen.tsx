@@ -6,7 +6,7 @@ import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch } from 'react-redux'
 import { OthersPickers } from '../../components/OthersPickers'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { CaloriesInput } from '../../components/CaloriesInputTS'
@@ -14,18 +14,12 @@ import { TimePickCombined } from '../../components/TimePickCombined'
 import { addHint } from '../../services/hints'
 import { addActivity } from '../../redux/actions'
 
-type TrainerActivityType = {
-    activity_type?: string
-    time_started?: number
-    time_ended?: number
-}
-
 export const TrainerScreen: NavigationStackScreenComponent = ({
     navigation,
 }) => {
     const dispatch = useDispatch()
     const params = navigation?.state?.params
-    const [activity, setActivity] = useState<TrainerActivityType>({})
+    const [activity, setActivity] = useState<Partial<IActivity>>({})
     const [data, setData] = useState<IAData>({})
 
     const submit = () => {

@@ -5,7 +5,7 @@ import { Routes, ActivityTypes, defaultStyles, width } from '../../constants'
 import { strings } from '../../localization'
 import { addActivity } from '../../redux/actions'
 import AudioRecorder from '../../components/AudioRecorder'
-import Activity, { IAData } from '../../classes/Activity'
+import Activity, { IActivity, IAData } from '../../classes/Activity'
 import timestamp from '../../helpers/timestamp'
 import GPS, { LocationType } from '../../sensors/GPS'
 import Comment from '../../components/Comment'
@@ -13,15 +13,9 @@ import { Button } from '../../components/Button'
 import Icon from 'react-native-vector-icons/dist/MaterialIcons'
 import { NavigationStackScreenComponent } from 'react-navigation-stack'
 
-type AlarmScreenActivityType = {
-    activity_type?: string
-    time_started?: number
-    comment?: string | undefined
-}
-
 const AlarmScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const dispatch = useDispatch()
-    const [activity, setActivity] = useState<AlarmScreenActivityType>({})
+    const [activity, setActivity] = useState<Partial<IActivity>>({})
     const [locations, setLocations] = useState<LocationType[]>([])
     const [data, setData] = useState<IAData>({})
 

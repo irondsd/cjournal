@@ -6,7 +6,7 @@ import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch } from 'react-redux'
 import { OthersPickers } from '../../components/OthersPickers'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { AudioRecorder } from '../../components/AudioRecorderTS'
@@ -14,18 +14,12 @@ import { TimePickCombined } from '../../components/TimePickCombined'
 import { addHint } from '../../services/hints'
 import { addActivity } from '../../redux/actions'
 
-type OtherActivityType = {
-    activity_type?: ActivityTypes
-    time_started?: number
-    time_ended?: number
-}
-
 // todo: refactor to join Others, Trainer and Vertical pos calib screen
 
 export const OtherScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const dispatch = useDispatch()
     const params = navigation?.state?.params
-    const [activity, setActivity] = useState<OtherActivityType>({})
+    const [activity, setActivity] = useState<Partial<IActivity>>({})
     const [data, setData] = useState<IAData>({})
 
     const submit = () => {

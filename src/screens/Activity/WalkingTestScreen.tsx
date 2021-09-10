@@ -17,7 +17,7 @@ import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import { strings } from '../../localization'
 import timestamp from '../../helpers/timestamp'
 import { useDispatch, useSelector } from 'react-redux'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { addActivity } from '../../redux/actions'
 import { findLatestTask } from '../../classes/Task'
@@ -32,14 +32,6 @@ import { usePedometer } from '../../hooks/usePedometer'
 import { terminateAlarm } from '../../helpers/terminateAlarm'
 import { BackButton } from '../../components/BackButton'
 
-type ActivityType = {
-    activity_type?: string
-    time_started?: number
-    time_ended?: number
-    task?: string
-    comment?: string
-}
-
 const TYPE = ActivityTypes.WalkingTest
 
 export const WalkingTestScreen: NavigationStackScreenComponent = ({
@@ -47,7 +39,7 @@ export const WalkingTestScreen: NavigationStackScreenComponent = ({
 }) => {
     const dispatch = useDispatch()
     const tasks = useSelector((state: RootState) => state.tasks)
-    const [activity, setActivity] = useState<ActivityType>({
+    const [activity, setActivity] = useState<Partial<IActivity>>({
         activity_type: TYPE,
     })
     const { params } = navigation.state

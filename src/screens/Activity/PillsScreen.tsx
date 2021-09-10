@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import {
     Routes,
     defaultStyles,
@@ -15,24 +15,18 @@ import { findLatestTask } from '../../classes/Task'
 import { TimePicker } from '../../components/TimePicker2'
 import TakePhoto from '../../components/TakePhoto'
 import { DropDownInput } from '../../components/DropDownInputTS'
-import Activity from '../../classes/Activity'
+import Activity, { IActivity } from '../../classes/Activity'
 import { RootState } from '../../redux/store'
 import { IAData } from '../../classes/Activity'
 import { Button } from '../../components/Button'
 import { objectCleanUp } from '../../helpers/utils'
-
-type PillsActivityType = {
-    activity_type?: ActivityTypes
-    time_started?: number
-    task?: string
-}
 
 export const PillsScreen: NavigationStackScreenComponent = ({ navigation }) => {
     const user = useSelector((state: RootState) => state.user)
     const tasks = useSelector((state: RootState) => state.tasks)
     const dispatch = useDispatch()
     const params = navigation?.state?.params
-    const [activity, setActivity] = useState<PillsActivityType>({})
+    const [activity, setActivity] = useState<Partial<IActivity>>({})
     const [data, setData] = useState<IAData>({})
     const [pillsList, setPillsList] = useState<string[]>([])
 
