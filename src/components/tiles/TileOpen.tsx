@@ -1,19 +1,15 @@
 import React, { FC } from 'react'
-import { Tile, TileChildProps } from '../TileTS'
+import { Tile, TileTypeChildProps } from './Tile'
 import { strings } from '../../localization'
-import {
-    ActivityTypes,
-    Routes,
-    tileColor,
-    tileShadeColor,
-} from '../../constants'
+import { tileColor, tileShadeColor } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
+import { ActivityRouter } from '../../navigation/ActivityRouter'
 
-const name = ActivityTypes.WalkingTest
-
-export const WalkingTestTile: FC<TileChildProps> = ({ disabled }) => {
+export const TileOpen: FC<TileTypeChildProps> = ({ name }) => {
     const navigation = useNavigation()
 
+    const route = ActivityRouter(name)
+    console.log(route)
     return (
         <Tile
             title={strings[name]}
@@ -21,10 +17,10 @@ export const WalkingTestTile: FC<TileChildProps> = ({ disabled }) => {
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(Routes.WalkingTest)
+                navigation.navigate(route)
             }}
             onLongPress={() => {
-                navigation.navigate(Routes.WalkingTest)
+                navigation.navigate(route)
             }}
         />
     )

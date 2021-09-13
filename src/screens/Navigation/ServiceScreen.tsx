@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
 import { strings } from '../../localization'
-import {
-    CuffFixTile,
-    ElectrodeReplacementTile,
-    VerticalPositionCalibrationTile,
-} from '../../components/tiles'
-import { TileLine } from '../../components/TileLine'
+import { TileInit, TileOpenSender } from '../../components/tiles'
+import { TileLine } from '../../components/tiles'
+import { ActivityTypes } from '../../constants'
 
 export const ServiceScreen = ({ navigation }) => {
     useEffect(() => {
@@ -17,9 +14,9 @@ export const ServiceScreen = ({ navigation }) => {
 
     return (
         <TileLine>
-            <CuffFixTile />
-            <ElectrodeReplacementTile />
-            <VerticalPositionCalibrationTile />
+            <TileInit name={ActivityTypes.CuffFix} />
+            <TileInit name={ActivityTypes.ElectrodeReplacement} />
+            <TileOpenSender name={ActivityTypes.VerticalPositionCalibration} />
         </TileLine>
     )
 }

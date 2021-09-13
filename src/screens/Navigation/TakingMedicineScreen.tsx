@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react'
 import { strings } from '../../localization'
-import {
-    CourseTherapyTile,
-    ReliefOfAttackTile,
-    MedicineTestTile,
-} from '../../components/tiles'
-import { TileLine } from '../../components/TileLine'
-import { defaultStyles } from '../../constants'
+import { TileOpenSender } from '../../components/tiles'
+import { TileLine } from '../../components/tiles'
+import { ActivityTypes, defaultStyles } from '../../constants'
 import { View } from 'react-native'
 
 export const TakingMedicineScreen = ({ navigation }) => {
@@ -20,9 +16,9 @@ export const TakingMedicineScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <CourseTherapyTile />
-                <ReliefOfAttackTile />
-                <MedicineTestTile />
+                <TileOpenSender name={ActivityTypes.CourseTherapy} />
+                <TileOpenSender name={ActivityTypes.ReliefOfAttack} />
+                <TileOpenSender name={ActivityTypes.MedicineTest} />
             </TileLine>
         </View>
     )

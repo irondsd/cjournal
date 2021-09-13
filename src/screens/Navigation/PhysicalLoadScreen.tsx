@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import { TileLine } from '../../components/TileLine'
-import {
-    OtherLoadTile,
-    RunningTile,
-    WalkingTile,
-    BicyclingTile,
-    TrainerTile,
-    WorkoutTile,
-} from '../../components/tiles'
-import { defaultStyles } from '../../constants'
+import { TileLine } from '../../components/tiles'
+import { TileOpenSender } from '../../components/tiles'
+import { ActivityTypes, defaultStyles } from '../../constants'
 
 export const PhysicalLoadScreen = ({ navigation }) => {
     useEffect(() => {
@@ -23,14 +16,14 @@ export const PhysicalLoadScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <WalkingTile />
-                <RunningTile />
-                <BicyclingTile />
+                <TileOpenSender name={ActivityTypes.Walking} />
+                <TileOpenSender name={ActivityTypes.Running} />
+                <TileOpenSender name={ActivityTypes.Bicycling} />
             </TileLine>
             <TileLine>
-                <WorkoutTile />
-                <TrainerTile />
-                <OtherLoadTile />
+                <TileOpenSender name={ActivityTypes.Workout} />
+                <TileOpenSender name={ActivityTypes.Trainer} />
+                <TileOpenSender name={ActivityTypes.OtherLoad} />
             </TileLine>
         </View>
     )

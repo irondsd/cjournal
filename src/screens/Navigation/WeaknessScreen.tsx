@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import {
-    NauseaTile,
-    StupefactionTile,
-    OtherWeaknessTile,
-    SyncopeTile,
-    FatigueTile,
-} from '../../components/tiles'
-import { TileLine } from '../../components/TileLine'
-import { TileSpacer } from '../../components/TileSpacer'
-import { defaultStyles } from '../../constants'
+import { TileInit, TileOpenSender } from '../../components/tiles'
+import { TileLine } from '../../components/tiles'
+import { TileSpacer } from '../../components/tiles'
+import { ActivityTypes, defaultStyles } from '../../constants'
 
 export const WeaknessScreen = ({ navigation }) => {
     useEffect(() => {
@@ -23,13 +17,13 @@ export const WeaknessScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <SyncopeTile />
-                <NauseaTile />
-                <StupefactionTile />
+                <TileInit name={ActivityTypes.Syncope} />
+                <TileInit name={ActivityTypes.Nausea} />
+                <TileInit name={ActivityTypes.Stupefaction} />
             </TileLine>
             <TileLine>
-                <FatigueTile />
-                <OtherWeaknessTile />
+                <TileInit name={ActivityTypes.Fatigue} />
+                <TileOpenSender name={ActivityTypes.OtherWeakness} />
                 <TileSpacer />
             </TileLine>
         </View>

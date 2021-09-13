@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react'
 import { strings } from '../../localization'
-import {
-    PositiveEmotionsTile,
-    OtherEmotionsTile,
-    NegativeEmotionsTile,
-} from '../../components/tiles'
-import { TileLine } from '../../components/TileLine'
+import { TileInit } from '../../components/tiles'
+import { TileLine, TileOpenSender } from '../../components/tiles'
 import { View } from 'react-native'
-import { defaultStyles } from '../../constants'
+import { ActivityTypes, defaultStyles } from '../../constants'
 
 export const EmotionalStressScreen = ({ navigation }) => {
     useEffect(() => {
@@ -20,9 +16,9 @@ export const EmotionalStressScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <PositiveEmotionsTile />
-                <NegativeEmotionsTile />
-                <OtherEmotionsTile />
+                <TileInit name={ActivityTypes.PositiveEmotions} />
+                <TileInit name={ActivityTypes.NegativeEmotions} />
+                <TileOpenSender name={ActivityTypes.OtherEmotions} />
             </TileLine>
         </View>
     )

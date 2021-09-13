@@ -1,22 +1,15 @@
 import React, { FC, useEffect, useState, useLayoutEffect } from 'react'
 import { View, StatusBar } from 'react-native'
-import { backgroundColor, Routes, defaultStyles } from '../../constants'
+import {
+    backgroundColor,
+    Routes,
+    defaultStyles,
+    ActivityTypes,
+} from '../../constants'
 import { strings } from '../../localization'
 import { SettingsButton } from '../../components/SettingsButton'
-import { TileLine } from '../../components/TileLine'
-import {
-    ActivityTile,
-    PhysicalLoadTile,
-    ServiceTile,
-    TakingMedicineTile,
-    PainTile,
-    ComplaintsTile,
-    WeaknessTile,
-    TestsTile,
-    EmotionalStressTile,
-    SleepTile,
-    AlarmTile,
-} from '../../components/tiles'
+import { TileLine } from '../../components/tiles'
+import { TileOpen } from '../../components/tiles'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { useSync } from '../../hooks/useSync'
@@ -71,23 +64,50 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 barStyle="dark-content"
             />
             <TileLine>
-                <SleepTile disabled={disabled.sleep} />
-                <AlarmTile />
+                <TileOpen
+                    name={ActivityTypes.Sleep}
+                    disabled={disabled.sleep}
+                />
+                <TileOpen name={ActivityTypes.Alarm} />
             </TileLine>
             <TileLine>
-                <PhysicalLoadTile disabled={disabled.physical} />
-                <ActivityTile disabled={disabled.activity} />
-                <EmotionalStressTile disabled={disabled.emotional} />
+                <TileOpen
+                    name={ActivityTypes.PhysicalLoad}
+                    disabled={disabled.physical}
+                />
+                <TileOpen
+                    name={ActivityTypes.Activity}
+                    disabled={disabled.activity}
+                />
+                <TileOpen
+                    name={ActivityTypes.EmotionalStress}
+                    disabled={disabled.emotional}
+                />
             </TileLine>
             <TileLine>
-                <PainTile disabled={disabled.pain} />
-                <ComplaintsTile disabled={disabled.complaints} />
-                <WeaknessTile disabled={disabled.WeaknessTile} />
+                <TileOpen name={ActivityTypes.Pain} disabled={disabled.pain} />
+                <TileOpen
+                    name={ActivityTypes.Complaints}
+                    disabled={disabled.complaints}
+                />
+                <TileOpen
+                    name={ActivityTypes.Weakness}
+                    disabled={disabled.WeaknessTile}
+                />
             </TileLine>
             <TileLine>
-                <TakingMedicineTile disabled={disabled.TakingMedicineTile} />
-                <TestsTile disabled={disabled.tests} />
-                <ServiceTile disabled={disabled.service} />
+                <TileOpen
+                    name={ActivityTypes.TakingMedicine}
+                    disabled={disabled.TakingMedicineTile}
+                />
+                <TileOpen
+                    name={ActivityTypes.Tests}
+                    disabled={disabled.tests}
+                />
+                <TileOpen
+                    name={ActivityTypes.Service}
+                    disabled={disabled.service}
+                />
             </TileLine>
         </View>
     )

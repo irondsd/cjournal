@@ -12,11 +12,12 @@ import {
     borderRadius,
     tileSize,
     tileFontSize,
-} from '../constants/styles'
+} from '../../constants/styles'
 import LinearGradient from 'react-native-linear-gradient'
-import { showError } from '../services/toast'
-import { strings } from '../localization'
-import ActivityIcon from './ActivityIcon'
+import { showError } from '../../services/toast'
+import { strings } from '../../localization'
+import ActivityIcon from '../ActivityIcon'
+import { ActivityTypes } from '../../constants'
 
 type TileProps = {
     title: string
@@ -28,7 +29,8 @@ type TileProps = {
     iconName: string
 }
 
-export type TileChildProps = {
+export type TileTypeChildProps = {
+    name: ActivityTypes
     disabled?: boolean
 }
 

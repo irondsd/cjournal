@@ -1,15 +1,10 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import { TileLine } from '../../components/TileLine'
-import { TileSpacer } from '../../components/TileSpacer'
-import {
-    HeadacheTile,
-    RetrosternalPainTile,
-    HeartAreaPainTile,
-    OtherPainTile,
-} from '../../components/tiles'
-import { defaultStyles } from '../../constants'
+import { TileLine } from '../../components/tiles'
+import { TileSpacer } from '../../components/tiles'
+import { TileInit, TileOpenSender } from '../../components/tiles'
+import { ActivityTypes, defaultStyles } from '../../constants'
 
 export const PainScreen = ({ navigation }) => {
     useEffect(() => {
@@ -22,13 +17,13 @@ export const PainScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <RetrosternalPainTile />
-                <HeartAreaPainTile />
-                <HeadacheTile />
+                <TileInit name={ActivityTypes.RetrosternalPain} />
+                <TileInit name={ActivityTypes.HeartAreaPain} />
+                <TileInit name={ActivityTypes.Headache} />
             </TileLine>
             <TileLine>
                 <TileSpacer />
-                <OtherPainTile />
+                <TileOpenSender name={ActivityTypes.OtherPain} />
                 <TileSpacer />
             </TileLine>
         </View>

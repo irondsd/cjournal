@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import {
-    DyspneaTile,
-    TachypneaTile,
-    ArrhythmiaTile,
-    PalpitationTile,
-    OtherComplaintsTile,
-    VisionDisturbancesTile,
-} from '../../components/tiles'
-import { TileLine } from '../../components/TileLine'
-import { defaultStyles } from '../../constants'
+import { TileInit, TileOpenSender } from '../../components/tiles'
+import { TileLine } from '../../components/tiles'
+import { ActivityTypes, defaultStyles } from '../../constants'
 
 export const ComplaintsScreen = ({ navigation }) => {
     useEffect(() => {
@@ -23,14 +16,14 @@ export const ComplaintsScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <ArrhythmiaTile />
-                <PalpitationTile />
-                <DyspneaTile />
+                <TileInit name={ActivityTypes.Arrhythmia} />
+                <TileInit name={ActivityTypes.Palpitation} />
+                <TileInit name={ActivityTypes.Dyspnea} />
             </TileLine>
             <TileLine>
-                <TachypneaTile />
-                <VisionDisturbancesTile />
-                <OtherComplaintsTile />
+                <TileInit name={ActivityTypes.Tachypnea} />
+                <TileInit name={ActivityTypes.VisionDisturbances} />
+                <TileOpenSender name={ActivityTypes.OtherComplaints} />
             </TileLine>
         </View>
     )

@@ -1,18 +1,10 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import {
-    WalkingTestTile,
-    StairsTile,
-    PsychoemotionalTestTile,
-    PressTile,
-    StrainingTile,
-    ActiveOrthostasisTile,
-    DeepBreathingTile,
-} from '../../components/tiles'
-import { TileLine } from '../../components/TileLine'
-import { TileSpacer } from '../../components/TileSpacer'
-import { defaultStyles } from '../../constants'
+import { TileInit, TileOpen } from '../../components/tiles'
+import { TileLine } from '../../components/tiles'
+import { TileSpacer } from '../../components/tiles'
+import { ActivityTypes, defaultStyles } from '../../constants'
 
 export const TestsScreen = ({ navigation }) => {
     useEffect(() => {
@@ -25,18 +17,18 @@ export const TestsScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <StairsTile />
-                <WalkingTestTile />
-                <DeepBreathingTile />
+                <TileOpen name={ActivityTypes.Stairs} />
+                <TileOpen name={ActivityTypes.WalkingTest} />
+                <TileInit name={ActivityTypes.DeepBreathing} />
             </TileLine>
             <TileLine>
-                <PressTile />
-                <StrainingTile />
-                <ActiveOrthostasisTile />
+                <TileOpen name={ActivityTypes.Press} />
+                <TileInit name={ActivityTypes.Straining} />
+                <TileOpen name={ActivityTypes.ActiveOrthostasis} />
             </TileLine>
             <TileLine>
                 <TileSpacer />
-                <PsychoemotionalTestTile />
+                <TileInit name={ActivityTypes.PsychoemotionalTest} />
                 <TileSpacer />
             </TileLine>
         </View>

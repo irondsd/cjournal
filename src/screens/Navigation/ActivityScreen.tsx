@@ -1,18 +1,10 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
-import { TileLine } from '../../components/TileLine'
-import { TileSpacer } from '../../components/TileSpacer'
-import {
-    SexTile,
-    ToiletTile,
-    ShowerTile,
-    OtherActivityTile,
-    AlcoholTile,
-    MealTile,
-    SmokingTile,
-} from '../../components/tiles'
+import { TileLine } from '../../components/tiles'
+import { TileSpacer } from '../../components/tiles'
+import { TileInit, TileOpenSender } from '../../components/tiles'
 import { strings } from '../../localization'
-import { defaultStyles } from '../../constants'
+import { ActivityTypes, defaultStyles } from '../../constants'
 
 export const ActivityScreen = ({ navigation }) => {
     useEffect(() => {
@@ -25,18 +17,18 @@ export const ActivityScreen = ({ navigation }) => {
     return (
         <View style={defaultStyles.navScreen}>
             <TileLine>
-                <MealTile />
-                <AlcoholTile />
-                <SmokingTile />
+                <TileInit name={ActivityTypes.Meal} />
+                <TileInit name={ActivityTypes.Alcohol} />
+                <TileInit name={ActivityTypes.Smoking} />
             </TileLine>
             <TileLine>
-                <SexTile />
-                <ShowerTile />
-                <ToiletTile />
+                <TileInit name={ActivityTypes.Sex} />
+                <TileInit name={ActivityTypes.Shower} />
+                <TileInit name={ActivityTypes.Toilet} />
             </TileLine>
             <TileLine>
                 <TileSpacer />
-                <OtherActivityTile />
+                <TileOpenSender name={ActivityTypes.OtherActivity} />
                 <TileSpacer />
             </TileLine>
         </View>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { tileMargin, tileSize } from '../constants/styles'
+import { tileMargin, tileSize } from '../../constants/styles'
 
 export const TileSpacer: FC = () => {
     return <View style={styles.container} />

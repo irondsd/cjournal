@@ -1,14 +1,5 @@
 import { ActivityTypes } from '../constants'
-
-export enum Routes {
-    TimePick = 'TimePick',
-    WalkingTest = 'WalkingTest',
-    TakingMedicine = 'TakingMedicine',
-    Stairs = 'Stairs',
-    Pills = 'Pills',
-    Other = 'Other',
-    BloodPressure = 'BloodPressure',
-}
+import { Routes } from '../navigation/Routes'
 
 export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
     switch (activity_type) {
@@ -42,6 +33,25 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
             return Routes.Other
         case ActivityTypes.Trainer:
             return Routes.Other
+
+        case ActivityTypes.PhysicalLoad:
+            return Routes.PhysicalLoad
+        case ActivityTypes.Activity:
+            return Routes.Activity
+        case ActivityTypes.EmotionalStress:
+            return Routes.EmotionalStress
+        case ActivityTypes.Pain:
+            return Routes.Pain
+        case ActivityTypes.Complaints:
+            return Routes.Complaints
+        case ActivityTypes.Weakness:
+            return Routes.Weakness
+        case ActivityTypes.TakingMedicine:
+            return Routes.TakingMedicine
+        case ActivityTypes.Tests:
+            return Routes.Tests
+        case ActivityTypes.Service:
+            return Routes.Service
         default:
             return Routes.TimePick
     }

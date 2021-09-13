@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Tile, TileChildProps } from '../TileTS'
+import { Tile, TileTypeChildProps } from './Tile'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
@@ -8,11 +8,13 @@ import {
     tileShadeColor,
 } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
+import { ActivityRouter } from '../../navigation/ActivityRouter'
 
-const name = ActivityTypes.OtherComplaints
-
-export const OtherComplaintsTile: FC<TileChildProps> = ({ disabled }) => {
+export const TileOpenSender: FC<TileTypeChildProps> = ({ name }) => {
     const navigation = useNavigation()
+
+    const route = ActivityRouter(name)
+    const options = { sender: name }
 
     return (
         <Tile
@@ -21,14 +23,10 @@ export const OtherComplaintsTile: FC<TileChildProps> = ({ disabled }) => {
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(Routes.Other, {
-                    sender: name,
-                })
+                navigation.navigate(route, options)
             }}
             onLongPress={() => {
-                navigation.navigate(Routes.Other, {
-                    sender: name,
-                })
+                navigation.navigate(route, options)
             }}
         />
     )

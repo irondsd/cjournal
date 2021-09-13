@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Tile, TileChildProps } from '../TileTS'
+import { Tile, TileTypeChildProps } from './Tile'
 import { strings } from '../../localization'
 import {
     ActivityTypes,
@@ -8,11 +8,15 @@ import {
     tileShadeColor,
 } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
+import { ActivityRouter } from '../../navigation/ActivityRouter'
+import { useInitActivity } from '../../hooks/useInitActivity'
 
-const name = ActivityTypes.OtherPain
-
-export const OtherPainTile: FC<TileChildProps> = ({ disabled }) => {
+export const TileInit: FC<TileTypeChildProps> = ({ name }) => {
     const navigation = useNavigation()
+    const { initSave } = useInitActivity()
+
+    const route = ActivityRouter(name)
+    const options = { sender: name }
 
     return (
         <Tile
@@ -21,14 +25,11 @@ export const OtherPainTile: FC<TileChildProps> = ({ disabled }) => {
             shadeColor={tileColor}
             color={tileShadeColor}
             onPress={() => {
-                navigation.navigate(Routes.Other, {
-                    sender: name,
-                })
+                initSave(name)
+                navigation.navigate(Routes.Home)
             }}
             onLongPress={() => {
-                navigation.navigate(Routes.Other, {
-                    sender: name,
-                })
+                navigation.navigate(route, options)
             }}
         />
     )
