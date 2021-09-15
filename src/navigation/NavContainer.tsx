@@ -25,6 +25,7 @@ import {
     SleepScreen,
     SleepFinishScreen,
     WalkingTestScreen,
+    StairsScreen,
     TimePickScreen,
     CameraScreen,
     DebugScreen,
@@ -73,6 +74,8 @@ export type RootStackParamList = {
         id?: string
     }
     BloodPressure: { sender: ActivityTypes; task?: string; id?: string }
+    WalkingTest: undefined
+    Stairs: undefined
 }
 
 const RootStack = createStackNavigator<RootStackParamList>()
@@ -209,6 +212,14 @@ export const NavContainer: FC = () => {
                         <RootStack.Screen
                             name={Routes.Debug}
                             component={DebugScreen}
+                        />
+                        <RootStack.Screen
+                            name={Routes.WalkingTest}
+                            component={WalkingTestScreen}
+                        />
+                        <RootStack.Screen
+                            name={Routes.Stairs}
+                            component={StairsScreen}
                         />
                     </>
                 ) : (

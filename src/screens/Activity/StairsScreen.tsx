@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useLayoutEffect } from 'react'
 import {
     View,
     Text,
@@ -40,14 +40,14 @@ type StairsScreenProps = {
     navigation: StairsScreenNavigationProp
 }
 
-export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
+export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
     // const tasks = useSelector((state: RootState) => state.tasks)
     const [activity, updateActivity, updateData] = useMakeActivity({
-        activity_type: ActivityTypes.WalkingTest,
+        activity_type: ActivityTypes.Stairs,
     })
-    const { params } = navigation.state
+    const [seconds, setSeconds] = useState(0)
+
     const [progress, setProgress] = useState(false)
-    const [seconds, setSeconds] = useState(walkingDuration)
     const {
         geolocationData,
         startUpdates: startGPS,
@@ -95,8 +95,6 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
 
     useEffect(() => {
         // const task = params?.task || findLatestTask(tasks, TYPE)
-        // setActivity({ ...activity, task })
-        navigation.setParams({ headerTitle: strings[TYPE] })
 
         // prevent going back without saving
         BackHandler.addEventListener('hardwareBackPress', backPressed)
@@ -105,6 +103,12 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
             BackHandler.removeEventListener('hardwareBackPress', backPressed)
     }, [])
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: strings.Stairs,
+        })
+    }, [navigation])
+
     useEffect(() => {
         let timeoutId
         let intervalId
@@ -112,10 +116,10 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
 
         if (progress) {
             time_started = timestamp()
-            setActivity({ ...activity, time_started })
+            updateActivity({ ...activity, time_started })
 
             intervalId = BackgroundTimer.setInterval(() => {
-                setSeconds(time_started - timestamp() + walkingDuration)
+                // setSeconds(time_started - timestamp() + walkingDuration)
             }, 200)
 
             // timeout for 6 minutes
@@ -140,29 +144,24 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
         }
     }, [progress])
 
-    useEffect(() => {
-        if (seconds === 0) {
-            submit()
-        }
-    }, [seconds])
-    console.log(activity)
     return (
         <View style={defaultStyles.container}>
             <InfoBox
                 info={{
                     [strings.Steps]: pedometerData.numberOfSteps,
+                    [strings.Time]: secs2time(seconds),
                     [strings.Distance]: `${pedometerData.distance.toFixed(0)} ${
                         strings.m
                     }`,
                 }}
             />
-            <CircleProgress progress={seconds / 3.6}>
+
+            <View style={{ flex: 1, justifyContent: 'center' }}>
                 <Text style={styles.timer}>
-                    {activity.time_started
-                        ? secs2time(seconds)
-                        : secs2time(walkingDuration)}
+                    {activity.time_started ? '0.0' : 'fdsfsd'}
                 </Text>
-            </CircleProgress>
+            </View>
+
             <Button
                 title={progress ? strings.Terminate : strings.Start}
                 onPress={() => {
@@ -172,13 +171,6 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
         </View>
     )
 }
-
-// WalkingTestScreen.navigationOptions = ({ navigation }) => {
-//     return {
-//         title: navigation.getParam('headerTitle'),
-//         headerLeft: null,
-//     }
-// }
 
 const styles = StyleSheet.create({
     timer: {
