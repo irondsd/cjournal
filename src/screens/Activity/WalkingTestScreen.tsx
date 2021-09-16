@@ -30,22 +30,25 @@ import { BackButton } from '../../components/BackButton'
 import { useMakeActivity } from '../../hooks/useMakeActivity'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../../navigation/NavContainer'
+import { useActivities } from '../../context/activitiesContext'
 
-type StairsScreenNavigationProp = StackNavigationProp<
+type WalkingTestScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
-    'Stairs'
+    'WalkingTest'
 >
 
-type StairsScreenProps = {
-    navigation: StairsScreenNavigationProp
+type WalkingTestScreenProps = {
+    navigation: WalkingTestScreenNavigationProp
 }
 
-export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
-    // const tasks = useSelector((state: RootState) => state.tasks)
-    const [activity, updateActivity, updateData] = useMakeActivity({
+export const WalkingTestScreen: FC<WalkingTestScreenProps> = ({
+    navigation,
+}) => {
+    const { activityAdd } = useActivities()
+    const [activity, updateActivity] = useMakeActivity({
         activity_type: ActivityTypes.WalkingTest,
     })
-    const { params } = navigation.state
+
     const [progress, setProgress] = useState(false)
     const [seconds, setSeconds] = useState(walkingDuration)
     const {
@@ -76,27 +79,22 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
         setProgress(false)
         Vibration.vibrate(600)
 
-        // const newAct = Activity.init(
-        //     activity.activity_type,
-        //     activity.time_started,
-        //     activity.time_ended,
-        //     activity.task,
-        //     undefined,
-        //     {
-        //         steps: pedometerData.numberOfSteps,
-        //         distance: parseInt(pedometerData.distance.toFixed(0)),
-        //         locations: geolocationData,
-        //     },
-        // )
-        // console.log(newAct)
-        // dispatch(addActivity(newAct))
-        navigation.navigate(Routes.Home)
+        const createdActivity = { ...activity }
+
+        if (!createdActivity.data) createdActivity.data = {}
+        createdActivity.data.distance = pedometerData.distance
+        createdActivity.data.steps = pedometerData.numberOfSteps
+        createdActivity.data.locations = [...geolocationData]
+
+        console.log(createdActivity)
+        // activityAdd(createdActivity)
+        // navigation.navigate(Routes.Home)
     }
 
     useEffect(() => {
         // const task = params?.task || findLatestTask(tasks, TYPE)
-        // setActivity({ ...activity, task })
-        navigation.setParams({
+
+        navigation.setOptions({
             headerTitle: strings[ActivityTypes.WalkingTest],
         })
 
@@ -147,7 +145,7 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
             submit()
         }
     }, [seconds])
-    console.log(activity)
+
     return (
         <View style={defaultStyles.container}>
             <InfoBox
@@ -174,13 +172,6 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
         </View>
     )
 }
-
-// WalkingTestScreen.navigationOptions = ({ navigation }) => {
-//     return {
-//         title: navigation.getParam('headerTitle'),
-//         headerLeft: null,
-//     }
-// }
 
 const styles = StyleSheet.create({
     timer: {
