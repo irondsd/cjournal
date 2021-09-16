@@ -9,7 +9,7 @@ export const TileOpen: FC<TileTypeChildProps> = ({ name }) => {
     const navigation = useNavigation()
 
     const route = ActivityRouter(name)
-    console.log(route)
+
     return (
         <Tile
             title={strings[name]}
