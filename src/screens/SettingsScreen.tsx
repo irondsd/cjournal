@@ -8,7 +8,12 @@ import {
     TouchableWithoutFeedback,
     Alert,
 } from 'react-native'
-import { backgroundColor, Routes, profileEditUrl } from '../constants'
+import {
+    backgroundColor,
+    Routes,
+    profileEditUrl,
+    ActivityTypes,
+} from '../constants'
 import { strings } from '../localization'
 import { Button } from '../components/Button'
 import { ToggleSwitch } from '../components/settings/ToggleSwitch'
@@ -104,6 +109,7 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
                     onPress={() => {
                         navigation.navigate(Routes.QRScan, {
                             returnTo: Routes.Settings,
+                            sender: ActivityTypes.Sleep, // not needed here
                         })
                     }}
                 />
@@ -164,7 +170,7 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
                         title={strings.EditProfile}
                         onPress={() => {
                             Linking.openURL(profileEditUrl).catch(err =>
-                                console.error('An error occurred', err),
+                                console.log('An error occurred', err),
                             )
                         }}
                     />

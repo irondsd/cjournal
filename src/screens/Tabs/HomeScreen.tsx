@@ -9,7 +9,7 @@ import {
 import { strings } from '../../localization'
 import { SettingsButton } from '../../components/SettingsButton'
 import { TileLine } from '../../components/tiles'
-import { TileOpen } from '../../components/tiles'
+import { TileOpen, TileOpenTimePick } from '../../components/tiles'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../../navigation/NavContainer'
 import { useSync } from '../../hooks/useSync'
@@ -64,7 +64,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 barStyle="dark-content"
             />
             <TileLine>
-                <TileOpen
+                <TileOpenTimePick
                     name={ActivityTypes.Sleep}
                     disabled={disabled.sleep}
                 />
