@@ -7,6 +7,8 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
             return Routes.WalkingTest
         case ActivityTypes.Stairs:
             return Routes.Stairs
+        case ActivityTypes.Sleep:
+            return Routes.Sleep
         case ActivityTypes.CourseTherapy:
             return Routes.Pills
         case ActivityTypes.ReliefOfAttack:
