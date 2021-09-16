@@ -157,9 +157,11 @@ export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
             />
 
             <View style={{ flex: 1, justifyContent: 'center' }}>
+                <Text style={styles.descText}>{strings.YouClimbed}</Text>
                 <Text style={styles.timer}>
-                    {activity.time_started ? '0.0' : 'fdsfsd'}
+                    {activity.time_started ? `0.0` : 'fdsfsd'}
                 </Text>
+                <Text style={styles.descText}>{strings.meters}</Text>
             </View>
 
             <Button
@@ -173,11 +175,17 @@ export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    descText: {
+        fontSize: width / 10,
+        color: '#00000011',
+        textAlign: 'center',
+        fontWeight: '100',
+    },
     timer: {
         fontSize: width / 7,
+        textAlign: 'center',
         fontWeight: '200',
         color: '#00000055',
-        transform: [{ scaleX: -1 }],
         fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
     },
 })
