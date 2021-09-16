@@ -96,7 +96,9 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
     useEffect(() => {
         // const task = params?.task || findLatestTask(tasks, TYPE)
         // setActivity({ ...activity, task })
-        navigation.setParams({ headerTitle: strings[TYPE] })
+        navigation.setParams({
+            headerTitle: strings[ActivityTypes.WalkingTest],
+        })
 
         // prevent going back without saving
         BackHandler.addEventListener('hardwareBackPress', backPressed)
@@ -112,7 +114,7 @@ export const WalkingTestScreen: FC<{ navigation: any }> = ({ navigation }) => {
 
         if (progress) {
             time_started = timestamp()
-            setActivity({ ...activity, time_started })
+            updateActivity({ time_started })
 
             intervalId = BackgroundTimer.setInterval(() => {
                 setSeconds(time_started - timestamp() + walkingDuration)
