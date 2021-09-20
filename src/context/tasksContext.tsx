@@ -4,6 +4,7 @@ import React, {
     useReducer,
     useContext,
     useEffect,
+    useState,
 } from 'react'
 import { Task } from '../types/Task'
 import timestamp from '../helpers/timestamp'
@@ -24,8 +25,11 @@ type TaskFunctions = {
     TaskCompleted?: (task: Task) => void
 }
 
-const TasksContext = createContext<{ tasks: Tasks } & TaskFunctions>({
+const TasksContext = createContext<
+    { tasks: Tasks; sorted: Task[] } & TaskFunctions
+>({
     tasks: defaultState,
+    sorted: [],
 })
 
 enum Actions {
@@ -71,6 +75,7 @@ function tasksReducer(
 
 const TasksProvider: FC = ({ children }) => {
     const [tasks, tasksDispatch] = useReducer(tasksReducer, defaultState)
+    const [sorted, setSorted] = useState<Task[]>([])
 
     const tasksRestore = (tasks: Tasks) => {
         tasksDispatch({ type: Actions.RESTORE, payload: tasks })
@@ -87,6 +92,7 @@ const TasksProvider: FC = ({ children }) => {
 
     const value = {
         tasks,
+        sorted,
         tasksRestore,
         loadTasksFromArray,
         TaskComplete,
@@ -94,6 +100,13 @@ const TasksProvider: FC = ({ children }) => {
     }
 
     useEffect(() => {
+        const array = Object.values(tasks)
+        const filtered = array.filter(t => !t.completed)
+        const sorted = filtered.sort(function (a, b) {
+            return b['time'] - a['time']
+        })
+
+        setSorted(sorted)
         tasksAsyncSave(tasks)
     }, [tasks])
 

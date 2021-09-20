@@ -27,8 +27,6 @@ export const TasksListItem: FC<TasksListItemProps> = ({ task, navigation }) => {
     }
 
     const onPress = () => {
-        if (task.completed) return
-
         const route = ActivityRouter(task.activity_type)
 
         navigation.navigate(route, {
