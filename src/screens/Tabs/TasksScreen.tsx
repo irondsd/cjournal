@@ -23,8 +23,7 @@ type TasksScreenProps = {
 export const TasksScreen: FC<TasksScreenProps> = ({ navigation }) => {
     const [isActive, setIsActive] = useState(false)
 
-    const { tasks } = useTasks()
-    const tasksArray = useMemo(() => Object.values(tasks), [tasks])
+    const { sorted } = useTasks()
 
     const { fetchTasks } = useSync()
 
@@ -62,7 +61,7 @@ export const TasksScreen: FC<TasksScreenProps> = ({ navigation }) => {
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
             <FlatList
                 style={styles.list}
-                data={tasksArray}
+                data={sorted}
                 contentContainerStyle={{ paddingBottom: 30 }}
                 overScrollMode={'always'}
                 renderItem={renderItem}
