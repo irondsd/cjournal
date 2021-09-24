@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Alert } from 'react-native'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
-import { NavigationStackScreenComponent } from 'react-navigation-stack'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import { Splash } from '../components/Splash'
 import { strings } from '../localization'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootStackParamList } from '../navigation/NavContainer'
+import { RouteProp } from '@react-navigation/native'
 
-export const QRScanScreen: NavigationStackScreenComponent = ({
-    navigation,
-}) => {
+type QRScanScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'QRScan'
+>
+type QRScanScreenRouteProp = RouteProp<RootStackParamList, 'QRScan'>
+
+type QRScanScreenProps = {
+    navigation: QRScanScreenNavigationProp
+    route: QRScanScreenRouteProp
+}
+
+export const QRScanScreen: FC<QRScanScreenProps> = ({ navigation, route }) => {
     const [permitted, setPermitted] = useState(false)
     const [hasValue, setHasValue] = useState(false)
 
     const onReadCode = qrValue => {
         setHasValue(true)
-        const returnTo = navigation.state.params.returnTo
+        const { returnTo } = route.params
 
         navigation.navigate(returnTo, { qrValue })
     }
 
     useEffect(() => {
-        if (!navigation.state.params.returnTo) {
+        if (!route.params.returnTo) {
             navigation.goBack()
             Alert.alert('An error occured', 'Please contact the developer')
         }
@@ -50,8 +61,4 @@ export const QRScanScreen: NavigationStackScreenComponent = ({
             }}
         />
     )
-}
-
-QRScanScreen.navigationOptions = () => {
-    return { header: null }
 }
