@@ -29,6 +29,7 @@ import {
     TimePickScreen,
     CameraScreen,
     DebugScreen,
+    QRScanScreen,
 } from '../screens'
 import {
     activitiesAsyncGet,
@@ -200,6 +201,10 @@ export const NavContainer: FC = () => {
                         <RootStack.Screen
                             name={Routes.Camera}
                             component={CameraScreen}
+                        />
+                        <RootStack.Screen
+                            name={Routes.QRScan}
+                            component={QRScanScreen}
                         />
                         <RootStack.Screen
                             name={Routes.Sleep}
