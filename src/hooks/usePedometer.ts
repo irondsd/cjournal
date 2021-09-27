@@ -5,9 +5,11 @@ import Pedometer, {
 
 export const usePedometer = (): {
     pedometerData: PedometerInterface
+    isAvailable: boolean
     startUpdates: () => void
     stopUpdates: () => void
 } => {
+    const [isAvailable, setIsAvailable] = useState(true)
     const [watchStarted, setWatchStarted] = useState(false)
     const [pedometerData, setPedometerData] = useState<PedometerInterface>({
         numberOfSteps: 0,
@@ -27,11 +29,13 @@ export const usePedometer = (): {
                         new Date().getTime(),
                         pedometerData => {
                             console.log(pedometerData)
-                            setPedometerData(pedometerData)
+                            if (pedometerData) setPedometerData(pedometerData)
+                            else console.log('pedometer data is null')
                         },
                     )
                 } else {
                     console.log('Pedometer is not available')
+                    setIsAvailable(false)
                 }
             })
         } else {
@@ -43,5 +47,5 @@ export const usePedometer = (): {
         }
     }, [watchStarted])
 
-    return { pedometerData, startUpdates, stopUpdates }
+    return { pedometerData, isAvailable, startUpdates, stopUpdates }
 }

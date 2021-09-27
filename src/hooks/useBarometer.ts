@@ -28,9 +28,11 @@ const elevationChange = (hPaStart: number, hPaEnd: number): number => {
 
 export const useBarometer = (): {
     barometerData: Data
+    isAvailable: boolean | undefined
     startUpdates: () => void
     stopUpdates: () => void
 } => {
+    const [isAvailable, setIsAvailable] = useState<boolean>()
     const [watchStarted, setWatchStarted] = useState(false)
     const [barometerData, setBarometerData] = useState<Data>({
         mmHg: 0,
@@ -43,7 +45,7 @@ export const useBarometer = (): {
     const stopUpdates = () => setWatchStarted(false)
 
     useEffect(() => {
-        let subscription
+        let subscription: any
         if (watchStarted) {
             subscription = barometer.subscribe(
                 ({ pressure }) => {
@@ -59,6 +61,7 @@ export const useBarometer = (): {
                 },
                 () => {
                     // not available
+                    setIsAvailable(false)
                     setWatchStarted(false)
                 },
             )
@@ -70,5 +73,18 @@ export const useBarometer = (): {
         }
     }, [watchStarted])
 
-    return { barometerData, startUpdates, stopUpdates }
+    useEffect(() => {
+        const sub = barometer.subscribe(
+            () => {
+                setIsAvailable(true)
+                if (sub) sub.unsubscribe()
+            },
+            () => {
+                setIsAvailable(false)
+                if (sub) sub.unsubscribe()
+            },
+        )
+    }, [])
+
+    return { barometerData, isAvailable, startUpdates, stopUpdates }
 }

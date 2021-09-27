@@ -11,27 +11,28 @@ export type LocationType = {
 
 export const useGeolocation = (): {
     geolocationData: LocationType[]
+    isAvailable: boolean | undefined
     startUpdates: () => void
     stopUpdates: () => void
     requestGeolocation: () => Promise<GeolocationResponse>
 } => {
-    const [isAllowed, setIsAllowed] = useState<boolean>()
+    const [isAvailable, setIsAvailable] = useState<boolean>()
     const [watchStarted, setWatchStarted] = useState(false)
     const [geolocationData, setGeolocationData] = useState<LocationType[]>([])
     const [lastKnownLocation, setLastKnownLocation] = useState<LocationType>()
 
     const checkPermissions = async (): Promise<boolean> => {
-        if (isAllowed === true || isAllowed === false) return isAllowed
+        if (isAvailable === true || isAvailable === false) return isAvailable
         else {
             const result = await requestLocationPermissions()
-            setIsAllowed(result)
+            setIsAvailable(result)
             return result
         }
     }
 
     const requestGeolocation = (): Promise<GeolocationResponse> => {
         return new Promise((resolve, reject) => {
-            if (!isAllowed) reject('not allowed')
+            if (!isAvailable) reject('not allowed')
 
             Geolocation.getCurrentPosition(
                 position => {
@@ -60,7 +61,7 @@ export const useGeolocation = (): {
         })
     }
 
-    const startUpdates = () => setWatchStarted(isAllowed ? true : false)
+    const startUpdates = () => setWatchStarted(isAvailable ? true : false)
     const stopUpdates = () => setWatchStarted(false)
 
     useEffect(() => {
@@ -75,7 +76,7 @@ export const useGeolocation = (): {
                         longitude: position.coords.longitude,
                     }
 
-                    if (isAllowed && watchStarted) {
+                    if (isAvailable && watchStarted) {
                         setGeolocationData(data => [...data, location])
                     } else {
                         setLastKnownLocation(location)
@@ -87,11 +88,17 @@ export const useGeolocation = (): {
         return () => {
             clearInterval(intervalId)
         }
-    }, [isAllowed, watchStarted])
+    }, [isAvailable, watchStarted])
 
     useEffect(() => {
         checkPermissions()
     }, [])
 
-    return { geolocationData, startUpdates, stopUpdates, requestGeolocation }
+    return {
+        geolocationData,
+        isAvailable,
+        startUpdates,
+        stopUpdates,
+        requestGeolocation,
+    }
 }
