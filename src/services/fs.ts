@@ -60,3 +60,12 @@ export async function clearFiles() {
         },
     )
 }
+
+export async function getFilesCount(): Promise<number> {
+    return RNFS.readDir(RNFS.DocumentDirectoryPath).then(
+        (res: { name: string; path: string }[]) => {
+            console.log(res)
+            return res.length
+        },
+    )
+}
