@@ -100,23 +100,35 @@ export const SettingsScreen: FC<SettingsScreenProps> = ({
         navigation.setOptions({
             title: strings.Settings,
             headerRight: () => (
-                <TouchableIcon
-                    set="FontAwesome"
-                    name="qrcode"
-                    color="#000"
-                    size={25}
-                    style={{ margin: 15 }}
-                    onPress={() => {
-                        navigation.navigate(Routes.QRScan, {
-                            returnTo: Routes.Settings,
-                            sender: ActivityTypes.Sleep, // not needed here
-                        })
-                    }}
-                />
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableIcon
+                        set="FontAwesome"
+                        name="qrcode"
+                        color="#000"
+                        size={25}
+                        style={{ margin: 15 }}
+                        onPress={() => {
+                            navigation.navigate(Routes.QRScan, {
+                                returnTo: Routes.Settings,
+                                sender: ActivityTypes.Sleep, // not needed here
+                            })
+                        }}
+                    />
+                    <TouchableIcon
+                        set="FontAwesome"
+                        name="heart"
+                        color="#000"
+                        size={25}
+                        style={{ margin: 15 }}
+                        onPress={() => {
+                            navigation.navigate(Routes.AppStatus)
+                        }}
+                    />
+                </View>
             ),
         })
     }, [navigation])
-    console.log(user)
+
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'white'} barStyle="dark-content" />
