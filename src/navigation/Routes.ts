@@ -30,4 +30,5 @@ export enum Routes {
     Trainer = 'Trainer',
     BloodPressure = 'BloodPressure',
     QRScan = 'QRScan',
+    AppStatus = 'AppStatus',
 }

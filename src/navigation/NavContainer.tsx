@@ -43,6 +43,7 @@ import { HomeStack } from './HomeStack'
 import { useActivities } from '../context/activitiesContext'
 import { useSettings } from '../context/settingsContext'
 import { useTasks } from '../context/tasksContext'
+import { AppStatusScreen } from '../screens/AppStatus'
 
 export type RootStackParamList = {
     Home: undefined
@@ -77,6 +78,7 @@ export type RootStackParamList = {
     BloodPressure: { sender: ActivityTypes; task?: string; id?: string }
     WalkingTest: undefined
     Stairs: undefined
+    AppStatus: undefined
 }
 
 const RootStack = createStackNavigator<RootStackParamList>()
@@ -225,6 +227,10 @@ export const NavContainer: FC = () => {
                         <RootStack.Screen
                             name={Routes.Stairs}
                             component={StairsScreen}
+                        />
+                        <RootStack.Screen
+                            name={Routes.AppStatus}
+                            component={AppStatusScreen}
                         />
                     </>
                 ) : (
