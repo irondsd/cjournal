@@ -21,7 +21,7 @@ type AppStatusScreenProps = {
 export const AppStatusScreen: FC<AppStatusScreenProps> = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: strings.Settings,
+            title: strings.AppStatus,
         })
     }, [navigation])
 
