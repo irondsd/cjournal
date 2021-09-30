@@ -232,4 +232,5 @@ export const es = {
     Sensors: 'Sensores',
     Permissions: 'Permisos',
     Storage: 'Almacenamiento',
+    Connectivity: 'Conectividad',
 }

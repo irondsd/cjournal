@@ -230,4 +230,5 @@ export const en = {
     Sensors: 'Sensors',
     Permissions: 'Permissions',
     Storage: 'Storage',
+    Connectivity: 'Connectivity',
 }

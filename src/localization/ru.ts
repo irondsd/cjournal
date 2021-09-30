@@ -229,4 +229,5 @@ export const ru = {
     Sensors: 'Сенсоры',
     Permissions: 'Разрешения',
     Storage: 'Хранилище',
+    Connectivity: 'Соединение',
 }
