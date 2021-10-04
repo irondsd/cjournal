@@ -30,6 +30,7 @@ import { BackButton } from '../../components/BackButton'
 import { useMakeActivity } from '../../hooks/useMakeActivity'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootStackParamList } from '../../navigation/NavContainer'
+import { useBarometer } from '../../hooks/useBarometer'
 
 type StairsScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -46,7 +47,6 @@ export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
         activity_type: ActivityTypes.Stairs,
     })
     const [seconds, setSeconds] = useState(0)
-
     const [progress, setProgress] = useState(false)
     const {
         geolocationData,
@@ -64,6 +64,11 @@ export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
         if (!progress) setProgress(true)
         else backPressed()
     }
+    const {
+        barometerData,
+        startUpdates: startBarometer,
+        stopUpdates: stopBarometer,
+    } = useBarometer()
 
     const backPressed = () => {
         if (progress) {
@@ -127,13 +132,15 @@ export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
                 submit()
             }, walkingDuration * 1000)
 
-            startGPS()
-            startPedometer()
+            // startGPS()
+            // startPedometer()
+            startBarometer()
         } else {
             BackgroundTimer.clearInterval(intervalId)
             BackgroundTimer.clearTimeout(timeoutId)
             stopGPS()
             stopPedometer()
+            stopBarometer()
         }
 
         return () => {
@@ -141,6 +148,7 @@ export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
             BackgroundTimer.clearTimeout(timeoutId)
             stopGPS()
             stopPedometer()
+            stopBarometer()
         }
     }, [progress])
 
@@ -157,11 +165,13 @@ export const StairsScreen: FC<StairsScreenProps> = ({ navigation }) => {
             />
 
             <View style={{ flex: 1, justifyContent: 'center' }}>
-                <Text style={styles.descText}>{strings.YouClimbed}</Text>
-                <Text style={styles.timer}>
+                <Text style={styles.descText}>
+                    {JSON.stringify(barometerData)}
+                </Text>
+                {/* <Text style={styles.timer}>
                     {activity.time_started ? `0.0` : 'fdsfsd'}
                 </Text>
-                <Text style={styles.descText}>{strings.meters}</Text>
+                <Text style={styles.descText}>{strings.meters}</Text> */}
             </View>
 
             <Button
