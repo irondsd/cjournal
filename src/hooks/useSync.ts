@@ -150,8 +150,11 @@ export const useSync = () => {
     }
 
     const fetchActivities = async (): Promise<void> => {
-        const res1 = await checkExpiration()
-        const res2 = await syncActivities()
+        if (!_id) await fetchUser()
+        await checkExpiration()
+        await syncActivities()
+
+        if (!_id) return Promise.reject('No id in use sync hook')
 
         const url = idinvFilter
             ? `idinv/${idinv}/activity`
@@ -168,7 +171,10 @@ export const useSync = () => {
     }
 
     const fetchTasks = async () => {
+        if (!_id) await fetchUser()
         await checkExpiration()
+
+        if (!_id) return Promise.reject('No id in use sync hook')
 
         const url = idinvFilter ? `idinv/${idinv}/tasks` : `users/${_id}/tasks`
 
