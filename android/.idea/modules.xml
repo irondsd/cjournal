@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cjournal.iml" filepath="$PROJECT_DIR$/.idea/modules/cjournal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/cjournal.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/cjournal.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1240719264/cjournal.react-native-app-auth.iml" filepath="$PROJECT_DIR$/.idea/modules/-1240719264/cjournal.react-native-app-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/568614017/cjournal.react-native-async-storage_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/568614017/cjournal.react-native-async-storage_async-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1216791220/cjournal.react-native-audio-record.iml" filepath="$PROJECT_DIR$/.idea/modules/1216791220/cjournal.react-native-audio-record.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1115381991/cjournal.react-native-background-fetch.iml" filepath="$PROJECT_DIR$/.idea/modules/1115381991/cjournal.react-native-background-fetch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/225093234/cjournal.react-native-background-timer.iml" filepath="$PROJECT_DIR$/.idea/modules/225093234/cjournal.react-native-background-timer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1394021818/cjournal.react-native-camera-kit.iml" filepath="$PROJECT_DIR$/.idea/modules/1394021818/cjournal.react-native-camera-kit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1464109709/cjournal.react-native-community_datetimepicker.iml" filepath="$PROJECT_DIR$/.idea/modules/-1464109709/cjournal.react-native-community_datetimepicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-100020132/cjournal.react-native-community_geolocation.iml" filepath="$PROJECT_DIR$/.idea/modules/-100020132/cjournal.react-native-community_geolocation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1032764419/cjournal.react-native-community_masked-view.iml" filepath="$PROJECT_DIR$/.idea/modules/-1032764419/cjournal.react-native-community_masked-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1956297895/cjournal.react-native-fs.iml" filepath="$PROJECT_DIR$/.idea/modules/-1956297895/cjournal.react-native-fs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1615703174/cjournal.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-1615703174/cjournal.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-995752052/cjournal.react-native-linear-gradient.iml" filepath="$PROJECT_DIR$/.idea/modules/-995752052/cjournal.react-native-linear-gradient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-747296219/cjournal.react-native-localization.iml" filepath="$PROJECT_DIR$/.idea/modules/-747296219/cjournal.react-native-localization.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1743515762/cjournal.react-native-push-notification.iml" filepath="$PROJECT_DIR$/.idea/modules/1743515762/cjournal.react-native-push-notification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1539930526/cjournal.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/-1539930526/cjournal.react-native-reanimated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1556187805/cjournal.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/-1556187805/cjournal.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/268936507/cjournal.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/268936507/cjournal.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/41419281/cjournal.react-native-sensitive-info.iml" filepath="$PROJECT_DIR$/.idea/modules/41419281/cjournal.react-native-sensitive-info.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/662890925/cjournal.react-native-sensors.iml" filepath="$PROJECT_DIR$/.idea/modules/662890925/cjournal.react-native-sensors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-407577149/cjournal.react-native-sound.iml" filepath="$PROJECT_DIR$/.idea/modules/-407577149/cjournal.react-native-sound.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-749358312/cjournal.react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/-749358312/cjournal.react-native-svg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/287770268/cjournal.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/287770268/cjournal.react-native-vector-icons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-472120915/cjournal.react-native-webview.iml" filepath="$PROJECT_DIR$/.idea/modules/-472120915/cjournal.react-native-webview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2062358552/cjournal.t2tx_react-native-universal-pedometer.iml" filepath="$PROJECT_DIR$/.idea/modules/-2062358552/cjournal.t2tx_react-native-universal-pedometer.iml" />
+    </modules>
+  </component>
+</project>
