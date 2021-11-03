@@ -33,13 +33,14 @@ export const TimePickCombined: FC<TimePickCombinedProps> = ({
     }, [from])
 
     useEffect(() => {
-        if (from === TimeSwitchValues.fromStart)
+        if (from === TimeSwitchValues.fromStart) 
             setEnded(duration ? time_started + duration * 60 : undefined)
+        
         else setStarted(duration ? time_started - duration * 60 : time_started)
     }, [duration])
 
     useEffect(() => {
-        if (time_started !== started && time_ended !== ended)
+        if (time_started !== started || time_ended !== ended)
             onChange(started, ended)
     }, [started, ended])
 
