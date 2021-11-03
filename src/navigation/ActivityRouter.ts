@@ -35,6 +35,8 @@ export const ActivityRouter = (activity_type: ActivityTypes): Routes => {
             return Routes.Other
         case ActivityTypes.Trainer:
             return Routes.Other
+        case ActivityTypes.Alarm:
+            return Routes.Alarm
 
         case ActivityTypes.PhysicalLoad:
             return Routes.PhysicalLoad
