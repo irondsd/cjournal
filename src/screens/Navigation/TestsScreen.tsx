@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { View } from 'react-native'
 import { strings } from '../../localization'
-import { TileInit, TileOpen } from '../../components/tiles'
+import { TileInit, TileOpen, TileOpenSender } from '../../components/tiles'
 import { TileLine } from '../../components/tiles'
 import { TileSpacer } from '../../components/tiles'
 import { ActivityTypes, defaultStyles } from '../../constants'
@@ -22,9 +22,9 @@ export const TestsScreen = ({ navigation }) => {
                 <TileInit name={ActivityTypes.DeepBreathing} />
             </TileLine>
             <TileLine>
-                <TileOpen name={ActivityTypes.Press} />
+                <TileOpenSender name={ActivityTypes.Press} />
                 <TileInit name={ActivityTypes.Straining} />
-                <TileOpen name={ActivityTypes.ActiveOrthostasis} />
+                <TileOpenSender name={ActivityTypes.ActiveOrthostasis} />
             </TileLine>
             <TileLine>
                 <TileSpacer />
