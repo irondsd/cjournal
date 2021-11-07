@@ -3,7 +3,6 @@ import { StyleSheet, Alert } from 'react-native'
 import { CameraKitCameraScreen } from 'react-native-camera-kit'
 import requestCameraPermission from '../permissions/requestCameraPermissions'
 import requestStoragePermission from '../permissions/requestStoragePermission'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { strings } from '../localization'
 import { Splash } from '../components/Splash'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -30,13 +29,10 @@ export const CameraScreen: FC<CameraScreenProps> = ({ navigation, route }) => {
             navigation.goBack()
         } else {
             if (event.type === 'right') {
-                const { returnTo } = route.params
+                const { returnTo, sender } = route.params
                 const image = event.captureImages?.pop()
 
-                navigation.navigate(returnTo, {
-                    sender: ActivityTypes.Alarm,
-                    image: image,
-                })
+                navigation.navigate(returnTo, { sender, image })
             }
         }
     }

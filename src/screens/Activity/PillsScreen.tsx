@@ -32,11 +32,6 @@ type PillsScreenProps = {
     navigation: PillsScreenNavigationProp
     route: PillsScreenRouteProp
 }
-type PillsActivityType = {
-    activity_type?: ActivityTypes
-    time_started?: number
-    task?: string
-}
 
 export const PillsScreen: FC<PillsScreenProps> = ({ navigation, route }) => {
     const { params } = route
