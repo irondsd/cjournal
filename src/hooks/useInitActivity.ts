@@ -29,20 +29,20 @@ export const useInitActivity = () => {
 
     const initWithLocationSave = async (activity_type: ActivityTypes) => {
         showToast(strings.ReqLocation)
-        return requestGeolocation().then(res => {
-            const { latitude, longitude } = res.coords
-            const activity: Activity = {
-                _id: objectId(),
-                activity_type,
-                time_started: timestamp(),
-                updated_at: timestamp(),
-                user: user!,
-                idinv: idinv,
-                data: { locations: [{ latitude, longitude }] },
-            }
+        // return requestGeolocation().then(res => {
+        //     const { latitude, longitude } = res.coords
+        //     const activity: Activity = {
+        //         _id: objectId(),
+        //         activity_type,
+        //         time_started: timestamp(),
+        //         updated_at: timestamp(),
+        //         user: user!,
+        //         idinv: idinv,
+        //         data: { locations: [{ latitude, longitude }] },
+        //     }
 
-            activityAdd!(activity)
-        })
+        //     activityAdd!(activity)
+        // })
     }
 
     return { initSave, initWithLocationSave }
