@@ -123,7 +123,7 @@ export const AudioRecorder: FC<AudioRecorderProps> = ({ onChange, file }) => {
                     console.log('playback failed due to audio decoding errors')
                 }
                 setPaused(true)
-                sound.release()
+                // sound.release()
             })
         } else {
             if (sound) sound.pause()
