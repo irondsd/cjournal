@@ -13,8 +13,6 @@ type ActivityListItemProps = {
     navigation: any
 }
 
-// todo
-
 const synced = (activity: Activity) => {
     if (activity.system) {
         if (activity.system.awaitsSync) return false
@@ -76,6 +74,11 @@ export const ActivityListItem: FC<ActivityListItemProps> = ({
         if (editable.includes(activity.activity_type)) {
             const { _id, activity_type } = activity
             const route = ActivityRouter(activity_type)
+
+            // hack
+            if (route === Routes.Sleep) 
+                return navigation.navigate(Routes.TimePick, { sender: activity_type, id: _id })
+
             navigation.navigate(route, { sender: activity_type, id: _id })
         } else {
             // not editable
